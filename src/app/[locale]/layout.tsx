@@ -5,6 +5,7 @@ import { Theme } from '@radix-ui/themes'
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
+import Footer from '@/components/Footer/Footer'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -37,6 +38,7 @@ export default async function LocaleLayout({
             <div className="main-wrapper">{children} </div>{' '}
           </Theme>
         </NextIntlClientProvider>
+        <Footer />
       </body>
     </html>
   )
