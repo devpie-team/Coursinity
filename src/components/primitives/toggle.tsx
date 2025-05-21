@@ -1,38 +1,23 @@
 import React from 'react'
 
 type ToggleProps = {
-  value: boolean 
+  value: boolean
   onToggle: (value: boolean) => void
 }
 
 const Toggle = ({ value, onToggle }: ToggleProps) => {
   return (
-    <div className="relative w-[108px] h-[56px] rounded-full border border-gray-300 bg-white flex items-center justify-between  text-sm font-semibold">
-      
-      <div className="flex justify-between px-[18px] w-full">
-        <span
-          className={`text-base leading-6 font-medium z-10 transition-colors ${value ? 'text-black' : 'text-white'}`}>
-          En
-        </span>
-        <span
-          className={`text-base leading-6 font-medium z-10 transition-colors ${value ? 'text-white' : 'text-black'}`}>
-          Ar
-        </span>
-      </div>
-
-    
+    <div
+      onClick={() => onToggle(!value)}
+      className={`relative w-9 h-5 rounded-full flex items-center transition-colors duration-300 cursor-pointer ${
+        value ? 'bg-primary-blue' : 'bg-secondary-200'
+      }`}>
       <div
         className={`
-          absolute left-[3px] w-[48px] h-[48px] bg-black rounded-full transition-all duration-300
-          ${value ? 'translate-x-[52px]' : 'translate-x-0'}
-        `}
+      absolute left-[2px] w-4 h-4 bg-white rounded-full transition-transform duration-300 shadow-[0px_1px_3px_0px_#1018281A]  
+      ${value ? 'translate-x-[16px]' : 'translate-x-0'}
+    `}
       />
-
-     
-      <div className="absolute inset-0 z-20 flex">
-        <button className="flex-1" onClick={() => onToggle(false)} />
-        <button className="flex-1" onClick={() => onToggle(true)} />
-      </div>
     </div>
   )
 }
