@@ -5,57 +5,62 @@
   },
   "Footer": {
     "Footer": {
-    "headline": "We Co-Plan the Vision &\nFully Deliver it",
-    "subheadline": "Train your team. Revolutionize your culture. Create an impact worthy of your business.",
-    "button": "Start your learning journey",
-    "columns": {
-      "coursinity": {
-        "title": "Coursinity",
-        "items": [
-          "Elevating corporate training through customized learning solutions",
-          "The Leader in EduTech Solutions"
-        ]
+      "headline": "We Co-Plan the Vision &\nFully Deliver it",
+      "subheadline": "Train your team. Revolutionize your culture. Create an impact worthy of your business.",
+      "button": "Start your learning journey",
+      "columns": {
+        "coursinity": {
+          "title": "Coursinity",
+          "items": [
+            "Elevating corporate training through customized learning solutions",
+            "The Leader in EduTech Solutions"
+          ]
+        },
+        "solutions": {
+          "title": "Solutions",
+          "items": [
+            "LMS Platforms",
+            "Content Development",
+            "Training Calendar",
+            "Learning Journeys",
+            "Consultancy"
+          ]
+        },
+        "academy": {
+          "title": "Academy",
+          "items": [
+            "Digital Academies",
+            "Compliance Training",
+            "Professional Certifications",
+            "Health & Safety"
+          ]
+        },
+        "company": {
+          "title": "Company",
+          "items": [
+            "About Us",
+            "Contact Us",
+            "Blog",
+            "Book a Demo"
+          ]
+        }
       },
-      "solutions": {
-        "title": "Solutions",
-        "items": [
-          "LMS Platforms",
-          "Content Development",
-          "Training Calendar",
-          "Learning Journeys",
-          "Consultancy"
-        ]
-      },
-      "academy": {
-        "title": "Academy",
-        "items": [
-          "Digital Academies",
-          "Compliance Training",
-          "Professional Certifications",
-          "Health & Safety"
-        ]
-      },
-      "company": {
-        "title": "Company",
-        "items": [
-          "About Us",
-          "Contact Us",
-          "Blog",
-          "Book a Demo"
-        ]
-      }
-    },
-    "bottom": {
-      "copyright": "© 2025 Coursinity. All rights reserved.",
-      "links": {
-        "terms": "Terms",
-        "privacy": "Privacy",
-        "cookies": "Cookies"
+      "bottom": {
+        "copyright": "© 2025 Coursinity. All rights reserved.",
+        "links": {
+          "terms": "Terms",
+          "privacy": "Privacy",
+          "cookies": "Cookies"
+        }
       }
     }
-   
+  },
+  "Hero": {
+    "title": "Lead The Change with a Future - ",
+    "titleGradient": "Ready Team",
+    "subtitle": "Empower your team with AI-driven, tailored training paths that bring your vision to life. The leader in Edu-tech solutions.",
+    "bookDemo": "Book a Demo Now",
+    "titleGradientMobile": "Spark a learning revolution.",
+    "subtitleMobile": "Take your team’s productivity to a new paradigm"
   }
-  
-  
-}
 }
