@@ -38,7 +38,7 @@ const Footer = ({ className }: FooterProps) => {
   return (
     <footer
       className={cn(
-        'w-full py-[140px] px-[150px] pb-[50px] text-white bg-primary-purple max-[1440px]:px-6 max-[1440px]:py-20 max-[1440px]:pb-16 max-[834px]:px-4',
+        'w-full py-[140px] px-[150px] pb-[50px] text-white bg-primary-purple max-[1280px]:px-6 max-[1440px]:py-20 max-[1440px]:pb-16 max-[834px]:px-4',
         className
       )}>
       <div>
