@@ -5,57 +5,83 @@
   },
   "Footer": {
     "Footer": {
-    "headline": "We Co-Plan the Vision &\nFully Deliver it",
-    "subheadline": "Train your team. Revolutionize your culture. Create an impact worthy of your business.",
-    "button": "Start your learning journey",
-    "columns": {
-      "coursinity": {
-        "title": "Coursinity",
-        "items": [
-          "Elevating corporate training through customized learning solutions",
-          "The Leader in EduTech Solutions"
-        ]
+      "headline": "We Co-Plan the Vision &\nFully Deliver it",
+      "subheadline": "Train your team. Revolutionize your culture. Create an impact worthy of your business.",
+      "button": "Start your learning journey",
+      "columns": {
+        "coursinity": {
+          "title": "Coursinity",
+          "items": [
+            "Elevating corporate training through customized learning solutions",
+            "The Leader in EduTech Solutions"
+          ]
+        },
+        "solutions": {
+          "title": "Solutions",
+          "items": [
+            "LMS Platforms",
+            "Content Development",
+            "Training Calendar",
+            "Learning Journeys",
+            "Consultancy"
+          ]
+        },
+        "academy": {
+          "title": "Academy",
+          "items": [
+            "Digital Academies",
+            "Compliance Training",
+            "Professional Certifications",
+            "Health & Safety"
+          ]
+        },
+        "company": {
+          "title": "Company",
+          "items": [
+            "About Us",
+            "Contact Us",
+            "Blog",
+            "Book a Demo"
+          ]
+        }
       },
-      "solutions": {
-        "title": "Solutions",
-        "items": [
-          "LMS Platforms",
-          "Content Development",
-          "Training Calendar",
-          "Learning Journeys",
-          "Consultancy"
-        ]
-      },
-      "academy": {
-        "title": "Academy",
-        "items": [
-          "Digital Academies",
-          "Compliance Training",
-          "Professional Certifications",
-          "Health & Safety"
-        ]
-      },
-      "company": {
-        "title": "Company",
-        "items": [
-          "About Us",
-          "Contact Us",
-          "Blog",
-          "Book a Demo"
-        ]
-      }
-    },
-    "bottom": {
-      "copyright": "© 2025 Coursinity. All rights reserved.",
-      "links": {
-        "terms": "Terms",
-        "privacy": "Privacy",
-        "cookies": "Cookies"
+      "bottom": {
+        "copyright": "© 2025 Coursinity. All rights reserved.",
+        "links": {
+          "terms": "Terms",
+          "privacy": "Privacy",
+          "cookies": "Cookies"
+        }
       }
     }
-   
+  },
+  "Features": {
+    "certified": {
+      "title": "Certified by the World’s Best",
+      "subtitle": "Coursinity is the go-to partner for global institutions driving progress through training.",
+      "items": [
+        "Prestigious universities with international recognition",
+        "Accredited bodies for high-level professional programs",
+        "Expert institutions in health, education, tourism, safety, and more"
+      ]
+    },
+    "trusted": {
+      "title": "Trusted by Organizations That Invest in People",
+      "subtitle": "Coursinity is more than a training provider, it’s your strategic partner in building organizational readiness.",
+      "items": [
+        {
+          "title": "Proven success stories",
+          "description": "Accredited by top global bodies for guaranteed quality."
+        },
+        {
+          "title": "Measurable impact",
+          "description": "Boost productivity and deliver tangible training outcomes"
+        },
+        {
+          "title": "Seamless system integration",
+          "description": "Works with your HR and institutional evaluation platforms"
+        }
+      ]
+    }
   }
-  
-  
-}
 }
