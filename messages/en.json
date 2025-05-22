@@ -2,5 +2,60 @@
   "HomePage": {
     "title": "Hello world!",
     "about": "Go to the about page"
+  },
+  "Footer": {
+    "Footer": {
+    "headline": "We Co-Plan the Vision &\nFully Deliver it",
+    "subheadline": "Train your team. Revolutionize your culture. Create an impact worthy of your business.",
+    "button": "Start your learning journey",
+    "columns": {
+      "coursinity": {
+        "title": "Coursinity",
+        "items": [
+          "Elevating corporate training through customized learning solutions",
+          "The Leader in EduTech Solutions"
+        ]
+      },
+      "solutions": {
+        "title": "Solutions",
+        "items": [
+          "LMS Platforms",
+          "Content Development",
+          "Training Calendar",
+          "Learning Journeys",
+          "Consultancy"
+        ]
+      },
+      "academy": {
+        "title": "Academy",
+        "items": [
+          "Digital Academies",
+          "Compliance Training",
+          "Professional Certifications",
+          "Health & Safety"
+        ]
+      },
+      "company": {
+        "title": "Company",
+        "items": [
+          "About Us",
+          "Contact Us",
+          "Blog",
+          "Book a Demo"
+        ]
+      }
+    },
+    "bottom": {
+      "copyright": "© 2025 Coursinity. All rights reserved.",
+      "links": {
+        "terms": "Terms",
+        "privacy": "Privacy",
+        "cookies": "Cookies"
+      }
+    }
+   
   }
+  
+  
+}
 }
