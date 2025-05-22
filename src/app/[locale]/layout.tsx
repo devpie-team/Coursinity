@@ -35,10 +35,9 @@ export default async function LocaleLayout({
       <body>
         <NextIntlClientProvider>
           <Theme>
-            <div className="main-wrapper">{children} </div>{' '}
+            <div className="main-wrapper ">{children} </div> <Footer />
           </Theme>
         </NextIntlClientProvider>
-        <Footer />
       </body>
     </html>
   )

@@ -5,20 +5,23 @@ import FacebookIcon from '../icons/FacebookIcon'
 import InstagramIcon from '../icons/InstagramIcon'
 import LinkedInIcon from '../icons/LinkedInIcon'
 import YouTubeIcon from '../icons/YouTubeIcon'
+import { Typography } from '../ui'
+import { useTranslations } from 'next-intl'
 
 type FooterProps = {
   className?: string
 }
 
 const Footer = ({ className }: FooterProps) => {
+  const t = useTranslations('Footer')
   return (
     <footer className={cn('w-full py-[140px] px-[150px] pb-[50px] text-white bg-primary-purple', className)}>
       <div>
         <div className="flex flex-col gap-[140px]">
           <div className="flex flex-col gap-8 text-center items-center  font-medium">
-            <h2 className="text-h2 ">
+            <Typography variant="h2" weight="medium">
               We Co-Plan the Vision &<br /> Fully Deliver it
-            </h2>
+            </Typography>
             <p className="text-body2">
               Train your team. Revolutionize your culture. Create an impact worthy of your business.
             </p>
@@ -92,13 +95,13 @@ const Footer = ({ className }: FooterProps) => {
               </div>
             </div>
             <div className="relative flex justify-between pt-5 border-t border-[#7662E833] items-center">
-              <p className="text-sm font-normal">© 2025 Coursinity. All rights reserved.</p>
-              <div className="absolute left-1/2 -translate-x-1/2 flex text-button gap-6">
+              <p className="text-sm font-normal w-[33%]">© 2025 Coursinity. All rights reserved.</p>
+              <div className="flex text-button gap-6 w-[33%] justify-center">
                 <a href="">Terms</a>
                 <a href="">Privacy</a>
                 <a href="">Cookies</a>
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 w-[33%] justify-end">
                 <button className="flex w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
                   <XIcon />
                 </button>
