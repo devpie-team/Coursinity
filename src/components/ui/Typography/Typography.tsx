@@ -2,7 +2,7 @@ import clsx from 'clsx'
 
 type TypographyProps = {
   as?: 'p' | 'span' | 'h1' | 'h2' | 'h3' | 'h4'
-  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'body3' | 'body4' | 'caption'
+  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'body3' | 'body4' | 'button' | 'caption'
   weight?: 'regular' | 'medium' | 'semibold' | 'bold'
   children: React.ReactNode
   className?: string
@@ -19,6 +19,7 @@ const variantMap = {
   body2: 'text-body2',
   body3: 'text-body3',
   body4: 'text-body4',
+  button: 'button',
   caption: 'text-caption'
 } as const
 

@@ -23,8 +23,8 @@ export default {
         body1: ['20px', { lineHeight: '30px', fontWeight: '400' }],
         body2: ['18px', { lineHeight: '28px', fontWeight: '400' }],
         body3: ['16px', { lineHeight: '28px', fontWeight: '400' }],
-        body4: ['14px', { lineHeight: '14px', fontWeight: '400' }],
-        caption: ['30px', { lineHeight: '36px', fontWeight: '400' }],
+        body4: ['14px', { lineHeight: '24px', fontWeight: '400' }],
+        caption: ['14px', { lineHeight: '14px', fontWeight: '400' }],
         button: ['16px', { lineHeight: '24px', fontWeight: '400' }],
       },
       colors: {

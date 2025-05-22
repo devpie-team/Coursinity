@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from '@/lib/utils'
 import { Button } from '../primitives/button'
 import XIcon from '../icons/XIcon'
@@ -7,114 +9,161 @@ import LinkedInIcon from '../icons/LinkedInIcon'
 import YouTubeIcon from '../icons/YouTubeIcon'
 import { Typography } from '../ui'
 import { useTranslations } from 'next-intl'
+import React, { useEffect, useState } from 'react'
 
 type FooterProps = {
   className?: string
 }
 
 const Footer = ({ className }: FooterProps) => {
-  const t = useTranslations('Footer')
+  const t = useTranslations('Footer.Footer')
+  const [isMobile, setIsMobile] = useState<boolean>(false)
+  const [isTablet, setIsTablet] = useState<boolean>(false)
+  const [isDesktop, setIsDesktop] = useState<boolean>(true) // За замовчуванням
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 834)
+      setIsTablet(width < 1440)
+      setIsDesktop(width > 1440)
+    }
+
+    checkScreenSize() // Початковий виклик
+
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
   return (
-    <footer className={cn('w-full py-[140px] px-[150px] pb-[50px] text-white bg-primary-purple', className)}>
+    <footer
+      className={cn(
+        'w-full py-[140px] px-[150px] pb-[50px] text-white bg-primary-purple max-[1440px]:px-6 max-[1440px]:py-20 max-[1440px]:pb-16 max-[834px]:px-4',
+        className
+      )}>
       <div>
-        <div className="flex flex-col gap-[140px]">
-          <div className="flex flex-col gap-8 text-center items-center  font-medium">
-            <Typography variant="h2" weight="medium">
-              We Co-Plan the Vision &<br /> Fully Deliver it
+        <div className="flex flex-col gap-[120px] max-[1440px]:gap ">
+          <div className="flex flex-col gap-8 items-center font-medium text-center max-[1440px]:gap-4">
+            <Typography variant={isTablet ? 'h4' : 'h2'} weight="medium">
+              {t('headline')
+                .split('\n')
+                .map((line, i) => (
+                  <React.Fragment key={i}>
+                    {line}
+                    <br />
+                  </React.Fragment>
+                ))}
             </Typography>
-            <p className="text-body2">
-              Train your team. Revolutionize your culture. Create an impact worthy of your business.
-            </p>
-            <Button variant="secondary" size="md" className="w-[263px]">
-              Start your learning journey
+            <Typography variant={isTablet ? 'button' : 'body2'} weight="medium">
+              {t('subheadline')}
+            </Typography>
+            <Button
+              variant="secondary"
+              size="md"
+              className="w-[263px]
+            max-[1440px]:w-[343px] mt-4">
+              {t('button')}
             </Button>
           </div>
+
           <div className="flex flex-col justify-between">
-            <div className="grid grid-cols-4 gap-[50px] pb-20">
-              <div className="flex flex-col gap-[20px] font-medium">
-                <h3 className="text-base1">Coursinity</h3>
-                <p className="text-button ">Elevating corporate training through customized learning solutions</p>
-                <p className="text-button">The Leader in EduTech Solutions</p>
+            <div className="grid grid-cols-[1fr_3fr]  gap-[50px] pb-20 max-[1440px]:pb-8 max-[1440px]:gap-8 max-[834px]:flex max-[834px]:flex-col ">
+              <div className="flex flex-col gap-[20px] font-medium flex-none">
+                <Typography variant={isTablet ? 'body1' : 'body2'} weight="medium">
+                  {t('columns.coursinity.title')}
+                </Typography>
+                <Typography variant={isTablet ? 'body4' : 'body3'}>{t('columns.coursinity.items.0')}</Typography>
+                <Typography variant={isTablet ? 'body4' : 'body3'}>{t('columns.coursinity.items.1')}</Typography>
               </div>
+              <div className="grid grid-cols-3 gap-[50px] max-[834px]:grid-cols-2 max-[834px]:grid-rows-2 flex-grow">
+                <div>
+                  <Typography variant={isTablet ? 'body3' : 'body2'} weight="medium" className="mb-5">
+                    {t('columns.solutions.title')}
+                  </Typography>
+                  <ul className="space-y-[6px] text-button">
+                    <li>
+                      <a href="#">{t('columns.solutions.items.0')}</a>
+                    </li>
+                    <li>
+                      <a href="#">{t('columns.solutions.items.1')}</a>
+                    </li>
+                    <li>
+                      <a href="#">{t('columns.solutions.items.2')}</a>
+                    </li>
+                    <li>
+                      <a href="#">{t('columns.solutions.items.3')}</a>
+                    </li>
+                    <li>
+                      <a href="#">{t('columns.solutions.items.4')}</a>
+                    </li>
+                  </ul>
+                </div>
 
-              <div>
-                <h3 className="text-body2 font-medium mb-5">Solutions</h3>
-                <ul className="space-y-[6px] text-button">
-                  <li>
-                    <a href="#">LMS Platforms</a>
-                  </li>
-                  <li>
-                    <a href="#">Content Development</a>
-                  </li>
-                  <li>
-                    <a href="#">Training Calendar</a>
-                  </li>
-                  <li>
-                    <a href="#">Learning Journeys</a>
-                  </li>
-                  <li>
-                    <a href="#">Consultancy</a>
-                  </li>
-                </ul>
-              </div>
+                <div>
+                  <Typography variant={isTablet ? 'body3' : 'body2'} weight="medium" className="mb-5">
+                    {t('columns.academy.title')}
+                  </Typography>
+                  <ul className="space-y-[6px] text-button">
+                    <li>
+                      <a href="#">{t('columns.academy.items.0')}</a>
+                    </li>
+                    <li>
+                      <a href="#">{t('columns.academy.items.1')}</a>
+                    </li>
+                    <li>
+                      <a href="#">{t('columns.academy.items.2')}</a>
+                    </li>
+                    <li>
+                      <a href="#">{t('columns.academy.items.3')}</a>
+                    </li>
+                  </ul>
+                </div>
 
-              <div>
-                <h3 className="text-body2 font-medium mb-5">Academy</h3>
-                <ul className="space-y-[6px] text-button">
-                  <li>
-                    <a href="#">Digital Academies</a>
-                  </li>
-                  <li>
-                    <a href="#">Compliance Training</a>
-                  </li>
-                  <li>
-                    <a href="#">Professional Certifications</a>
-                  </li>
-                  <li>
-                    <a href="#">Health & Safety</a>
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="text-body2 font-medium mb-3">Company</h3>
-                <ul className="space-y-[6px] text-button">
-                  <li>
-                    <a href="#">About Us</a>
-                  </li>
-                  <li>
-                    <a href="#">Contact Us</a>
-                  </li>
-                  <li>
-                    <a href="#">Blog</a>
-                  </li>
-                  <li>
-                    <a href="#">Book a Demo</a>
-                  </li>
-                </ul>
+                <div>
+                  <Typography variant={isTablet ? 'body3' : 'body2'} weight="medium" className="mb-5">
+                    {t('columns.company.title')}
+                  </Typography>
+                  <ul className="space-y-[6px] text-button">
+                    <li>
+                      <a href="#">{t('columns.company.items.0')}</a>
+                    </li>
+                    <li>
+                      <a href="#">{t('columns.company.items.1')}</a>
+                    </li>
+                    <li>
+                      <a href="#">{t('columns.company.items.2')}</a>
+                    </li>
+                    <li>
+                      <a href="#">{t('columns.company.items.3')}</a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-            <div className="relative flex justify-between pt-5 border-t border-[#7662E833] items-center">
-              <p className="text-sm font-normal w-[33%]">© 2025 Coursinity. All rights reserved.</p>
-              <div className="flex text-button gap-6 w-[33%] justify-center">
-                <a href="">Terms</a>
-                <a href="">Privacy</a>
-                <a href="">Cookies</a>
+
+            <div className="relative flex justify-between pt-5 border-t border-[#7662E833] items-center max-[1440px]:pt-8 max-[1440px]:flex-col gap-6">
+              <p className="text-sm font-normal w-[33%] order-1 max-[1440px]:order-3 max-[1440px]:text-center">
+                {t('bottom.copyright')}
+              </p>
+              <div className="flex text-button gap-6 w-[33%] justify-center order-2 max-[1440px]:order-1 max-[1440px]:justify-center">
+                <a href="#">{t('bottom.links.terms')}</a>
+                <a href="#">{t('bottom.links.privacy')}</a>
+                <a href="#">{t('bottom.links.cookies')}</a>
               </div>
-              <div className="flex gap-2 w-[33%] justify-end">
-                <button className="flex w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
+              <div className="flex gap-2 w-[33%] justify-end order-3 max-[1440px]:order-2 max-[1440px]:justify-center">
+                <button className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
                   <XIcon />
                 </button>
-                <button className="flex w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
+                <button className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
                   <FacebookIcon />
                 </button>
-                <button className="flex w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
+                <button className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
                   <InstagramIcon />
                 </button>
-                <button className="flex w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
+                <button className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
                   <LinkedInIcon />
                 </button>
-                <button className="flex w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
+                <button className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
                   <YouTubeIcon />
                 </button>
               </div>
