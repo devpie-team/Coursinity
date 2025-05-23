@@ -103,5 +103,16 @@
       "Empower AI agents to tackle time-draining tasks",
       "Customized programs for every department, role, and function"
     ]
+  },
+  "TeamTrainingSection": {
+    "title": "Scale Your Team Within Budget",
+    "description": "Coursinity helps you achieve more without stretching your budget, through flexible, cost-efficient training that scales with your needs. One smart academy, built to cover your entire organization.",
+    "button": "Learn more",
+    "items": [
+      "Train teams everywhere, affordably",
+      "Foster a culture of continuous growth without overspending",
+      "Cut down redundant training costs",
+      "Interactive training beyond conventional platforms"
+    ]
   }
 }
