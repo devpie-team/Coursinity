@@ -55,6 +55,35 @@
       }
     }
   },
+  "Features": {
+    "certified": {
+      "title": "Certified by the World’s Best",
+      "subtitle": "Coursinity is the go-to partner for global institutions driving progress through training.",
+      "items": [
+        "Prestigious universities with international recognition",
+        "Accredited bodies for high-level professional programs",
+        "Expert institutions in health, education, tourism, safety, and more"
+      ]
+    },
+    "trusted": {
+      "title": "Trusted by Organizations That Invest in People",
+      "subtitle": "Coursinity is more than a training provider, it’s your strategic partner in building organizational readiness.",
+      "items": [
+        {
+          "title": "Proven success stories",
+          "description": "Accredited by top global bodies for guaranteed quality."
+        },
+        {
+          "title": "Measurable impact",
+          "description": "Boost productivity and deliver tangible training outcomes"
+        },
+        {
+          "title": "Seamless system integration",
+          "description": "Works with your HR and institutional evaluation platforms"
+        }
+      ]
+    }
+  },
   "Hero": {
     "title": "Lead The Change with a Future - ",
     "titleGradient": "Ready Team",
