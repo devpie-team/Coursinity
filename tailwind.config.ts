@@ -39,6 +39,7 @@ export default {
         'secondary-200': '#E4EDF2',
         'secondary-300': '#F9FAFB',
         'secondary-400': '#D0D5DD',
+        'description': '#6E6E6E'
         
       },
       borderRadius: {
