@@ -44,7 +44,7 @@ const Footer = ({ className }: FooterProps) => {
       <div>
         <div className="flex flex-col gap-[120px] max-[1440px]:gap ">
           <div className="flex flex-col gap-8 items-center font-medium text-center max-[1440px]:gap-4">
-            <Typography variant={isTablet ? 'h4' : 'h2'} weight="medium">
+            <Typography variant={isDesktop ? 'h2' : 'h5'} weight="medium">
               {t('headline')
                 .split('\n')
                 .map((line, i) => (
@@ -54,7 +54,7 @@ const Footer = ({ className }: FooterProps) => {
                   </React.Fragment>
                 ))}
             </Typography>
-            <Typography variant={isTablet ? 'button' : 'body2'} weight="medium">
+            <Typography variant={isDesktop ? 'body2' : 'button'} weight="medium">
               {t('subheadline')}
             </Typography>
             <Button
@@ -72,8 +72,8 @@ const Footer = ({ className }: FooterProps) => {
                 <Typography variant={isTablet ? 'body1' : 'body2'} weight="medium">
                   {t('columns.coursinity.title')}
                 </Typography>
-                <Typography variant={isTablet ? 'body4' : 'body3'}>{t('columns.coursinity.items.0')}</Typography>
-                <Typography variant={isTablet ? 'body4' : 'body3'}>{t('columns.coursinity.items.1')}</Typography>
+                <Typography variant={isDesktop ? 'body3' : 'caption'}>{t('columns.coursinity.items.0')}</Typography>
+                <Typography variant={isDesktop ? 'body3' : 'caption'}>{t('columns.coursinity.items.1')}</Typography>
               </div>
               <div className="grid grid-cols-3 gap-[50px] max-[834px]:grid-cols-2 max-[834px]:grid-rows-2 flex-grow">
                 <div>

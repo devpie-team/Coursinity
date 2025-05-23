@@ -15,10 +15,10 @@ export default {
       },
       fontSize: {
         h1: ['80px', { lineHeight: '80px', fontWeight: '400' }],
-        h2: ['64px', { lineHeight: '76.8px', fontWeight: '400' }],
-        h3: ['42px', { lineHeight: '54.6px', fontWeight: '400' }],
+        h2: ['64px', { lineHeight: '120%', fontWeight: '400' }],
+        h3: ['42px', { lineHeight: '130%', fontWeight: '400' }],
         h4: ['32px', { lineHeight: '40px', fontWeight: '400' }],
-        h5: ['24px', { lineHeight: '33.6px', fontWeight: '400' }],
+        h5: ['30px', { lineHeight: '120%', fontWeight: '400' }],
         h6: ['24px', { lineHeight: '33.6px', fontWeight: '400' }],
         body1: ['20px', { lineHeight: '30px', fontWeight: '400' }],
         body2: ['18px', { lineHeight: '28px', fontWeight: '400' }],
