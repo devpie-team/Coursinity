@@ -19,7 +19,7 @@ const Footer = ({ className }: FooterProps) => {
   const t = useTranslations('Footer.Footer')
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [isTablet, setIsTablet] = useState<boolean>(false)
-  const [isDesktop, setIsDesktop] = useState<boolean>(true) // За замовчуванням
+  const [isDesktop, setIsDesktop] = useState<boolean>(true)
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -29,7 +29,7 @@ const Footer = ({ className }: FooterProps) => {
       setIsDesktop(width > 1440)
     }
 
-    checkScreenSize() // Початковий виклик
+    checkScreenSize()
 
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
