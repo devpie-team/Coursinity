@@ -1,0 +1,1 @@
+export { PlanetIcon } from './PlanetIcon'

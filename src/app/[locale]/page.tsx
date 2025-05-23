@@ -1,5 +1,7 @@
+'use client'
+
 import { useTranslations } from 'next-intl'
-import { FeaturesSection, HeroSection } from '@/components/Sections'
+import { BuildSection, FeaturesSection, HeroSection } from '@/components/Sections'
 import { AiTeamSection } from '@/components/Sections/AiTeamSection'
 
 export default function HomePage() {
@@ -7,7 +9,9 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+
       <AiTeamSection />
+      <BuildSection />
       <FeaturesSection />
     </>
   )
