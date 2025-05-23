@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import { isDate } from 'util/types'
 
 const certifications = [
   { src: '/assets/certifications/CompTia.png', alt: 'CompTIA logo' },
@@ -46,21 +47,18 @@ export const FeaturesSection = () => {
       <div
         className={cn(
           isTablet
-            ? 'flex gap-8'
-            : 'flex p-8 rounded-[20px] gap-8 bg-[linear-gradient(180deg,_rgba(255,255,255,0.16)_0%,_rgba(30,141,194,0.16)_100%)]'
+            ? 'flex gap-8 max-[834px]:flex-col'
+            : 'flex p-8 rounded-[20px] gap-8 bg-[linear-gradient(180deg,_rgba(255,255,255,0.16)_0%,_rgba(30,141,194,0.16)_100%)] '
         )}>
         {/* Left Block */}
         <div className="flex flex-col bg-white border rounded-2xl p-8 flex-1">
-          {isDesktop && (
-            <div className="mb-6">
-              <DiplomaIcon />
-            </div>
-          )}
+          <div className={cn(isDesktop ? 'mb-6' : 'mb-2')}>
+            <DiplomaIcon width={isTablet ? 40 : 64} height={isTablet ? 40 : 64} />
+          </div>
 
           <div className="flex flex-col flex-grow gap-8 max-[1440px]:gap-6">
-            {/* Верхня частина — буде рости */}
-            <div className="flex flex-col gap-4 flex-grow">
-              <Typography variant="h4" weight="medium">
+            <div className={cn('flex flex-col gap-4', !isDesktop && 'flex-grow')}>
+              <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium">
                 {t('certified.title')}
               </Typography>
               <Typography variant="button" weight="regular" className="text-[#6E6E6E]">
@@ -68,85 +66,97 @@ export const FeaturesSection = () => {
               </Typography>
             </div>
 
-            <div className="border-t"></div>
+            {!isDesktop && <div className="border-t" />}
 
-            {/* Нижня частина — прижата до низу */}
-            <div className="flex flex-col gap-4 max-[1440px]:gap-3 mt-auto">
+            <div className={cn('flex flex-col gap-4 max-[1440px]:gap-3', isDesktop ? 'flex-grow' : 'mt-auto')}>
               {t.raw('certified.items').map((item: string, index: number) => {
                 const limitedText = !isDesktop ? item.split(' ').slice(0, 2).join(' ') : item
 
                 return (
-                  <div className="flex gap-4" key={index}>
+                  <div className="flex gap-4 items-center" key={index}>
                     <div>
-                      <CheckCircleIcon />
+                      <CheckCircleIcon width={isTablet ? 24 : 28} height={isTablet ? 24 : 28} />
                     </div>
-
-                    <Typography variant="body2" weight="regular">
+                    <Typography variant={isDesktop ? 'body2' : 'caption'} weight="regular">
                       {limitedText}
                     </Typography>
                   </div>
                 )
               })}
-            </div>
-            <div className="grid grid-cols-2 grid-rows-2 place-items-center mt-auto gap-[10px]">
-              {certificationsLeft.map(({ src, alt }, i) => (
-                <img key={i} src={src} alt={alt} className="max-h-[64px]" />
-              ))}
+              <div
+                className={cn(
+                  'grid grid-cols-2 grid-rows-2 place-items-center mt-auto gap-[10px]  ',
+                  !isDesktop && 'pt-3'
+                )}>
+                {certificationsLeft.map(({ src, alt }, i) => (
+                  <div
+                    key={i}
+                    className={cn(
+                      'flex bg-secondary-300 rounded-[10px] justify-center items-center w-full h-16',
+                      isDesktop ? 'h-16' : 'h-[42px] '
+                    )}>
+                    <img src={src} alt={alt} className="max-h-[64px]" />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
         {/* Right Block */}
         <div className="flex flex-col bg-white border rounded-2xl p-8 flex-1">
-          {isDesktop && (
-            <div className="mb-6">
-              <DealIcon />
+          <div className={cn(isDesktop ? 'mb-6' : 'mb-2')}>
+            <DealIcon width={isTablet ? 40 : 64} height={isTablet ? 40 : 64} />
+          </div>
+
+          <div className="flex flex-col flex-grow gap-8 max-[1440px]:gap-6">
+            <div className={cn('flex flex-col gap-4', !isDesktop && 'flex-grow')}>
+              <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium">
+                {t('trusted.title')}
+              </Typography>
+              <Typography variant="button" weight="regular" className="text-[#6E6E6E]">
+                {t('trusted.subtitle')}
+              </Typography>
             </div>
-          )}
 
-          <div className="flex flex-col flex-grow">
-            {/* Верхня частина — заголовки + чекліст */}
-            <div className="flex flex-col gap-8 flex-grow max-[1440px]:gap-6">
-              <div className="flex flex-col gap-4">
-                <Typography variant="h4" weight="medium">
-                  {t('trusted.title')}
-                </Typography>
-                <Typography variant="button" weight="regular" className="text-[#6E6E6E]">
-                  {t('trusted.subtitle')}
-                </Typography>
-              </div>
+            {!isDesktop && <div className="border-t" />}
 
-              <div className="border-t"></div>
-
-              <div className="flex flex-col gap-4 max-[1440px]:gap-3">
-                {t.raw('trusted.items').map((item: { title: string; description: string }, index: number) => (
-                  <div className="flex gap-4" key={index}>
-                    <div>
-                      <CheckCircleIcon />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <Typography variant="body1" weight="regular">
-                        {item.title}
-                        {isDesktop && ':'}
+            <div className={cn('flex flex-col gap-4 max-[1440px]:gap-3', isDesktop ? 'flex-grow' : 'mt-auto')}>
+              {t.raw('trusted.items').map((item: { title: string; description: string }, index: number) => (
+                <div className="flex gap-4 items-center" key={index}>
+                  <div>
+                    <CheckCircleIcon width={isTablet ? 24 : 28} height={isTablet ? 24 : 28} />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <Typography variant={isDesktop ? 'body2' : 'caption'} weight="regular">
+                      {item.title}
+                      {isDesktop && ':'}
+                    </Typography>
+                    {isDesktop && (
+                      <Typography variant="body2" weight="regular" className="text-[#6E6E6E]">
+                        {item.description}
                       </Typography>
-                      {isDesktop && (
-                        <Typography variant="body2" weight="regular" className="text-[#6E6E6E]">
-                          {item.description}
-                        </Typography>
-                      )}
-                    </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+
+              <div
+                className={cn(
+                  'grid grid-cols-2 grid-rows-2 place-items-center mt-auto gap-[10px]  ',
+                  !isDesktop && 'pt-3'
+                )}>
+                {certificationsRight.map(({ src, alt }, i) => (
+                  <div
+                    key={i}
+                    className={cn(
+                      'flex bg-secondary-300 rounded-[10px] justify-center items-center w-full h-16',
+                      isDesktop ? 'h-16' : 'h-[42px] '
+                    )}>
+                    <img src={src} alt={alt} className="max-h-[64px]" />
                   </div>
                 ))}
               </div>
-            </div>
-
-            {/* Нижня частина — сертифікати, прибиті донизу */}
-            <div className="grid grid-cols-2 grid-rows-2 place-items-center mt-auto pt-8 gap-[10px]">
-              {certificationsRight.map(({ src, alt }, i) => (
-                <div className="flex bg-secondary-300 rounded-[10px] place-content-center w-full h-16">
-                  <img key={i} src={src} alt={alt} className="" />
-                </div>
-              ))}
             </div>
           </div>
         </div>
