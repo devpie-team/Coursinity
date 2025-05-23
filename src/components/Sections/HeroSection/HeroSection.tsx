@@ -7,13 +7,11 @@ import { useEffect, useState } from 'react'
 
 export const HeroSection = () => {
   const t = useTranslations('Hero')
-  const [isMobile, setIsMobile] = useState<boolean>(false)
   const [isTablet, setIsTablet] = useState<boolean>(false)
 
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth
-      setIsMobile(width < 834)
       setIsTablet(width < 1440)
     }
 

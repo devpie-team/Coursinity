@@ -1,0 +1,1 @@
+export { SectorIcon } from './SectorIcon'

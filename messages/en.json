@@ -114,5 +114,36 @@
       "Cut down redundant training costs",
       "Interactive training beyond conventional platforms"
     ]
+  },
+  "Build": {
+    "cards": [
+      {
+        "title": "In-Person, Remote, Self-Paced & Hybrid",
+        "subtitle": "Flexible training formats tailored to your team’s needs, fostering a culture of continuous growth."
+      },
+      {
+        "title": "Tailored Learning Paths",
+        "subtitle": "Designed around your roles, departments, and organizational goals."
+      },
+      {
+        "title": "Sector-Specific Design",
+        "subtitle": "We leverage modern, interactive training techniques to deliver programs that sharpen your organization’s competitive edge across every sector."
+      },
+      {
+        "title": "Bespoke Digital Content",
+        "subtitle": "Regulatory compliance across sectors. From banking to healthcare and beyond, we deliver full support so your organization meets every requirement."
+      },
+      {
+        "title": "Branded Digital Academy",
+        "subtitle": "More than a platform. A complete digital academy featuring expert-led, interactive training journeys and a rich, diverse content library."
+      },
+      {
+        "title": "Flexible Scheduling",
+        "subtitle": "Synced with your team’s availability, no disruption, no delays."
+      }
+    ],
+    "title": "Built Around You. Branded For You",
+    "subtitle": "Custom-built to reflect your organization’s identity, vision, and goals"
+
   }
 }
