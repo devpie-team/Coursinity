@@ -91,5 +91,17 @@
     "bookDemo": "Book a Demo Now",
     "titleGradientMobile": "Spark a learning revolution.",
     "subtitleMobile": "Take your team’s productivity to a new paradigm"
+  },
+  "AiTeamSection": {
+    "title": "Build an AI‑Proficient Team",
+    "description": "We help you build a team that masters AI interaction, using it to boost productivity and drive task completion. Training is fully customized for each role, in a style that fits your team’s culture, tools, and ambitions.",
+    "button": "Learn More",
+    "items": [
+      "Training teams to write smarter AI prompts",
+      "Confident use of AI tools in daily tasks",
+      "Learn through real-world, scenario-driven training",
+      "Empower AI agents to tackle time-draining tasks",
+      "Customized programs for every department, role, and function"
+    ]
   }
 }
