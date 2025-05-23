@@ -25,7 +25,7 @@ export const HeroSection = () => {
 
   return (
     <section
-      className="relative min-h-[900px] max-[834px]:min-h-[766px] max-[1440px]:min-h-[600px] w-full bg-cover bg-center bg-no-repeat h-[2000px]"
+      className="relative min-h-[900px] max-[834px]:min-h-[766px] max-[1440px]:min-h-[600px] w-full bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: `url('/assets/heroBg.png')`
       }}>
