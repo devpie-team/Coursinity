@@ -83,5 +83,13 @@
         }
       ]
     }
+  },
+  "Hero": {
+    "title": "Lead The Change with a Future - ",
+    "titleGradient": "Ready Team",
+    "subtitle": "Empower your team with AI-driven, tailored training paths that bring your vision to life. The leader in Edu-tech solutions.",
+    "bookDemo": "Book a Demo Now",
+    "titleGradientMobile": "Spark a learning revolution.",
+    "subtitleMobile": "Take your team’s productivity to a new paradigm"
   }
 }

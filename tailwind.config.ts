@@ -25,7 +25,7 @@ export default {
         body3: ['16px', { lineHeight: '28px', fontWeight: '400' }],
         body4: ['14px', { lineHeight: '24px', fontWeight: '400' }],
         caption: ['14px', { lineHeight: '14px', fontWeight: '400' }],
-        button: ['16px', { lineHeight: '24px', fontWeight: '400' }],
+        button: ['16px', { lineHeight: '24px', fontWeight: '400' }]
       },
       colors: {
         black: '#0D0D0D',
@@ -46,5 +46,13 @@ export default {
       }
     }
   },
+  safelist: [
+    { pattern: /^h-.*/ },
+    { pattern: /^min-h-.*/ },
+    { pattern: /^max-h-.*/ },
+    { pattern: /^w-.*/ },
+    { pattern: /^min-w-.*/ },
+    { pattern: /^max-w-.*/ }
+  ],
   plugins: [require('tailwindcss-animate')]
 } satisfies Config
