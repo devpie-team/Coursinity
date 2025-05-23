@@ -34,10 +34,12 @@ export default {
         'primary-purple': '#A578F2',
         'primary-blue': '#1C8DC1',
         'primary-yellow': '#FDE800',
+        'secondary-purple': '#8759D5',
         'secondary-100': '#F6F1FE',
         'secondary-200': '#E4EDF2',
         'secondary-300': '#F9FAFB',
-        'secondary-400': '#D0D5DD'
+        'secondary-400': '#D0D5DD',
+        
       },
       borderRadius: {
         lg: 'var(--radius)',
