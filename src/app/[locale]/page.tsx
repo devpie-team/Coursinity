@@ -6,6 +6,7 @@ import { AiTeamSection } from '@/components/Sections/AiTeamSection'
 import { FutureSection } from '@/components/Sections/FutureSection'
 import { TeamTrainingSection } from '@/components/Sections/TeamTrainingSection'
 import { Header } from '@/components/Header'
+import Footer from '@/components/Footer/Footer'
 
 export default function HomePage() {
   const t = useTranslations('HomePage')
@@ -18,6 +19,7 @@ export default function HomePage() {
       <BuildSection />
       <TeamTrainingSection />
       <FeaturesSection />
+      <Footer />
     </>
   )
 }
