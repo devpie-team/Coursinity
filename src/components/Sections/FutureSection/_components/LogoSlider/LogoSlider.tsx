@@ -44,7 +44,7 @@ export const LogoSlider = () => {
           ].map((src, i) => (
             <div
               key={i}
-              className="w-[160px] h-[160px] border border-secondary-400 bg-white rounded-[40px]  flex items-center justify-center skew-x-[-30deg]">
+              className="w-[160px] h-[160px] border border-secondary-400 bg-white rounded-[40px]  flex items-center justify-center skew-x-[-30deg] max-[1440px]:h-[105px] max-[1440px]:w-[105px]">
               <img src={src} alt="" className=" object-contain" />
             </div>
           ))}
