@@ -14,15 +14,15 @@ export default {
         sans: ['var(--font-poppins)', ...defaultTheme.fontFamily.sans]
       },
       fontSize: {
-        h1: ['80px', { lineHeight: '80px', fontWeight: '400' }],
-        h2: ['64px', { lineHeight: '120%', fontWeight: '400' }],
-        h3: ['42px', { lineHeight: '130%', fontWeight: '400' }],
+        h1: ['80px', { lineHeight: '80px', fontWeight: '400', letterSpacing: '-0.03em' }],
+        h2: ['64px', { lineHeight: '120%', fontWeight: '400', letterSpacing: '-0.04em' }],
+        h3: ['42px', { lineHeight: '130%', fontWeight: '400', letterSpacing: '-0.04em' }],
         h4: ['32px', { lineHeight: '40px', fontWeight: '400' }],
         h5: ['30px', { lineHeight: '120%', fontWeight: '400' }],
         h6: ['24px', { lineHeight: '33.6px', fontWeight: '400' }],
         body1: ['20px', { lineHeight: '30px', fontWeight: '400' }],
         body2: ['18px', { lineHeight: '28px', fontWeight: '400' }],
-        body3: ['16px', { lineHeight: '28px', fontWeight: '400' }],
+        body3: ['16px', { lineHeight: '24px', fontWeight: '400' }],
         body4: ['14px', { lineHeight: '24px', fontWeight: '400' }],
         caption: ['14px', { lineHeight: '14px', fontWeight: '400' }],
         button: ['16px', { lineHeight: '24px', fontWeight: '400' }]
@@ -38,7 +38,8 @@ export default {
         'secondary-100': '#F6F1FE',
         'secondary-200': '#E4EDF2',
         'secondary-300': '#F9FAFB',
-        'secondary-400': '#D0D5DD'
+        'secondary-400': '#D0D5DD',
+        description: '#6E6E6E'
       },
       borderRadius: {
         lg: 'var(--radius)',
