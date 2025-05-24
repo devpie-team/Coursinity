@@ -38,8 +38,7 @@ export default {
         'secondary-100': '#F6F1FE',
         'secondary-200': '#E4EDF2',
         'secondary-300': '#F9FAFB',
-        'secondary-400': '#D0D5DD',
-        
+        'secondary-400': '#D0D5DD'
       },
       borderRadius: {
         lg: 'var(--radius)',

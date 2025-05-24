@@ -43,7 +43,7 @@ export const BuildSection = () => {
 
   return (
     <section
-      className="flex flex-col gap-12 pt-[140px] px-10 max-w-[100vw] bg-black pb-[150px] text-white"
+      className="flex flex-col items-center gap-12 pt-[140px] px-10 max-w-[100vw] bg-black pb-[150px] text-white"
       ref={scrollWrapperRef}>
       <div className="flex flex-col items-center gap-4">
         <Typography variant="h3">{t('title')}</Typography>
@@ -52,7 +52,7 @@ export const BuildSection = () => {
         </Typography>
       </div>
 
-      <div className="horizontal-container flex h-[536px] items-center gap-[26px] pb-[100px] overflow-hidden">
+      <div className="horizontal-container flex h-[536px] items-center gap-[26px] pb-[100px] overflow-hidden w-[1440px]">
         {CARDS.map(({ icon, rotation, top }, id) => (
           <RotatedCard
             key={id}
