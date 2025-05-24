@@ -18,7 +18,7 @@ export const HeroSection = () => {
     const checkScreenSize = () => {
       const width = window.innerWidth
       setIsMobile(width < 768)
-      setIsTablet(width < 1024)
+      setIsTablet(width <= 1024)
     }
 
     checkScreenSize()
@@ -133,24 +133,36 @@ export const HeroSection = () => {
         </div>
       </div>
 
-      <img src="/assets/hero/element1.png/" className="absolute bottom-[-40px] left-3 animate-element element1 z-20" />
       <img
-        src="/assets/hero/element2.png/"
-        className="absolute bottom-[-40px] right-[-40px] animate-element element2"
+        src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}1.png/`}
+        className="absolute bottom-[-40px] left-3 max-[1024px]:left-1  max-[1024px]:bottom-[-20px] animate-element element1 "
       />
       <img
-        src="/assets/hero/element3.png/"
-        className="absolute top-[15%] left-0 animate-element element3  max-[992px]:scale-[0.5]"
+        src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}2.png/`}
+        className="absolute bottom-[-40px] right-[-40px] max-[1024px]:right-[-20px]  max-[1024px]:bottom-[-15px] animate-element element2"
       />
-      <img src="/assets/hero/element4.png/" className="absolute top-[15%] right-[-40px] animate-element element4" />
       <img
-        src="/assets/hero/element5.png/"
-        className="absolute top-[15%] left-[42%] max-[768px]:left-[14%] animate-element element5"
+        src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}3.png/`}
+        className="absolute top-[15%] left-0  max-[768px]:top-[10%] animate-element element3"
+      />
+      <img
+        src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}4.png/`}
+        className="absolute top-[15%] right-[-40px] max-[768px]:top-[10%] max-[1024px]:right-[-15px] animate-element element4"
+      />
+      <img
+        src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}5.png/`}
+        className="absolute top-[15%] left-[42%] max-[768px]:top-[22%] max-[768px]:left-[25%] animate-element element5"
       />
       {isMobile ? null : (
         <>
-          <img src="/assets/hero/element6.png/" className="absolute top-[42%] right-[-40px] animate-element element6" />
-          <img src="/assets/hero/element7.png/" className="absolute top-[42%] left-[-90px] animate-element element7" />
+          <img
+            src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}6.png/`}
+            className="absolute top-[42%] right-[-40px] max-[1024px]:right-[-15px] animate-element element6"
+          />
+          <img
+            src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}7.png/`}
+            className="absolute top-[42%] left-[-90px] max-[1024px]:left-[-60px] animate-element element7"
+          />
         </>
       )}
     </section>

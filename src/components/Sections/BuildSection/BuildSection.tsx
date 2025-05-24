@@ -52,7 +52,7 @@ export const BuildSection = () => {
         </Typography>
       </div>
 
-      <div className="horizontal-container flex h-[536px] items-center gap-[26px] pb-[100px] overflow-hidden w-[1440px]">
+      <div className="horizontal-container flex h-[536px] items-center gap-[26px] pb-[100px] overflow-hidden w-full">
         {CARDS.map(({ icon, rotation, top }, id) => (
           <RotatedCard
             key={id}

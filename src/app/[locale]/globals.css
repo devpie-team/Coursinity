@@ -10,6 +10,14 @@
   min-height: 100vh;
 }
 
+:root {
+  --font-poppins: 'Poppins', sans-serif;
+}
+
+body {
+  font-family: var(--font-poppins), sans-serif;
+}
+
 main {
   position: relative;
   display: flex;

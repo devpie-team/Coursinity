@@ -6,6 +6,7 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import Footer from '@/components/Footer/Footer'
+import { Header } from '@/components/Header'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -31,14 +32,14 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale}>
-      <body>
-        <NextIntlClientProvider>
-          <Theme>
+    <html lang={locale} className={poppins.variable}>
+      <Theme>
+        <body>
+          <NextIntlClientProvider>
             <div className="main-wrapper ">{children} </div> <Footer />
-          </Theme>
-        </NextIntlClientProvider>
-      </body>
+          </NextIntlClientProvider>
+        </body>
+      </Theme>
     </html>
   )
 }

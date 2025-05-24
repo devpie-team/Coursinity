@@ -37,5 +37,9 @@ export const Typography = ({
   children,
   className = ''
 }: TypographyProps) => {
-  return <Component className={clsx(variantMap[variant], weightMap[weight], className)}>{children}</Component>
+  return (
+    <Component className={clsx(variantMap[variant], weightMap[weight], 'font-poppins', className)}>
+      {children}
+    </Component>
+  )
 }

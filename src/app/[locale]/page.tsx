@@ -5,11 +5,13 @@ import { BuildSection, FeaturesSection, HeroSection } from '@/components/Section
 import { AiTeamSection } from '@/components/Sections/AiTeamSection'
 import { FutureSection } from '@/components/Sections/FutureSection'
 import { TeamTrainingSection } from '@/components/Sections/TeamTrainingSection'
+import { Header } from '@/components/Header'
 
 export default function HomePage() {
   const t = useTranslations('HomePage')
   return (
     <>
+      <Header />
       <HeroSection />
       <FutureSection />
       <AiTeamSection />
