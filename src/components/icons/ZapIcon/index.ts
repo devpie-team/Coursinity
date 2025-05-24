@@ -1,0 +1,1 @@
+export { ZapIcon } from './ZapIcon'

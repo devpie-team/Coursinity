@@ -1,0 +1,1 @@
+export { UserOctagonIcon } from './UserOctagonIcon'

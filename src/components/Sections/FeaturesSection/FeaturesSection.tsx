@@ -6,9 +6,7 @@ import DiplomaIcon from '@/components/icons/DiplomaIcon'
 import { Typography } from '@/components/ui'
 import { cn } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { isDate } from 'util/types'
 
 const certifications = [
   { src: '/assets/certifications/CompTia.png', alt: 'CompTIA logo' },
@@ -27,7 +25,7 @@ export const FeaturesSection = () => {
   const t = useTranslations('Features')
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [isTablet, setIsTablet] = useState<boolean>(false)
-  const [isDesktop, setIsDesktop] = useState<boolean>(true) // За замовчуванням
+  const [isDesktop, setIsDesktop] = useState<boolean>(true)
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -37,7 +35,7 @@ export const FeaturesSection = () => {
       setIsDesktop(width > 1440)
     }
 
-    checkScreenSize() // Початковий виклик
+    checkScreenSize()
 
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)

@@ -68,7 +68,7 @@ export const TeamTrainingSection = () => {
                   }`}>
                   {i + 1}
                 </div>
-                <Typography variant={isDesktop ? 'body3' : 'caption'} weight="regular" className="leading-[140%]">
+                <Typography variant={isDesktop ? 'body3' : 'caption'} weight="regular" className="leading-[140%] ">
                   {t(`items.${i}`)}
                 </Typography>
               </div>
