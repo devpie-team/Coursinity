@@ -26,7 +26,7 @@ export const LogoSlider = () => {
   }, [])
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center px-[150px] py-10 max-lg:px-6 max-lg:py-8 max-md:px-4">
       <div className="relative   h-[200px] border-4 border-secondary-400 rounded-[40px]  w-full overflow-hidden">
         <div
           className="flex absolute gap-10  left-1/3 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[7.5deg]"

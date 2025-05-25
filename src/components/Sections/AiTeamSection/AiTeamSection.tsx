@@ -41,7 +41,7 @@ export const AiTeamSection = () => {
   ]
 
   return (
-    <div
+    <section
       className={cn(
         'bg-black text-white p-[140px] max-[1440px]:px-6 max-[1440px]:pb-20 max-[1440px]:pt-0 max-[834px]:px-4'
       )}>
@@ -78,6 +78,6 @@ export const AiTeamSection = () => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   )
 }
