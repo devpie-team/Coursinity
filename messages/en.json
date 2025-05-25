@@ -144,6 +144,14 @@
     ],
     "title": "Built Around You. Branded For You",
     "subtitle": "Custom-built to reflect your organization’s identity, vision, and goals"
-
+  },
+  "FutureSection": {
+    "title": "The Future Starts Now. Get Your Team Ready",
+    "subtitle": "Get your team future-ready with training designed to ignite productivity.",
+    "card1Title": "Training Built to Fit",
+    "card2Title": "Gamified Experiences that Stick",
+    "card3Title": "Maximum Value, Whatever the Budget",
+    "card4Title": "Seamless Systems by Design",
+    "card5Title": "Real Results, No Guesswork"
   }
 }
