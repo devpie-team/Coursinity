@@ -44,8 +44,8 @@ export const FutureSection = () => {
       { selector: '.future-element5', x: -1100, y: -300 }
     ]
     ScrollTrigger.getAll().forEach((trigger) => {
-      const triggerElement = trigger.trigger as Element
-      if (triggerElement && triggerElement.classList.contains('future-section')) {
+      const el = trigger.trigger as Element
+      if (el?.classList?.contains('future-section')) {
         trigger.kill()
       }
     })
@@ -74,7 +74,7 @@ export const FutureSection = () => {
 
     const targetScale = isMobile ? 0.7 : 1
     gsap.fromTo(
-      '.future-scaleText',
+      '.scaleText',
       { scale: initialScale },
       {
         scale: targetScale,
@@ -89,7 +89,7 @@ export const FutureSection = () => {
       }
     )
     gsap.fromTo(
-      '.future-opacityText',
+      '.opacityText',
       { opacity: 1 },
       {
         opacity: 0,
@@ -105,12 +105,12 @@ export const FutureSection = () => {
   }, [isDesktop, isTablet, isMobile, windowWidth])
 
   return (
-    <div>
+    <section>
       <div className="px-10">
         <LogoSlider />
       </div>
       <div className="relative flex items-center justify-center text-center w-full h-[975px] overflow-hidden future-section">
-        <div className="flex flex-col max-w-full w-[432px] future-scaleText future-opacityText max-lg:w-[372px] max-md:w-[252px]">
+        <div className="flex flex-col max-w-full w-[432px] scaleText opacityText max-lg:w-[372px] max-md:w-[252px]">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
             {t('title')}
           </Typography>
@@ -190,6 +190,6 @@ export const FutureSection = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
