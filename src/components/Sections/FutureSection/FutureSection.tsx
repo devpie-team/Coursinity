@@ -33,10 +33,6 @@ export const FutureSection = () => {
         runAnimations(1, 3)
       }
     })
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-    }
   }, [])
 
   const runAnimations = (targetScale: number, initialScale: number) => {

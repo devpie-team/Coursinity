@@ -30,9 +30,9 @@ export const FeaturesSection = () => {
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth
-      setIsMobile(width < 834)
-      setIsTablet(width < 1440)
-      setIsDesktop(width > 1440)
+      setIsMobile(width < 768)
+      setIsTablet(width >= 768 && width <= 1024)
+      setIsDesktop(width > 1024)
     }
 
     checkScreenSize()
@@ -41,20 +41,20 @@ export const FeaturesSection = () => {
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
   return (
-    <section className="px-[140px] pb-[140px] max-[1440px]:px-6 max-[1440px]:pt-20 max-[1440px]:pb-0">
+    <section className="px-[140px] pb-[140px] max-lg:px-6 max-lg:pt-20 max-lg:pb-0 max-[1400px]:px-[100px] max-[1250px]:px-[50px] max-md:px-4">
       <div
         className={cn(
-          isTablet
-            ? 'flex gap-8 max-[834px]:flex-col'
+          isTablet || isMobile
+            ? 'flex gap-8 max-md:flex-col'
             : 'flex p-8 rounded-[20px] gap-8 bg-[linear-gradient(180deg,_rgba(255,255,255,0.16)_0%,_rgba(30,141,194,0.16)_100%)] '
         )}>
         {/* Left Block */}
-        <div className="flex flex-col bg-white border rounded-2xl p-8 flex-1">
+        <div className="flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6">
           <div className={cn(isDesktop ? 'mb-6' : 'mb-2')}>
             <DiplomaIcon width={isTablet ? 40 : 64} height={isTablet ? 40 : 64} />
           </div>
 
-          <div className="flex flex-col flex-grow gap-8 max-[1440px]:gap-6">
+          <div className="flex flex-col flex-grow gap-8 max-lg:gap-6">
             <div className={cn('flex flex-col gap-4', !isDesktop && 'flex-grow')}>
               <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium">
                 {t('certified.title')}
@@ -66,7 +66,7 @@ export const FeaturesSection = () => {
 
             {!isDesktop && <div className="border-t" />}
 
-            <div className={cn('flex flex-col gap-4 max-[1440px]:gap-3', isDesktop ? 'flex-grow' : 'mt-auto')}>
+            <div className="flex flex-grow flex-col gap-4 max-lg:gap-3 max-lg:flex-none">
               {t.raw('certified.items').map((item: string, index: number) => {
                 const limitedText = !isDesktop ? item.split(' ').slice(0, 2).join(' ') : item
 
@@ -81,19 +81,12 @@ export const FeaturesSection = () => {
                   </div>
                 )
               })}
-              <div
-                className={cn(
-                  'grid grid-cols-2 grid-rows-2 place-items-center mt-auto gap-[10px]  ',
-                  !isDesktop && 'pt-3'
-                )}>
+              <div className="grid grid-cols-2 grid-rows-2 place-items-center mt-auto gap-[10px] max-lg:mt-0 max-lg:pt-3">
                 {certificationsLeft.map(({ src, alt }, i) => (
                   <div
                     key={i}
-                    className={cn(
-                      'flex bg-secondary-300 rounded-[10px] justify-center items-center w-full h-16',
-                      isDesktop ? 'h-16' : 'h-[42px] '
-                    )}>
-                    <img src={src} alt={alt} className="max-h-[64px]" />
+                    className="flex bg-secondary-300 rounded-[10px] justify-center items-center w-full h-16 max-lg:h-[42px]">
+                    <img src={src} alt={alt} className="max-h-[64px] max-lg:max-h-[42px]" />
                   </div>
                 ))}
               </div>
@@ -102,13 +95,13 @@ export const FeaturesSection = () => {
         </div>
 
         {/* Right Block */}
-        <div className="flex flex-col bg-white border rounded-2xl p-8 flex-1">
-          <div className={cn(isDesktop ? 'mb-6' : 'mb-2')}>
+        <div className="flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6">
+          <div className="mb-6 max-lg:mb-2">
             <DealIcon width={isTablet ? 40 : 64} height={isTablet ? 40 : 64} />
           </div>
 
-          <div className="flex flex-col flex-grow gap-8 max-[1440px]:gap-6">
-            <div className={cn('flex flex-col gap-4', !isDesktop && 'flex-grow')}>
+          <div className="flex flex-col flex-grow gap-8 max-lg:gap-6">
+            <div className="flex flex-col gap-4 max-lg:flex-grow">
               <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium">
                 {t('trusted.title')}
               </Typography>
@@ -119,7 +112,7 @@ export const FeaturesSection = () => {
 
             {!isDesktop && <div className="border-t" />}
 
-            <div className={cn('flex flex-col gap-4 max-[1440px]:gap-3', isDesktop ? 'flex-grow' : 'mt-auto')}>
+            <div className={cn('flex flex-col gap-4 max-lg:gap-3', isDesktop ? 'flex-grow' : 'mt-auto')}>
               {t.raw('trusted.items').map((item: { title: string; description: string }, index: number) => (
                 <div className="flex gap-4 items-center" key={index}>
                   <div>
@@ -140,18 +133,12 @@ export const FeaturesSection = () => {
               ))}
 
               <div
-                className={cn(
-                  'grid grid-cols-2 grid-rows-2 place-items-center mt-auto gap-[10px]  ',
-                  !isDesktop && 'pt-3'
-                )}>
+                className={cn('grid grid-cols-2 grid-rows-2 place-items-center  gap-[10px]  ', !isDesktop && 'pt-3')}>
                 {certificationsRight.map(({ src, alt }, i) => (
                   <div
                     key={i}
-                    className={cn(
-                      'flex bg-secondary-300 rounded-[10px] justify-center items-center w-full h-16',
-                      isDesktop ? 'h-16' : 'h-[42px] '
-                    )}>
-                    <img src={src} alt={alt} className="max-h-[64px]" />
+                    className="flex bg-secondary-300 rounded-[10px] justify-center items-center w-full h-16 max-lg:h-[42px]">
+                    <img src={src} alt={alt} className="max-h-[64px] max-lg:max-h-[42px]" />
                   </div>
                 ))}
               </div>
