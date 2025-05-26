@@ -45,6 +45,14 @@ export default {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)'
+      },
+      backgroundImage: {
+        'custom-gradient':  `radial-gradient(
+          ellipse 91.85% 92.48% at 10.11% 28.24%,
+          rgba(30, 141, 194, 0.64) 8%,
+          rgba(165, 120, 242, 0.64) 35%,
+          rgba(30, 141, 194, 0.64) 100%
+        )`
       }
     }
   },
