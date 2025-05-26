@@ -1,10 +1,16 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { BuildSection, FeaturesSection, HeroSection, StackSection } from '@/components/Sections'
-import { AiTeamSection } from '@/components/Sections/AiTeamSection'
-import { FutureSection } from '@/components/Sections/FutureSection'
-import { TeamTrainingSection } from '@/components/Sections/TeamTrainingSection'
+import {
+  AiTeamSection,
+  BuildSection,
+  FeaturesSection,
+  FutureSection,
+  HeroSection,
+  ImpactSection,
+  StackSection,
+  TeamTrainingSection
+} from '@/components/Sections'
 import { Header } from '@/components/Header'
 import Footer from '@/components/Footer/Footer'
 
@@ -14,11 +20,11 @@ export default function HomePage() {
     <>
       <Header />
       <HeroSection />
-      <StackSection />
       <FutureSection />
       <AiTeamSection />
+      {/* <StackSection /> */}
       <BuildSection />
-
+      <ImpactSection />
       <TeamTrainingSection />
       <FeaturesSection />
       <Footer />
