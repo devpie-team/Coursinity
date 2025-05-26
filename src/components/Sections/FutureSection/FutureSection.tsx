@@ -19,20 +19,18 @@ export const FutureSection = () => {
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
 
-    ScrollTrigger.matchMedia({
-      '(max-width: 767px)': () => {
-        runAnimations(0.7, 1.5)
-      },
-      '(min-width: 768px) and (max-width: 1024px)': () => {
-        runAnimations(1, 2)
-      },
-      '(min-width: 1025px) and (max-width: 1350px)': () => {
-        runAnimations(1, 2.3)
-      },
-      '(min-width: 1351px)': () => {
-        runAnimations(1, 3)
-      }
-    })
+    if (ScrollTrigger.getAll().length === 0) {
+      const width = window.innerWidth
+      if (width < 400) runAnimations(0.7, 1.1)
+      else if (width < 768) runAnimations(0.7, 1.5)
+      else if (width <= 1024) runAnimations(1, 2)
+      else if (width <= 1350) runAnimations(1, 2.3)
+      else runAnimations(1, 3)
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+    }
   }, [])
 
   const runAnimations = (targetScale: number, initialScale: number) => {
@@ -56,7 +54,7 @@ export const FutureSection = () => {
           scrollTrigger: {
             trigger: '.future-section',
             start: 'top top',
-            end: '100%',
+            end: '110%',
             scrub: 2
           }
         }
