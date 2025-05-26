@@ -1,6 +1,10 @@
-export const GridEditIcon = () => {
+type GridEditIconProps = {
+  size?: number | string
+}
+
+export const GridEditIcon = ({ size = 48 }: GridEditIconProps) => {
   return (
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={size} height={size} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M42.6589 29.3399C40.5589 27.2399 38.8989 27.9199 37.4589 29.3399L29.1589 37.6399C28.8389 37.9599 28.5389 38.5799 28.4589 39.0199L27.9989 42.1999C27.8389 43.3399 28.6389 44.1599 29.7789 43.9799L32.9589 43.5199C33.3989 43.4599 34.0189 43.1399 34.3389 42.8199L42.6389 34.5199C44.0989 33.0999 44.7589 31.4399 42.6589 29.3399Z"
         fill="#E4EDF2"
