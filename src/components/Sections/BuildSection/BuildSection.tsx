@@ -19,14 +19,14 @@ const CARDS = [
 
 export const BuildSection = () => {
   const t = useTranslations('Build')
-  const scrollWrapperRef = useRef<HTMLDivElement>(null)
+  const scrollWrapperBuildRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!scrollWrapperRef.current) return
+    if (!scrollWrapperBuildRef.current) return
 
     let sections = gsap.utils.toArray('.horizontal-container .page')
 
-    const scrollWrapper = scrollWrapperRef.current as HTMLElement
+    const scrollWrapper = scrollWrapperBuildRef.current as HTMLElement
 
     gsap.to(sections, {
       xPercent: -310,
@@ -44,7 +44,7 @@ export const BuildSection = () => {
   return (
     <section
       className="flex flex-col items-center gap-12 pt-[140px] px-10 max-w-[100vw] bg-black pb-[150px] text-white"
-      ref={scrollWrapperRef}>
+      ref={scrollWrapperBuildRef}>
       <div className="flex flex-col items-center gap-4">
         <Typography variant="h3">{t('title')}</Typography>
         <Typography variant="body3" className="text-[#FFFFFFA3]">

@@ -32,22 +32,61 @@ button,
 a {
   cursor: pointer;
 }
+
+.impact-section {
+  .pin-spacer {
+    background: #0d0d0d;
+  }
+}
+
 .custom-shadow {
-  box-shadow:
-    inset 0px 4px 4px #EEEEEE52,
-    0px 20px 40px -10px #1E8DC299,
-    0px 60px 160px #1E8DC299;
-  backdrop-filter:blur(4px);
+  box-shadow: inset 0px 4px 4px #eeeeee52, 0px 20px 40px -10px #1e8dc299, 0px 60px 160px #1e8dc299;
+  backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(20px);
 }
- .custom-shadow-secondary {
-    box-shadow:
-      inset 0px 2.82px 2.82px #EEEEEE52,
-      0px 14.11px 28.22px -7.05px #1E8DC299,
-      0px 42.33px 112.88px #1E8DC299;
-    backdrop-filter: blur(14.11px);
-    -webkit-backdrop-filter: blur(14.11px);
-  }
+.custom-shadow-secondary {
+  box-shadow: inset 0px 2.82px 2.82px #eeeeee52, 0px 14.11px 28.22px -7.05px #1e8dc299, 0px 42.33px 112.88px #1e8dc299;
+  backdrop-filter: blur(14.11px);
+  -webkit-backdrop-filter: blur(14.11px);
+}
+
+/* .blue-gradient-border {
+  border: 2px solid transparent;
+  border-radius: 20px;
+  border-image: linear-gradient(
+      68.38deg,
+      rgba(28, 141, 193, 0) 0%,
+      rgba(28, 141, 193, 1) 49%,
+      rgba(28, 141, 193, 1) 75%,
+      rgba(14, 67, 92, 0) 100%
+    )
+    1;
+} */
+.blue-gradient-border {
+  position: relative;
+  border-radius: 20px;
+  background: white; /* or your content background */
+  z-index: 0;
+}
+
+.blue-gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px; /* border thickness */
+  border-radius: 20px;
+  background: linear-gradient(
+    68.38deg,
+    rgba(28, 141, 193, 0) 0%,
+    rgba(28, 141, 193, 1) 49%,
+    rgba(28, 141, 193, 1) 75%,
+    rgba(14, 67, 92, 0) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+}
 
 @layer base {
   :root {
