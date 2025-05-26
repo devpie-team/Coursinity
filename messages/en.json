@@ -157,5 +157,25 @@
   "ImpactSection": {
     "title": "Real Impact, Proven by Numbers",
     "subtitle": "Coursinity programs are built to deliver measurable, scalable results."
+  },
+  "dataDrivenSection": {
+    "left": {
+      "title": "Make Decisions Based on Data, Not Guesswork",
+      "description": "Actionable insights to drive smarter decisions and track progress by role and function."
+    },
+    "slides": [
+      {
+        "title": "Side-by-Side Progress",
+        "description": "View skill growth at a glance and tackle gaps with confidence."
+      },
+      {
+        "title": "Track Growth Journeys",
+        "description": "Map each team member’s development and guide them forward."
+      },
+      {
+        "title": "Live Insights Hub & Smart Filters",
+        "description": "Monitor engagement, performance, and impact in real time."
+      }
+    ]
   }
 }
