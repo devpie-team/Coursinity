@@ -1,6 +1,6 @@
 'use client'
 
-import CheckCircleIcon from '@/components/icons/CheckCircleIcon'
+import { CheckCircleIcon } from '@/components/icons'
 import DealIcon from '@/components/icons/DealIcon'
 import DiplomaIcon from '@/components/icons/DiplomaIcon'
 import { Typography } from '@/components/ui'
@@ -73,7 +73,7 @@ export const FeaturesSection = () => {
                 return (
                   <div className="flex gap-4 items-center" key={index}>
                     <div>
-                      <CheckCircleIcon width={isTablet ? 24 : 28} height={isTablet ? 24 : 28} />
+                      <CheckCircleIcon size={isTablet ? 24 : 28} />
                     </div>
                     <Typography variant={isDesktop ? 'body2' : 'caption'} weight="regular">
                       {limitedText}
@@ -123,7 +123,7 @@ export const FeaturesSection = () => {
               {t.raw('trusted.items').map((item: { title: string; description: string }, index: number) => (
                 <div className="flex gap-4 items-center" key={index}>
                   <div>
-                    <CheckCircleIcon width={isTablet ? 24 : 28} height={isTablet ? 24 : 28} />
+                    <CheckCircleIcon size={isTablet ? 24 : 28} />
                   </div>
                   <div className="flex flex-col gap-2">
                     <Typography variant={isDesktop ? 'body2' : 'caption'} weight="regular">

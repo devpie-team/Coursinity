@@ -32,6 +32,22 @@ button,
 a {
   cursor: pointer;
 }
+.custom-shadow {
+  box-shadow:
+    inset 0px 4px 4px #EEEEEE52,
+    0px 20px 40px -10px #1E8DC299,
+    0px 60px 160px #1E8DC299;
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter: blur(20px);
+}
+ .custom-shadow-secondary {
+    box-shadow:
+      inset 0px 2.82px 2.82px #EEEEEE52,
+      0px 14.11px 28.22px -7.05px #1E8DC299,
+      0px 42.33px 112.88px #1E8DC299;
+    backdrop-filter: blur(14.11px);
+    -webkit-backdrop-filter: blur(14.11px);
+  }
 
 @layer base {
   :root {
