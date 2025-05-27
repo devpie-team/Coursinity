@@ -1,7 +1,20 @@
 import clsx from 'clsx'
 import { ElementType, ReactNode, ComponentPropsWithoutRef } from 'react'
 
-type Variant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'body3' | 'body4' | 'button' | 'caption'
+type Variant =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'body1'
+  | 'body2'
+  | 'body3'
+  | 'body4'
+  | 'button'
+  | 'caption'
+  | 'subtitle'
 
 type Weight = 'regular' | 'medium' | 'semibold' | 'bold'
 
@@ -24,8 +37,9 @@ const variantMap: Record<Variant, string> = {
   body2: 'text-body2',
   body3: 'text-body3',
   body4: 'text-body4',
-  button: 'button',
-  caption: 'text-caption'
+  button: 'text-button',
+  caption: 'text-caption',
+  subtitle: 'text-subtitle'
 }
 
 const weightMap: Record<Weight, string> = {
