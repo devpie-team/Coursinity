@@ -1,0 +1,1 @@
+export { StarsIcon } from './StarsIcon'

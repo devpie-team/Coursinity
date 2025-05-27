@@ -10,6 +10,9 @@ export default {
   ],
   theme: {
     extend: {
+      animation: {
+        slideRight: 'slide-right 20s linear infinite'
+      },
       fontFamily: {
         sans: ['var(--font-poppins)', ...defaultTheme.fontFamily.sans]
       },
@@ -39,15 +42,16 @@ export default {
         'secondary-200': '#E4EDF2',
         'secondary-300': '#F9FAFB',
         'secondary-400': '#D0D5DD',
-        'description': '#6E6E6E'
+        description: '#6E6E6E'
       },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)'
       },
+
       backgroundImage: {
-        'custom-gradient':  `radial-gradient(
+        'custom-gradient': `radial-gradient(
           ellipse 91.85% 92.48% at 10.11% 28.24%,
           rgba(30, 141, 194, 0.64) 8%,
           rgba(165, 120, 242, 0.64) 35%,
