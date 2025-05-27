@@ -156,7 +156,14 @@
   },
   "ImpactSection": {
     "title": "Real Impact, Proven by Numbers",
-    "subtitle": "Coursinity programs are built to deliver measurable, scalable results."
+    "subtitle": "Coursinity programs are built to deliver measurable, scalable results.",
+    "smart": "Smart training",
+    "sectors": "Programs delivered across 12+ sectors",
+    "government": "Government & private orgs onboard",
+    "learners": "Learners trained and growing",
+    "average": "Average satisfaction score",
+    "numbers": "Proven by Numbers",
+    "active": "Active in 6 countries and expanding"
   },
   "dataDrivenSection": {
     "left": {

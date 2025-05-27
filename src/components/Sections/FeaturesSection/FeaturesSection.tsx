@@ -41,7 +41,7 @@ export const FeaturesSection = () => {
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
   return (
-    <section className="px-[140px] pb-[140px] max-[1440px]:px-6 max-[1440px]:pt-20 max-[1440px]:pb-0">
+    <section className="bg-white px-[140px] pb-[140px] max-[1440px]:px-6 max-[1440px]:pt-20 max-[1440px]:pb-0">
       <div
         className={cn(
           isTablet

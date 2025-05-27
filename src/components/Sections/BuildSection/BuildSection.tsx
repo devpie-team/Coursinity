@@ -43,7 +43,7 @@ export const BuildSection = () => {
 
   return (
     <section
-      className="flex flex-col items-center gap-12 pt-[140px] px-10 max-w-[100vw] bg-black pb-[150px] text-white"
+      className="build-section flex flex-col items-center gap-12 pt-[140px] px-10 max-w-[100vw] bg-black pb-[150px] text-white"
       ref={scrollWrapperBuildRef}>
       <div className="flex flex-col items-center gap-4">
         <Typography variant="h3">{t('title')}</Typography>

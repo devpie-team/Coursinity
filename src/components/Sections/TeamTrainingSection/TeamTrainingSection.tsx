@@ -34,7 +34,7 @@ export const TeamTrainingSection = () => {
   ]
 
   return (
-    <section className="flex pl-[140px] py-[85px]  gap-[50px] max-[1440px]:px-6 max-[1440px]:pb-0 max-[1440px]:gap-5 max-[834px]:flex-col">
+    <section className="bg-white flex pl-[140px] py-[85px]  gap-[50px] max-[1440px]:px-6 max-[1440px]:pb-0 max-[1440px]:gap-5 max-[834px]:flex-col">
       <div className="flex flex-col gap-10 ">
         <div className="flex flex-col gap-4">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">

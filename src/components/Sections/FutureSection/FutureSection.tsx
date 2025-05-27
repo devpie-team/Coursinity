@@ -100,7 +100,7 @@ export const FutureSection = () => {
   }
 
   return (
-    <section>
+    <section className="bg-white">
       <LogoSlider />
 
       <div className="relative flex items-center justify-center text-center w-full h-[975px] overflow-hidden future-section">
