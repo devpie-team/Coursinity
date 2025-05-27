@@ -1,0 +1,1 @@
+export { DirectionDownIcon } from './DirectionDownIcon'
