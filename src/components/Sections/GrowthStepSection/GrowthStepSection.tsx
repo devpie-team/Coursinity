@@ -1,108 +1,144 @@
 'use client'
 
-import { CheckCircleIcon } from '@/components/icons'
-import { PlayCircleIcon } from '@/components/icons/PlayCircleIcon'
+import { useEffect, useState } from 'react'
+import { useSwipeable } from 'react-swipeable'
 import { Typography } from '@/components/ui'
-import { useState } from 'react'
+import { Button } from '@/components/primitives/button'
+import Stepper from '@/components/Stepper'
+import { GrowthSlide } from './_components/GrowthSlide'
+import { SwipeStepper } from '@/components/SwipeStepper/SwipeStepper'
+import { useTranslations } from 'next-intl'
 
 export const GrowthStepSection = () => {
-  const [activeIndex, setActiveIndex] = useState(1)
+  const t = useTranslations('GrowthStepSection')
 
-  // Для визначення позиції слайда відносно центру
-  const getRelativePosition = (index: number) => {
-    const diff = (index - activeIndex + 3) % 3
-    if (diff === 0) return 'left'
-    if (diff === 1) return 'center'
-    if (diff === 2) return 'right'
-    return ''
-  }
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
+  const [isDesktop, setIsDesktop] = useState(true)
+  const [detailsShownFor, setDetailsShownFor] = useState<Set<number>>(new Set())
 
-  const handleClick = (index: number) => {
-    const position = getRelativePosition(index)
-    if (position === 'left') {
-      setActiveIndex((prev) => (prev + 2) % 3) // -1
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+      setIsTablet(width >= 768 && width <= 1024)
+      setIsDesktop(width > 1024)
+    }
+
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  const getStepperIndex = (index: number) => index + 1
+
+  const slideImages = [
+    {
+      image: '/assets/growth/growth_1.png',
+      imageHeight: '100%',
+      imageWidth: '100%',
+      imageClasses: 'absolute top-0 max-lg:top-[60px] max-lg:scale-[1.4]'
+    },
+    {
+      image: '/assets/growth/growth_2.png',
+      imageHeight: '300px',
+      imageWidth: '300px'
+    },
+    {
+      image: '/assets/growth/growth_3.png',
+      imageHeight: '270px',
+      imageWidth: '500px',
+      imageClasses: '-translate-x-[20px] translate-y-[30px]'
+    }
+  ]
+
+  const rawSlides = t.raw('slides')
+  const slides = Array.isArray(rawSlides) ? rawSlides : []
+
+  const mergedSlides = slides.map((slide, index) => ({
+    id: slide.id,
+    title: slide.title,
+    bullets: slide.items,
+    ...slideImages[index]
+  }))
+
+  const handleClick = (index: number, position: 'left' | 'right' | 'center') => {
+    if (!isDesktop && position === 'center') {
+      setDetailsShownFor((prev) => {
+        const next = new Set(prev)
+        next.add(index)
+        return next
+      })
+    } else if (position === 'left') {
+      setActiveIndex((prev) => (prev + 2) % 3)
     } else if (position === 'right') {
-      setActiveIndex((prev) => (prev + 1) % 3) // +1
+      setActiveIndex((prev) => (prev + 1) % 3)
     }
-    // якщо центр — нічого
   }
 
-  const getStyles = (index: number) => {
-    const position = getRelativePosition(index)
-
-    if (position === 'left') {
-      return 'z-0 opacity-40 rotate-[-5deg] -translate-x-[160%] w-[630px] h-[424px] bg-custom-gradient custom-shadow-secondary'
-    }
-    if (position === 'center') {
-      return 'z-10 opacity-100 rotate-0 -translate-x-1/2 w-[900px] h-[600px] bg-custom-gradient custom-shadow'
-    }
-    if (position === 'right') {
-      return 'z-0 opacity-40 rotate-[5deg] translate-x-[60%] w-[900px] h-[600px] transform scale-[80%] bg-custom-gradient custom-shadow-secondary top-1/2 left-1/3 -translate-y-1/2'
-    }
-
-    return ''
-  }
+  const swipeHandlers = useSwipeable({
+    onSwipedRight: () => setActiveIndex((prev) => (prev + 2) % 3),
+    onSwipedLeft: () => setActiveIndex((prev) => (prev + 1) % 3),
+    preventScrollOnSwipe: true,
+    trackTouch: true,
+    trackMouse: true
+  })
 
   return (
-    <section className="relative flex bg-black h-[1240px] overflow-hidden">
-      <div
-        className={`absolute top-1/2 left-1/2 -translate-y-1/2 transition-all duration-700 ease-in-out
-         rounded-2xl cursor-pointer ${getStyles(0)}`}
-        onClick={() => handleClick(0)}></div>
-
-      <div
-        className={`absolute flex flex-col top-1/2 left-1/2 -translate-y-1/2 transition-all duration-700 ease-in-out
-         rounded-2xl justify-between cursor-pointer py-10 ${getStyles(2)}`}
-        onClick={() => handleClick(2)}>
-        <div className="flex gap-5 items-center justify-center p-1">
-          <Typography variant="h4" weight="medium" className="text-white">
-            Coursinity Academy
-          </Typography>
-          <div>
-            <PlayCircleIcon />
-          </div>
-        </div>
-
-        <div>
-          <img
-            src="/assets/growth/growth_2.png"
-            alt="growth_1"
-            className="top-[50px]   absolute object-contain w-full"
-          />
-        </div>
-
-        <div className="flex    ">
-          <div className="flex flex-col h-[148px] w-[271px] gap-5 p-5">
-            <div>
-              <CheckCircleIcon size="32" fill="white" />
-            </div>
-            <Typography variant="body2" weight="semibold" className="text-white opacity-80">
-              Fully branded internal academies
-            </Typography>
-          </div>
-          <div className="flex flex-col h-[148px] w-[271px] gap-5 p-5">
-            <div>
-              <CheckCircleIcon size="32" fill="white" />
-            </div>
-            <Typography variant="body2" weight="semibold" className="text-white opacity-80">
-              Reporting, analytics, and certification tracking
-            </Typography>
-          </div>
-          <div className="flex flex-col h-[148px] w-[271px] gap-5 p-5">
-            <div>
-              <CheckCircleIcon size="32" fill="white" />
-            </div>
-            <Typography variant="body2" weight="semibold" className="text-white opacity-80">
-              LMS platforms integrated with your systems
-            </Typography>
-          </div>
-        </div>
+    <section
+      className="relative flex flex-col bg-black h-[1240px] max-lg:h-[730px] overflow-hidden items-center justify-between"
+      {...(!isDesktop ? swipeHandlers : {})}>
+      <div className="flex flex-col gap-4 text-center pb-14 pt-[140px] max-lg:pt-20 max-md:px-4">
+        <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
+          {t('common.sectionTitle')}
+        </Typography>
+        <Typography variant="body3" weight="regular" className="text-white opacity-80">
+          {t('common.sectionDescription')}
+        </Typography>
       </div>
 
-      <div
-        className={`absolute  top-1/2 left-1/2 -translate-y-1/2 transition-all duration-700 ease-in-out
-         rounded-2xl cursor-pointer ${getStyles(1)}`}
-        onClick={() => handleClick(1)}></div>
+      <div>
+        {mergedSlides.map((slide, index) => (
+          <GrowthSlide
+            key={slide.id}
+            index={index}
+            activeIndex={activeIndex}
+            onClick={handleClick}
+            data={slide}
+            showDetails={detailsShownFor.has(index)}
+          />
+        ))}
+      </div>
+
+      {isDesktop ? (
+        <div className="flex flex-col gap-[40px] pb-[140px] px-[140px] w-full items-center">
+          <Typography variant="h6" weight="regular" className="text-white">
+            {t('common.subtitle')}
+          </Typography>
+          <Button variant="secondary" className="w-[190px]">
+            {t('common.cta')}
+          </Button>
+          <div className="absolute bottom-[140px] right-[140px]">
+            <Stepper
+              steps={3}
+              activeStep={getStepperIndex(activeIndex)}
+              onStepClick={(step) => setActiveIndex(step - 1)}
+            />
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-8 items-center justify-center pb-20">
+          <SwipeStepper
+            steps={3}
+            activeStep={getStepperIndex(activeIndex)}
+            onStepClick={(step) => setActiveIndex(step - 1)}
+          />
+          <Button variant="secondary" className="w-[343px]">
+            {t('common.cta')}
+          </Button>
+        </div>
+      )}
     </section>
   )
 }

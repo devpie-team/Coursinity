@@ -184,5 +184,42 @@
         "description": "Monitor engagement, performance, and impact in real time."
       }
     ]
+  },
+  "GrowthStepSection": {
+    "common": {
+      "cta": "Talk to expert",
+      "subtitle": "Custom training systems for accelerated growth",
+      "sectionTitle": "End‑to‑End Team Growth",
+      "sectionDescription": "Explore the Coursinity suite with three paths to smarter, faster, better teams"
+    },
+    "slides": [
+      {
+        "id": 0,
+        "title": "Coursinity Academy",
+        "items": [
+          "Fully branded internal academies",
+          "Reporting, analytics, and certification tracking",
+          "LMS platforms integrated with your systems"
+        ]
+      },
+      {
+        "id": 1,
+        "title": "Coursinity AI",
+        "items": [
+          "Role-specific AI use cases",
+          "Ongoing support, updates, and libraries",
+          "Hands-on prompt coaching"
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Coursinity Solutions",
+        "items": [
+          "Self-paced training journeys",
+          "Built-in assessments and progress tracking",
+          "Fully branded internal academies"
+        ]
+      }
+    ]
   }
 }
