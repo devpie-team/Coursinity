@@ -14,7 +14,6 @@ import {
 import { Header } from '@/components/Header'
 import Footer from '@/components/Footer/Footer'
 import { GrowthStepSection } from '@/components/Sections/GrowthStepSection'
-import { DataDrivenSection } from '@/components/Sections/DataDrivenSection'
 
 export default function HomePage() {
   const t = useTranslations('HomePage')
@@ -29,7 +28,6 @@ export default function HomePage() {
       <BuildSection />
       <ImpactSection />
       <TeamTrainingSection />
-      <DataDrivenSection />
       <FeaturesSection />
       <Footer />
     </>
