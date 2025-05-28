@@ -9,8 +9,8 @@ type Option = {
 }
 
 type CustomSelectProps = {
-  value: string
-  onChange: (value: string) => void
+  value?: string
+  onChange?: (value: string) => void
   options: Option[]
   placeholder?: string
   label?: string

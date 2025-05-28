@@ -21,7 +21,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      'group relative rounded-full flex h-[60px] w-[320px] items-center justify-between whitespace-nowrap border border-input bg-transparent px-5 pr-8 py-[18px] text-md shadow-sm ring-offset-background focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 group-data-[state=active]:border-secondary-400',
+      'group relative rounded-full flex h-[60px] w-[320px] items-center justify-between whitespace-nowrap border border-input bg-transparent px-5 pr-10 py-[18px] text-md shadow-sm ring-offset-background focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 group-data-[state=active]:border-secondary-400',
       // Додано стилізацію для placeholder
       '[&>[data-placeholder]]:text-description data-[placeholder]:text-description',
       className
@@ -29,12 +29,14 @@ const SelectTrigger = React.forwardRef<
     {...props}>
     {children}
     <SelectPrimitive.Icon asChild>
-      <DirectionDownIcon
-        className={cn(
-          'absolute right-[20px] pointer-events-none fill-dark-color-2 transition-transform duration-200',
-          'group-data-[state=open]:rotate-180 group-data-[state=open]:mt-[2px]'
-        )}
-      />
+      <div className="pl-2">
+        <DirectionDownIcon
+          className={cn(
+            ' pointer-events-none fill-dark-color-2 transition-transform duration-200',
+            'group-data-[state=open]:rotate-180 group-data-[state=open]:mt-[2px] '
+          )}
+        />
+      </div>
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ))
