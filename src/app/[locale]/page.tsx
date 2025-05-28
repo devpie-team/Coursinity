@@ -18,7 +18,7 @@ import { GrowthStepSection } from '@/components/Sections/GrowthStepSection'
 export default function HomePage() {
   const t = useTranslations('HomePage')
   return (
-    <div className="bg-white p-10">
+    <>
       <Header />
       <HeroSection />
       <FutureSection />
@@ -30,6 +30,6 @@ export default function HomePage() {
       <TeamTrainingSection />
       <FeaturesSection />
       <Footer />
-    </div>
+    </>
   )
 }
