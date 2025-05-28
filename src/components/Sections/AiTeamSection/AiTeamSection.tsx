@@ -1,6 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/primitives/button'
 import { Typography } from '@/components/ui'
@@ -12,25 +14,10 @@ import IdeaIcon from '@/components/icons/IdeaIcon'
 import MonitorIcon from '@/components/icons/MonitorIcon'
 import { cn } from '@/lib/utils'
 
+gsap.registerPlugin(ScrollTrigger)
+
 export const AiTeamSection = () => {
   const t = useTranslations('AiTeamSection')
-
-  const [isMobile, setIsMobile] = useState(false)
-  const [isTablet, setIsTablet] = useState(false)
-  const [isDesktop, setIsDesktop] = useState(true)
-
-  useEffect(() => {
-    const checkScreenSize = () => {
-      const width = window.innerWidth
-      setIsMobile(width < 768)
-      setIsTablet(width >= 768 && width <= 1024)
-      setIsDesktop(width > 1024)
-    }
-
-    checkScreenSize()
-    window.addEventListener('resize', checkScreenSize)
-    return () => window.removeEventListener('resize', checkScreenSize)
-  }, [])
 
   const items = [
     { icon: <UsersIcon />, translationKey: 'items.0' },
@@ -40,12 +27,44 @@ export const AiTeamSection = () => {
     { icon: <MonitorIcon />, translationKey: 'items.4' }
   ]
 
+  const itemRefs = useRef<Array<HTMLDivElement | null>>([])
+
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      items.forEach((_, i) => {
+        gsap.fromTo(
+          itemRefs.current[i],
+          {
+            opacity: 0,
+            scale: 0.7,
+            y: 60
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            delay: i * 0.05,
+            duration: 0.6,
+            ease: 'expo.inOut',
+            scrollTrigger: {
+              trigger: itemRefs.current[i],
+              start: 'top 80%',
+
+              toggleActions: 'play none none reverse'
+            }
+          }
+        )
+      })
+    })
+    return () => ctx.revert()
+  }, [items.length])
+
   return (
     <section className={cn('bg-black text-white p-[140px] max-[1200px]:px-6 max-lg:pb-20 max-lg:pt-0 max-md:px-4')}>
       <div className={cn('flex justify-center items-stretch gap-[130px] max-lg:gap-10 max-md:flex-col')}>
         {/* Left */}
         <div className="flex flex-col gap-8 flex-1 min-w-[300px] justify-center max-lg:gap-4">
-          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
+          <Typography variant="h3" weight="medium">
             {t('title')}
           </Typography>
           <Typography variant="body3" weight="regular">
@@ -61,10 +80,14 @@ export const AiTeamSection = () => {
           {items.map(({ icon, translationKey }, index) => (
             <div
               key={index}
-              className="p-6 border border-[#FFFFFF29] rounded-[20px] bg-[linear-gradient(180deg,_rgba(255,255,255,0.06)_0%,_rgba(30,141,194,0.06)_100%)] backdrop-blur-[16px] max-lg:p-4">
+              ref={(el) => {
+                itemRefs.current[index] = el
+              }}
+              className="p-6 border border-[#FFFFFF29] rounded-[20px] bg-[linear-gradient(180deg,_rgba(255,255,255,0.06)_0%,_rgba(30,141,194,0.06)_100%)] backdrop-blur-[16px] max-lg:p-4 origin-top"
+              style={{ transformOrigin: 'top center' }}>
               <div className="flex gap-3 items-center">
                 <div>{icon}</div>
-                <Typography variant={isDesktop ? 'body2' : isTablet ? 'body3' : 'caption'} weight="regular">
+                <Typography variant="body2" weight="regular">
                   {t(translationKey)}
                 </Typography>
               </div>

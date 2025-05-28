@@ -39,16 +39,16 @@ export const FutureSection = () => {
 
     ScrollTrigger.matchMedia({
       '(max-width: 767px)': () => {
-        runAnimations(0.7, 1.5)
+        runAnimations(0.5, 1, true, false, false)
       },
       '(min-width: 768px) and (max-width: 1024px)': () => {
-        runAnimations(1, 2)
+        runAnimations(0.7, 1.3, false, true, false)
       },
       '(min-width: 1025px) and (max-width: 1350px)': () => {
-        runAnimations(1, 2.3)
+        runAnimations(0.7, 1.3, false, false, true)
       },
       '(min-width: 1351px)': () => {
-        runAnimations(1, 1.5)
+        runAnimations(1, 1.5, false, false, true)
       }
     })
 
@@ -57,14 +57,42 @@ export const FutureSection = () => {
     }
   }, [])
 
-  const runAnimations = (targetScale: number, initialScale: number) => {
-    const elementSettings = [
+  const getElementSettings = (isMobile: boolean, isTablet: boolean, isDesktop: boolean) => {
+    if (isMobile) {
+      return [
+        { selector: '.future-element1', x: 80, y: -220 },
+        { selector: '.future-element2', x: 230, y: 40 },
+        { selector: '.future-element3', x: 30, y: 240 },
+        { selector: '.future-element4', x: -180, y: 180 },
+        { selector: '.future-element5', x: -200, y: -170 }
+      ]
+    }
+    if (isTablet) {
+      return [
+        { selector: '.future-element1', x: 70, y: -240 },
+        { selector: '.future-element2', x: 340, y: -70 },
+        { selector: '.future-element3', x: 180, y: 220 },
+        { selector: '.future-element4', x: -260, y: 180 },
+        { selector: '.future-element5', x: -350, y: -100 }
+      ]
+    }
+    // Default: Desktop
+    return [
       { selector: '.future-element1', x: 100, y: -300 },
       { selector: '.future-element2', x: 500, y: -100 },
       { selector: '.future-element3', x: 450, y: 200 },
       { selector: '.future-element4', x: -400, y: 250 },
       { selector: '.future-element5', x: -500, y: -150 }
     ]
+  }
+  const runAnimations = (
+    targetScale: number,
+    initialScale: number,
+    isMobile: boolean,
+    isTablet: boolean,
+    isDesktop: boolean
+  ) => {
+    const elementSettings = getElementSettings(isMobile, isTablet, isDesktop)
 
     elementSettings.forEach(({ selector, x, y }) => {
       gsap.fromTo(
@@ -119,7 +147,7 @@ export const FutureSection = () => {
 
   return (
     <section className="bg-white">
-      <div className="px-10">
+      <div>
         <LogoSlider />
       </div>
       <div className="relative flex items-center justify-center text-center w-full h-[975px] overflow-hidden future-section">
