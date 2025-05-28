@@ -25,7 +25,7 @@ export const FutureSection = () => {
       else if (width < 768) runAnimations(0.7, 1.5)
       else if (width <= 1024) runAnimations(1, 2)
       else if (width <= 1350) runAnimations(1, 2.3)
-      else runAnimations(1, 3)
+      else runAnimations(0.7, 1)
     }
 
     return () => {
@@ -35,11 +35,11 @@ export const FutureSection = () => {
 
   const runAnimations = (targetScale: number, initialScale: number) => {
     const elementSettings = [
-      { selector: '.future-element1', x: 200, y: -800 },
-      { selector: '.future-element2', x: 1100, y: -200 },
-      { selector: '.future-element3', x: 1000, y: 700 },
-      { selector: '.future-element4', x: -1000, y: 600 },
-      { selector: '.future-element5', x: -1100, y: -300 }
+      { selector: '.future-element1', x: 100, y: -300 },
+      { selector: '.future-element2', x: 500, y: -100 },
+      { selector: '.future-element3', x: 450, y: 200 },
+      { selector: '.future-element4', x: -400, y: 250 },
+      { selector: '.future-element5', x: -500, y: -150 }
     ]
 
     elementSettings.forEach(({ selector, x, y }) => {
