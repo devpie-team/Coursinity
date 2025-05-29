@@ -35,7 +35,7 @@ const POSITIONS = {
 // Функція визначає, яка позиція зараз у картки
 const getRelativePosition = (index: number, activeIndex: number): 'top' | 'middle' | 'bottom' => {
   if (index === activeIndex) return 'top'
-  if ((index + 1) % 3 === activeIndex) return 'middle'
+  if ((index + 2) % 3 === activeIndex) return 'middle'
   return 'bottom'
 }
 
@@ -94,7 +94,7 @@ export const StackSection = () => {
           </Typography>
           <Button variant="secondary">Talk to a Learning Advisor</Button>
         </div>
-        <Stepper steps={3} activeStep={activeIndex + 1} />
+        <Stepper steps={3} activeStep={activeIndex + 1} onStepClick={(stepIndex) => setActiveIndex(stepIndex - 1)} />
       </div>
     </section>
   )
