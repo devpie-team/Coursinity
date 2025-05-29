@@ -1,1 +1,1 @@
-export {ExpandableCard} from './ExpdandableCard'
+export {ExpandableCard} from './ExpandableCard'

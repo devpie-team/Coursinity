@@ -104,7 +104,7 @@ export const InspirationSection = () => {
           Inspire Productivity, Don’t Force it
         </Typography>
       </div>
-      <div className="flex flex-col gap-[10px] border border-white border-opacity-15 p-6 rounded-3xl w-full flex-1 max-h-[612px]">
+      <div className="flex flex-col gap-[10px] border border-white border-opacity-15 p-6 rounded-3xl w-full flex-1 ">
         {benefits.map((item, idx) => (
           <ExpandableCard
             key={item.title}
