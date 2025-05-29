@@ -106,7 +106,7 @@ export const FutureSection = () => {
           scrollTrigger: {
             trigger: '.future-section',
             start: 'top top',
-            end: '100%',
+            end: '120%',
             scrub: 2
           }
         }
