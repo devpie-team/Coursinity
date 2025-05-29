@@ -1,0 +1,1 @@
+export { GamingPadIcon } from './GamingPadIcon'

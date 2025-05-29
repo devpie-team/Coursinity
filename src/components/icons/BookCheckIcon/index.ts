@@ -1,0 +1,1 @@
+export { BookCheckIcon } from './BookCheckIcon'

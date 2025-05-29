@@ -14,6 +14,7 @@ import {
 import { Header } from '@/components/Header'
 import Footer from '@/components/Footer/Footer'
 import { GrowthStepSection } from '@/components/Sections/GrowthStepSection'
+import { InspirationSection } from '@/components/Sections/InspirationSection'
 
 export default function HomePage() {
   const t = useTranslations('HomePage')
@@ -24,6 +25,7 @@ export default function HomePage() {
       <FutureSection />
       <GrowthStepSection />
       <AiTeamSection />
+      <InspirationSection />
       {/* <StackSection /> */}
       <BuildSection />
       <ImpactSection />
