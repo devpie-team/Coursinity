@@ -1,0 +1,1 @@
+export { DoubleQuotesIcon } from './DoubleQuotesIcon'

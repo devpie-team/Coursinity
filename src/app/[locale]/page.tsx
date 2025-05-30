@@ -16,6 +16,7 @@ import Footer from '@/components/Footer/Footer'
 import { GrowthStepSection } from '@/components/Sections/GrowthStepSection'
 import { InspirationSection } from '@/components/Sections/InspirationSection'
 import { DataDrivenSection } from '@/components/Sections/DataDrivenSection'
+import { TestimonialsSection } from '@/components/Sections/TestimonialsSection'
 
 export default function HomePage() {
   const t = useTranslations('HomePage')
@@ -34,6 +35,7 @@ export default function HomePage() {
       <TeamTrainingSection />
       <DataDrivenSection />
       <FeaturesSection />
+      <TestimonialsSection />
       <Footer />
     </>
   )
