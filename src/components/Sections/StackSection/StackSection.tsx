@@ -1,64 +1,58 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Typography } from '@/components/ui'
 import { Button } from '@/components/primitives/button'
 import Stepper from '@/components/Stepper'
 
 import { StackCards } from './_components/StackCards/StackCards'
-
-type Position = 'top' | 'middle' | 'bottom'
-const slideConfigs = [
-  {
-    title: 'Step 1',
-    subtitle: 'Pinpoint the Skill Gaps',
-    description: 'We uncover your goals and the skills your team needs next.',
-    img: '/assets/stack_section/stack_1.png'
-  },
-  {
-    title: 'Step 2',
-    subtitle: 'Identify Priorities',
-    description: 'Focus on what matters most for your growth.',
-    img: '/assets/stack_section/stack_2.png'
-  },
-  {
-    title: 'Step 3',
-    subtitle: 'Tailor Training',
-    description: 'Build training around your team’s unique needs.',
-    img: '/assets/stack_section/stack_3.png'
-  }
-]
-
-const getRelativePosition = (index: number, activeIndex: number): 'top' | 'middle' | 'bottom' => {
-  if (index === activeIndex) return 'top'
-  if ((index + 2) % 3 === activeIndex) return 'middle'
-  return 'bottom'
-}
+import { useTranslations } from 'next-intl'
 
 export const StackSection = () => {
+  const [isMobile, setIsMobile] = useState<boolean>(false)
+  const [isTablet, setIsTablet] = useState<boolean>(false)
+  const [isDesktop, setIsDesktop] = useState<boolean>(true)
   const [activeIndex, setActiveIndex] = useState(0)
+  const t = useTranslations('StackSection')
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+      setIsTablet(width >= 768 && width <= 1024)
+      setIsDesktop(width > 1024)
+    }
+
+    checkScreenSize()
+
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
 
   return (
-    <section className="flex gap-[120px] bg-primary-purple h-[900px] pt-[130px] px-[235px] text-white overflow-hidden">
+    <section className="flex gap-[120px] bg-primary-purple h-[900px] pt-[130px] px-[235px] text-white overflow-hidden items-start max-[1200px]:px-[140px] max-lg:px-10 max-lg:pt-20 max-lg:h-[750px]  max-lg:gap-16 max-md:flex-col max-md:px-4 max-md:gap-10 max-md:h-[970px] ">
       {/* Slides */}
-      <div className="w-1/2 relative">
+      <div className="w-1/2 relative max-lg:scale-[75%] transform order-1 max-md:order-2 max-md:translate-x-1/2">
         <StackCards activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
       </div>
       {/* Right section */}
-      <div className="flex flex-col gap-[210px] max-w-[410px] ml-auto relative z-40 w-1/2">
-        <div className="flex flex-col gap-8 ">
-          <Typography variant="h3" weight="medium">
-            Training Your Team. Your Smartest Investment
+      <div className="flex flex-col gap-[210px] max-w-[410px]  relative z-40 w-1/2 max-lg:gap-[120px] justify-center h-full order-2 max-md:order-1 max-md:justify-start max-md:items-center max-md:h-[280px] max-md:w-full max-md:max-w-full max-md:text-center">
+        <div className="flex flex-col gap-8 max-lg:gap-4 w-full justify-center">
+          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
+            {t('left.title')}
           </Typography>
-          <Typography variant="body2" weight="regular">
-            Coursinity turns your ambition into tailored training shaped by your goals, your team’s strengths, and your
-            culture’s pulse.
+          <Typography variant={isDesktop ? 'body2' : 'body3'} weight="regular">
+            {t('left.description')}
           </Typography>
-          <Button variant="secondary" className="w-[255px]">
-            Talk to a Learning Advisor
+          <Button
+            variant="secondary"
+            className="w-[255px] mt-4 max-md:mx-auto max-lg:w-[343px] max-[400px]:w-full max-[400px]:mt-0">
+            {t('left.button')}
           </Button>
         </div>
-        <Stepper steps={3} activeStep={activeIndex + 1} onStepClick={(stepIndex) => setActiveIndex(stepIndex - 1)} />
+        {!isMobile && (
+          <Stepper steps={3} activeStep={activeIndex + 1} onStepClick={(stepIndex) => setActiveIndex(stepIndex - 1)} />
+        )}
       </div>
     </section>
   )

@@ -221,5 +221,32 @@
         ]
       }
     ]
+  },
+  "StackSection": {
+    "left": {
+      "title": "Training Your Team. Your Smartest Investment",
+      "description": "Coursinity turns your ambition into tailored training shaped by your goals, your team’s strengths, and your culture’s pulse.",
+      "button": "Talk to a Learning Advisor"
+    },
+    "steps": [
+      {
+        "title": "Step 1",
+        "subtitle": "Pinpoint the Skill Gaps",
+        "description": "We uncover your goals and the skills your team needs next."
+      },
+      {
+        "title": "Step 2",
+        "subtitle": "We design tailored learning experiences",
+        "description": "",
+        "button": "Book a Demo Now",
+        "badge": "Individual plan"
+      },
+      {
+        "title": "Step 3",
+        "subtitle": "Maximize the Return",
+        "description": "",
+        "button": "Book a Demo Now"
+      }
+    ]
   }
 }

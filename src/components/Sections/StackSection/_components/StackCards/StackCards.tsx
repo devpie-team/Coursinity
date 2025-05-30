@@ -2,13 +2,15 @@
 
 import { BadgeIcon } from '@/components/icons/BadgeIcon'
 import { Typography } from '@/components/ui'
+import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
 
 type Position = 'top' | 'middle' | 'bottom'
 
 const POSITIONS: Record<Position, string> = {
-  top: 'top-[-30px] z-10',
-  middle: 'top-[570px] z-20',
-  bottom: 'top-[670px] z-30'
+  top: 'top-[-10px] z-10 max-lg:top-[100px] max-md:top-[20px]',
+  middle: 'top-[570px] z-20 max-lg:top-[690px] max-md:top-[555px]',
+  bottom: 'top-[670px] z-30 max-lg:top-[790px] max-md:top-[655px]'
 }
 
 const getRelativePosition = (index: number, activeIndex: number): Position => {
@@ -22,103 +24,152 @@ type StackCardsProps = {
   setActiveIndex: (idx: number) => void
 }
 
-export const StackCards = ({ activeIndex, setActiveIndex }: StackCardsProps) => (
-  <>
-    {/* Картка 1 */}
-    <div
-      className={`
-        absolute left-1/2 -translate-x-1/2 h-[770px] w-[440px]
-        bg-black bg-opacity-[32%] rounded-3xl backdrop-blur-[40px]
-        flex flex-col justify-between cursor-pointer transition-all duration-500 ease-in-out mb-[100px]
-        ${POSITIONS[getRelativePosition(0, activeIndex)]}
-        ${activeIndex === 0 ? 'rounded-t-3xl' : ''}
-      `}
-      onClick={() => setActiveIndex(0)}>
-      <div className="flex flex-col gap-2 px-[18px] pt-12 text-center justify-center items-center">
-        <Typography variant="h4" weight="medium" className="opacity-65 mb-1">
-          Step 1
-        </Typography>
-        <Typography variant="h4" weight="medium">
-          Pinpoint the Skill Gaps
-        </Typography>
-        <Typography variant="body3" weight="regular" className="opacity-80 w-[305px] text-center">
-          We uncover your goals and the skills your team needs next.
-        </Typography>
-      </div>
-      <div className="flex justify-center pb-[255px]">
-        <img src="/assets/stack_section/stack_1.png" alt="Step 1" className="object-cover " />
-      </div>
-      <img
-        src="/assets/stack_section/stack_4.png"
-        alt="stack_4"
-        className="absolute object-cover top-[350px] left-[15px]"
-      />
-      <img
-        src="/assets/stack_section/stack_5.png"
-        alt="stack_5"
-        className="absolute object-cover top-[250px] right-[20px]"
-      />
-    </div>
+export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIndex }) => {
+  const [isMobile, setIsMobile] = useState<boolean>(false)
+  const [isTablet, setIsTablet] = useState<boolean>(false)
+  const [isDesktop, setIsDesktop] = useState<boolean>(true)
+  const t = useTranslations('StackSection')
 
-    {/* Картка 2 */}
-    <div
-      className={`
-        absolute left-1/2 -translate-x-1/2 h-[730px] w-[440px]
-        bg-black bg-opacity-[32%] rounded-3xl backdrop-blur-[40px]
-        flex flex-col justify-between cursor-pointer transition-all duration-500 ease-in-out
-        ${POSITIONS[getRelativePosition(1, activeIndex)]}
-        ${activeIndex === 1 ? 'rounded-t-3xl' : ''}
-      `}
-      onClick={() => setActiveIndex(1)}>
-      <div className="flex flex-col gap-3 px-[18px] pt-12 text-center justify-center items-center">
-        <Typography variant="h4" weight="medium" className="opacity-65 ">
-          Step 2
-        </Typography>
-        <Typography variant="h4" weight="medium">
-          We design tailored learning experiences
-        </Typography>
-        <button className=" h-14 rounded-full bg-black bg-opacity-[32%] text-white text-caption px-6 py-5 text-center mt-4 hover:bg-gradient-to-r  from-[#0D0D0D] to-[#3D3D3D] active:bg-none active:bg-primary-purple transition-all">
-          Book a Demo Now
-        </button>
-      </div>
-      <div className="flex justify-center">
-        <img src="/assets/stack_section/stack_2.png" alt="Step 2" className="object-cover " />
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+      setIsTablet(width >= 768 && width <= 1024)
+      setIsDesktop(width > 1024)
+    }
+
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  return (
+    <>
+      {/* Картка 1 */}
+      <div
+        className={`
+          absolute left-1/2 -translate-x-1/2 h-[770px] w-[440px]
+          bg-black bg-opacity-[32%] rounded-3xl backdrop-blur-[40px]
+          flex flex-col justify-between cursor-pointer transition-all duration-500 ease-in-out mb-[100px]
+          ${POSITIONS[getRelativePosition(0, activeIndex)]}
+          ${activeIndex === 0 ? 'rounded-t-3xl' : ''}
+        `}
+        onClick={() => setActiveIndex(0)}>
+        <div className="flex flex-col gap-2 px-[18px] pt-12 text-center justify-center items-center">
+          <Typography variant="h4" weight="medium" className="opacity-65 mb-1">
+            {t('steps.0.title')}
+          </Typography>
+          <Typography variant="h4" weight="medium">
+            {t('steps.0.subtitle')}
+          </Typography>
+          <Typography variant="body3" weight="regular" className="opacity-80 w-[305px] text-center">
+            {t('steps.0.description')}
+          </Typography>
+        </div>
+        <div className="flex justify-center pb-[255px]">
+          <img
+            src="/assets/stack_section/stack_1.png"
+            alt="Step 1"
+            className=" object-cover max-md:absolute max-md:bottom-[50px]"
+          />
+        </div>
+        <img
+          src="/assets/stack_section/stack_4.png"
+          alt="stack_4"
+          className="absolute object-cover top-[350px] left-[15px]"
+        />
+        <img
+          src="/assets/stack_section/stack_5.png"
+          alt="stack_5"
+          className="absolute object-cover top-[250px] right-[20px]"
+        />
       </div>
 
-      <div className=" absolute flex justify-center items-center gap-[10px] bg-white h-14  rounded-full p-4 text-[#18233D] top-[460px] left-[65px]">
-        <span className="absolute w-4 h-4 bg-white rounded-full top-[40px] left-[0px]"></span>
-        <span className="absolute w-2 h-2 bg-white rounded-full top-[56px] left-[-8px]"></span>
-        <BadgeIcon />
-        <Typography variant="caption" weight="medium">
-          Individual plan
-        </Typography>
+      {/* Картка 2 */}
+      <div
+        className={`
+          absolute left-1/2 -translate-x-1/2 h-[730px] w-[440px]
+          bg-black bg-opacity-[32%] rounded-3xl backdrop-blur-[40px]
+          flex flex-col  cursor-pointer transition-all duration-500 ease-in-out 
+          ${POSITIONS[getRelativePosition(1, activeIndex)]}
+          ${activeIndex === 1 ? 'rounded-t-3xl' : ''}
+        `}
+        onClick={() => setActiveIndex(1)}>
+        <div className="flex flex-col gap-3 px-[18px] pt-12 text-center justify-center items-center">
+          <Typography variant="h4" weight="medium" className="opacity-65 ">
+            {t('steps.1.title')}
+          </Typography>
+          <Typography variant="h4" weight="medium">
+            {t('steps.1.subtitle')}
+          </Typography>
+          {t('steps.1.button') && (
+            <button
+              className="
+                button-gradient
+                h-14 rounded-full px-6 py-5 text-center mt-4
+                text-white text-caption
+                transition-all 
+              ">
+              {t('steps.1.button')}
+            </button>
+          )}
+        </div>
+        <div className="flex justify-center">
+          <img
+            src="/assets/stack_section/stack_2.png"
+            alt="Step 2"
+            className=" object-cover max-md:absolute max-md:bottom-12"
+          />
+        </div>
+        {t('steps.1.badge') && (
+          <div className=" absolute flex justify-center items-center gap-[10px] bg-white h-14  rounded-full p-4 text-[#18233D] top-[460px] left-[65px] max-md:top-[420px]">
+            <span className="absolute w-4 h-4 bg-white rounded-full top-[40px] left-[0px]"></span>
+            <span className="absolute w-2 h-2 bg-white rounded-full top-[56px] left-[-8px]"></span>
+            <BadgeIcon />
+            <Typography variant="caption" weight="medium">
+              {t('steps.1.badge')}
+            </Typography>
+          </div>
+        )}
       </div>
-    </div>
 
-    {/* Картка 3 */}
-    <div
-      className={`
-        absolute left-1/2 -translate-x-1/2 h-[770px] w-[440px]
-        bg-black bg-opacity-[32%] rounded-3xl backdrop-blur-[40px]
-        flex flex-col justify-between cursor-pointer transition-all duration-500 ease-in-out
-        ${POSITIONS[getRelativePosition(2, activeIndex)]}
-        ${activeIndex === 2 ? 'rounded-t-3xl' : ''}
-      `}
-      onClick={() => setActiveIndex(2)}>
-      <div className="flex flex-col gap-3 px-[18px] pt-12 text-center justify-center items-center">
-        <Typography variant="h4" weight="medium" className="opacity-65 ">
-          Step 3
-        </Typography>
-        <Typography variant="h4" weight="medium">
-          Maximize the Return
-        </Typography>
-        <button className=" h-14 rounded-full bg-black bg-opacity-[32%] text-white text-caption px-6 py-5 text-center mt-4 hover:bg-gradient-to-r  from-[#0D0D0D] to-[#3D3D3D] active:bg-none active:bg-primary-purple">
-          Book a Demo Now
-        </button>
+      {/* Картка 3 */}
+      <div
+        className={`
+          absolute left-1/2 -translate-x-1/2 h-[770px] w-[440px]
+          bg-black bg-opacity-[32%] rounded-3xl backdrop-blur-[40px]
+          flex flex-col justify-between cursor-pointer transition-all duration-500 ease-in-out
+          ${POSITIONS[getRelativePosition(2, activeIndex)]}
+          ${activeIndex === 2 ? 'rounded-t-3xl' : ''}
+        `}
+        onClick={() => setActiveIndex(2)}>
+        <div className="flex flex-col gap-3 px-[18px] pt-12 text-center justify-center items-center">
+          <Typography variant="h4" weight="medium" className="opacity-65 ">
+            {t('steps.2.title')}
+          </Typography>
+          <Typography variant="h4" weight="medium">
+            {t('steps.2.subtitle')}
+          </Typography>
+          {t('steps.2.button') && (
+            <button
+              className="
+                button-gradient
+                h-14 rounded-full px-6 py-5 text-center mt-4
+                text-white text-caption
+                transition-all 
+              ">
+              {t('steps.2.button')}
+            </button>
+          )}
+        </div>
+        <div className="flex justify-center pb-[195px]">
+          <img
+            src="/assets/stack_section/stack_3.png"
+            alt="Step 3"
+            className=" object-cover max-md:absolute max-md:bottom-[220px]"
+          />
+        </div>
       </div>
-      <div className="flex justify-center pb-[195px]">
-        <img src="/assets/stack_section/stack_3.png" alt="Step 3" className="object-cover " />
-      </div>
-    </div>
-  </>
-)
+    </>
+  )
+}
