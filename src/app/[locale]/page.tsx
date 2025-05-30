@@ -24,10 +24,11 @@ export default function HomePage() {
       <Header />
       <HeroSection />
       <FutureSection />
+      <StackSection />
       <GrowthStepSection />
       <AiTeamSection />
       <InspirationSection />
-      {/* <StackSection /> */}
+
       <BuildSection />
       <ImpactSection />
       <TeamTrainingSection />

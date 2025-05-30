@@ -1,81 +1,59 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { gsap } from 'gsap'
+import { useEffect, useState } from 'react'
+import { Typography } from '@/components/ui'
+import { Button } from '@/components/primitives/button'
+import Stepper from '@/components/Stepper'
 
-const cards = [
-  { title: 'Step 1', text: 'Pinpoint the Skill Gaps' },
-  { title: 'Step 2', text: 'Tailored learning experiences' },
-  { title: 'Step 3', text: 'Maximize the Return' }
-]
-
-export default function StackSteps() {
-  const [index, setIndex] = useState(0)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const cardRefs = useRef<HTMLDivElement[]>([])
-
-  useEffect(() => {
-    if (!containerRef.current) return
-
-    cardRefs.current.forEach((el, i) => {
-      gsap.set(el, {
-        y: i > index ? 100 : 0,
-        opacity: i === index ? 1 : 0,
-        zIndex: i === index ? 2 : 1
-      })
-    })
-  }, [index])
-
-  const handleNext = () => {
-    const current = cardRefs.current[index]
-    const nextIndex = (index + 1) % cards.length
-    const next = cardRefs.current[nextIndex]
-
-    const tl = gsap.timeline()
-
-    tl.to(current, {
-      y: -100,
-      opacity: 0,
-      duration: 0.5,
-      ease: 'power2.out'
-    }).set(current, { zIndex: 0 })
-
-    tl.to(
-      next,
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        ease: 'power2.out'
-      },
-      '<' // одночасно з set
-    )
-
-    setIndex(nextIndex)
-  }
-
-  return (
-    <div className="relative w-[400px] h-[500px] mx-auto" ref={containerRef}>
-      {cards.map((card, i) => (
-        <div
-          key={i}
-          ref={(el) => {
-            if (el) cardRefs.current[i] = el
-          }}
-          className="absolute top-0 left-0 w-full h-full bg-purple-500 text-white p-6 rounded-3xl shadow-xl">
-          <h2 className="text-xl font-semibold">{card.title}</h2>
-          <p className="mt-4 text-sm">{card.text}</p>
-        </div>
-      ))}
-      <button
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-white text-black rounded-full"
-        onClick={handleNext}>
-        Next
-      </button>
-    </div>
-  )
-}
+import { StackCards } from './_components/StackCards/StackCards'
+import { useTranslations } from 'next-intl'
 
 export const StackSection = () => {
-  return <StackSteps />
+  const [isMobile, setIsMobile] = useState<boolean>(false)
+  const [isTablet, setIsTablet] = useState<boolean>(false)
+  const [isDesktop, setIsDesktop] = useState<boolean>(true)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const t = useTranslations('StackSection')
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+      setIsTablet(width >= 768 && width <= 1024)
+      setIsDesktop(width > 1024)
+    }
+
+    checkScreenSize()
+
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  return (
+    <section className="flex gap-[120px] bg-primary-purple h-[900px] pt-[130px] px-[235px] text-white overflow-hidden items-start max-[1200px]:px-[140px] max-lg:px-10 max-lg:pt-20 max-lg:h-[750px]  max-lg:gap-16 max-md:flex-col max-md:px-4 max-md:gap-10 max-md:h-[970px] ">
+      {/* Slides */}
+      <div className="w-1/2 relative max-lg:scale-[75%] transform order-1 max-md:order-2 max-md:translate-x-1/2">
+        <StackCards activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
+      </div>
+      {/* Right section */}
+      <div className="flex flex-col gap-[210px] max-w-[410px]  relative z-40 w-1/2 max-lg:gap-[120px] justify-center h-full order-2 max-md:order-1 max-md:justify-start max-md:items-center max-md:h-[280px] max-md:w-full max-md:max-w-full max-md:text-center">
+        <div className="flex flex-col gap-8 max-lg:gap-4 w-full justify-center">
+          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
+            {t('left.title')}
+          </Typography>
+          <Typography variant={isDesktop ? 'body2' : 'body3'} weight="regular">
+            {t('left.description')}
+          </Typography>
+          <Button
+            variant="secondary"
+            className="w-[255px] mt-4 max-md:mx-auto max-lg:w-[343px] max-[400px]:w-full max-[400px]:mt-0">
+            {t('left.button')}
+          </Button>
+        </div>
+        {!isMobile && (
+          <Stepper steps={3} activeStep={activeIndex + 1} onStepClick={(stepIndex) => setActiveIndex(stepIndex - 1)} />
+        )}
+      </div>
+    </section>
+  )
 }
