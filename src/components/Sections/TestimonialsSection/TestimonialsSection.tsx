@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Typography } from '@/components/ui'
 import { TestimonialCard } from './_components/TestimonialCard'
 import { CarouselStepper } from './_components/CarouselStepper'
@@ -62,26 +62,41 @@ const testimonials = [
     userName: 'M. Ali',
     userPosition: 'Training Lead, Bahri'
   }
-  // ...ще відгуки
 ]
 
 const POSITIONS = ['left', 'center', 'right'] as const
 type Position = (typeof POSITIONS)[number]
 
 export const TestimonialsSection = () => {
+  const [isMobile, setIsMobile] = useState<boolean>(false)
+  const [isTablet, setIsTablet] = useState<boolean>(false)
+  const [isDesktop, setIsDesktop] = useState<boolean>(true)
   const [activeIndex, setActiveIndex] = useState(0)
   const slidesCount = testimonials.length
 
-  // Генеруємо масив для 3 позицій
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+      setIsTablet(width >= 768 && width <= 1024)
+      setIsDesktop(width > 1024)
+    }
+
+    checkScreenSize()
+
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
   const getVisibleSlides = () => {
     const result = []
-    // Ліва (якщо не на першому)
+
     if (activeIndex > 0) {
       result.push({ ...testimonials[activeIndex - 1], pos: 'left' as Position })
     }
-    // Центр (завжди)
+
     result.push({ ...testimonials[activeIndex], pos: 'center' as Position })
-    // Права (якщо не на останньому)
+
     if (activeIndex < testimonials.length - 1) {
       result.push({ ...testimonials[activeIndex + 1], pos: 'right' as Position })
     }
@@ -94,9 +109,9 @@ export const TestimonialsSection = () => {
   const visibleSlides = getVisibleSlides()
 
   return (
-    <section className="flex flex-col h-[933px] bg-white items-center gap-[105px] relative justify-between px-[140px] pb-[140px]">
+    <section className="flex flex-col h-[933px] bg-white items-center gap-[105px] relative justify-between px-[140px] pb-[140px] max-lg:px-[60px] max-lg:py-20 max-lg:h-[834px] overflow-hidden">
       <div className="flex flex-col gap-4">
-        <Typography variant="h3" weight="medium">
+        <Typography variant={isDesktop ? 'h3' : 'h3'} weight="medium">
           What Our Partners Are Saying
         </Typography>
         <Typography variant="body3" weight="regular">
@@ -104,10 +119,8 @@ export const TestimonialsSection = () => {
         </Typography>
       </div>
 
-      {/* КОНТЕЙНЕР для слайдів */}
-      <div className="relative w-full min-h-[440px] flex items-center justify-center">
-        {/* тільки одне flex, картки абсолютом */}
-        {visibleSlides.map((slide) => (
+      <div className="relative w-full min-h-[440px] flex items-center justify-center max-lg:w-auto max-lg:min-h-0">
+        {visibleSlides.map((slide, idx) => (
           <TestimonialCard key={slide.company + slide.userName} data={slide} position={slide.pos as Position} />
         ))}
       </div>
