@@ -248,5 +248,59 @@
         "button": "Book a Demo Now"
       }
     ]
+  },
+  "TestimonialsSection": {
+    "title": "What Our Partners Are Saying",
+    "subtitle": "Real results. Genuine trust. Teams that drive transformation.",
+    "businessTypesTitle": "Business Types",
+    "businessTypes": [
+      "Corporation",
+      "LLC",
+      "Other"
+    ],
+    "testimonials": [
+      {
+        "company": "Bahri company 1",
+        "feedback": "Coursinity helped us train over 4,000 employees without disrupting daily operations. The academy reflected our identity and values and the results were measurable from the first month.",
+        "userName": "M. Ali",
+        "userPosition": "Training Lead, Bahri"
+      },
+      {
+        "company": "Second Riyadh Health Cluster 2",
+        "feedback": "In record time, employee skill levels rose significantly, and job satisfaction was clearly enhanced. Coursinity’s customized journeys helped us train 20,000+ medical staff without disrupting care.",
+        "userName": "M. Ali",
+        "userPosition": "Training Director, Second Riyadh Health Cluster​"
+      },
+      {
+        "company": "Bahri company 3",
+        "feedback": "Coursinity helped us train over 4,000 employees without disrupting daily operations. The academy reflected our identity and values and the results were measurable from the first month.",
+        "userName": "M. Ali",
+        "userPosition": "Training Lead, Bahri"
+      },
+      {
+        "company": "Second Riyadh Health Cluster 4",
+        "feedback": "In record time, employee skill levels rose significantly, and job satisfaction was clearly enhanced. Coursinity’s customized journeys helped us train 20,000+ medical staff without disrupting care.",
+        "userName": "M. Ali",
+        "userPosition": "Training Director, Second Riyadh Health Cluster​"
+      },
+      {
+        "company": "Bahri company 5",
+        "feedback": "Coursinity helped us train over 4,000 employees without disrupting daily operations. The academy reflected our identity and values and the results were measurable from the first month.",
+        "userName": "M. Ali",
+        "userPosition": "Training Lead, Bahri"
+      },
+      {
+        "company": "Second Riyadh Health Cluster 6",
+        "feedback": "In record time, employee skill levels rose significantly, and job satisfaction was clearly enhanced. Coursinity’s customized journeys helped us train 20,000+ medical staff without disrupting care.",
+        "userName": "M. Ali",
+        "userPosition": "Training Director, Second Riyadh Health Cluster​"
+      },
+      {
+        "company": "Bahri company 7",
+        "feedback": "Coursinity helped us train over 4,000 employees without disrupting daily operations. The academy reflected our identity and values and the results were measurable from the first month.",
+        "userName": "M. Ali",
+        "userPosition": "Training Lead, Bahri"
+      }
+    ]
   }
 }
