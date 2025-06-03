@@ -17,6 +17,7 @@ import { GrowthStepSection } from '@/components/Sections/GrowthStepSection'
 import { InspirationSection } from '@/components/Sections/InspirationSection'
 import { DataDrivenSection } from '@/components/Sections/DataDrivenSection'
 import { TestimonialsSection } from '@/components/Sections/TestimonialsSection'
+import { Carousel3dSection } from '@/components/Sections/Carousel3dSection'
 
 export default function HomePage() {
   const t = useTranslations('HomePage')
@@ -28,6 +29,7 @@ export default function HomePage() {
       <StackSection />
       <GrowthStepSection />
       <AiTeamSection />
+      <Carousel3dSection />
       <InspirationSection />
 
       <BuildSection />
