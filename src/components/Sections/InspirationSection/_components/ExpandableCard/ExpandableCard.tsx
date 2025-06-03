@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
+import { Typography } from '@/components/ui'
 
 type ExpandableCardProps = {
   title?: string
@@ -25,7 +26,7 @@ export const ExpandableCard = ({ title, description, icon, innerRef, isOpen }: E
     function update() {
       const node = localRef.current
       if (!node) return
-      setIsReallyClosed(node.offsetHeight <= 80)
+      setIsReallyClosed(node.offsetHeight <= 70)
     }
     update()
 
@@ -44,19 +45,25 @@ export const ExpandableCard = ({ title, description, icon, innerRef, isOpen }: E
       {isReallyClosed && (
         <div className="flex flex-row items-center gap-6 h-[56px] card-closed">
           <div className="w-1 h-6 bg-white opacity-40 rounded-[40px]" />
-          <span className="text-lg">{title}</span>
+          <Typography variant="body1" weight="medium">
+            {title}
+          </Typography>
         </div>
       )}
       {/* завжди показуємо open-контент, якщо isOpen */}
 
-      <div className="flex flex-col items-start gap-4 p-4">
-        {icon && (
-          <span className="flex bg-primary-blue bg-opacity-5 h-20 w-20 justify-center items-center rounded-full mb-2">
-            {icon}
-          </span>
-        )}
-        <span className="text-lg font-semibold">{title}</span>
-        <div className="opacity-65 mt-2">{description}</div>
+      <div className="flex flex-row items-start justify-between gap-4 p-4 pt-3">
+        <div className="flex flex-col gap-4 ">
+          <Typography variant="body1" weight="medium" className="pl-3">
+            {title}
+          </Typography>
+
+          <div className="opacity-65 mt-2">{description}</div>
+        </div>
+
+        <div className="flex bg-primary-blue bg-opacity-5 h-20 w-20 justify-center items-center rounded-full mb-2 shrink-0">
+          {icon}
+        </div>
       </div>
     </div>
   )

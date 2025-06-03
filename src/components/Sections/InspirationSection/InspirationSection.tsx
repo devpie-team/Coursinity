@@ -45,13 +45,14 @@ const benefits = [
     icon: <DiplomaIcon size="40px" fill="primary-blue" />
   }
 ]
-const CLOSED_HEIGHT = 56
-const OPEN_HEIGHT = 280
+
 export const InspirationSection = () => {
   gsap.registerPlugin(ScrollTrigger)
   const sectionRef = useRef<HTMLDivElement | null>(null)
   const cardRefs = useRef<Array<HTMLDivElement | null>>([])
   const [openStates, setOpenStates] = useState<boolean[]>(() => benefits.map((_, idx) => idx === 0))
+  const CLOSED_HEIGHT = 56
+  const OPEN_HEIGHT = 180
 
   function setOpenOnly(idx: number) {
     setOpenStates((states) => states.map((_, i) => i === idx))
