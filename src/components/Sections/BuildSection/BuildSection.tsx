@@ -1,3 +1,4 @@
+// BuildSection.tsx
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -9,34 +10,53 @@ import { DartIcon, LayersIcon, MoonIcon, PlanetIcon, SectorIcon, StarIcon } from
 gsap.registerPlugin(ScrollTrigger)
 
 const CARDS = [
-  { icon: <LayersIcon />, rotation: '1.85deg', top: '47px' },
-  { icon: <DartIcon />, rotation: '-3.26deg', top: '96px' },
-  { icon: <SectorIcon />, rotation: '2.71deg', top: '0px' },
-  { icon: <PlanetIcon />, rotation: '-1.85deg', top: '0px' },
-  { icon: <MoonIcon />, rotation: '3.22deg', top: '32px' },
-  { icon: <StarIcon />, rotation: '-3.6deg', top: '0px' }
+  { icon: <LayersIcon />, rotation: '1.85deg' },
+  { icon: <DartIcon />, rotation: '-3.26deg' },
+  { icon: <SectorIcon />, rotation: '2.71deg' },
+  { icon: <PlanetIcon />, rotation: '-1.85deg' },
+  { icon: <MoonIcon />, rotation: '3.22deg' },
+  { icon: <StarIcon />, rotation: '-3.6deg' }
 ]
 
 export const BuildSection = () => {
   const t = useTranslations('Build')
   const scrollWrapperBuildRef = useRef<HTMLDivElement>(null)
+  const cardRefs = useRef<Array<HTMLDivElement | null>>([])
 
   useEffect(() => {
     if (!scrollWrapperBuildRef.current) return
 
-    let sections = gsap.utils.toArray('.horizontal-container .page')
-
-    const scrollWrapper = scrollWrapperBuildRef.current as HTMLElement
+    const sections = gsap.utils.toArray('.horizontal-container .page')
 
     gsap.to(sections, {
       xPercent: -310,
       ease: 'none',
       scrollTrigger: {
-        trigger: scrollWrapper,
+        trigger: scrollWrapperBuildRef.current,
         pin: true,
         start: 'bottom bottom',
-        end: () => '+=' + scrollWrapper.offsetWidth,
+        end: () => '+=' + scrollWrapperBuildRef.current!.offsetWidth,
         scrub: 1
+      }
+    })
+
+    cardRefs.current.forEach((card, idx) => {
+      if (card) {
+        gsap.fromTo(
+          card,
+          { rotation: 0 },
+          {
+            rotation: CARDS[idx].rotation,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: scrollWrapperBuildRef.current,
+              start: 'top center',
+              end: 'bottom center',
+              scrub: true
+            },
+            transformOrigin: 'center center'
+          }
+        )
       }
     })
   }, [])
@@ -53,15 +73,15 @@ export const BuildSection = () => {
       </div>
 
       <div className="horizontal-container flex h-[536px] items-center gap-[26px] pb-[100px] overflow-hidden w-full">
-        {CARDS.map(({ icon, rotation, top }, id) => (
+        {CARDS.map(({ icon, rotation }, id) => (
           <RotatedCard
             key={id}
+            innerRef={(el: HTMLDivElement) => (cardRefs.current[id] = el)}
             title={t(`cards.${id}.title`)}
             subtitle={t(`cards.${id}.subtitle`)}
             icon={icon}
             rotation={rotation}
             id={id}
-            top={top}
           />
         ))}
       </div>
