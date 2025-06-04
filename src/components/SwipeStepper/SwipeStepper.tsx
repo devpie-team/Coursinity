@@ -8,7 +8,7 @@ type SwipeStepperProps = {
 
 export const SwipeStepper = ({ steps, activeStep, onStepClick }: SwipeStepperProps) => {
   return (
-    <div className="grid grid-cols-3 gap-[10px] w-fit">
+    <div className="flex flex-row gap-[10px] w-fit">
       {Array.from({ length: steps }).map((_, i) => {
         const step = i + 1
         const isActive = step === activeStep
