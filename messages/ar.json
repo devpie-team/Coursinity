@@ -84,6 +84,14 @@
       ]
     }
   },
+  "Hero": {
+    "title": "Lead The Change with a Future - ",
+    "titleGradient": "Ready Team",
+    "subtitle": "Empower your team with AI-driven, tailored training paths that bring your vision to life. The leader in Edu-tech solutions.",
+    "bookDemo": "Book a Demo Now",
+    "titleGradientMobile": "Spark a learning revolution.",
+    "subtitleMobile": "Take your team’s productivity to a new paradigm"
+  },
   "AiTeamSection": {
     "title": "بناء فريق عمل يتسم بالكفاءة في مجال الذكاء الاصطناعي",
     "description": "نحن نساعدك على بناء فريق يتقن التفاعل مع الذكاء الاصطناعي، ويستخدمه لتعزيز الإنتاجية ودفع عجلة إنجاز المهام. التدريب مخصص بالكامل لكل دور، بأسلوب يناسب ثقافة فريقك وأدواته وطموحاته.",
@@ -96,6 +104,47 @@
       "تدريب مخصص يستهدف جميع الأنشطة، الأقسام، والمسميات الوظيفية"
     ]
   },
+  "TeamTrainingSection": {
+    "title": "Scale Your Team Within Budget",
+    "description": "Coursinity helps you achieve more without stretching your budget, through flexible, cost-efficient training that scales with your needs. One smart academy, built to cover your entire organization.",
+    "button": "Learn more",
+    "items": [
+      "Train teams everywhere, affordably",
+      "Foster a culture of continuous growth without overspending",
+      "Cut down redundant training costs",
+      "Interactive training beyond conventional platforms"
+    ]
+  },
+  "Build": {
+    "cards": [
+      {
+        "title": "In-Person, Remote, Self-Paced & Hybrid",
+        "subtitle": "Flexible training formats tailored to your team’s needs, fostering a culture of continuous growth."
+      },
+      {
+        "title": "Tailored Learning Paths",
+        "subtitle": "Designed around your roles, departments, and organizational goals."
+      },
+      {
+        "title": "Sector-Specific Design",
+        "subtitle": "We leverage modern, interactive training techniques to deliver programs that sharpen your organization’s competitive edge across every sector."
+      },
+      {
+        "title": "Bespoke Digital Content",
+        "subtitle": "Regulatory compliance across sectors. From banking to healthcare and beyond, we deliver full support so your organization meets every requirement."
+      },
+      {
+        "title": "Branded Digital Academy",
+        "subtitle": "More than a platform. A complete digital academy featuring expert-led, interactive training journeys and a rich, diverse content library."
+      },
+      {
+        "title": "Flexible Scheduling",
+        "subtitle": "Synced with your team’s availability, no disruption, no delays."
+      }
+    ],
+    "title": "Built Around You. Branded For You",
+    "subtitle": "Custom-built to reflect your organization’s identity, vision, and goals"
+  },
   "FutureSection": {
     "title": "المستقبل يبدأ الآن. جهّز فريقك",
     "subtitle": "جهّز فريقك للمستقبل بحلول تدريبية مصممة لتحقيق الأثر والارتقاء بكفاءة فريقك وإنجاز رؤية مؤسستك ككل.",
@@ -104,6 +153,101 @@
     "card3Title": "القيمة القصوى، مهما كانت الميزانية",
     "card4Title": "أنظمة سلسة حسب التصميم",
     "card5Title": "نتائج حقيقية، بدون تخمينات"
+  },
+  "ImpactSection": {
+    "title": "Real Impact, Proven by Numbers",
+    "subtitle": "Coursinity programs are built to deliver measurable, scalable results.",
+    "smart": "Smart training",
+    "sectors": "Programs delivered across 12+ sectors",
+    "government": "Government & private orgs onboard",
+    "learners": "Learners trained and growing",
+    "average": "Average satisfaction score",
+    "numbers": "Proven by Numbers",
+    "active": "Active in 6 countries and expanding"
+  },
+  "dataDrivenSection": {
+    "left": {
+      "title": "Make Decisions Based on Data, Not Guesswork",
+      "description": "Actionable insights to drive smarter decisions and track progress by role and function."
+    },
+    "slides": [
+      {
+        "title": "Side-by-Side Progress",
+        "description": "View skill growth at a glance and tackle gaps with confidence."
+      },
+      {
+        "title": "Track Growth Journeys",
+        "description": "Map each team member’s development and guide them forward."
+      },
+      {
+        "title": "Live Insights Hub & Smart Filters",
+        "description": "Monitor engagement, performance, and impact in real time."
+      }
+    ]
+  },
+  "GrowthStepSection": {
+    "common": {
+      "cta": "Talk to expert",
+      "subtitle": "Custom training systems for accelerated growth",
+      "sectionTitle": "End‑to‑End Team Growth",
+      "sectionDescription": "Explore the Coursinity suite with three paths to smarter, faster, better teams"
+    },
+    "slides": [
+      {
+        "id": 0,
+        "title": "Coursinity Academy",
+        "items": [
+          "Fully branded internal academies",
+          "Reporting, analytics, and certification tracking",
+          "LMS platforms integrated with your systems"
+        ]
+      },
+      {
+        "id": 1,
+        "title": "Coursinity AI",
+        "items": [
+          "Role-specific AI use cases",
+          "Ongoing support, updates, and libraries",
+          "Hands-on prompt coaching"
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Coursinity Solutions",
+        "items": [
+          "Self-paced training journeys",
+          "Built-in assessments and progress tracking",
+          "Fully branded internal academies"
+        ]
+      }
+    ]
+  },
+  "StackSection": {
+    "left": {
+      "title": "Training Your Team. Your Smartest Investment",
+      "description": "Coursinity turns your ambition into tailored training shaped by your goals, your team’s strengths, and your culture’s pulse.",
+      "button": "Talk to a Learning Advisor"
+    },
+    "steps": [
+      {
+        "title": "Step 1",
+        "subtitle": "Pinpoint the Skill Gaps",
+        "description": "We uncover your goals and the skills your team needs next."
+      },
+      {
+        "title": "Step 2",
+        "subtitle": "We design tailored learning experiences",
+        "description": "",
+        "button": "Book a Demo Now",
+        "badge": "Individual plan"
+      },
+      {
+        "title": "Step 3",
+        "subtitle": "Maximize the Return",
+        "description": "",
+        "button": "Book a Demo Now"
+      }
+    ]
   },
   "TestimonialsSection": {
     "title": "نبذة من شهادات عملائنا",

@@ -29,7 +29,6 @@ export default function HomePage() {
       <GrowthStepSection />
       <AiTeamSection />
       <InspirationSection />
-
       <BuildSection />
       <ImpactSection />
       <TeamTrainingSection />
