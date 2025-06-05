@@ -140,7 +140,7 @@ export function Carousel3dSection() {
   const radius = 1.5
   const circleCenter = [0, -0.3, -0.5]
   const zScale = 1
-  const xScale = 1.5
+  const xScale = 1
 
   return (
     <section
