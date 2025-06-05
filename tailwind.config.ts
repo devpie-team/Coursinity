@@ -27,7 +27,7 @@ export default {
         body2: ['18px', { lineHeight: '28px', fontWeight: '400' }],
         body3: ['16px', { lineHeight: '24px', fontWeight: '400' }],
         body4: ['14px', { lineHeight: '24px', fontWeight: '400' }],
-        caption: ['14px', { lineHeight: '14px', fontWeight: '400' }],
+        caption: ['14px', { lineHeight: '20px', fontWeight: '400' }],
         button: ['16px', { lineHeight: '24px', fontWeight: '400' }],
         subtitle: ['13px', { lineHeight: '13px', fontWeight: '400' }]
       },
