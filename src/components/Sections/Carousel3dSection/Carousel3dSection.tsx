@@ -5,7 +5,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { MyModel } from './_components/Model/Model'
 import { Slide3D } from './_components/Slide3D/Slide3d'
 import * as THREE from 'three'
-import { EffectComposer, Bloom } from '@react-three/postprocessing'
+import { Float, Environment } from '@react-three/drei'
+import { EffectComposer, ChromaticAberration, Bloom } from '@react-three/postprocessing'
+import { BlendFunction } from 'postprocessing'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -54,6 +56,10 @@ export function Carousel3dSection() {
   const [rotation, setRotation] = useState(0)
   const rotationY = useRef(0)
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
+  const [modelY, setModelY] = useState(-4)
+  const [effectStrength, setEffectStrength] = useState(0)
+  const lastScrollTime = useRef(Date.now())
+  const lastRotation = useRef(0)
 
   const gradientTexture = useMemo(() => {
     const currentIndex = Math.floor(rotation)
@@ -80,6 +86,21 @@ export function Carousel3dSection() {
 
   useEffect(() => {
     let proxy = { rot: 0 }
+    let frameId: number
+
+    const updateVelocity = () => {
+      const currentTime = Date.now()
+      const deltaTime = (currentTime - lastScrollTime.current) / 1000 // Convert to seconds
+      const rotationDelta = Math.abs(proxy.rot - lastRotation.current)
+
+      // Calculate velocity in rotations per second
+      const newVelocity = rotationDelta / Math.max(deltaTime, 0.016)
+      setEffectStrength(Math.min(newVelocity * 2, 1)) // Cap at 1 and scale for effect
+
+      lastScrollTime.current = currentTime
+      lastRotation.current = proxy.rot
+      frameId = requestAnimationFrame(updateVelocity)
+    }
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -92,6 +113,8 @@ export function Carousel3dSection() {
         anticipatePin: 1,
         onUpdate: (self) => {
           setCurrentSlideIndex(Math.floor(self.progress * (slidesData.length - 1)))
+          const newY = -4 - self.progress * 0.3
+          setModelY(newY)
         }
       }
     })
@@ -105,13 +128,19 @@ export function Carousel3dSection() {
       }
     })
 
+    frameId = requestAnimationFrame(updateVelocity)
+
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
       tl.kill()
+      cancelAnimationFrame(frameId)
     }
   }, [])
 
-  const radius = 0.6
+  const radius = 1.5
+  const circleCenter = [0, -0.3, -0.5]
+  const zScale = 1
+  const xScale = 1.5
 
   return (
     <section
@@ -127,7 +156,7 @@ export function Carousel3dSection() {
         style={{
           position: 'relative',
           height: '100vh',
-          width: '100%'
+          width: '100vw'
         }}>
         <Canvas
           shadows
@@ -136,47 +165,86 @@ export function Carousel3dSection() {
             left: '50%',
             top: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 1600,
+            width: 2000,
             height: 1600,
             zIndex: 10
           }}
-          camera={{ position: [0, 0, 4], fov: 70 }}>
-          {/* Glowing background wall */}
+          camera={{ position: [0, 0, 3.2], fov: 70 }}>
+          <Environment preset="city" />
+
+          {/* Background gradient mesh */}
           <mesh position={[0, 1.85, -0.3]} scale={[6, 7.3, 1]}>
             <planeGeometry />
             <meshBasicMaterial map={gradientTexture} transparent opacity={0.45} side={THREE.DoubleSide} />
           </mesh>
 
-          <pointLight position={[4, 2, -2]} intensity={0.5} color="#A578F2" />
-          <pointLight position={[-6, 4, -1]} intensity={20} color="#A578F2" />
-
-          <spotLight position={[-4, 2, 2]} angle={2} penumbra={0} intensity={100} color="#2bb9ff" />
-          <spotLight position={[0, 1, 2]} angle={2} penumbra={0} intensity={20} color="#A578F2" />
-
-          <directionalLight
+          {/* Original lighting setup */}
+          <directionalLight castShadow position={[5, 3, 3]} intensity={1.5} />
+          <directionalLight castShadow position={[30, 3, 3]} intensity={3} />
+          <ambientLight position={[-3, 3, 10]} intensity={0.4} color="#f5ebd0" />
+          <pointLight position={[0, 1, 1.6]} intensity={1} color="#faf6d4" distance={50} decay={2} castShadow />
+          <spotLight
+            position={[1, 0, 0]}
+            intensity={5.5}
+            color="#f6fa0a"
+            angle={0.8}
+            penumbra={0.5}
+            distance={2}
+            decay={2}
             castShadow
-            position={[2, 5, 4]}
-            intensity={0.8}
-            shadow-mapSize-width={1024}
-            shadow-mapSize-height={1024}
-            shadow-camera-far={15}
-            shadow-camera-left={-6}
-            shadow-camera-right={6}
-            shadow-camera-top={6}
-            shadow-camera-bottom={-6}
           />
-          <MyModel rotationY={rotationY} position={[0, -2.3, 0]} />
+          <spotLight
+            position={[0, -1.1, 1.1]}
+            intensity={1.5}
+            color="#726bff"
+            angle={0.8}
+            penumbra={0.5}
+            distance={2}
+            decay={2}
+            castShadow
+          />
+
+          <Float speed={2} rotationIntensity={0.2} floatIntensity={0.2}>
+            <MyModel rotationY={rotationY} position={[0, modelY, 0]} />
+          </Float>
+
+          {/* Cards */}
           {slidesData.map((slide, i) => {
             const angleStep = (2 * Math.PI) / slidesData.length
             const baseAngle = i * angleStep - rotation * angleStep
             const distanceFromActive = Math.abs(i - rotation)
-            const x = radius * Math.sin(baseAngle)
-            const y = -0.7 * (i - rotation)
-            const z = radius * Math.cos(baseAngle)
-            const rotationY = Math.atan2(x, z)
-            const scale = Math.max(0.5, 1 - distanceFromActive * 0.3)
 
-            return <Slide3D key={i} text={slide.text} position={[x, y, z]} rotation={[0, rotationY, 0]} scale={scale} />
+            // Show 3 slides by increasing threshold
+            if (distanceFromActive > 1.5) return null
+
+            const x = circleCenter[0] + radius * Math.sin(baseAngle) * xScale
+            const waveAmplitude = 0.5
+            const normalizedAngle = ((baseAngle % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI)
+            const verticalOffset = Math.sin(normalizedAngle - Math.PI) * waveAmplitude
+            const y = circleCenter[1] + verticalOffset
+            const z = circleCenter[2] + radius * Math.cos(baseAngle) * zScale
+            const rotationY = Math.atan2(xScale * Math.cos(baseAngle), -zScale * Math.sin(baseAngle)) - Math.PI / 2
+
+            // Smooth scale transition between center and sides
+            const maxScale = 1.2 // Scale at center
+            const minScale = 0.6 // Scale at sides
+            // Use a smooth interpolation based on distance
+            const scale = maxScale - distanceFromActive * (maxScale - minScale)
+
+            // Smoother opacity transition
+            const opacity = Math.max(0, 1 - distanceFromActive / 1.5)
+
+            return (
+              <group key={i} visible={true}>
+                <Slide3D
+                  text={slide.text}
+                  position={[x, y, z]}
+                  rotation={[0, rotationY, 0]}
+                  scale={scale}
+                  opacity={opacity}
+                />
+              </group>
+            )
           })}
         </Canvas>
       </div>

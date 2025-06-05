@@ -7,9 +7,10 @@ type Slide3DProps = {
   position: [number, number, number]
   rotation: [number, number, number]
   scale?: number | [number, number, number]
+  opacity?: number
 }
 
-export function Slide3D({ text, position, rotation, scale = 1 }: Slide3DProps) {
+export function Slide3D({ text, position, rotation, scale = 1, opacity = 1 }: Slide3DProps) {
   const meshRef = useRef<THREE.Mesh>(null)
 
   // Create gradient texture
@@ -32,8 +33,8 @@ export function Slide3D({ text, position, rotation, scale = 1 }: Slide3DProps) {
 
   // Create rounded rectangle shape
   const roundedRectShape = new THREE.Shape()
-  const width = 1
-  const height = 0.7
+  const width = 0.9
+  const height = 0.6
   const radius = 0.1
 
   roundedRectShape.moveTo(-width / 2 + radius, -height / 2)
@@ -61,14 +62,21 @@ export function Slide3D({ text, position, rotation, scale = 1 }: Slide3DProps) {
         <extrudeGeometry args={[roundedRectShape, extrudeSettings]} />
         <meshPhysicalMaterial
           transparent={true}
-          opacity={0.3}
+          opacity={0.3 * opacity}
           map={gradientTexture}
           side={THREE.DoubleSide}
           depthWrite={false}
         />
       </mesh>
 
-      <Text position={[0, 0, 0.02]} fontSize={0.07} color="#FFFFFF" anchorX="center" anchorY="middle">
+      <Text
+        position={[0, 0, 0.02]}
+        fontSize={0.07}
+        color="#FFFFFF"
+        anchorX="center"
+        anchorY="middle"
+        material-opacity={opacity}
+        material-transparent={true}>
         {text}
       </Text>
     </group>

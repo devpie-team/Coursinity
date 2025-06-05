@@ -19,5 +19,5 @@ export function MyModel({ rotationY, position = [0, 0, 0] }: MyModelProps) {
     }
   })
 
-  return <primitive ref={ref} object={model.scene} position={position} scale={2} />
+  return <primitive ref={ref} object={model.scene} position={position} scale={3} />
 }
