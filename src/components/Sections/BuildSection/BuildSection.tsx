@@ -13,12 +13,12 @@ import { SwipeStepper } from '@/components/SwipeStepper/SwipeStepper'
 gsap.registerPlugin(ScrollTrigger)
 
 const CARDS = [
-  { icon: <LayersIcon />, rotation: '0' },
-  { icon: <DartIcon />, rotation: '0' },
-  { icon: <SectorIcon />, rotation: '0' },
-  { icon: <PlanetIcon />, rotation: '0' },
-  { icon: <MoonIcon />, rotation: '0' },
-  { icon: <StarIcon />, rotation: '0' }
+  { icon: <LayersIcon />, rotation: '0', move: -20, end: 0 },
+  { icon: <DartIcon />, rotation: '0', move: 70, end: 90 },
+  { icon: <SectorIcon />, rotation: '0', move: 140, end: 160 },
+  { icon: <PlanetIcon />, rotation: '0', move: -20, end: 0 },
+  { icon: <MoonIcon />, rotation: '0', move: 70, end: 90 },
+  { icon: <StarIcon />, rotation: '0', move: 140, end: 160 }
 ]
 
 type ScrollTriggerInstance = ReturnType<typeof ScrollTrigger.create>
@@ -68,6 +68,42 @@ export const BuildSection = () => {
       setCurrentStep(firstVisible >= 2 ? 1 : 0)
     }
 
+    CARDS.forEach(({ move, end }, id) => {
+      if (id < 3) {
+        gsap.fromTo(
+          `.element${id}`,
+          { rotate: 0, opacity: 1 },
+          {
+            ease: 'sine.inOut',
+            opacity: 0.3,
+            rotate: '-7deg',
+            scrollTrigger: {
+              trigger: '.horizontal-container',
+              start: `${move}%`,
+              end: `${end}%`,
+              scrub: 2
+            }
+          }
+        )
+      } else {
+        gsap.fromTo(
+          `.element${id}`,
+          { rotate: '7deg', opacity: 0.3 },
+          {
+            ease: 'sine.inOut',
+            opacity: 1,
+            rotate: '0',
+            scrollTrigger: {
+              trigger: '.horizontal-container',
+              start: `${move}%`,
+              end: `${end}%`,
+              scrub: 2
+            }
+          }
+        )
+      }
+    })
+
     const sections = gsap.utils.toArray('.horizontal-container .page')
     const st = ScrollTrigger.create({
       trigger: scrollWrapperBuildRef.current,
@@ -81,6 +117,7 @@ export const BuildSection = () => {
         ease: 'none'
       })
     })
+
     scrollTriggerRef.current = st
     updateStep()
 
@@ -176,7 +213,7 @@ export const BuildSection = () => {
             icon={icon}
             rotation={rotation}
             id={id}
-            className="page"
+            className={`page element${id}`}
           />
         ))}
       </div>
