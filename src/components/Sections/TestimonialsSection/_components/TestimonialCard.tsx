@@ -29,7 +29,6 @@ export const TestimonialCard = ({ data, position, isDesktop }: TestimonialCardPr
     positionClass =
       'absolute scale-[70%] opacity-40 -translate-y-[160px] translate-x-[425px] z-0 transition-all duration-700 pointer-events-none max-[1600px]:scale-[55%] max-lg:-translate-y-0 max-lg:scale-100 max-lg:opacity-80 max-lg:translate-x-[150%]'
 
-  // business types з перекладу (масив)
   const businessTypes: string[] = t.raw('businessTypes')
 
   return (
