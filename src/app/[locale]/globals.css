@@ -9,7 +9,7 @@
   z-index: 0;
   min-height: 100vh;
   font-family: var(--font-poppins), sans-serif;
-  background-color: black;
+  background: #0d0d0d;
 }
 
 :root {

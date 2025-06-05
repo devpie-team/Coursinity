@@ -62,6 +62,7 @@ export const FutureSection = () => {
       { selector: '.future-element5', x: -500, y: -150 }
     ]
   }
+
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
 
