@@ -302,5 +302,37 @@
         "userPosition": "Training Lead, Bahri"
       }
     ]
+  },
+  "InspirationSection": {
+    "title": "Inspire Productivity, Don't Force it",
+    "description": "Coursinity isn't just a platform, it's where expert-led training meets team engagement, all in one smart learning community.",
+    "successMetric": "Your Success is our Only Metric",
+    "learnMore": "Learn More",
+    "benefits": [
+      {
+        "title": "Game On",
+        "description": "We turn training into an energizing mix of play, challenge, and learning."
+      },
+      {
+        "title": "Real-World Ready",
+        "description": "Go beyond theory with training built for real-world challenges."
+      },
+      {
+        "title": "Lasting Impact ",
+        "description": "Training that boosts performance long after it ends, creating lasting growth."
+      },
+      {
+        "title": "Beyond the Classroom",
+        "description": "Immersive training through real-time learning, daily nudges, and ongoing interaction."
+      },
+      {
+        "title": "Ongoing Mentorship",
+        "description": "1-on-1 support that keeps trainees on track and driving results."
+      },
+      {
+        "title": "Certified & Celebrated",
+        "description": "Credentials from prestigious institutions validating your team's accomplishments."
+      }
+    ]
   }
 }
