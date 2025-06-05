@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { gsap } from 'gsap'
 import ToggleLanguage from '../ToggleLanguage'
 import { Button } from '../primitives/button'
+import { TreeLines } from '../icons'
 
 export const Header = () => {
   const headerRef = useRef<HTMLDivElement>(null)
@@ -69,7 +70,9 @@ export const Header = () => {
           <Button>Book a Demo Now</Button>
         </div>
       ) : (
-        <></>
+        <div>
+          <TreeLines />
+        </div>
       )}
     </header>
   )
