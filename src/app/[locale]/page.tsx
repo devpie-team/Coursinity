@@ -14,6 +14,9 @@ import {
 import { Header } from '@/components/Header'
 import Footer from '@/components/Footer/Footer'
 import { GrowthStepSection } from '@/components/Sections/GrowthStepSection'
+import { InspirationSection } from '@/components/Sections/InspirationSection'
+import { DataDrivenSection } from '@/components/Sections/DataDrivenSection'
+import { TestimonialsSection } from '@/components/Sections/TestimonialsSection'
 
 export default function HomePage() {
   const t = useTranslations('HomePage')
@@ -22,13 +25,16 @@ export default function HomePage() {
       <Header />
       <HeroSection />
       <FutureSection />
+      <StackSection />
       <GrowthStepSection />
       <AiTeamSection />
-      {/* <StackSection /> */}
+      <InspirationSection />
       <BuildSection />
       <ImpactSection />
       <TeamTrainingSection />
+      <DataDrivenSection />
       <FeaturesSection />
+      <TestimonialsSection />
       <Footer />
     </>
   )

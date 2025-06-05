@@ -1,16 +1,16 @@
 type DiplomaIconProps = {
-  width?: number | string
-  height?: number | string
+  size?: number | string
+  fill?: string
   className?: string
 }
 
-const DiplomaIcon = ({ width = 64, height = 64, className }: DiplomaIconProps) => {
+const DiplomaIcon = ({ fill = 'none', size = 64, className }: DiplomaIconProps) => {
   return (
     <svg
-      width={width}
-      height={height}
+      width={size}
+      height={size}
       viewBox="0 0 64 64"
-      fill="none"
+      fill={fill}
       xmlns="http://www.w3.org/2000/svg"
       className={className}>
       <path

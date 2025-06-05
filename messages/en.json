@@ -221,5 +221,118 @@
         ]
       }
     ]
+  },
+  "StackSection": {
+    "left": {
+      "title": "Training Your Team. Your Smartest Investment",
+      "description": "Coursinity turns your ambition into tailored training shaped by your goals, your team’s strengths, and your culture’s pulse.",
+      "button": "Talk to a Learning Advisor"
+    },
+    "steps": [
+      {
+        "title": "Step 1",
+        "subtitle": "Pinpoint the Skill Gaps",
+        "description": "We uncover your goals and the skills your team needs next."
+      },
+      {
+        "title": "Step 2",
+        "subtitle": "We design tailored learning experiences",
+        "description": "",
+        "button": "Book a Demo Now",
+        "badge": "Individual plan"
+      },
+      {
+        "title": "Step 3",
+        "subtitle": "Maximize the Return",
+        "description": "",
+        "button": "Book a Demo Now"
+      }
+    ]
+  },
+  "TestimonialsSection": {
+    "title": "What Our Partners Are Saying",
+    "subtitle": "Real results. Genuine trust. Teams that drive transformation.",
+    "businessTypesTitle": "Business Types",
+    "businessTypes": [
+      "Corporation",
+      "LLC",
+      "Other"
+    ],
+    "testimonials": [
+      {
+        "company": "Bahri company 1",
+        "feedback": "Coursinity helped us train over 4,000 employees without disrupting daily operations. The academy reflected our identity and values and the results were measurable from the first month.",
+        "userName": "M. Ali",
+        "userPosition": "Training Lead, Bahri"
+      },
+      {
+        "company": "Second Riyadh Health Cluster 2",
+        "feedback": "In record time, employee skill levels rose significantly, and job satisfaction was clearly enhanced. Coursinity’s customized journeys helped us train 20,000+ medical staff without disrupting care.",
+        "userName": "M. Ali",
+        "userPosition": "Training Director, Second Riyadh Health Cluster​"
+      },
+      {
+        "company": "Bahri company 3",
+        "feedback": "Coursinity helped us train over 4,000 employees without disrupting daily operations. The academy reflected our identity and values and the results were measurable from the first month.",
+        "userName": "M. Ali",
+        "userPosition": "Training Lead, Bahri"
+      },
+      {
+        "company": "Second Riyadh Health Cluster 4",
+        "feedback": "In record time, employee skill levels rose significantly, and job satisfaction was clearly enhanced. Coursinity’s customized journeys helped us train 20,000+ medical staff without disrupting care.",
+        "userName": "M. Ali",
+        "userPosition": "Training Director, Second Riyadh Health Cluster​"
+      },
+      {
+        "company": "Bahri company 5",
+        "feedback": "Coursinity helped us train over 4,000 employees without disrupting daily operations. The academy reflected our identity and values and the results were measurable from the first month.",
+        "userName": "M. Ali",
+        "userPosition": "Training Lead, Bahri"
+      },
+      {
+        "company": "Second Riyadh Health Cluster 6",
+        "feedback": "In record time, employee skill levels rose significantly, and job satisfaction was clearly enhanced. Coursinity’s customized journeys helped us train 20,000+ medical staff without disrupting care.",
+        "userName": "M. Ali",
+        "userPosition": "Training Director, Second Riyadh Health Cluster​"
+      },
+      {
+        "company": "Bahri company 7",
+        "feedback": "Coursinity helped us train over 4,000 employees without disrupting daily operations. The academy reflected our identity and values and the results were measurable from the first month.",
+        "userName": "M. Ali",
+        "userPosition": "Training Lead, Bahri"
+      }
+    ]
+  },
+  "InspirationSection": {
+    "title": "Inspire Productivity, Don't Force it",
+    "description": "Coursinity isn't just a platform, it's where expert-led training meets team engagement, all in one smart learning community.",
+    "successMetric": "Your Success is our Only Metric",
+    "learnMore": "Learn More",
+    "benefits": [
+      {
+        "title": "Game On",
+        "description": "We turn training into an energizing mix of play, challenge, and learning."
+      },
+      {
+        "title": "Real-World Ready",
+        "description": "Go beyond theory with training built for real-world challenges."
+      },
+      {
+        "title": "Lasting Impact ",
+        "description": "Training that boosts performance long after it ends, creating lasting growth."
+      },
+      {
+        "title": "Beyond the Classroom",
+        "description": "Immersive training through real-time learning, daily nudges, and ongoing interaction."
+      },
+      {
+        "title": "Ongoing Mentorship",
+        "description": "1-on-1 support that keeps trainees on track and driving results."
+      },
+      {
+        "title": "Certified & Celebrated",
+        "description": "Credentials from prestigious institutions validating your team's accomplishments."
+      }
+    ]
   }
 }

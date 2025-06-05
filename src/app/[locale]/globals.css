@@ -9,7 +9,7 @@
   z-index: 0;
   min-height: 100vh;
   font-family: var(--font-poppins), sans-serif;
-  background-color: black;
+  background: #0d0d0d;
 }
 
 :root {
@@ -72,6 +72,38 @@ a {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   z-index: -1;
+}
+
+@property --myColor1 {
+  syntax: '<color>';
+  initial-value: rgba(0, 0, 0, 0.32);
+  inherits: false;
+}
+
+@property --myColor2 {
+  syntax: '<color>';
+  initial-value: rgba(0, 0, 0, 0.32);
+  inherits: false;
+}
+
+.button-gradient {
+  --myColor1: rgba(0, 0, 0, 0.32);
+  --myColor2: rgba(0, 0, 0, 0.32);
+  background: linear-gradient(90deg, var(--myColor1), var(--myColor2));
+  transition: --myColor1 0.7s, --myColor2 0.7s;
+  color: white;
+}
+
+/* Градієнт на ховері */
+.button-gradient:hover {
+  --myColor1: #0D0D0D;
+  --myColor2: #3D3D3D;
+}
+
+/* Активний стан */
+.button-gradient:active {
+  --myColor1: #A084E8;
+  --myColor2: #A084E8;
 }
 
 @layer base {
