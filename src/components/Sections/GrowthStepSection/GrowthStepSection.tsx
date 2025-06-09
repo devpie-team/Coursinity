@@ -8,6 +8,8 @@ import Stepper from '@/components/Stepper'
 import { GrowthSlide } from './_components/GrowthSlide'
 import { SwipeStepper } from '@/components/SwipeStepper/SwipeStepper'
 import { useTranslations } from 'next-intl'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 export const GrowthStepSection = () => {
   const t = useTranslations('GrowthStepSection')
@@ -29,6 +31,18 @@ export const GrowthStepSection = () => {
     checkScreenSize()
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  useEffect(() => {
+    AOS.init({
+      once: false,
+      duration: 700,
+      offset: 100,
+      easing: 'ease-in-out',
+      delay: 0,
+      mirror: true,
+      anchorPlacement: 'center-bottom'
+    })
   }, [])
 
   const getStepperIndex = (index: number) => index + 1
@@ -89,7 +103,9 @@ export const GrowthStepSection = () => {
     <section
       className="relative flex flex-col bg-black h-[1240px] max-lg:h-[730px] overflow-hidden items-center justify-between"
       {...(!isDesktop ? swipeHandlers : {})}>
-      <div className="flex flex-col gap-4 text-center pb-14 pt-[140px] max-lg:pt-20 max-md:px-4">
+      <div
+        className="flex flex-col gap-4 text-center pb-14 pt-[140px] max-lg:pt-20 max-md:px-4"
+        data-aos="zoom-in-down">
         <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
           {t('common.sectionTitle')}
         </Typography>
@@ -98,7 +114,7 @@ export const GrowthStepSection = () => {
         </Typography>
       </div>
 
-      <div>
+      <div data-aos="fade" data-aos-offset="-200">
         {mergedSlides.map((slide, index) => (
           <GrowthSlide
             key={slide.id}
@@ -112,14 +128,17 @@ export const GrowthStepSection = () => {
       </div>
 
       {isDesktop ? (
-        <div className="flex flex-col gap-[40px] pb-[140px] px-[140px] w-full items-center">
+        <div
+          className="flex flex-col gap-[40px] pb-[140px] px-[140px] w-full items-center "
+          data-aos="fade"
+          data-aos-offset="-80">
           <Typography variant="h6" weight="regular" className="text-white">
             {t('common.subtitle')}
           </Typography>
-          <Button variant="secondary" className="w-[190px]">
+          <Button variant="secondary" className="w-[190px]" data-aos="fade" data-aos-offset="-80">
             {t('common.cta')}
           </Button>
-          <div className="absolute bottom-[140px] right-[140px]">
+          <div className="absolute bottom-[140px] right-[140px]" data-aos="fade" data-aos-offset="-80">
             <Stepper
               steps={3}
               activeStep={getStepperIndex(activeIndex)}

@@ -13,6 +13,8 @@ import TeacherIcon from '@/components/icons/TeacherIcon'
 import IdeaIcon from '@/components/icons/IdeaIcon'
 import MonitorIcon from '@/components/icons/MonitorIcon'
 import { cn } from '@/lib/utils'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -50,7 +52,7 @@ export const AiTeamSection = () => {
               trigger: itemRefs.current[i],
               start: 'top 80%',
 
-              toggleActions: 'play none none reverse'
+              toggleActions: 'play reverse play reverse'
             }
           }
         )
@@ -63,7 +65,7 @@ export const AiTeamSection = () => {
     <section className={cn('bg-black text-white p-[140px] max-[1200px]:px-6 max-lg:pb-20 max-lg:pt-0 max-md:px-4')}>
       <div className={cn('flex justify-center items-stretch gap-[130px] max-lg:gap-10 max-md:flex-col')}>
         {/* Left */}
-        <div className="flex flex-col gap-8 flex-1 min-w-[300px] justify-center max-lg:gap-4">
+        <div className="flex flex-col gap-8 flex-1 min-w-[300px] justify-center max-lg:gap-4" data-aos="fade">
           <Typography variant="h3" weight="medium">
             {t('title')}
           </Typography>

@@ -7,6 +7,8 @@ import { Typography } from '@/components/ui'
 import { cn } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 const certifications = [
   { src: '/assets/certifications/CompTia.png', alt: 'CompTIA logo' },
@@ -49,17 +51,19 @@ export const FeaturesSection = () => {
             : 'flex p-8 rounded-[20px] gap-8 bg-[linear-gradient(180deg,_rgba(255,255,255,0.16)_0%,_rgba(30,141,194,0.16)_100%)] '
         )}>
         {/* Left Block */}
-        <div className="flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6">
+        <div
+          className="flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6"
+          data-aos="fade-up">
           <div className={cn(isDesktop ? 'mb-6' : 'mb-2')}>
-            <DiplomaIcon width={isTablet ? 40 : 64} height={isTablet ? 40 : 64} />
+            <DiplomaIcon size={isTablet ? 40 : 64} />
           </div>
 
           <div className="flex flex-col flex-grow gap-8 max-lg:gap-6">
             <div className={cn('flex flex-col gap-4', !isDesktop && 'flex-grow')}>
-              <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium">
+              <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium" data-aos="fade-up">
                 {t('certified.title')}
               </Typography>
-              <Typography variant="button" weight="regular" className="text-[#6E6E6E]">
+              <Typography variant="button" weight="regular" className="text-[#6E6E6E]" data-aos="fade-up">
                 {t('certified.subtitle')}
               </Typography>
             </div>
@@ -75,13 +79,15 @@ export const FeaturesSection = () => {
                     <div>
                       <CheckCircleIcon size={isTablet ? 24 : 28} />
                     </div>
-                    <Typography variant={isDesktop ? 'body2' : 'caption'} weight="regular">
+                    <Typography variant={isDesktop ? 'body2' : 'caption'} weight="regular" data-aos="fade-up">
                       {limitedText}
                     </Typography>
                   </div>
                 )
               })}
-              <div className="grid grid-cols-2 grid-rows-2 place-items-center mt-auto gap-[10px] max-lg:mt-0 max-lg:pt-3">
+              <div
+                className="grid grid-cols-2 grid-rows-2 place-items-center mt-auto gap-[10px] max-lg:mt-0 max-lg:pt-3"
+                data-aos="fade">
                 {certificationsLeft.map(({ src, alt }, i) => (
                   <div
                     key={i}
@@ -95,17 +101,19 @@ export const FeaturesSection = () => {
         </div>
 
         {/* Right Block */}
-        <div className="flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6">
+        <div
+          className="flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6"
+          data-aos="fade-up">
           <div className="mb-6 max-lg:mb-2">
             <DealIcon width={isTablet ? 40 : 64} height={isTablet ? 40 : 64} />
           </div>
 
           <div className="flex flex-col flex-grow gap-8 max-lg:gap-6">
             <div className="flex flex-col gap-4 max-lg:flex-grow">
-              <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium">
+              <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium" data-aos="fade-up">
                 {t('trusted.title')}
               </Typography>
-              <Typography variant="button" weight="regular" className="text-[#6E6E6E]">
+              <Typography variant="button" weight="regular" className="text-[#6E6E6E]" data-aos="fade-up">
                 {t('trusted.subtitle')}
               </Typography>
             </div>
@@ -119,12 +127,12 @@ export const FeaturesSection = () => {
                     <CheckCircleIcon size={isTablet ? 24 : 28} />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <Typography variant={isDesktop ? 'body2' : 'caption'} weight="regular">
+                    <Typography variant={isDesktop ? 'body2' : 'caption'} weight="regular" data-aos="fade-up">
                       {item.title}
                       {isDesktop && ':'}
                     </Typography>
                     {isDesktop && (
-                      <Typography variant="body2" weight="regular" className="text-[#6E6E6E]">
+                      <Typography variant="body2" weight="regular" className="text-[#6E6E6E]" data-aos="fade-up">
                         {item.description}
                       </Typography>
                     )}
@@ -133,7 +141,8 @@ export const FeaturesSection = () => {
               ))}
 
               <div
-                className={cn('grid grid-cols-2 grid-rows-2 place-items-center  gap-[10px]  ', !isDesktop && 'pt-3')}>
+                className={cn('grid grid-cols-2 grid-rows-2 place-items-center  gap-[10px]  ', !isDesktop && 'pt-3')}
+                data-aos="fade">
                 {certificationsRight.map(({ src, alt }, i) => (
                   <div
                     key={i}

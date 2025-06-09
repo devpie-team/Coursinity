@@ -6,6 +6,8 @@ import clsx from 'clsx'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
 import { useTranslations } from 'next-intl'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
@@ -52,10 +54,10 @@ export const DataDrivenSection = () => {
     <section className="bg-white p-[140px] pt-0 flex justify-center items-center gap-[180px] max-lg:px-6 max-lg:pt-20 max-lg:pb-0 max-md:flex-col max-lg:gap-10 max-md:px-4">
       {/* Left side */}
       <div className="flex flex-col gap-4 max-w-[480px]">
-        <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
+        <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade-right">
           {t('left.title')}
         </Typography>
-        <Typography variant="body3" weight="regular" className="text-description">
+        <Typography variant="body3" weight="regular" className="text-description" data-aos="fade-right">
           {t('left.description')}
         </Typography>
       </div>
@@ -108,7 +110,9 @@ export const DataDrivenSection = () => {
           </div>
         </div>
       ) : (
-        <div className="flex flex-col gap-8 shrink-0 h-[500px] w-[480px] bg-secondary-300 rounded-[20px] relative overflow-hidden justify-center items-center p-[50px] pb-[28px]">
+        <div
+          className="flex flex-col gap-8 shrink-0 h-[500px] w-[480px] bg-secondary-300 rounded-[20px] relative overflow-hidden justify-center items-center p-[50px] pb-[28px]"
+          data-aos="fade-left">
           <img
             src="/assets/data_driven/data_driven_1.png"
             alt="bg"

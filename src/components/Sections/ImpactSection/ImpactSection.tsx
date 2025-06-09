@@ -4,6 +4,8 @@ import { gsap } from 'gsap'
 import { useTranslations } from 'next-intl'
 import { Typography } from '@/components/ui'
 import { BuildingIcon, BusinessIcon, EducationIcon, SmileIcon, StarsIcon } from '@/components/icons'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 export const ImpactSection = () => {
   const t = useTranslations('ImpactSection')
@@ -28,14 +30,19 @@ export const ImpactSection = () => {
       }
     )
   }, [])
+  useEffect(() => {
+    AOS.init()
+  }, [])
 
   return (
     <section className="pt-32 pb-[89px] bg-black flex flex-col gap-[52px] overflow-hidden">
       <div className="flex flex-col gap-4 text-center text-white">
-        <Typography variant="h3" weight="medium">
+        <Typography variant="h3" weight="medium" data-aos="fade-left" data-aos-offset="-30">
           {t('title')}
         </Typography>
-        <Typography variant="body3">{t('subtitle')}</Typography>
+        <Typography variant="body3" data-aos="fade-right">
+          {t('subtitle')}
+        </Typography>
       </div>
 
       <div ref={containerRef} className="relative h-[672px] min-w-[1705px] bg-black overflow-hidden">

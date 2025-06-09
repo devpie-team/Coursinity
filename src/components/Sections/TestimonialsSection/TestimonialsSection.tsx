@@ -6,6 +6,8 @@ import { TestimonialCard } from './_components/TestimonialCard'
 import { CarouselStepper } from './_components/CarouselStepper'
 import { useSwipeable } from 'react-swipeable'
 import { useTranslations } from 'next-intl'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 const testimonialImages = [
   '/assets/testimonials/testimonials_1.png',
@@ -37,6 +39,9 @@ export const TestimonialsSection = () => {
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
+  useEffect(() => {
+    AOS.init()
+  }, [])
 
   const getVisibleSlides = () => {
     const result = []
@@ -63,10 +68,10 @@ export const TestimonialsSection = () => {
   return (
     <section className="flex flex-col h-[933px] bg-white items-center gap-[105px] relative justify-between px-[140px] pb-[140px] overflow-hidden max-lg:px-[60px] max-lg:py-20 max-lg:h-[834px] max-md:h-[862px] max-md:px-4">
       <div className="flex flex-col gap-4 max-md:text-center">
-        <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
+        <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade" data-aos-offset="-50">
           {t('title')}
         </Typography>
-        <Typography variant="body3" weight="regular">
+        <Typography variant="body3" weight="regular" data-aos="fade" data-aos-offset="-50">
           {t('subtitle')}
         </Typography>
       </div>
@@ -82,13 +87,15 @@ export const TestimonialsSection = () => {
           />
         ))}
       </div>
-      <CarouselStepper
-        total={testimonials.length}
-        activeStep={activeIndex}
-        onPrev={handlePrev}
-        onNext={handleNext}
-        onStepClick={setActiveIndex}
-      />
+      <div data-aos="fade-up" data-aos-offset="-100">
+        <CarouselStepper
+          total={testimonials.length}
+          activeStep={activeIndex}
+          onPrev={handlePrev}
+          onNext={handleNext}
+          onStepClick={setActiveIndex}
+        />
+      </div>
     </section>
   )
 }

@@ -6,23 +6,20 @@ import { MyModel } from './_components/Model/Model'
 import { Slide3D } from './_components/Slide3D/Slide3d'
 import * as THREE from 'three'
 import { Float, Environment } from '@react-three/drei'
-import { EffectComposer, ChromaticAberration, Bloom } from '@react-three/postprocessing'
-import { BlendFunction } from 'postprocessing'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const slidesData = [
   { text: 'AI-powered LMS', colors: ['#0D0D0D', '#1C8DC1', '#A578F2'] },
   { text: 'Metaverse & VR scenarios', colors: ['#0D0D0D', '#1E8DC2', '#A578F2'] },
-  { text: 'Slide 3', colors: ['#0D0D0D', '#64B5E6', '#A578F2'] },
-  { text: 'Slide 4', colors: ['#0D0D0D', '#4BA3D8', '#A578F2'] },
-  { text: 'Slide 5', colors: ['#0D0D0D', '#1E8DC2', '#A578F2'] },
-  { text: 'Slide 6', colors: ['#0D0D0D', '#64B5E6', '#A578F2'] },
-  { text: 'Slide 7', colors: ['#0D0D0D', '#4BA3D8', '#A578F2'] },
-  { text: 'Slide 8', colors: ['#0D0D0D', '#1C8DC1', '#A578F2'] }
+  { text: 'AI-powered LMS', colors: ['#0D0D0D', '#64B5E6', '#A578F2'] },
+  { text: 'Metaverse & VR scenarios', colors: ['#0D0D0D', '#4BA3D8', '#A578F2'] },
+  { text: 'AI-powered LMS', colors: ['#0D0D0D', '#1E8DC2', '#A578F2'] },
+  { text: 'Metaverse & VR scenarios', colors: ['#0D0D0D', '#64B5E6', '#A578F2'] },
+  { text: 'AI-powered LMS', colors: ['#0D0D0D', '#4BA3D8', '#A578F2'] },
+  { text: 'Metaverse & VR scenarios', colors: ['#0D0D0D', '#1C8DC1', '#A578F2'] }
 ]
 
-// Create gradient texture for the background
 const createGradientTexture = (colors: string[]) => {
   const canvas = document.createElement('canvas')
   canvas.width = 1024
@@ -90,12 +87,10 @@ export function Carousel3dSection() {
 
     const updateVelocity = () => {
       const currentTime = Date.now()
-      const deltaTime = (currentTime - lastScrollTime.current) / 1000 // Convert to seconds
+      const deltaTime = (currentTime - lastScrollTime.current) / 1000
       const rotationDelta = Math.abs(proxy.rot - lastRotation.current)
-
-      // Calculate velocity in rotations per second
       const newVelocity = rotationDelta / Math.max(deltaTime, 0.016)
-      setEffectStrength(Math.min(newVelocity * 2, 1)) // Cap at 1 and scale for effect
+      setEffectStrength(Math.min(newVelocity * 2, 1))
 
       lastScrollTime.current = currentTime
       lastRotation.current = proxy.rot
@@ -214,7 +209,6 @@ export function Carousel3dSection() {
             const baseAngle = i * angleStep - rotation * angleStep
             const distanceFromActive = Math.abs(i - rotation)
 
-            // Show 3 slides by increasing threshold
             if (distanceFromActive > 1.5) return null
 
             const x = circleCenter[0] + radius * Math.sin(baseAngle) * xScale
@@ -225,13 +219,11 @@ export function Carousel3dSection() {
             const z = circleCenter[2] + radius * Math.cos(baseAngle) * zScale
             const rotationY = Math.atan2(xScale * Math.cos(baseAngle), -zScale * Math.sin(baseAngle)) - Math.PI / 2
 
-            // Smooth scale transition between center and sides
-            const maxScale = 1.2 // Scale at center
-            const minScale = 0.6 // Scale at sides
-            // Use a smooth interpolation based on distance
+            const maxScale = 1.2
+            const minScale = 0.6
+
             const scale = maxScale - distanceFromActive * (maxScale - minScale)
 
-            // Smoother opacity transition
             const opacity = Math.max(0, 1 - distanceFromActive / 1.5)
 
             return (

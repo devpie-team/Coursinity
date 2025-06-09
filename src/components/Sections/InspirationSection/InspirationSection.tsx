@@ -35,6 +35,7 @@ export const InspirationSection = () => {
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [isTablet, setIsTablet] = useState<boolean>(false)
   const [isDesktop, setIsDesktop] = useState<boolean>(true)
+  const [isVisible, setIsVisible] = useState<boolean>(false)
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth
@@ -47,6 +48,36 @@ export const InspirationSection = () => {
 
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  // Custom intersection observer for repetitive opacity animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true)
+          } else {
+            // Reset when leaving viewport so animation can repeat
+            setIsVisible(false)
+          }
+        })
+      },
+      {
+        threshold: 0.3,
+        rootMargin: '0px 0px -100px 0px'
+      }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
   }, [])
 
   const CLOSED_HEIGHT = 56
@@ -125,7 +156,13 @@ export const InspirationSection = () => {
       <section
         ref={sectionRef}
         className="flex bg-black h-[952px] p-[140px] gap-20 max-[1300px]:p-10 items-center justify-center max-lg:gap-8 max-lg:px-6 flex-col">
-        <div className="max-w-[270px] shrink  flex flex-col gap-4">
+        <div 
+          className="max-w-[270px] shrink flex flex-col gap-4"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+            transitionDelay: isVisible ? '0ms' : '0ms'
+          }}>
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
             {t('title')}
           </Typography>
@@ -133,7 +170,13 @@ export const InspirationSection = () => {
             {t('description')}
           </Typography>
         </div>
-        <div className="flex flex-col gap-[10px] border border-white border-opacity-15 p-6 rounded-3xl min-w-[440px] max-w-[500px] flex-1 max-md:min-w-[343px] max-md:max-w-[343px]  ">
+        <div 
+          className="flex flex-col gap-[10px] border border-white border-opacity-15 p-6 rounded-3xl min-w-[440px] max-w-[500px] flex-1 max-md:min-w-[343px] max-md:max-w-[343px]"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+            transitionDelay: isVisible ? '200ms' : '0ms'
+          }}>
           {benefits.map((item, idx) => (
             <ExpandableCard
               key={t(`benefits.${idx}.title`)}
@@ -149,7 +192,13 @@ export const InspirationSection = () => {
             />
           ))}
         </div>
-        <div className="flex flex-col gap-6 text-center">
+        <div 
+          className="flex flex-col gap-6 text-center"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+            transitionDelay: isVisible ? '400ms' : '0ms'
+          }}>
           <Typography variant="body3" weight="medium" className="text-white">
             {t('successMetric')}
           </Typography>
@@ -165,12 +214,24 @@ export const InspirationSection = () => {
     <section
       ref={sectionRef}
       className="flex bg-black h-[100vh] p-[140px] gap-20 max-[1300px]:p-10 items-center justify-center max-lg:gap-8 max-lg:px-6">
-      <div className="max-w-[270px] shrink max-[1150px]:hidden">
+      <div 
+        className="max-w-[270px] shrink max-[1150px]:hidden"
+        style={{
+          opacity: isVisible ? 1 : 0,
+          transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+          transitionDelay: isVisible ? '0ms' : '0ms'
+        }}>
         <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
           {t('title')}
         </Typography>
       </div>
-      <div className="flex flex-col gap-[10px] border border-white border-opacity-15 p-6 rounded-3xl min-w-[440px] max-w-[500px] flex-1 max-md:min-w-[343px] max-md:max-w-[343px]  order-1 max-[1150px]:order-2 ">
+      <div 
+        className="flex flex-col gap-[10px] border border-white border-opacity-15 p-6 rounded-3xl min-w-[440px] max-w-[500px] flex-1 max-md:min-w-[343px] max-md:max-w-[343px] order-1 max-[1150px]:order-2"
+        style={{
+          opacity: isVisible ? 1 : 0,
+          transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+          transitionDelay: isVisible ? '200ms' : '0ms'
+        }}>
         {benefits.map((item, idx) => (
           <ExpandableCard
             key={t(`benefits.${idx}.title`)}
@@ -186,7 +247,13 @@ export const InspirationSection = () => {
           />
         ))}
       </div>
-      <div className="flex flex-col gap-8 max-w-[270px] shrink order-2 max-[1150px]:order-1">
+      <div 
+        className="flex flex-col gap-8 max-w-[270px] shrink order-2 max-[1150px]:order-1"
+        style={{
+          opacity: isVisible ? 1 : 0,
+          transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+          transitionDelay: isVisible ? '400ms' : '0ms'
+        }}>
         <div className="max-w-[270px] shrink min-[1150px]:hidden ">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
             {t('title')}

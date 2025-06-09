@@ -28,6 +28,7 @@ export const BuildSection = () => {
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
+  const [isVisible, setIsVisible] = useState(false)
   const t = useTranslations('Build')
   const scrollWrapperBuildRef = useRef<HTMLDivElement>(null)
   const { hideHeaderForSection, showHeaderForSection } = useHeaderVisibility()
@@ -66,6 +67,36 @@ export const BuildSection = () => {
     checkScreenSize()
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  // Custom intersection observer for repetitive opacity animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true)
+          } else {
+            // Reset when leaving viewport so animation can repeat
+            setIsVisible(false)
+          }
+        })
+      },
+      {
+        threshold: 0.3,
+        rootMargin: '0px 0px -100px 0px'
+      }
+    )
+
+    if (scrollWrapperBuildRef.current) {
+      observer.observe(scrollWrapperBuildRef.current)
+    }
+
+    return () => {
+      if (scrollWrapperBuildRef.current) {
+        observer.unobserve(scrollWrapperBuildRef.current)
+      }
+    }
   }, [])
 
   useEffect(() => {
@@ -246,17 +277,40 @@ export const BuildSection = () => {
 
   return (
     <section
+
       className=" h-[100vh] build-section flex flex-col items-center justify-center gap-12  px-10 max-w-[100vw] bg-black text-white max-lg:pt-20 max-lg:px-6 max-lg:pb-0"
+
       ref={scrollWrapperBuildRef}>
-      <div className="flex flex-col items-center gap-4 text-center">
+      <div
+        className="flex flex-col items-center gap-4 text-center"
+        style={{
+          opacity: isVisible ? 1 : 0,
+          transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+          transitionDelay: isVisible ? '0ms' : '0ms'
+        }}>
         <Typography variant={isDesktop ? 'h3' : 'h5'}>{t('title')}</Typography>
         <Typography variant="body3" className="text-white text-opacity-80">
           {t('subtitle')}
         </Typography>
       </div>
-      {renderCards()}
 
-      <SwipeStepper steps={steps} activeStep={currentStep + 1} onStepClick={handleStepClick} />
+      <div
+        style={{
+          opacity: isVisible ? 1 : 0,
+          transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+          transitionDelay: isVisible ? '200ms' : '0ms'
+        }}>
+        {renderCards()}
+      </div>
+
+      <div
+        style={{
+          opacity: isVisible ? 1 : 0,
+          transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+          transitionDelay: isVisible ? '400ms' : '0ms'
+        }}>
+        <SwipeStepper steps={steps} activeStep={currentStep + 1} onStepClick={handleStepClick} />
+      </div>
     </section>
   )
 }

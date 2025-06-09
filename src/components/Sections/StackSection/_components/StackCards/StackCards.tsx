@@ -4,7 +4,8 @@ import { BadgeIcon } from '@/components/icons/BadgeIcon'
 import { Typography } from '@/components/ui'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
-
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 type Position = 'top' | 'middle' | 'bottom'
 
 const POSITIONS: Record<Position, string> = {
@@ -56,13 +57,13 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
         `}
         onClick={() => setActiveIndex(0)}>
         <div className="flex flex-col gap-2 px-[18px] pt-12 text-center justify-center items-center">
-          <Typography variant="h4" weight="medium" className="opacity-65 mb-1">
+          <Typography variant="h4" weight="medium" className="opacity-65 mb-1" data-aos="fade">
             {t('steps.0.title')}
           </Typography>
-          <Typography variant="h4" weight="medium">
+          <Typography variant="h4" weight="medium" data-aos="fade">
             {t('steps.0.subtitle')}
           </Typography>
-          <Typography variant="body3" weight="regular" className="opacity-80 w-[305px] text-center">
+          <Typography variant="body3" weight="regular" className="opacity-80 w-[305px] text-center" data-aos="fade">
             {t('steps.0.description')}
           </Typography>
         </div>
@@ -71,17 +72,20 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
             src="/assets/stack_section/stack_1.png"
             alt="Step 1"
             className=" object-cover max-md:absolute max-md:bottom-[50px]"
+            data-aos="fade-up"
           />
         </div>
         <img
           src="/assets/stack_section/stack_4.png"
           alt="stack_4"
           className="absolute object-cover top-[350px] left-[15px]"
+          data-aos="fade-up"
         />
         <img
           src="/assets/stack_section/stack_5.png"
           alt="stack_5"
           className="absolute object-cover top-[250px] right-[20px]"
+          data-aos="fade-up"
         />
       </div>
 
@@ -96,7 +100,7 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
         `}
         onClick={() => setActiveIndex(1)}>
         <div className="flex flex-col gap-3 px-[18px] pt-12 text-center justify-center items-center">
-          <Typography variant="h4" weight="medium" className="opacity-65 ">
+          <Typography variant="h4" weight="medium" className="opacity-65 " data-aos="fade-up">
             {t('steps.1.title')}
           </Typography>
           <Typography variant="h4" weight="medium">
@@ -144,7 +148,7 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
         `}
         onClick={() => setActiveIndex(2)}>
         <div className="flex flex-col gap-3 px-[18px] pt-12 text-center justify-center items-center">
-          <Typography variant="h4" weight="medium" className="opacity-65 ">
+          <Typography variant="h4" weight="medium" className="opacity-65 " data-aos="fade-up">
             {t('steps.2.title')}
           </Typography>
           <Typography variant="h4" weight="medium">
