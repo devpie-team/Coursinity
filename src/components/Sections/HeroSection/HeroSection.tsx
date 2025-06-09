@@ -12,6 +12,8 @@ import hero2 from '../../../../public/assets/lottie/hero/h_2.json'
 import hero3 from '../../../../public/assets/lottie/hero/h_3.json'
 import hero4 from '../../../../public/assets/lottie/hero/h_4.json'
 import type { LottieRefCurrentProps } from 'lottie-react'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -120,7 +122,7 @@ export const HeroSection = () => {
           <img src="/assets/hero/glass.png" alt="Glass" className="w-full h-full object-cover opacity-70" />
         </div>
 
-        <div className="flex flex-col gap-8 items-center z-10 text-center px-4 w-[910px] ">
+        <div className="flex flex-col gap-8 items-center z-10 text-center px-4 w-[910px] " data-aos="fade-up">
           <div className="flex flex-col gap-6 max-[1024px]:gap-4 items-center">
             {isTablet ? (
               <div className=" leading-tight text-transparent bg-gradient-to-b from-[#1C8DC1] to-[#D3E7F0] bg-clip-text w-fit">
