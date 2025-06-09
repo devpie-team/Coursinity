@@ -18,7 +18,11 @@ export const AcademySection = () => {
         </Typography>
       </div>
       <div className="flex flex-col items-center gap-8">
-        <Lottie animationData={animationData} loop={true} className="w-full h-[900px]" />
+        <Lottie
+          animationData={animationData}
+          loop={true}
+          className="w-full h-[900px] max-lg:h-[600px] max-md:h-[400px]"
+        />
         <Button variant="purple">{t('button')}</Button>
       </div>
     </section>

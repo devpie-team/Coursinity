@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
 import { gsap } from 'gsap'
 import ToggleLanguage from '../ToggleLanguage'
@@ -9,6 +9,7 @@ import { Button } from '../primitives/button'
 import { TreeLines } from '../icons'
 
 export const Header = () => {
+  const t = useTranslations('Header')
   const headerRef = useRef<HTMLDivElement>(null)
   const [lastScroll, setLastScroll] = useState(0)
 
@@ -67,12 +68,14 @@ export const Header = () => {
               router.replace(newPath)
             }}
           />
+
           <button
             className="button-gradient h-[56px] rounded-full px-6 py-5 text-center 
                 text-white text-caption !bg-black
                 transition-all  ">
-            Book a Demo Now
+           {t('button')}
           </button>
+
         </div>
       ) : (
         <div>
