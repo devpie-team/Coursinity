@@ -61,7 +61,7 @@ export const DataDrivenSection = () => {
       </div>
 
       {isTablet || isMobile ? (
-        <div className="w-full max-w-[373px]">
+        <div className="w-full max-w-[373px] relative">
           <Swiper
             modules={[Autoplay]}
             autoplay={{ delay: 3000 }}
@@ -70,7 +70,7 @@ export const DataDrivenSection = () => {
             onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}>
             {slides.map((slide, index) => (
               <SwiperSlide key={index}>
-                <div className="flex flex-col gap-8 bg-secondary-300 rounded-[20px] relative overflow-hidden justify-center items-center p-[35px] max-md:p-5">
+                <div className="flex flex-col gap-8 bg-secondary-300 rounded-[20px] relative overflow-hidden justify-center items-center p-[35px] pb-[76px] max-md:p-5 max-md:pb-[76px] h-[400px]">
                   <img
                     src="/assets/data_driven/data_driven_1.png"
                     alt="bg"
@@ -81,8 +81,8 @@ export const DataDrivenSection = () => {
                     alt={`slide_${index}`}
                     className="relative object-cover h-[195px] w-[270px]"
                   />
-                  <div className="flex flex-col justify-center items-center text-center gap-3">
-                    <div className="flex flex-col gap-4">
+                  <div className="flex flex-col justify-center items-center text-center">
+                    <div className="flex flex-col gap-4 mb-4">
                       <Typography variant="body1" weight="medium">
                         {slide.title}
                       </Typography>
@@ -90,22 +90,22 @@ export const DataDrivenSection = () => {
                         {slide.description}
                       </Typography>
                     </div>
-                    <div className="flex gap-[10px] justify-center">
-                      {slides.map((_, dotIndex) => (
-                        <div
-                          key={dotIndex}
-                          className={clsx(
-                            'h-2 w-2 rounded-full transition-colors duration-300 bg-primary-blue',
-                            dotIndex === activeIndex ? 'opacity-100' : 'opacity-40'
-                          )}
-                        />
-                      ))}
-                    </div>
                   </div>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
+          <div className="absolute bottom-7 left-0 right-0 z-10 flex gap-[10px] justify-center">
+            {slides.map((_, dotIndex) => (
+              <div
+                key={dotIndex}
+                className={clsx(
+                  'h-2 w-2 rounded-full transition-colors duration-300 bg-primary-blue',
+                  dotIndex === activeIndex ? 'opacity-100' : 'opacity-40'
+                )}
+              />
+            ))}
+          </div>
         </div>
       ) : (
         <div className="flex flex-col gap-8 shrink-0 h-[500px] w-[480px] bg-secondary-300 rounded-[20px] relative overflow-hidden justify-center items-center p-[50px] pb-[28px]">
