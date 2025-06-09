@@ -68,7 +68,14 @@ export const Header = () => {
               router.replace(newPath)
             }}
           />
-          <Button>{t('button')}</Button>
+
+          <button
+            className="button-gradient h-[56px] rounded-full px-6 py-5 text-center 
+                text-white text-caption !bg-black
+                transition-all  ">
+           {t('button')}
+          </button>
+
         </div>
       ) : (
         <div>
