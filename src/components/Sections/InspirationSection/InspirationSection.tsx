@@ -13,6 +13,7 @@ import DiplomaIcon from '@/components/icons/DiplomaIcon'
 import { useTranslations } from 'next-intl'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
 
 const benefits = [
   { icon: <GamingPadIcon /> },
@@ -27,6 +28,7 @@ export const InspirationSection = () => {
   const t = useTranslations('InspirationSection')
   gsap.registerPlugin(ScrollTrigger)
   const sectionRef = useRef<HTMLDivElement | null>(null)
+
   const cardRefs = useRef<Array<HTMLDivElement | null>>([])
   const [openStates, setOpenStates] = useState<boolean[]>(() => benefits.map((_, idx) => idx === 0))
 
@@ -54,6 +56,26 @@ export const InspirationSection = () => {
   function setOpenOnly(idx: number) {
     setOpenStates((states) => states.map((_, i) => i === idx))
   }
+  const { hideHeaderForSection, showHeaderForSection } = useHeaderVisibility()
+  const sectionId = useRef(Math.random()?.toString())
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          hideHeaderForSection(sectionId.current)
+        } else {
+          showHeaderForSection(sectionId.current)
+        }
+      },
+      { threshold: 0.5 }
+    )
+    if (sectionRef.current) observer.observe(sectionRef.current)
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current)
+      showHeaderForSection(sectionId.current) // На всякий случай
+    }
+  }, [])
 
   useEffect(() => {
     if (!sectionRef.current) return

@@ -5,9 +5,8 @@ import { useLocale, useTranslations } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
 import { gsap } from 'gsap'
 import ToggleLanguage from '../ToggleLanguage'
-import { Button } from '../primitives/button'
-import { TreeLines } from '../icons'
 import { MobileMenu } from './MobileMenu'
+import { useHeaderVisibility } from './HeaderVisibilityContext'
 
 export const Header = () => {
   const t = useTranslations('Header')
@@ -51,6 +50,8 @@ export const Header = () => {
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
+  const { isVisible } = useHeaderVisibility()
+  if (!isVisible) return null
 
   return (
     <header
@@ -79,9 +80,8 @@ export const Header = () => {
             className="button-gradient h-[56px] rounded-full px-6 py-5 text-center 
                 text-white text-caption !bg-black
                 transition-all  ">
-           {t('button')}
+            {t('button')}
           </button>
-
         </div>
       ) : (
         <MobileMenu />
