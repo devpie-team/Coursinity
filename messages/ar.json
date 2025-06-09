@@ -89,8 +89,8 @@
     "titleGradient": "",
     "subtitle": "صمّم حلول التدريب والتطوير التي تخلق الأثر على أرض الواقع، وتبني ثقافة الشغف بالتميز في الأداء الأولى في تقنيات التدريب والتطوير",
     "bookDemo": "احجز عرض توضيحي",
-    "titleGradientMobile": "Spark a learning revolution.",
-    "subtitleMobile": "Take your team’s productivity to a new paradigm"
+    "titleGradientMobile": "أشعل ثورة التعلم.",
+    "subtitleMobile": "ارفع إنتاجية فريقك إلى مستوى جديد"
   },
   "AiTeamSection": {
     "title": "بناء فريق عمل يتسم بالكفاءة في مجال الذكاء الاصطناعي",
@@ -142,8 +142,8 @@
         "subtitle": "سواء متطلبات الإفصاح أو متطلبات قطاعات محدّدة كالقطاع المصرفي أو الصحي وغيره، سنكون شركاءك في ضمان الالتزام"
       }
     ],
-    "title": "Built Around You. Branded For You",
-    "subtitle": "Custom-built to reflect your organization’s identity, vision, and goals"
+    "title": "بُنيت حولك. صُممت من أجلك",
+    "subtitle": "مصممة خصيصًا لتعكس هوية مؤسستك ورؤيتها وأهدافها"
   },
   "FutureSection": {
     "title": "المستقبل يبدأ الآن. جهّز فريقك",
@@ -158,12 +158,12 @@
     "title": "خلق أثر حقيقي، تثبته الأرقام",
     "subtitle": "برامج كورسنيتي مصمّمة لتحقيق نتائج واضحة يمكن قياسها وتطويرها",
     "smart": "التدريب الذكي",
-    "sectors": "Programs delivered across 12+ sectors",
+    "sectors": "قطاعاً قدّمنا فيها برامجنا التدريبية",
     "government": "درّبنا منسوبي أكثر من 725 جهة حكومية وخاصة",
-    "learners": "Learners trained and growing",
-    "average": "Average satisfaction score",
-    "numbers": "Proven by Numbers",
-    "active": "Active in 6 countries and expanding"
+    "learners": "درّبنا أكثر من 230 ألف متدرّب",
+    "average": "متوسط مستوى الرضا في برامجنا التدريبية",
+    "numbers": "مثبت بالأرقام",
+    "active": "دول نعمل فيها حالياً"
   },
   "dataDrivenSection": {
     "left": {
@@ -224,28 +224,28 @@
   },
   "StackSection": {
     "left": {
-      "title": "Training Your Team. Your Smartest Investment",
-      "description": "Coursinity turns your ambition into tailored training shaped by your goals, your team’s strengths, and your culture’s pulse.",
-      "button": "Talk to a Learning Advisor"
+      "title": "تدريب فريقك... الاستثمار الرابح",
+      "description": "أنت تملك الطموح، ونحن نضمن تحقيقه كورسنيتي تمنحك القدرة على تصميم تجربة تدريبية تتناسب مع طموحك وفريقك وثقافة مؤسستك",
+      "button": "تحدث مع فريق الحلول التدريبية "
     },
     "steps": [
       {
-        "title": "Step 1",
-        "subtitle": "Pinpoint the Skill Gaps",
-        "description": "We uncover your goals and the skills your team needs next."
+        "title": "الخطوة 1",
+        "subtitle": "نحلّل الاحتياج التدريبي لأعضاء فريقك",
+        "description": "نفهم أهداف مؤسستك والفجوات القائمة"
       },
       {
-        "title": "Step 2",
-        "subtitle": "We design tailored learning experiences",
+        "title": "الخطوة 2",
+        "subtitle": "نقوم بتصميم تجارب تعليمية مصممة خصيصاً",
         "description": "",
-        "button": "Book a Demo Now",
-        "badge": "Individual plan"
+        "button": "احجز عرضاً تجريبياً الآن",
+        "badge": "خطة فردية"
       },
       {
-        "title": "Step 3",
-        "subtitle": "Maximize the Return",
+        "title": "الخطوة 3",
+        "subtitle": "تعظيم العائد",
         "description": "",
-        "button": "Book a Demo Now"
+        "button": "احجز عرضاً تجريبياً الآن"
       }
     ]
   },
@@ -339,5 +339,10 @@
     "title": "أكاديمية رقمية تفاعلية شاملة",
     "description": "أكاديمية رقمية بمميزات تقنية ومحتوى متجدّد يجعل التدريب ثقافة مؤسسية",
     "button": "ابدأ رحلة تدريب فريقك"
+  },
+  "Header": {
+    "button": "احجز عرض توضيحي",
+    "ar": "في",
+    "en": "عربي"
   }
 }

@@ -25,7 +25,11 @@ export const AcademySection = () => {
         </Typography>
       </div>
       <div className="flex flex-col items-center gap-8" data-aos="fade-up">
-        <Lottie animationData={animationData} loop={true} className="w-full h-[900px]" />
+        <Lottie
+          animationData={animationData}
+          loop={true}
+          className="w-full h-[900px] max-lg:h-[600px] max-md:h-[400px]"
+        />
         <Button variant="purple" data-aos="fade-up" data-aos-offset="-50">
           {t('button')}
         </Button>
