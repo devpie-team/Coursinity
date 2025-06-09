@@ -1,0 +1,1 @@
+export {Slide3D} from './Slide3d'

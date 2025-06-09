@@ -8,7 +8,7 @@ const LOTTIE_PATHS = [
   '/assets/lottie/team_train/team_train_1.json',
   '/assets/lottie/team_train/team_train_2.json',
   '/assets/lottie/team_train/team_train_3.json',
-  '/assets/lottie/team_train/team_train_4.json'
+  '/assets/team_training/team_training_4.png'
 ]
 
 export const TeamTrainingSection = () => {
@@ -31,7 +31,6 @@ export const TeamTrainingSection = () => {
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
 
-  // Load all lottie files when selectedIndex changes, or on mount
   useEffect(() => {
     LOTTIE_PATHS.forEach((path, idx) => {
       if (!animations[idx]) {
@@ -46,15 +45,14 @@ export const TeamTrainingSection = () => {
           })
       }
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const features = [0, 1, 2, 3]
 
   return (
-    <section className="bg-white flex pl-[140px] py-[85px]  gap-[50px] max-[1250px]:px-6 max-lg:pb-0 max-lg:gap-5 max-md:flex-col">
-      <div className="flex flex-col gap-10 ">
-        <div className="flex flex-col gap-4">
+    <section className="bg-white flex pl-[140px] py-[85px]  gap-[50px] max-[1250px]:px-6 max-lg:pb-0 max-lg:gap-5 max-md:flex-col justify-center">
+      <div className="flex flex-col gap-10 max-w-[700px]">
+        <div className="flex flex-col gap-4 ">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
             {t('title')}
           </Typography>
@@ -68,23 +66,27 @@ export const TeamTrainingSection = () => {
           </div>
         )}
 
-        <div className="grid grid-cols-2 grid-rows-2 gap-[20px] max-[1200px]:flex max-[1200px]:flex-col ">
+        <div className="grid grid-cols-2 grid-rows-2 gap-[20px]  max-[1200px]:flex max-[1200px]:flex-col ">
           {features.map((i) => {
             const isSelected = selectedIndex === i
             return (
               <div
                 key={i}
                 onClick={() => setSelectedIndex(i)}
-                className={`flex px-5 py-6 gap-4 border rounded-[20px] cursor-pointer transition-all text-black max-lg:p-4 ${
-                  isSelected ? 'bg-secondary-100 border-primary-purple ' : 'bg-white border-secondary-400 '
+                className={`flex px-5 py-6 gap-4 border rounded-[20px] cursor-pointer transition-all duration-300 text-black max-lg:p-4 ${
+                  isSelected 
+                    ? 'bg-secondary-100 border-primary-purple' 
+                    : 'bg-white border-secondary-400 hover:bg-secondary-50'
                 }`}>
                 <div
-                  className={`flex h-8 w-8 rounded-full  text-body1 font-medium leading-[150%] justify-center items-center shrink-0 max-lg:h-6 max-lg:w-6 max-lg:text-caption ${
-                    isSelected ? 'bg-primary-purple text-white' : ' bg-secondary-100 text-primary-purple'
+                  className={`flex h-8 w-8 rounded-full text-body1 font-medium leading-[150%] justify-center items-center shrink-0 max-lg:h-6 max-lg:w-6 max-lg:text-caption transition-all duration-300 ${
+                    isSelected 
+                      ? 'bg-primary-purple text-white' 
+                      : 'bg-secondary-100 text-primary-purple hover:bg-secondary-200'
                   }`}>
                   {i + 1}
                 </div>
-                <Typography variant={isDesktop ? 'body3' : 'caption'} weight="regular" className="leading-[140%] ">
+                <Typography variant={isDesktop ? 'body3' : 'caption'} weight="regular" className="leading-[140%] transition-all duration-300">
                   {t(`items.${i}`)}
                 </Typography>
               </div>
