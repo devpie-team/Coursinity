@@ -108,7 +108,7 @@ export const BuildSection = () => {
     const st = ScrollTrigger.create({
       trigger: scrollWrapperBuildRef.current,
       pin: true,
-      start: 'bottom bottom',
+      start: 'top top',
       end: () => '+=' + scrollWrapperBuildRef.current!.offsetWidth,
       scrub: 1,
       onUpdate: updateStep,
@@ -224,7 +224,7 @@ export const BuildSection = () => {
 
   return (
     <section
-      className="build-section flex flex-col items-center gap-12 pt-[140px] px-10 max-w-[100vw] bg-black pb-[150px] text-white max-lg:pt-20 max-lg:px-6 max-lg:pb-0"
+      className="h-[100vh] build-section flex flex-col items-center justify-center gap-12  px-10 max-w-[100vw] bg-black text-white max-lg:pt-20 max-lg:px-6 max-lg:pb-0"
       ref={scrollWrapperBuildRef}>
       <div className="flex flex-col items-center gap-4 text-center">
         <Typography variant={isDesktop ? 'h3' : 'h5'}>{t('title')}</Typography>

@@ -122,7 +122,7 @@ export const FutureSection = () => {
         ease: 'sine.inOut',
         scrollTrigger: {
           trigger: '.future-section',
-          start: 'bottom bottom',
+          start: 'top top',
           end: '90%',
           scrub: 2,
           pin: true
@@ -151,7 +151,7 @@ export const FutureSection = () => {
       <div>
         <LogoSlider />
       </div>
-      <div className="relative flex items-center justify-center text-center w-full h-[975px] overflow-hidden future-section">
+      <div className="relative flex items-center justify-center text-center w-full h-[100vh] overflow-hidden future-section">
         <div className="flex flex-col max-w-full w-[432px] scaleText opacityText max-lg:w-[372px] max-md:w-[252px]">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
             {t('title')}

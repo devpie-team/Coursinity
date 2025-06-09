@@ -1,0 +1,1 @@
+export { AcademySection } from './AcademySection'

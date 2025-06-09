@@ -142,7 +142,7 @@ export const InspirationSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="flex bg-black h-[952px] p-[140px] gap-20 max-[1300px]:p-10 items-center justify-center max-lg:gap-8 max-lg:px-6">
+      className="flex bg-black h-[100vh] p-[140px] gap-20 max-[1300px]:p-10 items-center justify-center max-lg:gap-8 max-lg:px-6">
       <div className="max-w-[270px] shrink max-[1150px]:hidden">
         <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
           {t('title')}
