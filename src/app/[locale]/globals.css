@@ -105,6 +105,100 @@ a {
   --myColor1: #A084E8;
   --myColor2: #A084E8;
 }
+@property --from {
+  syntax: '<color>';
+  initial-value: #000;
+  inherits: false;
+}
+
+@property --to {
+  syntax: '<color>';
+  initial-value: #000;
+  inherits: false;
+}
+
+.btn-gradient-primary {
+  background: #000;
+  color: #fff;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition:
+    background 0.35s,
+    box-shadow 0.35s;
+}
+
+.btn-gradient-primary:hover {
+  background: linear-gradient(90deg, #0D0D0D 0%, #3D3D3D 100%);
+  box-shadow: 0px 12px 30px 0px #A578F240;
+}
+
+.btn-gradient-primary:active {
+  background: var(--primary-purple, #A578F2);
+  box-shadow: none;
+}
+
+.btn-gradient-primary:disabled {
+  pointer-events: none;
+  opacity: 0.2;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* SECONDARY BUTTON */
+.btn-gradient-secondary {
+  background: #fff;
+  color: #000;
+  border-radius: 9999px;
+  font-weight: 500;
+  backdrop-filter: blur(40px);
+  transition:
+    background 0.35s,
+    box-shadow 0.35s,
+    color 0.35s;
+}
+
+.btn-gradient-secondary:hover {
+  background: #F6F1FE;
+  color: var(--primary-purple, #8759D5);
+  box-shadow: 0px 12px 40px 0px #A578F240;
+}
+
+.btn-gradient-secondary:active {
+  color: #8759D5;
+}
+
+.btn-gradient-secondary:disabled {
+  pointer-events: none;
+  opacity: 0.3;
+  color: rgba(255, 255, 255, 0.4);
+  background: #fff;
+}
+
+/* PURPLE BUTTON */
+.btn-gradient-purple {
+  background: var(--primary-purple, #A578F2);
+  color: #fff;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition:
+    background 0.35s,
+    box-shadow 0.35s;
+}
+
+.btn-gradient-purple:hover {
+  background: var(--secondary-purple, #7A59F7);
+  box-shadow: 0px 12px 30px 0px #A578F240;
+}
+
+.btn-gradient-purple:active {
+  background: var(--primary-purple, #A578F2);
+  box-shadow: none;
+}
+
+.btn-gradient-purple:disabled {
+  pointer-events: none;
+  opacity: 0.2;
+  color: rgba(255, 255, 255, 0.9);
+}
 
 @layer base {
   :root {

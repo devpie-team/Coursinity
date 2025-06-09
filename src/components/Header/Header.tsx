@@ -67,7 +67,12 @@ export const Header = () => {
               router.replace(newPath)
             }}
           />
-          <Button>Book a Demo Now</Button>
+          <button
+            className="button-gradient h-[56px] rounded-full px-6 py-5 text-center 
+                text-white text-caption !bg-black
+                transition-all  ">
+            Book a Demo Now
+          </button>
         </div>
       ) : (
         <div>

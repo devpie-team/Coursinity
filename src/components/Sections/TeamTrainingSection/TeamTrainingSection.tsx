@@ -4,11 +4,16 @@ import { Button } from '@/components/primitives/button'
 import { Typography } from '@/components/ui'
 import Lottie from 'lottie-react'
 
-const LOTTIE_PATHS = [
-  '/assets/lottie/team_train/team_train_1.json',
-  '/assets/lottie/team_train/team_train_2.json',
-  '/assets/lottie/team_train/team_train_3.json',
-  '/assets/team_training/team_training_4.png'
+interface AnimationItem {
+  type: 'lottie' | 'image'
+  data: any
+}
+
+const ANIMATION_PATHS = [
+  { path: '/assets/lottie/team_train/team_train_1.json', type: 'lottie' },
+  { path: '/assets/lottie/team_train/team_train_2.json', type: 'lottie' },
+  { path: '/assets/lottie/team_train/team_train_3.json', type: 'lottie' },
+  { path: '/assets/team_training/team_train_4.png', type: 'image' }
 ]
 
 export const TeamTrainingSection = () => {
@@ -17,7 +22,9 @@ export const TeamTrainingSection = () => {
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(0)
-  const [animations, setAnimations] = useState<(any | null)[]>([null, null, null, null])
+  const [pendingIndex, setPendingIndex] = useState<number | null>(null)
+  const [fade, setFade] = useState(true)
+  const [animations, setAnimations] = useState<(AnimationItem | null)[]>([null, null, null, null])
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -32,22 +39,49 @@ export const TeamTrainingSection = () => {
   }, [])
 
   useEffect(() => {
-    LOTTIE_PATHS.forEach((path, idx) => {
+    ANIMATION_PATHS.forEach((item, idx) => {
       if (!animations[idx]) {
-        fetch(path)
-          .then((res) => res.json())
-          .then((json) => {
-            setAnimations((prev) => {
-              const updated = [...prev]
-              updated[idx] = json
-              return updated
+        if (item.type === 'lottie') {
+          fetch(item.path)
+            .then((res) => res.json())
+            .then((json) => {
+              setAnimations((prev) => {
+                const updated = [...prev]
+                updated[idx] = { type: 'lottie', data: json }
+                return updated
+              })
             })
+        } else {
+          setAnimations((prev) => {
+            const updated = [...prev]
+            updated[idx] = { type: 'image', data: item.path }
+            return updated
           })
+        }
       }
     })
   }, [])
 
   const features = [0, 1, 2, 3]
+
+  const handleFeatureClick = (i: number) => {
+    if (i === selectedIndex) return
+    setFade(false)
+    setPendingIndex(i)
+    setTimeout(() => {
+      setSelectedIndex(i)
+      setFade(true)
+      setPendingIndex(null)
+    }, 250)
+  }
+
+  const renderAnimation = (animation: AnimationItem, className: string) => {
+    if (animation.type === 'lottie') {
+      return <Lottie animationData={animation.data} loop={true} style={{ width: '100%', height: '100%' }} />
+    } else {
+      return <img src={animation.data} alt="Training visualization" className={`w-full h-full object-contain`} />
+    }
+  }
 
   return (
     <section className="bg-white flex pl-[140px] py-[85px]  gap-[50px] max-[1250px]:px-6 max-lg:pb-0 max-lg:gap-5 max-md:flex-col justify-center">
@@ -61,8 +95,13 @@ export const TeamTrainingSection = () => {
           </Typography>
         </div>
         {selectedIndex !== null && animations[selectedIndex] && (
-          <div className="max-md:block hidden w-full h-auto max-h-[300px] object-contain rounded-xl">
-            <Lottie animationData={animations[selectedIndex]} loop={true} style={{ width: '100%', height: 300 }} />
+          <div
+            className={`max-md:block hidden w-full h-auto  object-contain rounded-xl transition-opacity duration-300`}
+            style={{
+              opacity: fade ? 1 : 0,
+              pointerEvents: fade ? 'auto' : 'none'
+            }}>
+            {renderAnimation(animations[selectedIndex], 'w-full h-[300px]')}
           </div>
         )}
 
@@ -72,21 +111,22 @@ export const TeamTrainingSection = () => {
             return (
               <div
                 key={i}
-                onClick={() => setSelectedIndex(i)}
-                className={`flex px-5 py-6 gap-4 border rounded-[20px] cursor-pointer transition-all duration-300 text-black max-lg:p-4 ${
-                  isSelected 
-                    ? 'bg-secondary-100 border-primary-purple' 
-                    : 'bg-white border-secondary-400 hover:bg-secondary-50'
+                onClick={() => handleFeatureClick(i)}
+                className={`flex px-5 py-6 gap-4 border rounded-[20px] cursor-pointer transition-all duration-500 text-black max-lg:p-4 ${
+                  isSelected ? 'bg-secondary-100 border-primary-purple' : 'bg-white border-secondary-400 '
                 }`}>
                 <div
                   className={`flex h-8 w-8 rounded-full text-body1 font-medium leading-[150%] justify-center items-center shrink-0 max-lg:h-6 max-lg:w-6 max-lg:text-caption transition-all duration-300 ${
-                    isSelected 
-                      ? 'bg-primary-purple text-white' 
+                    isSelected
+                      ? 'bg-primary-purple text-white'
                       : 'bg-secondary-100 text-primary-purple hover:bg-secondary-200'
                   }`}>
                   {i + 1}
                 </div>
-                <Typography variant={isDesktop ? 'body3' : 'caption'} weight="regular" className="leading-[140%] transition-all duration-300">
+                <Typography
+                  variant={isDesktop ? 'body3' : 'caption'}
+                  weight="regular"
+                  className="leading-[140%] transition-all duration-300">
                   {t(`items.${i}`)}
                 </Typography>
               </div>
@@ -99,10 +139,15 @@ export const TeamTrainingSection = () => {
         </Button>
       </div>
 
-      <div className=" flex justify-center shrink-0 max-md:hidden">
+      <div className="flex items-start shrink-0 max-md:hidden max-lg:items-center">
         {selectedIndex !== null && animations[selectedIndex] && (
-          <div className="h-[570px] w-[570px] max-[1400px]:h-[500px] max-[1400px]:w-[510px] max-lg:w-[400px] max-lg:h-[410px] ">
-            <Lottie animationData={animations[selectedIndex]} loop={true} style={{ width: '100%', height: '100%' }} />
+          <div
+            className="h-[570px] w-[570px] max-[1400px]:h-[500px] max-[1400px]:w-[510px] max-lg:w-[400px] max-lg:h-[410px] transition-opacity duration-300"
+            style={{
+              opacity: fade ? 1 : 0,
+              pointerEvents: fade ? 'auto' : 'none'
+            }}>
+            {renderAnimation(animations[selectedIndex], 'w-full h-full')}
           </div>
         )}
       </div>
