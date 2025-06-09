@@ -5,8 +5,8 @@ import { useLocale, useTranslations } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
 import { gsap } from 'gsap'
 import ToggleLanguage from '../ToggleLanguage'
-import { Button } from '../primitives/button'
-import { TreeLines } from '../icons'
+import { MobileMenu } from './MobileMenu'
+import { useHeaderVisibility } from './HeaderVisibilityContext'
 
 export const Header = () => {
   const t = useTranslations('Header')
@@ -50,13 +50,20 @@ export const Header = () => {
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
+  const { isVisible } = useHeaderVisibility()
+  if (!isVisible) return null
 
   return (
     <header
       ref={headerRef}
-      className="fixed top-0 left-0 w-full z-50 px-[115px] flex items-center
-    justify-between py-[20px]">
-      <img src="/assets/logos/logos.png" alt="Logo" className="h-[14px] w-[326px] max-lg:w-[126px]" />
+      className="fixed bg-white top-0 left-0 w-full z-50 px-[115px] max-lg:px-6 flex items-center
+    justify-between py-[20px]"
+      style={{ boxShadow: '0px 12px 30px 0px #0000000D' }}>
+      <img
+        src={`/assets/logos/${isTablet || isMobile ? 'mobileLogo' : 'logos'}.png`}
+        alt="Logo"
+        className="h-[14px] w-[326px] max-lg:w-[126px]"
+      />
       {isDesktop && <div />}
       {isDesktop ? (
         <div className="flex items-center gap-[18px]">
@@ -73,14 +80,11 @@ export const Header = () => {
             className="button-gradient h-[56px] rounded-full px-6 py-5 text-center 
                 text-white text-caption !bg-black
                 transition-all  ">
-           {t('button')}
+            {t('button')}
           </button>
-
         </div>
       ) : (
-        <div>
-          <TreeLines />
-        </div>
+        <MobileMenu />
       )}
     </header>
   )

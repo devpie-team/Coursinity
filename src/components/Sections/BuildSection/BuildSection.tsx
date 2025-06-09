@@ -9,6 +9,7 @@ import { RotatedCard } from './components/RotatedCard/RotatedCard'
 import { Typography } from '@/components/ui'
 import { DartIcon, LayersIcon, MoonIcon, PlanetIcon, SectorIcon, StarIcon } from '@/components/icons'
 import { SwipeStepper } from '@/components/SwipeStepper/SwipeStepper'
+import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -30,6 +31,27 @@ export const BuildSection = () => {
   const [isVisible, setIsVisible] = useState(false)
   const t = useTranslations('Build')
   const scrollWrapperBuildRef = useRef<HTMLDivElement>(null)
+  const { hideHeaderForSection, showHeaderForSection } = useHeaderVisibility()
+  const sectionId = useRef(Math.random()?.toString())
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          hideHeaderForSection(sectionId.current)
+        } else {
+          showHeaderForSection(sectionId.current)
+        }
+      },
+      { threshold: 0.5 }
+    )
+    if (scrollWrapperBuildRef.current) observer.observe(scrollWrapperBuildRef.current)
+    return () => {
+      if (scrollWrapperBuildRef.current) observer.unobserve(scrollWrapperBuildRef.current)
+      showHeaderForSection(sectionId.current) // На всякий случай
+    }
+  }, [])
+
   const cardRefs = useRef<Array<HTMLDivElement | null>>([])
   const [currentStep, setCurrentStep] = useState(0)
   const swiperRef = useRef<SwiperType | null>(null)
@@ -255,7 +277,9 @@ export const BuildSection = () => {
 
   return (
     <section
-      className="h-[100vh] build-section flex flex-col items-center justify-center gap-12  px-10 max-w-[100vw] bg-black text-white max-lg:pt-20 max-lg:px-6 max-lg:pb-0 overflow-hidden max-w-[100vw]"
+
+      className=" h-[100vh] build-section flex flex-col items-center justify-center gap-12  px-10 max-w-[100vw] bg-black text-white max-lg:pt-20 max-lg:px-6 max-lg:pb-0"
+
       ref={scrollWrapperBuildRef}>
       <div
         className="flex flex-col items-center gap-4 text-center"
