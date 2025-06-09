@@ -85,10 +85,10 @@
     }
   },
   "Hero": {
-    "title": "Lead The Change with a Future - ",
-    "titleGradient": "Ready Team",
-    "subtitle": "Empower your team with AI-driven, tailored training paths that bring your vision to life. The leader in Edu-tech solutions.",
-    "bookDemo": "Book a Demo Now",
+    "title": "أحدث ثورة في مؤسستك، وانتقل بإنتاجية فريقك لبعدٍ آخر",
+    "titleGradient": "",
+    "subtitle": "صمّم حلول التدريب والتطوير التي تخلق الأثر على أرض الواقع، وتبني ثقافة الشغف بالتميز في الأداء الأولى في تقنيات التدريب والتطوير",
+    "bookDemo": "احجز عرض توضيحي",
     "titleGradientMobile": "Spark a learning revolution.",
     "subtitleMobile": "Take your team’s productivity to a new paradigm"
   },
@@ -118,28 +118,28 @@
   "Build": {
     "cards": [
       {
-        "title": "In-Person, Remote, Self-Paced & Hybrid",
-        "subtitle": "Flexible training formats tailored to your team’s needs, fostering a culture of continuous growth."
+        "title": "محتوى تدريبي خاص بمؤسّستك",
+        "subtitle": "نُنشئ المحتوى بناءً على مهامك اليومية، سير العمل الداخلي، واحتياجات فريقك الفعلية"
       },
       {
-        "title": "Tailored Learning Paths",
-        "subtitle": "Designed around your roles, departments, and organizational goals."
+        "title": "كالندر تدريبي خاصs",
+        "subtitle": "مواعيد تدريب تتماشى مع أوقات فريقك  بدون تعطيل ولا تأخير"
       },
       {
-        "title": "Sector-Specific Design",
-        "subtitle": "We leverage modern, interactive training techniques to deliver programs that sharpen your organization’s competitive edge across every sector."
+        "title": "برامج متخصّصة لكل قطاع",
+        "subtitle": "يتماشى مع أدواتك، أنظمتك، ومعايير الامتثال في قطاعك"
       },
       {
-        "title": "Bespoke Digital Content",
-        "subtitle": "Regulatory compliance across sectors. From banking to healthcare and beyond, we deliver full support so your organization meets every requirement."
+        "title": "أكاديميّة رقميّة بهويّة مؤسّستك",
+        "subtitle": "اكاديمية رقمية ليست منصة وحسب. دورات تفاعلية في شكل رحلات تدريبية مع نخبة من الخبراء. فريق دعم ومحتوى متنوع"
       },
       {
-        "title": "Branded Digital Academy",
-        "subtitle": "More than a platform. A complete digital academy featuring expert-led, interactive training journeys and a rich, diverse content library."
+        "title": "حضوري. عن بُعد. ذاتي. مدمج",
+        "subtitle": "أساليب متنوعة تضمن التدخّل اللازم لمعالجة الاحتياج، وتمكّن مؤسستك من خلق ثقافة التطوير المستمر"
       },
       {
-        "title": "Flexible Scheduling",
-        "subtitle": "Synced with your team’s availability, no disruption, no delays."
+        "title": "برامج لتلبية المتطلّبات النظامية",
+        "subtitle": "سواء متطلبات الإفصاح أو متطلبات قطاعات محدّدة كالقطاع المصرفي أو الصحي وغيره، سنكون شركاءك في ضمان الالتزام"
       }
     ],
     "title": "Built Around You. Branded For You",
@@ -155,11 +155,11 @@
     "card5Title": "نتائج حقيقية، بدون تخمينات"
   },
   "ImpactSection": {
-    "title": "Real Impact, Proven by Numbers",
-    "subtitle": "Coursinity programs are built to deliver measurable, scalable results.",
-    "smart": "Smart training",
+    "title": "خلق أثر حقيقي، تثبته الأرقام",
+    "subtitle": "برامج كورسنيتي مصمّمة لتحقيق نتائج واضحة يمكن قياسها وتطويرها",
+    "smart": "التدريب الذكي",
     "sectors": "Programs delivered across 12+ sectors",
-    "government": "Government & private orgs onboard",
+    "government": "درّبنا منسوبي أكثر من 725 جهة حكومية وخاصة",
     "learners": "Learners trained and growing",
     "average": "Average satisfaction score",
     "numbers": "Proven by Numbers",
@@ -310,19 +310,19 @@
     "learnMore": "اعرف المزيد",
     "benefits": [
       {
-        "title": "عمل تفاعلي",
-        "description": "نحوّل التدريب إلى مزيج محفّز من التفاعل، التحدي والتعلم."
+        "title": "بصمة مستمرّة",
+        "description": "أثر يمتد بعد انتهاء التدريب،يعزّز أداء فريقك، ويبني ثقافة تدريب مستدامة"
       },
       {
         "title": "عمل واقعي",
         "description": "تتخطى حدود النظريات مع تدريب مُعد لمواجهة تحديات العالم الحقيقي."
       },
       {
-        "title": "إنجاز موثّق",
+        "title": "متعة وتفاعل",
         "description": "تدريب يعزز الأداء لفترة طويلة بعد انتهائه، لتحقيق نمو مستدام."
       },
       {
-        "title": "متعة وتفاعل",
+        "title": "إنجاز موثّق",
         "description": "تدريب تفاعلي حيّ، إشعارات يومية وتواصل مستمر."
       },
       {
@@ -334,5 +334,10 @@
         "description": "شهادات واعتمادات من مؤسسات مرموقة تثبت إنجاز فريقك."
       }
     ]
+  },
+  "AcademySection": {
+    "title": "أكاديمية رقمية تفاعلية شاملة",
+    "description": "أكاديمية رقمية بمميزات تقنية ومحتوى متجدّد يجعل التدريب ثقافة مؤسسية",
+    "button": "ابدأ رحلة تدريب فريقك"
   }
 }

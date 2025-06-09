@@ -334,5 +334,10 @@
         "description": "Credentials from prestigious institutions validating your team's accomplishments."
       }
     ]
+  },
+  "AcademySection": {
+    "title": "All-in-One Digital Learning Academy",
+    "description": "We give you the tools to train smarter, stay compliant, and scale confidently.",
+    "button": "Start your learning journey"
   }
 }

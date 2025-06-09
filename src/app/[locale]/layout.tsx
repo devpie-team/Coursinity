@@ -30,7 +30,7 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale} className={poppins.variable}>
+    <html lang={locale} className={poppins.variable} dir={locale == 'ar' ? 'rtl' : 'ltr'}>
       <body>
         <NextIntlClientProvider>
           <Theme>
