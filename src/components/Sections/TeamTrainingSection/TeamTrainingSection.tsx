@@ -73,16 +73,20 @@ export const TeamTrainingSection = () => {
               <div
                 key={i}
                 onClick={() => setSelectedIndex(i)}
-                className={`flex px-5 py-6 gap-4 border rounded-[20px] cursor-pointer transition-all text-black max-lg:p-4 ${
-                  isSelected ? 'bg-secondary-100 border-primary-purple ' : 'bg-white border-secondary-400 '
+                className={`flex px-5 py-6 gap-4 border rounded-[20px] cursor-pointer transition-all duration-300 text-black max-lg:p-4 ${
+                  isSelected 
+                    ? 'bg-secondary-100 border-primary-purple' 
+                    : 'bg-white border-secondary-400 hover:bg-secondary-50'
                 }`}>
                 <div
-                  className={`flex h-8 w-8 rounded-full  text-body1 font-medium leading-[150%] justify-center items-center shrink-0 max-lg:h-6 max-lg:w-6 max-lg:text-caption ${
-                    isSelected ? 'bg-primary-purple text-white' : ' bg-secondary-100 text-primary-purple'
+                  className={`flex h-8 w-8 rounded-full text-body1 font-medium leading-[150%] justify-center items-center shrink-0 max-lg:h-6 max-lg:w-6 max-lg:text-caption transition-all duration-300 ${
+                    isSelected 
+                      ? 'bg-primary-purple text-white' 
+                      : 'bg-secondary-100 text-primary-purple hover:bg-secondary-200'
                   }`}>
                   {i + 1}
                 </div>
-                <Typography variant={isDesktop ? 'body3' : 'caption'} weight="regular" className="leading-[140%] ">
+                <Typography variant={isDesktop ? 'body3' : 'caption'} weight="regular" className="leading-[140%] transition-all duration-300">
                   {t(`items.${i}`)}
                 </Typography>
               </div>
