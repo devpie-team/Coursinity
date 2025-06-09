@@ -27,24 +27,24 @@ export const LogoSlider = () => {
 
   return (
     <div className="flex justify-center px-[150px] py-10 max-lg:px-6 max-lg:py-8 max-md:px-4">
-      <div className="relative   h-[200px] border-4 border-secondary-400 rounded-[40px]  w-full overflow-hidden">
+      <div className="relative   h-[200px] border-4 border-secondary-400 rounded-[40px]  w-full overflow-hidden max-lg:h-[100px]">
         <div
           className="flex absolute gap-10  left-1/3 top-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[7.5deg]"
           ref={trackRef}>
           {[
-            'assets/logos/microsoft.png',
-            'assets/logos/axelos.png',
+            'assets/logos/comptia.png',
+            'assets/logos/nebosh.png',
+            'assets/logos/GInI.png',
             'assets/logos/iosh.png',
+            'assets/logos/axelos.png',
             'assets/logos/microsoft.png',
-            'assets/logos/microsoft.png',
-            'assets/logos/microsoft.png',
-            'assets/logos/microsoft.png',
-            'assets/logos/microsoft.png',
-            'assets/logos/microsoft.png'
+            'assets/logos/IQF.png',
+            'assets/logos/IoSCM.png',
+            'assets/logos/IFA.png'
           ].map((src, i) => (
             <div
               key={i}
-              className="w-[160px] h-[160px] border border-secondary-400 bg-white rounded-[40px]  flex items-center justify-center skew-x-[-30deg] max-[1440px]:h-[105px] max-[1440px]:w-[105px]">
+              className="w-[160px] h-[160px] border border-secondary-400 bg-white rounded-[40px]  flex items-center justify-center skew-x-[-30deg] max-[1440px]:h-[105px] max-[1440px]:w-[105px] p-5">
               <img src={src} alt="" className=" object-contain" />
             </div>
           ))}
