@@ -8,7 +8,7 @@ const LOTTIE_PATHS = [
   '/assets/lottie/team_train/team_train_1.json',
   '/assets/lottie/team_train/team_train_2.json',
   '/assets/lottie/team_train/team_train_3.json',
-  '/assets/lottie/team_train/team_train_4.json'
+  '/assets/team_training/team_training_4.png'
 ]
 
 export const TeamTrainingSection = () => {
@@ -31,7 +31,6 @@ export const TeamTrainingSection = () => {
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
 
-  // Load all lottie files when selectedIndex changes, or on mount
   useEffect(() => {
     LOTTIE_PATHS.forEach((path, idx) => {
       if (!animations[idx]) {
@@ -46,15 +45,14 @@ export const TeamTrainingSection = () => {
           })
       }
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const features = [0, 1, 2, 3]
 
   return (
-    <section className="bg-white flex pl-[140px] py-[85px]  gap-[50px] max-[1250px]:px-6 max-lg:pb-0 max-lg:gap-5 max-md:flex-col">
-      <div className="flex flex-col gap-10 ">
-        <div className="flex flex-col gap-4">
+    <section className="bg-white flex pl-[140px] py-[85px]  gap-[50px] max-[1250px]:px-6 max-lg:pb-0 max-lg:gap-5 max-md:flex-col justify-center">
+      <div className="flex flex-col gap-10 max-w-[700px]">
+        <div className="flex flex-col gap-4 ">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
             {t('title')}
           </Typography>
@@ -68,7 +66,7 @@ export const TeamTrainingSection = () => {
           </div>
         )}
 
-        <div className="grid grid-cols-2 grid-rows-2 gap-[20px] max-[1200px]:flex max-[1200px]:flex-col ">
+        <div className="grid grid-cols-2 grid-rows-2 gap-[20px]  max-[1200px]:flex max-[1200px]:flex-col ">
           {features.map((i) => {
             const isSelected = selectedIndex === i
             return (

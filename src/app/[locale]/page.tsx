@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 import {
+  AcademySection,
   AiTeamSection,
   BuildSection,
   FeaturesSection,
@@ -31,9 +32,9 @@ export default function HomePage() {
       <AiTeamSection />
       <Carousel3dSection />
       <InspirationSection />
-
       <BuildSection />
       <ImpactSection />
+      <AcademySection />
       <TeamTrainingSection />
       <DataDrivenSection />
       <FeaturesSection />

@@ -1,3 +1,4 @@
+export { AcademySection } from './AcademySection/AcademySection'
 export { TeamTrainingSection } from '@/components/Sections/TeamTrainingSection'
 export { FutureSection } from './FutureSection/FutureSection'
 export { BuildSection } from './BuildSection/BuildSection'
