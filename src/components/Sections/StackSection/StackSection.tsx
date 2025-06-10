@@ -30,6 +30,9 @@ export const StackSection = () => {
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
+  useEffect(() => {
+    AOS.init()
+  }, [])
 
   return (
     <section className="flex gap-[120px] bg-primary-purple h-[900px] pt-[130px] px-[235px] text-white overflow-hidden items-start max-[1200px]:px-[140px] max-lg:px-10 max-lg:pt-20 max-lg:h-[750px]  max-lg:gap-16 max-md:flex-col max-md:px-4 max-md:gap-10 max-md:h-[970px] ">
@@ -49,12 +52,13 @@ export const StackSection = () => {
           <Button
             variant="secondary"
             className="w-[255px] mt-4 max-md:mx-auto max-lg:w-[343px] max-[400px]:w-full max-[400px]:mt-0"
-            data-aos="fade-up">
+            data-aos="fade-up"
+            data-aos-offset="200">
             {t('left.button')}
           </Button>
         </div>
         {!isMobile && (
-          <div data-aos="fade-up" data-aos-offset="100">
+          <div data-aos="fade-up" data-aos-offset="-50">
             <Stepper
               steps={3}
               activeStep={activeIndex + 1}

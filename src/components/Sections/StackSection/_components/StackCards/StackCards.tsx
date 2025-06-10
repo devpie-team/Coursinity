@@ -43,6 +43,9 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
+  useEffect(() => {
+    AOS.init()
+  }, [])
 
   return (
     <>
@@ -148,7 +151,7 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
         `}
         onClick={() => setActiveIndex(2)}>
         <div className="flex flex-col gap-3 px-[18px] pt-12 text-center justify-center items-center">
-          <Typography variant="h4" weight="medium" className="opacity-65 " data-aos="fade-up">
+          <Typography variant="h4" weight="medium" className="opacity-65 " data-aos="fade-up" data-aos-offset="-50">
             {t('steps.2.title')}
           </Typography>
           <Typography variant="h4" weight="medium">
