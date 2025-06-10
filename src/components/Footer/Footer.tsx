@@ -49,7 +49,7 @@ const Footer = ({ className }: FooterProps) => {
   return (
     <footer
       className={cn(
-        'w-full py-[140px] px-[150px] pb-[50px] text-white bg-primary-purple max-[1280px]:px-6 max-lg:py-20 max-lg:pb-16 max-[834px]:px-4',
+        'w-full py-[140px] px-[150px] pb-[50px] text-white bg-primary-purple max-[1280px]:px-6 max-lg:py-20 max-lg:pb-16 max-[834px]:px-4 ',
         className
       )}>
       <div className="flex flex-col gap-[120px] max-lg:gap-20">
@@ -79,7 +79,7 @@ const Footer = ({ className }: FooterProps) => {
             {/* Coursinity column */}
             <div
               className="flex flex-col gap-[20px] font-medium flex-none max-w-[240px] max-[834px]:max-w-full"
-              data-aos="fade-right">
+              data-aos="fade">
               <Typography variant={isTablet ? 'body1' : 'body2'} weight="medium">
                 {t('columns.coursinity.title')}
               </Typography>
@@ -89,7 +89,7 @@ const Footer = ({ className }: FooterProps) => {
 
             <div className="grid grid-cols-3 gap-[50px] max-md:grid-cols-2 max-md:grid-rows-2 flex-grow">
               {/* Solutions */}
-              <div data-aos="fade-right">
+              <div data-aos="fade">
                 <Typography variant={isTablet ? 'body3' : 'body2'} weight="medium" className="mb-5">
                   {t('columns.solutions.title')}
                 </Typography>
@@ -97,7 +97,7 @@ const Footer = ({ className }: FooterProps) => {
               </div>
 
               {/* Academy */}
-              <div data-aos="fade-left">
+              <div data-aos="fade">
                 <Typography variant={isTablet ? 'body3' : 'body2'} weight="medium" className="mb-5">
                   {t('columns.academy.title')}
                 </Typography>
@@ -105,12 +105,8 @@ const Footer = ({ className }: FooterProps) => {
               </div>
 
               {/* Company */}
-              <div data-aos="fade-left">
-                <Typography
-                  variant={isTablet ? 'body3' : 'body2'}
-                  weight="medium"
-                  className="mb-5"
-                  data-aos="fade-left">
+              <div data-aos="fade">
+                <Typography variant={isTablet ? 'body3' : 'body2'} weight="medium" className="mb-5">
                   {t('columns.company.title')}
                 </Typography>
                 <ul className="space-y-[6px] text-button">{renderListItems('columns.company.items', 4)}</ul>
