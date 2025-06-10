@@ -37,10 +37,10 @@ export const ImpactSection = () => {
   return (
     <section className="pt-32 pb-[89px] bg-black flex flex-col gap-[52px] overflow-hidden">
       <div className="flex flex-col gap-4 text-center text-white">
-        <Typography variant="h3" weight="medium" data-aos="fade-left" data-aos-offset="-30">
+        <Typography variant="h3" weight="medium" data-aos="fade-up" data-aos-offset="-30">
           {t('title')}
         </Typography>
-        <Typography variant="body3" data-aos="fade-right">
+        <Typography variant="body3" data-aos="fade-up">
           {t('subtitle')}
         </Typography>
       </div>
