@@ -8,6 +8,10 @@ function getSnapshot() {
   return hiddenSections.size === 0 // true если показывать хедер
 }
 
+function getServerSnapshot() {
+  return true // На сервере хедер всегда видим по умолчанию
+}
+
 function subscribe(cb: () => void) {
   subscribers.add(cb)
   return () => subscribers.delete(cb)
@@ -29,7 +33,7 @@ const HeaderVisibilityContext = createContext({
 })
 
 export const HeaderVisibilityProvider = ({ children }: { children: React.ReactNode }) => {
-  const isVisible = useSyncExternalStore(subscribe, getSnapshot)
+  const isVisible = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
   return (
     <HeaderVisibilityContext.Provider value={{ isVisible, hideHeaderForSection, showHeaderForSection }}>
       {children}
