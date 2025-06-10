@@ -58,12 +58,12 @@ export const FeaturesSection = () => {
             <DiplomaIcon size={isTablet ? 40 : 64} />
           </div>
 
-          <div className="flex flex-col flex-grow gap-8 max-lg:gap-6">
+          <div className="flex flex-col flex-grow gap-8 max-lg:gap-6" data-aos="fade">
             <div className={cn('flex flex-col gap-4', !isDesktop && 'flex-grow')}>
-              <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium" data-aos="fade-up">
+              <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium">
                 {t('certified.title')}
               </Typography>
-              <Typography variant="button" weight="regular" className="text-[#6E6E6E]" data-aos="fade-up">
+              <Typography variant="button" weight="regular" className="text-[#6E6E6E]">
                 {t('certified.subtitle')}
               </Typography>
             </div>
@@ -75,11 +75,11 @@ export const FeaturesSection = () => {
                 const limitedText = !isDesktop ? item.split(' ').slice(0, 2).join(' ') : item
 
                 return (
-                  <div className="flex gap-4 items-center" key={index}>
+                  <div className="flex gap-4 items-center" key={index} data-aos="fade">
                     <div>
                       <CheckCircleIcon size={isTablet ? 24 : 28} />
                     </div>
-                    <Typography variant={isDesktop ? 'body2' : 'caption'} weight="regular" data-aos="fade-up">
+                    <Typography variant={isDesktop ? 'body2' : 'caption'} weight="regular">
                       {limitedText}
                     </Typography>
                   </div>
@@ -109,11 +109,11 @@ export const FeaturesSection = () => {
           </div>
 
           <div className="flex flex-col flex-grow gap-8 max-lg:gap-6">
-            <div className="flex flex-col gap-4 max-lg:flex-grow">
-              <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium" data-aos="fade-up">
+            <div className="flex flex-col gap-4 max-lg:flex-grow" data-aos="fade">
+              <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium">
                 {t('trusted.title')}
               </Typography>
-              <Typography variant="button" weight="regular" className="text-[#6E6E6E]" data-aos="fade-up">
+              <Typography variant="button" weight="regular" className="text-[#6E6E6E]">
                 {t('trusted.subtitle')}
               </Typography>
             </div>
@@ -122,17 +122,17 @@ export const FeaturesSection = () => {
 
             <div className={cn('flex flex-col gap-4 max-lg:gap-3', isDesktop ? 'flex-grow' : 'mt-auto')}>
               {t.raw('trusted.items').map((item: { title: string; description: string }, index: number) => (
-                <div className="flex gap-4 items-center" key={index}>
+                <div className="flex gap-4 items-center" key={index} data-aos="fade">
                   <div>
                     <CheckCircleIcon size={isTablet ? 24 : 28} />
                   </div>
-                  <div className="flex flex-col gap-2">
-                    <Typography variant={isDesktop ? 'body2' : 'caption'} weight="regular" data-aos="fade-up">
+                  <div className="flex flex-col gap-2" data-aos="fade">
+                    <Typography variant={isDesktop ? 'body2' : 'caption'} weight="regular">
                       {item.title}
                       {isDesktop && ':'}
                     </Typography>
                     {isDesktop && (
-                      <Typography variant="body2" weight="regular" className="text-[#6E6E6E]" data-aos="fade-up">
+                      <Typography variant="body2" weight="regular" className="text-[#6E6E6E]">
                         {item.description}
                       </Typography>
                     )}

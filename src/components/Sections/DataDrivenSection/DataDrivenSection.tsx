@@ -49,15 +49,18 @@ export const DataDrivenSection = () => {
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
+  useEffect(() => {
+    AOS.init()
+  }, [])
 
   return (
     <section className="bg-white p-[140px] pt-0 flex justify-center items-center gap-[180px] max-lg:px-6 max-lg:pt-20 max-lg:pb-0 max-md:flex-col max-lg:gap-10 max-md:px-4">
       {/* Left side */}
       <div className="flex flex-col gap-4 max-w-[480px]">
-        <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade-right">
+        <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade" data-aos-offset="-50">
           {t('left.title')}
         </Typography>
-        <Typography variant="body3" weight="regular" className="text-description" data-aos="fade-right">
+        <Typography variant="body3" weight="regular" className="text-description" data-aos="fade" data-aos-offset="-50">
           {t('left.description')}
         </Typography>
       </div>
@@ -112,7 +115,7 @@ export const DataDrivenSection = () => {
       ) : (
         <div
           className="flex flex-col gap-8 shrink-0 h-[500px] w-[480px] bg-secondary-300 rounded-[20px] relative overflow-hidden justify-center items-center p-[50px] pb-[28px]"
-          data-aos="fade-left">
+          data-aos="fade">
           <img
             src="/assets/data_driven/data_driven_1.png"
             alt="bg"

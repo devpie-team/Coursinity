@@ -92,10 +92,15 @@ export const TeamTrainingSection = () => {
     <section className="bg-white flex pl-[140px] py-[85px]  gap-[50px] max-[1250px]:px-6 max-lg:pb-0 max-lg:gap-5 max-md:flex-col justify-center overflow-hidden">
       <div className="flex flex-col gap-10 max-w-[700px]">
         <div className="flex flex-col gap-4 ">
-          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade-up" data-aos-offset="-50">
+          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade" data-aos-offset="-50">
             {t('title')}
           </Typography>
-          <Typography variant="body3" weight="regular" className="text-description" data-aos="fade-up">
+          <Typography
+            variant="body3"
+            weight="regular"
+            className="text-description"
+            data-aos="fade"
+            data-aos-offset="-50">
             {t('description')}
           </Typography>
         </div>
@@ -112,7 +117,7 @@ export const TeamTrainingSection = () => {
 
         <div
           className="grid grid-cols-2 grid-rows-2 gap-[20px]  max-[1200px]:flex max-[1200px]:flex-col "
-          data-aos="fade-up">
+          data-aos="fade">
           {features.map((i) => {
             const isSelected = selectedIndex === i
             return (
@@ -141,7 +146,7 @@ export const TeamTrainingSection = () => {
           })}
         </div>
 
-        <Button variant="primary" className="w-[200px] max-lg:w-[343px]" data-aos="fade-up">
+        <Button variant="primary" className="w-[200px] max-lg:w-[343px]" data-aos="fade" data-aos-offset="-50">
           {t('button')}
         </Button>
       </div>
