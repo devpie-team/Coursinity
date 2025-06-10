@@ -86,7 +86,7 @@ export const TeamTrainingSection = () => {
   }
 
   return (
-    <section className="bg-white flex pl-[140px] py-[85px]  gap-[50px] max-[1250px]:px-6 max-lg:pb-0 max-lg:gap-5 max-md:flex-col justify-center">
+    <section className="bg-white flex pl-[140px] py-[85px]  gap-[50px] max-[1250px]:px-6 max-lg:pb-0 max-lg:gap-5 max-md:flex-col justify-center overflow-hidden">
       <div className="flex flex-col gap-10 max-w-[700px]">
         <div className="flex flex-col gap-4 ">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade-up" data-aos-offset="100">
@@ -107,7 +107,9 @@ export const TeamTrainingSection = () => {
           </div>
         )}
 
-        <div className="grid grid-cols-2 grid-rows-2 gap-[20px]  max-[1200px]:flex max-[1200px]:flex-col ">
+        <div
+          className="grid grid-cols-2 grid-rows-2 gap-[20px]  max-[1200px]:flex max-[1200px]:flex-col "
+          data-aos="fade-up">
           {features.map((i) => {
             const isSelected = selectedIndex === i
             return (
@@ -116,8 +118,7 @@ export const TeamTrainingSection = () => {
                 onClick={() => handleFeatureClick(i)}
                 className={`flex px-5 py-6 gap-4 border rounded-[20px] cursor-pointer transition-all duration-500 text-black max-lg:p-4 ${
                   isSelected ? 'bg-secondary-100 border-primary-purple' : 'bg-white border-secondary-400 '
-                }`}
-                data-aos="fade-up">
+                }`}>
                 <div
                   className={`flex h-8 w-8 rounded-full text-body1 font-medium leading-[150%] justify-center items-center shrink-0 max-lg:h-6 max-lg:w-6 max-lg:text-caption transition-all duration-300 ${
                     isSelected
