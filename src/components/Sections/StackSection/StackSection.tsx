@@ -43,22 +43,21 @@ export const StackSection = () => {
       {/* Right section */}
       <div className="flex flex-col gap-[210px] max-w-[410px]  relative z-40 w-1/2 max-lg:gap-[120px] justify-center h-full order-2 max-md:order-1 max-md:justify-start max-md:items-center max-md:h-[280px] max-md:w-full max-md:max-w-full max-md:text-center">
         <div className="flex flex-col gap-8 max-lg:gap-4 w-full justify-center">
-          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade-up">
+          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade">
             {t('left.title')}
           </Typography>
-          <Typography variant={isDesktop ? 'body2' : 'body3'} weight="regular" data-aos="fade-up">
+          <Typography variant={isDesktop ? 'body2' : 'body3'} weight="regular" data-aos="fade">
             {t('left.description')}
           </Typography>
           <Button
             variant="secondary"
             className="w-[255px] mt-4 max-md:mx-auto max-lg:w-[343px] max-[400px]:w-full max-[400px]:mt-0"
-            data-aos="fade-up"
-            data-aos-offset="200">
+            data-aos="fade">
             {t('left.button')}
           </Button>
         </div>
         {!isMobile && (
-          <div data-aos="fade-up" data-aos-offset="-50">
+          <div data-aos="fade" data-aos-offset="-50">
             <Stepper
               steps={3}
               activeStep={activeIndex + 1}

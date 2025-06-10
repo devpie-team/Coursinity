@@ -34,15 +34,7 @@ export const GrowthStepSection = () => {
   }, [])
 
   useEffect(() => {
-    AOS.init({
-      once: false,
-      duration: 700,
-      offset: 100,
-      easing: 'ease-in-out',
-      delay: 0,
-      mirror: true,
-      anchorPlacement: 'center-bottom'
-    })
+    AOS.init()
   }, [])
 
   const getStepperIndex = (index: number) => index + 1

@@ -66,10 +66,10 @@ export const AiTeamSection = () => {
       <div className={cn('flex justify-center items-stretch gap-[130px] max-lg:gap-10 max-md:flex-col')}>
         {/* Left */}
         <div className="flex flex-col gap-8 flex-1 min-w-[300px] justify-center max-lg:gap-4">
-          <Typography variant="h3" weight="medium" data-aos="fade">
+          <Typography variant="h3" weight="medium" data-aos="fade" data-aos-offset="-50">
             {t('title')}
           </Typography>
-          <Typography variant="body3" weight="regular" data-aos="fade">
+          <Typography variant="body3" weight="regular" data-aos="fade" data-aos-offset="-50">
             {t('description')}
           </Typography>
           <Button
