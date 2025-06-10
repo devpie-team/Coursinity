@@ -9,6 +9,7 @@ import { RotatedCard } from './components/RotatedCard/RotatedCard'
 import { Typography } from '@/components/ui'
 import { DartIcon, LayersIcon, MoonIcon, PlanetIcon, SectorIcon, StarIcon } from '@/components/icons'
 import { SwipeStepper } from '@/components/SwipeStepper/SwipeStepper'
+import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -29,6 +30,27 @@ export const BuildSection = () => {
   const [isDesktop, setIsDesktop] = useState(true)
   const t = useTranslations('Build')
   const scrollWrapperBuildRef = useRef<HTMLDivElement>(null)
+  const { hideHeaderForSection, showHeaderForSection } = useHeaderVisibility()
+  const sectionId = useRef(Math.random()?.toString())
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          hideHeaderForSection(sectionId.current)
+        } else {
+          showHeaderForSection(sectionId.current)
+        }
+      },
+      { threshold: 0.5 }
+    )
+    if (scrollWrapperBuildRef.current) observer.observe(scrollWrapperBuildRef.current)
+    return () => {
+      if (scrollWrapperBuildRef.current) observer.unobserve(scrollWrapperBuildRef.current)
+      showHeaderForSection(sectionId.current) // На всякий случай
+    }
+  }, [])
+
   const cardRefs = useRef<Array<HTMLDivElement | null>>([])
   const [currentStep, setCurrentStep] = useState(0)
   const swiperRef = useRef<SwiperType | null>(null)
