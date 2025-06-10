@@ -246,7 +246,7 @@ export const BuildSection = () => {
 
   return (
     <section
-      className="h-[100vh] build-section flex flex-col items-center justify-center gap-12  px-10 max-w-[100vw] bg-black text-white max-lg:pt-20 max-lg:px-6 max-lg:pb-0"
+      className="h-[100vh] build-section flex flex-col items-center justify-center gap-12  px-10 max-w-[100vw] bg-black text-white max-lg:pt-20 max-lg:px-6 max-lg:pb-0 max-lg:h-auto"
       ref={scrollWrapperBuildRef}>
       <div className="flex flex-col items-center gap-4 text-center">
         <Typography variant={isDesktop ? 'h3' : 'h5'}>{t('title')}</Typography>

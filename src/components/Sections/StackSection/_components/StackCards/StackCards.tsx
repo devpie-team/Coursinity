@@ -60,7 +60,7 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
         `}
         onClick={() => setActiveIndex(0)}>
         <div className="flex flex-col gap-2 px-[18px] pt-12 text-center justify-center items-center">
-          <Typography variant="h4" weight="medium" className="opacity-65 mb-1" data-aos="fade">
+          <Typography variant="h4" weight="medium" className="opacity-65 mb-1">
             {t('steps.0.title')}
           </Typography>
           <Typography variant="h4" weight="medium" data-aos="fade">
@@ -76,6 +76,7 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
             alt="Step 1"
             className=" object-cover max-md:absolute max-md:bottom-[50px]"
             data-aos="fade-up"
+            data-aos-offset="-50"
           />
         </div>
         <img
@@ -103,10 +104,10 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
         `}
         onClick={() => setActiveIndex(1)}>
         <div className="flex flex-col gap-3 px-[18px] pt-12 text-center justify-center items-center">
-          <Typography variant="h4" weight="medium" className="opacity-65 " data-aos="fade-up">
+          <Typography variant="h4" weight="medium" className="opacity-65 ">
             {t('steps.1.title')}
           </Typography>
-          <Typography variant="h4" weight="medium">
+          <Typography variant="h4" weight="medium" data-aos="fade-up" data-aos-offset="-350">
             {t('steps.1.subtitle')}
           </Typography>
           {t('steps.1.button') && (
@@ -116,7 +117,9 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
                 h-14 rounded-full px-6 py-5 text-center mt-4
                 text-white text-caption
                 transition-all 
-              ">
+              "
+              data-aos="fade-up"
+              data-aos-offset="-350">
               {t('steps.1.button')}
             </button>
           )}
@@ -126,10 +129,15 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
             src="/assets/stack_section/stack_2.png"
             alt="Step 2"
             className=" object-cover max-md:absolute max-md:bottom-12"
+            data-aos="fade-up"
+            data-aos-offset="-650"
           />
         </div>
         {t('steps.1.badge') && (
-          <div className=" absolute flex justify-center items-center gap-[10px] bg-white h-14  rounded-full p-4 text-[#18233D] top-[460px] left-[65px] max-md:top-[420px]">
+          <div
+            className=" absolute flex justify-center items-center gap-[10px] bg-white h-14  rounded-full p-4 text-[#18233D] top-[460px] left-[65px] max-md:top-[420px]"
+            data-aos="fade"
+            data-aos-offset="-550">
             <span className="absolute w-4 h-4 bg-white rounded-full top-[40px] left-[0px]"></span>
             <span className="absolute w-2 h-2 bg-white rounded-full top-[56px] left-[-8px]"></span>
             <BadgeIcon />
@@ -151,10 +159,10 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
         `}
         onClick={() => setActiveIndex(2)}>
         <div className="flex flex-col gap-3 px-[18px] pt-12 text-center justify-center items-center">
-          <Typography variant="h4" weight="medium" className="opacity-65 " data-aos="fade-up" data-aos-offset="-50">
+          <Typography variant="h4" weight="medium" className="opacity-65 ">
             {t('steps.2.title')}
           </Typography>
-          <Typography variant="h4" weight="medium">
+          <Typography variant="h4" weight="medium" data-aos="fade-up" data-aos-offset="-550">
             {t('steps.2.subtitle')}
           </Typography>
           {t('steps.2.button') && (
@@ -164,12 +172,14 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
                 h-14 rounded-full px-6 py-5 text-center mt-4
                 text-white text-caption
                 transition-all 
-              ">
+              "
+              data-aos="fade-up"
+              data-aos-offset="-550">
               {t('steps.2.button')}
             </button>
           )}
         </div>
-        <div className="flex justify-center pb-[195px]">
+        <div className="flex justify-center pb-[120px]" data-aos="fade-up" data-aos-offset="-850">
           <img
             src="/assets/stack_section/stack_3.png"
             alt="Step 3"

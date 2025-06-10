@@ -156,7 +156,7 @@ export const InspirationSection = () => {
       <section
         ref={sectionRef}
         className="flex bg-black h-[952px] p-[140px] gap-20 max-[1300px]:p-10 items-center justify-center max-lg:gap-8 max-lg:px-6 flex-col">
-        <div 
+        <div
           className="max-w-[270px] shrink flex flex-col gap-4"
           style={{
             opacity: isVisible ? 1 : 0,
@@ -170,7 +170,7 @@ export const InspirationSection = () => {
             {t('description')}
           </Typography>
         </div>
-        <div 
+        <div
           className="flex flex-col gap-[10px] border border-white border-opacity-15 p-6 rounded-3xl min-w-[440px] max-w-[500px] flex-1 max-md:min-w-[343px] max-md:max-w-[343px]"
           style={{
             opacity: isVisible ? 1 : 0,
@@ -192,7 +192,7 @@ export const InspirationSection = () => {
             />
           ))}
         </div>
-        <div 
+        <div
           className="flex flex-col gap-6 text-center"
           style={{
             opacity: isVisible ? 1 : 0,
@@ -214,7 +214,7 @@ export const InspirationSection = () => {
     <section
       ref={sectionRef}
       className="flex bg-black h-[100vh] p-[140px] gap-20 max-[1300px]:p-10 items-center justify-center max-lg:gap-8 max-lg:px-6">
-      <div 
+      <div
         className="max-w-[270px] shrink max-[1150px]:hidden"
         style={{
           opacity: isVisible ? 1 : 0,
@@ -225,7 +225,7 @@ export const InspirationSection = () => {
           {t('title')}
         </Typography>
       </div>
-      <div 
+      <div
         className="flex flex-col gap-[10px] border border-white border-opacity-15 p-6 rounded-3xl min-w-[440px] max-w-[500px] flex-1 max-md:min-w-[343px] max-md:max-w-[343px] order-1 max-[1150px]:order-2"
         style={{
           opacity: isVisible ? 1 : 0,
@@ -247,7 +247,7 @@ export const InspirationSection = () => {
           />
         ))}
       </div>
-      <div 
+      <div
         className="flex flex-col gap-8 max-w-[270px] shrink order-2 max-[1150px]:order-1"
         style={{
           opacity: isVisible ? 1 : 0,
