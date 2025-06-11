@@ -344,5 +344,105 @@
     "button": "Book a Demo Now",
     "ar": "Ar",
     "en": "En"
+  },
+  "ContactVisual": {
+    "title": "Ready When You Are",
+    "description": "Take sneak peek on what Coursinity personalized training can really do",
+    "footer": "You'll hear from us within 24 hours. Humans only."
+  },
+  "ContactForm": {
+    "first_name": "First Name",
+    "first_name_placeholder": "What should we call you?",
+    "last_name": "Last Name",
+    "last_name_placeholder": "Your last name, please",
+    "business_email": "Business Email",
+    "business_email_placeholder": "Where can we reach you?",
+    "phone_number": "Phone Number",
+    "phone_number_placeholder": "+966",
+    "company_name": "Company Name",
+    "company_name_placeholder": "Your organization’s name",
+    "job_title": "Job Title",
+    "job_title_placeholder": "Your role or position",
+    "number_of_employees": "Number of Employees",
+    "number_of_employees_placeholder": "Size of your team",
+    "number_of_employees_options": [
+      {
+        "label": "1-10",
+        "value": "1-10"
+      },
+      {
+        "label": "11-50",
+        "value": "11-50"
+      },
+      {
+        "label": "51-100",
+        "value": "51-100"
+      },
+      {
+        "label": "101-200",
+        "value": "101-200"
+      },
+      {
+        "label": "201-500",
+        "value": "201-500"
+      },
+      {
+        "label": "501-1000",
+        "value": "501-1000"
+      },
+      {
+        "label": "+1000",
+        "value": "+1000"
+      }
+    ],
+    "areas_of_interest": "Areas of Interest",
+    "areas_of_interest_placeholder": "What you'd like to focus on",
+    "areas_of_interest_options": [
+      {
+        "label": "Launching Digital Academy",
+        "value": "Launching Digital Academy"
+      },
+      {
+        "label": "Launching Learning Journeys",
+        "value": "Launching Learning Journeys"
+      },
+      {
+        "label": "Building An LMS",
+        "value": "Building An LMS"
+      },
+      {
+        "label": "AI Transformation",
+        "value": "AI Transformation"
+      },
+      {
+        "label": "Executive Enablement",
+        "value": "Executive Enablement"
+      },
+      {
+        "label": "Compliance & Regulatory Training",
+        "value": "Compliance & Regulatory Training"
+      },
+      {
+        "label": "Multilingual Workforce Training",
+        "value": "Multilingual Workforce Training"
+      },
+      {
+        "label": "Building Customized Content",
+        "value": "Building Customized Content"
+      }
+    ],
+    "additional_info": "Additional Information",
+    "additional_info_placeholder": "Anything specific we should know?",
+    "agreement_1": "I agree to the ",
+    "agreement_terms": "Terms of Service",
+    "agreement_and": " and ",
+    "agreement_privacy": "Privacy Policy",
+    "submit": "Let's Talk"
+  },
+  "CompanyCard": {
+    "company": "Bahri company",
+    "review": "Coursinity helped us train over 4,000 employees without disrupting daily operations. The academy reflected our identity and values and the results were measurable from the first month.",
+    "author": "M. Ali",
+    "author_position": "Training Lead, Bahri"
   }
 }

@@ -76,6 +76,36 @@ a {
   z-index: -1;
 }
 
+.border-gradient {
+  position: relative;
+  border-radius: 999px;
+  z-index: 0;
+  /* Без звичайного border! */
+  /* border: none; */
+}
+
+.border-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  padding: 1px;
+  /* товщина рамки */
+  background: linear-gradient(68.38deg,
+      rgba(28, 141, 193, 0) 11%,
+      #1C8DC1 50.72%,
+      #1C8DC1 72.35%,
+      rgba(14, 67, 92, 0) 92.79%);
+  /* Маска для "порожнини" */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: 1;
+  pointer-events: none;
+}
+
 @property --myColor1 {
   syntax: '<color>';
   initial-value: rgba(0, 0, 0, 0.32);
