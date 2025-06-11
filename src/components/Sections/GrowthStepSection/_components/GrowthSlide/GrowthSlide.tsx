@@ -70,7 +70,7 @@ export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: 
   return (
     <div
       className={clsx(
-        'absolute flex flex-col rounded-2xl justify-between cursor-pointer py-10 overflow-hidden max-lg:px-[30px] max-lg:pb-[10px] max-lg:pt-6 max-lg:justify-between growth-slide',
+        'absolute flex flex-col rounded-[2%] justify-between cursor-pointer py-10 overflow-hidden max-lg:px-[30px] max-lg:pb-[10px] max-lg:pt-6 max-lg:justify-between growth-slide',
         style
       )}
       onClick={handleSlideClick}>
