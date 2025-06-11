@@ -89,18 +89,17 @@ export const TeamTrainingSection = () => {
   }
 
   return (
-    <section className="bg-white flex pl-[140px] py-[85px]  gap-[50px] max-[1250px]:px-6 max-lg:pb-0 max-lg:gap-5 max-md:flex-col justify-center overflow-hidden">
+    <section className="bg-white flex pl-[140px] py-[85px]  gap-[50px] max-[1250px]:pl-6 max-lg:pb-0 max-lg:gap-5 max-md:flex-col justify-center overflow-hidden max-md:p-4">
       <div className="flex flex-col gap-10 max-w-[700px]">
         <div className="flex flex-col gap-4 ">
-          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade" data-aos-offset="-50">
+          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos-offset={isMobile ? '-100' : '-50'}>
             {t('title')}
           </Typography>
           <Typography
             variant="body3"
             weight="regular"
             className="text-description"
-            data-aos="fade"
-            data-aos-offset="-50">
+            data-aos-offset={isMobile ? '-100' : '-50'}>
             {t('description')}
           </Typography>
         </div>
@@ -117,7 +116,7 @@ export const TeamTrainingSection = () => {
 
         <div
           className="grid grid-cols-2 grid-rows-2 gap-[20px]  max-[1200px]:flex max-[1200px]:flex-col "
-          data-aos="fade">
+          data-aos={isDesktop ? 'fade' : ''}>
           {features.map((i) => {
             const isSelected = selectedIndex === i
             return (
@@ -146,15 +145,18 @@ export const TeamTrainingSection = () => {
           })}
         </div>
 
-        <Button variant="primary" className="w-[200px] max-lg:w-[343px]" data-aos="fade" data-aos-offset="-50">
+        <button
+          className="button-gradient h-[56px] rounded-full px-6 py-5 text-center
+                text-white text-caption !bg-black
+                transition-all   w-[200px] max-lg:w-[343px]">
           {t('button')}
-        </Button>
+        </button>
       </div>
 
       <div className="flex items-start shrink-0 max-md:hidden max-lg:items-center" data-aos="fade-left">
         {selectedIndex !== null && animations[selectedIndex] && (
           <div
-            className="h-[570px] w-[570px] max-[1400px]:h-[500px] max-[1400px]:w-[510px] max-lg:w-[400px] max-lg:h-[410px] transition-opacity duration-300"
+            className="h-[570px] w-[570px] max-[1400px]:h-[500px] max-[1400px]:w-[510px] max-lg:w-[405px] max-lg:h-[410px] transition-opacity duration-300"
             style={{
               opacity: fade ? 1 : 0,
               pointerEvents: fade ? 'auto' : 'none'

@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Typography } from '@/components/ui'
 import { CheckCircleIcon } from '@/components/icons'
 import { PlayCircleIcon } from '@/components/icons/PlayCircleIcon'
@@ -13,8 +13,6 @@ type SlideData = {
   id: number
   title: string
   image: string
-  imageHeight: string
-  imageWidth: string
   imageClasses?: string
   bullets: string[]
 }
@@ -49,7 +47,22 @@ const getStyles = (position: string) => {
 
 export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: Props) => {
   const t = useTranslations('GrowthStepSection')
-  const { isMobile, isTablet, isDesktop } = useResponsiveBreakpoints()
+  const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
+  const [isDesktop, setIsDesktop] = useState(true)
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+      setIsTablet(width >= 768 && width <= 1024)
+      setIsDesktop(width > 1024)
+    }
+
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
 
   const position = useMemo(() => getRelativePosition(index, activeIndex), [index, activeIndex])
   const style = useMemo(() => getStyles(position), [position])
@@ -79,7 +92,9 @@ export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: 
           <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium" className="text-white">
             {data.title}
           </Typography>
-          <PlayCircleIcon size={isDesktop ? '40px' : '27px'} />
+          <div>
+            <PlayCircleIcon size={isDesktop ? '40px' : '27px'} />
+          </div>
         </div>
         {!isDesktop && showDetails && index === 0 && (
           <div>
@@ -99,9 +114,8 @@ export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: 
                   src={data.image}
                   alt={data.title}
                   draggable={false}
-                  loading="lazy" // Add lazy loading
+                  loading="lazy"
                   className={clsx('object-contain', data.imageClasses)}
-                  style={{ height: data.imageHeight, width: data.imageWidth }}
                 />
               </div>
             )}
@@ -128,9 +142,8 @@ export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: 
             src={data.image}
             alt={data.title}
             draggable={false}
-            loading="lazy" // Add lazy loading
+            loading="lazy"
             className={clsx('object-contain', data.imageClasses)}
-            style={{ height: data.imageHeight, width: data.imageWidth }}
           />
         )}
       </div>

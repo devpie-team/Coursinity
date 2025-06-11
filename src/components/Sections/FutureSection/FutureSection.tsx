@@ -50,7 +50,7 @@ export const FutureSection = () => {
         { selector: '.future-element2', x: 340, y: -70 },
         { selector: '.future-element3', x: 180, y: 220 },
         { selector: '.future-element4', x: -260, y: 180 },
-        { selector: '.future-element5', x: -350, y: -100 }
+        { selector: '.future-element5', x: -320, y: -100 }
       ]
     }
     // Default: Desktop

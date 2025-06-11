@@ -69,7 +69,7 @@ export const ExpandableCard = ({
   return (
     <div
       ref={setRefs}
-      className="overflow-hidden rounded-[20px] bg-[linear-gradient(180deg,_rgba(255,255,255,0.06)_0%,_rgba(30,141,194,0.06)_100%)] text-white px-6 !max-h-[170px] max-[1150px]:!max-h-[145px] max-lg:!max-h-[135px] max-md:!max-h-[200px]">
+      className="overflow-hidden rounded-[20px] bg-[linear-gradient(180deg,_rgba(255,255,255,0.06)_0%,_rgba(30,141,194,0.06)_100%)] text-white px-6 !max-h-[170px] max-[1150px]:!max-h-[145px] max-lg:!max-h-[200px] max-md:!max-h-[180px]">
       {isReallyClosed && (
         <div className="flex flex-row items-center gap-6 h-[56px] card-closed">
           <div
@@ -86,7 +86,7 @@ export const ExpandableCard = ({
       )}
 
       {!isMobile && (
-        <div className="flex flex-row items-start justify-between gap-4 p-7 pt-[13px] min-h-[100%] relative pr-20 max-ld:pr-17 max-md:pr-0">
+        <div className="flex flex-row items-start justify-between gap-4 p-7 pt-[13px] min-h-[100%] relative pr-20 max-lg:pr-14 max-md:pr-0 ">
           <div className="flex flex-col gap-4 items-start h-full">
             <Typography variant={isDesktop ? 'body1' : 'body2'} weight="medium" className="">
               {title}
@@ -108,7 +108,7 @@ export const ExpandableCard = ({
         </div>
       )}
       {isMobile && (
-        <div className="flex items-start justify-between gap-4 p-7 pt-[13px] min-h-[100%] relative pr-20 max-ld:pr-17 max-md:pr-0 flex-col">
+        <div className="flex items-start  gap-4 p-7 pt-[13px] min-h-[100%] relative pr-20 max-ld:pr-17 max-md:pr-0 flex-col ">
           <div className="flex items-center justify-between w-full h-full gap-4">
             <Typography variant={isDesktop ? 'body1' : 'body2'} weight="medium" className="">
               {title}
