@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useTranslations } from 'next-intl'
@@ -20,6 +20,22 @@ gsap.registerPlugin(ScrollTrigger)
 
 export const AiTeamSection = () => {
   const t = useTranslations('AiTeamSection')
+  const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
+  const [isDesktop, setIsDesktop] = useState(false)
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+      setIsTablet(width >= 768 && width <= 1024)
+      setIsDesktop(width > 1024)
+    }
+
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
 
   const items = [
     { icon: <UsersIcon />, translationKey: 'items.0' },
@@ -46,11 +62,11 @@ export const AiTeamSection = () => {
             scale: 1,
             y: 0,
             delay: i * 0.05,
-            duration: 0.6,
+            duration: 0.3,
             ease: 'expo.inOut',
             scrollTrigger: {
               trigger: itemRefs.current[i],
-              start: 'top 80%',
+              start: 'top 90%',
 
               toggleActions: 'play reverse play reverse'
             }
@@ -65,20 +81,20 @@ export const AiTeamSection = () => {
     <section className={cn('bg-black text-white p-[140px] max-[1200px]:px-6 max-lg:pb-20 max-lg:pt-0 max-md:px-4')}>
       <div className={cn('flex justify-center items-stretch gap-[130px] max-lg:gap-10 max-md:flex-col')}>
         {/* Left */}
-        <div className="flex flex-col gap-8 flex-1 min-w-[300px] justify-center max-lg:gap-4" data-aos="fade">
-          <Typography variant="h3" weight="medium">
+        <div className="flex flex-col gap-8 flex-1 min-w-[300px] justify-center max-lg:gap-4 max-lg:max-w-[373px]">
+          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade" data-aos-offset="-50">
             {t('title')}
           </Typography>
-          <Typography variant="body3" weight="regular">
+          <Typography variant="body3" weight="regular" data-aos="fade" data-aos-offset="-50">
             {t('description')}
           </Typography>
-          <Button variant="purple" size="md" className="mt-10 w-[190px] max-lg:w-[253px] max-md:w-full max-lg:mt-4">
+          <Button variant="purple" size="md" className="mt-10 w-[190px] max-lg:w-full max-md:w-full max-lg:mt-4">
             {t('button')}
           </Button>
         </div>
 
         {/* Right */}
-        <div className="flex flex-col gap-2 flex-1 min-w-[300px]">
+        <div className="flex flex-col gap-2 flex-1 min-w-[300px] max-w-[480px] max-lg:max-w-[373px]">
           {items.map(({ icon, translationKey }, index) => (
             <div
               key={index}

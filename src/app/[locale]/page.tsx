@@ -20,9 +20,21 @@ import { DataDrivenSection } from '@/components/Sections/DataDrivenSection'
 import { TestimonialsSection } from '@/components/Sections/TestimonialsSection'
 import { Carousel3dSection } from '@/components/Sections/Carousel3dSection'
 import { ImpactSectionNew } from '@/components/Sections/ImpactSection'
+import { useEffect } from 'react'
+import AOS from 'aos'
 
 export default function HomePage() {
   const t = useTranslations('HomePage')
+  useEffect(() => {
+    AOS.init({
+      once: false,
+      duration: 700,
+      offset: 100,
+      easing: 'ease-in-out',
+
+      mirror: true
+    })
+  }, [])
   return (
     <>
       <Header />
@@ -31,7 +43,7 @@ export default function HomePage() {
       <StackSection />
       <GrowthStepSection />
       <AiTeamSection />
-      <Carousel3dSection />
+      {/* <Carousel3dSection /> */}
       <InspirationSection />
       <BuildSection />
       <ImpactSectionNew />

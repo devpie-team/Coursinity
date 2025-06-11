@@ -152,12 +152,9 @@ export const HeroSection = () => {
             </Typography>
           </div>
 
-          <button
-            className="button-gradient h-[56px] rounded-full px-6 py-5 text-center
-                text-white text-caption !bg-black
-                transition-all  max-[1440px]:max-w-[425px] max-[1440px]:w-full ">
+          <Button variant="purple" className="max-[1440px]:max-w-[425px] max-[1440px]:w-full max-lg:h-16">
             {t('bookDemo')}
-          </button>
+          </Button>
         </div>
       </div>
 

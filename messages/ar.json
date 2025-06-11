@@ -346,5 +346,105 @@
     "button": "احجز عرض توضيحي",
     "ar": "في",
     "en": "عربي"
+  },
+  "ContactVisual": {
+    "title": "جاهز عندما تكون مستعدًا",
+    "description": "احصل على لمحة سريعة عما يمكن أن تفعله تدريبات كورسينيتي المخصصة حقًا",
+    "footer": "ستسمع منا خلال 24 ساعة. فقط البشر."
+  },
+  "ContactForm": {
+    "first_name": "الاسم الأول",
+    "first_name_placeholder": "كيف يجب أن نناديك؟",
+    "last_name": "اسم العائلة",
+    "last_name_placeholder": "اسم عائلتك، من فضلك",
+    "business_email": "البريد الإلكتروني التجاري",
+    "business_email_placeholder": "أين يمكننا الوصول إليك؟",
+    "phone_number": "رقم الهاتف",
+    "phone_number_placeholder": "+966",
+    "company_name": "اسم الشركة",
+    "company_name_placeholder": "اسم مؤسستك",
+    "job_title": "المسمى الوظيفي",
+    "job_title_placeholder": "دورك أو منصبك",
+    "number_of_employees": "عدد الموظفين",
+    "number_of_employees_placeholder": "حجم فريقك",
+    "number_of_employees_options": [
+      {
+        "label": "1-10",
+        "value": "1-10"
+      },
+      {
+        "label": "11-50",
+        "value": "11-50"
+      },
+      {
+        "label": "51-100",
+        "value": "51-100"
+      },
+      {
+        "label": "101-200",
+        "value": "101-200"
+      },
+      {
+        "label": "201-500",
+        "value": "201-500"
+      },
+      {
+        "label": "501-1000",
+        "value": "501-1000"
+      },
+      {
+        "label": "+1000",
+        "value": "+1000"
+      }
+    ],
+    "areas_of_interest": "مجالات الاهتمام",
+    "areas_of_interest_placeholder": "ما الذي تود التركيز عليه",
+    "areas_of_interest_options": [
+      {
+        "label": "إطلاق الأكاديمية الرقمية",
+        "value": "Launching Digital Academy"
+      },
+      {
+        "label": "إطلاق مسارات التعلم",
+        "value": "Launching Learning Journeys"
+      },
+      {
+        "label": "بناء نظام إدارة التعلم",
+        "value": "Building An LMS"
+      },
+      {
+        "label": "التحول بالذكاء الاصطناعي",
+        "value": "AI Transformation"
+      },
+      {
+        "label": "تمكين القيادات التنفيذية",
+        "value": "Executive Enablement"
+      },
+      {
+        "label": "تدريب الامتثال والتنظيم",
+        "value": "Compliance & Regulatory Training"
+      },
+      {
+        "label": "تدريب القوى العاملة متعددة اللغات",
+        "value": "Multilingual Workforce Training"
+      },
+      {
+        "label": "بناء محتوى مخصص",
+        "value": "Building Customized Content"
+      }
+    ],
+    "additional_info": "معلومات إضافية",
+    "additional_info_placeholder": "هل هناك شيء محدد يجب أن نعرفه؟",
+    "agreement_1": "أوافق على ",
+    "agreement_terms": "شروط الخدمة",
+    "agreement_and": " و",
+    "agreement_privacy": "سياسة الخصوصية",
+    "submit": "دعنا نتحدث"
+  },
+  "CompanyCard": {
+    "company": "شركة البحري",
+    "review": "ساعدتنا كورسينيتي في تدريب أكثر من 4000 موظف دون تعطيل العمليات اليومية. كانت الأكاديمية تعكس هويتنا وقيمنا وكانت النتائج قابلة للقياس منذ الشهر الأول.",
+    "author": "م. علي",
+    "author_position": "رئيس التدريب، البحري"
   }
 }

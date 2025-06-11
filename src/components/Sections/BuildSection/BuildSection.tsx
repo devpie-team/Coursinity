@@ -10,6 +10,8 @@ import { Typography } from '@/components/ui'
 import { DartIcon, LayersIcon, MoonIcon, PlanetIcon, SectorIcon, StarIcon } from '@/components/icons'
 import { SwipeStepper } from '@/components/SwipeStepper/SwipeStepper'
 import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -67,6 +69,9 @@ export const BuildSection = () => {
     checkScreenSize()
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+  useEffect(() => {
+    AOS.init()
   }, [])
 
   useEffect(() => {
@@ -178,7 +183,9 @@ export const BuildSection = () => {
           className="w-full tablet-swiper"
           allowTouchMove={true}
           onSwiper={(swiper) => (swiperRef.current = swiper)}
-          onSlideChange={handleSlideChange}>
+          onSlideChange={handleSlideChange}
+          data-aos="fade"
+          data-aos-offset="-50">
           {pairs.map((pair, pairIndex) => (
             <SwiperSlide key={pairIndex} className="!flex !flex-row !justify-center !gap-[40px] w-full">
               {pair.map((card, idx) => (
@@ -207,7 +214,9 @@ export const BuildSection = () => {
           className="w-full mobile-swiper"
           allowTouchMove={true}
           onSwiper={(swiper) => (swiperRef.current = swiper)}
-          onSlideChange={handleSlideChange}>
+          onSlideChange={handleSlideChange}
+          data-aos="fade"
+          data-aos-offset="-50">
           {CARDS.map((card, idx) => (
             <SwiperSlide key={idx} className="!flex !justify-center">
               <RotatedCard
@@ -247,7 +256,7 @@ export const BuildSection = () => {
 
   return (
     <section
-      className="h-[100vh] build-section flex flex-col items-center justify-center gap-12  px-10 max-w-[100vw] bg-black text-white max-lg:pt-20 max-lg:px-6 max-lg:pb-0"
+      className="h-[100vh] build-section flex flex-col items-center justify-center gap-12  px-10 max-w-[100vw] bg-black text-white max-lg:pt-0 max-lg:px-6 max-lg:pb-0  max-lg:h-auto max-md:pt-20 max-md:px-4"
       ref={scrollWrapperBuildRef}>
       <div className="flex flex-col items-center gap-4 text-center">
         <Typography variant={isDesktop ? 'h3' : 'h5'}>{t('title')}</Typography>

@@ -81,7 +81,7 @@ export const InspirationSection = () => {
   }, [])
 
   const CLOSED_HEIGHT = 56
-  const open_height = 180
+  const open_height = 200
   const iconSize = isDesktop ? '32px' : '24px'
 
   function setOpenOnly(idx: number) {
@@ -155,14 +155,8 @@ export const InspirationSection = () => {
     return (
       <section
         ref={sectionRef}
-        className="flex bg-black h-[952px] p-[140px] gap-20 max-[1300px]:p-10 items-center justify-center max-lg:gap-8 max-lg:px-6 flex-col">
-        <div 
-          className="max-w-[270px] shrink flex flex-col gap-4"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
-            transitionDelay: isVisible ? '0ms' : '0ms'
-          }}>
+        className="flex bg-black h-[952px] p-[140px] gap-20 max-[1300px]:p-10 items-center justify-center max-lg:gap-8 max-lg:px-6 flex-col ">
+        <div className="max-w-[270px] shrink flex flex-col gap-4">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
             {t('title')}
           </Typography>
@@ -170,13 +164,7 @@ export const InspirationSection = () => {
             {t('description')}
           </Typography>
         </div>
-        <div 
-          className="flex flex-col gap-[10px] border border-white border-opacity-15 p-6 rounded-3xl min-w-[440px] max-w-[500px] flex-1 max-md:min-w-[343px] max-md:max-w-[343px]"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
-            transitionDelay: isVisible ? '200ms' : '0ms'
-          }}>
+        <div className="flex flex-col gap-[10px] border border-white border-opacity-15 p-6 rounded-3xl min-w-[440px] max-w-[500px] flex-1 max-md:min-w-[343px] max-md:max-w-[343px]">
           {benefits.map((item, idx) => (
             <ExpandableCard
               key={t(`benefits.${idx}.title`)}
@@ -192,13 +180,7 @@ export const InspirationSection = () => {
             />
           ))}
         </div>
-        <div 
-          className="flex flex-col gap-6 text-center"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
-            transitionDelay: isVisible ? '400ms' : '0ms'
-          }}>
+        <div className="flex flex-col gap-6 text-center">
           <Typography variant="body3" weight="medium" className="text-white">
             {t('successMetric')}
           </Typography>
@@ -213,25 +195,33 @@ export const InspirationSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="flex bg-black h-[100vh] p-[140px] gap-20 max-[1300px]:p-10 items-center justify-center max-lg:gap-8 max-lg:px-6">
-      <div 
+      className="flex bg-black h-[100vh] p-[140px] gap-20 max-[1300px]:p-10 items-center justify-center max-lg:gap-8 max-lg:px-6 max-md:px-4">
+      <div
         className="max-w-[270px] shrink max-[1150px]:hidden"
-        style={{
-          opacity: isVisible ? 1 : 0,
-          transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
-          transitionDelay: isVisible ? '0ms' : '0ms'
-        }}>
+        style={
+          isDesktop
+            ? {
+                opacity: isVisible ? 1 : 0,
+                transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+                transitionDelay: isVisible ? '0ms' : '0ms'
+              }
+            : {}
+        }>
         <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
           {t('title')}
         </Typography>
       </div>
-      <div 
-        className="flex flex-col gap-[10px] border border-white border-opacity-15 p-6 rounded-3xl min-w-[440px] max-w-[500px] flex-1 max-md:min-w-[343px] max-md:max-w-[343px] order-1 max-[1150px]:order-2"
-        style={{
-          opacity: isVisible ? 1 : 0,
-          transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
-          transitionDelay: isVisible ? '200ms' : '0ms'
-        }}>
+      <div
+        className="flex flex-col gap-[10px] border border-white border-opacity-15 p-6 rounded-3xl min-w-[440px] max-w-[500px] flex-1 max-md:min-w-[343px] max-md:max-w-[343px] order-1 max-[1150px]:order-2 max-lg:max-w-[343px] max-lg:min-w-[343px]"
+        style={
+          isDesktop
+            ? {
+                opacity: isVisible ? 1 : 0,
+                transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+                transitionDelay: isVisible ? '200ms' : '0ms'
+              }
+            : {}
+        }>
         {benefits.map((item, idx) => (
           <ExpandableCard
             key={t(`benefits.${idx}.title`)}
@@ -247,14 +237,18 @@ export const InspirationSection = () => {
           />
         ))}
       </div>
-      <div 
-        className="flex flex-col gap-8 max-w-[270px] shrink order-2 max-[1150px]:order-1"
-        style={{
-          opacity: isVisible ? 1 : 0,
-          transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
-          transitionDelay: isVisible ? '400ms' : '0ms'
-        }}>
-        <div className="max-w-[270px] shrink min-[1150px]:hidden ">
+      <div
+        className="flex flex-col gap-8 max-w-[270px] shrink order-2 max-[1150px]:order-1 max-lg:max-w-full w-full"
+        style={
+          isDesktop
+            ? {
+                opacity: isVisible ? 1 : 0,
+                transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+                transitionDelay: isVisible ? '400ms' : '0ms'
+              }
+            : {}
+        }>
+        <div className=" shrink min-[1150px]:hidden ">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
             {t('title')}
           </Typography>
@@ -265,7 +259,9 @@ export const InspirationSection = () => {
         <Typography variant="body3" weight="medium" className="text-white">
           {t('successMetric')}
         </Typography>
-        <Button variant="purple">{t('learnMore')}</Button>
+        <Button variant="purple" className="max-lg:w-[253px] max-md:w-full">
+          {t('learnMore')}
+        </Button>
       </div>
     </section>
   )
