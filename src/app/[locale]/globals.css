@@ -44,18 +44,12 @@ a {
   box-shadow: inset 0px 4px 4px #eeeeee52, 0px 20px 40px -10px #1e8dc299, 0px 60px 160px #1e8dc299;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(20px);
-  will-change: transform, opacity;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
 }
 
 .custom-shadow-secondary {
   box-shadow: inset 0px 2.82px 2.82px #eeeeee52, 0px 14.11px 28.22px -7.05px #1e8dc299, 0px 42.33px 112.88px #1e8dc299;
   backdrop-filter: blur(14.11px);
   -webkit-backdrop-filter: blur(14.11px);
-  will-change: transform, opacity;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
 }
 
 .blue-gradient-border {
@@ -236,30 +230,6 @@ a {
   pointer-events: none;
   opacity: 0.2;
   color: rgba(255, 255, 255, 0.9);
-}
-
-/* Performance optimizations for Growth Step Section */
-[data-aos] {
-  will-change: transform, opacity;
-}
-
-.growth-slide {
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  -webkit-perspective: 1000;
-}
-
-/* Optimize custom gradient background */
-.bg-custom-gradient {
-  will-change: transform, opacity;
-  transform-style: preserve-3d;
-}
-
-/* Hardware acceleration for heavy animations */
-@media (prefers-reduced-motion: no-preference) {
-  .growth-slide {
-    transform: translateZ(0);
-  }
 }
 
 @layer base {

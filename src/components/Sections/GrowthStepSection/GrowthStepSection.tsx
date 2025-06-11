@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useMemo, useCallback } from 'react'
+import { useEffect, useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
 import { Typography } from '@/components/ui'
 import { Button } from '@/components/primitives/button'
@@ -8,89 +8,87 @@ import Stepper from '@/components/Stepper'
 import { GrowthSlide } from './_components/GrowthSlide'
 import { SwipeStepper } from '@/components/SwipeStepper/SwipeStepper'
 import { useTranslations } from 'next-intl'
-import { useResponsiveBreakpoints } from '@/hooks/useResponsiveBreakpoints'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 export const GrowthStepSection = () => {
   const t = useTranslations('GrowthStepSection')
-  const { isMobile, isTablet, isDesktop } = useResponsiveBreakpoints()
 
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
+  const [isDesktop, setIsDesktop] = useState(true)
   const [detailsShownFor, setDetailsShownFor] = useState<Set<number>>(new Set())
 
-  // Initialize AOS only once
   useEffect(() => {
-    const initAOS = async () => {
-      const AOS = (await import('aos')).default
-      AOS.init({
-        once: true, // Only animate once
-        duration: 600, // Reduce duration
-        easing: 'ease-out-cubic'
-      })
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+      setIsTablet(width >= 768 && width <= 1024)
+      setIsDesktop(width > 1024)
     }
-    initAOS()
+
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
 
-  const getStepperIndex = useCallback((index: number) => index + 1, [])
+  useEffect(() => {
+    AOS.init()
+  }, [])
 
-  const slideImages = useMemo(
-    () => [
-      {
-        image: '/assets/growth/growth_1.png',
-        imageHeight: '100%',
-        imageWidth: '100%',
-        imageClasses: 'absolute top-0 max-lg:top-[60px] max-lg:scale-[1.4]'
-      },
-      {
-        image: '/assets/growth/growth_2.png',
-        imageHeight: '300px',
-        imageWidth: '300px'
-      },
-      {
-        image: '/assets/growth/growth_3.png',
-        imageHeight: '270px',
-        imageWidth: '500px',
-        imageClasses: '-translate-x-[20px] translate-y-[30px]'
-      }
-    ],
-    []
-  )
+  const getStepperIndex = (index: number) => index + 1
 
-  const mergedSlides = useMemo(() => {
-    const rawSlides = t.raw('slides')
-    const slides = Array.isArray(rawSlides) ? rawSlides : []
-
-    return slides.map((slide, index) => ({
-      id: slide.id,
-      title: slide.title,
-      bullets: slide.items,
-      ...slideImages[index]
-    }))
-  }, [t, slideImages])
-
-  const handleClick = useCallback(
-    (index: number, position: 'left' | 'right' | 'center') => {
-      if (!isDesktop && position === 'center') {
-        setDetailsShownFor((prev) => {
-          const next = new Set(prev)
-          next.add(index)
-          return next
-        })
-      } else if (position === 'left') {
-        setActiveIndex((prev) => (prev + 2) % 3)
-      } else if (position === 'right') {
-        setActiveIndex((prev) => (prev + 1) % 3)
-      }
+  const slideImages = [
+    {
+      image: '/assets/growth/growth_1.png',
+      imageHeight: '100%',
+      imageWidth: '100%',
+      imageClasses: 'absolute top-0 max-lg:top-[60px] max-lg:scale-[1.4]'
     },
-    [isDesktop]
-  )
+    {
+      image: '/assets/growth/growth_2.png',
+      imageHeight: '300px',
+      imageWidth: '300px'
+    },
+    {
+      image: '/assets/growth/growth_3.png',
+      imageHeight: '270px',
+      imageWidth: '500px',
+      imageClasses: '-translate-x-[20px] translate-y-[30px]'
+    }
+  ]
+
+  const rawSlides = t.raw('slides')
+  const slides = Array.isArray(rawSlides) ? rawSlides : []
+
+  const mergedSlides = slides.map((slide, index) => ({
+    id: slide.id,
+    title: slide.title,
+    bullets: slide.items,
+    ...slideImages[index]
+  }))
+
+  const handleClick = (index: number, position: 'left' | 'right' | 'center') => {
+    if (!isDesktop && position === 'center') {
+      setDetailsShownFor((prev) => {
+        const next = new Set(prev)
+        next.add(index)
+        return next
+      })
+    } else if (position === 'left') {
+      setActiveIndex((prev) => (prev + 2) % 3)
+    } else if (position === 'right') {
+      setActiveIndex((prev) => (prev + 1) % 3)
+    }
+  }
 
   const swipeHandlers = useSwipeable({
     onSwipedRight: () => setActiveIndex((prev) => (prev + 2) % 3),
     onSwipedLeft: () => setActiveIndex((prev) => (prev + 1) % 3),
     preventScrollOnSwipe: true,
     trackTouch: true,
-    trackMouse: false, // Disable mouse tracking for better performance
-    touchEventOptions: { passive: false }
+    trackMouse: true
   })
 
   return (
@@ -123,16 +121,16 @@ export const GrowthStepSection = () => {
 
       {isDesktop ? (
         <div
-          className="flex flex-col gap-[40px] pb-[140px] px-[140px] w-full items-center"
+          className="flex flex-col gap-[40px] pb-[140px] px-[140px] w-full items-center "
           data-aos="fade"
           data-aos-offset="-80">
           <Typography variant="h6" weight="regular" className="text-white">
             {t('common.subtitle')}
           </Typography>
-          <Button variant="secondary" className="w-[190px]">
+          <Button variant="secondary" className="w-[190px]" data-aos="fade" data-aos-offset="-80">
             {t('common.cta')}
           </Button>
-          <div className="absolute bottom-[140px] right-[140px]">
+          <div className="absolute bottom-[140px] right-[140px]" data-aos="fade" data-aos-offset="-80">
             <Stepper
               steps={3}
               activeStep={getStepperIndex(activeIndex)}
