@@ -42,40 +42,57 @@ export const FeaturesSection = () => {
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
+  useEffect(() => {
+    AOS.init()
+  }, [])
+
   return (
-    <section className="bg-white px-[140px] pb-[140px] max-lg:px-6 max-lg:pt-20 max-lg:pb-0 max-[1400px]:px-[100px] max-[1250px]:px-[50px] max-md:px-4">
+    <section className="bg-white px-[140px] pb-[140px] max-lg:px-6 max-lg:pt-20 max-lg:pb-0 max-[1400px]:px-[100px] max-[1250px]:px-[50px] max-md:px-4 ">
       <div
         className={cn(
           isTablet || isMobile
-            ? 'flex gap-8 max-md:flex-col'
+            ? 'flex gap-4 max-md:flex-col '
             : 'flex p-8 rounded-[20px] gap-8 bg-[linear-gradient(180deg,_rgba(255,255,255,0.16)_0%,_rgba(30,141,194,0.16)_100%)] '
         )}>
         {/* Left Block */}
         <div
           className="flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6"
-          data-aos="fade-up">
+          data-aos={!isMobile ? 'fade' : ''}
+          data-aos-offset={'-100'}>
           <div className={cn(isDesktop ? 'mb-6' : 'mb-2')}>
-            <DiplomaIcon size={isTablet ? 40 : 64} />
+            <DiplomaIcon size={!isDesktop ? 40 : 64} />
           </div>
 
-          <div className="flex flex-col flex-grow gap-8 max-lg:gap-6" data-aos="fade">
+          <div className="flex flex-col flex-grow gap-8 max-lg:gap-6" data-aos-offset="-50">
             <div className={cn('flex flex-col gap-4', !isDesktop && 'flex-grow')}>
-              <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium">
+              <Typography
+                variant={isDesktop ? 'h4' : 'body1'}
+                weight="medium"
+                data-aos="fade"
+                data-aos-offset={isMobile ? '-450' : '-100'}>
                 {t('certified.title')}
               </Typography>
-              <Typography variant="button" weight="regular" className="text-[#6E6E6E]">
+              <Typography
+                variant="button"
+                weight="regular"
+                className="text-[#6E6E6E]"
+                data-aos="fade"
+                data-aos-offset={isMobile ? '-450' : '-100'}>
                 {t('certified.subtitle')}
               </Typography>
             </div>
 
             {!isDesktop && <div className="border-t" />}
 
-            <div className="flex flex-grow flex-col gap-4 max-lg:gap-3 max-lg:flex-none">
+            <div
+              className="flex flex-grow flex-col gap-4 max-lg:gap-3 max-lg:flex-none"
+              data-aos="fade"
+              data-aos-offset={isMobile ? '-450' : '-50'}>
               {t.raw('certified.items').map((item: string, index: number) => {
                 const limitedText = !isDesktop ? item.split(' ').slice(0, 2).join(' ') : item
 
                 return (
-                  <div className="flex gap-4 items-center" key={index} data-aos="fade">
+                  <div className="flex gap-4 items-center" key={index}>
                     <div>
                       <CheckCircleIcon size={isTablet ? 24 : 28} />
                     </div>
@@ -87,7 +104,8 @@ export const FeaturesSection = () => {
               })}
               <div
                 className="grid grid-cols-2 grid-rows-2 place-items-center mt-auto gap-[10px] max-lg:mt-0 max-lg:pt-3"
-                data-aos="fade">
+                data-aos="fade"
+                data-aos-offset={isMobile ? '-400' : '-200'}>
                 {certificationsLeft.map(({ src, alt }, i) => (
                   <div
                     key={i}
@@ -103,13 +121,17 @@ export const FeaturesSection = () => {
         {/* Right Block */}
         <div
           className="flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6"
-          data-aos="fade-up">
+          data-aos={!isMobile ? 'fade' : ''}
+          data-aos-offset={'-100'}>
           <div className="mb-6 max-lg:mb-2">
-            <DealIcon width={isTablet ? 40 : 64} height={isTablet ? 40 : 64} />
+            <DealIcon width={!isDesktop ? 40 : 64} height={isTablet ? 40 : 64} />
           </div>
 
           <div className="flex flex-col flex-grow gap-8 max-lg:gap-6">
-            <div className="flex flex-col gap-4 max-lg:flex-grow" data-aos="fade">
+            <div
+              className="flex flex-col gap-4 max-lg:flex-grow"
+              data-aos="fade"
+              data-aos-offset={isMobile ? '-450' : '-50'}>
               <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium">
                 {t('trusted.title')}
               </Typography>
@@ -120,13 +142,16 @@ export const FeaturesSection = () => {
 
             {!isDesktop && <div className="border-t" />}
 
-            <div className={cn('flex flex-col gap-4 max-lg:gap-3', isDesktop ? 'flex-grow' : 'mt-auto')}>
+            <div
+              className={cn('flex flex-col gap-4 max-lg:gap-3', isDesktop ? 'flex-grow' : 'mt-auto')}
+              data-aos="fade"
+              data-aos-offset={isMobile ? '-450' : '-50'}>
               {t.raw('trusted.items').map((item: { title: string; description: string }, index: number) => (
-                <div className="flex gap-4 items-center" key={index} data-aos="fade">
+                <div className="flex gap-4 items-center" key={index}>
                   <div>
                     <CheckCircleIcon size={isTablet ? 24 : 28} />
                   </div>
-                  <div className="flex flex-col gap-2" data-aos="fade">
+                  <div className="flex flex-col gap-2">
                     <Typography variant={isDesktop ? 'body2' : 'caption'} weight="regular">
                       {item.title}
                       {isDesktop && ':'}
@@ -142,7 +167,8 @@ export const FeaturesSection = () => {
 
               <div
                 className={cn('grid grid-cols-2 grid-rows-2 place-items-center  gap-[10px]  ', !isDesktop && 'pt-3')}
-                data-aos="fade">
+                data-aos="fade"
+                data-aos-offset={isMobile ? '-450' : '-200'}>
                 {certificationsRight.map(({ src, alt }, i) => (
                   <div
                     key={i}

@@ -42,20 +42,15 @@ export const GrowthStepSection = () => {
   const slideImages = [
     {
       image: '/assets/growth/growth_1.png',
-      imageHeight: '100%',
-      imageWidth: '100%',
-      imageClasses: 'absolute top-0 max-lg:top-[60px] max-lg:scale-[1.4]'
+      imageClasses: 'absolute top-0 max-lg:top-[60px] max-lg:scale-[1.4] w-[100%] h-[100%]'
     },
     {
       image: '/assets/growth/growth_2.png',
-      imageHeight: '300px',
-      imageWidth: '300px'
+      imageClasses: ' h-[300px] w-[300px] max-lg:h-[250px] max-md:h-[220px]'
     },
     {
       image: '/assets/growth/growth_3.png',
-      imageHeight: '270px',
-      imageWidth: '500px',
-      imageClasses: '-translate-x-[20px] translate-y-[30px]'
+      imageClasses: '-translate-x-[20px] translate-y-[30px] h-[270px] w-[500px] max-lg:h-[220px]'
     }
   ]
 
@@ -96,8 +91,9 @@ export const GrowthStepSection = () => {
       className="relative flex flex-col bg-black h-[1240px] max-lg:h-[730px] overflow-hidden items-center justify-between"
       {...(!isDesktop ? swipeHandlers : {})}>
       <div
-        className="flex flex-col gap-4 text-center pb-14 pt-[140px] max-lg:pt-20 max-md:px-4"
-        data-aos="zoom-in-down">
+        className="flex flex-col gap-4 text-center pb-10 pt-[140px] max-lg:pt-20 max-md:px-4"
+        data-aos="fade"
+        data-aos-offset={isMobile ? '-10' : ''}>
         <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
           {t('common.sectionTitle')}
         </Typography>
