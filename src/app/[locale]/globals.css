@@ -44,11 +44,18 @@ a {
   box-shadow: inset 0px 4px 4px #eeeeee52, 0px 20px 40px -10px #1e8dc299, 0px 60px 160px #1e8dc299;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(20px);
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
+
 .custom-shadow-secondary {
   box-shadow: inset 0px 2.82px 2.82px #eeeeee52, 0px 14.11px 28.22px -7.05px #1e8dc299, 0px 42.33px 112.88px #1e8dc299;
   backdrop-filter: blur(14.11px);
   -webkit-backdrop-filter: blur(14.11px);
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .blue-gradient-border {
@@ -63,13 +70,11 @@ a {
   inset: 0;
   padding: 2px;
   border-radius: 20px;
-  background: linear-gradient(
-    68.38deg,
-    rgba(28, 141, 193, 0) 0%,
-    rgba(28, 141, 193, 1) 49%,
-    rgba(28, 141, 193, 1) 75%,
-    rgba(14, 67, 92, 0) 100%
-  );
+  background: linear-gradient(68.38deg,
+      rgba(28, 141, 193, 0) 0%,
+      rgba(28, 141, 193, 1) 49%,
+      rgba(28, 141, 193, 1) 75%,
+      rgba(14, 67, 92, 0) 100%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -137,6 +142,7 @@ a {
   --myColor1: #A084E8;
   --myColor2: #A084E8;
 }
+
 @property --from {
   syntax: '<color>';
   initial-value: #000;
@@ -232,6 +238,30 @@ a {
   color: rgba(255, 255, 255, 0.9);
 }
 
+/* Performance optimizations for Growth Step Section */
+[data-aos] {
+  will-change: transform, opacity;
+}
+
+.growth-slide {
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+}
+
+/* Optimize custom gradient background */
+.bg-custom-gradient {
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+}
+
+/* Hardware acceleration for heavy animations */
+@media (prefers-reduced-motion: no-preference) {
+  .growth-slide {
+    transform: translateZ(0);
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -260,6 +290,7 @@ a {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
