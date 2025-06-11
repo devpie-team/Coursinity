@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Swiper as SwiperType } from 'swiper'
 import 'swiper/css'
@@ -29,6 +29,7 @@ export const BuildSection = () => {
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
   const t = useTranslations('Build')
+  const locale = useLocale()
   const scrollWrapperBuildRef = useRef<HTMLDivElement>(null)
   const { hideHeaderForSection, showHeaderForSection } = useHeaderVisibility()
   const sectionId = useRef(Math.random()?.toString())
@@ -135,7 +136,7 @@ export const BuildSection = () => {
       scrub: 1,
       onUpdate: updateStep,
       animation: gsap.to(sections, {
-        xPercent: -310,
+        xPercent: 310,
         ease: 'none'
       })
     })
