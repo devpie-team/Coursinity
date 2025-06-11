@@ -175,11 +175,11 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
             </button>
           )}
         </div>
-        <div className="flex justify-center pb-[120px]" data-aos="fade-up" data-aos-offset="-850">
+        <div className="flex justify-center pb-[20px]" data-aos="fade-up" data-aos-offset="-850">
           <img
             src="/assets/stack_section/stack_3.png"
             alt="Step 3"
-            className=" object-cover max-md:absolute max-md:bottom-[220px]"
+            className=" object-cover max-md:absolute max-md:bottom-[120px]"
           />
         </div>
       </div>
