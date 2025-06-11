@@ -50,19 +50,22 @@ const getStyles = (position: string) => {
 export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: Props) => {
   const t = useTranslations('GrowthStepSection')
   const { isMobile, isTablet, isDesktop } = useResponsiveBreakpoints()
-  
+
   const position = useMemo(() => getRelativePosition(index, activeIndex), [index, activeIndex])
   const style = useMemo(() => getStyles(position), [position])
   const shouldShowText = useMemo(() => isDesktop || showDetails, [isDesktop, showDetails])
 
-  const handleSlideClick = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation()
-    if (!isDesktop && position === 'center' && !showDetails) {
-      onClick(index, position) // тригер глобального setDetailsShownFor
-    } else {
-      onClick(index, position) // переключення між слайдами
-    }
-  }, [isDesktop, position, showDetails, onClick, index])
+  const handleSlideClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation()
+      if (!isDesktop && position === 'center' && !showDetails) {
+        onClick(index, position) // тригер глобального setDetailsShownFor
+      } else {
+        onClick(index, position) // переключення між слайдами
+      }
+    },
+    [isDesktop, position, showDetails, onClick, index]
+  )
 
   return (
     <div
@@ -71,7 +74,6 @@ export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: 
         style
       )}
       onClick={handleSlideClick}>
-      
       <div className={cn(!isDesktop && showDetails && 'flex flex-col gap-4')}>
         <div className="flex gap-5 items-center justify-center max-lg:gap-2">
           <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium" className="text-white">
