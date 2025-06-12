@@ -33,9 +33,9 @@ export function Slide3D({ text, position, rotation, scale = 1, opacity = 1 }: Sl
 
   // Create rounded rectangle shape
   const roundedRectShape = new THREE.Shape()
-  const width = 0.9
-  const height = 0.6
-  const radius = 0.1
+  const width = 0.6
+  const height = 0.4
+  const radius = 0.05
 
   roundedRectShape.moveTo(-width / 2 + radius, -height / 2)
   roundedRectShape.lineTo(width / 2 - radius, -height / 2)
@@ -51,9 +51,9 @@ export function Slide3D({ text, position, rotation, scale = 1, opacity = 1 }: Sl
     steps: 1,
     depth: 0.01,
     bevelEnabled: true,
-    bevelThickness: 0.02,
-    bevelSize: 0,
-    bevelSegments: 5
+    bevelThickness: 0.01,
+    bevelSize: 0.0001,
+    bevelSegments: 0.5
   }
 
   return (
@@ -70,8 +70,8 @@ export function Slide3D({ text, position, rotation, scale = 1, opacity = 1 }: Sl
       </mesh>
 
       <Text
-        position={[0, 0, 0.02]}
-        fontSize={0.07}
+        position={[0, 0, 0.01]}
+        fontSize={0.04}
         color="#FFFFFF"
         anchorX="center"
         anchorY="middle"
