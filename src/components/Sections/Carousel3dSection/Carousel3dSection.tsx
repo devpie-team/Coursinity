@@ -4,48 +4,31 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { MyModel } from './_components/Model/Model'
 import { Slide3D } from './_components/Slide3D/Slide3d'
+import { ParticlePlane } from './_components/ParticlePlane/ParticlePlane'
 import * as THREE from 'three'
-import { Float, Environment } from '@react-three/drei'
+import { Float, Environment, OrbitControls } from '@react-three/drei'
+import { EffectComposer, ChromaticAberration, Bloom, DepthOfField, Vignette, Noise } from '@react-three/postprocessing'
+import { BlendFunction } from 'postprocessing'
+import { LightingSetup } from './_components/LightingSetup/LightingSetup'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const slidesData = [
-  { text: 'AI-powered LMS', colors: ['#0D0D0D', '#1C8DC1', '#A578F2'] },
-  { text: 'Metaverse & VR scenarios', colors: ['#0D0D0D', '#1E8DC2', '#A578F2'] },
-  { text: 'AI-powered LMS', colors: ['#0D0D0D', '#64B5E6', '#A578F2'] },
-  { text: 'Metaverse & VR scenarios', colors: ['#0D0D0D', '#4BA3D8', '#A578F2'] },
-  { text: 'AI-powered LMS', colors: ['#0D0D0D', '#1E8DC2', '#A578F2'] },
-  { text: 'Metaverse & VR scenarios', colors: ['#0D0D0D', '#64B5E6', '#A578F2'] },
-  { text: 'AI-powered LMS', colors: ['#0D0D0D', '#4BA3D8', '#A578F2'] },
-  { text: 'Metaverse & VR scenarios', colors: ['#0D0D0D', '#1C8DC1', '#A578F2'] }
+  { text: 'AI Transformation', colors: ['#0D0D0D', '#1C8DC1', '#A578F2'] },
+  { text: 'Immersive VR Labs', colors: ['#0D0D0D', '#1E8DC2', '#A578F2'] },
+  { text: 'Tailored Journeys', colors: ['#0D0D0D', '#64B5E6', '#A578F2'] },
+  { text: 'Beyond-Class Engagement', colors: ['#0D0D0D', '#4BA3D8', '#A578F2'] },
+  { text: 'Live Coaching', colors: ['#0D0D0D', '#1E8DC2', '#A578F2'] },
+  { text: 'Reusable Programs', colors: ['#0D0D0D', '#64B5E6', '#A578F2'] },
+  { text: 'Gamified Learning', colors: ['#0D0D0D', '#4BA3D8', '#A578F2'] },
+  { text: 'On-Job Upskilling', colors: ['#0D0D0D', '#1C8DC1', '#A578F2'] },
+  { text: 'Success Partners', colors: ['#0D0D0D', '#1C8DC1', '#A578F2'] },
+  { text: 'Evergreen Paths', colors: ['#0D0D0D', '#1E8DC2', '#A578F2'] },
+  { text: 'Hybrid Delivery', colors: ['#0D0D0D', '#64B5E6', '#A578F2'] },
+  { text: 'Audit-Ready Compliance', colors: ['#0D0D0D', '#4BA3D8', '#A578F2'] },
+  { text: 'White-Label Academies', colors: ['#0D0D0D', '#1E8DC2', '#A578F2'] },
+  { text: 'Certifications', colors: ['#0D0D0D', '#64B5E6', '#A578F2'] }
 ]
-
-const createGradientTexture = (colors: string[]) => {
-  const canvas = document.createElement('canvas')
-  canvas.width = 1024
-  canvas.height = 1024
-  const context = canvas.getContext('2d')!
-
-  const gradient = context.createRadialGradient(
-    canvas.width * 0.6583,
-    canvas.height * 0.0648,
-    0,
-    canvas.width * 0.6583,
-    canvas.height * 0.0648,
-    canvas.width
-  )
-
-  gradient.addColorStop(0.69, colors[0])
-  gradient.addColorStop(0.9, colors[1])
-  gradient.addColorStop(1, colors[2])
-
-  context.fillStyle = gradient
-  context.fillRect(0, 0, canvas.width, canvas.height)
-
-  const texture = new THREE.CanvasTexture(canvas)
-  texture.needsUpdate = true
-  return texture
-}
 
 export function Carousel3dSection() {
   const sectionRef = useRef(null)
@@ -53,33 +36,12 @@ export function Carousel3dSection() {
   const [rotation, setRotation] = useState(0)
   const rotationY = useRef(0)
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
-  const [modelY, setModelY] = useState(-4)
+  const [modelY, setModelY] = useState(0)
   const [effectStrength, setEffectStrength] = useState(0)
   const lastScrollTime = useRef(Date.now())
   const lastRotation = useRef(0)
 
-  const gradientTexture = useMemo(() => {
-    const currentIndex = Math.floor(rotation)
-    const nextIndex = Math.min(currentIndex + 1, slidesData.length - 1)
-    const progress = rotation - currentIndex
-
-    // Interpolate colors
-    const currentColors = slidesData[currentIndex].colors
-    const nextColors = slidesData[nextIndex].colors
-    const interpolatedColors = currentColors.map((color, i) => {
-      const current = new THREE.Color(color)
-      const next = new THREE.Color(nextColors[i])
-      return new THREE.Color(
-        current.r + (next.r - current.r) * progress,
-        current.g + (next.g - current.g) * progress,
-        current.b + (next.b - current.b) * progress
-      ).getHexString()
-    })
-
-    return createGradientTexture(interpolatedColors.map((c) => `#${c}`))
-  }, [rotation])
-
-  const triggerLength = window.innerHeight * (slidesData.length - 1) * 0.7
+  const triggerLength = window.innerHeight * slidesData.length * 1.2
 
   useEffect(() => {
     let proxy = { rot: 0 }
@@ -87,10 +49,12 @@ export function Carousel3dSection() {
 
     const updateVelocity = () => {
       const currentTime = Date.now()
-      const deltaTime = (currentTime - lastScrollTime.current) / 1000
+      const deltaTime = (currentTime - lastScrollTime.current) / 1000 // Convert to seconds
       const rotationDelta = Math.abs(proxy.rot - lastRotation.current)
+
+      // Calculate velocity in rotations per second
       const newVelocity = rotationDelta / Math.max(deltaTime, 0.016)
-      setEffectStrength(Math.min(newVelocity * 2, 1))
+      setEffectStrength(Math.min(newVelocity * 2, 1)) // Cap at 1 and scale for effect
 
       lastScrollTime.current = currentTime
       lastRotation.current = proxy.rot
@@ -108,18 +72,18 @@ export function Carousel3dSection() {
         anticipatePin: 1,
         onUpdate: (self) => {
           setCurrentSlideIndex(Math.floor(self.progress * (slidesData.length - 1)))
-          const newY = -4 - self.progress * 0.3
+          const newY = -2.7 - self.progress * 0.3
           setModelY(newY)
         }
       }
     })
 
     tl.to(proxy, {
-      rot: slidesData.length - 1,
+      rot: slidesData.length, // Full rotation through all 14 slides
       ease: 'none',
       onUpdate: () => {
         setRotation(proxy.rot)
-        rotationY.current = -proxy.rot * Math.PI * 0.33
+        rotationY.current = -proxy.rot * Math.PI * 0.15 // Slower model rotation for 14 slides
       }
     })
 
@@ -132,10 +96,8 @@ export function Carousel3dSection() {
     }
   }, [])
 
-  const radius = 1.5
-  const circleCenter = [0, -0.3, -0.5]
-  const zScale = 1
-  const xScale = 1
+  const radius = 1
+  const circleCenter = [0, -0.1, 0]
 
   return (
     <section
@@ -143,7 +105,7 @@ export function Carousel3dSection() {
       style={{
         position: 'relative',
         height: `100vh`,
-        background: '#161616',
+        background: '#0D0D0D',
         overflow: 'hidden'
       }}>
       <div
@@ -164,80 +126,134 @@ export function Carousel3dSection() {
             height: 1600,
             zIndex: 10
           }}
-          camera={{ position: [0, 0, 3.2], fov: 70 }}>
-          <Environment preset="city" />
-
-          {/* Background gradient mesh */}
-          <mesh position={[0, 1.85, -0.3]} scale={[6, 7.3, 1]}>
-            <planeGeometry />
-            <meshBasicMaterial map={gradientTexture} transparent opacity={0.45} side={THREE.DoubleSide} />
-          </mesh>
-
-          {/* Original lighting setup */}
-          <directionalLight castShadow position={[5, 3, 3]} intensity={1.5} />
-          <directionalLight castShadow position={[30, 3, 3]} intensity={3} />
-          <ambientLight position={[-3, 3, 10]} intensity={0.4} color="#f5ebd0" />
-          <pointLight position={[0, 1, 1.6]} intensity={1} color="#faf6d4" distance={50} decay={2} castShadow />
-          <spotLight
-            position={[1, 0, 0]}
-            intensity={5.5}
-            color="#f6fa0a"
-            angle={0.8}
-            penumbra={0.5}
-            distance={2}
-            decay={2}
-            castShadow
-          />
-          <spotLight
-            position={[0, -1.1, 1.1]}
-            intensity={1.5}
-            color="#726bff"
-            angle={0.8}
-            penumbra={0.5}
-            distance={2}
-            decay={2}
-            castShadow
+          camera={{ position: [0, 0, 2], fov: 70 }}>
+          <LightingSetup
+            rotation={rotation}
+            effectStrength={effectStrength}
+            currentSlideIndex={currentSlideIndex}
+            slidesData={slidesData}
           />
 
           <Float speed={2} rotationIntensity={0.2} floatIntensity={0.2}>
-            <MyModel rotationY={rotationY} position={[0, modelY, 0]} />
+            <MyModel rotationY={rotationY.current} position={[0, modelY, 0]} />
           </Float>
 
-          {/* Cards */}
+          <ParticlePlane
+            position={[0, 0, -5]}
+            startY={-4}
+            endY={-1.7}
+            width={8}
+            height={4}
+            depth={6}
+            particleCount={15000}
+            particleSize={0.01}
+            randomness={150}
+            waveIntensity={50}
+            waveSpeed={0.01}
+            scrollProgress={rotation * 0.3}
+          />
+
+          {/* 3D Spiral Carousel - Fixed Positions System */}
           {slidesData.map((slide, i) => {
-            const angleStep = (2 * Math.PI) / slidesData.length
-            const baseAngle = i * angleStep - rotation * angleStep
-            const distanceFromActive = Math.abs(i - rotation)
+            // 3D Spiral/Helix parameters
+            const spiralTurns = 1.5
+            const verticalSpacing = 0.15
+            const spiralRadius = radius
+            const totalSlides = slidesData.length
 
-            if (distanceFromActive > 1.5) return null
+            // Generate extended positions on spiral (including positions before and after for natural flow)
+            const fixedPositions = []
+            const startOffset = 10 // Start spiral before position 0
+            const endOffset = 10 // Continue spiral after last position
+            const totalPositions = totalSlides + startOffset + endOffset
 
-            const x = circleCenter[0] + radius * Math.sin(baseAngle) * xScale
-            const waveAmplitude = 0.5
-            const normalizedAngle = ((baseAngle % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI)
-            const verticalOffset = Math.sin(normalizedAngle - Math.PI) * waveAmplitude
-            const y = circleCenter[1] + verticalOffset
-            const z = circleCenter[2] + radius * Math.cos(baseAngle) * zScale
-            const rotationY = Math.atan2(xScale * Math.cos(baseAngle), -zScale * Math.sin(baseAngle)) - Math.PI / 2
+            for (let pos = -startOffset; pos < totalSlides + endOffset; pos++) {
+              const posProgress = pos / totalSlides
+              const posAngle = posProgress * spiralTurns * 2 * Math.PI
+              const posX = circleCenter[0] + spiralRadius * Math.sin(posAngle)
+              const posZ = circleCenter[2] + spiralRadius * Math.cos(posAngle)
+              const posY = circleCenter[1] - pos * verticalSpacing
+              fixedPositions.push({ x: posX, y: posY, z: posZ, angle: posAngle })
+            }
 
-            const maxScale = 1.2
-            const minScale = 0.6
+            // Calculate which position this slide should be at - NO CYCLING
+            const slideOffset = i - rotation + startOffset // Add offset to account for extended start
+            const currentPositionIndex = Math.floor(slideOffset)
+            const nextPositionIndex = currentPositionIndex + 1
+            const interpolationFactor = slideOffset - Math.floor(slideOffset)
 
-            const scale = maxScale - distanceFromActive * (maxScale - minScale)
+            // Ensure we don't go beyond available positions (finite spiral)
+            if (
+              currentPositionIndex < 0 ||
+              nextPositionIndex < 0 ||
+              currentPositionIndex >= fixedPositions.length - 1 ||
+              nextPositionIndex >= fixedPositions.length
+            ) {
+              return null // Hide slides that go beyond spiral bounds
+            }
 
-            const opacity = Math.max(0, 1 - distanceFromActive / 1.5)
+            // Get current and next positions
+            const currentPos = fixedPositions[currentPositionIndex]
+            const nextPos = fixedPositions[nextPositionIndex]
+
+            // Smooth interpolation between positions
+            const x = currentPos.x + (nextPos.x - currentPos.x) * interpolationFactor
+            const y = currentPos.y + (nextPos.y - currentPos.y) * interpolationFactor
+            const z = currentPos.z + (nextPos.z - currentPos.z) * interpolationFactor
+
+            // Interpolate rotation as well
+            const currentAngle = currentPos.angle
+            const nextAngle = nextPos.angle
+            let angleDiff = nextAngle - currentAngle
+            // Handle angle wrap-around
+            if (angleDiff > Math.PI) angleDiff -= 2 * Math.PI
+            if (angleDiff < -Math.PI) angleDiff += 2 * Math.PI
+            const interpolatedAngle = currentAngle + angleDiff * interpolationFactor
+
+            // Calculate distance from camera/front for effects
+            const distanceFromCamera = Math.sqrt(x * x + (z - 2) * (z - 2))
+            const normalizedDistance = Math.min(distanceFromCamera / (spiralRadius * 2), 1)
+
+            // Face camera with consistent right inclination
+            const rotationY = Math.atan2(x - circleCenter[0], z - circleCenter[2])
+            const rotationX = 0
+            const rotationZ = -0.06
+
+            // All slides same size
+            const scale = 1.0
+
+            // Opacity based on distance and height
+            const proximityOpacity = Math.max(0.3, 1.2 - normalizedDistance)
+            const heightOpacity = Math.max(0.4, 1.0 + (y - circleCenter[1]) * 0.05)
+            const opacity = Math.min(proximityOpacity, heightOpacity)
 
             return (
               <group key={i} visible={true}>
                 <Slide3D
                   text={slide.text}
                   position={[x, y, z]}
-                  rotation={[0, rotationY, 0]}
+                  rotation={[rotationX, rotationY, rotationZ]}
                   scale={scale}
                   opacity={opacity}
                 />
               </group>
             )
           })}
+
+          <OrbitControls
+            enableZoom={true}
+            enablePan={true}
+            enableRotate={true}
+            minDistance={2}
+            maxDistance={10}
+            minPolarAngle={Math.PI / 4}
+            maxPolarAngle={(Math.PI * 3) / 4}
+          />
+
+          {/* Post-processing Effects */}
+          <EffectComposer>
+            <Noise premultiply opacity={0.2} blendFunction={BlendFunction.OVERLAY} />
+          </EffectComposer>
         </Canvas>
       </div>
     </section>

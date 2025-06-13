@@ -37,13 +37,13 @@ export default function HomePage() {
   }, [])
   return (
     <>
-      <Header />
+      {/*  <Header />
       <HeroSection />
       <FutureSection />
-      <StackSection />
+      <StackSection /> */}
       <GrowthStepSection />
       <AiTeamSection />
-      {/* <Carousel3dSection /> */}
+      <Carousel3dSection />
       <InspirationSection />
       <BuildSection />
       <ImpactSectionNew />
@@ -52,7 +52,7 @@ export default function HomePage() {
       <DataDrivenSection />
       <FeaturesSection />
       <TestimonialsSection />
-      <Footer />
+      <Footer /> */}
     </>
   )
 }
