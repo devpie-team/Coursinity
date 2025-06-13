@@ -9,9 +9,9 @@ import 'aos/dist/aos.css'
 type Position = 'top' | 'middle' | 'bottom'
 
 const POSITIONS: Record<Position, string> = {
-  top: 'top-[-10px] z-10 max-lg:top-[100px] max-md:top-[20px]',
-  middle: 'top-[570px] z-20 max-lg:top-[690px] max-md:top-[555px]',
-  bottom: 'top-[670px] z-30 max-lg:top-[790px] max-md:top-[655px]'
+  top: 'top-[-10px] z-10 max-lg:top-[000px] max-md:top-[20px]',
+  middle: 'top-[570px] z-20 max-lg:top-[555px] max-md:top-[555px]',
+  bottom: 'top-[670px] z-30 max-lg:top-[660px] max-md:top-[655px]'
 }
 
 const getRelativePosition = (index: number, activeIndex: number): Position => {
@@ -117,9 +117,7 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
                 h-14 rounded-full px-6 py-5 text-center mt-4
                 text-white text-caption
                 transition-all 
-              "
-              data-aos="fade-up"
-              data-aos-offset="-350">
+              ">
               {t('steps.1.button')}
             </button>
           )}
@@ -128,7 +126,7 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
           <img
             src="/assets/stack_section/stack_2.png"
             alt="Step 2"
-            className=" object-cover max-md:absolute max-md:bottom-12"
+            className=" object-cover max-md:absolute max-md:bottom-12 "
             data-aos="fade-up"
             data-aos-offset="-650"
           />
@@ -172,18 +170,16 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
                 h-14 rounded-full px-6 py-5 text-center mt-4
                 text-white text-caption
                 transition-all 
-              "
-              data-aos="fade-up"
-              data-aos-offset="-550">
+              ">
               {t('steps.2.button')}
             </button>
           )}
         </div>
-        <div className="flex justify-center pb-[120px]" data-aos="fade-up" data-aos-offset="-850">
+        <div className="flex justify-center pb-[20px]" data-aos="fade-up" data-aos-offset="-850">
           <img
             src="/assets/stack_section/stack_3.png"
             alt="Step 3"
-            className=" object-cover max-md:absolute max-md:bottom-[220px]"
+            className=" object-cover max-md:absolute max-md:bottom-[120px]"
           />
         </div>
       </div>

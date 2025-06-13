@@ -55,20 +55,30 @@ const Footer = ({ className }: FooterProps) => {
       <div className="flex flex-col gap-[120px] max-lg:gap-20">
         {/*Headline*/}
         <div className="flex flex-col gap-8 items-center font-medium text-center max-lg:gap-4">
-          <Typography variant={isDesktop ? 'h2' : 'h5'} weight="medium" data-aos="fade-up">
+          <Typography
+            variant={isDesktop ? 'h2' : 'h5'}
+            weight="medium"
+            data-aos="fade"
+            data-aos-offset={isMobile ? '-450' : '-50'}>
             {t('headline')
               .split('\n')
               .map((line, i) => (
                 <React.Fragment key={i}>
+                  {' '}
+                  {''}
                   {line}
-                  <br />
                 </React.Fragment>
               ))}
           </Typography>
-          <Typography variant={isDesktop ? 'body2' : 'button'} weight="medium" data-aos="fade-up">
+          <Typography
+            variant={isDesktop ? 'body2' : 'button'}
+            weight="regular"
+            className="text-opacity-80"
+            data-aos="fade"
+            data-aos-offset={isMobile ? '-450' : '-50'}>
             {t('subheadline')}
           </Typography>
-          <Button variant="secondary" size="md" className="w-[263px] max-lg:w-[343px] mt-4" data-aos="fade-up">
+          <Button variant="secondary" size="md" className="w-[263px] max-lg:w-[343px] mt-4">
             {t('button')}
           </Button>
         </div>
@@ -79,7 +89,8 @@ const Footer = ({ className }: FooterProps) => {
             {/* Coursinity column */}
             <div
               className="flex flex-col gap-[20px] font-medium flex-none max-w-[240px] max-[834px]:max-w-full"
-              data-aos="fade">
+              data-aos="fade"
+              data-aos-offset={isMobile ? '-450' : '-50'}>
               <Typography variant={isTablet ? 'body1' : 'body2'} weight="medium">
                 {t('columns.coursinity.title')}
               </Typography>
@@ -89,7 +100,7 @@ const Footer = ({ className }: FooterProps) => {
 
             <div className="grid grid-cols-3 gap-[50px] max-md:grid-cols-2 max-md:grid-rows-2 flex-grow">
               {/* Solutions */}
-              <div data-aos="fade">
+              <div data-aos="fade" data-aos-offset={isMobile ? '-450' : '-50'}>
                 <Typography variant={isTablet ? 'body3' : 'body2'} weight="medium" className="mb-5">
                   {t('columns.solutions.title')}
                 </Typography>
@@ -97,7 +108,7 @@ const Footer = ({ className }: FooterProps) => {
               </div>
 
               {/* Academy */}
-              <div data-aos="fade">
+              <div data-aos="fade" data-aos-offset={isMobile ? '-450' : '-50'}>
                 <Typography variant={isTablet ? 'body3' : 'body2'} weight="medium" className="mb-5">
                   {t('columns.academy.title')}
                 </Typography>
@@ -115,18 +126,17 @@ const Footer = ({ className }: FooterProps) => {
           </div>
 
           {/*Copyright + Links + Socials */}
-          <div className="relative flex justify-between pt-5 border-t border-[#7662E833] items-center max-lg:pt-8 max-lg:flex-col gap-6">
+          <div
+            className="relative flex justify-between pt-5 border-t border-opacity-15 border-white items-center max-lg:pt-8 max-lg:flex-col gap-6"
+            data-aos="fade">
             <Typography
               as="p"
               variant="caption"
-              className="text-sm font-normal w-[33%] order-1 max-lg:order-3 max-lg:text-center max-md:w-full"
-              data-aos="fade">
+              className="text-sm font-normal w-[33%] order-1 max-lg:order-3 max-lg:text-center max-md:w-full">
               {t('bottom.copyright')}
             </Typography>
 
-            <div
-              className="flex text-button gap-6 w-[33%] justify-center order-2 max-lg:order-1 max-lg:justify-center"
-              data-aos="fade">
+            <div className="flex text-button gap-6 w-[33%] justify-center order-2 max-lg:order-1 max-lg:justify-center">
               <Typography as="a" href="#" variant={isDesktop ? 'body3' : 'caption'}>
                 {t('bottom.links.terms')}
               </Typography>
@@ -138,9 +148,7 @@ const Footer = ({ className }: FooterProps) => {
               </Typography>
             </div>
 
-            <div
-              className="flex gap-2 w-[33%] justify-end order-3 max-lg:order-2 max-lg:justify-center"
-              data-aos="fade">
+            <div className="flex gap-2 w-[33%] justify-end order-3 max-lg:order-2 max-lg:justify-center">
               <button className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
                 <XIcon />
               </button>
