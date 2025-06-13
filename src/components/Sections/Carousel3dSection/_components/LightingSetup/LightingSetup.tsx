@@ -15,6 +15,22 @@ export function LightingSetup({ rotation, effectStrength, currentSlideIndex, sli
     <>
       <fog attach="fog" args={['#0D0D0D', 8, 15]} />
 
+      {/* Front lights for slides */}
+      <pointLight
+        position={[-0.05, 0.3, 1.5]}
+        intensity={0.2}
+        color="#A578F2" // Фіолетовий
+        distance={3}
+        decay={1.5}
+      />
+      <spotLight
+        position={[-0.05, -0.5, 1.5]}
+        intensity={0.1}
+        color="#1C8DC1" // Синій
+        distance={3}
+        decay={1.5}
+      />
+
       {/* Dynamic orbital lights that respond to scroll */}
       <pointLight
         position={[Math.sin(rotation * 1.3) * 3.5, 2.5, Math.cos(rotation * 1.3) * 3.5]}
@@ -58,9 +74,9 @@ export function LightingSetup({ rotation, effectStrength, currentSlideIndex, sli
 
       {/* Original lighting setup */}
       <directionalLight castShadow position={[5, 3, 3]} intensity={1.5} />
-      <directionalLight castShadow position={[30, 3, 3]} intensity={3} />
+      <directionalLight castShadow position={[8, 3, 3.5]} intensity={2} />
       <ambientLight position={[-3, 3, 10]} intensity={0.4} color="#f5ebd0" />
-      <pointLight position={[0, 1, 1.6]} intensity={1} color="#faf6d4" distance={50} decay={2} castShadow />
+      <pointLight position={[0, 1, 1.6]} intensity={1} color="#faf6d4" distance={50} decay={10} castShadow />
 
       {/* Rotating color-changing spotlight */}
       <spotLight
@@ -107,4 +123,4 @@ export function LightingSetup({ rotation, effectStrength, currentSlideIndex, sli
       />
     </>
   )
-} 
+}
