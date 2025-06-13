@@ -36,7 +36,7 @@ export function Carousel3dSection() {
   const [rotation, setRotation] = useState(0)
   const rotationY = useRef(0)
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
-  const [modelY, setModelY] = useState(0)
+  const [modelY, setModelY] = useState(-2.7)
   const [effectStrength, setEffectStrength] = useState(0)
   const lastScrollTime = useRef(Date.now())
   const lastRotation = useRef(0)
@@ -134,9 +134,9 @@ export function Carousel3dSection() {
             slidesData={slidesData}
           />
 
-          <Float speed={2} rotationIntensity={0.2} floatIntensity={0.2}>
+          {/* <Float speed={2} rotationIntensity={0.2} floatIntensity={0.2}>
             <MyModel rotationY={rotationY.current} position={[0, modelY, 0]} />
-          </Float>
+          </Float> */}
 
           <ParticlePlane
             position={[0, 0, -5]}
@@ -217,7 +217,7 @@ export function Carousel3dSection() {
             // Face camera with consistent right inclination
             const rotationY = Math.atan2(x - circleCenter[0], z - circleCenter[2])
             const rotationX = 0
-            const rotationZ = -0.06
+            const rotationZ = -0.05
 
             // All slides same size
             const scale = 1.0
@@ -240,7 +240,7 @@ export function Carousel3dSection() {
             )
           })}
 
-          <OrbitControls
+          {/* <OrbitControls
             enableZoom={true}
             enablePan={true}
             enableRotate={true}
@@ -248,7 +248,7 @@ export function Carousel3dSection() {
             maxDistance={10}
             minPolarAngle={Math.PI / 4}
             maxPolarAngle={(Math.PI * 3) / 4}
-          />
+          /> */}
 
           {/* Post-processing Effects */}
           <EffectComposer>
