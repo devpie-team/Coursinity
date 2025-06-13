@@ -90,7 +90,9 @@
     "subtitle": "صمّم حلول التدريب والتطوير التي تخلق الأثر على أرض الواقع، وتبني ثقافة الشغف بالتميز في الأداء الأولى في تقنيات التدريب والتطوير",
     "bookDemo": "احجز عرض توضيحي",
     "titleGradientMobile": "أشعل ثورة التعلم.",
-    "subtitleMobile": "ارفع إنتاجية فريقك إلى مستوى جديد"
+    "subtitleMobile": "ارفع إنتاجية فريقك إلى مستوى جديد",
+    "spark": " أطلق شرارة التعلم",
+    "revolution": " الثورة."
   },
   "AiTeamSection": {
     "title": "بناء فريق عمل يتسم بالكفاءة في مجال الذكاء الاصطناعي",
@@ -105,14 +107,14 @@
     ]
   },
   "TeamTrainingSection": {
-    "title": "Scale Your Team Within Budget",
-    "description": "Coursinity helps you achieve more without stretching your budget, through flexible, cost-efficient training that scales with your needs. One smart academy, built to cover your entire organization.",
-    "button": "Learn more",
+    "title": "قيمة أعلى لا تتطلّب ميزانية أكبر",
+    "description": "كورسنيتي تساعدك على الوصول لعدد أكبر، وتحقيق نتائج أفضل، دون تجاوز الميزانية. بتكاليف مرنة، وتنفيذ فعّال، ونمو يمكن قياسه كل ذلك من خلال أكاديمية واحدة تغطي جميع احتياجات مؤسستك",
+    "button": "اعرف المزيد",
     "items": [
-      "Train teams everywhere, affordably",
-      "Foster a culture of continuous growth without overspending",
-      "Cut down redundant training costs",
-      "Interactive training beyond conventional platforms"
+      "تدريب الجميع في كل الفروع باستثمار بسيط",
+      "خلق ثقافة تطوير مستمر بكفاءة إنفاق عالية",
+      "حد الصرف المتكرر على الاحتياجات الدائمة",
+      "تجربة تدريب تفاعلية تتجاوز حدود المنصة النمطية"
     ]
   },
   "Build": {
@@ -167,57 +169,57 @@
   },
   "dataDrivenSection": {
     "left": {
-      "title": "Make Decisions Based on Data, Not Guesswork",
-      "description": "Actionable insights to drive smarter decisions and track progress by role and function."
+      "title": "صمِّم وراقِب برامجك التدريبيّة بناءً على البيانات، لا على التوقّعات",
+      "description": "كورسنيتي تمنحك رؤية واضحة لكل متدرّب، ولكل فريق، ولكل مستوى وظيفي"
     },
     "slides": [
       {
-        "title": "Side-by-Side Progress",
-        "description": "View skill growth at a glance and tackle gaps with confidence."
+        "title": "لوحات متابعة مباشرة وفلاتر ذكيّة",
+        "description": "راقِب الإنجاز، التفاعل، والأثر لحظة بلحظة."
       },
       {
-        "title": "Track Growth Journeys",
-        "description": "Map each team member’s development and guide them forward."
+        "title": "تتبع رحلات النمو",
+        "description": "ارسم خريطة لتطور كل عضو من أعضاء الفريق وقم بتوجيههم إلى الأمام."
       },
       {
-        "title": "Live Insights Hub & Smart Filters",
-        "description": "Monitor engagement, performance, and impact in real time."
+        "title": "مركز الرؤى المباشرة والفلاتر الذكية",
+        "description": "راقب المشاركة والأداء والتأثير في الوقت الفعلي."
       }
     ]
   },
   "GrowthStepSection": {
     "common": {
-      "cta": "Talk to expert",
-      "subtitle": "Custom training systems for accelerated growth",
-      "sectionTitle": "End‑to‑End Team Growth",
-      "sectionDescription": "Explore the Coursinity suite with three paths to smarter, faster, better teams"
+      "cta": "تحدث إلى خبير",
+      "subtitle": "أنظمة تدريب مخصصة للنمو المتسارع",
+      "sectionTitle": "كل ما تحتاجه لتطوير فريقك … في مكان واحد",
+      "sectionDescription": "حلول تدريبية رقمية تساعدك على بناء فرق أسرع، أذكى، وأكثر كفاءة"
     },
     "slides": [
       {
         "id": 0,
-        "title": "Coursinity Academy",
+        "title": "أكاديمية كورسينيتي",
         "items": [
-          "Fully branded internal academies",
-          "Reporting, analytics, and certification tracking",
-          "LMS platforms integrated with your systems"
+          "أكاديميات داخلية تحمل العلامة التجارية بالكامل",
+          "التقارير والتحليلات وتتبع الشهادات",
+          "منصات إدارة التعلم المدمجة مع أنظمتك"
         ]
       },
       {
         "id": 1,
-        "title": "Coursinity AI",
+        "title": "ذكاء كورسينيتي الاصطناعيI",
         "items": [
-          "Role-specific AI use cases",
-          "Ongoing support, updates, and libraries",
-          "Hands-on prompt coaching"
+          "الاصطناعي",
+          "الدعم المستمر والتحديثات والمكتبات",
+          "تدريب عملي على التوجيهات"
         ]
       },
       {
         "id": 2,
-        "title": "Coursinity Solutions",
+        "title": "حلول كورسينيتي",
         "items": [
-          "Self-paced training journeys",
-          "Built-in assessments and progress tracking",
-          "Fully branded internal academies"
+          "رحلات تدريبية ذاتية السرعة",
+          "تقييمات مدمجة وتتبع التقدم",
+          "أكاديميات داخلية تحمل العلامة التجارية بالكامل"
         ]
       }
     ]

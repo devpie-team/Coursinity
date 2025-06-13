@@ -56,11 +56,20 @@ export const DataDrivenSection = () => {
   return (
     <section className="bg-white p-[140px] pt-0 flex justify-center items-center gap-[180px] max-lg:px-6 max-lg:pt-20 max-lg:pb-0 max-md:flex-col max-lg:gap-10 max-md:px-4">
       {/* Left side */}
-      <div className="flex flex-col gap-4 max-w-[480px]">
-        <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade" data-aos-offset="-50">
+      <div className="flex flex-col gap-4 max-w-[480px] ">
+        <Typography
+          variant={isDesktop ? 'h3' : 'h5'}
+          weight="medium"
+          data-aos={isDesktop ? 'fade' : ''}
+          data-aos-offset="-50">
           {t('left.title')}
         </Typography>
-        <Typography variant="body3" weight="regular" className="text-description" data-aos="fade" data-aos-offset="-50">
+        <Typography
+          variant="body3"
+          weight="regular"
+          className="text-description"
+          data-aos={isDesktop ? 'fade' : ''}
+          data-aos-offset="-50">
           {t('left.description')}
         </Typography>
       </div>
@@ -130,7 +139,7 @@ export const DataDrivenSection = () => {
               fade ? 'opacity-100' : 'opacity-0'
             )}
           />
-          <div className="flex flex-col justify-center items-center text-center gap-3">
+          <div className="flex flex-col justify-center items-center text-center gap-5">
             <div
               className={clsx(
                 'flex flex-col gap-4 transition-opacity duration-500',
