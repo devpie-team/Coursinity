@@ -71,7 +71,7 @@ export function Carousel3dSection() {
         anticipatePin: 1,
         onUpdate: (self) => {
           setCurrentSlideIndex(Math.floor(self.progress * (slidesData.length - 1)))
-          const newY = -2.65 - self.progress * 0.3
+          const newY = -3.1 - self.progress * 0.3
           setModelY(newY)
         }
       }
