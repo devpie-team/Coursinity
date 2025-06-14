@@ -108,7 +108,7 @@ export const ExpandableCard = ({
         </div>
       )}
       {isMobile && (
-        <div className="flex items-start  gap-4 p-7 pt-[13px] min-h-[100%] relative pr-20 max-ld:pr-17 max-md:pr-0 flex-col ">
+        <div className="flex items-start  gap-4 p-7 pt-[13px] min-h-[100%] relative pr-20 max-ld:pr-17 max-md:pr-0 flex-col max-md:pl-0">
           <div className="flex items-center justify-between w-full h-full gap-4">
             <Typography variant={isDesktop ? 'body1' : 'body2'} weight="medium" className="">
               {title}

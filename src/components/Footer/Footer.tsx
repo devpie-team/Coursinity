@@ -149,7 +149,7 @@ const Footer = ({ className }: FooterProps) => {
             </div>
 
             <div className="flex gap-2 w-[33%] justify-end order-3 max-lg:order-2 max-lg:justify-center">
-              <button className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
+              <button className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all ">
                 <XIcon />
               </button>
               <button className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">

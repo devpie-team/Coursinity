@@ -42,7 +42,7 @@ export const GrowthStepSection = () => {
   const slideImages = [
     {
       image: '/assets/growth/growth_1.png',
-      imageClasses: 'absolute top-0 max-lg:top-[60px] max-lg:scale-[1.4] w-[100%] h-[100%]'
+      imageClasses: 'absolute top-0 max-lg:top-[60px] max-lg:scale-[1.4] w-[100%] h-[100%]  '
     },
     {
       image: '/assets/growth/growth_2.png',
@@ -123,7 +123,7 @@ export const GrowthStepSection = () => {
           <Typography variant="h6" weight="regular" className="text-white">
             {t('common.subtitle')}
           </Typography>
-          <Button variant="secondary" className="w-[190px]" data-aos="fade" data-aos-offset="-80">
+          <Button variant="secondary" className="w-[190px]">
             {t('common.cta')}
           </Button>
           <div className="absolute bottom-[140px] right-[140px]" data-aos="fade" data-aos-offset="-80">

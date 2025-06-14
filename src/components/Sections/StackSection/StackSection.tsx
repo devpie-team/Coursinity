@@ -51,10 +51,10 @@ export const StackSection = () => {
       {/* Right section */}
       <div className="flex flex-col gap-[210px] max-w-[410px]  relative z-40 w-1/2 max-lg:gap-[120px] justify-center h-full order-2 max-md:order-1 max-md:justify-start max-md:items-center max-md:h-[280px] max-md:w-full max-md:max-w-full max-md:text-center max-lg:justify-end pb-14">
         <div className="flex flex-col gap-8 max-lg:gap-4 w-full justify-center">
-          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade">
+          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade" data-aos-offset="-50">
             {t('left.title')}
           </Typography>
-          <Typography variant={isDesktop ? 'body2' : 'body3'} weight="regular" data-aos="fade">
+          <Typography variant={isDesktop ? 'body2' : 'body3'} weight="regular" data-aos="fade" data-aos-offset="-50">
             {t('left.description')}
           </Typography>
           <Button
