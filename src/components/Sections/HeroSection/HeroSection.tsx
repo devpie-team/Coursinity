@@ -2,15 +2,20 @@
 
 import { Button } from '@/components/primitives/button'
 import { Typography } from '@/components/ui'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lottie from 'lottie-react'
-import hero1 from '../../../../public/assets/lottie/hero/h_1.json'
-import hero2 from '../../../../public/assets/lottie/hero/h_2.json'
-import hero3 from '../../../../public/assets/lottie/hero/h_3.json'
-import hero4 from '../../../../public/assets/lottie/hero/h_4.json'
+import hero1En from '../../../../public/assets/lottie/hero/en/h_1.json'
+import hero2En from '../../../../public/assets/lottie/hero/en/h_2.json'
+import hero3En from '../../../../public/assets/lottie/hero/en/h_3.json'
+import hero4En from '../../../../public/assets/lottie/hero/en/h_4.json'
+
+import hero1Ar from '../../../../public/assets/lottie/hero/ar/h_1.json'
+import hero2Ar from '../../../../public/assets/lottie/hero/ar/h_2.json'
+import hero3Ar from '../../../../public/assets/lottie/hero/ar/h_3.json'
+import hero4Ar from '../../../../public/assets/lottie/hero/ar/h_4.json'
 import type { LottieRefCurrentProps } from 'lottie-react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -18,6 +23,14 @@ import 'aos/dist/aos.css'
 gsap.registerPlugin(ScrollTrigger)
 
 export const HeroSection = () => {
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
+
+  const hero1 = isArabic ? hero1Ar : hero1En
+  const hero2 = isArabic ? hero2Ar : hero2En
+  const hero3 = isArabic ? hero3Ar : hero3En
+  const hero4 = isArabic ? hero4Ar : hero4En
+
   const t = useTranslations('Hero')
   const [isTablet, setIsTablet] = useState<boolean>(false)
   const [isMobile, setIsMobile] = useState<boolean>(false)

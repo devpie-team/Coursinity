@@ -3,7 +3,7 @@ import Lottie from 'lottie-web'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Typography } from '@/components/ui'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Button } from '@/components/primitives/button'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -97,6 +97,8 @@ export const AcademySection = () => {
   useEffect(() => {
     AOS.init()
   }, [])
+
+  const locale = useLocale()
 
   useEffect(() => {
     if (!animationContainerRef.current) return

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Button } from '@/components/primitives/button'
 import { Typography } from '@/components/ui'
 import Lottie from 'lottie-react'
@@ -88,8 +88,14 @@ export const TeamTrainingSection = () => {
     }
   }
 
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
+
   return (
-    <section className="bg-white flex pl-[140px] py-[85px]  gap-[50px] max-[1250px]:pl-6 max-lg:pb-0 max-lg:gap-5 max-md:flex-col justify-center overflow-hidden max-md:p-4">
+    <section
+      className={`bg-white flex ${isArabic ? 'pr-[140px]' : 'pl-[140px]'} py-[85px] gap-[50px]  ${
+        isArabic ? 'max-[1250px]:pr-6' : 'max-[1250px]:pl-6'
+      } max-lg:pb-0 max-lg:gap-5 max-md:flex-col justify-center overflow-hidden max-md:p-4`}>
       <div className="flex flex-col gap-10 max-w-[700px]">
         <div className="flex flex-col gap-4 ">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos-offset={isMobile ? '-100' : '-50'}>
