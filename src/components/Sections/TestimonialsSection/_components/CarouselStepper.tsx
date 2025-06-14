@@ -1,5 +1,4 @@
 import { ChevronLeftIcon } from '@/components/icons/ChevronLeftIcon'
-import { on } from 'events'
 
 type CarouselStepperProps = {
   total: number
@@ -32,11 +31,7 @@ export const CarouselStepper = ({ total, activeStep, onPrev, onNext, onStepClick
             }
           `}
         disabled={activeStep === 0}>
-        {locale == 'en' ? (
-          <ChevronLeftIcon stroke={activeStep === 0 ? '#D0D5DD' : '#1C8DC1'} />
-        ) : (
-          <ChevronLeftIcon className="-scale-x-100" stroke={activeStep === total - 1 ? '#D0D5DD' : '#1C8DC1'} />
-        )}
+        <ChevronLeftIcon stroke={activeStep === 0 ? '#D0D5DD' : '#1C8DC1'} />
       </button>
 
       <div className="flex gap-3">
@@ -65,11 +60,7 @@ export const CarouselStepper = ({ total, activeStep, onPrev, onNext, onStepClick
             }
           `}
         disabled={activeStep === total - 1}>
-        {locale == 'ar' ? (
-          <ChevronLeftIcon stroke={activeStep === 0 ? '#D0D5DD' : '#1C8DC1'} />
-        ) : (
-          <ChevronLeftIcon className="-scale-x-100" stroke={activeStep === total - 1 ? '#D0D5DD' : '#1C8DC1'} />
-        )}
+        <ChevronLeftIcon className="-scale-x-100" stroke={activeStep === total - 1 ? '#D0D5DD' : '#1C8DC1'} />
       </button>
     </div>
   )
