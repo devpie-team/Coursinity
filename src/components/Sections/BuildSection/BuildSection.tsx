@@ -50,7 +50,7 @@ export const BuildSection = () => {
     if (scrollWrapperBuildRef.current) observer.observe(scrollWrapperBuildRef.current)
     return () => {
       if (scrollWrapperBuildRef.current) observer.unobserve(scrollWrapperBuildRef.current)
-      showHeaderForSection(sectionId.current) // На всякий случай
+      showHeaderForSection(sectionId.current)
     }
   }, [])
 
@@ -70,6 +70,7 @@ export const BuildSection = () => {
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
+
   useEffect(() => {
     AOS.init()
   }, [])

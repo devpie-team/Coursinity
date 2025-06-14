@@ -5,7 +5,7 @@ import { Typography } from '@/components/ui'
 import { TestimonialCard } from './_components/TestimonialCard'
 import { CarouselStepper } from './_components/CarouselStepper'
 import { useSwipeable } from 'react-swipeable'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
@@ -27,6 +27,8 @@ export const TestimonialsSection = () => {
   const [activeIndex, setActiveIndex] = useState(0)
   const testimonials = t.raw('testimonials') as any[]
   const slidesCount = testimonials.length
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -46,11 +48,28 @@ export const TestimonialsSection = () => {
   const getVisibleSlides = () => {
     const result = []
     if (activeIndex > 0) {
-      result.push({ ...testimonials[activeIndex - 1], userImg: testimonialImages[activeIndex - 1], pos: 'left' })
+      const prevIndex = activeIndex - 1
+      result.push({
+        ...testimonials[prevIndex],
+        userImg: testimonialImages[prevIndex],
+        pos: 'left',
+        id: prevIndex
+      })
     }
-    result.push({ ...testimonials[activeIndex], userImg: testimonialImages[activeIndex], pos: 'center' })
+    result.push({
+      ...testimonials[activeIndex],
+      userImg: testimonialImages[activeIndex],
+      pos: 'center',
+      id: activeIndex
+    })
     if (activeIndex < testimonials.length - 1) {
-      result.push({ ...testimonials[activeIndex + 1], userImg: testimonialImages[activeIndex + 1], pos: 'right' })
+      const nextIndex = activeIndex + 1
+      result.push({
+        ...testimonials[nextIndex],
+        userImg: testimonialImages[nextIndex],
+        pos: 'right',
+        id: nextIndex
+      })
     }
     return result
   }
@@ -87,13 +106,8 @@ export const TestimonialsSection = () => {
       <div
         className="relative w-full min-h-[440px] flex items-center justify-center max-lg:w-auto max-lg:min-h-0"
         {...(isMobile || isTablet ? swipeHandlers : {})}>
-        {visibleSlides.map((slide, idx) => (
-          <TestimonialCard
-            key={slide.company + slide.userName}
-            data={slide}
-            position={slide.pos}
-            isDesktop={isDesktop}
-          />
+        {visibleSlides.map((slide) => (
+          <TestimonialCard key={slide.id} data={slide} position={slide.pos} isDesktop={isDesktop} />
         ))}
       </div>
       <div data-aos="fade" data-aos-offset={isMobile ? '-450' : '-50'}>
