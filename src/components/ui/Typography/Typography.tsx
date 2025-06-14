@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { ElementType, ReactNode, ComponentPropsWithoutRef } from 'react'
+import React from 'react'
 
 type Variant =
   | 'h1'
@@ -18,7 +19,7 @@ type Variant =
 
 type Weight = 'regular' | 'medium' | 'semibold' | 'bold'
 
-type TypographyProps<T extends ElementType = 'p'> = {
+type TypographyProps<T extends ElementType> = {
   as?: T
   variant?: Variant
   weight?: Weight
@@ -58,9 +59,7 @@ export const Typography = <T extends ElementType = 'p'>({
   ...props
 }: TypographyProps<T>) => {
   const Component = as || 'p'
-  return (
-    <Component className={clsx(variantMap[variant], weightMap[weight], 'font-poppins', className)} {...props}>
-      {children}
-    </Component>
-  )
+  const combinedClassName = clsx(variantMap[variant], weightMap[weight], 'font-poppins', className)
+
+  return React.createElement(Component, { className: combinedClassName, ...props }, children)
 }
