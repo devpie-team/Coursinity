@@ -135,7 +135,9 @@ export const HeroSection = () => {
           <img src="/assets/hero/glass.png" alt="Glass" className="w-full h-full object-cover opacity-70" />
         </div>
 
-        <div className="flex flex-col gap-8 items-center z-10 text-center px-4 w-[910px] " data-aos="fade-up">
+        <div
+          className={`flex flex-col gap-8 items-center z-10 text-center px-4 ${locale ? 'w-[1010px]' : 'w-[910px]'} `}
+          data-aos="fade-up">
           <div className="flex flex-col gap-6 max-[1024px]:gap-4 items-center">
             {isTablet ? (
               <div className=" leading-tight text-transparent bg-gradient-to-b from-[#1C8DC1] to-[#D3E7F0] bg-clip-text w-fit">
