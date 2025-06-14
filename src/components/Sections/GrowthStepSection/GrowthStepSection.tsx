@@ -42,7 +42,7 @@ export const GrowthStepSection = () => {
   const slideImages = [
     {
       image: '/assets/growth/growth_1.png',
-      imageClasses: 'absolute top-0 max-lg:top-[60px] max-lg:scale-[1.4] w-[100%] h-[100%]'
+      imageClasses: 'absolute top-0 max-lg:top-[60px] max-lg:scale-[1.4] w-[100%] h-[100%]  '
     },
     {
       image: '/assets/growth/growth_2.png',

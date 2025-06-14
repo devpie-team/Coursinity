@@ -72,9 +72,9 @@ export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: 
     (e: React.MouseEvent) => {
       e.stopPropagation()
       if (!isDesktop && position === 'center' && !showDetails) {
-        onClick(index, position) // тригер глобального setDetailsShownFor
+        onClick(index, position)
       } else {
-        onClick(index, position) // переключення між слайдами
+        onClick(index, position)
       }
     },
     [isDesktop, position, showDetails, onClick, index]
@@ -111,8 +111,7 @@ export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: 
           className={clsx(
             'absolute inset-0 flex items-center justify-center transition-opacity duration-700 ease-in-out',
             shouldShowText ? 'opacity-0 pointer-events-none' : 'opacity-100'
-          )}
-        >
+          )}>
           <img
             src={data.image}
             alt={data.title}
@@ -125,10 +124,9 @@ export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: 
         {/* Текстова частина */}
         <div
           className={clsx(
-            'absolute inset-0 w-full h-full flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out',
+            'absolute inset-0 w-full h-full flex flex-col items-center justify-end transition-opacity duration-700 ease-in-out',
             shouldShowText ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          )}
-        >
+          )}>
           <div className="flex flex-col w-full">
             {isDesktop && (
               <div className="flex justify-center mb-6">
@@ -145,16 +143,14 @@ export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: 
               {data.bullets.map((text, i) => (
                 <div
                   key={i}
-                  className="flex flex-col h-[148px] w-[271px] gap-5 p-5 max-lg:gap-2 max-lg:max-h-[40px] max-lg:w-full max-lg:p-0 max-lg:flex-row"
-                >
+                  className="flex flex-col h-[148px] w-[271px] gap-5 p-5 max-lg:gap-2 max-lg:max-h-[40px] max-lg:w-full max-lg:p-0 max-lg:flex-row">
                   <div>
                     <CheckCircleIcon size={isDesktop ? '32px' : '16px'} fill="white" />
                   </div>
                   <Typography
                     variant={isDesktop ? 'body2' : 'subtitle'}
                     weight={isDesktop ? 'semibold' : 'regular'}
-                    className="text-white opacity-80"
-                  >
+                    className="text-white opacity-80">
                     {text}
                   </Typography>
                 </div>

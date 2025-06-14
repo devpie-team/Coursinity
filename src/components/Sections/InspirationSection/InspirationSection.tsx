@@ -262,7 +262,7 @@ export const InspirationSection = () => {
               }
             : {}
         }>
-        <div className=" shrink min-[1150px]:hidden ">
+        <div className="shrink min1150:hidden">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
             {t('title')}
           </Typography>

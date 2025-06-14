@@ -55,7 +55,7 @@ export const AiTeamSection = () => {
           {
             opacity: 0,
             scale: 0.7,
-            y: 60
+            y: 50
           },
           {
             opacity: 1,
@@ -66,7 +66,7 @@ export const AiTeamSection = () => {
             ease: 'expo.inOut',
             scrollTrigger: {
               trigger: itemRefs.current[i],
-              start: 'top 90%',
+              start: 'top 95%',
 
               toggleActions: 'play reverse play reverse'
             }
@@ -81,7 +81,7 @@ export const AiTeamSection = () => {
     <section className={cn('bg-black text-white p-[140px] max-[1200px]:px-6 max-lg:pb-20 max-lg:pt-0 max-md:px-4')}>
       <div className={cn('flex justify-center items-stretch gap-[130px] max-lg:gap-10 max-md:flex-col')}>
         {/* Left */}
-        <div className="flex flex-col gap-8 flex-1 min-w-[300px] justify-center max-lg:gap-4 max-lg:max-w-[373px]">
+        <div className="flex flex-col gap-8 flex-1 min-w-[300px] max-w-[550px] justify-center max-lg:gap-4 max-lg:max-w-[373px]">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade" data-aos-offset="-50">
             {t('title')}
           </Typography>
