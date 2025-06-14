@@ -30,7 +30,25 @@ const slidesData = [
   { text: 'Certifications', colors: ['#0D0D0D', '#64B5E6', '#A578F2'] }
 ]
 
+// Add useMediaQuery hook
+const useMediaQuery = (query: string) => {
+  const [matches, setMatches] = useState(false)
+
+  useEffect(() => {
+    const media = window.matchMedia(query)
+    if (media.matches !== matches) {
+      setMatches(media.matches)
+    }
+    const listener = () => setMatches(media.matches)
+    media.addEventListener('change', listener)
+    return () => media.removeEventListener('change', listener)
+  }, [matches, query])
+
+  return matches
+}
+
 export function Carousel3dSection() {
+  const isMobile = useMediaQuery('(max-width: 768px)')
   const sectionRef = useRef(null)
   const containerRef = useRef(null)
   const [rotation, setRotation] = useState(0)
@@ -42,6 +60,12 @@ export function Carousel3dSection() {
   const lastRotation = useRef(0)
 
   const triggerLength = window.innerHeight * slidesData.length * 1.2
+
+  // Adjust parameters based on screen size
+  const radius = isMobile ? 0.6 : 1
+  const verticalSpacing = isMobile ? 0.15 : 0.15
+  const spiralTurns = isMobile ? 2 : 1.5
+  const circleCenter = [0, -0.1, 0]
 
   useEffect(() => {
     let proxy = { rot: 0 }
@@ -96,9 +120,6 @@ export function Carousel3dSection() {
     }
   }, [])
 
-  const radius = 1
-  const circleCenter = [0, -0.1, 0]
-
   return (
     <section
       ref={sectionRef}
@@ -122,11 +143,11 @@ export function Carousel3dSection() {
             left: '50%',
             top: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 2000,
-            height: 1600,
+            width: isMobile ? 1200 : 2000,
+            height: isMobile ? 900 : 1600,
             zIndex: 10
           }}
-          camera={{ position: [0, 0, 2], fov: 70 }}>
+          camera={{ position: [0, 0, isMobile ? 1.5 : 2], fov: isMobile ? 75 : 70 }}>
           <LightingSetup
             rotation={rotation}
             effectStrength={effectStrength}
@@ -155,23 +176,20 @@ export function Carousel3dSection() {
 
           {/* 3D Spiral Carousel - Fixed Positions System */}
           {slidesData.map((slide, i) => {
-            // 3D Spiral/Helix parameters
-            const spiralTurns = 1.5
-            const verticalSpacing = 0.15
-            const spiralRadius = radius
+            // Use the responsive parameters
             const totalSlides = slidesData.length
 
-            // Generate extended positions on spiral (including positions before and after for natural flow)
+            // Generate extended positions on spiral
             const fixedPositions = []
-            const startOffset = 10 // Start spiral before position 0
-            const endOffset = 10 // Continue spiral after last position
+            const startOffset = isMobile ? 8 : 10
+            const endOffset = isMobile ? 8 : 10
             const totalPositions = totalSlides + startOffset + endOffset
 
             for (let pos = -startOffset; pos < totalSlides + endOffset; pos++) {
               const posProgress = pos / totalSlides
               const posAngle = posProgress * spiralTurns * 2 * Math.PI
-              const posX = circleCenter[0] + spiralRadius * Math.sin(posAngle)
-              const posZ = circleCenter[2] + spiralRadius * Math.cos(posAngle)
+              const posX = circleCenter[0] + radius * Math.sin(posAngle)
+              const posZ = circleCenter[2] + radius * Math.cos(posAngle)
               const posY = circleCenter[1] - pos * verticalSpacing
               fixedPositions.push({ x: posX, y: posY, z: posZ, angle: posAngle })
             }
@@ -212,19 +230,19 @@ export function Carousel3dSection() {
 
             // Calculate distance from camera/front for effects
             const distanceFromCamera = Math.sqrt(x * x + (z - 2) * (z - 2))
-            const normalizedDistance = Math.min(distanceFromCamera / (spiralRadius * 2), 1)
+            const normalizedDistance = Math.min(distanceFromCamera / (radius * 2), 1)
 
             // Face camera with consistent right inclination
             const rotationY = Math.atan2(x - circleCenter[0], z - circleCenter[2])
             const rotationX = 0
             const rotationZ = -0.05
 
-            // All slides same size
-            const scale = 1.0
+            // Adjust scale for mobile
+            const scale = isMobile ? 0.7 : 1.0
 
-            // Opacity based on distance and height
-            const proximityOpacity = Math.max(0.3, 1.2 - normalizedDistance)
-            const heightOpacity = Math.max(0.4, 1.0 + (y - circleCenter[1]) * 0.05)
+            // Adjust opacity calculations for mobile
+            const proximityOpacity = Math.max(isMobile ? 0.4 : 0.3, 1.2 - normalizedDistance)
+            const heightOpacity = Math.max(isMobile ? 0.5 : 0.4, 1.0 + (y - circleCenter[1]) * 0.05)
             const opacity = Math.min(proximityOpacity, heightOpacity)
 
             return (

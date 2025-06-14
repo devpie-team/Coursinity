@@ -83,7 +83,7 @@ export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: 
   return (
     <div
       className={clsx(
-        'absolute flex flex-col rounded-[2%] justify-between cursor-pointer py-10 overflow-hidden max-lg:px-[30px] max-lg:pb-[10px] max-lg:pt-6 max-lg:justify-between growth-slide',
+        'absolute flex flex-col rounded-[2%] justify-between cursor-pointer py-10 overflow-hidden max-lg:rounded-2xl max-lg:px-[30px] max-lg:pb-[10px] max-lg:pt-6 max-lg:justify-between growth-slide',
         style
       )}
       onClick={handleSlideClick}>
@@ -105,8 +105,30 @@ export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: 
         )}
       </div>
 
-      <div className="flex items-center justify-center w-full">
-        {shouldShowText ? (
+      <div className="relative w-full h-full">
+        {/* Картинка */}
+        <div
+          className={clsx(
+            'absolute inset-0 flex items-center justify-center transition-opacity duration-700 ease-in-out',
+            shouldShowText ? 'opacity-0 pointer-events-none' : 'opacity-100'
+          )}
+        >
+          <img
+            src={data.image}
+            alt={data.title}
+            draggable={false}
+            loading="lazy"
+            className={clsx('object-contain', data.imageClasses)}
+          />
+        </div>
+
+        {/* Текстова частина */}
+        <div
+          className={clsx(
+            'absolute inset-0 w-full h-full flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out',
+            shouldShowText ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          )}
+        >
           <div className="flex flex-col w-full">
             {isDesktop && (
               <div className="flex justify-center mb-6">
@@ -123,29 +145,23 @@ export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: 
               {data.bullets.map((text, i) => (
                 <div
                   key={i}
-                  className="flex flex-col h-[148px] w-[271px] gap-5 p-5 max-lg:gap-2 max-lg:max-h-[40px] max-lg:w-full max-lg:p-0 max-lg:flex-row">
+                  className="flex flex-col h-[148px] w-[271px] gap-5 p-5 max-lg:gap-2 max-lg:max-h-[40px] max-lg:w-full max-lg:p-0 max-lg:flex-row"
+                >
                   <div>
                     <CheckCircleIcon size={isDesktop ? '32px' : '16px'} fill="white" />
                   </div>
                   <Typography
                     variant={isDesktop ? 'body2' : 'subtitle'}
                     weight={isDesktop ? 'semibold' : 'regular'}
-                    className="text-white opacity-80">
+                    className="text-white opacity-80"
+                  >
                     {text}
                   </Typography>
                 </div>
               ))}
             </div>
           </div>
-        ) : (
-          <img
-            src={data.image}
-            alt={data.title}
-            draggable={false}
-            loading="lazy"
-            className={clsx('object-contain', data.imageClasses)}
-          />
-        )}
+        </div>
       </div>
     </div>
   )
