@@ -37,10 +37,10 @@ export default function HomePage() {
   }, [])
   return (
     <>
-      {/*  <Header />
+      <Header />
       <HeroSection />
       <FutureSection />
-      <StackSection /> */}
+      <StackSection />
       <GrowthStepSection />
       <AiTeamSection />
       <Carousel3dSection />
@@ -52,7 +52,7 @@ export default function HomePage() {
       <DataDrivenSection />
       <FeaturesSection />
       <TestimonialsSection />
-      <Footer /> */}
+      <Footer />
     </>
   )
 }
