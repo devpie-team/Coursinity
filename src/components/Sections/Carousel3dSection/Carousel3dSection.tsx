@@ -235,12 +235,13 @@ export function Carousel3dSection() {
                   rotation={[rotationX, rotationY, rotationZ]}
                   scale={scale}
                   opacity={opacity}
+                  index={i}
                 />
               </group>
             )
           })}
 
-          {/* <OrbitControls
+          <OrbitControls
             enableZoom={true}
             enablePan={true}
             enableRotate={true}
@@ -248,7 +249,7 @@ export function Carousel3dSection() {
             maxDistance={10}
             minPolarAngle={Math.PI / 4}
             maxPolarAngle={(Math.PI * 3) / 4}
-          /> */}
+          />
 
           {/* Post-processing Effects */}
           <EffectComposer>

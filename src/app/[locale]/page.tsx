@@ -37,16 +37,16 @@ export default function HomePage() {
   }, [])
   return (
     <>
-      {/*  <Header />
+      {/* <Header />
       <HeroSection />
       <FutureSection />
-      <StackSection /> */}
+      <StackSection />
       <GrowthStepSection />
-      <AiTeamSection />
+      <AiTeamSection /> */}
       <Carousel3dSection />
       <InspirationSection />
       <BuildSection />
-      <ImpactSectionNew />
+      {/*  <ImpactSectionNew />
       <AcademySection />
       <TeamTrainingSection />
       <DataDrivenSection />
