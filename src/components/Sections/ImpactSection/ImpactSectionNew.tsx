@@ -40,7 +40,7 @@ export const ImpactSectionNew = () => {
           'absolute w-[296px] h-[65px] bottom-[331px] md:bottom-[231px] right-[390px] scale-50 sm:scale-75 lg:scale-100'
       },
       {
-        animation: require(`../../../../public/assets/lottie/impact/${locale}/5.json`),
+        animation: require(`../../../../public/assets/lottie/impact/en/5.json`),
         className:
           'absolute w-[156px] h-[52px] bottom-[251px] md:bottom-[151px] left-[421px] scale-50 sm:scale-75 lg:scale-100'
       },
