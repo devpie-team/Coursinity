@@ -141,7 +141,7 @@ export const BuildSection = () => {
       scrub: 1,
       onUpdate: updateStep,
       animation: gsap.to(sections, {
-        xPercent: 310,
+        xPercent: locale == 'ar' ? 310 : -310,
         ease: 'none'
       })
     })

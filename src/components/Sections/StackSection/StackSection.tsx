@@ -6,7 +6,7 @@ import { Button } from '@/components/primitives/button'
 import Stepper from '@/components/Stepper'
 
 import { StackCards } from './_components/StackCards/StackCards'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
@@ -34,10 +34,18 @@ export const StackSection = () => {
     AOS.init()
   }, [])
 
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
+
   return (
     <section className="flex gap-[120px] bg-primary-purple h-[900px] pt-[130px] px-[235px] text-white overflow-hidden items-start max-[1200px]:px-[140px] max-lg:px-10 max-lg:pt-20 max-lg:h-[650px]  max-lg:gap-16 max-md:flex-col max-md:px-4 max-md:gap-10 max-md:h-[970px] ">
       {/* Slides */}
-      <div className="w-1/2 relative max-lg:scale-[75%] transform order-1 max-md:order-2 max-md:translate-x-1/2">
+      <div
+        className={`${
+          isArabic && isMobile ? 'w-full' : 'w-1/2'
+        } relative max-lg:scale-[75%] transform order-1 max-md:order-2${
+          isArabic && isMobile ? '' : ' max-md:translate-x-1/2'
+        }`}>
         <StackCards activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
       </div>
       {/* Right section */}
