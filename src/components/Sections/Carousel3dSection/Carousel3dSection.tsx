@@ -6,6 +6,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { PerformanceMonitor } from '@react-three/drei'
 import { SceneContent } from './_components/SceneContent/SceneContent'
+import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -59,6 +60,27 @@ export function Carousel3dSection() {
     return () => {
       tl.kill()
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+    }
+  }, [])
+
+  const { hideHeaderForSection, showHeaderForSection } = useHeaderVisibility()
+  const sectionId = useRef(Math.random()?.toString())
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          hideHeaderForSection(sectionId.current)
+        } else {
+          showHeaderForSection(sectionId.current)
+        }
+      },
+      { threshold: 0.5 }
+    )
+    if (sectionRef.current) observer.observe(sectionRef.current)
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current)
+      showHeaderForSection(sectionId.current)
     }
   }, [])
 

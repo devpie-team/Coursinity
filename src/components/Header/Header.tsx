@@ -39,7 +39,7 @@ export const Header = () => {
       }
 
       if (headerRef.current) {
-        if (currentScroll > lastScroll && currentScroll > 50 && !isOpen) {
+        if ((currentScroll > lastScroll && currentScroll > 50 && !isOpen) || (!isVisible && !isOpen)) {
           gsap.to(headerRef.current, { y: -100, duration: 0.5, ease: 'power2.inOut' })
         } else {
           gsap.to(headerRef.current, { y: 0, duration: 0.5, ease: 'power2.inOut' })
@@ -87,8 +87,6 @@ export const Header = () => {
       })
     }
   }, [isOpen])
-
-  if (!isVisible && !isOpen) return null
 
   return (
     <header
