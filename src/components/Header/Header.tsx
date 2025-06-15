@@ -13,44 +13,51 @@ import { TreeLines } from '../icons'
 export const Header = () => {
   const t = useTranslations('Header')
   const headerRef = useRef<HTMLDivElement>(null)
-  const mobileMenuRef = useRef<HTMLDivElement>(null)
 
-  const [lastScroll, setLastScroll] = useState(0)
-  const [isOpen, setIsOpen] = useState(false)
-  const [showMenu, setShowMenu] = useState(false)
+  // --- State Management ---
+  const [isOpen, setIsOpen] = useState(false) // State for mobile menu
+  const [start, setStart] = useState(true) // Is user at the top of the page?
+  const [isScrolledDown, setIsScrolledDown] = useState(false) // Is user scrolling down?
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
-  const [start, setStart] = useState(true)
 
+  // --- Refs ---
+  const lastScrollRef = useRef(0) // To track scroll position without re-renders
+
+  // --- Hooks ---
   const locale = useLocale()
   const pathname = usePathname()
   const router = useRouter()
-  const { isVisible } = useHeaderVisibility()
+  const { isVisible } = useHeaderVisibility() // From context
 
+  // --- Effect for Scroll Handling (Optimized) ---
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY
 
-      if (currentScroll <= 10) {
-        setStart(true)
-      } else if (start == true) {
-        setStart(false)
+      // Update 'start' state for background/shadow
+      setStart(currentScroll <= 10)
+
+      // Determine scroll direction and hide/show header
+      // Hide if: scrolling down, past 50px, menu is closed, or context says invisible
+      if ((currentScroll > lastScrollRef.current && currentScroll > 50 && !isOpen) || (!isVisible && !isOpen)) {
+        setIsScrolledDown(true)
+      } else {
+        setIsScrolledDown(false)
       }
 
-      if (headerRef.current) {
-        if ((currentScroll > lastScroll && currentScroll > 50 && !isOpen) || (!isVisible && !isOpen)) {
-          gsap.to(headerRef.current, { y: -100, duration: 0.5, ease: 'power2.inOut' })
-        } else {
-          gsap.to(headerRef.current, { y: 0, duration: 0.5, ease: 'power2.inOut' })
-        }
-      }
-      setLastScroll(currentScroll)
+      // Update last scroll position
+      lastScrollRef.current = currentScroll
     }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [lastScroll, isOpen])
 
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => window.removeEventListener('scroll', handleScroll)
+    // Dependencies are external states that should trigger a re-evaluation of the logic
+  }, [isOpen, isVisible])
+
+  // --- Effect for Screen Size ---
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth
@@ -63,30 +70,7 @@ export const Header = () => {
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
 
-  useEffect(() => {
-    if (isOpen) {
-      setShowMenu(true)
-    } else if (showMenu) {
-      const timeout = setTimeout(() => setShowMenu(false), 300)
-      return () => clearTimeout(timeout)
-    }
-  }, [isOpen, showMenu])
-
-  useLayoutEffect(() => {
-    if (showMenu && isOpen && mobileMenuRef.current) {
-      gsap.fromTo(mobileMenuRef.current, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'power2.out' })
-    }
-  }, [showMenu, isOpen])
-
-  useEffect(() => {
-    if (!isOpen && mobileMenuRef.current) {
-      gsap.to(mobileMenuRef.current, {
-        opacity: 0,
-        duration: 0.3,
-        ease: 'power2.in'
-      })
-    }
-  }, [isOpen])
+  // --- Effect for Body Scroll Lock ---
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add('overflow-hidden')
@@ -95,15 +79,30 @@ export const Header = () => {
     }
   }, [isOpen])
 
+  const headerClasses = [
+    'fixed',
+    'top-0',
+    'left-0',
+    'w-full',
+    'z-50',
+    'px-[115px]',
+    'max-lg:px-6',
+    'flex',
+    'items-center',
+    'justify-between',
+    'py-[20px]',
+    'transition-transform', // Added for CSS animation
+    'duration-500', // Animation duration
+    'ease-in-out', // Animation timing function
+    isScrolledDown ? '-translate-y-full' : 'translate-y-0', // CSS class for hiding/showing
+    !start || isOpen ? 'bg-white' : 'bg-transparent',
+    !start && 'shadow-[0px_12px_30px_0px_#0000000D]'
+  ]
+    .filter(Boolean)
+    .join(' ')
+
   return (
-    <header
-      ref={headerRef}
-      className={`fixed ${
-        !start ? 'bg-white' : ''
-      } top-0 left-0 w-full z-50 px-[115px] max-lg:px-6 flex items-center justify-between py-[20px] ${
-        isOpen && 'bg-white '
-      }`}
-      style={{ boxShadow: !start ? '0px 12px 30px 0px #0000000D' : undefined }}>
+    <header ref={headerRef} className={headerClasses}>
       <img
         src={`/assets/logos/${isTablet || isMobile ? 'mobileLogo' : 'logos'}.png`}
         alt="Logo"
@@ -123,16 +122,17 @@ export const Header = () => {
           <Button>{t('button')}</Button>
         </div>
       ) : (
-        <button onClick={() => setIsOpen((prev) => !prev)} className="p-2">
+        <button onClick={() => setIsOpen((prev) => !prev)} className="p-2 z-[51]">
           {!isOpen ? <TreeLines /> : <X className="w-6 h-6" />}
         </button>
       )}
 
-      {showMenu && (
+      {/* --- Mobile Menu (Optimized with CSS Transitions) --- */}
+      {!isDesktop && (
         <div
-          ref={mobileMenuRef}
-          className="absolute inset-0 z-50 bg-white px-6 py-6 flex flex-col justify-between md:h-[300px] bottom-0 top-[79px] h-[calc(100vh-79px)]"
-          style={{ pointerEvents: isOpen ? 'auto' : 'none' }}>
+          className={`absolute inset-0 z-50 bg-white px-6 py-6 flex flex-col justify-between md:h-[300px] top-[79px] h-[calc(100vh-79px)]
+            transition-opacity duration-300 ease-in-out
+            ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
           <div className="flex flex-col gap-8 items-center">
             <ToggleLanguage
               value={locale !== 'en'}
