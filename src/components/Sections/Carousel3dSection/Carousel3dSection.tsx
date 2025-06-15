@@ -69,6 +69,7 @@ export function Carousel3dSection() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
+        console.log(entry.isIntersecting)
         if (entry.isIntersecting) {
           hideHeaderForSection(sectionId.current)
         } else {
@@ -77,6 +78,7 @@ export function Carousel3dSection() {
       },
       { threshold: 0.5 }
     )
+
     if (sectionRef.current) observer.observe(sectionRef.current)
     return () => {
       if (sectionRef.current) observer.unobserve(sectionRef.current)
