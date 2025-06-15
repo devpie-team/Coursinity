@@ -21,6 +21,7 @@ export const Header = () => {
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
+  const [start, setStart] = useState(true)
 
   const locale = useLocale()
   const pathname = usePathname()
@@ -30,11 +31,18 @@ export const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY
+
+      if (currentScroll <= 10) {
+        setStart(true)
+      } else if (start == true) {
+        setStart(false)
+      }
+
       if (headerRef.current) {
         if (currentScroll > lastScroll && currentScroll > 50 && !isOpen) {
-          gsap.to(headerRef.current, { opacity: 0, duration: 0.7, ease: 'power2.out' })
+          gsap.to(headerRef.current, { y: -100, duration: 0.5, ease: 'power2.inOut' })
         } else {
-          gsap.to(headerRef.current, { opacity: 1, duration: 0.7, ease: 'power2.out' })
+          gsap.to(headerRef.current, { y: 0, duration: 0.5, ease: 'power2.inOut' })
         }
       }
       setLastScroll(currentScroll)
@@ -85,9 +93,10 @@ export const Header = () => {
   return (
     <header
       ref={headerRef}
-      className="fixed bg-white top-0 left-0 w-full z-50 px-[115px] max-lg:px-6 flex items-center
-      justify-between py-[20px]"
-      style={{ boxShadow: '0px 12px 30px 0px #0000000D' }}>
+      className={`fixed ${
+        !start ? 'bg-white' : ''
+      } top-0 left-0 w-full z-50 px-[115px] max-lg:px-6 flex items-center justify-between py-[20px]`}
+      style={{ boxShadow: !start ? '0px 12px 30px 0px #0000000D' : undefined }}>
       <img
         src={`/assets/logos/${isTablet || isMobile ? 'mobileLogo' : 'logos'}.png`}
         alt="Logo"

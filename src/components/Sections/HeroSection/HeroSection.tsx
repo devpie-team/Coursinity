@@ -23,7 +23,10 @@ import { BubbleIcon } from '@/components/icons'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export const HeroSection = () => {
+type THeroSection = {
+  loading: boolean
+}
+export const HeroSection = ({ loading }: THeroSection) => {
   const locale = useLocale()
   const isArabic = locale == 'ar'
 
@@ -40,6 +43,16 @@ export const HeroSection = () => {
   const lottieRef2 = useRef<LottieRefCurrentProps>(null)
   const lottieRef3 = useRef<LottieRefCurrentProps>(null)
   const lottieRef4 = useRef<LottieRefCurrentProps>(null)
+
+  useEffect(() => {
+    console.log(loading)
+    if (!loading) {
+      lottieRef1.current?.goToAndPlay(0, true)
+      lottieRef2.current?.goToAndPlay(0, true)
+      lottieRef3.current?.goToAndPlay(0, true)
+      lottieRef4.current?.goToAndPlay(0, true)
+    }
+  }, [loading])
 
   useEffect(() => {
     ScrollTrigger.create({
