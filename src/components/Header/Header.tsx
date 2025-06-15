@@ -87,13 +87,22 @@ export const Header = () => {
       })
     }
   }, [isOpen])
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('overflow-hidden')
+    } else {
+      document.body.classList.remove('overflow-hidden')
+    }
+  }, [isOpen])
 
   return (
     <header
       ref={headerRef}
       className={`fixed ${
         !start ? 'bg-white' : ''
-      } top-0 left-0 w-full z-50 px-[115px] max-lg:px-6 flex items-center justify-between py-[20px]`}
+      } top-0 left-0 w-full z-50 px-[115px] max-lg:px-6 flex items-center justify-between py-[20px] ${
+        isOpen && 'bg-white '
+      }`}
       style={{ boxShadow: !start ? '0px 12px 30px 0px #0000000D' : undefined }}>
       <img
         src={`/assets/logos/${isTablet || isMobile ? 'mobileLogo' : 'logos'}.png`}

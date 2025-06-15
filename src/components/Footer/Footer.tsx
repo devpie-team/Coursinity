@@ -59,7 +59,7 @@ const Footer = ({ className }: FooterProps) => {
             variant={isDesktop ? 'h2' : 'h5'}
             weight="medium"
             data-aos="fade"
-            data-aos-offset={isMobile ? '-450' : '-50'}>
+            data-aos-offset={isMobile ? '-650' : '-50'}>
             {t('headline')
               .split('\n')
               .map((line, i) => (
@@ -75,7 +75,7 @@ const Footer = ({ className }: FooterProps) => {
             weight="regular"
             className="text-opacity-80"
             data-aos="fade"
-            data-aos-offset={isMobile ? '-450' : '-50'}>
+            data-aos-offset={isMobile ? '-650' : '-50'}>
             {t('subheadline')}
           </Typography>
           <Button variant="secondary" size="md" className="w-[263px] max-lg:w-[343px] mt-4">
@@ -85,12 +85,12 @@ const Footer = ({ className }: FooterProps) => {
 
         {/* Middle: Columns */}
         <div className="flex flex-col justify-between ">
-          <div className="grid grid-cols-[1fr_3fr] gap-[50px] pb-20 max-md:pb-0 max-lg:pb-8 max-lg:gap-8 max-[834px]:flex max-[834px]:flex-col ">
+          <div className="grid grid-cols-[1fr_3fr] gap-[50px] pb-20 max-md:pb-0 max-lg:pb-8 max-lg:gap-8  max-md:grid-rows-[1fr_3fr] max-md:grid-cols-1">
             {/* Coursinity column */}
             <div
               className="flex flex-col gap-[20px] font-medium flex-none max-w-[240px] max-[834px]:max-w-full"
-              data-aos="fade"
-              data-aos-offset={isMobile ? '-450' : '-50'}>
+              data-aos={isMobile ? '' : 'fade'}
+              data-aos-offset="-50">
               <Typography variant={isTablet ? 'body1' : 'body2'} weight="medium">
                 {t('columns.coursinity.title')}
               </Typography>
@@ -100,7 +100,7 @@ const Footer = ({ className }: FooterProps) => {
 
             <div className="grid grid-cols-3 gap-[50px] max-md:grid-cols-2 max-md:grid-rows-2 flex-grow">
               {/* Solutions */}
-              <div data-aos="fade" data-aos-offset={isMobile ? '-450' : '-50'}>
+              <div data-aos={isMobile ? '' : 'fade'} data-aos-offset="-50">
                 <Typography variant={isTablet ? 'body3' : 'body2'} weight="medium" className="mb-5">
                   {t('columns.solutions.title')}
                 </Typography>
@@ -108,7 +108,7 @@ const Footer = ({ className }: FooterProps) => {
               </div>
 
               {/* Academy */}
-              <div data-aos="fade" data-aos-offset={isMobile ? '-450' : '-50'}>
+              <div data-aos={isMobile ? '' : 'fade'} data-aos-offset="-50">
                 <Typography variant={isTablet ? 'body3' : 'body2'} weight="medium" className="mb-5">
                   {t('columns.academy.title')}
                 </Typography>
@@ -116,7 +116,7 @@ const Footer = ({ className }: FooterProps) => {
               </div>
 
               {/* Company */}
-              <div data-aos="fade">
+              <div data-aos={isMobile ? '' : 'fade'}>
                 <Typography variant={isTablet ? 'body3' : 'body2'} weight="medium" className="mb-5">
                   {t('columns.company.title')}
                 </Typography>

@@ -69,7 +69,7 @@ export const FeaturesSection = () => {
                 variant={isDesktop ? 'h4' : 'body1'}
                 weight="medium"
                 data-aos="fade"
-                data-aos-offset={isMobile ? '-450' : '-100'}>
+                data-aos-offset={isMobile ? '-650' : '-100'}>
                 {t('certified.title')}
               </Typography>
               <Typography
@@ -77,7 +77,7 @@ export const FeaturesSection = () => {
                 weight="regular"
                 className="text-[#6E6E6E]"
                 data-aos="fade"
-                data-aos-offset={isMobile ? '-450' : '-100'}>
+                data-aos-offset={isMobile ? '-650' : '-100'}>
                 {t('certified.subtitle')}
               </Typography>
             </div>
@@ -87,7 +87,7 @@ export const FeaturesSection = () => {
             <div
               className="flex flex-grow flex-col gap-4 max-lg:gap-3 max-lg:flex-none"
               data-aos="fade"
-              data-aos-offset={isMobile ? '-450' : '-50'}>
+              data-aos-offset={isMobile ? '-650' : '-50'}>
               {t.raw('certified.items').map((item: string, index: number) => {
                 const limitedText = !isDesktop ? item.split(' ').slice(0, 2).join(' ') : item
 
@@ -105,7 +105,7 @@ export const FeaturesSection = () => {
               <div
                 className="grid grid-cols-2 grid-rows-2 place-items-center mt-auto gap-[10px] max-lg:mt-0 max-lg:pt-3"
                 data-aos="fade"
-                data-aos-offset={isMobile ? '-400' : '-200'}>
+                data-aos-offset={isMobile ? '-650' : '-200'}>
                 {certificationsLeft.map(({ src, alt }, i) => (
                   <div
                     key={i}
@@ -131,7 +131,7 @@ export const FeaturesSection = () => {
             <div
               className="flex flex-col gap-4 max-lg:flex-grow"
               data-aos="fade"
-              data-aos-offset={isMobile ? '-450' : '-50'}>
+              data-aos-offset={isMobile ? '-650' : '-50'}>
               <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium">
                 {t('trusted.title')}
               </Typography>
@@ -145,7 +145,7 @@ export const FeaturesSection = () => {
             <div
               className={cn('flex flex-col gap-4 max-lg:gap-3', isDesktop ? 'flex-grow' : 'mt-auto')}
               data-aos="fade"
-              data-aos-offset={isMobile ? '-450' : '-50'}>
+              data-aos-offset={isMobile ? '-650' : '-50'}>
               {t.raw('trusted.items').map((item: { title: string; description: string }, index: number) => (
                 <div className="flex gap-4 items-center" key={index}>
                   <div>
@@ -168,7 +168,7 @@ export const FeaturesSection = () => {
               <div
                 className={cn('grid grid-cols-2 grid-rows-2 place-items-center  gap-[10px]  ', !isDesktop && 'pt-3')}
                 data-aos="fade"
-                data-aos-offset={isMobile ? '-450' : '-200'}>
+                data-aos-offset={isMobile ? '-650' : '-200'}>
                 {certificationsRight.map(({ src, alt }, i) => (
                   <div
                     key={i}
