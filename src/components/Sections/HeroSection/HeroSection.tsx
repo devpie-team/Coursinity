@@ -19,6 +19,7 @@ import hero4Ar from '../../../../public/assets/lottie/hero/ar/h_4.json'
 import type { LottieRefCurrentProps } from 'lottie-react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import { BubbleIcon } from '@/components/icons'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -183,10 +184,14 @@ export const HeroSection = () => {
         src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}2.png/`}
         className="absolute bottom-[-40px] right-[-40px] max-[1024px]:right-[-20px]  max-[1024px]:bottom-[-15px] animate-element hero-element2"
       />
-      <img
-        src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}3.png/`}
-        className="absolute top-[15%] left-0  max-[768px]:top-[10%] animate-element hero-element3"
-      />
+      {isTablet ? (
+        <BubbleIcon />
+      ) : (
+        <img
+          src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}3.png/`}
+          className="absolute top-[15%] left-0  max-[768px]:top-[10%] animate-element hero-element3"
+        />
+      )}
       <img
         src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}4.png/`}
         className="absolute top-[15%] right-[-40px] max-[768px]:top-[10%] max-[1024px]:right-[-15px] animate-element hero-element4"

@@ -135,7 +135,7 @@ export const AcademySection = () => {
         </Typography>
       </div>
       <div className="flex flex-col items-center gap-8">
-        <div ref={animationContainerRef} className="w-full h-[900px] max-lg:h-[600px] max-md:h-[400px]" />
+        <div ref={animationContainerRef} className="w-full" />
         <Button variant="purple">{t('button')}</Button>
       </div>
     </section>
