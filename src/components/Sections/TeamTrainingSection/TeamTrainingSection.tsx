@@ -11,13 +11,6 @@ interface AnimationItem {
   data: any
 }
 
-const ANIMATION_PATHS = [
-  { path: '/assets/lottie/team_train/team_train_1.json', type: 'lottie' },
-  { path: '/assets/lottie/team_train/team_train_2.json', type: 'lottie' },
-  { path: '/assets/lottie/team_train/team_train_3.json', type: 'lottie' },
-  { path: '/assets/team_training/team_train_4.png', type: 'image' }
-]
-
 export const TeamTrainingSection = () => {
   const t = useTranslations('TeamTrainingSection')
   const [isMobile, setIsMobile] = useState(false)
@@ -27,6 +20,17 @@ export const TeamTrainingSection = () => {
   const [pendingIndex, setPendingIndex] = useState<number | null>(null)
   const [fade, setFade] = useState(true)
   const [animations, setAnimations] = useState<(AnimationItem | null)[]>([null, null, null, null])
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
+  const ANIMATION_PATHS = [
+    { path: '/assets/lottie/team_train/team_train_1.json', type: 'lottie' },
+    { path: '/assets/lottie/team_train/team_train_2.json', type: 'lottie' },
+    { path: '/assets/lottie/team_train/team_train_3.json', type: 'lottie' },
+    {
+      path: isArabic ? '/assets/lottie/team_train/team_train_4_ar.json' : '/assets/lottie/team_train/team_train_4.json',
+      type: 'lottie'
+    }
+  ]
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -82,14 +86,11 @@ export const TeamTrainingSection = () => {
 
   const renderAnimation = (animation: AnimationItem, className: string) => {
     if (animation.type === 'lottie') {
-      return <Lottie animationData={animation.data} loop={true} style={{ width: '100%', height: '100%' }} />
+      return <Lottie animationData={animation.data} loop={true} className="max-lg:h-[350px]" />
     } else {
       return <img src={animation.data} alt="Training visualization" className={`w-full h-full object-contain`} />
     }
   }
-
-  const locale = useLocale()
-  const isArabic = locale == 'ar'
 
   return (
     <section

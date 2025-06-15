@@ -60,7 +60,8 @@ export default {
         )`
       },
       screens: {
-        'min1150': '1150px'
+        'min1150': '1150px',
+        '1250': '1250px'
       }
     }
   },

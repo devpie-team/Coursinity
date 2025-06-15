@@ -116,7 +116,7 @@ export const AcademySection = () => {
   }, [])
 
   return (
-    <section className="bg-white py-[140px] flex justify-center items-center flex-col gap-12 px-4">
+    <section className="bg-white py-[140px] flex justify-center items-center flex-col gap-12 ">
       <div className="flex flex-col gap-4 text-center">
         <Typography
           weight="medium"
@@ -135,7 +135,10 @@ export const AcademySection = () => {
         </Typography>
       </div>
       <div className="flex flex-col items-center gap-8">
-        <div ref={animationContainerRef} className="w-full h-[900px] max-lg:h-[600px] max-md:h-[400px]" />
+        <div
+          ref={animationContainerRef}
+          className="w-full h-[900px]  max-1250:h-[800px] max-min1150:h-[700px] max-lg:h-full "
+        />
         <Button variant="purple">{t('button')}</Button>
       </div>
     </section>

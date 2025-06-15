@@ -40,7 +40,7 @@ export const TestimonialCard = ({ data, position, isDesktop }: TestimonialCardPr
   return (
     <div
       className={cn(
-        `w-[880px] h-[440px] p-4 bg-secondary-300 rounded-[20px] flex gap-12 max-lg:w-[710px] max-lg:h-[290px] max-md:flex-col max-md:w-[343px] max-md:gap-[18px] max-md:p-[10px] justify-between ${positionClass}`,
+        `w-[880px] h-[440px] p-4 bg-secondary-300 rounded-[20px] flex gap-12 max-lg:w-[710px] max-lg:h-[290px] max-md:flex-col max-md:w-[343px] max-md:gap-[18px] max-md:p-[10px] justify-between max-md:h-[470px] ${positionClass}`,
         isArabic && 'max-md:h-[500px]'
       )}>
       <div className="flex flex-col justify-between p-4 order-1 max-md:order-2 max-md:p-0 max-md:gap-4">

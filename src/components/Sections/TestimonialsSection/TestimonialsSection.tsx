@@ -91,7 +91,7 @@ export const TestimonialsSection = () => {
           variant={isDesktop ? 'h3' : 'h5'}
           weight="medium"
           data-aos="fade"
-          data-aos-offset={isMobile ? '-450' : '-100'}>
+          data-aos-offset={isMobile ? '-320' : '-100'}>
           {t('title')}
         </Typography>
         <Typography
@@ -99,12 +99,12 @@ export const TestimonialsSection = () => {
           weight="regular"
           className="text-description"
           data-aos="fade"
-          data-aos-offset={isMobile ? '-450' : '-100'}>
+          data-aos-offset={isMobile ? '-320' : '-100'}>
           {t('subtitle')}
         </Typography>
       </div>
       <div
-        className="relative w-full min-h-[440px] flex items-center justify-center max-lg:w-auto max-lg:min-h-0"
+        className="relative w-full min-h-[440px] flex items-center justify-center max-lg:w-auto max-lg:min-h-0 max-"
         {...(isMobile || isTablet ? swipeHandlers : {})}>
         {visibleSlides.map((slide) => (
           <TestimonialCard key={slide.id} data={slide} position={slide.pos} isDesktop={isDesktop} />

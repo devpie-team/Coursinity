@@ -20,10 +20,10 @@ import 'aos/dist/aos.css'
 const benefits = [
   { icon: <GamingPadIcon /> },
   { icon: <EducationProperty2Icon /> },
-  { icon: <BriefCaseIcon /> },
-  { icon: <BookCheckIcon /> },
+  { icon: <BriefCaseIcon color="#1C8DC1" /> },
+  { icon: <BookCheckIcon color="#1C8DC1" /> },
   { icon: <EducationProperty5Icon /> },
-  { icon: <DiplomaIcon fill="primary-blue" /> }
+  { icon: <DiplomaIcon /> }
 ]
 
 export const InspirationSection = () => {
