@@ -210,7 +210,7 @@ export const ImpactSectionNew = () => {
   }, [animations])
 
   return (
-    <section className="pt-32 pb-[89px] bg-black flex flex-col gap-[52px] overflow-hidden">
+    <section className="pt-32 pb-[89px] bg-black flex flex-col gap-[52px] overflow-hidden max-md:pt-20">
       <div className="flex flex-col gap-4 text-center text-white px-4">
         <Typography
           variant={isDesktop ? 'h3' : 'h5'}

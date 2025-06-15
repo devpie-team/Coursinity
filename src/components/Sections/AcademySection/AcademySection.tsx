@@ -116,7 +116,7 @@ export const AcademySection = () => {
   }, [])
 
   return (
-    <section className="bg-white py-[140px] flex justify-center items-center flex-col gap-12 ">
+    <section className="bg-white py-[140px] flex justify-center items-center flex-col gap-12 max-md:pt-20">
       <div className="flex flex-col gap-4 text-center px-4">
         <Typography
           weight="medium"

@@ -168,7 +168,7 @@ export const InspirationSection = () => {
 
   if (isMobile) {
     return (
-      <section ref={sectionRef} className="flex bg-black py-20 px-4 gap-8  justify-center flex-col">
+      <section ref={sectionRef} className="flex bg-black py-20 px-4 gap-8  items-center flex-col max-md:pb-0">
         <div className="  flex flex-col gap-4" data-aos="fade" data-aos-offset="-50">
           <Typography variant="h5" weight="medium" className="text-white">
             {t('title')}
@@ -194,7 +194,7 @@ export const InspirationSection = () => {
             </div>
           ))}
         </div>
-        <div className="flex flex-col gap-6 text-center" data-aos="fade" data-aos-offset="-50">
+        <div className="flex flex-col gap-6 text-center justify-center" data-aos="fade" data-aos-offset="-50">
           <Typography variant="body3" weight="medium" className="text-white">
             {t('successMetric')}
           </Typography>
