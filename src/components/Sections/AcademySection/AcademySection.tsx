@@ -117,7 +117,7 @@ export const AcademySection = () => {
 
   return (
     <section className="bg-white py-[140px] flex justify-center items-center flex-col gap-12 ">
-      <div className="flex flex-col gap-4 text-center">
+      <div className="flex flex-col gap-4 text-center px-4">
         <Typography
           weight="medium"
           variant={isDesktop ? 'h3' : 'h5'}

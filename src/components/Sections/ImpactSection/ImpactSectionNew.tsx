@@ -137,6 +137,22 @@ export const ImpactSectionNew = () => {
 
   // State for loaded animations
   const [animations, setAnimations] = useState<AnimationItem[]>([])
+  const [isMobile, setIsMobile] = useState<boolean>(false)
+  const [isTablet, setIsTablet] = useState<boolean>(false)
+  const [isDesktop, setIsDesktop] = useState<boolean>(true)
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+      setIsTablet(width >= 768 && width <= 1024)
+      setIsDesktop(width > 1024)
+    }
+
+    checkScreenSize()
+
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
 
   // Load all animations on mount
   useEffect(() => {
@@ -195,11 +211,15 @@ export const ImpactSectionNew = () => {
 
   return (
     <section className="pt-32 pb-[89px] bg-black flex flex-col gap-[52px] overflow-hidden">
-      <div className="flex flex-col gap-4 text-center text-white">
-        <Typography variant="h3" weight="medium" data-aos="fade-left" data-aos-offset="-30">
+      <div className="flex flex-col gap-4 text-center text-white px-4">
+        <Typography
+          variant={isDesktop ? 'h3' : 'h5'}
+          weight="medium"
+          data-aos="fade"
+          data-aos-offset={isMobile ? '-100' : '-50'}>
           {t('title')}
         </Typography>
-        <Typography variant="body3" data-aos="fade-right">
+        <Typography variant="body3" data-aos="fade" data-aos-offset={isMobile ? '-100' : '-50'}>
           {t('subtitle')}
         </Typography>
       </div>
