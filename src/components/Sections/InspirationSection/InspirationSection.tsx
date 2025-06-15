@@ -168,8 +168,8 @@ export const InspirationSection = () => {
 
   if (isMobile) {
     return (
-      <section ref={sectionRef} className="flex bg-black py-20 px-6 gap-8 items-center justify-center flex-col">
-        <div className="max-w-[270px] shrink flex flex-col gap-4" data-aos="fade" data-aos-offset="-50">
+      <section ref={sectionRef} className="flex bg-black py-20 px-4 gap-8  justify-center flex-col">
+        <div className="  flex flex-col gap-4" data-aos="fade" data-aos-offset="-50">
           <Typography variant="h5" weight="medium" className="text-white">
             {t('title')}
           </Typography>
@@ -177,7 +177,7 @@ export const InspirationSection = () => {
             {t('description')}
           </Typography>
         </div>
-        <div className="flex flex-col gap-[10px] border border-white border-opacity-15 p-6 rounded-3xl w-full max-w-[343px]">
+        <div className="flex flex-col gap-[10px] border border-white border-opacity-15 p-6 rounded-2xl w-full ">
           {benefits.map((item, idx) => (
             <div key={t(`benefits.${idx}.title`)} data-aos="fade-up " data-aos-offset="-30">
               <ExpandableCard
