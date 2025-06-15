@@ -14,7 +14,7 @@ interface ParticlePlaneProps {
   randomness?: number
   waveIntensity?: number
   waveSpeed?: number
-  scrollProgress?: number
+  scrollProgressRef: React.MutableRefObject<{ value: number }>
 }
 
 export function ParticlePlane({
@@ -29,13 +29,9 @@ export function ParticlePlane({
   randomness = 0.2,
   waveIntensity = 0.5,
   waveSpeed = 1,
-  scrollProgress = 0
+  scrollProgressRef
 }: ParticlePlaneProps) {
-  // Calculate current Y position based on scroll progress
-  const currentY = useMemo(() => {
-    return startY + (endY - startY) * scrollProgress
-  }, [startY, endY, scrollProgress])
-
+  const groupRef = useRef<THREE.Group>(null)
   // Use the exact particle count for volume filling
   const actualParticleCount = particleCount
 
@@ -243,9 +239,14 @@ export function ParticlePlane({
 
   // Animate the particles with wave motion based on scroll
   useFrame((state) => {
+    if (!groupRef.current) return
+    const progress = scrollProgressRef.current.value
+    const currentY = startY + (endY - startY) * progress
+    groupRef.current.position.set(position[0], currentY, position[2])
+
     if (meshRefs.current.length > 0) {
       // Use scroll progress as the primary animation driver
-      const scrollTime = scrollProgress * waveSpeed
+      const scrollTime = progress * waveSpeed
       const clockTime = state.clock.elapsedTime * 0.2 // Slow background animation
       const time = scrollTime + clockTime
 
@@ -270,7 +271,7 @@ export function ParticlePlane({
           const sizeMultiplier = 0.2 + particleVariation * 1.8
 
           // Scroll-influenced speed
-          const scrollInfluence = 1 + Math.abs(scrollProgress) * 0.2 * speedMultiplier
+          const scrollInfluence = 1 + Math.abs(progress) * 0.2 * speedMultiplier
           const effectiveTime = time * speedMultiplier * scrollInfluence
 
           // Calculate wave offset with varying speeds
@@ -279,7 +280,7 @@ export function ParticlePlane({
 
           // Scroll-based flow animation
           const baseFlowSpeed = 0.5 + speedMultiplier * 1.0
-          const scrollFlow = scrollProgress * baseFlowSpeed * scrollInfluence
+          const scrollFlow = progress * baseFlowSpeed * scrollInfluence
           const flowOffset = (scrollFlow + globalIndex * 0.1) % (height + 2)
           let flowY = baseY + flowOffset - height / 2 - 1
 
@@ -298,7 +299,7 @@ export function ParticlePlane({
 
           // Add pulsating effect based on time and scroll
           const pulseFreq = 0.5 + particleVariation * 2.0 // Different pulse speeds
-          const pulseEffect = 1 + Math.sin(effectiveTime * pulseFreq) * 0.3 * (1 + Math.abs(scrollProgress) * 0.5)
+          const pulseEffect = 1 + Math.sin(effectiveTime * pulseFreq) * 0.3 * (1 + Math.abs(progress) * 0.5)
           const finalSize = sizeMultiplier * pulseEffect
 
           // Add rotation effect for some shapes
@@ -322,7 +323,7 @@ export function ParticlePlane({
   })
 
   return (
-    <group position={[position[0], currentY, position[2]]}>
+    <group ref={groupRef}>
       {particleShapes.map((shape, index) => (
         <instancedMesh
           key={index}
