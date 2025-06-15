@@ -17,7 +17,7 @@ const certifications = [
   { src: '/assets/certifications/Axelos.png', alt: 'Axelos logo' },
   { src: '/assets/certifications/Dubai_Courts.png', alt: 'Dubai_Courts logo' },
   { src: '/assets/certifications/Bahri_Ship_Mgmt.png', alt: 'Bahri_Ship_Mgmt logo' },
-  { src: '/assets/certifications/Digital_Dubai.png', alt: 'Digital_Dubai logo' },
+  { src: '/assets/certifications/dubai_digital.png', alt: 'Digital_Dubai logo' },
   { src: '/assets/certifications/Minestry_of_Health.png', alt: 'Ministry of Health logo' }
 ]
 const certificationsLeft = certifications.slice(0, 4)

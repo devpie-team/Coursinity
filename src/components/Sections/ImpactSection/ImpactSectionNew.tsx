@@ -1,14 +1,42 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useMemo, useCallback, useState } from 'react'
 import { gsap } from 'gsap'
 import { useLocale, useTranslations } from 'next-intl'
 import { Typography } from '@/components/ui'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
-import Lottie, { type LottieRefCurrentProps } from 'lottie-react'
+import Lottie, { type LottieRefCurrentProps, type LottieComponentProps } from 'lottie-react'
 
 import { BuildingIcon, BusinessIcon, EducationIcon, SmileIcon } from '@/components/icons'
+
+// Types
+type AnimationData = {
+  v: string
+  fr: number
+  ip: number
+  op: number
+  w: number
+  h: number
+  nm: string
+  ddd: number
+  assets: any[]
+  layers: any[]
+  [key: string]: any
+}
+
+interface AnimationPath {
+  path: string
+  className: string
+}
+
+interface AnimationItem {
+  animation: AnimationData | null
+  className: string
+}
+
+// Cache for storing loaded animations
+const animationCache: Record<string, AnimationData> = {}
 
 export const ImpactSectionNew = () => {
   const t = useTranslations('ImpactSection')
@@ -17,62 +45,113 @@ export const ImpactSectionNew = () => {
   const wrapperRef = useRef<HTMLDivElement>(null)
 
   const GROUP_COUNT = 2
+  const ANIMATION_COUNT = 9 // Кількість анімацій
 
-  const getAnimationsForLocale = (locale: string) => {
-    return [
+  // Створюємо рефи на верхньому рівні
+  const lottieRefs = Array.from({ length: ANIMATION_COUNT }, () =>
+    Array.from({ length: GROUP_COUNT }, () => useRef<LottieRefCurrentProps>(null))
+  )
+
+  // Function to load animation with caching
+  const loadAnimation = useCallback(async (path: string): Promise<AnimationData | null> => {
+    // Перевіряємо в пам'яті
+    if (animationCache[path]) return animationCache[path]
+
+    // Перевіряємо в sessionStorage
+    const cached = sessionStorage.getItem(path)
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached) as AnimationData
+        animationCache[path] = parsed
+        return parsed
+      } catch (error) {
+        console.error(`❌ Failed to parse cached animation: ${path}`, error)
+      }
+    }
+
+    try {
+      const response = await fetch(path)
+      const data = (await response.json()) as AnimationData
+
+      // Кешуємо в пам'яті та sessionStorage
+      animationCache[path] = data
+      sessionStorage.setItem(path, JSON.stringify(data))
+
+      return data
+    } catch (error) {
+      console.error(`❌ Failed to load animation: ${path}`, error)
+      return null
+    }
+  }, [])
+
+  // Memoized animation paths
+  const animationPaths = useMemo<AnimationPath[]>(
+    () => [
       {
-        animation: require(`../../../../public/assets/lottie/impact/${locale}/1.json`),
+        path: `/assets/lottie/impact/${locale}/1.json`,
         className:
           'absolute w-[362px] h-[280px] top-[74px] md:top-[146px] left-[30px] lg:left-0 scale-50 sm:scale-75 lg:scale-100'
       },
       {
-        animation: require(`../../../../public/assets/lottie/impact/${locale}/2.json`),
+        path: `/assets/lottie/impact/${locale}/2.json`,
         className:
           'absolute w-[362px] h-[308px] bottom-[220px] md:bottom-[27px] right-[16px] scale-50 sm:scale-75 lg:scale-100'
       },
       {
-        animation: require(`../../../../public/assets/lottie/impact/${locale}/3.json`),
+        path: `/assets/lottie/impact/${locale}/3.json`,
         className: 'absolute w-[253px] h-[65px] top-[11px] md:top-[22px] left-[162px] scale-50 sm:scale-75 lg:scale-100'
       },
       {
-        animation: require(`../../../../public/assets/lottie/impact/${locale}/4.json`),
+        path: `/assets/lottie/impact/${locale}/4.json`,
         className:
           'absolute w-[296px] h-[65px] bottom-[331px] md:bottom-[231px] right-[390px] scale-50 sm:scale-75 lg:scale-100'
       },
       {
-        animation: require(`../../../../public/assets/lottie/impact/en/5.json`),
+        path: '/assets/lottie/impact/en/5.json',
         className:
           'absolute w-[156px] h-[52px] bottom-[251px] md:bottom-[151px] left-[421px] scale-50 sm:scale-75 lg:scale-100'
       },
       {
-        animation: require(`../../../../public/assets/lottie/impact/${locale}/6.json`),
+        path: `/assets/lottie/impact/${locale}/6.json`,
         className:
           'absolute w-[309px] h-[223px] top-[16px] md:top-[35px] right-[556px] scale-50 sm:scale-75 lg:scale-100'
       },
       {
-        animation: require(`../../../../public/assets/lottie/impact/${locale}/7.json`),
+        path: `/assets/lottie/impact/${locale}/7.json`,
         className:
           'absolute w-[269px] h-[160px] top-[46px] md:top-[93px] left-[488px] scale-50 sm:scale-75 lg:scale-100'
       },
       {
-        animation: require(`../../../../public/assets/lottie/impact/${locale}/8.json`),
+        path: `/assets/lottie/impact/${locale}/8.json`,
         className:
           'absolute w-[362px] h-[316px] bottom-[220px] md:bottom-0 left-[619px] scale-50 sm:scale-75 lg:scale-100'
       },
       {
-        animation: require(`../../../../public/assets/lottie/impact/en/5.json`),
+        path: '/assets/lottie/impact/en/5.json',
         className:
           'absolute w-[156px] h-[52px] top-[62px] md:top-[133px] right-[251px] scale-50 sm:scale-75 lg:scale-100'
       }
-    ]
-  }
-
-  const animations = getAnimationsForLocale(locale)
-
-  const lottieRefs: Array<Array<React.RefObject<LottieRefCurrentProps | null>>> = Array.from(
-    { length: animations.length },
-    () => Array.from({ length: GROUP_COUNT }, () => useRef<LottieRefCurrentProps | null>(null))
+    ],
+    [locale]
   )
+
+  // State for loaded animations
+  const [animations, setAnimations] = useState<AnimationItem[]>([])
+
+  // Load all animations on mount
+  useEffect(() => {
+    const loadAllAnimations = async () => {
+      const loadedAnimations = await Promise.all(
+        animationPaths.map(async ({ path, className }) => {
+          const data = await loadAnimation(path)
+          return { animation: data, className }
+        })
+      )
+      setAnimations(loadedAnimations)
+    }
+
+    loadAllAnimations()
+  }, [animationPaths, loadAnimation])
 
   useEffect(() => {
     const wrapper = wrapperRef.current
@@ -107,13 +186,11 @@ export const ImpactSectionNew = () => {
       })
     }
 
-    playAll()
-
-    const interval = setInterval(() => {
+    if (animations.length > 0) {
       playAll()
-    }, 8000)
-
-    return () => clearInterval(interval)
+      const interval = setInterval(playAll, 8000)
+      return () => clearInterval(interval)
+    }
   }, [animations])
 
   return (
@@ -145,16 +222,19 @@ export const ImpactSectionNew = () => {
               <div className="blue-gradient-border absolute w-[100px] h-[100px] bottom-[238px] md:bottom-[58px] right-[507px] flex items-center justify-center scale-50 sm:scale-75 lg:scale-100">
                 <SmileIcon />
               </div>
-              {animations.map(({ animation, className }, i) => (
-                <Lottie
-                  key={`${groupIdx}-${i}`}
-                  lottieRef={lottieRefs[i][groupIdx]}
-                  animationData={animation}
-                  autoplay={false}
-                  className={className}
-                  loop={false}
-                />
-              ))}
+              {animations.map(
+                ({ animation, className }, i) =>
+                  animation && (
+                    <Lottie
+                      key={`${groupIdx}-${i}`}
+                      lottieRef={lottieRefs[i][groupIdx]}
+                      animationData={animation}
+                      autoplay={false}
+                      className={className}
+                      loop={false}
+                    />
+                  )
+              )}
             </div>
           ))}
         </div>
