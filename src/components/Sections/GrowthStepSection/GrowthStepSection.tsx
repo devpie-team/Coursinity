@@ -88,7 +88,7 @@ export const GrowthStepSection = () => {
 
   return (
     <section
-      className="relative flex flex-col bg-black h-[1240px] max-lg:h-[730px] overflow-hidden items-center justify-between"
+      className="relative flex flex-col bg-black h-[1240px] max-lg:h-[760px] overflow-hidden items-center justify-between"
       {...(!isDesktop ? swipeHandlers : {})}>
       <div
         className="flex flex-col gap-4 text-center pb-10 pt-[140px] max-lg:pt-20 max-md:px-4"
