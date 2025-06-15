@@ -52,7 +52,7 @@ export default function HomePage() {
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), isMobile ? 5600 : isTablet ? 5500 : 4700)
+    const timer = setTimeout(() => setLoading(false), isMobile ? 6600 : isTablet ? 6500 : 5700)
     return () => clearTimeout(timer)
   }, [isMobile, isTablet])
 
