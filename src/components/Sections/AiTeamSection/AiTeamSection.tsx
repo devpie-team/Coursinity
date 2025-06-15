@@ -79,7 +79,7 @@ export const AiTeamSection = () => {
 
   return (
     <section className={cn('bg-black text-white p-[140px] max-[1200px]:px-6 max-lg:pb-20 max-lg:pt-0 max-md:px-4')}>
-      <div className={cn('flex justify-center items-stretch gap-[130px] max-lg:gap-10 max-md:flex-col')}>
+      <div className={cn('flex justify-center items-center gap-[130px] max-lg:gap-10 max-md:flex-col')}>
         {/* Left */}
         <div className="flex flex-col gap-8 flex-1 min-w-[300px] max-w-[550px] justify-center max-lg:gap-4 max-lg:max-w-[373px]">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade" data-aos-offset="-50">

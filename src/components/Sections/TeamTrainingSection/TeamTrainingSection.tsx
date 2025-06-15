@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo, useCallback } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import { Button } from '@/components/primitives/button'
 import { Typography } from '@/components/ui'
@@ -6,10 +6,18 @@ import Lottie from 'lottie-react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
+import teamTrain1 from '/assets/lottie/team_train/team_train_1.json'
+import teamTrain2 from '/assets/lottie/team_train/team_train_2.json'
+import teamTrain3 from '/assets/lottie/team_train/team_train_3.json'
+import teamTrain4 from '/assets/lottie/team_train/team_train_4.json'
+import teamTrain4Ar from '/assets/lottie/team_train/team_train_4_ar.json'
+
 interface AnimationItem {
   type: 'lottie' | 'image'
   data: any
 }
+
+const animationCache: Record<string, any> = {}
 
 export const TeamTrainingSection = () => {
   const t = useTranslations('TeamTrainingSection')
@@ -17,20 +25,66 @@ export const TeamTrainingSection = () => {
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(0)
-  const [pendingIndex, setPendingIndex] = useState<number | null>(null)
-  const [fade, setFade] = useState(true)
   const [animations, setAnimations] = useState<(AnimationItem | null)[]>([null, null, null, null])
   const locale = useLocale()
   const isArabic = locale == 'ar'
-  const ANIMATION_PATHS = [
-    { path: '/assets/lottie/team_train/team_train_1.json', type: 'lottie' },
-    { path: '/assets/lottie/team_train/team_train_2.json', type: 'lottie' },
-    { path: '/assets/lottie/team_train/team_train_3.json', type: 'lottie' },
-    {
-      path: isArabic ? '/assets/lottie/team_train/team_train_4_ar.json' : '/assets/lottie/team_train/team_train_4.json',
-      type: 'lottie'
+
+  const ANIMATION_PATHS = useMemo(
+    () => [
+      { path: '/assets/lottie/team_train/team_train_1.json', type: 'lottie' },
+      { path: '/assets/lottie/team_train/team_train_2.json', type: 'lottie' },
+      { path: '/assets/lottie/team_train/team_train_3.json', type: 'lottie' },
+      {
+        path: isArabic
+          ? '/assets/lottie/team_train/team_train_4_ar.json'
+          : '/assets/lottie/team_train/team_train_4.json',
+        type: 'lottie'
+      }
+    ],
+    [isArabic]
+  )
+
+  const loadAnimation = useCallback(async (path: string) => {
+    // Перевіряємо в пам'яті
+    if (animationCache[path]) return animationCache[path]
+
+    const cached = sessionStorage.getItem(path)
+    if (cached) {
+      const parsed = JSON.parse(cached)
+      animationCache[path] = parsed
+      return parsed
     }
-  ]
+
+    try {
+      const response = await fetch(path)
+      const data = await response.json()
+
+      animationCache[path] = data
+      sessionStorage.setItem(path, JSON.stringify(data))
+
+      return data
+    } catch (error) {
+      console.error(`❌ Failed to load animation: ${path}`, error)
+      return null
+    }
+  }, [])
+
+  useEffect(() => {
+    const loadAllAnimations = async () => {
+      const loadedAnimations = await Promise.all(
+        ANIMATION_PATHS.map(async (item) => {
+          if (item.type === 'lottie') {
+            const data = await loadAnimation(item.path)
+            return { type: 'lottie' as const, data }
+          }
+          return { type: 'image' as const, data: item.path }
+        })
+      )
+      setAnimations(loadedAnimations)
+    }
+
+    loadAllAnimations()
+  }, [ANIMATION_PATHS, loadAnimation])
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -47,49 +101,33 @@ export const TeamTrainingSection = () => {
     AOS.init()
   }, [])
 
-  useEffect(() => {
-    ANIMATION_PATHS.forEach((item, idx) => {
-      if (!animations[idx]) {
-        if (item.type === 'lottie') {
-          fetch(item.path)
-            .then((res) => res.json())
-            .then((json) => {
-              setAnimations((prev) => {
-                const updated = [...prev]
-                updated[idx] = { type: 'lottie', data: json }
-                return updated
-              })
-            })
-        } else {
-          setAnimations((prev) => {
-            const updated = [...prev]
-            updated[idx] = { type: 'image', data: item.path }
-            return updated
-          })
-        }
-      }
-    })
-  }, [])
-
-  const features = [0, 1, 2, 3]
-
   const handleFeatureClick = (i: number) => {
     if (i === selectedIndex) return
-    setFade(false)
-    setPendingIndex(i)
-    setTimeout(() => {
-      setSelectedIndex(i)
-      setFade(true)
-      setPendingIndex(null)
-    }, 250)
+    setSelectedIndex(i)
   }
 
-  const renderAnimation = (animation: AnimationItem, className: string) => {
-    if (animation.type === 'lottie') {
-      return <Lottie animationData={animation.data} loop={true} className="max-lg:h-[350px]" />
-    } else {
-      return <img src={animation.data} alt="Training visualization" className={`w-full h-full object-contain`} />
-    }
+  const renderAnimations = () => {
+    return (
+      <div className="relative w-full h-full">
+        {animations.map((animation, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-300 ${
+              selectedIndex === index ? 'opacity-100 z-10' : 'opacity-0 z-0'
+            }`}
+            style={{ pointerEvents: selectedIndex === index ? 'auto' : 'none' }}>
+            {animation && animation.type === 'lottie' && (
+              <Lottie
+                animationData={animation.data}
+                loop={true}
+                className="w-full h-full"
+                style={{ width: '100%', height: '100%' }}
+              />
+            )}
+          </div>
+        ))}
+      </div>
+    )
   }
 
   return (
@@ -110,28 +148,20 @@ export const TeamTrainingSection = () => {
             {t('description')}
           </Typography>
         </div>
-        {selectedIndex !== null && animations[selectedIndex] && (
-          <div
-            className={`max-md:block hidden w-full h-auto  object-contain rounded-xl transition-opacity duration-300`}
-            style={{
-              opacity: fade ? 1 : 0,
-              pointerEvents: fade ? 'auto' : 'none'
-            }}>
-            {renderAnimation(animations[selectedIndex], 'w-full h-[300px]')}
-          </div>
-        )}
+
+        <div className="max-md:block hidden w-full h-[300px] relative">{renderAnimations()}</div>
 
         <div
-          className="grid grid-cols-2 grid-rows-2 gap-[20px]  max-[1200px]:flex max-[1200px]:flex-col "
+          className="grid grid-cols-2 grid-rows-2 gap-[20px] max-[1200px]:flex max-[1200px]:flex-col"
           data-aos={isDesktop ? 'fade' : ''}>
-          {features.map((i) => {
+          {[0, 1, 2, 3].map((i) => {
             const isSelected = selectedIndex === i
             return (
               <div
                 key={i}
                 onClick={() => handleFeatureClick(i)}
                 className={`flex px-5 py-6 gap-4 border rounded-[20px] cursor-pointer transition-all duration-500 text-black max-lg:p-4 ${
-                  isSelected ? 'bg-secondary-100 border-primary-purple' : 'bg-white border-secondary-400 '
+                  isSelected ? 'bg-secondary-100 border-primary-purple' : 'bg-white border-secondary-400'
                 }`}>
                 <div
                   className={`flex h-8 w-8 rounded-full text-body1 font-medium leading-[150%] justify-center items-center shrink-0 max-lg:h-6 max-lg:w-6 max-lg:text-caption transition-all duration-300 ${
@@ -155,22 +185,15 @@ export const TeamTrainingSection = () => {
         <button
           className="button-gradient h-[56px] rounded-full px-6 py-5 text-center
                 text-white text-caption !bg-black
-                transition-all   w-[200px] max-lg:w-[343px]">
+                transition-all w-[200px] max-lg:w-[343px]">
           {t('button')}
         </button>
       </div>
 
       <div className="flex items-start shrink-0 max-md:hidden max-lg:items-center" data-aos="fade-left">
-        {selectedIndex !== null && animations[selectedIndex] && (
-          <div
-            className="h-[570px] w-[570px] max-[1400px]:h-[500px] max-[1400px]:w-[510px] max-lg:w-[405px] max-lg:h-[410px] transition-opacity duration-300"
-            style={{
-              opacity: fade ? 1 : 0,
-              pointerEvents: fade ? 'auto' : 'none'
-            }}>
-            {renderAnimation(animations[selectedIndex], 'w-full h-full')}
-          </div>
-        )}
+        <div className="h-[570px] w-[570px] max-[1400px]:h-[500px] max-[1400px]:w-[510px] max-lg:w-[405px] max-lg:h-[410px] relative">
+          {renderAnimations()}
+        </div>
       </div>
     </section>
   )
