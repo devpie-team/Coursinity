@@ -90,7 +90,7 @@ export const TestimonialsSection = () => {
         <Typography
           variant={isDesktop ? 'h3' : 'h5'}
           weight="medium"
-          data-aos="fade"
+          data-aos={isMobile ? '' : 'fade'}
           data-aos-offset={isMobile ? '-320' : '-100'}>
           {t('title')}
         </Typography>
@@ -98,7 +98,7 @@ export const TestimonialsSection = () => {
           variant="body3"
           weight="regular"
           className="text-description"
-          data-aos="fade"
+          data-aos={isMobile ? '' : 'fade'}
           data-aos-offset={isMobile ? '-320' : '-100'}>
           {t('subtitle')}
         </Typography>
@@ -110,7 +110,7 @@ export const TestimonialsSection = () => {
           <TestimonialCard key={slide.id} data={slide} position={slide.pos} isDesktop={isDesktop} />
         ))}
       </div>
-      <div data-aos="fade" data-aos-offset={isMobile ? '-450' : '-50'}>
+      <div data-aos={isMobile ? '' : 'fade'} data-aos-offset={isMobile ? '-450' : '-50'}>
         <CarouselStepper
           total={testimonials.length}
           activeStep={activeIndex}

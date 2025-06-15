@@ -48,6 +48,20 @@ export const Loader = ({ loading }: TLoading) => {
   const bottomBlockRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    // Toggle no-scroll class on body when loading state changes
+    if (loading) {
+      document.body.classList.add('no-scroll')
+    } else {
+      document.body.classList.remove('no-scroll')
+    }
+
+    // Cleanup function to remove the class when component unmounts
+    return () => {
+      document.body.classList.remove('no-scroll')
+    }
+  }, [loading])
+
+  useEffect(() => {
     if (loading && maskRef.current && iconRef.current && topBlockRef.current && bottomBlockRef.current) {
       // wipe mask
       gsap.fromTo(
