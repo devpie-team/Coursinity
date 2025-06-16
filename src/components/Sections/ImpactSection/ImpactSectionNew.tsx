@@ -35,7 +35,6 @@ interface AnimationItem {
   className: string
 }
 
-// Cache for storing loaded animations
 const animationCache: Record<string, AnimationData> = {}
 
 export const ImpactSectionNew = () => {
@@ -45,19 +44,15 @@ export const ImpactSectionNew = () => {
   const wrapperRef = useRef<HTMLDivElement>(null)
 
   const GROUP_COUNT = 2
-  const ANIMATION_COUNT = 9 // Кількість анімацій
+  const ANIMATION_COUNT = 9
 
-  // Створюємо рефи на верхньому рівні
   const lottieRefs = Array.from({ length: ANIMATION_COUNT }, () =>
     Array.from({ length: GROUP_COUNT }, () => useRef<LottieRefCurrentProps>(null))
   )
 
-  // Function to load animation with caching
   const loadAnimation = useCallback(async (path: string): Promise<AnimationData | null> => {
-    // Перевіряємо в пам'яті
     if (animationCache[path]) return animationCache[path]
 
-    // Перевіряємо в sessionStorage
     const cached = sessionStorage.getItem(path)
     if (cached) {
       try {
@@ -84,7 +79,6 @@ export const ImpactSectionNew = () => {
     }
   }, [])
 
-  // Memoized animation paths
   const animationPaths = useMemo<AnimationPath[]>(
     () => [
       {
@@ -135,7 +129,6 @@ export const ImpactSectionNew = () => {
     [locale]
   )
 
-  // State for loaded animations
   const [animations, setAnimations] = useState<AnimationItem[]>([])
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [isTablet, setIsTablet] = useState<boolean>(false)
@@ -154,7 +147,6 @@ export const ImpactSectionNew = () => {
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
 
-  // Load all animations on mount
   useEffect(() => {
     const loadAllAnimations = async () => {
       const loadedAnimations = await Promise.all(
@@ -192,20 +184,36 @@ export const ImpactSectionNew = () => {
   }, [])
 
   useEffect(() => {
-    const playAll = () => {
+    if (animations.length === 0) return
+
+    let timeouts: NodeJS.Timeout[] = []
+    let intervals: NodeJS.Timeout[] = []
+
+    const STAGGER = 600
+
+    const playAllStaggered = () => {
       animations.forEach((_, i) => {
-        for (let group = 0; group < GROUP_COUNT; group++) {
-          const ref = lottieRefs[i][group].current
-          ref?.stop()
-          ref?.play()
-        }
+        timeouts.push(
+          setTimeout(() => {
+            for (let group = 0; group < GROUP_COUNT; group++) {
+              const ref = lottieRefs[i][group].current
+              ref?.stop()
+              ref?.play()
+            }
+          }, i * STAGGER)
+        )
       })
     }
 
-    if (animations.length > 0) {
-      playAll()
-      const interval = setInterval(playAll, 8000)
-      return () => clearInterval(interval)
+    playAllStaggered()
+
+    const intervalDuration = 3000 + (ANIMATION_COUNT - 1) * STAGGER
+    const interval = setInterval(playAllStaggered, intervalDuration)
+    intervals.push(interval)
+
+    return () => {
+      timeouts.forEach(clearTimeout)
+      intervals.forEach(clearInterval)
     }
   }, [animations])
 

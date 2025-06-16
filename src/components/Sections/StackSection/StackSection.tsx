@@ -1,44 +1,122 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Typography } from '@/components/ui'
 import { Button } from '@/components/primitives/button'
 import Stepper from '@/components/Stepper'
-
 import { StackCards } from './_components/StackCards/StackCards'
 import { useLocale, useTranslations } from 'next-intl'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export const StackSection = () => {
-  const [isMobile, setIsMobile] = useState<boolean>(false)
-  const [isTablet, setIsTablet] = useState<boolean>(false)
-  const [isDesktop, setIsDesktop] = useState<boolean>(true)
   const [activeIndex, setActiveIndex] = useState(0)
+
+  const [isVisible, setIsVisible] = useState(false)
+  const sectionRef = useRef<HTMLDivElement>(null)
   const t = useTranslations('StackSection')
-
-  useEffect(() => {
-    const checkScreenSize = () => {
-      const width = window.innerWidth
-      setIsMobile(width < 768)
-      setIsTablet(width >= 768 && width <= 1024)
-      setIsDesktop(width > 1024)
-    }
-
-    checkScreenSize()
-
-    window.addEventListener('resize', checkScreenSize)
-    return () => window.removeEventListener('resize', checkScreenSize)
-  }, [])
-  useEffect(() => {
-    AOS.init()
-  }, [])
-
   const locale = useLocale()
   const isArabic = locale == 'ar'
 
+  // Responsive state (simplified, can keep your useState version if you want)
+  const [windowWidth, setWindowWidth] = useState<number>(0)
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth)
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  const isMobile = windowWidth < 768
+  const isTablet = windowWidth >= 768 && windowWidth <= 1024
+  const isDesktop = windowWidth > 1024
+
+  // Animate scroll steps
+  useEffect(() => {
+    AOS.init()
+
+    if (!sectionRef.current) return
+
+    const ctx = gsap.context(() => {
+      const steps = 3
+      const triggerLength = (window.innerHeight * steps) / 2
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: isMobile ? 'bottom bottom' : 'top top',
+        end: `+=${triggerLength}`,
+        pin: true,
+        scrub: 1,
+        onUpdate: (self) => {
+          const progress = self.progress
+          const idx = Math.min(steps - 1, Math.floor(progress * steps + 0.15))
+          setActiveIndex(idx)
+        }
+      })
+    }, sectionRef)
+
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => t.kill())
+      ctx.revert()
+    }
+  }, [isMobile])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true)
+          } else {
+            setIsVisible(false)
+          }
+        })
+      },
+      {
+        threshold: 0.3,
+        rootMargin: '0px 0px -100px 0px'
+      }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
+  }, [])
+  const { hideHeaderForSection, showHeaderForSection } = useHeaderVisibility()
+  const sectionId = useRef(Math.random()?.toString())
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          hideHeaderForSection(sectionId.current)
+        } else {
+          showHeaderForSection(sectionId.current)
+        }
+      },
+      { threshold: 0.5 }
+    )
+    if (sectionRef.current) observer.observe(sectionRef.current)
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current)
+      showHeaderForSection(sectionId.current)
+    }
+  }, [])
+
   return (
-    <section className="flex gap-[120px] bg-primary-purple h-[900px] pt-[130px] px-[235px] text-white overflow-hidden items-start max-[1200px]:px-[140px] max-lg:px-10 max-lg:pt-20 max-lg:h-[650px]  max-lg:gap-16 max-md:flex-col max-md:px-4 max-md:gap-10 max-md:h-[970px] ">
+    <section
+      ref={sectionRef}
+      className="relative flex gap-[120px] bg-primary-purple h-[900px] pt-[130px] px-[235px] text-white overflow-hidden items-start max-[1200px]:px-[140px] max-lg:px-10 max-lg:pt-20 max-lg:h-[650px] max-lg:gap-16 max-md:flex-col max-md:px-4 max-md:gap-10 max-md:h-[970px]">
       {/* Slides */}
       <div
         className={`${
@@ -46,15 +124,21 @@ export const StackSection = () => {
         } relative max-lg:scale-[75%] transform order-1 max-md:order-2${
           isArabic && isMobile ? '' : ' max-md:translate-x-1/2'
         }`}>
-        <StackCards activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
+        <StackCards activeIndex={activeIndex} setActiveIndex={setActiveIndex} isVisible={isVisible} />
       </div>
       {/* Right section */}
-      <div className="flex flex-col gap-[210px] max-w-[410px]  relative z-40 w-1/2 max-lg:gap-[120px] justify-center h-full order-2 max-md:order-1 max-md:justify-start max-md:items-center max-md:h-[280px] max-md:w-full max-md:max-w-full max-md:text-center max-lg:justify-end pb-14">
+      <div
+        className="flex flex-col gap-[210px] max-w-[410px]  relative z-40 w-1/2 max-lg:gap-[120px] justify-center h-full order-2 max-md:order-1 max-md:justify-start max-md:items-center max-md:h-[280px] max-md:w-full max-md:max-w-full max-md:text-center max-lg:justify-end pb-14"
+        style={{
+          opacity: isVisible ? 1 : 0,
+          transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+          transitionDelay: isVisible ? '400ms' : '0ms'
+        }}>
         <div className="flex flex-col gap-8 max-lg:gap-4 w-full justify-center">
-          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade" data-aos-offset="-50">
+          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
             {t('left.title')}
           </Typography>
-          <Typography variant={isDesktop ? 'body2' : 'body3'} weight="regular" data-aos="fade" data-aos-offset="-50">
+          <Typography variant={isDesktop ? 'body2' : 'body3'} weight="regular">
             {t('left.description')}
           </Typography>
           <Button
@@ -63,15 +147,18 @@ export const StackSection = () => {
             {t('left.button')}
           </Button>
         </div>
-        {!isMobile && (
-          <div data-aos="fade" data-aos-offset="-50">
+        {/* {!isMobile && (
+          <div>
             <Stepper
               steps={3}
               activeStep={activeIndex + 1}
-              onStepClick={(stepIndex) => setActiveIndex(stepIndex - 1)}
+              onStepClick={(stepIndex) => {
+                setActiveIndexForced(stepIndex - 1)
+                setActiveIndex(stepIndex - 1)
+              }}
             />
           </div>
-        )}
+        )} */}
       </div>
     </section>
   )

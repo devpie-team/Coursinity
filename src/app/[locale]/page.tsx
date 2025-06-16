@@ -60,6 +60,7 @@ export default function HomePage() {
     <>
       {loading && <Loader loading={loading} />}
       <Header />
+
       <HeroSection loading={loading} />
       <FutureSection />
       <StackSection />
