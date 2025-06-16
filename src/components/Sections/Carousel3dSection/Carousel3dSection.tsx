@@ -2,11 +2,13 @@
 
 import { useRef, useEffect, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { PerformanceMonitor } from '@react-three/drei'
 import { SceneContent } from './_components/SceneContent/SceneContent'
 import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
+import { EffectComposer, Glitch } from '@react-three/postprocessing'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -69,7 +71,6 @@ export function Carousel3dSection() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        console.log(entry.isIntersecting)
         if (entry.isIntersecting) {
           hideHeaderForSection(sectionId.current)
         } else {
@@ -97,6 +98,13 @@ export function Carousel3dSection() {
           camera={{ position: [0, 0, isMobile ? 1.4 : 1.65], fov: isMobile ? 75 : 70 }}
           style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
           <PerformanceMonitor onIncline={() => setDpr(2)} onDecline={() => setDpr(1)}>
+            <OrbitControls
+              enableZoom={false}
+              enablePan={false}
+              minPolarAngle={Math.PI / 4}
+              maxPolarAngle={Math.PI / 2}
+              rotateSpeed={0.5}
+            />
             <SceneContent isMobile={isMobile} scrollProgressRef={scrollProxy} slidesData={slidesData} />
           </PerformanceMonitor>
         </Canvas>

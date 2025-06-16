@@ -35,10 +35,10 @@ export const SceneContent = ({ isMobile, scrollProgressRef, slidesData }: SceneC
 
   const spiralParams: SpiralParams = useMemo(
     () => ({
-      radius: isMobile ? 0.6 : 1,
-      verticalSpacing: 0.15,
+      radius: isMobile ? 0.6 : 1.4,
+      verticalSpacing: 0.25,
       spiralTurns: isMobile ? 2 : 1.5,
-      circleCenter: [0, -0.1, 0],
+      circleCenter: [0, -0.1, -0.4],
       totalSlides: slidesData.length,
       startOffset: isMobile ? 8 : 10,
       endOffset: isMobile ? 8 : 10
@@ -62,7 +62,7 @@ export const SceneContent = ({ isMobile, scrollProgressRef, slidesData }: SceneC
 
   useFrame(() => {
     const progress = scrollProgressRef.current.value
-    const newIndex = Math.floor((progress / slidesData.length) * (slidesData.length - 1))
+    const newIndex = Math.round((progress / slidesData.length) * (slidesData.length - 1))
     if (newIndex !== currentSlideIndex) setCurrentSlideIndex(newIndex)
 
     const currentTime = Date.now()
@@ -105,6 +105,7 @@ export const SceneContent = ({ isMobile, scrollProgressRef, slidesData }: SceneC
           fixedPositions={fixedPositions}
           isMobile={isMobile}
           spiralParams={spiralParams}
+          currentSlideIndex={currentSlideIndex}
         />
       ))}
     </>
