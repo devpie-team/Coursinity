@@ -98,13 +98,13 @@ export function Carousel3dSection() {
           camera={{ position: [0, 0, isMobile ? 1.4 : 1.65], fov: isMobile ? 75 : 70 }}
           style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
           <PerformanceMonitor onIncline={() => setDpr(2)} onDecline={() => setDpr(1)}>
-            <OrbitControls
+            {/*  <OrbitControls
               enableZoom={false}
               enablePan={false}
               minPolarAngle={Math.PI / 4}
               maxPolarAngle={Math.PI / 2}
               rotateSpeed={0.5}
-            />
+            /> */}
             <SceneContent isMobile={isMobile} scrollProgressRef={scrollProxy} slidesData={slidesData} />
           </PerformanceMonitor>
         </Canvas>

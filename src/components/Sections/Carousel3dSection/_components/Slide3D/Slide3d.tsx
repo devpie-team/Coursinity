@@ -1,18 +1,29 @@
-import { useRef, useState, useMemo, useEffect } from 'react'
+import { useRef, useState, useMemo } from 'react'
 import * as THREE from 'three'
 import { useFrame, useThree } from '@react-three/fiber'
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js'
 import { FontLoader } from 'three/addons/loaders/FontLoader.js'
+import { RippleEffect } from './RippleEffect'
 
 type Slide3DProps = {
   text: string
+  baseColor?: THREE.ColorRepresentation
+  rippleColor?: THREE.ColorRepresentation
   scale?: number | [number, number, number]
   isActive?: boolean
   offsetFromCenter?: number
   side?: 'left' | 'right'
 }
 
-export function Slide3D({ text, scale = 1, isActive = false, offsetFromCenter, side }: Slide3DProps) {
+export function Slide3D({
+  text,
+  baseColor = '#4b5669',
+  rippleColor = '#4b5669',
+  scale = 1,
+  isActive = false,
+  offsetFromCenter,
+  side
+}: Slide3DProps) {
   const groupRef = useRef<THREE.Group>(null!)
   const meshRef = useRef<THREE.Mesh>(null)
   const textMeshRef = useRef<THREE.Mesh>(null)
@@ -26,65 +37,14 @@ export function Slide3D({ text, scale = 1, isActive = false, offsetFromCenter, s
   const currentTextOpacity = useRef(1)
   const currentTextFontSize = useRef(0.08)
 
-  // --- Створення геометрії (без змін) ---
-  const roundedRectShape = useMemo(() => {
-    const shape = new THREE.Shape()
-    const width = 0.85
-    const height = 0.6
-    const radius = 0.05
-    shape.moveTo(-width / 2 + radius, -height / 2)
-    shape.lineTo(width / 2 - radius, -height / 2)
-    shape.quadraticCurveTo(width / 2, -height / 2, width / 2, -height / 2 + radius)
-    shape.lineTo(width / 2, height / 2 - radius)
-    shape.quadraticCurveTo(width / 2, height / 2, width / 2 - radius, height / 2)
-    shape.lineTo(-width / 2 + radius, height / 2)
-    shape.quadraticCurveTo(-width / 2, height / 2, -width / 2, height / 2 - radius)
-    shape.lineTo(-width / 2, -height / 2 + radius)
-    shape.quadraticCurveTo(-width / 2, -height / 2, -width / 2 + radius, -height / 2)
-    return shape
-  }, [])
+  // Створюємо кольори
+  const base = useMemo(() => new THREE.Color(baseColor), [baseColor])
+  const ripple = useMemo(() => new THREE.Color(rippleColor), [rippleColor])
 
-  const geometry = useMemo(
-    () =>
-      new THREE.ExtrudeGeometry(roundedRectShape, {
-        depth: 0.01,
-        bevelEnabled: true,
-        bevelSize: 0.0,
-        bevelThickness: 0.005,
-        bevelSegments: 2,
-        bevelOffset: 0
-      }),
-    [roundedRectShape]
-  )
-
-  // Створюємо геометрію тексту
-  const textGeometry = useMemo(() => {
-    const loader = new FontLoader()
-    const font = loader.parse(require('three/examples/fonts/helvetiker_regular.typeface.json'))
-
-    const geometry = new TextGeometry(text, {
-      font: font,
-      size: 0.06,
-      depth: 0.0001,
-      curveSegments: 12,
-      bevelEnabled: true,
-      bevelThickness: 0.0001,
-      bevelSize: 0.002,
-
-      bevelSegments: 2
-    })
-
-    // Центруємо геометрію
-    geometry.computeBoundingBox()
-    const boundingBox = geometry.boundingBox!
-    const centerOffset = -0.5 * (boundingBox.max.x - boundingBox.min.x)
-    geometry.translate(centerOffset, 0, 0)
-
-    return geometry
-  }, [text])
-
-  useFrame(() => {
+  useFrame((state) => {
     if (!groupRef.current) return
+
+    const t = state.clock.getElapsedTime()
 
     const worldPosition = new THREE.Vector3()
     groupRef.current.getWorldPosition(worldPosition)
@@ -116,10 +76,63 @@ export function Slide3D({ text, scale = 1, isActive = false, offsetFromCenter, s
       textMeshRef.current.scale.setScalar(currentTextFontSize.current / 0.08)
       materialRef.current.opacity = currentTextOpacity.current
     }
-
-    /*  const targetScale = isHovered ? baseScale * 1.15 : isActive ? baseScale * 1.1 : baseScale
-    groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1) */
   })
+
+  // --- Створення геометрії (без змін) ---
+  const roundedRectShape = useMemo(() => {
+    const shape = new THREE.Shape()
+    const width = 0.85
+    const height = 0.6
+    const radius = 0.05
+    shape.moveTo(-width / 2 + radius, -height / 2)
+    shape.lineTo(width / 2 - radius, -height / 2)
+    shape.quadraticCurveTo(width / 2, -height / 2, width / 2, -height / 2 + radius)
+    shape.lineTo(width / 2, height / 2 - radius)
+    shape.quadraticCurveTo(width / 2, height / 2, width / 2 - radius, height / 2)
+    shape.lineTo(-width / 2 + radius, height / 2)
+    shape.quadraticCurveTo(-width / 2, height / 2, -width / 2, height / 2 - radius)
+    shape.lineTo(-width / 2, -height / 2 + radius)
+    shape.quadraticCurveTo(-width / 2, -height / 2, -width / 2 + radius, -height / 2)
+    return shape
+  }, [])
+
+  const geometry = useMemo(
+    () =>
+      new THREE.ExtrudeGeometry(roundedRectShape, {
+        depth: 0.01,
+        bevelEnabled: true,
+        bevelSize: 0.015,
+        bevelThickness: 0.005,
+        bevelSegments: 2,
+        bevelOffset: 0
+      }),
+    [roundedRectShape]
+  )
+
+  // Створюємо геометрію тексту
+  const textGeometry = useMemo(() => {
+    const loader = new FontLoader()
+    const font = loader.parse(require('three/examples/fonts/helvetiker_regular.typeface.json'))
+
+    const geometry = new TextGeometry(text, {
+      font: font,
+      size: 0.06,
+      depth: 0.0001,
+      curveSegments: 12,
+      bevelEnabled: true,
+      bevelThickness: 0.0001,
+      bevelSize: 0.002,
+      bevelSegments: 2
+    })
+
+    // Центруємо геометрію
+    geometry.computeBoundingBox()
+    const boundingBox = geometry.boundingBox!
+    const centerOffset = -0.5 * (boundingBox.max.x - boundingBox.min.x)
+    geometry.translate(centerOffset, 0, 0)
+
+    return geometry
+  }, [text])
 
   return (
     <group
@@ -127,21 +140,25 @@ export function Slide3D({ text, scale = 1, isActive = false, offsetFromCenter, s
       scale={scale}
       onPointerOver={() => setIsHovered(true)}
       onPointerOut={() => setIsHovered(false)}>
+      {/* Фоновий меш */}
       <mesh ref={meshRef} geometry={geometry}>
         <meshPhysicalMaterial
-          color={'#4b5669'}
+          color={base}
           metalness={1}
           roughness={0.5}
           clearcoat={0.8}
           clearcoatRoughness={1}
           reflectivity={0.5}
           transparent={true}
-          opacity={0.7}
+          opacity={0.3}
           toneMapped={true}
-          emissive={'#03034f'} // Світіння
+          emissive={base}
           emissiveIntensity={0.01}
         />
       </mesh>
+
+      {/* Хвилі */}
+      <RippleEffect geometry={geometry} baseColor={base} rippleColor={ripple} />
 
       {/* Text with TextGeometry */}
       <mesh ref={textMeshRef} geometry={textGeometry} position={[0, 0, 0.06]}>
