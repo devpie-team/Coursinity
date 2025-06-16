@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -12,7 +12,6 @@ import { ClipboardIcon } from '@/components/icons/ClipboardIcon'
 import { GridEditIcon } from '@/components/icons/GridEditIcon'
 import { ZapIcon } from '@/components/icons/ZapIcon'
 import { cn } from '@/lib/utils'
-import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
 
 export const FutureSection = () => {
   const t = useTranslations('FutureSection')
@@ -20,30 +19,6 @@ export const FutureSection = () => {
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(false)
   const [windowWidth, setWindowWidth] = useState(0)
-
-  const { hideHeaderForSection, showHeaderForSection } = useHeaderVisibility()
-  const sectionId = useRef(Math.random()?.toString())
-  const sectionRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          hideHeaderForSection(sectionId.current)
-        } else {
-          showHeaderForSection(sectionId.current)
-        }
-      },
-      { threshold: 0.5 }
-    )
-    if (sectionRef.current) observer.observe(sectionRef.current)
-    return () => {
-      if (sectionRef.current) observer.unobserve(sectionRef.current)
-      showHeaderForSection(sectionId.current)
-    }
-  }, [])
-
-  console.log(11)
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -176,9 +151,7 @@ export const FutureSection = () => {
       <div>
         <LogoSlider />
       </div>
-      <div
-        className="relative flex items-center justify-center text-center w-full h-[100vh] overflow-hidden future-section"
-        ref={sectionRef}>
+      <div className="relative flex items-center justify-center text-center w-full h-[100vh] overflow-hidden future-section">
         <div className="flex flex-col max-w-full w-[432px] scaleText opacityText max-lg:w-[372px] max-md:w-[252px]">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
             {t('title')}
