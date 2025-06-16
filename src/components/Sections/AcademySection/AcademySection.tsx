@@ -3,7 +3,7 @@ import Lottie from 'lottie-web'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Typography } from '@/components/ui'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Button } from '@/components/primitives/button'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -98,6 +98,8 @@ export const AcademySection = () => {
     AOS.init()
   }, [])
 
+  const locale = useLocale()
+
   useEffect(() => {
     if (!animationContainerRef.current) return
 
@@ -114,8 +116,8 @@ export const AcademySection = () => {
   }, [])
 
   return (
-    <section className="bg-white py-[140px] flex justify-center items-center flex-col gap-12 px-4">
-      <div className="flex flex-col gap-4 text-center">
+    <section className="bg-white py-[140px] flex justify-center items-center flex-col gap-12 max-md:pt-20">
+      <div className="flex flex-col gap-4 text-center px-4">
         <Typography
           weight="medium"
           variant={isDesktop ? 'h3' : 'h5'}
@@ -133,7 +135,7 @@ export const AcademySection = () => {
         </Typography>
       </div>
       <div className="flex flex-col items-center gap-8">
-        <div ref={animationContainerRef} className="w-full h-[900px] max-lg:h-[600px] max-md:h-[400px]" />
+        <div ref={animationContainerRef} className="w-full" />
         <Button variant="purple">{t('button')}</Button>
       </div>
     </section>

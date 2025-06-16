@@ -1,5 +1,5 @@
 'use client'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
 
 type ToggleLanguageProps = {
@@ -10,24 +10,24 @@ type ToggleLanguageProps = {
 const ToggleLanguage = ({ value, onToggle }: ToggleLanguageProps) => {
   const t = useTranslations('Header')
 
-  const pathname = usePathname()
-  const isArabicPath = pathname.startsWith('/ar')
+  const locale = useLocale()
+  const isArabicPath = locale == 'ar'
 
   return (
     <div
+      dir="ltr"
       onClick={() => onToggle(!value)}
       className="relative w-[108px] h-[56px] rounded-full border border-gray-300 bg-white flex items-center justify-between text-sm font-semibold cursor-pointer">
-      <div className="flex justify-between px-[18px] w-full z-10">
-        <span
-          className={`text-base leading-6 font-medium transition-colors ${
-            !isArabicPath && value ? 'text-black' : 'text-white'
-          }`}>
+      <div
+        className={
+          isArabicPath
+            ? 'flex justify-between pl-[20px] pr-[10px] w-full z-10'
+            : 'flex justify-between px-[18px] w-full z-10'
+        }>
+        <span className={`text-base leading-6 font-medium transition-colors ${value ? 'text-black' : 'text-white'}`}>
           {t('en')}
         </span>
-        <span
-          className={`text-base leading-6 font-medium transition-colors ${
-            !isArabicPath && value ? 'text-white' : 'text-black'
-          }`}>
+        <span className={`text-base leading-6 font-medium transition-colors ${value ? 'text-white' : 'text-black'}`}>
           {t('ar')}
         </span>
       </div>

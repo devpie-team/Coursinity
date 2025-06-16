@@ -1,4 +1,5 @@
 import { ChevronLeftIcon } from '@/components/icons/ChevronLeftIcon'
+import { useLocale } from 'next-intl'
 
 type CarouselStepperProps = {
   total: number
@@ -17,6 +18,8 @@ export const CarouselStepper = ({ total, activeStep, onPrev, onNext, onStepClick
   const windowEnd = Math.min(windowStart + windowSize, total)
 
   dots = Array.from({ length: windowEnd - windowStart }, (_, i) => windowStart + i)
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
 
   return (
     <div className="flex items-center gap-6 z-20">
@@ -31,7 +34,7 @@ export const CarouselStepper = ({ total, activeStep, onPrev, onNext, onStepClick
             }
           `}
         disabled={activeStep === 0}>
-        <ChevronLeftIcon stroke={activeStep === 0 ? '#D0D5DD' : '#1C8DC1'} />
+        <ChevronLeftIcon stroke={activeStep === 0 ? '#D0D5DD' : '#1C8DC1'} className={isArabic ? '-scale-x-100' : ''} />
       </button>
 
       <div className="flex gap-3">
@@ -60,7 +63,10 @@ export const CarouselStepper = ({ total, activeStep, onPrev, onNext, onStepClick
             }
           `}
         disabled={activeStep === total - 1}>
-        <ChevronLeftIcon className="-scale-x-100" stroke={activeStep === total - 1 ? '#D0D5DD' : '#1C8DC1'} />
+        <ChevronLeftIcon
+          className={isArabic ? '' : '-scale-x-100'}
+          stroke={activeStep === total - 1 ? '#D0D5DD' : '#1C8DC1'}
+        />
       </button>
     </div>
   )

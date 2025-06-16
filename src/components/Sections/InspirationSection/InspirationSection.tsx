@@ -14,14 +14,16 @@ import { useTranslations } from 'next-intl'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 const benefits = [
   { icon: <GamingPadIcon /> },
   { icon: <EducationProperty2Icon /> },
-  { icon: <BriefCaseIcon /> },
-  { icon: <BookCheckIcon /> },
+  { icon: <BriefCaseIcon color="#1C8DC1" /> },
+  { icon: <BookCheckIcon color="#1C8DC1" /> },
   { icon: <EducationProperty5Icon /> },
-  { icon: <DiplomaIcon fill="primary-blue" /> }
+  { icon: <DiplomaIcon /> }
 ]
 
 export const InspirationSection = () => {
@@ -109,7 +111,16 @@ export const InspirationSection = () => {
   }, [])
 
   useEffect(() => {
-    if (!sectionRef.current) return
+    if (isMobile) {
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out'
+      })
+    }
+  }, [isMobile])
+
+  useEffect(() => {
+    if (!sectionRef.current || isMobile) return
 
     cardRefs.current.forEach((card, idx) => {
       if (card) gsap.set(card, { height: idx === 0 ? open_height : CLOSED_HEIGHT })
@@ -130,7 +141,6 @@ export const InspirationSection = () => {
       if (cardRefs.current[i + 1]) {
         const label = `switch-${i}`
         tl.addLabel(label)
-
         tl.to(
           cardRefs.current[i],
           {
@@ -149,38 +159,42 @@ export const InspirationSection = () => {
         )
       }
     })
-  }, [])
+
+    return () => {
+      tl.scrollTrigger?.kill()
+      tl.kill()
+    }
+  }, [isMobile])
 
   if (isMobile) {
     return (
-      <section
-        ref={sectionRef}
-        className="flex bg-black h-[952px] p-[140px] gap-20 max-[1300px]:p-10 items-center justify-center max-lg:gap-8 max-lg:px-6 flex-col ">
-        <div className="max-w-[270px] shrink flex flex-col gap-4">
-          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
+      <section ref={sectionRef} className="flex bg-black py-20 px-4 gap-8  items-center flex-col max-md:pb-0">
+        <div className="  flex flex-col gap-4" data-aos="fade" data-aos-offset="-50">
+          <Typography variant="h5" weight="medium" className="text-white">
             {t('title')}
           </Typography>
           <Typography variant="body3" weight="regular" className="text-white opacity-80">
             {t('description')}
           </Typography>
         </div>
-        <div className="flex flex-col gap-[10px] border border-white border-opacity-15 p-6 rounded-3xl min-w-[440px] max-w-[500px] flex-1 max-md:min-w-[343px] max-md:max-w-[343px]">
+        <div className="flex flex-col gap-[10px] border border-white border-opacity-15 p-6 rounded-2xl w-full ">
           {benefits.map((item, idx) => (
-            <ExpandableCard
-              key={t(`benefits.${idx}.title`)}
-              title={t(`benefits.${idx}.title`)}
-              description={t(`benefits.${idx}.description`)}
-              icon={React.cloneElement(item.icon, { size: iconSize })}
-              innerRef={(el) => {
-                cardRefs.current[idx] = el
-              }}
-              isOpen={openStates[idx]}
-              closedHeight={CLOSED_HEIGHT}
-              openHeight={open_height}
-            />
+            <div key={t(`benefits.${idx}.title`)} data-aos="fade-up " data-aos-offset="-30">
+              <ExpandableCard
+                title={t(`benefits.${idx}.title`)}
+                description={t(`benefits.${idx}.description`)}
+                icon={React.cloneElement(item.icon, { size: '24px' })}
+                innerRef={(el) => {
+                  cardRefs.current[idx] = el
+                }}
+                isOpen={true}
+                closedHeight={CLOSED_HEIGHT}
+                openHeight={open_height}
+              />
+            </div>
           ))}
         </div>
-        <div className="flex flex-col gap-6 text-center">
+        <div className="flex flex-col gap-6 text-center justify-center" data-aos="fade" data-aos-offset="-50">
           <Typography variant="body3" weight="medium" className="text-white">
             {t('successMetric')}
           </Typography>
@@ -248,7 +262,7 @@ export const InspirationSection = () => {
               }
             : {}
         }>
-        <div className=" shrink min-[1150px]:hidden ">
+        <div className="shrink min1150:hidden">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
             {t('title')}
           </Typography>

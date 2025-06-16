@@ -20,8 +20,9 @@ import { DataDrivenSection } from '@/components/Sections/DataDrivenSection'
 import { TestimonialsSection } from '@/components/Sections/TestimonialsSection'
 import { Carousel3dSection } from '@/components/Sections/Carousel3dSection'
 import { ImpactSectionNew } from '@/components/Sections/ImpactSection'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import AOS from 'aos'
+import { Loader } from '@/components/Loader'
 
 export default function HomePage() {
   const t = useTranslations('HomePage')
@@ -35,24 +36,45 @@ export default function HomePage() {
       mirror: true
     })
   }, [])
+
+  const [loading, setLoading] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+      setIsTablet(width >= 768 && width <= 1024)
+    }
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), isMobile ? 6000 : isTablet ? 6500 : 5700)
+    return () => clearTimeout(timer)
+  }, [isMobile, isTablet])
+
   return (
     <>
-      {/* <Header />
-      <HeroSection />
+      {loading && <Loader loading={loading} />}
+      <Header />
+      <HeroSection loading={loading} />
       <FutureSection />
       <StackSection />
       <GrowthStepSection />
-      <AiTeamSection /> */}
+      <AiTeamSection />
       <Carousel3dSection />
       <InspirationSection />
       <BuildSection />
-      {/*  <ImpactSectionNew />
+      <ImpactSectionNew />
       <AcademySection />
       <TeamTrainingSection />
       <DataDrivenSection />
       <FeaturesSection />
       <TestimonialsSection />
-      <Footer /> */}
+      <Footer />
     </>
   )
 }

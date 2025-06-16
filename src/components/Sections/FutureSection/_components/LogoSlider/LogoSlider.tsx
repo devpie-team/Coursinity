@@ -55,7 +55,7 @@ export const LogoSlider = () => {
   return (
     <div className="flex justify-center px-[150px] py-10 max-lg:px-6 max-lg:py-8 max-md:px-4">
       <div
-        className="relative h-[200px] border-4 border-secondary-400 rounded-[40px] w-full overflow-hidden max-lg:h-[100px] transition-all duration-500 ease-in-out cursor-pointer hover:shadow-lg"
+        className="relative h-[200px] border-4 border-secondary-400 rounded-[40px] w-full overflow-hidden max-lg:h-[100px] transition-all duration-500 ease-in-out cursor-pointer hover:shadow-lg max-md:rounded-[24px]"
         onMouseEnter={() => setIsContainerHovered(true)}
         onMouseLeave={() => setIsContainerHovered(false)}>
         <div

@@ -54,13 +54,13 @@ export const DataDrivenSection = () => {
   }, [])
 
   return (
-    <section className="bg-white p-[140px] pt-0 flex justify-center items-center gap-[180px] max-lg:px-6 max-lg:pt-20 max-lg:pb-0 max-md:flex-col max-lg:gap-10 max-md:px-4">
+    <section className="bg-white p-[140px] pt-0 flex justify-center items-center gap-[180px] max-lg:px-6 max-lg:pt-20 max-lg:pb-0 max-md:flex-col max-lg:gap-10 max-md:px-4 ">
       {/* Left side */}
       <div className="flex flex-col gap-4 max-w-[480px] ">
         <Typography
           variant={isDesktop ? 'h3' : 'h5'}
           weight="medium"
-          data-aos={isDesktop ? 'fade' : ''}
+          data-aos={isMobile ? '' : 'fade'}
           data-aos-offset="-50">
           {t('left.title')}
         </Typography>
@@ -68,78 +68,85 @@ export const DataDrivenSection = () => {
           variant="body3"
           weight="regular"
           className="text-description"
-          data-aos={isDesktop ? 'fade' : ''}
+          data-aos={isMobile ? '' : 'fade'}
           data-aos-offset="-50">
           {t('left.description')}
         </Typography>
       </div>
 
       {isTablet || isMobile ? (
-        <div className="w-full max-w-[373px] relative">
-          <Swiper
-            modules={[Autoplay]}
-            autoplay={{ delay: 3000 }}
-            loop
-            slidesPerView={1}
-            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}>
-            {slides.map((slide, index) => (
-              <SwiperSlide key={index}>
-                <div className="flex flex-col gap-8 bg-secondary-300 rounded-[20px] relative overflow-hidden justify-center items-center p-[35px] pb-[76px] max-md:p-5 max-md:pb-[76px] h-[400px]">
-                  <img
-                    src="/assets/data_driven/data_driven_1.png"
-                    alt="bg"
-                    className="absolute top-0 object-cover pointer-events-none"
-                  />
-                  <img
-                    src={`/assets/data_driven/data_driven_${index + 2}.png`}
-                    alt={`slide_${index}`}
-                    className="relative object-cover h-[195px] w-[270px]"
-                  />
-                  <div className="flex flex-col justify-center items-center text-center">
-                    <div className="flex flex-col gap-4 mb-4">
-                      <Typography variant="body1" weight="medium">
-                        {slide.title}
-                      </Typography>
-                      <Typography variant="caption" weight="regular" className="text-description">
-                        {slide.description}
-                      </Typography>
+        <div className="relative w-full max-w-[373px]">
+          <div className="relative flex flex-col gap-8 bg-secondary-300 rounded-[20px] overflow-hidden justify-center items-center p-[35px] pb-[76px] max-md:p-5 max-md:pb-[50px] ">
+            <img
+              src="/assets/data_driven/data_driven_1.png"
+              alt="bg"
+              className="absolute inset-0 object-cover pointer-events-none z-0"
+            />
+
+            <Swiper
+              modules={[Autoplay]}
+              autoplay={{ delay: 3000 }}
+              loop
+              slidesPerView={1}
+              onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+              className="relative z-10 w-full">
+              {slides.map((slide, index) => (
+                <SwiperSlide key={index}>
+                  <div className="flex flex-col gap-8 justify-center items-center ">
+                    <img
+                      src={`/assets/data_driven/data_driven_${index + 2}.png`}
+                      alt={`slide_${index}`}
+                      className="relative object-cover h-[195px] w-[270px]"
+                    />
+                    <div className="flex flex-col justify-center items-center text-center">
+                      <div className="flex flex-col gap-4 mb-4">
+                        <Typography variant="body1" weight="medium">
+                          {slide.title}
+                        </Typography>
+                        <Typography variant="caption" weight="regular" className="text-description">
+                          {slide.description}
+                        </Typography>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <div className="absolute bottom-7 left-0 right-0 z-10 flex gap-[10px] justify-center">
-            {slides.map((_, dotIndex) => (
-              <div
-                key={dotIndex}
-                className={clsx(
-                  'h-2 w-2 rounded-full transition-colors duration-300 bg-primary-blue',
-                  dotIndex === activeIndex ? 'opacity-100' : 'opacity-40'
-                )}
-              />
-            ))}
+                </SwiperSlide>
+              ))}
+            </Swiper>
+
+            <div className="absolute bottom-7 left-0 right-0 z-10 flex gap-[10px] justify-center">
+              {slides.map((_, dotIndex) => (
+                <div
+                  key={dotIndex}
+                  className={clsx(
+                    'h-2 w-2 rounded-full transition-colors duration-300 bg-primary-blue',
+                    dotIndex === activeIndex ? 'opacity-100' : 'opacity-40'
+                  )}
+                />
+              ))}
+            </div>
           </div>
         </div>
       ) : (
         <div
-          className="flex flex-col gap-8 shrink-0 h-[500px] w-[480px] bg-secondary-300 rounded-[20px] relative overflow-hidden justify-center items-center p-[50px] pb-[28px]"
+          className="relative flex flex-col gap-8 shrink-0 h-[500px] w-[480px] bg-secondary-300 rounded-[20px] overflow-hidden justify-center items-center p-[50px] pb-[28px]"
           data-aos="fade">
           <img
             src="/assets/data_driven/data_driven_1.png"
             alt="bg"
-            className="absolute top-0 object-cover pointer-events-none"
+            className="absolute inset-0 object-cover pointer-events-none z-0"
           />
+
           <img
             key={activeIndex}
             src={`/assets/data_driven/data_driven_${activeIndex + 2}.png`}
             alt={`slide_${activeIndex}`}
             className={clsx(
-              'relative object-cover h-[270px] w-[380px] transition-opacity duration-500',
+              'relative z-10 object-cover h-[270px] w-[380px] transition-opacity duration-500',
               fade ? 'opacity-100' : 'opacity-0'
             )}
           />
-          <div className="flex flex-col justify-center items-center text-center gap-5">
+
+          <div className="relative z-10 flex flex-col justify-center items-center text-center gap-5">
             <div
               className={clsx(
                 'flex flex-col gap-4 transition-opacity duration-500',
@@ -152,6 +159,7 @@ export const DataDrivenSection = () => {
                 {current.description}
               </Typography>
             </div>
+
             <div className="flex gap-[10px] justify-center">
               {slides.map((_, dotIndex) => (
                 <button

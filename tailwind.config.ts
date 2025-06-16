@@ -58,6 +58,10 @@ export default {
           rgba(165, 120, 242, 0.64) 35%,
           rgba(30, 141, 194, 0.64) 100%
         )`
+      },
+      screens: {
+        'min1150': '1150px',
+        
       }
     }
   },
@@ -67,7 +71,8 @@ export default {
     { pattern: /^max-h-.*/ },
     { pattern: /^w-.*/ },
     { pattern: /^min-w-.*/ },
-    { pattern: /^max-w-.*/ }
+    { pattern: /^max-w-.*/ },
+    'min-[1150px]:hidden'
   ],
   plugins: [require('tailwindcss-animate')]
 } satisfies Config

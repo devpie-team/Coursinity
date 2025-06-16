@@ -23,21 +23,23 @@ export const MobileMenu = () => {
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 bg-white px-6 py-4 flex flex-col justify-between">
-          <div className="flex justify-between items-center">
-            <img src="/assets/logos/mobileLogo.png" alt="Logo" className="h-[14px] w-[126px]" />
-            <button onClick={() => setIsOpen(false)}>
-              <X className="w-6 h-6" />
-            </button>
+        <div className="fixed inset-0 z-50 bg-white px-6 py-6 flex flex-col justify-between md:h-[300px]">
+          <div className="flex flex-col gap-8 items-center">
+            <div className="flex justify-between items-center w-full">
+              <img src="/assets/logos/mobileLogo.png" alt="Logo" className="h-[14px] w-[126px]" />
+              <button onClick={() => setIsOpen(false)}>
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <ToggleLanguage
+              value={locale !== 'en'}
+              onToggle={(isEn) => {
+                const newLocale = !isEn ? 'en' : 'ar'
+                const newPath = `/${newLocale}${pathname.slice(locale.length + 1)}`
+                router.replace(newPath)
+              }}
+            />
           </div>
-          <ToggleLanguage
-            value={locale !== 'en'}
-            onToggle={(isEn) => {
-              const newLocale = !isEn ? 'en' : 'ar'
-              const newPath = `/${newLocale}${pathname.slice(locale.length + 1)}`
-              router.replace(newPath)
-            }}
-          />
           <Button variant="purple">{t('button')}</Button>
         </div>
       )}

@@ -1,43 +1,63 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useLayoutEffect } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
 import { gsap } from 'gsap'
 import ToggleLanguage from '../ToggleLanguage'
-import { MobileMenu } from './MobileMenu'
 import { useHeaderVisibility } from './HeaderVisibilityContext'
+import { Button } from '../primitives/button'
+import { X } from 'lucide-react'
+import { TreeLines } from '../icons'
 
 export const Header = () => {
   const t = useTranslations('Header')
   const headerRef = useRef<HTMLDivElement>(null)
-  const [lastScroll, setLastScroll] = useState(0)
 
+  // --- State Management ---
+  const [isOpen, setIsOpen] = useState(false) // State for mobile menu
+  const [start, setStart] = useState(true) // Is user at the top of the page?
+  const [isScrolledDown, setIsScrolledDown] = useState(false) // Is user scrolling down?
+  const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
+  const [isDesktop, setIsDesktop] = useState(true)
+
+  // --- Refs ---
+  const lastScrollRef = useRef(0) // To track scroll position without re-renders
+
+  // --- Hooks ---
   const locale = useLocale()
   const pathname = usePathname()
   const router = useRouter()
+  const { isVisible } = useHeaderVisibility() // From context
 
+  // --- Effect for Scroll Handling (Optimized) ---
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY
-      if (headerRef.current) {
-        if (currentScroll > lastScroll && currentScroll > 50) {
-          gsap.to(headerRef.current, { opacity: 0, duration: 0.7, ease: 'power2.out' })
-        } else {
-          gsap.to(headerRef.current, { opacity: 1, duration: 0.7, ease: 'power2.out' })
-        }
+
+      // Update 'start' state for background/shadow
+      setStart(currentScroll <= 10)
+
+      // Determine scroll direction and hide/show header
+      // Hide if: scrolling down, past 50px, menu is closed, or context says invisible
+      if ((currentScroll > lastScrollRef.current && currentScroll > 50 && !isOpen) || (!isVisible && !isOpen)) {
+        setIsScrolledDown(true)
+      } else {
+        setIsScrolledDown(false)
       }
-      setLastScroll(currentScroll)
+
+      // Update last scroll position
+      lastScrollRef.current = currentScroll
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [lastScroll])
+    // Dependencies are external states that should trigger a re-evaluation of the logic
+  }, [isOpen, isVisible])
 
-  const [isMobile, setIsMobile] = useState<boolean>(false)
-  const [isTablet, setIsTablet] = useState<boolean>(false)
-  const [isDesktop, setIsDesktop] = useState<boolean>(true)
-
+  // --- Effect for Screen Size ---
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth
@@ -45,20 +65,44 @@ export const Header = () => {
       setIsTablet(width >= 768 && width <= 1024)
       setIsDesktop(width > 1024)
     }
-
     checkScreenSize()
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
-  const { isVisible } = useHeaderVisibility()
-  if (!isVisible) return null
+
+  // --- Effect for Body Scroll Lock ---
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('overflow-hidden')
+    } else {
+      document.body.classList.remove('overflow-hidden')
+    }
+  }, [isOpen])
+
+  const headerClasses = [
+    'fixed',
+    'top-0',
+    'left-0',
+    'w-full',
+    'z-50',
+    'px-[115px]',
+    'max-lg:px-6',
+    'flex',
+    'items-center',
+    'justify-between',
+    'py-[20px]',
+    'transition-transform', // Added for CSS animation
+    'duration-500', // Animation duration
+    'ease-in-out', // Animation timing function
+    isScrolledDown ? '-translate-y-full' : 'translate-y-0', // CSS class for hiding/showing
+    !start || isOpen ? 'bg-white' : 'bg-transparent',
+    !start && 'shadow-[0px_12px_30px_0px_#0000000D]'
+  ]
+    .filter(Boolean)
+    .join(' ')
 
   return (
-    <header
-      ref={headerRef}
-      className="fixed bg-white top-0 left-0 w-full z-50 px-[115px] max-lg:px-6 flex items-center
-    justify-between py-[20px]"
-      style={{ boxShadow: '0px 12px 30px 0px #0000000D' }}>
+    <header ref={headerRef} className={headerClasses}>
       <img
         src={`/assets/logos/${isTablet || isMobile ? 'mobileLogo' : 'logos'}.png`}
         alt="Logo"
@@ -75,16 +119,32 @@ export const Header = () => {
               router.replace(newPath)
             }}
           />
-
-          <button
-            className="button-gradient h-[56px] rounded-full px-6 py-5 text-center 
-                text-white text-caption !bg-black
-                transition-all  ">
-            {t('button')}
-          </button>
+          <Button>{t('button')}</Button>
         </div>
       ) : (
-        <MobileMenu />
+        <button onClick={() => setIsOpen((prev) => !prev)} className="p-2 z-[51]">
+          {!isOpen ? <TreeLines /> : <X className="w-6 h-6" />}
+        </button>
+      )}
+
+      {/* --- Mobile Menu (Optimized with CSS Transitions) --- */}
+      {!isDesktop && (
+        <div
+          className={`absolute inset-0 z-50 bg-white px-6 py-6 flex flex-col justify-between md:h-[300px] top-[79px] h-[calc(100vh-79px)]
+            transition-opacity duration-300 ease-in-out
+            ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+          <div className="flex flex-col gap-8 items-center">
+            <ToggleLanguage
+              value={locale !== 'en'}
+              onToggle={(isEn) => {
+                const newLocale = !isEn ? 'en' : 'ar'
+                const newPath = `/${newLocale}${pathname.slice(locale.length + 1)}`
+                router.replace(newPath)
+              }}
+            />
+          </div>
+          <Button variant="purple">{t('button')}</Button>
+        </div>
       )}
     </header>
   )

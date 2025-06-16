@@ -6,7 +6,7 @@ import { Button } from '@/components/primitives/button'
 import Stepper from '@/components/Stepper'
 
 import { StackCards } from './_components/StackCards/StackCards'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
@@ -34,19 +34,27 @@ export const StackSection = () => {
     AOS.init()
   }, [])
 
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
+
   return (
     <section className="flex gap-[120px] bg-primary-purple h-[900px] pt-[130px] px-[235px] text-white overflow-hidden items-start max-[1200px]:px-[140px] max-lg:px-10 max-lg:pt-20 max-lg:h-[650px]  max-lg:gap-16 max-md:flex-col max-md:px-4 max-md:gap-10 max-md:h-[970px] ">
       {/* Slides */}
-      <div className="w-1/2 relative max-lg:scale-[75%] transform order-1 max-md:order-2 max-md:translate-x-1/2">
+      <div
+        className={`${
+          isArabic && isMobile ? 'w-full' : 'w-1/2'
+        } relative max-lg:scale-[75%] transform order-1 max-md:order-2${
+          isArabic && isMobile ? '' : ' max-md:translate-x-1/2'
+        }`}>
         <StackCards activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
       </div>
       {/* Right section */}
       <div className="flex flex-col gap-[210px] max-w-[410px]  relative z-40 w-1/2 max-lg:gap-[120px] justify-center h-full order-2 max-md:order-1 max-md:justify-start max-md:items-center max-md:h-[280px] max-md:w-full max-md:max-w-full max-md:text-center max-lg:justify-end pb-14">
         <div className="flex flex-col gap-8 max-lg:gap-4 w-full justify-center">
-          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade">
+          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade" data-aos-offset="-50">
             {t('left.title')}
           </Typography>
-          <Typography variant={isDesktop ? 'body2' : 'body3'} weight="regular" data-aos="fade">
+          <Typography variant={isDesktop ? 'body2' : 'body3'} weight="regular" data-aos="fade" data-aos-offset="-50">
             {t('left.description')}
           </Typography>
           <Button

@@ -2,22 +2,39 @@
 
 import { Button } from '@/components/primitives/button'
 import { Typography } from '@/components/ui'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lottie from 'lottie-react'
-import hero1 from '../../../../public/assets/lottie/hero/h_1.json'
-import hero2 from '../../../../public/assets/lottie/hero/h_2.json'
-import hero3 from '../../../../public/assets/lottie/hero/h_3.json'
-import hero4 from '../../../../public/assets/lottie/hero/h_4.json'
+import hero1En from '../../../../public/assets/lottie/hero/en/h_1.json'
+import hero2En from '../../../../public/assets/lottie/hero/en/h_2.json'
+import hero3En from '../../../../public/assets/lottie/hero/en/h_3.json'
+import hero4En from '../../../../public/assets/lottie/hero/en/h_4.json'
+
+import hero1Ar from '../../../../public/assets/lottie/hero/ar/h_1.json'
+import hero2Ar from '../../../../public/assets/lottie/hero/ar/h_2.json'
+import hero3Ar from '../../../../public/assets/lottie/hero/ar/h_3.json'
+import hero4Ar from '../../../../public/assets/lottie/hero/ar/h_4.json'
 import type { LottieRefCurrentProps } from 'lottie-react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import { BubbleIcon } from '@/components/icons'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export const HeroSection = () => {
+type THeroSection = {
+  loading: boolean
+}
+export const HeroSection = ({ loading }: THeroSection) => {
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
+
+  const hero1 = isArabic ? hero1Ar : hero1En
+  const hero2 = isArabic ? hero2Ar : hero2En
+  const hero3 = isArabic ? hero3Ar : hero3En
+  const hero4 = isArabic ? hero4Ar : hero4En
+
   const t = useTranslations('Hero')
   const [isTablet, setIsTablet] = useState<boolean>(false)
   const [isMobile, setIsMobile] = useState<boolean>(false)
@@ -26,6 +43,16 @@ export const HeroSection = () => {
   const lottieRef2 = useRef<LottieRefCurrentProps>(null)
   const lottieRef3 = useRef<LottieRefCurrentProps>(null)
   const lottieRef4 = useRef<LottieRefCurrentProps>(null)
+
+  useEffect(() => {
+    console.log(loading)
+    if (!loading) {
+      lottieRef1.current?.goToAndPlay(0, true)
+      lottieRef2.current?.goToAndPlay(0, true)
+      lottieRef3.current?.goToAndPlay(0, true)
+      lottieRef4.current?.goToAndPlay(0, true)
+    }
+  }, [loading])
 
   useEffect(() => {
     ScrollTrigger.create({
@@ -122,7 +149,9 @@ export const HeroSection = () => {
           <img src="/assets/hero/glass.png" alt="Glass" className="w-full h-full object-cover opacity-70" />
         </div>
 
-        <div className="flex flex-col gap-8 items-center z-10 text-center px-4 w-[910px] " data-aos="fade-up">
+        <div
+          className={`flex flex-col gap-8 items-center z-10 text-center px-4 ${locale ? 'w-[1010px]' : 'w-[910px]'} `}
+          data-aos="fade-up">
           <div className="flex flex-col gap-6 max-[1024px]:gap-4 items-center">
             {isTablet ? (
               <div className=" leading-tight text-transparent bg-gradient-to-b from-[#1C8DC1] to-[#D3E7F0] bg-clip-text w-fit">
@@ -168,10 +197,14 @@ export const HeroSection = () => {
         src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}2.png/`}
         className="absolute bottom-[-40px] right-[-40px] max-[1024px]:right-[-20px]  max-[1024px]:bottom-[-15px] animate-element hero-element2"
       />
-      <img
-        src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}3.png/`}
-        className="absolute top-[15%] left-0  max-[768px]:top-[10%] animate-element hero-element3"
-      />
+      {isTablet ? (
+        <BubbleIcon />
+      ) : (
+        <img
+          src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}3.png/`}
+          className="absolute top-[15%] left-0  max-[768px]:top-[10%] animate-element hero-element3"
+        />
+      )}
       <img
         src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}4.png/`}
         className="absolute top-[15%] right-[-40px] max-[768px]:top-[10%] max-[1024px]:right-[-15px] animate-element hero-element4"

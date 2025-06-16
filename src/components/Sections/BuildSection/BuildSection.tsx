@@ -37,20 +37,22 @@ export const BuildSection = () => {
   const sectionId = useRef(Math.random()?.toString())
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          hideHeaderForSection(sectionId.current)
-        } else {
-          showHeaderForSection(sectionId.current)
-        }
-      },
-      { threshold: 0.5 }
-    )
-    if (scrollWrapperBuildRef.current) observer.observe(scrollWrapperBuildRef.current)
-    return () => {
-      if (scrollWrapperBuildRef.current) observer.unobserve(scrollWrapperBuildRef.current)
-      showHeaderForSection(sectionId.current) // На всякий случай
+    if (isMobile) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            hideHeaderForSection(sectionId.current)
+          } else {
+            showHeaderForSection(sectionId.current)
+          }
+        },
+        { threshold: 0.5 }
+      )
+      if (scrollWrapperBuildRef.current) observer.observe(scrollWrapperBuildRef.current)
+      return () => {
+        if (scrollWrapperBuildRef.current) observer.unobserve(scrollWrapperBuildRef.current)
+        showHeaderForSection(sectionId.current)
+      }
     }
   }, [])
 
@@ -70,6 +72,7 @@ export const BuildSection = () => {
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
+
   useEffect(() => {
     AOS.init()
   }, [])
@@ -141,7 +144,7 @@ export const BuildSection = () => {
       scrub: 1,
       onUpdate: updateStep,
       animation: gsap.to(sections, {
-        xPercent: 310,
+        xPercent: locale == 'ar' ? 310 : -310,
         ease: 'none'
       })
     })

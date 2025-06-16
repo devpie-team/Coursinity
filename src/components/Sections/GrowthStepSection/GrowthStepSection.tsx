@@ -42,7 +42,7 @@ export const GrowthStepSection = () => {
   const slideImages = [
     {
       image: '/assets/growth/growth_1.png',
-      imageClasses: 'absolute top-0 max-lg:top-[60px] max-lg:scale-[1.4] w-[100%] h-[100%]'
+      imageClasses: 'absolute top-0 max-lg:top-[60px] max-lg:scale-[1.4] w-[100%] h-[100%]  '
     },
     {
       image: '/assets/growth/growth_2.png',
@@ -88,7 +88,7 @@ export const GrowthStepSection = () => {
 
   return (
     <section
-      className="relative flex flex-col bg-black h-[1240px] max-lg:h-[730px] overflow-hidden items-center justify-between"
+      className="relative flex flex-col bg-black h-[1240px] max-lg:h-[760px] overflow-hidden items-center justify-between"
       {...(!isDesktop ? swipeHandlers : {})}>
       <div
         className="flex flex-col gap-4 text-center pb-10 pt-[140px] max-lg:pt-20 max-md:px-4"
@@ -123,7 +123,7 @@ export const GrowthStepSection = () => {
           <Typography variant="h6" weight="regular" className="text-white">
             {t('common.subtitle')}
           </Typography>
-          <Button variant="secondary" className="w-[190px]" data-aos="fade" data-aos-offset="-80">
+          <Button variant="secondary" className="w-[190px]">
             {t('common.cta')}
           </Button>
           <div className="absolute bottom-[140px] right-[140px]" data-aos="fade" data-aos-offset="-80">

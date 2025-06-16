@@ -165,7 +165,7 @@ export const FutureSection = () => {
           <Typography
             variant={isDesktop ? 'body2' : 'caption'}
             weight={isDesktop ? 'semibold' : 'medium'}
-            className="text-white">
+            className="text-white text-start">
             {t('card1Title')}
           </Typography>
           <div className="flex gap-1 h-full items-end max-lg:gap-[3px]">
@@ -222,7 +222,7 @@ export const FutureSection = () => {
         </div>
 
         <div className="absolute flex flex-col w-[250px] h-[245px] bg-secondary-200 px-5 py-3 rounded-[40px] justify-end text-start bg-[url('/assets/future/future_3.jpg')] bg-cover bg-center shadow-[inset_0_0_0_1px_rgba(255,255,255,0.32)] max-lg:w-[160px] max-lg:h-[160px] max-lg:p-3 max-lg:pb-0 max-lg:rounded-2xl items-center future-element5">
-          <div className="flex bg-white rounded-[20px] p-3 max-lg:p-2 max-lg:rounded-xl max-lg:w-[144px]">
+          <div className="flex bg-white rounded-[20px] p-3 max-lg:p-2 max-lg:rounded-xl max-lg:w-[144px] gap-3">
             <div>
               <ZapIcon size={isDesktop ? '24' : '14'} />
             </div>
