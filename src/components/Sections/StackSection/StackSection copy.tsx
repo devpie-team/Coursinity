@@ -14,41 +14,6 @@ import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext
 
 gsap.registerPlugin(ScrollTrigger)
 
-export function useMediaBreakpoints() {
-  const [bp, setBp] = useState(() => {
-    if (typeof window === 'undefined') return 'desktop'
-    if (window.matchMedia('(max-width: 767px)').matches) return 'mobile'
-    if (window.matchMedia('(min-width: 1025px)').matches) return 'desktop'
-    return 'tablet'
-  })
-
-  useEffect(() => {
-    const mMobile = window.matchMedia('(max-width: 767px)')
-    const mDesktop = window.matchMedia('(min-width: 1025px)')
-
-    const check = () => {
-      if (mMobile.matches) setBp('mobile')
-      else if (mDesktop.matches) setBp('desktop')
-      else setBp('tablet')
-    }
-
-    mMobile.addEventListener('change', check)
-    mDesktop.addEventListener('change', check)
-    // for initial mount
-    check()
-    return () => {
-      mMobile.removeEventListener('change', check)
-      mDesktop.removeEventListener('change', check)
-    }
-  }, [])
-
-  return {
-    isMobile: bp === 'mobile',
-    isTablet: bp === 'tablet',
-    isDesktop: bp === 'desktop'
-  }
-}
-
 export const StackSection = () => {
   const [activeIndex, setActiveIndex] = useState(0)
 
@@ -58,19 +23,31 @@ export const StackSection = () => {
   const locale = useLocale()
   const isArabic = locale == 'ar'
 
-  // Responsive state (simplified, can keep your useState version if you want)
-  const [windowWidth, setWindowWidth] = useState<number>(0)
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth)
-    handleResize()
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  const useBreakpoint = () => {
+    const [bp, setBp] = useState<'mobile' | 'tablet' | 'desktop'>(() => {
+      if (typeof window === 'undefined') return 'desktop'
+      if (window.innerWidth < 768) return 'mobile'
+      if (window.innerWidth > 1024) return 'desktop'
+      return 'tablet'
+    })
 
-  const isMobile = windowWidth < 768
-  const isDesktop = windowWidth > 1024
+    useEffect(() => {
+      const check = () => {
+        if (window.innerWidth < 768) setBp('mobile')
+        else if (window.innerWidth > 1024) setBp('desktop')
+        else setBp('tablet')
+      }
+      window.addEventListener('resize', check)
+      return () => window.removeEventListener('resize', check)
+    }, [])
 
-  const { isMobile: isMobileAnimation } = useMediaBreakpoints()
+    return {
+      isMobile: bp === 'mobile',
+      isTablet: bp === 'tablet',
+      isDesktop: bp === 'desktop'
+    }
+  }
+  const { isMobile, isDesktop } = useBreakpoint()
 
   useEffect(() => {
     AOS.init()
@@ -82,7 +59,7 @@ export const StackSection = () => {
       const triggerLength = (window.innerHeight * steps) / 2
       ScrollTrigger.create({
         trigger: sectionRef.current,
-        start: isMobileAnimation ? 'bottom bottom' : 'top top',
+        start: isMobile ? 'bottom bottom' : 'top top',
         end: `+=${triggerLength}`,
         pin: true,
         scrub: 1,
@@ -98,7 +75,7 @@ export const StackSection = () => {
       ScrollTrigger.getAll().forEach((t) => t.kill())
       ctx.revert()
     }
-  }, [isMobileAnimation])
+  }, [isMobile])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
