@@ -15,11 +15,17 @@ import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext
 gsap.registerPlugin(ScrollTrigger)
 
 export function useMediaBreakpoints() {
-  const [bp, setBp] = useState(() => {
+  const getBp = () => {
     if (typeof window === 'undefined') return 'desktop'
     if (window.matchMedia('(max-width: 767px)').matches) return 'mobile'
     if (window.matchMedia('(min-width: 1025px)').matches) return 'desktop'
     return 'tablet'
+  }
+
+  const [bp, setBp] = useState(getBp)
+  const [isLowScreen, setIsLowScreen] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return window.innerHeight < 850
   })
 
   useEffect(() => {
@@ -30,22 +36,28 @@ export function useMediaBreakpoints() {
       if (mMobile.matches) setBp('mobile')
       else if (mDesktop.matches) setBp('desktop')
       else setBp('tablet')
+      setIsLowScreen(window.innerHeight < 850)
     }
 
     mMobile.addEventListener('change', check)
     mDesktop.addEventListener('change', check)
+    window.addEventListener('resize', check)
+
     // for initial mount
     check()
+
     return () => {
       mMobile.removeEventListener('change', check)
       mDesktop.removeEventListener('change', check)
+      window.removeEventListener('resize', check)
     }
   }, [])
 
   return {
     isMobile: bp === 'mobile',
     isTablet: bp === 'tablet',
-    isDesktop: bp === 'desktop'
+    isDesktop: bp === 'desktop',
+    isLowScreen
   }
 }
 
@@ -70,7 +82,7 @@ export const StackSection = () => {
   const isMobile = windowWidth < 768
   const isDesktop = windowWidth > 1024
 
-  const { isMobile: isMobileAnimation } = useMediaBreakpoints()
+  const { isMobile: isMobileAnimation, isLowScreen } = useMediaBreakpoints()
 
   useEffect(() => {
     AOS.init()
@@ -82,7 +94,7 @@ export const StackSection = () => {
       const triggerLength = (window.innerHeight * steps) / 2
       ScrollTrigger.create({
         trigger: sectionRef.current,
-        start: isMobileAnimation ? 'bottom bottom' : 'top top',
+        start: isLowScreen || isMobileAnimation ? 'bottom bottom' : 'top top',
         end: `+=${triggerLength}`,
         pin: true,
         scrub: 1,

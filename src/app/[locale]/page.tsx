@@ -60,7 +60,8 @@ export default function HomePage() {
     <>
       {loading && <Loader loading={loading} />}
       <Header />
-      <BuildSection />
+
+
       <HeroSection loading={loading} />
       <FutureSection />
       <StackSection />
@@ -68,7 +69,7 @@ export default function HomePage() {
       <AiTeamSection />
       <Carousel3dSection />
       <InspirationSection />
-      {/* <BuildSection /> */}
+      <BuildSection /> 
       <ImpactSectionNew />
       <AcademySection />
       <TeamTrainingSection />
