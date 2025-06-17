@@ -162,7 +162,7 @@ export const BuildSection = () => {
     if (isTablet && swiperRef.current) {
       swiperRef.current.slideTo(step - 1)
     } else if (isMobile && swiperRef.current) {
-      swiperRef.current.slideTo(step)
+      swiperRef.current.slideTo(step - 1)
     } else if (isDesktop && scrollTriggerRef.current) {
       const scrollTrigger = scrollTriggerRef.current
       const totalScroll = scrollTrigger.end - scrollTrigger.start
@@ -214,7 +214,7 @@ export const BuildSection = () => {
       return (
         <Swiper
           slidesPerView={1}
-          spaceBetween={20}
+          spaceBetween={200}
           className="w-full mobile-swiper"
           allowTouchMove={true}
           onSwiper={(swiper) => (swiperRef.current = swiper)}
