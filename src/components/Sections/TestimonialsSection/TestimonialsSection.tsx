@@ -8,6 +8,7 @@ import { useSwipeable } from 'react-swipeable'
 import { useLocale, useTranslations } from 'next-intl'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 
 const testimonialImages = [
   '/assets/testimonials/testimonials_1.png',
@@ -87,22 +88,18 @@ export const TestimonialsSection = () => {
   return (
     <section className="flex flex-col h-[933px] bg-white items-center gap-[105px] relative justify-between px-[140px] pb-[140px] overflow-hidden max-lg:px-[60px] max-lg:py-20 max-lg:h-[650px] max-md:h-[862px] max-md:px-4">
       <div className="flex flex-col gap-4 text-center">
-        <Typography
-          variant={isDesktop ? 'h3' : 'h5'}
-          weight="medium"
-          data-aos={isMobile ? '' : 'fade'}
-          data-aos-offset={isMobile ? '-320' : '-100'}>
-          {t('title')}
-        </Typography>
-        <Typography
-          variant="body3"
-          weight="regular"
-          className="text-description"
-          data-aos={isMobile ? '' : 'fade'}
-          data-aos-offset={isMobile ? '-320' : '-100'}>
-          {t('subtitle')}
-        </Typography>
+        <FadeInOnView>
+          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
+            {t('title')}
+          </Typography>
+        </FadeInOnView>
+        <FadeInOnView>
+          <Typography variant="body3" weight="regular" className="text-description">
+            {t('subtitle')}
+          </Typography>
+        </FadeInOnView>
       </div>
+
       <div
         className="relative w-full min-h-[440px] flex items-center justify-center max-lg:w-auto max-lg:min-h-0 max-"
         {...(isMobile || isTablet ? swipeHandlers : {})}>
@@ -110,15 +107,18 @@ export const TestimonialsSection = () => {
           <TestimonialCard key={slide.id} data={slide} position={slide.pos} isDesktop={isDesktop} />
         ))}
       </div>
-      <div data-aos={isMobile ? '' : 'fade'} data-aos-offset={isMobile ? '-450' : '-50'}>
-        <CarouselStepper
-          total={testimonials.length}
-          activeStep={activeIndex}
-          onPrev={handlePrev}
-          onNext={handleNext}
-          onStepClick={setActiveIndex}
-        />
-      </div>
+
+      <FadeInOnView>
+        <div>
+          <CarouselStepper
+            total={testimonials.length}
+            activeStep={activeIndex}
+            onPrev={handlePrev}
+            onNext={handleNext}
+            onStepClick={setActiveIndex}
+          />
+        </div>
+      </FadeInOnView>
     </section>
   )
 }
