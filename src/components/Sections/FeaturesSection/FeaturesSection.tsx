@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 
 const certifications = [
   { src: '/assets/certifications/CompTia.png', alt: 'CompTIA logo' },
@@ -55,42 +56,28 @@ export const FeaturesSection = () => {
             : 'flex p-8 rounded-[20px] gap-8 bg-[linear-gradient(180deg,_rgba(255,255,255,0.16)_0%,_rgba(30,141,194,0.16)_100%)] '
         )}>
         {/* Left Block */}
-        <div
-          className="flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6"
-          data-aos={!isMobile ? 'fade' : ''}
-          data-aos-offset={'-100'}>
+
+        <div className="flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6">
           <div className={cn(isDesktop ? 'mb-6' : 'mb-2')}>
             <DiplomaIcon size={!isDesktop ? 40 : 64} />
           </div>
-
-          <div className="flex flex-col flex-grow gap-8 max-lg:gap-6" data-aos-offset="-50">
+          <div className="flex flex-col flex-grow gap-8 max-lg:gap-6">
             <div className={cn('flex flex-col gap-4', !isDesktop && 'flex-grow')}>
-              <Typography
-                variant={isDesktop ? 'h4' : 'body1'}
-                weight="medium"
-                data-aos="fade"
-                data-aos-offset={isMobile ? '-650' : '-100'}>
-                {t('certified.title')}
-              </Typography>
-              <Typography
-                variant="button"
-                weight="regular"
-                className="text-[#6E6E6E]"
-                data-aos="fade"
-                data-aos-offset={isMobile ? '-650' : '-100'}>
-                {t('certified.subtitle')}
-              </Typography>
+              <FadeInOnView>
+                <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium">
+                  {t('certified.title')}
+                </Typography>
+              </FadeInOnView>
+              <FadeInOnView>
+                <Typography variant="button" weight="regular" className="text-[#6E6E6E]">
+                  {t('certified.subtitle')}
+                </Typography>
+              </FadeInOnView>
             </div>
-
             {!isDesktop && <div className="border-t" />}
-
-            <div
-              className="flex flex-grow flex-col gap-4 max-lg:gap-3 max-lg:flex-none"
-              data-aos="fade"
-              data-aos-offset={isMobile ? '-650' : '-50'}>
+            <div className="flex flex-grow flex-col gap-4 max-lg:gap-3 max-lg:flex-none">
               {t.raw('certified.items').map((item: string, index: number) => {
                 const limitedText = !isDesktop ? item.split(' ').slice(0, 2).join(' ') : item
-
                 return (
                   <div className="flex gap-4 items-center" key={index}>
                     <div>
@@ -102,10 +89,8 @@ export const FeaturesSection = () => {
                   </div>
                 )
               })}
-              <div
-                className="grid grid-cols-2 grid-rows-2 place-items-center mt-auto gap-[10px] max-lg:mt-0 max-lg:pt-3"
-                data-aos="fade"
-                data-aos-offset={isMobile ? '-650' : '-200'}>
+
+              <div className="grid grid-cols-2 grid-rows-2 place-items-center mt-auto gap-[10px] max-lg:mt-0 max-lg:pt-3">
                 {certificationsLeft.map(({ src, alt }, i) => (
                   <div
                     key={i}
@@ -119,33 +104,26 @@ export const FeaturesSection = () => {
         </div>
 
         {/* Right Block */}
-        <div
-          className="flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6"
-          data-aos={!isMobile ? 'fade' : ''}
-          data-aos-offset={'-100'}>
+
+        <div className="flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6">
           <div className="mb-6 max-lg:mb-2">
             <DealIcon width={!isDesktop ? 40 : 64} height={isTablet ? 40 : 64} />
           </div>
-
           <div className="flex flex-col flex-grow gap-8 max-lg:gap-6">
-            <div
-              className="flex flex-col gap-4 max-lg:flex-grow"
-              data-aos="fade"
-              data-aos-offset={isMobile ? '-650' : '-50'}>
-              <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium">
-                {t('trusted.title')}
-              </Typography>
-              <Typography variant="button" weight="regular" className="text-[#6E6E6E]">
-                {t('trusted.subtitle')}
-              </Typography>
+            <div className="flex flex-col gap-4 max-lg:flex-grow">
+              <FadeInOnView>
+                <Typography variant={isDesktop ? 'h4' : 'body1'} weight="medium">
+                  {t('trusted.title')}
+                </Typography>
+              </FadeInOnView>
+              <FadeInOnView>
+                <Typography variant="button" weight="regular" className="text-[#6E6E6E]">
+                  {t('trusted.subtitle')}
+                </Typography>
+              </FadeInOnView>
             </div>
-
             {!isDesktop && <div className="border-t" />}
-
-            <div
-              className={cn('flex flex-col gap-4 max-lg:gap-3', isDesktop ? 'flex-grow' : 'mt-auto')}
-              data-aos="fade"
-              data-aos-offset={isMobile ? '-650' : '-50'}>
+            <div className={cn('flex flex-col gap-4 max-lg:gap-3', isDesktop ? 'flex-grow' : 'mt-auto')}>
               {t.raw('trusted.items').map((item: { title: string; description: string }, index: number) => (
                 <div className="flex gap-4 items-center" key={index}>
                   <div>

@@ -15,6 +15,7 @@ import MonitorIcon from '@/components/icons/MonitorIcon'
 import { cn } from '@/lib/utils'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -82,15 +83,21 @@ export const AiTeamSection = () => {
       <div className={cn('flex justify-center items-center gap-[130px] max-lg:gap-10 max-md:flex-col')}>
         {/* Left */}
         <div className="flex flex-col gap-8 flex-1 min-w-[300px] max-w-[550px] justify-center max-lg:gap-4 max-lg:max-w-[373px]">
-          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" data-aos="fade" data-aos-offset="-50">
-            {t('title')}
-          </Typography>
-          <Typography variant="body3" weight="regular" data-aos="fade" data-aos-offset="-50">
-            {t('description')}
-          </Typography>
-          <Button variant="purple" size="md" className="mt-10 w-[190px] max-lg:w-full max-md:w-full max-lg:mt-4">
-            {t('button')}
-          </Button>
+          <FadeInOnView variant="fade-up">
+            <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
+              {t('title')}
+            </Typography>
+          </FadeInOnView>
+          <FadeInOnView>
+            <Typography variant="body3" weight="regular">
+              {t('description')}
+            </Typography>
+          </FadeInOnView>
+          <FadeInOnView>
+            <Button variant="purple" size="md" className="mt-10 w-[190px] max-lg:w-full max-md:w-full max-lg:mt-4">
+              {t('button')}
+            </Button>
+          </FadeInOnView>
         </div>
 
         {/* Right */}

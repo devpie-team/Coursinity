@@ -11,6 +11,7 @@ import 'aos/dist/aos.css'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
+import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 
 export const DataDrivenSection = () => {
   const t = useTranslations('dataDrivenSection')
@@ -57,21 +58,16 @@ export const DataDrivenSection = () => {
     <section className="bg-white p-[140px] pt-0 flex justify-center items-center gap-[180px] max-lg:px-6 max-lg:pt-20 max-lg:pb-0 max-md:flex-col max-lg:gap-10 max-md:px-4 ">
       {/* Left side */}
       <div className="flex flex-col gap-4 max-w-[480px] ">
-        <Typography
-          variant={isDesktop ? 'h3' : 'h5'}
-          weight="medium"
-          data-aos={isMobile ? '' : 'fade'}
-          data-aos-offset="-50">
-          {t('left.title')}
-        </Typography>
-        <Typography
-          variant="body3"
-          weight="regular"
-          className="text-description"
-          data-aos={isMobile ? '' : 'fade'}
-          data-aos-offset="-50">
-          {t('left.description')}
-        </Typography>
+        <FadeInOnView variant="slide-right">
+          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
+            {t('left.title')}
+          </Typography>
+        </FadeInOnView>
+        <FadeInOnView variant="slide-right">
+          <Typography variant="body3" weight="regular" className="text-description">
+            {t('left.description')}
+          </Typography>
+        </FadeInOnView>
       </div>
 
       {isTablet || isMobile ? (
@@ -127,59 +123,56 @@ export const DataDrivenSection = () => {
           </div>
         </div>
       ) : (
-        <div
-          className="relative flex flex-col gap-8 shrink-0 h-[500px] w-[480px] bg-secondary-300 rounded-[20px] overflow-hidden justify-center items-center p-[50px] pb-[28px]"
-          data-aos="fade">
-          <img
-            src="/assets/data_driven/data_driven_1.png"
-            alt="bg"
-            className="absolute inset-0 object-cover pointer-events-none z-0"
-          />
-
-          <img
-            key={activeIndex}
-            src={`/assets/data_driven/data_driven_${activeIndex + 2}.png`}
-            alt={`slide_${activeIndex}`}
-            className={clsx(
-              'relative z-10 object-cover h-[270px] w-[380px] transition-opacity duration-500',
-              fade ? 'opacity-100' : 'opacity-0'
-            )}
-          />
-
-          <div className="relative z-10 flex flex-col justify-center items-center text-center gap-5">
-            <div
+        <FadeInOnView variant="slide-left">
+          <div className="relative flex flex-col gap-8 shrink-0 h-[500px] w-[480px] bg-secondary-300 rounded-[20px] overflow-hidden justify-center items-center p-[50px] pb-[28px]">
+            <img
+              src="/assets/data_driven/data_driven_1.png"
+              alt="bg"
+              className="absolute inset-0 object-cover pointer-events-none z-0"
+            />
+            <img
+              key={activeIndex}
+              src={`/assets/data_driven/data_driven_${activeIndex + 2}.png`}
+              alt={`slide_${activeIndex}`}
               className={clsx(
-                'flex flex-col gap-4 transition-opacity duration-500',
+                'relative z-10 object-cover h-[270px] w-[380px] transition-opacity duration-500',
                 fade ? 'opacity-100' : 'opacity-0'
-              )}>
-              <Typography variant="body1" weight="medium">
-                {current.title}
-              </Typography>
-              <Typography variant="body3" weight="regular" className="text-description">
-                {current.description}
-              </Typography>
-            </div>
-
-            <div className="flex gap-[10px] justify-center">
-              {slides.map((_, dotIndex) => (
-                <button
-                  key={dotIndex}
-                  onClick={() => {
-                    setFade(false)
-                    setTimeout(() => {
-                      setActiveIndex(dotIndex)
-                      setFade(true)
-                    }, 300)
-                  }}
-                  className={clsx(
-                    'h-2 w-2 rounded-full transition-colors duration-300 cursor-pointer',
-                    dotIndex === activeIndex ? 'bg-primary-blue' : 'bg-secondary-200'
-                  )}
-                />
-              ))}
+              )}
+            />
+            <div className="relative z-10 flex flex-col justify-center items-center text-center gap-5">
+              <div
+                className={clsx(
+                  'flex flex-col gap-4 transition-opacity duration-500',
+                  fade ? 'opacity-100' : 'opacity-0'
+                )}>
+                <Typography variant="body1" weight="medium">
+                  {current.title}
+                </Typography>
+                <Typography variant="body3" weight="regular" className="text-description">
+                  {current.description}
+                </Typography>
+              </div>
+              <div className="flex gap-[10px] justify-center">
+                {slides.map((_, dotIndex) => (
+                  <button
+                    key={dotIndex}
+                    onClick={() => {
+                      setFade(false)
+                      setTimeout(() => {
+                        setActiveIndex(dotIndex)
+                        setFade(true)
+                      }, 300)
+                    }}
+                    className={clsx(
+                      'h-2 w-2 rounded-full transition-colors duration-300 cursor-pointer',
+                      dotIndex === activeIndex ? 'bg-primary-blue' : 'bg-secondary-200'
+                    )}
+                  />
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        </FadeInOnView>
       )}
     </section>
   )

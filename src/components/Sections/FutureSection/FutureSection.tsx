@@ -12,6 +12,7 @@ import { ClipboardIcon } from '@/components/icons/ClipboardIcon'
 import { GridEditIcon } from '@/components/icons/GridEditIcon'
 import { ZapIcon } from '@/components/icons/ZapIcon'
 import { cn } from '@/lib/utils'
+import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 
 export const FutureSection = () => {
   const t = useTranslations('FutureSection')
@@ -55,7 +56,7 @@ export const FutureSection = () => {
     }
     // Default: Desktop
     return [
-      { selector: '.future-element1', x: 100, y: -300 },
+      { selector: '.future-element1', x: 100, y: -250 },
       { selector: '.future-element2', x: 500, y: -100 },
       { selector: '.future-element3', x: 450, y: 200 },
       { selector: '.future-element4', x: -400, y: 250 },
@@ -147,18 +148,20 @@ export const FutureSection = () => {
   }
 
   return (
-    <section className="bg-white">
+    <section className="bg-white overflow-x-hidden">
       <div>
         <LogoSlider />
       </div>
       <div className="relative flex items-center justify-center text-center w-full h-[100vh] overflow-hidden future-section">
         <div className="flex flex-col max-w-full w-[432px] scaleText opacityText max-lg:w-[372px] max-md:w-[252px]">
-          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
-            {t('title')}
-          </Typography>
-          <Typography variant={isDesktop ? 'body2' : 'body3'} weight="regular" className="text-description">
-            {t('subtitle')}
-          </Typography>
+          <FadeInOnView>
+            <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
+              {t('title')}
+            </Typography>
+            <Typography variant={isDesktop ? 'body2' : 'body3'} weight="regular" className="text-description">
+              {t('subtitle')}
+            </Typography>
+          </FadeInOnView>
         </div>
 
         <div className="absolute flex flex-col w-[240px] h-[240px] bg-primary-purple p-6 rounded-[40px] max-lg:w-[160px] max-lg:h-[160px] max-lg:p-3 max-lg:pb-2 max-lg:rounded-2xl future-element1">
