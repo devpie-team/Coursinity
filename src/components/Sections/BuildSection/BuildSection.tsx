@@ -214,7 +214,7 @@ export const BuildSection = () => {
       return (
         <Swiper
           slidesPerView={1}
-          spaceBetween={200}
+          spaceBetween={-40}
           className="w-full mobile-swiper"
           allowTouchMove={true}
           onSwiper={(swiper) => (swiperRef.current = swiper)}
