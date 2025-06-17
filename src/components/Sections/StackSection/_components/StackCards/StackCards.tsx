@@ -23,9 +23,10 @@ const getRelativePosition = (index: number, activeIndex: number): Position => {
 type StackCardsProps = {
   activeIndex: number
   setActiveIndex: (idx: number) => void
+  isVisible: boolean
 }
 
-export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIndex }) => {
+export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIndex, isVisible }) => {
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [isTablet, setIsTablet] = useState<boolean>(false)
   const [isDesktop, setIsDesktop] = useState<boolean>(true)
@@ -58,20 +59,22 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
           ${POSITIONS[getRelativePosition(0, activeIndex)]}
           ${activeIndex === 0 ? 'rounded-t-3xl' : ''}
         `}
-        onClick={() => setActiveIndex(0)}>
-        <div className="flex flex-col gap-2 px-[18px] pt-12 text-center justify-center items-center">
+        // onClick={() => setActiveIndex(0)}s
+      >
+        <div
+          className="flex flex-col gap-2 px-[18px] pt-12 text-center justify-center items-center"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+            transitionDelay: isVisible ? '400ms' : '0ms'
+          }}>
           <Typography variant="h4" weight="medium" className="opacity-65 mb-1">
             {t('steps.0.title')}
           </Typography>
-          <Typography variant="h4" weight="medium" data-aos="fade" data-aos-offset="-50">
+          <Typography variant="h4" weight="medium">
             {t('steps.0.subtitle')}
           </Typography>
-          <Typography
-            variant="body3"
-            weight="regular"
-            className="opacity-80 w-[305px] text-center"
-            data-aos="fade"
-            data-aos-offset="-50">
+          <Typography variant="body3" weight="regular" className="opacity-80 w-[305px] text-center">
             {t('steps.0.description')}
           </Typography>
         </div>
@@ -80,23 +83,32 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
             src="/assets/stack_section/stack_1.png"
             alt="Step 1"
             className=" object-cover max-md:absolute max-md:bottom-[50px]"
-            data-aos="fade-up"
-            data-aos-offset="-50"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+              transitionDelay: isVisible ? '400ms' : '0ms'
+            }}
           />
         </div>
         <img
           src="/assets/stack_section/stack_4.png"
           alt="stack_4"
           className="absolute object-cover top-[350px] left-[15px]"
-          data-aos="fade-up"
-          data-aos-offset="-50"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+            transitionDelay: isVisible ? '400ms' : '0ms'
+          }}
         />
         <img
           src="/assets/stack_section/stack_5.png"
           alt="stack_5"
           className="absolute object-cover top-[250px] right-[20px]"
-          data-aos="fade-up"
-          data-aos-offset="-50"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+            transitionDelay: isVisible ? '400ms' : '0ms'
+          }}
         />
       </div>
 
@@ -109,7 +121,8 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
           ${POSITIONS[getRelativePosition(1, activeIndex)]}
           ${activeIndex === 1 ? 'rounded-t-3xl' : ''}
         `}
-        onClick={() => setActiveIndex(1)}>
+        // onClick={() => setActiveIndex(1)}
+      >
         <div className="flex flex-col gap-3 px-[18px] pt-12 text-center justify-center items-center">
           <Typography variant="h4" weight="medium" className="opacity-65 ">
             {t('steps.1.title')}
@@ -134,15 +147,10 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
             src="/assets/stack_section/stack_2.png"
             alt="Step 2"
             className=" object-cover max-md:absolute max-md:bottom-12 "
-            data-aos="fade-up"
-            data-aos-offset="-650"
           />
         </div>
         {t('steps.1.badge') && (
-          <div
-            className=" absolute flex justify-center items-center gap-[10px] bg-white h-14  rounded-full p-4 text-[#18233D] top-[460px] left-[65px] max-md:top-[420px]"
-            data-aos="fade"
-            data-aos-offset="-550">
+          <div className=" absolute flex justify-center items-center gap-[10px] bg-white h-14  rounded-full p-4 text-[#18233D] top-[460px] left-[65px] max-md:top-[420px]">
             <span className="absolute w-4 h-4 bg-white rounded-full top-[40px] left-[0px]"></span>
             <span className="absolute w-2 h-2 bg-white rounded-full top-[56px] left-[-8px]"></span>
             <BadgeIcon />
@@ -162,12 +170,13 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
           ${POSITIONS[getRelativePosition(2, activeIndex)]}
           ${activeIndex === 2 ? 'rounded-t-3xl' : ''}
         `}
-        onClick={() => setActiveIndex(2)}>
+        // onClick={() => setActiveIndex(2)}
+      >
         <div className="flex flex-col gap-3 px-[18px] pt-12 text-center justify-center items-center">
           <Typography variant="h4" weight="medium" className="opacity-65 ">
             {t('steps.2.title')}
           </Typography>
-          <Typography variant="h4" weight="medium" data-aos="fade-up" data-aos-offset="-550">
+          <Typography variant="h4" weight="medium">
             {t('steps.2.subtitle')}
           </Typography>
           {t('steps.2.button') && (
@@ -182,7 +191,7 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
             </button>
           )}
         </div>
-        <div className="flex justify-center pb-[100px]" data-aos="fade-up" data-aos-offset="-850">
+        <div className="flex justify-center pb-[100px]">
           <img
             src="/assets/stack_section/stack_3.png"
             alt="Step 3"

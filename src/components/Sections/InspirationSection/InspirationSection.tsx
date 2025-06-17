@@ -16,6 +16,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 
 const benefits = [
   { icon: <GamingPadIcon /> },
@@ -210,21 +211,23 @@ export const InspirationSection = () => {
     <section
       ref={sectionRef}
       className="flex bg-black h-[100vh] p-[140px] gap-20 max-[1300px]:p-10 items-center justify-center max-lg:gap-8 max-lg:px-6 max-md:px-4">
-      <div
-        className="max-w-[270px] shrink max-[1150px]:hidden"
-        style={
-          isDesktop
-            ? {
-                opacity: isVisible ? 1 : 0,
-                transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
-                transitionDelay: isVisible ? '0ms' : '0ms'
-              }
-            : {}
-        }>
-        <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
-          {t('title')}
-        </Typography>
-      </div>
+      <FadeInOnView variant="slide-left">
+        <div
+          className="max-w-[270px] shrink max-[1150px]:hidden"
+          style={
+            isDesktop
+              ? {
+                  opacity: isVisible ? 1 : 0,
+                  transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+                  transitionDelay: isVisible ? '0ms' : '0ms'
+                }
+              : {}
+          }>
+          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
+            {t('title')}
+          </Typography>
+        </div>
+      </FadeInOnView>
       <div
         className="flex flex-col gap-[10px] border border-white border-opacity-15 p-6 rounded-3xl min-w-[440px] max-w-[500px] flex-1 max-md:min-w-[343px] max-md:max-w-[343px] order-1 max-[1150px]:order-2 max-lg:max-w-[343px] max-lg:min-w-[343px]"
         style={
@@ -251,6 +254,7 @@ export const InspirationSection = () => {
           />
         ))}
       </div>
+
       <div
         className="flex flex-col gap-8 max-w-[270px] shrink order-2 max-[1150px]:order-1 max-lg:max-w-full w-full"
         style={
@@ -267,12 +271,16 @@ export const InspirationSection = () => {
             {t('title')}
           </Typography>
         </div>
-        <Typography variant="body3" weight="regular" className="text-white opacity-80">
-          {t('description')}
-        </Typography>
-        <Typography variant="body3" weight="medium" className="text-white">
-          {t('successMetric')}
-        </Typography>
+        <FadeInOnView variant="slide-right">
+          <Typography variant="body3" weight="regular" className="text-white opacity-80">
+            {t('description')}
+          </Typography>
+        </FadeInOnView>
+        <FadeInOnView variant="slide-right">
+          <Typography variant="body3" weight="medium" className="text-white">
+            {t('successMetric')}
+          </Typography>
+        </FadeInOnView>
         <Button variant="purple" className="max-lg:w-[253px] max-md:w-full">
           {t('learnMore')}
         </Button>

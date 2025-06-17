@@ -12,6 +12,7 @@ import { SwipeStepper } from '@/components/SwipeStepper/SwipeStepper'
 import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -161,7 +162,7 @@ export const BuildSection = () => {
     if (isTablet && swiperRef.current) {
       swiperRef.current.slideTo(step - 1)
     } else if (isMobile && swiperRef.current) {
-      swiperRef.current.slideTo(step)
+      swiperRef.current.slideTo(step - 1)
     } else if (isDesktop && scrollTriggerRef.current) {
       const scrollTrigger = scrollTriggerRef.current
       const totalScroll = scrollTrigger.end - scrollTrigger.start
@@ -213,7 +214,7 @@ export const BuildSection = () => {
       return (
         <Swiper
           slidesPerView={1}
-          spaceBetween={20}
+          spaceBetween={200}
           className="w-full mobile-swiper"
           allowTouchMove={true}
           onSwiper={(swiper) => (swiperRef.current = swiper)}
@@ -262,10 +263,14 @@ export const BuildSection = () => {
       className="h-[100vh] build-section flex flex-col items-center justify-center gap-12  px-10 max-w-[100vw] bg-black text-white max-lg:pt-0 max-lg:px-6 max-lg:pb-0  max-lg:h-auto max-md:pt-20 max-md:px-4"
       ref={scrollWrapperBuildRef}>
       <div className="flex flex-col items-center gap-4 text-center">
-        <Typography variant={isDesktop ? 'h3' : 'h5'}>{t('title')}</Typography>
-        <Typography variant="body3" className="text-white text-opacity-80">
-          {t('subtitle')}
-        </Typography>
+        <FadeInOnView variant="fade-up">
+          <Typography variant={isDesktop ? 'h3' : 'h5'}>{t('title')}</Typography>
+        </FadeInOnView>
+        <FadeInOnView variant="fade-up">
+          <Typography variant="body3" className="text-white text-opacity-80">
+            {t('subtitle')}
+          </Typography>
+        </FadeInOnView>
       </div>
       {renderCards()}
 
