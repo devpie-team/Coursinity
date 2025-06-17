@@ -5,6 +5,7 @@ import { useFrame } from '@react-three/fiber'
 import { ParticlePlane } from '../ParticlePlane/ParticlePlane'
 import { LightingSetup } from '../LightingSetup/LightingSetup'
 import { AnimatedSlide } from '../AnimatedSlide/AnimatedSlide'
+import { CentralPillar } from '../CentralPillar/CentralPillar'
 
 interface SlideData {
   text: string
@@ -33,17 +34,32 @@ export const SceneContent = ({ isMobile, scrollProgressRef, slidesData }: SceneC
   const lastRotationRef = useRef(0)
   const lastScrollTimeRef = useRef(Date.now())
 
+  // Перевірка безпеки для slidesData
+  const safeSlidesData = useMemo(() => {
+    if (!slidesData || !Array.isArray(slidesData)) {
+      console.warn('slidesData is not properly defined, using fallback data')
+      return [
+        { text: 'AI Transformation', colors: ['#FF6B6B', '#4ECDC4', '#45B7D1'] },
+        { text: 'Immersive VR Labs', colors: ['#A8E6CF', '#DCEDC1', '#FFD3B6'] }
+      ]
+    }
+    return slidesData.map((slide) => ({
+      text: slide.text || 'Default Text',
+      colors: Array.isArray(slide.colors) && slide.colors.length >= 3 ? slide.colors : ['#FF6B6B', '#4ECDC4', '#45B7D1']
+    }))
+  }, [slidesData])
+
   const spiralParams: SpiralParams = useMemo(
     () => ({
       radius: isMobile ? 0.6 : 1.4,
       verticalSpacing: 0.25,
       spiralTurns: isMobile ? 2 : 1.5,
       circleCenter: [0, -0.1, -0.4],
-      totalSlides: slidesData.length,
+      totalSlides: safeSlidesData.length,
       startOffset: isMobile ? 8 : 10,
       endOffset: isMobile ? 8 : 10
     }),
-    [isMobile, slidesData.length]
+    [isMobile, safeSlidesData.length]
   )
 
   const fixedPositions = useMemo(() => {
@@ -62,7 +78,7 @@ export const SceneContent = ({ isMobile, scrollProgressRef, slidesData }: SceneC
 
   useFrame(() => {
     const progress = scrollProgressRef.current.value
-    const newIndex = Math.round((progress / slidesData.length) * (slidesData.length - 1))
+    const newIndex = Math.round((progress / safeSlidesData.length) * (safeSlidesData.length - 1))
     if (newIndex !== currentSlideIndex) setCurrentSlideIndex(newIndex)
 
     const currentTime = Date.now()
@@ -80,7 +96,7 @@ export const SceneContent = ({ isMobile, scrollProgressRef, slidesData }: SceneC
         rotation={scrollProgressRef.current.value}
         effectStrength={effectStrengthRef.current}
         currentSlideIndex={currentSlideIndex}
-        slidesData={slidesData}
+        slidesData={safeSlidesData}
       />
       <ParticlePlane
         position={[0, 0, -5]}
@@ -96,7 +112,7 @@ export const SceneContent = ({ isMobile, scrollProgressRef, slidesData }: SceneC
         waveSpeed={0.01}
         scrollProgressRef={scrollProgressRef}
       />
-      {slidesData.map((slide, i) => (
+      {safeSlidesData.map((slide, i) => (
         <AnimatedSlide
           key={i}
           index={i}
@@ -108,6 +124,7 @@ export const SceneContent = ({ isMobile, scrollProgressRef, slidesData }: SceneC
           currentSlideIndex={currentSlideIndex}
         />
       ))}
+      <CentralPillar scrollProgressRef={scrollProgressRef} circleCenter={spiralParams.circleCenter} />
     </>
   )
 }

@@ -8,25 +8,24 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { PerformanceMonitor } from '@react-three/drei'
 import { SceneContent } from './_components/SceneContent/SceneContent'
 import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
-import { EffectComposer, Glitch } from '@react-three/postprocessing'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const slidesData = [
-  { text: 'AI Transformation', colors: ['#0D0D0D', '#1C8DC1', '#A578F2'] },
-  { text: 'Immersive VR Labs', colors: ['#0D0D0D', '#1E8DC2', '#A578F2'] },
-  { text: 'Tailored Journeys', colors: ['#0D0D0D', '#64B5E6', '#A578F2'] },
-  { text: 'Beyond-Class Engagement', colors: ['#0D0D0D', '#4BA3D8', '#A578F2'] },
-  { text: 'Live Coaching', colors: ['#0D0D0D', '#1E8DC2', '#A578F2'] },
-  { text: 'Reusable Programs', colors: ['#0D0D0D', '#64B5E6', '#A578F2'] },
-  { text: 'Gamified Learning', colors: ['#0D0D0D', '#4BA3D8', '#A578F2'] },
-  { text: 'On-Job Upskilling', colors: ['#0D0D0D', '#1C8DC1', '#A578F2'] },
-  { text: 'Success Partners', colors: ['#0D0D0D', '#1C8DC1', '#A578F2'] },
-  { text: 'Evergreen Paths', colors: ['#0D0D0D', '#1E8DC2', '#A578F2'] },
-  { text: 'Hybrid Delivery', colors: ['#0D0D0D', '#64B5E6', '#A578F2'] },
-  { text: 'Audit-Ready Compliance', colors: ['#0D0D0D', '#4BA3D8', '#A578F2'] },
-  { text: 'White-Label Academies', colors: ['#0D0D0D', '#1E8DC2', '#A578F2'] },
-  { text: 'Certifications', colors: ['#0D0D0D', '#64B5E6', '#A578F2'] }
+  { text: 'AI Transformation', colors: ['#FF6B6B', '#4ECDC4', '#45B7D1'] },
+  { text: 'Immersive VR Labs', colors: ['#A8E6CF', '#DCEDC1', '#FFD3B6'] },
+  { text: 'Tailored Journeys', colors: ['#FF9A9E', '#FECFEF', '#FECFEF'] },
+  { text: 'Beyond-Class Engagement', colors: ['#A8E6CF', '#FF8B94', '#FFC3A0'] },
+  { text: 'Live Coaching', colors: ['#FFD93D', '#FF6B6B', '#4ECDC4'] },
+  { text: 'Reusable Programs', colors: ['#6C5CE7', '#A29BFE', '#FD79A8'] },
+  { text: 'Gamified Learning', colors: ['#00B894', '#00CEC9', '#74B9FF'] },
+  { text: 'On-Job Upskilling', colors: ['#FDCB6E', '#E17055', '#D63031'] },
+  { text: 'Success Partners', colors: ['#6C5CE7', '#A29BFE', '#FD79A8'] },
+  { text: 'Evergreen Paths', colors: ['#00B894', '#00CEC9', '#74B9FF'] },
+  { text: 'Hybrid Delivery', colors: ['#FDCB6E', '#E17055', '#D63031'] },
+  { text: 'Audit-Ready Compliance', colors: ['#6C5CE7', '#A29BFE', '#FD79A8'] },
+  { text: 'White-Label Academies', colors: ['#00B894', '#00CEC9', '#74B9FF'] },
+  { text: 'Certifications', colors: ['#FDCB6E', '#E17055', '#D63031'] }
 ]
 
 const useMediaQuery = (query: string): boolean => {
@@ -95,7 +94,7 @@ export function Carousel3dSection() {
         <Canvas
           shadows
           dpr={dpr}
-          camera={{ position: [0, 0, isMobile ? 1.4 : 1.65], fov: isMobile ? 75 : 70 }}
+          camera={{ position: [0, -0.1, isMobile ? 1.4 : 1.65], fov: isMobile ? 75 : 70 }}
           style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
           <PerformanceMonitor onIncline={() => setDpr(2)} onDecline={() => setDpr(1)}>
             {/*  <OrbitControls

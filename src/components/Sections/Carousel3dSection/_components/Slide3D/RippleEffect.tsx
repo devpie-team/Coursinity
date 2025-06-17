@@ -144,7 +144,7 @@ export function RippleEffect({ geometry, baseColor, rippleColor }: RippleEffectP
   })
 
   return (
-    <mesh geometry={geometry} scale={[1.02, 1.02, 1.02]}>
+    <mesh geometry={geometry}>
       {/* @ts-ignore */}
       <rippleMaterial
         ref={rippleMaterialRef}
@@ -168,4 +168,4 @@ export function RippleEffect({ geometry, baseColor, rippleColor }: RippleEffectP
       />
     </mesh>
   )
-} 
+}

@@ -17,8 +17,8 @@ type Slide3DProps = {
 
 export function Slide3D({
   text,
-  baseColor = '#4b5669',
-  rippleColor = '#4b5669',
+  baseColor = '#ed8a82',
+  rippleColor = '#ed8a82',
   scale = 1,
   isActive = false,
   offsetFromCenter,
@@ -150,7 +150,7 @@ export function Slide3D({
           clearcoatRoughness={1}
           reflectivity={0.5}
           transparent={true}
-          opacity={0.3}
+          opacity={0.5}
           toneMapped={true}
           emissive={base}
           emissiveIntensity={0.01}

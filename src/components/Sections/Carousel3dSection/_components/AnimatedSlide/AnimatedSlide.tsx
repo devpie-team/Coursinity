@@ -74,7 +74,14 @@ export const AnimatedSlide = memo(
       const z = currentPos.z + (nextPos.z - currentPos.z) * interpolationFactor
 
       const rotationY = Math.atan2(x - circleCenter[0], z - circleCenter[2])
-      groupRef.current.position.set(x, y, z)
+
+      // Зробити центральний слайд ближче до камери з плавним переходом
+      const maxZOffset = 0.05
+      const transitionRange = 1.0 // Діапазон для плавного переходу
+      const distanceFromCenter = Math.abs(offsetFromCenter)
+      const zOffset = Math.max(0, maxZOffset * (1 - distanceFromCenter / transitionRange))
+
+      groupRef.current.position.set(x, y, z + zOffset)
       groupRef.current.rotation.set(0, rotationY, -0.05)
     })
 
@@ -82,6 +89,7 @@ export const AnimatedSlide = memo(
       <group ref={groupRef}>
         <Slide3D
           text={data.text}
+          baseColor={data.colors[1]}
           scale={isMobile ? 0.7 : 1.0}
           offsetFromCenter={Math.abs(offsetFromCenter)}
           side={offsetFromCenter < 0 ? 'left' : offsetFromCenter > 0 ? 'right' : undefined}
