@@ -10,6 +10,7 @@ import { SwipeStepper } from '@/components/SwipeStepper/SwipeStepper'
 import { useTranslations } from 'next-intl'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 
 export const GrowthStepSection = () => {
   const t = useTranslations('GrowthStepSection')
@@ -90,17 +91,16 @@ export const GrowthStepSection = () => {
     <section
       className="relative flex flex-col bg-black h-[1240px] max-lg:h-[760px] overflow-hidden items-center justify-between"
       {...(!isDesktop ? swipeHandlers : {})}>
-      <div
-        className="flex flex-col gap-4 text-center pb-10 pt-[140px] max-lg:pt-20 max-md:px-4"
-        data-aos="fade"
-        data-aos-offset={isMobile ? '-10' : ''}>
-        <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
-          {t('common.sectionTitle')}
-        </Typography>
-        <Typography variant="body3" weight="regular" className="text-white opacity-80">
-          {t('common.sectionDescription')}
-        </Typography>
-      </div>
+      <FadeInOnView variant="fade-up">
+        <div className="flex flex-col gap-4 text-center pb-10 pt-[140px] max-lg:pt-20 max-md:px-4">
+          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
+            {t('common.sectionTitle')}
+          </Typography>
+          <Typography variant="body3" weight="regular" className="text-white opacity-80">
+            {t('common.sectionDescription')}
+          </Typography>
+        </div>
+      </FadeInOnView>
 
       <div data-aos="fade" data-aos-offset="-200">
         {mergedSlides.map((slide, index) => (
@@ -116,24 +116,23 @@ export const GrowthStepSection = () => {
       </div>
 
       {isDesktop ? (
-        <div
-          className="flex flex-col gap-[40px] pb-[140px] px-[140px] w-full items-center "
-          data-aos="fade"
-          data-aos-offset="-80">
-          <Typography variant="h6" weight="regular" className="text-white">
-            {t('common.subtitle')}
-          </Typography>
-          <Button variant="secondary" className="w-[190px]">
-            {t('common.cta')}
-          </Button>
-          <div className="absolute bottom-[140px] right-[140px]" data-aos="fade" data-aos-offset="-80">
-            <Stepper
-              steps={3}
-              activeStep={getStepperIndex(activeIndex)}
-              onStepClick={(step) => setActiveIndex(step - 1)}
-            />
+        <FadeInOnView>
+          <div className="flex flex-col gap-[40px] pb-[140px] px-[140px] w-full items-center ">
+            <Typography variant="h6" weight="regular" className="text-white">
+              {t('common.subtitle')}
+            </Typography>
+            <Button variant="secondary" className="w-[190px]">
+              {t('common.cta')}
+            </Button>
+            <div className="absolute bottom-[140px] right-[140px]" data-aos="fade" data-aos-offset="-80">
+              <Stepper
+                steps={3}
+                activeStep={getStepperIndex(activeIndex)}
+                onStepClick={(step) => setActiveIndex(step - 1)}
+              />
+            </div>
           </div>
-        </div>
+        </FadeInOnView>
       ) : (
         <div className="flex flex-col gap-8 items-center justify-center pb-20">
           <SwipeStepper
