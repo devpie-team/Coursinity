@@ -92,10 +92,8 @@ export const FeaturesSection = () => {
 
               <div className="grid grid-cols-2 grid-rows-2 place-items-center mt-auto gap-[10px] max-lg:mt-0 max-lg:pt-3">
                 {certificationsLeft.map(({ src, alt }, i) => (
-                  <div
-                    key={i}
-                    className="flex bg-secondary-300 rounded-[10px] justify-center items-center w-full h-16 max-lg:h-[42px]">
-                    <img src={src} alt={alt} className="max-h-[64px] max-lg:max-h-[42px]" />
+                  <div key={i} className="flex  rounded-[10px] justify-center items-center w-full h-12 max-lg:h-10">
+                    <img src={src} alt={alt} className="max-h-[48px] max-lg:max-h-10" />
                   </div>
                 ))}
               </div>
@@ -143,14 +141,9 @@ export const FeaturesSection = () => {
                 </div>
               ))}
 
-              <div
-                className={cn('grid grid-cols-2 grid-rows-2 place-items-center  gap-[10px]  ', !isDesktop && 'pt-3')}
-                data-aos="fade"
-                data-aos-offset={isMobile ? '-650' : '-200'}>
+              <div className={cn('grid grid-cols-2 grid-rows-2 place-items-center  gap-4  mt-4', !isDesktop && 'pt-3')}>
                 {certificationsRight.map(({ src, alt }, i) => (
-                  <div
-                    key={i}
-                    className="flex bg-secondary-300 rounded-[10px] justify-center items-center w-full h-16 max-lg:h-[42px]">
+                  <div key={i} className="flex  rounded-[10px] justify-center items-center w-full h-12 max-lg:h-[42px]">
                     <img src={src} alt={alt} className="max-h-[64px] max-lg:max-h-[42px]" />
                   </div>
                 ))}

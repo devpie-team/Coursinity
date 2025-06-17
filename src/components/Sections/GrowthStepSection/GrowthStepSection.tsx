@@ -116,23 +116,33 @@ export const GrowthStepSection = () => {
       </div>
 
       {isDesktop ? (
-        <FadeInOnView>
-          <div className="flex flex-col gap-[40px] pb-[140px] px-[140px] w-full items-center ">
-            <Typography variant="h6" weight="regular" className="text-white">
-              {t('common.subtitle')}
-            </Typography>
-            <Button variant="secondary" className="w-[190px]">
-              {t('common.cta')}
-            </Button>
-            <div className="absolute bottom-[140px] right-[140px]" data-aos="fade" data-aos-offset="-80">
-              <Stepper
-                steps={3}
-                activeStep={getStepperIndex(activeIndex)}
-                onStepClick={(step) => setActiveIndex(step - 1)}
-              />
-            </div>
+        <div className="flex flex-col gap-[40px] pb-[140px] px-[140px] w-full items-center ">
+          <Typography variant="h6" weight="regular" className="text-white">
+            {t('common.subtitle')}
+          </Typography>
+          <Button variant="secondary" className="w-[190px]">
+            {t('common.cta')}
+          </Button>
+          <div className="absolute bottom-[140px] right-[140px]" data-aos="fade" data-aos-offset="-80">
+            <Stepper
+              steps={3}
+              activeStep={getStepperIndex(activeIndex)}
+              onStepClick={(step) => setActiveIndex(step - 1)}
+            />
           </div>
-        </FadeInOnView>
+
+          <button
+            onClick={() => handleClick(activeIndex, 'left')}
+            className="absolute left-[400px] top-[50%] z-10 transform -translate-y-1/2 w-[48px] h-[48px] bg-white backdrop-blur rounded-full flex items-center justify-center border border-white hover:bg-white/20 transition">
+            <span className="text-black text-4xl">‹</span>
+          </button>
+
+          <button
+            onClick={() => handleClick(activeIndex, 'right')}
+            className="absolute right-[400px] top-[50%] z-10 transform -translate-y-1/2 w-[48px] h-[48px] bg-white backdrop-blur rounded-full flex items-center border border-white justify-center hover:bg-white/20 transition ">
+            <span className="text-black text-4xl">›</span>
+          </button>
+        </div>
       ) : (
         <div className="flex flex-col gap-8 items-center justify-center pb-20">
           <SwipeStepper
