@@ -58,23 +58,23 @@ export default function HomePage() {
 
   return (
     <>
-      {/*  {loading && <Loader loading={loading} />}
+      {loading && <Loader loading={loading} />}
       <Header />
       <HeroSection loading={loading} />
       <FutureSection />
       <StackSection />
       <GrowthStepSection />
-      <AiTeamSection /> */}
+      <AiTeamSection />
       <Carousel3dSection />
       <InspirationSection />
       <BuildSection />
-      {/*   <ImpactSectionNew />
+      <ImpactSectionNew />
       <AcademySection />
       <TeamTrainingSection />
       <DataDrivenSection />
       <FeaturesSection />
       <TestimonialsSection />
-      <Footer /> */}
+      <Footer />
     </>
   )
 }

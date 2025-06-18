@@ -91,7 +91,7 @@ export const StackSection = () => {
 
     const ctx = gsap.context(() => {
       const steps = 3
-      const triggerLength = (window.innerHeight * steps) / 2
+      const triggerLength = window.innerHeight * steps
       ScrollTrigger.create({
         trigger: sectionRef.current,
         start: isLowScreen || isMobileAnimation ? 'bottom bottom' : 'top top',
