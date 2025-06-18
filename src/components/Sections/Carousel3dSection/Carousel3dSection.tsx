@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
+import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { PerformanceMonitor } from '@react-three/drei'
@@ -105,6 +106,16 @@ export function Carousel3dSection() {
               rotateSpeed={0.5}
             /> */}
             <SceneContent isMobile={isMobile} scrollProgressRef={scrollProxy} slidesData={slidesData} />
+            <EffectComposer>
+              <Bloom
+                intensity={1.5}
+                luminanceThreshold={0.1}
+                luminanceSmoothing={0.025}
+                radius={0.8}
+                mipmapBlur
+                layers={1}
+              />
+            </EffectComposer>
           </PerformanceMonitor>
         </Canvas>
       </div>
