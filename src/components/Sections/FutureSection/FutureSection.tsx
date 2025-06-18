@@ -14,8 +14,6 @@ import { ZapIcon } from '@/components/icons/ZapIcon'
 import { cn } from '@/lib/utils'
 import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 
-gsap.registerPlugin(ScrollTrigger)
-
 export const FutureSection = () => {
   const t = useTranslations('FutureSection')
   const [isMobile, setIsMobile] = useState(false)
@@ -154,9 +152,7 @@ export const FutureSection = () => {
       <div>
         <LogoSlider />
       </div>
-      <div
-        className="relative flex items-center justify-center text-center w-full h-[100vh] overflow-hidden "
-        id="smooth-content">
+      <div className="relative flex items-center justify-center text-center w-full h-[100vh] overflow-hidden future-section">
         <div className="flex flex-col max-w-full w-[432px] scaleText opacityText max-lg:w-[372px] max-md:w-[252px]">
           <FadeInOnView>
             <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
