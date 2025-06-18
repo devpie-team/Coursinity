@@ -48,13 +48,28 @@ export const TeamTrainingSection = () => {
 
   const ANIMATION_PATHS = useMemo(
     () => [
-      { path: '/assets/lottie/team_train/team_train_1.json', type: 'lottie' },
-      { path: '/assets/lottie/team_train/team_train_2.json', type: 'lottie' },
-      { path: '/assets/lottie/team_train/team_train_3.json', type: 'lottie' },
+      {
+        path: isArabic
+          ? '/assets/lottie/team_train/team_train_1_ar.json'
+          : '/assets/lottie/team_train/team_train_1_en.json',
+        type: 'lottie'
+      },
+      {
+        path: isArabic
+          ? '/assets/lottie/team_train/team_train_2_ar.json'
+          : '/assets/lottie/team_train/team_train_2_en.json',
+        type: 'lottie'
+      },
+      {
+        path: isArabic
+          ? '/assets/lottie/team_train/team_train_3_ar.json'
+          : '/assets/lottie/team_train/team_train_3_en.json',
+        type: 'lottie'
+      },
       {
         path: isArabic
           ? '/assets/lottie/team_train/team_train_4_ar.json'
-          : '/assets/lottie/team_train/team_train_4.json',
+          : '/assets/lottie/team_train/team_train_4_en.json',
         type: 'lottie'
       }
     ],
@@ -64,11 +79,15 @@ export const TeamTrainingSection = () => {
   const loadAnimation = useCallback(async (path: string) => {
     if (animationCache[path]) return animationCache[path]
 
-    const cached = sessionStorage.getItem(path)
-    if (cached) {
-      const parsed = JSON.parse(cached)
-      animationCache[path] = parsed
-      return parsed
+    try {
+      const cached = sessionStorage.getItem(path)
+      if (cached) {
+        const parsed = JSON.parse(cached)
+        animationCache[path] = parsed
+        return parsed
+      }
+    } catch (error) {
+      console.warn("SessionStorage недоступний, використовуємо пам'ять:", error)
     }
 
     try {
@@ -76,7 +95,25 @@ export const TeamTrainingSection = () => {
       const data = await response.json()
 
       animationCache[path] = data
-      sessionStorage.setItem(path, JSON.stringify(data))
+
+      // Спробуємо зберегти в sessionStorage з обробкою помилок
+      try {
+        sessionStorage.setItem(path, JSON.stringify(data))
+      } catch (storageError) {
+        console.warn("Не вдалося зберегти в sessionStorage, використовуємо тільки пам'ять:", storageError)
+        // Очищаємо старий кеш якщо місця немає
+        try {
+          const keys = Object.keys(sessionStorage)
+          if (keys.length > 10) {
+            // Видаляємо перші 5 ключів для звільнення місця
+            keys.slice(0, 5).forEach((key) => sessionStorage.removeItem(key))
+            // Повторна спроба збереження
+            sessionStorage.setItem(path, JSON.stringify(data))
+          }
+        } catch (cleanupError) {
+          console.warn('Не вдалося очистити sessionStorage:', cleanupError)
+        }
+      }
 
       return data
     } catch (error) {
@@ -162,7 +199,9 @@ export const TeamTrainingSection = () => {
 
   return (
     <section
-      className={`bg-white flex ${isArabic ? 'pr-[140px]' : 'pl-[140px]'} py-[85px] gap-[50px] overflow-x-hidden${
+      className={`bg-white flex ${
+        isArabic ? 'pr-[140px]' : 'pl-[140px]'
+      } py-[85px] gap-[50px] overflow-x-hidden max-lg:pr-4 ${
         isArabic ? 'max-[1250px]:pr-6' : 'max-[1250px]:pl-6'
       } max-lg:pb-0 max-lg:gap-5 max-md:flex-col justify-center overflow-hidden max-md:p-4`}>
       <div className="flex flex-col gap-10 max-w-[700px]">
@@ -220,8 +259,8 @@ export const TeamTrainingSection = () => {
         </button>
       </div>
 
-      <div className="flex items-start shrink-0 max-md:hidden max-lg:items-center">
-        <div className="h-[570px] w-[570px] max-[1400px]:h-[500px] max-[1400px]:w-[510px] max-lg:w-[405px] max-lg:h-[410px] relative">
+      <div className="flex items-start shrink-0 max-md:hidden max-lg:items-center ">
+        <div className="h-[570px] w-[570px] max-[1400px]:h-[500px] max-[1400px]:w-[510px] max-lg:w-[390px] max-lg:h-[410px] relative">
           {renderAnimations(lottieRefs)}
         </div>
       </div>
