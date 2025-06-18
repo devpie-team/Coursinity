@@ -21,7 +21,7 @@ const ToggleLanguage = ({ value, onToggle }: ToggleLanguageProps) => {
       <div
         className={
           isArabicPath
-            ? 'flex justify-between pl-[20px] pr-[10px] w-full z-10'
+            ? 'flex justify-between pl-[6px] pr-[10px] w-full z-10'
             : 'flex justify-between px-[18px] w-full z-10'
         }>
         <span className={`text-base leading-6 font-medium transition-colors ${value ? 'text-black' : 'text-white'}`}>
