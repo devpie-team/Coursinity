@@ -127,7 +127,7 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
           <Typography variant="h4" weight="medium" className="opacity-65 ">
             {t('steps.1.title')}
           </Typography>
-          <Typography variant="h4" weight="medium" data-aos="fade-up" data-aos-offset="-350">
+          <Typography variant="h4" weight="medium">
             {t('steps.1.subtitle')}
           </Typography>
           {t('steps.1.button') && (
