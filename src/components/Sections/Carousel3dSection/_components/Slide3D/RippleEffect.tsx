@@ -3,12 +3,11 @@ import * as THREE from 'three'
 import { shaderMaterial } from '@react-three/drei'
 import { extend, useFrame } from '@react-three/fiber'
 
-// Ripple shader
 const RippleMaterial = shaderMaterial(
   {
     u_time: 0,
-    u_center: new THREE.Vector2(5, 5),
-    u_resolution: new THREE.Vector2(1, 1),
+    u_center: new THREE.Vector2(0.5, 0.5),
+    u_resolution: new THREE.Vector2(window.innerWidth, window.innerHeight),
     u_waveFrequency: 10.0,
     u_waveSpeed: 3.5,
     u_waveDecay: 3.0,
@@ -23,7 +22,6 @@ const RippleMaterial = shaderMaterial(
     u_emissiveIntensity: 0.01,
     u_strength: 2.0
   },
-  // Vertex Shader
   `
     varying vec2 vUv;
     varying vec3 vNormal;
@@ -37,11 +35,10 @@ const RippleMaterial = shaderMaterial(
       gl_Position = projectionMatrix * mvPosition;
     }
   `,
-  // Fragment Shader
   `
+    precision mediump float;
     uniform float u_time;
     uniform vec2 u_center;
-    uniform vec2 u_resolution;
     uniform float u_waveFrequency;
     uniform float u_waveSpeed;
     uniform float u_waveDecay;
@@ -54,50 +51,24 @@ const RippleMaterial = shaderMaterial(
     uniform float u_reflectivity;
     uniform vec3 u_emissive;
     uniform float u_emissiveIntensity;
-    uniform float u_strength;
-    
+
     varying vec2 vUv;
     varying vec3 vNormal;
     varying vec3 vViewPosition;
 
-    // Функція для обчислення фізичного освітлення
-    vec3 calculateLighting(vec3 baseColor, float metalness, float roughness) {
-      vec3 normal = normalize(vNormal);
-      vec3 viewDir = normalize(vViewPosition);
-      
-      // Базове освітлення
-      vec3 lighting = baseColor;
-      
-      // Металічність
-      lighting = mix(lighting, baseColor * 0.5, metalness);
-      
-      // Шорсткість
-      lighting = mix(lighting, lighting * 0.7, roughness);
-      
-      // Покриття
-      float clearcoat = u_clearcoat * (1.0 - roughness);
-      lighting = mix(lighting, lighting * 1.2, clearcoat);
-      
-      // Відбиття
-      float reflection = u_reflectivity * (1.0 - roughness);
-      lighting = mix(lighting, lighting * 1.5, reflection);
-      
-      // Світіння
-      lighting += u_emissive * u_emissiveIntensity;
-      
-      return lighting;
-    }
-
     void main() {
-      float dist = distance(vUv, u_center);
+      vec2 uv = vUv;
+      float dist = distance(uv, u_center);
       float ripple = sin(u_waveFrequency * dist - u_time * u_waveSpeed) * exp(-u_waveDecay * dist);
-      
+
       vec3 rippleColor = vec3(0.294, 0.337, 0.412) * ripple;
-      vec3 baseColor = mix(u_baseColor, rippleColor, 0.7);
-      
-      vec3 finalColor = calculateLighting(baseColor, u_metalness, u_roughness);
-      
-      gl_FragColor = vec4(finalColor, u_opacity);
+      vec3 color = mix(u_baseColor, rippleColor, 0.7);
+
+      vec3 viewDir = normalize(vViewPosition);
+      float fresnel = pow(1.0 - dot(viewDir, normalize(vNormal)), 3.0);
+      color += fresnel * u_emissive * u_emissiveIntensity;
+
+      gl_FragColor = vec4(color, u_opacity);
     }
   `
 )
@@ -122,18 +93,14 @@ type RippleEffectProps = {
 export function RippleEffect({ geometry, baseColor, rippleColor, rippleCenter }: RippleEffectProps) {
   const rippleMaterialRef = useRef<THREE.ShaderMaterial>(null!)
 
-  // Оновлення роздільної здатності при ресайзі
   useEffect(() => {
     const handleResize = () => {
-      if (rippleMaterialRef.current) {
-        rippleMaterialRef.current.uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight)
-      }
+      rippleMaterialRef.current?.uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight)
     }
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // Ripple is always animated
   useFrame(({ clock }) => {
     if (rippleMaterialRef.current) {
       rippleMaterialRef.current.uniforms.u_time.value = clock.getElapsedTime()
@@ -147,21 +114,8 @@ export function RippleEffect({ geometry, baseColor, rippleColor, rippleCenter }:
       {/* @ts-ignore */}
       <rippleMaterial
         ref={rippleMaterialRef}
-        u_center={new THREE.Vector2(0.5, 0.5)}
-        u_resolution={new THREE.Vector2(window.innerWidth, window.innerHeight)}
-        u_waveFrequency={10}
-        u_waveSpeed={3.5}
-        u_waveDecay={3}
         u_baseColor={baseColor}
-        u_opacity={0.5}
-        u_metalness={1.0}
-        u_roughness={0.5}
-        u_clearcoat={0.8}
-        u_clearcoatRoughness={1.0}
-        u_reflectivity={0.5}
         u_emissive={rippleColor}
-        u_emissiveIntensity={0.01}
-        u_strength={2}
         transparent={true}
         blending={THREE.AdditiveBlending}
       />
