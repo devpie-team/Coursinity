@@ -214,13 +214,41 @@ export const BuildSection = () => {
       return (
         <Swiper
           slidesPerView={1}
-          spaceBetween={200}
           className="w-full mobile-swiper"
           allowTouchMove={true}
           onSwiper={(swiper) => (swiperRef.current = swiper)}
           onSlideChange={handleSlideChange}
           data-aos="fade"
-          data-aos-offset="-50">
+          data-aos-offset="-50"
+          breakpoints={{
+            320: {
+              spaceBetween: -30
+            },
+            370: {
+              spaceBetween: -50
+            },
+            410: {
+              spaceBetween: -80
+            },
+            460: {
+              spaceBetween: -100
+            },
+            500: {
+              spaceBetween: -120
+            },
+            550: {
+              spaceBetween: -140
+            },
+            600: {
+              spaceBetween: -160
+            },
+            650: {
+              spaceBetween: -180
+            },
+            700: {
+              spaceBetween: 0
+            }
+          }}>
           {CARDS.map((card, idx) => (
             <SwiperSlide key={idx} className="!flex !justify-center">
               <RotatedCard
@@ -260,7 +288,7 @@ export const BuildSection = () => {
 
   return (
     <section
-      className="h-[100vh] build-section flex flex-col items-center justify-center gap-12  px-10 max-w-[100vw] bg-black text-white max-lg:pt-0 max-lg:px-6 max-lg:pb-0  max-lg:h-auto max-md:pt-20 max-md:px-4"
+      className="h-[100vh] build-section flex flex-col items-center justify-center gap-4  px-10 max-w-[100vw] bg-black text-white max-lg:pt-0 max-lg:px-6 max-lg:pb-0  max-lg:h-auto max-md:pt-20 max-md:px-4"
       ref={scrollWrapperBuildRef}>
       <div className="flex flex-col items-center gap-4 text-center">
         <FadeInOnView variant="fade-up">

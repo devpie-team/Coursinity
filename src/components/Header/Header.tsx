@@ -119,7 +119,12 @@ export const Header = () => {
               router.replace(newPath)
             }}
           />
-          <Button>{t('button')}</Button>
+          <button
+            className="flex button-gradient h-[56px] rounded-full px-6 py-4 text-center items-center
+                text-white text-body3 !bg-black
+                transition-all w-[200px]">
+            {t('button')}
+          </button>
         </div>
       ) : (
         <button onClick={() => setIsOpen((prev) => !prev)} className="p-2 z-[51]">

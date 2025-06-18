@@ -18,7 +18,7 @@ export const SwipeStepper = ({ steps, activeStep, onStepClick }: SwipeStepperPro
             key={step}
             onClick={() => onStepClick?.(step)}
             className={`w-12 h-1 flex items-center justify-center rounded-[99px] border-[1.5px] 
-              transition-colors text-white text-[24px] leading-8 font-medium
+               text-white text-[24px] leading-8 font-medium transition-all duration-300
               ${isActive ? 'bg-white' : 'bg-white opacity-40'}
             `}></button>
         )
