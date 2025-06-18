@@ -55,7 +55,7 @@ export const DataDrivenSection = () => {
   }, [])
 
   return (
-    <section className="bg-white p-[140px] pt-0 flex justify-center items-center gap-[180px] max-lg:px-6 max-lg:pt-20 max-lg:pb-0 max-md:flex-col max-lg:gap-10 max-md:px-4 ">
+    <section className="bg-white p-[140px] pt-0 flex justify-center items-center gap-[180px] max-lg:px-6 max-lg:pt-20 max-lg:pb-0 max-md:flex-col max-lg:gap-10 max-md:px-4 overflow-x-hidden">
       {/* Left side */}
       <div className="flex flex-col gap-4 max-w-[480px] ">
         <FadeInOnView variant="slide-right">

@@ -45,7 +45,6 @@ export const TeamTrainingSection = () => {
   )
 
   const loadAnimation = useCallback(async (path: string) => {
-    // Перевіряємо в пам'яті
     if (animationCache[path]) return animationCache[path]
 
     const cached = sessionStorage.getItem(path)
@@ -132,7 +131,7 @@ export const TeamTrainingSection = () => {
 
   return (
     <section
-      className={`bg-white flex ${isArabic ? 'pr-[140px]' : 'pl-[140px]'} py-[85px] gap-[50px]  ${
+      className={`bg-white flex ${isArabic ? 'pr-[140px]' : 'pl-[140px]'} py-[85px] gap-[50px] overflow-x-hidden${
         isArabic ? 'max-[1250px]:pr-6' : 'max-[1250px]:pl-6'
       } max-lg:pb-0 max-lg:gap-5 max-md:flex-col justify-center overflow-hidden max-md:p-4`}>
       <div className="flex flex-col gap-10 max-w-[700px]">
