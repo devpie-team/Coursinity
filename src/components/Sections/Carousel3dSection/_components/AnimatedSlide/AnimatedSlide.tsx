@@ -42,6 +42,8 @@ export const AnimatedSlide = memo(
   }: AnimatedSlideProps) => {
     const groupRef = useRef<Group>(null)
     const [offsetFromCenter, setOffsetFromCenter] = useState(0)
+    // Ripple center state
+    const [rippleCenterUv, setRippleCenterUv] = useState<[number, number]>([0.5, 0.5])
 
     useFrame(() => {
       if (!groupRef.current) return
@@ -85,8 +87,15 @@ export const AnimatedSlide = memo(
       groupRef.current.rotation.set(0, rotationY, -0.05)
     })
 
+    // Handle pointer move for ripple center
+    function handlePointerMove(e: any) {
+      if (e.uv) {
+        setRippleCenterUv([e.uv.x, e.uv.y])
+      }
+    }
+
     return (
-      <group ref={groupRef}>
+      <group ref={groupRef} onPointerMove={handlePointerMove}>
         <Slide3D
           text={data.text}
           baseColor={data.colors[1]}
@@ -94,6 +103,7 @@ export const AnimatedSlide = memo(
           offsetFromCenter={Math.abs(offsetFromCenter)}
           side={offsetFromCenter < 0 ? 'left' : offsetFromCenter > 0 ? 'right' : undefined}
           isActive={Math.abs(offsetFromCenter) < 0.5}
+          rippleCenterUv={rippleCenterUv}
         />
       </group>
     )

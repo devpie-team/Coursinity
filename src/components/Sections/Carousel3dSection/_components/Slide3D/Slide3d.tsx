@@ -13,6 +13,7 @@ type Slide3DProps = {
   isActive?: boolean
   offsetFromCenter?: number
   side?: 'left' | 'right'
+  rippleCenterUv?: [number, number]
 }
 
 export function Slide3D({
@@ -22,14 +23,15 @@ export function Slide3D({
   scale = 1,
   isActive = false,
   offsetFromCenter,
-  side
+  side,
+  rippleCenterUv
 }: Slide3DProps) {
   const groupRef = useRef<THREE.Group>(null!)
   const meshRef = useRef<THREE.Mesh>(null)
   const textMeshRef = useRef<THREE.Mesh>(null)
   const materialRef = useRef<THREE.MeshPhysicalMaterial>(null!)
   const [isHovered, setIsHovered] = useState(false)
-  const { camera } = useThree()
+  const { camera, clock } = useThree()
   const baseScale = typeof scale === 'number' ? scale : scale[0]
 
   // Для плавної анімації позиції тексту
@@ -40,6 +42,9 @@ export function Slide3D({
   // Створюємо кольори
   const base = useMemo(() => new THREE.Color(baseColor), [baseColor])
   const ripple = useMemo(() => new THREE.Color(rippleColor), [rippleColor])
+
+  const rippleCenter = rippleCenterUv || [0.5, 0.5]
+  const rippleTime = clock.getElapsedTime()
 
   useFrame((state) => {
     if (!groupRef.current) return
@@ -158,7 +163,12 @@ export function Slide3D({
       </mesh>
 
       {/* Хвилі */}
-      <RippleEffect geometry={geometry} baseColor={base} rippleColor={ripple} />
+      <RippleEffect
+        geometry={geometry}
+        baseColor={base}
+        rippleColor={ripple}
+        rippleCenter={rippleCenter}
+      />
 
       {/* Text with TextGeometry */}
       <mesh ref={textMeshRef} geometry={textGeometry} position={[0, 0, 0.06]}>

@@ -12,7 +12,7 @@ export function CentralPillar({ scrollProgressRef, circleCenter = [0, -0.1, -0.4
   const meshRef = useRef<THREE.InstancedMesh>(null)
 
   // Параметри частинок стовпа
-  const particleCount = 5000
+  const particleCount = 2000
   const pillarHeight = 8
   const pillarWidth = 1.3
   const particleSize = 0.08
@@ -117,7 +117,7 @@ export function CentralPillar({ scrollProgressRef, circleCenter = [0, -0.1, -0.4
       opacity: 0.9,
       emissive: new THREE.Color(0x333333),
       emissiveIntensity: 0.2,
-      roughness: 0.2,
+      roughness: 0.4,
       metalness: 0.8
     })
   }, [])

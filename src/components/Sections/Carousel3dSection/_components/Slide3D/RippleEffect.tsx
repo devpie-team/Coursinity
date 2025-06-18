@@ -116,9 +116,10 @@ type RippleEffectProps = {
   geometry: THREE.BufferGeometry
   baseColor: THREE.Color
   rippleColor: THREE.Color
+  rippleCenter?: [number, number]
 }
 
-export function RippleEffect({ geometry, baseColor, rippleColor }: RippleEffectProps) {
+export function RippleEffect({ geometry, baseColor, rippleColor, rippleCenter }: RippleEffectProps) {
   const rippleMaterialRef = useRef<THREE.ShaderMaterial>(null!)
 
   // Оновлення роздільної здатності при ресайзі
@@ -132,14 +133,12 @@ export function RippleEffect({ geometry, baseColor, rippleColor }: RippleEffectP
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // Анімація центру хвиль
-  useFrame((state) => {
+  // Ripple is always animated
+  useFrame(({ clock }) => {
     if (rippleMaterialRef.current) {
-      const t = state.clock.getElapsedTime()
-      const x = 0.5 + 0.01 * Math.sin(t * 0.6)
-      const y = 0.5 + 0.01 * Math.cos(t * 0.4)
-      rippleMaterialRef.current.uniforms.u_center.value.set(x, y)
-      rippleMaterialRef.current.uniforms.u_time.value = t
+      rippleMaterialRef.current.uniforms.u_time.value = clock.getElapsedTime()
+      const center = rippleCenter || [0.5, 0.5]
+      rippleMaterialRef.current.uniforms.u_center.value.set(center[0], center[1])
     }
   })
 
