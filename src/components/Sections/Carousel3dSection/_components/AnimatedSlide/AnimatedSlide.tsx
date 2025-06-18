@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, memo } from 'react'
+import { useRef, memo, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { Group, Mesh, Object3D } from 'three'
 import { Slide3D } from '../Slide3D/Slide3d'
@@ -27,15 +27,35 @@ interface AnimatedSlideProps {
   fixedPositions: Array<{ x: number; y: number; z: number }>
   isMobile: boolean
   spiralParams: SpiralParams
+  currentSlideIndex: number
 }
 
 export const AnimatedSlide = memo(
-  ({ index, data, scrollProgressRef, fixedPositions, isMobile, spiralParams }: AnimatedSlideProps) => {
+  ({
+    index,
+    data,
+    scrollProgressRef,
+    fixedPositions,
+    isMobile,
+    spiralParams,
+    currentSlideIndex
+  }: AnimatedSlideProps) => {
     const groupRef = useRef<Group>(null)
+    const [offsetFromCenter, setOffsetFromCenter] = useState(0)
+    // Ripple center state
+    const [rippleCenterUv, setRippleCenterUv] = useState<[number, number]>([0.5, 0.5])
 
     useFrame(() => {
       if (!groupRef.current) return
       const rotation = scrollProgressRef.current.value
+
+      // Нормалізуємо різницю, враховуючи циклічність каруселі
+      const totalSlides = spiralParams.totalSlides
+      let signedOffset = index - rotation
+      if (signedOffset < -totalSlides / 2) signedOffset += totalSlides
+      if (signedOffset > totalSlides / 2) signedOffset -= totalSlides
+      console.log('signedOffset:', signedOffset)
+      setOffsetFromCenter(signedOffset)
 
       const { radius, verticalSpacing, circleCenter, startOffset } = spiralParams
       const slideOffset = index - rotation + startOffset
@@ -56,26 +76,35 @@ export const AnimatedSlide = memo(
       const z = currentPos.z + (nextPos.z - currentPos.z) * interpolationFactor
 
       const rotationY = Math.atan2(x - circleCenter[0], z - circleCenter[2])
-      groupRef.current.position.set(x, y, z)
+
+      // Зробити центральний слайд ближче до камери з плавним переходом
+      const maxZOffset = 0.05
+      const transitionRange = 1.0 // Діапазон для плавного переходу
+      const distanceFromCenter = Math.abs(offsetFromCenter)
+      const zOffset = Math.max(0, maxZOffset * (1 - distanceFromCenter / transitionRange))
+
+      groupRef.current.position.set(x, y, z + zOffset)
       groupRef.current.rotation.set(0, rotationY, -0.05)
-
-      const distanceFromCamera = Math.sqrt(x * x + (z - 2) * (z - 2))
-      const normalizedDistance = Math.min(distanceFromCamera / (radius * 2), 1)
-      const proximityOpacity = Math.max(isMobile ? 0.4 : 0.3, 1.2 - normalizedDistance)
-      const heightOpacity = Math.max(isMobile ? 0.5 : 0.4, 1.0 + (y - circleCenter[1]) * 0.05)
-      const opacity = Math.min(proximityOpacity, heightOpacity)
-
-      groupRef.current.traverse((child: Object3D) => {
-        if (child instanceof Mesh && child.material && 'opacity' in child.material) {
-          child.material.opacity = opacity
-          child.material.transparent = true
-        }
-      })
     })
 
+    // Handle pointer move for ripple center
+    function handlePointerMove(e: any) {
+      if (e.uv) {
+        setRippleCenterUv([e.uv.x, e.uv.y])
+      }
+    }
+
     return (
-      <group ref={groupRef}>
-        <Slide3D text={data.text} scale={isMobile ? 0.7 : 1.0} />
+      <group ref={groupRef} onPointerMove={handlePointerMove}>
+        <Slide3D
+          text={data.text}
+          baseColor={data.colors[1]}
+          scale={isMobile ? 0.7 : 1.0}
+          offsetFromCenter={Math.abs(offsetFromCenter)}
+          side={offsetFromCenter < 0 ? 'left' : offsetFromCenter > 0 ? 'right' : undefined}
+          isActive={Math.abs(offsetFromCenter) < 0.5}
+          rippleCenterUv={rippleCenterUv}
+        />
       </group>
     )
   }

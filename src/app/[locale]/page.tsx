@@ -65,10 +65,9 @@ export default function HomePage() {
       <StackSection />
       <GrowthStepSection />
       <AiTeamSection />
-      {/*  <Carousel3dSection /> */}
+      <Carousel3dSection />
       <InspirationSection />
       <BuildSection />
-
       <ImpactSectionNew />
       <AcademySection />
       <TeamTrainingSection />
