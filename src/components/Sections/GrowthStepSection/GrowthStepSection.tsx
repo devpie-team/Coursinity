@@ -7,10 +7,12 @@ import { Button } from '@/components/primitives/button'
 import Stepper from '@/components/Stepper'
 import { GrowthSlide } from './_components/GrowthSlide'
 import { SwipeStepper } from '@/components/SwipeStepper/SwipeStepper'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
+import { ChevronLeftIcon } from '@/components/icons/ChevronLeftIcon'
+import { cn } from '@/lib/utils'
 
 export const GrowthStepSection = () => {
   const t = useTranslations('GrowthStepSection')
@@ -33,6 +35,8 @@ export const GrowthStepSection = () => {
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
 
   useEffect(() => {
     AOS.init()
@@ -42,8 +46,8 @@ export const GrowthStepSection = () => {
 
   const slideImages = [
     {
-      image: '/assets/growth/growth_1.png',
-      imageClasses: 'absolute top-0 max-lg:top-[60px] max-lg:scale-[1.4] w-[100%] h-[100%]  '
+      image: isArabic ? '/assets/growth/growth_1_ar.png' : '/assets/growth/growth_1_en.png',
+      imageClasses: 'absolute top-[-60px] max-lg:top-[20px] max-lg:scale-[1.4] w-[100%]   '
     },
     {
       image: '/assets/growth/growth_2.png',
@@ -130,17 +134,23 @@ export const GrowthStepSection = () => {
               onStepClick={(step) => setActiveIndex(step - 1)}
             />
           </div>
-
           <button
             onClick={() => handleClick(activeIndex, 'left')}
-            className="absolute left-[400px] top-[50%] z-10 transform -translate-y-1/2 w-[48px] h-[48px] bg-white backdrop-blur rounded-full flex items-center justify-center border border-white hover:bg-white/20 transition">
-            <span className="text-black text-4xl">‹</span>
+            className="group absolute left-[5%] top-[50%] z-10 transform -translate-y-1/2 w-[48px] h-[48px] bg-white backdrop-blur rounded-full flex items-center justify-center border border-white hover:bg-white/20 transition">
+            <ChevronLeftIcon
+              className={cn('h-6 w-6  stroke-black group-hover:stroke-white transition', isArabic ? 'scale-x-100' : '')}
+            />
           </button>
 
           <button
             onClick={() => handleClick(activeIndex, 'right')}
-            className="absolute right-[400px] top-[50%] z-10 transform -translate-y-1/2 w-[48px] h-[48px] bg-white backdrop-blur rounded-full flex items-center border border-white justify-center hover:bg-white/20 transition ">
-            <span className="text-black text-4xl">›</span>
+            className="group absolute right-[5%] top-[50%] z-10 transform -translate-y-1/2 w-[48px] h-[48px] bg-white backdrop-blur rounded-full flex items-center border border-white justify-center hover:bg-white/20 transition ">
+            <ChevronLeftIcon
+              className={cn(
+                'h-6 w-6  -scale-x-100 stroke-black group-hover:stroke-white transition',
+                isArabic ? '' : '-scale-x-100'
+              )}
+            />
           </button>
         </div>
       ) : (

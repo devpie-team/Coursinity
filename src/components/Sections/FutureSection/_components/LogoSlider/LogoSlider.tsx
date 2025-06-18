@@ -15,16 +15,25 @@ export const LogoSlider = () => {
     'assets/logos/comptia.png',
     'assets/logos/nebosh.png',
     'assets/logos/GInI.png',
+    'assets/logos/comptia.png',
+    'assets/logos/nebosh.png',
+    'assets/logos/GInI.png',
     'assets/logos/iosh.png',
     'assets/logos/axelos.png',
     'assets/logos/microsoft.png',
     'assets/logos/IQF.png',
     'assets/logos/IoSCM.png',
-    'assets/logos/IFA.png'
+    'assets/logos/IFA.png',
+    'assets/logos/comptia.png',
+    'assets/logos/nebosh.png',
+    'assets/logos/GInI.png'
   ]
 
   // Colored logos for hover state
   const coloredLogos = [
+    'assets/logos/IQF_colored.png',
+    'assets/logos/IoSCM_colored.png',
+    'assets/logos/IFA_colored.png',
     'assets/logos/comptia_colored.png',
     'assets/logos/nebosh_colored.png',
     'assets/logos/GInI_colored.png',
@@ -33,7 +42,10 @@ export const LogoSlider = () => {
     'assets/logos/microsoft_colored.png',
     'assets/logos/IQF_colored.png',
     'assets/logos/IoSCM_colored.png',
-    'assets/logos/IFA_colored.png'
+    'assets/logos/IFA_colored.png',
+    'assets/logos/comptia_colored.png',
+    'assets/logos/nebosh_colored.png',
+    'assets/logos/GInI_colored.png'
   ]
 
   useEffect(() => {
@@ -64,7 +76,7 @@ export const LogoSlider = () => {
           {defaultLogos.map((src, i) => (
             <div
               key={i}
-              className={`w-[150px] h-[150px] border border-secondary-400 bg-white rounded-[40px] flex items-center justify-center skew-x-[-30deg] max-[1640px]:h-[120px] max-[1640px]:w-[120px] max-[1440px]:h-[105px] max-[1440px]:w-[105px]  p-5 transition-all duration-500 ease-in-out `}>
+              className={`w-[105px] h-[105px] border border-secondary-400 bg-white rounded-[25px] flex items-center justify-center skew-x-[-30deg]    p-5 transition-all duration-500 ease-in-out `}>
               <div className="relative w-full h-full flex items-center justify-center">
                 <img
                   src={src}

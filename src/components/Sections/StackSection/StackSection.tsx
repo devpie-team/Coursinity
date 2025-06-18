@@ -163,7 +163,7 @@ export const StackSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative flex gap-[120px] bg-primary-purple h-[900px] pt-[130px] px-[235px] text-white overflow-hidden items-start max-[1200px]:px-[140px] max-lg:px-10 max-lg:pt-20 max-lg:h-[650px] max-lg:gap-16 max-md:flex-col max-md:px-4 max-md:gap-10 max-md:h-[970px]">
+      className="relative flex gap-[120px] bg-primary-purple h-[100vh] pt-[95px] px-[235px] text-white overflow-hidden items-start max-[1200px]:px-[140px] max-lg:px-10 max-lg:pt-20 max-lg:h-[650px] max-lg:gap-16 max-md:flex-col max-md:px-4 max-md:gap-10 max-md:h-[970px]">
       {/* Slides */}
       <div
         className={`${
