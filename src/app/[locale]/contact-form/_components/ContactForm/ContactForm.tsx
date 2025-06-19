@@ -15,7 +15,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
 
   return (
     <div className={cn('', className)}>
-      <form className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
+      <form className="grid grid-cols-2 gap-4 max-md:grid-cols-1 ">
         <Input label={t('first_name')} placeholder={t('first_name_placeholder')} className="w-full" />
         <Input label={t('last_name')} placeholder={t('last_name_placeholder')} className="w-full" />
         <Input label={t('business_email')} placeholder={t('business_email_placeholder')} className="w-full" />
@@ -48,7 +48,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
             {t('additional_info')}
           </Typography>
           <textarea
-            className="p-5 text-md font-normal h-[120px] border border-secondary-400 rounded-2xl active:border-description hover:border-description outline-none focus:border-description resize-none"
+            className="p-5 text-md font-normal h-[120px] border border-secondary-400 rounded-2xl transition-all duration-300 active:border-description hover:border-description outline-none focus:border-description resize-none "
             placeholder={t('additional_info_placeholder')}
           />
         </div>
@@ -67,7 +67,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
               </a>
             </Typography>
           </div>
-          <Button variant="purple" className="w-[190px] mt-1">
+          <Button variant="purple" className="w-[190px] mt-1 max-md:w-full">
             {t('submit')}
           </Button>
         </div>
