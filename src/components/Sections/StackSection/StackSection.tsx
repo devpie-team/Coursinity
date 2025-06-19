@@ -91,8 +91,9 @@ export const StackSection = () => {
 
     const ctx = gsap.context(() => {
       const steps = 3
-      const triggerLength = (window.innerHeight * steps) / 2
+      const triggerLength = window.innerHeight * steps
       ScrollTrigger.create({
+        anticipatePin: 1,
         trigger: sectionRef.current,
         start: isLowScreen || isMobileAnimation ? 'bottom bottom' : 'top top',
         end: `+=${triggerLength}`,
@@ -163,7 +164,7 @@ export const StackSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative flex gap-[120px] bg-primary-purple h-[100vh] pt-[95px] px-[235px] text-white overflow-hidden items-start max-[1200px]:px-[140px] max-lg:px-10 max-lg:pt-20 max-lg:h-[650px] max-lg:gap-16 max-md:flex-col max-md:px-4 max-md:gap-10 max-md:h-[970px]">
+      className="relative flex gap-[120px] bg-primary-purple pt-[120px] px-[235px] text-white overflow-hidden items-start max-[1200px]:px-[140px] max-lg:px-10 max-lg:pt-20  h-[900px] max-lg:h-[650px] max-lg:gap-16 max-md:flex-col max-md:px-4 max-md:gap-10 max-md:h-[970px]">
       {/* Slides */}
       <div
         className={`${

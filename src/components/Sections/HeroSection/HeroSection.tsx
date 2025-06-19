@@ -17,7 +17,6 @@ import hero2Ar from '../../../../public/assets/lottie/hero/ar/h_2.json'
 import hero3Ar from '../../../../public/assets/lottie/hero/ar/h_3.json'
 import hero4Ar from '../../../../public/assets/lottie/hero/ar/h_4.json'
 import type { LottieRefCurrentProps } from 'lottie-react'
-import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { BubbleIcon } from '@/components/icons'
 
@@ -26,6 +25,17 @@ gsap.registerPlugin(ScrollTrigger)
 type THeroSection = {
   loading: boolean
 }
+
+const elementSettings = [
+  { selector: '.hero-element1', x: -1200, y: 1200, duration: 2, fade: true },
+  { selector: '.hero-element2', x: 1200, y: 1200, duration: 2, fade: true },
+  { selector: '.hero-element3', x: -1200, y: -1200, duration: 2, fade: true },
+  { selector: '.hero-element4', x: 1200, y: -1200, duration: 2, fade: true },
+  { selector: '.hero-element5', x: 0, y: 0, duration: 1, fade: false },
+  { selector: '.hero-element6', x: 1200, y: 0, duration: 2, fade: true },
+  { selector: '.hero-element7', x: -1200, y: 0, duration: 2, fade: true }
+]
+
 export const HeroSection = ({ loading }: THeroSection) => {
   const locale = useLocale()
   const isArabic = locale == 'ar'
@@ -43,6 +53,48 @@ export const HeroSection = ({ loading }: THeroSection) => {
   const lottieRef2 = useRef<LottieRefCurrentProps>(null)
   const lottieRef3 = useRef<LottieRefCurrentProps>(null)
   const lottieRef4 = useRef<LottieRefCurrentProps>(null)
+
+  useEffect(() => {
+    if (!loading) {
+      lottieRef1.current?.goToAndPlay(0, true)
+      lottieRef2.current?.goToAndPlay(0, true)
+      lottieRef3.current?.goToAndPlay(0, true)
+      lottieRef4.current?.goToAndPlay(0, true)
+      // elementSettings.forEach(({ selector, x, y, duration, fade }) => {
+      //   if (fade) {
+      //     gsap.fromTo(
+      //       selector,
+      //       {
+      //         opacity: 0,
+      //         x: x,
+      //         y: y,
+      //         duration: 2,
+      //         ease: 'sine.inOut'
+      //       },
+      //       {
+      //         opacity: 1,
+      //         duration: 2,
+      //         x: 0,
+      //         y: 0,
+      //         ease: 'sine.inOut'
+      //       }
+      //     )
+      //   } else {
+      //     gsap.fromTo(
+      //       selector,
+      //       {
+      //         opacity: 0,
+      //         duration: 2,
+      //         ease: 'sine.inOut'
+      //       },
+      //       {
+      //         opacity: 1
+      //       }
+      //     )
+      //   }
+      // })
+    }
+  }, [loading])
 
   useEffect(() => {
     ScrollTrigger.create({
@@ -71,16 +123,6 @@ export const HeroSection = ({ loading }: THeroSection) => {
   }, [])
 
   useEffect(() => {
-    const elementSettings = [
-      { selector: '.hero-element1', x: -1200, y: 1200, duration: 2, fade: true },
-      { selector: '.hero-element2', x: 1200, y: 1200, duration: 2, fade: true },
-      { selector: '.hero-element3', x: -1200, y: -1200, duration: 2, fade: true },
-      { selector: '.hero-element4', x: 1200, y: -1200, duration: 2, fade: true },
-      { selector: '.hero-element5', x: 0, y: 0, duration: 1, fade: false },
-      { selector: '.hero-element6', x: 1200, y: 0, duration: 2, fade: true },
-      { selector: '.hero-element7', x: -1200, y: 0, duration: 2, fade: true }
-    ]
-
     elementSettings.forEach(({ selector, x, y, duration, fade }) => {
       if (fade) {
         gsap.fromTo(

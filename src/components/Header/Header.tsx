@@ -8,7 +8,7 @@ import ToggleLanguage from '../ToggleLanguage'
 import { useHeaderVisibility } from './HeaderVisibilityContext'
 import { Button } from '../primitives/button'
 import { X } from 'lucide-react'
-import { TreeLines } from '../icons'
+import { LogoIcon, TreeLines } from '../icons'
 
 export const Header = () => {
   const t = useTranslations('Header')
@@ -103,11 +103,7 @@ export const Header = () => {
 
   return (
     <header ref={headerRef} className={headerClasses}>
-      <img
-        src={`/assets/logos/${isTablet || isMobile ? 'mobileLogo' : 'logos'}.png`}
-        alt="Logo"
-        className="h-[14px] w-[326px] max-lg:w-[126px]"
-      />
+      <LogoIcon className="h-[14px] w-[127px]" />
       {isDesktop && <div />}
       {isDesktop ? (
         <div className="flex items-center gap-[18px]">
@@ -120,7 +116,7 @@ export const Header = () => {
             }}
           />
           <button
-            className="flex button-gradient h-[56px] rounded-full px-6 py-4 text-center items-center
+            className="flex button-gradient h-[56px] rounded-full px-6 py-4 text-center items-center justify-center
                 text-white text-body3 !bg-black
                 transition-all w-[200px]">
             {t('button')}
@@ -132,7 +128,6 @@ export const Header = () => {
         </button>
       )}
 
-      {/* --- Mobile Menu (Optimized with CSS Transitions) --- */}
       {!isDesktop && (
         <div
           className={`absolute inset-0 z-50 bg-white px-6 py-6 flex flex-col justify-between md:h-[300px] top-[79px] h-[calc(100vh-79px)]

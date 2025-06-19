@@ -48,6 +48,14 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
     AOS.init()
   }, [])
 
+  const activeStyle = (step: number) => {
+    return {
+      opacity: isVisible && activeIndex + 1 == step ? 1 : 0,
+      transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
+      transitionDelay: isVisible && activeIndex + 1 == step ? '400ms' : '0ms'
+    }
+  }
+
   return (
     <>
       {/* Картка 1 */}
@@ -61,20 +69,18 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
         `}
         // onClick={() => setActiveIndex(0)}s
       >
-        <div
-          className="flex flex-col gap-2 px-[18px] pt-12 text-center justify-center items-center"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
-            transitionDelay: isVisible ? '400ms' : '0ms'
-          }}>
+        <div className="flex flex-col gap-2 px-[18px] pt-12 text-center justify-center items-center">
           <Typography variant="h4" weight="medium" className="opacity-65 mb-1">
             {t('steps.0.title')}
           </Typography>
-          <Typography variant="h4" weight="medium">
+          <Typography variant="h4" weight="medium" style={activeStyle(1)}>
             {t('steps.0.subtitle')}
           </Typography>
-          <Typography variant="body3" weight="regular" className="opacity-80 w-[305px] text-center">
+          <Typography
+            variant="body3"
+            weight="regular"
+            className="opacity-80 w-[305px] text-center"
+            style={activeStyle(1)}>
             {t('steps.0.description')}
           </Typography>
         </div>
@@ -83,32 +89,20 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
             src="/assets/stack_section/stack_1.png"
             alt="Step 1"
             className=" object-cover max-md:absolute max-md:bottom-[50px]"
-            style={{
-              opacity: isVisible ? 1 : 0,
-              transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
-              transitionDelay: isVisible ? '400ms' : '0ms'
-            }}
+            style={activeStyle(1)}
           />
         </div>
         <img
           src="/assets/stack_section/stack_4.png"
           alt="stack_4"
           className="absolute object-cover top-[350px] left-[15px]"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
-            transitionDelay: isVisible ? '400ms' : '0ms'
-          }}
+          style={activeStyle(1)}
         />
         <img
           src="/assets/stack_section/stack_5.png"
           alt="stack_5"
           className="absolute object-cover top-[250px] right-[20px]"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
-            transitionDelay: isVisible ? '400ms' : '0ms'
-          }}
+          style={activeStyle(1)}
         />
       </div>
 
@@ -127,11 +121,12 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
           <Typography variant="h4" weight="medium" className="opacity-65 ">
             {t('steps.1.title')}
           </Typography>
-          <Typography variant="h4" weight="medium" data-aos="fade-up" data-aos-offset="-350">
+          <Typography variant="h4" weight="medium" style={activeStyle(2)}>
             {t('steps.1.subtitle')}
           </Typography>
           {t('steps.1.button') && (
             <button
+              style={activeStyle(2)}
               className="
                 button-gradient
                 h-14 rounded-full px-6 py-5 text-center mt-4
@@ -147,6 +142,7 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
             src="/assets/stack_section/stack_2.png"
             alt="Step 2"
             className=" object-cover max-md:absolute max-md:bottom-12 "
+            style={activeStyle(2)}
           />
         </div>
         {t('steps.1.badge') && (
@@ -176,11 +172,12 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
           <Typography variant="h4" weight="medium" className="opacity-65 ">
             {t('steps.2.title')}
           </Typography>
-          <Typography variant="h4" weight="medium">
+          <Typography variant="h4" weight="medium" style={activeStyle(3)}>
             {t('steps.2.subtitle')}
           </Typography>
           {t('steps.2.button') && (
             <button
+              style={activeStyle(3)}
               className="
                 button-gradient
                 h-14 rounded-full px-6 py-5 text-center mt-4
@@ -191,7 +188,7 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
             </button>
           )}
         </div>
-        <div className="flex justify-center pb-[100px]">
+        <div className="flex justify-center pb-[100px]" style={activeStyle(3)}>
           <img
             src="/assets/stack_section/stack_3.png"
             alt="Step 3"

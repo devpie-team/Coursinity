@@ -7,6 +7,8 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { HeaderVisibilityProvider } from '@/components/Header/HeaderVisibilityContext'
 
+import SmoothScrollProvider from '@/components/SmoothScrollProvider'
+
 const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
@@ -36,7 +38,9 @@ export default async function LocaleLayout({
         <NextIntlClientProvider>
           <Theme>
             <HeaderVisibilityProvider>
-              <div className="main-wrapper ">{children}</div>
+              <SmoothScrollProvider>
+                <div className="main-wrapper ">{children}</div>
+              </SmoothScrollProvider>
             </HeaderVisibilityProvider>
           </Theme>
         </NextIntlClientProvider>

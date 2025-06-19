@@ -64,7 +64,7 @@ export const FutureSection = () => {
     ]
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
 
     ScrollTrigger.matchMedia({
