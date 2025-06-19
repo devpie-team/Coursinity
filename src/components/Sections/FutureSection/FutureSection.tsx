@@ -81,6 +81,10 @@ export const FutureSection = () => {
         runAnimations(1, 1.5, false, false, true)
       }
     })
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+    }
   }, [])
 
   const runAnimations = (
