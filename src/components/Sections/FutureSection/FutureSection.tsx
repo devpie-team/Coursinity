@@ -13,6 +13,7 @@ import { GridEditIcon } from '@/components/icons/GridEditIcon'
 import { ZapIcon } from '@/components/icons/ZapIcon'
 import { cn } from '@/lib/utils'
 import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
+import { usePathname } from 'next/navigation'
 
 export const FutureSection = () => {
   const t = useTranslations('FutureSection')
@@ -65,6 +66,7 @@ export const FutureSection = () => {
   }
 
   const locale = useLocale()
+  const pathname = usePathname()
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -87,7 +89,7 @@ export const FutureSection = () => {
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
     }
-  }, [locale])
+  }, [locale, pathname])
 
   const runAnimations = (
     targetScale: number,
