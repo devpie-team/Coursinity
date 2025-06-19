@@ -48,8 +48,6 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
     AOS.init()
   }, [])
 
-  console.log(isVisible, activeIndex)
-
   const activeStyle = (step: number) => {
     return {
       opacity: isVisible && activeIndex + 1 == step ? 1 : 0,
@@ -128,6 +126,7 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
           </Typography>
           {t('steps.1.button') && (
             <button
+              style={activeStyle(2)}
               className="
                 button-gradient
                 h-14 rounded-full px-6 py-5 text-center mt-4
@@ -178,6 +177,7 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
           </Typography>
           {t('steps.2.button') && (
             <button
+              style={activeStyle(3)}
               className="
                 button-gradient
                 h-14 rounded-full px-6 py-5 text-center mt-4
