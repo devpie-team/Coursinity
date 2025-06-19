@@ -9,16 +9,13 @@ import { AnimatedSlide } from '../AnimatedSlide/AnimatedSlide'
 import { CentralPillar } from '../CentralPillar/CentralPillar'
 import { AnimatedModel } from '../AnimatedModel/AnimatedModel'
 import { useSpiralParams } from '../hooks/useSpiralParams'
-
-interface SlideData {
-  text: string
-  colors: string[]
-}
+import { SlideData } from '../../types'
 
 interface SceneContentProps {
   isMobile: boolean
   scrollProgressRef: React.MutableRefObject<{ value: number }>
   slidesData: SlideData[]
+  locale: string
   waveFrequency?: number
   waveSpeed?: number
   waveDecay?: number
@@ -26,15 +23,16 @@ interface SceneContentProps {
   rippleEmissiveIntensity?: number
 }
 
-export const SceneContent = ({ 
-  isMobile, 
-  scrollProgressRef, 
+export const SceneContent = ({
+  isMobile,
+  scrollProgressRef,
   slidesData,
+  locale,
   waveFrequency,
   waveSpeed,
   waveDecay,
   rippleOpacity,
-  rippleEmissiveIntensity,
+  rippleEmissiveIntensity
 }: SceneContentProps) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
   const effectStrengthRef = useRef(0)
@@ -67,12 +65,12 @@ export const SceneContent = ({
       />
       <ParticlePlane
         position={[0, 0, -5]}
-        startY={-4}
-        endY={-3.4}
+        startY={-2}
+        endY={-0.6}
         width={8}
         height={4}
         depth={6}
-        particleCount={isMobile ? 10000 : 16000}
+        particleCount={isMobile ? 5000 : 8000}
         particleSize={0.01}
         randomness={150}
         waveIntensity={50}
@@ -81,13 +79,14 @@ export const SceneContent = ({
       />
 
       {/* 3D модель з правильним обертанням */}
-      <AnimatedModel scrollProgressRef={scrollProgressRef} />
+      {/* <AnimatedModel scrollProgressRef={scrollProgressRef} /> */}
 
       {slidesData.map((slide, i) => (
         <AnimatedSlide
           key={i}
           index={i}
           data={slide}
+          locale={locale}
           scrollProgressRef={scrollProgressRef}
           fixedPositions={fixedPositions}
           isMobile={isMobile}
@@ -100,7 +99,11 @@ export const SceneContent = ({
           rippleEmissiveIntensity={rippleEmissiveIntensity}
         />
       ))}
-      {/* <CentralPillar scrollProgressRef={scrollProgressRef} circleCenter={spiralParams.circleCenter} /> */}
+      <CentralPillar
+        scrollProgressRef={scrollProgressRef}
+        circleCenter={spiralParams.circleCenter}
+        isMobile={isMobile}
+      />
     </>
   )
 }

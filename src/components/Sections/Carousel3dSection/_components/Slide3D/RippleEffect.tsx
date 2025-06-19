@@ -12,15 +12,15 @@ const RippleMaterial = shaderMaterial(
     u_waveSpeed: 3.5,
     u_waveDecay: 3.0,
     u_baseColor: new THREE.Color(0.2, 0.3, 0.8),
-    u_opacity: 0.5,
+    u_opacity: 0.7,
     u_metalness: 1.0,
-    u_roughness: 0.5,
-    u_clearcoat: 0.8,
-    u_clearcoatRoughness: 1.0,
-    u_reflectivity: 0.5,
-    u_emissive: new THREE.Color(0.011764, 0.011764, 0.309804),
-    u_emissiveIntensity: 0.01,
-    u_strength: 2.0
+    u_roughness: 0.3,
+    u_clearcoat: 1.0,
+    u_clearcoatRoughness: 0.5,
+    u_reflectivity: 0.8,
+    u_emissive: new THREE.Color(1.0, 1.0, 1.0),
+    u_emissiveIntensity: 0.15,
+    u_strength: 2.5
   },
   `
     varying vec2 vUv;

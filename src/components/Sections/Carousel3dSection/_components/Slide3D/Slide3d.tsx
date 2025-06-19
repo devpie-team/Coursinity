@@ -18,12 +18,14 @@ type Slide3DProps = {
   waveDecay?: number
   rippleOpacity?: number
   rippleEmissiveIntensity?: number
+  isMobile?: boolean
+  locale?: string
 }
 
 export function Slide3D({
   text,
-  baseColor = '#ed8a82',
-  rippleColor = '#ed8a82',
+  baseColor = '#000000',
+  rippleColor = '#ffffff',
   scale = 1,
   isActive = false,
   offsetFromCenter,
@@ -34,6 +36,8 @@ export function Slide3D({
   waveDecay,
   rippleOpacity,
   rippleEmissiveIntensity,
+  isMobile = false,
+  locale
 }: Slide3DProps) {
   const groupRef = useRef<THREE.Group>(null!)
   const meshRef = useRef<THREE.Mesh>(null)
@@ -45,11 +49,33 @@ export function Slide3D({
   const base = useMemo(() => new THREE.Color(baseColor), [baseColor])
   const ripple = useMemo(() => new THREE.Color(rippleColor), [rippleColor])
 
+  // Створюємо градієнтну текстуру для слайда
+  const gradientTexture = useMemo(() => {
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')!
+
+    canvas.width = 256
+    canvas.height = 256
+
+    // Створюємо радіальний градієнт
+    const gradient = ctx.createRadialGradient(128, 128, 0, 128, 128, 128)
+    gradient.addColorStop(0, String(baseColor))
+    gradient.addColorStop(1, String(rippleColor))
+
+    ctx.fillStyle = gradient
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+    const texture = new THREE.CanvasTexture(canvas)
+    texture.needsUpdate = true
+
+    return texture
+  }, [baseColor, rippleColor])
+
   // --- Створення геометрії (без змін) ---
   const roundedRectShape = useMemo(() => {
     const shape = new THREE.Shape()
-    const width = 0.85
-    const height = 0.6
+    const width = isMobile ? 0.5 : 0.85
+    const height = isMobile ? 0.4 : 0.6
     const radius = 0.05
     shape.moveTo(-width / 2 + radius, -height / 2)
     shape.lineTo(width / 2 - radius, -height / 2)
@@ -87,14 +113,14 @@ export function Slide3D({
       {/* Фоновий меш */}
       <mesh ref={meshRef} geometry={geometry}>
         <meshPhysicalMaterial
-          color={base}
+          map={gradientTexture}
           metalness={1}
           roughness={0.5}
           clearcoat={0.8}
           clearcoatRoughness={1}
           reflectivity={0.5}
           transparent={true}
-          opacity={0.5}
+          opacity={0.75}
           toneMapped={true}
           emissive={base}
           emissiveIntensity={0.01}
@@ -102,10 +128,10 @@ export function Slide3D({
       </mesh>
 
       {/* Хвилі */}
-      <RippleEffect 
-        geometry={geometry} 
-        baseColor={base} 
-        rippleColor={ripple} 
+      <RippleEffect
+        geometry={geometry}
+        baseColor={base}
+        rippleColor={ripple}
         rippleCenter={rippleCenter}
         waveFrequency={waveFrequency}
         waveSpeed={waveSpeed}
@@ -115,11 +141,7 @@ export function Slide3D({
       />
 
       {/* Текст */}
-      <SlideText 
-        text={text} 
-        offsetFromCenter={offsetFromCenter} 
-        side={side} 
-      />
+      <SlideText text={text} offsetFromCenter={offsetFromCenter} side={side} isMobile={isMobile} locale={locale} />
     </group>
   )
 }

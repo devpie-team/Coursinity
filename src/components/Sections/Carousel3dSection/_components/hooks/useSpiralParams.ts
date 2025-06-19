@@ -1,9 +1,5 @@
 import { useMemo } from 'react'
-
-interface SlideData {
-    text: string
-    colors: string[]
-}
+import { SlideData } from '../../types'
 
 interface SpiralParams {
     radius: number
@@ -18,10 +14,10 @@ interface SpiralParams {
 export function useSpiralParams(isMobile: boolean, slidesData: SlideData[]) {
     const spiralParams: SpiralParams = useMemo(
         () => ({
-            radius: isMobile ? 0.8 : 1.2,
-            verticalSpacing: 0.25,
-            spiralTurns: isMobile ? 1.8 : 0.7,
-            circleCenter: [0, -0.1, -0.2],
+            radius: isMobile ? 0.6 : 1.2,
+            verticalSpacing:isMobile ? 0.2 : 0.25,
+            spiralTurns: isMobile ? 0.7 : 0.7,
+            circleCenter: isMobile ? [0, -0.1, 0.1] : [0, -0.1, -0.2],
             totalSlides: slidesData.length,
             startOffset: isMobile ? 6 : 8,
             endOffset: isMobile ? 6 : 8

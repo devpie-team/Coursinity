@@ -7,6 +7,8 @@ type SlideTextProps = {
   text: string
   offsetFromCenter?: number
   side?: 'left' | 'right'
+  isMobile?: boolean
+  locale?: string
 }
 
 // Кастомний шейдер матеріал для глітч ефекту
@@ -107,7 +109,7 @@ declare global {
   }
 }
 
-export function SlideText({ text, offsetFromCenter, side }: SlideTextProps) {
+export function SlideText({ text, offsetFromCenter, side, isMobile = false, locale }: SlideTextProps) {
   const textMeshRef = useRef<THREE.Mesh>(null)
   const textShaderRef = useRef<THREE.ShaderMaterial>(null!)
   const { camera, clock } = useThree()
@@ -115,7 +117,7 @@ export function SlideText({ text, offsetFromCenter, side }: SlideTextProps) {
   // Для плавної анімації позиції тексту
   const currentTextPositionX = useRef(0)
   const currentTextOpacity = useRef(1)
-  const currentTextFontSize = useRef(0.08)
+  const currentTextFontSize = useRef(isMobile ? 0.06 : 0.08)
 
   // Створюємо текстуру тексту з canvas
   const textTexture = useMemo(() => {
@@ -126,11 +128,30 @@ export function SlideText({ text, offsetFromCenter, side }: SlideTextProps) {
     canvas.width = 512
     canvas.height = 128
 
+    // Створюємо градієнт
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height)
+    gradient.addColorStop(0, '#ffffff') // Білий
+    gradient.addColorStop(0.3, '#e6e6e6') // Світло-сірий
+    gradient.addColorStop(0.7, '#cccccc') // Сірий
+    gradient.addColorStop(1, '#ffffff') // Знову білий
+
     // Налаштування тексту
-    ctx.fillStyle = 'white'
-    ctx.font = 'bold 32px Arial, sans-serif'
-    ctx.textAlign = 'center'
-    ctx.textBaseline = 'middle'
+    ctx.fillStyle = gradient
+
+    // Визначаємо шрифт залежно від мови
+    const fontSize = isMobile ? 20 : 23
+    const fontFamily = locale === 'ar' ? 'Arial, sans-serif' : 'Arial, sans-serif'
+    ctx.font = `bold ${fontSize}px ${fontFamily}`
+
+    // Налаштування для арабської мови
+    if (locale === 'ar') {
+      ctx.direction = 'rtl'
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'middle'
+    } else {
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'middle'
+    }
 
     // Малюємо текст
     ctx.fillText(text, canvas.width / 2, canvas.height / 2)
@@ -140,23 +161,25 @@ export function SlideText({ text, offsetFromCenter, side }: SlideTextProps) {
     texture.needsUpdate = true
 
     return texture
-  }, [text])
+  }, [text, isMobile, locale])
 
   // Створюємо геометрію для тексту (площина)
   const textGeometry = useMemo(() => {
     const aspectRatio = 512 / 128 // width / height
-    const width = 1.2
+    const width = isMobile ? 0.8 : 1.2
     const height = width / aspectRatio
 
     return new THREE.PlaneGeometry(width, height)
-  }, [])
+  }, [isMobile])
 
   // Анімація тексту
   useFrame((state) => {
     const t = state.clock.getElapsedTime()
 
     // Обчислюємо цільові значення для тексту
-    const targetFontSize = offsetFromCenter !== undefined ? 0.07 - Math.min(offsetFromCenter, 1) * 0.03 : 0.08
+    const baseFontSize = isMobile ? 0.06 : 0.08
+    const targetFontSize =
+      offsetFromCenter !== undefined ? baseFontSize - Math.min(offsetFromCenter, 1) * 0.03 : baseFontSize
 
     const targetPositionX =
       offsetFromCenter !== undefined
@@ -178,7 +201,7 @@ export function SlideText({ text, offsetFromCenter, side }: SlideTextProps) {
     // Оновлюємо позицію і розмір тексту
     if (textMeshRef.current) {
       textMeshRef.current.position.x = currentTextPositionX.current
-      textMeshRef.current.scale.setScalar(currentTextFontSize.current / 0.08)
+      textMeshRef.current.scale.setScalar(currentTextFontSize.current / baseFontSize)
       if (textShaderRef.current && textShaderRef.current.uniforms && textShaderRef.current.uniforms.u_opacity) {
         textShaderRef.current.uniforms.u_opacity.value = currentTextOpacity.current
       }
