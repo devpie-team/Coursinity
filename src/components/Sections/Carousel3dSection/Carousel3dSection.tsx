@@ -117,9 +117,9 @@ export function Carousel3dSection() {
               rippleOpacity={0.2}
               rippleEmissiveIntensity={0.02}
             />
-            <EffectComposer>
+            {/*  <EffectComposer>
               <Bloom intensity={1.5} luminanceThreshold={0.1} luminanceSmoothing={0.025} radius={0.8} mipmapBlur />
-            </EffectComposer>
+            </EffectComposer> */}
           </PerformanceMonitor>
         </Canvas>
       </div>
