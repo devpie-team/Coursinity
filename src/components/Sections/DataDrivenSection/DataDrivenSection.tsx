@@ -5,13 +5,15 @@ import { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
+import { ChevronLeftIcon } from '@/components/icons/ChevronLeftIcon'
+import { cn } from '@/lib/utils'
 
 export const DataDrivenSection = () => {
   const t = useTranslations('dataDrivenSection')
@@ -50,6 +52,8 @@ export const DataDrivenSection = () => {
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
   useEffect(() => {
     AOS.init()
   }, [])
@@ -169,6 +173,38 @@ export const DataDrivenSection = () => {
                     )}
                   />
                 ))}
+                <button
+                  onClick={() => {
+                    setFade(false)
+                    setTimeout(() => {
+                      setActiveIndex((prev) => (prev - 1 + slides.length) % slides.length)
+                      setFade(true)
+                    }, 300)
+                  }}
+                  className="group absolute left-[35%] bottom-[-7%] z-10  w-6 h-6    flex items-center justify-center transition">
+                  <ChevronLeftIcon
+                    className={cn(
+                      'h-6 w-6  stroke-[#1C8DC1] group-hover:stroke-[#1C8DC1]/50 transition',
+                      isArabic ? 'scale-x-100' : ''
+                    )}
+                  />
+                </button>
+                <button
+                  onClick={() => {
+                    setFade(false)
+                    setTimeout(() => {
+                      setActiveIndex((prev) => (prev + 1) % slides.length)
+                      setFade(true)
+                    }, 300)
+                  }}
+                  className="group absolute right-[35%] bottom-[-7%] z-10  w-6 h-6    flex items-center justify-center transition -scale-x-100">
+                  <ChevronLeftIcon
+                    className={cn(
+                      'h-6 w-6  stroke-[#1C8DC1] group-hover:stroke-[#1C8DC1]/50  transition ',
+                      isArabic ? '' : 'scale-x-100'
+                    )}
+                  />
+                </button>
               </div>
             </div>
           </div>
