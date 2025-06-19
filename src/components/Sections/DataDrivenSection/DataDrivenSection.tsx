@@ -202,11 +202,11 @@ export const DataDrivenSection = () => {
                       setFade(true)
                     }, 300)
                   }}
-                  className="group w-6 h-6 flex items-center justify-center transition">
+                  className="group w-6 h-6 flex items-center justify-center transition -scale-x-100">
                   <ChevronLeftIcon
                     className={cn(
                       'h-6 w-6 stroke-[#1C8DC1] group-hover:stroke-[#1C8DC1]/50 transition',
-                      isArabic ? '' : 'scale-x-100'
+                      isArabic ? '-scale-x-100' : ''
                     )}
                   />
                 </button>
