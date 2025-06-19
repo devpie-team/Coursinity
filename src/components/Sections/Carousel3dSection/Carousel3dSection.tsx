@@ -9,16 +9,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { PerformanceMonitor } from '@react-three/drei'
 import { SceneContent } from './_components/SceneContent/SceneContent'
 import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
+import { MyModel } from './_components/Model/Model'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const slidesData = [
-  { text: 'AI Transformation', colors: ['#FF6B6B', '#4ECDC4', '#45B7D1'] },
-  { text: 'Immersive VR Labs', colors: ['#A8E6CF', '#DCEDC1', '#FFD3B6'] },
-  { text: 'Tailored Journeys', colors: ['#FF9A9E', '#FECFEF', '#FECFEF'] },
-  { text: 'Beyond-Class Engagement', colors: ['#A8E6CF', '#FF8B94', '#FFC3A0'] },
-  { text: 'Live Coaching', colors: ['#FFD93D', '#FF6B6B', '#4ECDC4'] },
-  { text: 'Reusable Programs', colors: ['#6C5CE7', '#A29BFE', '#FD79A8'] },
+  { text: 'AI Transformation', colors: ['#84ff00', '#1c1c2e', '#84ff00'] },
+  { text: 'Immersive VR Labs', colors: ['#67678f', '#1c1c2e', '#67678f'] },
+  { text: 'Tailored Journeys', colors: ['#67678f', '#1c1c2e', '#67678f'] },
+  { text: 'Beyond-Class Engagement', colors: ['#67678f', '#1c1c2e', '#67678f'] },
+  { text: 'Live Coaching', colors: ['#67678f', '#1c1c2e', '#67678f'] }
+  /*  { text: 'Reusable Programs', colors: ['#6C5CE7', '#A29BFE', '#FD79A8'] }
   { text: 'Gamified Learning', colors: ['#00B894', '#00CEC9', '#74B9FF'] },
   { text: 'On-Job Upskilling', colors: ['#FDCB6E', '#E17055', '#D63031'] },
   { text: 'Success Partners', colors: ['#6C5CE7', '#A29BFE', '#FD79A8'] },
@@ -26,7 +27,7 @@ const slidesData = [
   { text: 'Hybrid Delivery', colors: ['#FDCB6E', '#E17055', '#D63031'] },
   { text: 'Audit-Ready Compliance', colors: ['#6C5CE7', '#A29BFE', '#FD79A8'] },
   { text: 'White-Label Academies', colors: ['#00B894', '#00CEC9', '#74B9FF'] },
-  { text: 'Certifications', colors: ['#FDCB6E', '#E17055', '#D63031'] }
+  { text: 'Certifications', colors: ['#FDCB6E', '#E17055', '#D63031'] } */
 ]
 
 const useMediaQuery = (query: string): boolean => {
@@ -105,16 +106,19 @@ export function Carousel3dSection() {
               maxPolarAngle={Math.PI / 2}
               rotateSpeed={0.5}
             /> */}
-            <SceneContent isMobile={isMobile} scrollProgressRef={scrollProxy} slidesData={slidesData} />
+
+            <SceneContent
+              isMobile={isMobile}
+              scrollProgressRef={scrollProxy}
+              slidesData={slidesData}
+              waveFrequency={5.0}
+              waveSpeed={3.0}
+              waveDecay={20.5}
+              rippleOpacity={0.2}
+              rippleEmissiveIntensity={0.02}
+            />
             <EffectComposer>
-              <Bloom
-                intensity={1.5}
-                luminanceThreshold={0.1}
-                luminanceSmoothing={0.025}
-                radius={0.8}
-                mipmapBlur
-                layers={1}
-              />
+              <Bloom intensity={1.5} luminanceThreshold={0.1} luminanceSmoothing={0.025} radius={0.8} mipmapBlur />
             </EffectComposer>
           </PerformanceMonitor>
         </Canvas>

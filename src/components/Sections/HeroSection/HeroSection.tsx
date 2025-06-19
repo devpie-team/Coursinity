@@ -45,16 +45,6 @@ export const HeroSection = ({ loading }: THeroSection) => {
   const lottieRef4 = useRef<LottieRefCurrentProps>(null)
 
   useEffect(() => {
-    console.log(loading)
-    if (!loading) {
-      lottieRef1.current?.goToAndPlay(0, true)
-      lottieRef2.current?.goToAndPlay(0, true)
-      lottieRef3.current?.goToAndPlay(0, true)
-      lottieRef4.current?.goToAndPlay(0, true)
-    }
-  }, [loading])
-
-  useEffect(() => {
     ScrollTrigger.create({
       trigger: '.hero-section',
       start: 'top 80%',
