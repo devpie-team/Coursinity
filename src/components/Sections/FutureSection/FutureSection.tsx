@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useLayoutEffect, useState } from 'react'
-import { useLocale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -13,7 +13,6 @@ import { GridEditIcon } from '@/components/icons/GridEditIcon'
 import { ZapIcon } from '@/components/icons/ZapIcon'
 import { cn } from '@/lib/utils'
 import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
-import { usePathname } from 'next/navigation'
 
 export const FutureSection = () => {
   const t = useTranslations('FutureSection')
@@ -65,9 +64,6 @@ export const FutureSection = () => {
     ]
   }
 
-  const locale = useLocale()
-  const pathname = usePathname()
-
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
 
@@ -85,11 +81,7 @@ export const FutureSection = () => {
         runAnimations(1, 1.5, false, false, true)
       }
     })
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-    }
-  }, [locale, pathname])
+  }, [])
 
   const runAnimations = (
     targetScale: number,
