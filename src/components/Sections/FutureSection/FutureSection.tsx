@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useLayoutEffect, useState } from 'react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -64,6 +64,8 @@ export const FutureSection = () => {
     ]
   }
 
+  const locale = useLocale()
+
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
 
@@ -85,7 +87,7 @@ export const FutureSection = () => {
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
     }
-  }, [])
+  }, [locale])
 
   const runAnimations = (
     targetScale: number,
