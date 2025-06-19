@@ -345,7 +345,11 @@
   "Header": {
     "button": "احجز عرض توضيحي",
     "ar": "عربي",
-    "en": "انجليزي"
+    "en": "انجليزي",
+    "blog": "الخدمات",
+    "services": "المدونة",
+    "academy": "Academy",
+    "smarter": "Smarter"
   },
   "ContactVisual": {
     "title": "جاهز عندما تكون مستعدًا",

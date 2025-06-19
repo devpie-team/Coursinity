@@ -71,11 +71,13 @@ a {
   inset: 0;
   padding: 2px;
   border-radius: 20px;
-  background: linear-gradient(68.38deg,
-      rgba(28, 141, 193, 0) 0%,
-      rgba(28, 141, 193, 1) 49%,
-      rgba(28, 141, 193, 1) 75%,
-      rgba(14, 67, 92, 0) 100%);
+  background: linear-gradient(
+    68.38deg,
+    rgba(28, 141, 193, 0) 0%,
+    rgba(28, 141, 193, 1) 49%,
+    rgba(28, 141, 193, 1) 75%,
+    rgba(14, 67, 92, 0) 100%
+  );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -97,15 +99,15 @@ a {
   border-radius: 999px;
   padding: 1px;
   /* товщина рамки */
-  background: linear-gradient(68.38deg,
-      rgba(28, 141, 193, 0) 11%,
-      #1C8DC1 50.72%,
-      #1C8DC1 72.35%,
-      rgba(14, 67, 92, 0) 92.79%);
+  background: linear-gradient(
+    68.38deg,
+    rgba(28, 141, 193, 0) 11%,
+    #1c8dc1 50.72%,
+    #1c8dc1 72.35%,
+    rgba(14, 67, 92, 0) 92.79%
+  );
   /* Маска для "порожнини" */
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   z-index: 1;
@@ -134,14 +136,14 @@ a {
 
 /* Градієнт на ховері */
 .button-gradient:hover {
-  --myColor1: #0D0D0D;
-  --myColor2: #3D3D3D;
+  --myColor1: #0d0d0d;
+  --myColor2: #3d3d3d;
 }
 
 /* Активний стан */
 .button-gradient:active {
-  --myColor1: #A084E8;
-  --myColor2: #A084E8;
+  --myColor1: #a084e8;
+  --myColor2: #a084e8;
 }
 
 @property --from {
@@ -161,18 +163,16 @@ a {
   color: #fff;
   border-radius: 9999px;
   font-weight: 500;
-  transition:
-    background 0.35s,
-    box-shadow 0.35s;
+  transition: background 0.35s, box-shadow 0.35s;
 }
 
 .btn-gradient-primary:hover {
-  background: linear-gradient(90deg, #0D0D0D 0%, #3D3D3D 100%);
-  box-shadow: 0px 12px 30px 0px #A578F240;
+  background: linear-gradient(90deg, #0d0d0d 0%, #3d3d3d 100%);
+  box-shadow: 0px 12px 30px 0px #a578f240;
 }
 
 .btn-gradient-primary:active {
-  background: var(--primary-purple, #A578F2);
+  background: var(--primary-purple, #a578f2);
   box-shadow: none;
 }
 
@@ -189,20 +189,17 @@ a {
   border-radius: 9999px;
   font-weight: 500;
   backdrop-filter: blur(40px);
-  transition:
-    background 0.35s,
-    box-shadow 0.35s,
-    color 0.35s;
+  transition: background 0.35s, box-shadow 0.35s, color 0.35s;
 }
 
 .btn-gradient-secondary:hover {
-  background: #F6F1FE;
-  color: var(--primary-purple, #8759D5);
-  box-shadow: 0px 12px 40px 0px #A578F240;
+  background: #f6f1fe;
+  color: var(--primary-purple, #8759d5);
+  box-shadow: 0px 12px 40px 0px #a578f240;
 }
 
 .btn-gradient-secondary:active {
-  color: #8759D5;
+  color: #8759d5;
 }
 
 .btn-gradient-secondary:disabled {
@@ -214,22 +211,20 @@ a {
 
 /* PURPLE BUTTON */
 .btn-gradient-purple {
-  background: var(--primary-purple, #A578F2);
+  background: var(--primary-purple, #a578f2);
   color: #fff;
   border-radius: 9999px;
   font-weight: 500;
-  transition:
-    background 0.35s,
-    box-shadow 0.35s;
+  transition: background 0.35s, box-shadow 0.35s;
 }
 
 .btn-gradient-purple:hover {
-  background: var(--secondary-purple, #7A59F7);
-  box-shadow: 0px 12px 30px 0px #A578F240;
+  background: var(--secondary-purple, #7a59f7);
+  box-shadow: 0px 12px 30px 0px #a578f240;
 }
 
 .btn-gradient-purple:active {
-  background: var(--primary-purple, #A578F2);
+  background: var(--primary-purple, #a578f2);
   box-shadow: none;
 }
 

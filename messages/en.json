@@ -345,7 +345,11 @@
   "Header": {
     "button": "Book a Demo Now",
     "ar": "Ar",
-    "en": "En"
+    "en": "En",
+    "blog": "Blog",
+    "services": "Services",
+    "academy": "Academy",
+    "smarter": "Smarter"
   },
   "ContactVisual": {
     "title": "Ready When You Are",
