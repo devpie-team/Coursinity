@@ -93,6 +93,7 @@ export const StackSection = () => {
       const steps = 3
       const triggerLength = window.innerHeight * steps
       ScrollTrigger.create({
+        anticipatePin: 1,
         trigger: sectionRef.current,
         start: isLowScreen || isMobileAnimation ? 'bottom bottom' : 'top top',
         end: `+=${triggerLength}`,
