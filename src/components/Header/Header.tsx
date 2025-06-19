@@ -116,7 +116,7 @@ export const Header = () => {
             }}
           />
           <button
-            className="flex button-gradient h-[56px] rounded-full px-6 py-4 text-center items-center
+            className="flex button-gradient h-[56px] rounded-full px-6 py-4 text-center items-center justify-center
                 text-white text-body3 !bg-black
                 transition-all w-[200px]">
             {t('button')}
