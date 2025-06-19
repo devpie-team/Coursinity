@@ -24,6 +24,8 @@ export const DataDrivenSection = () => {
   const [isDesktop, setIsDesktop] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
   const [fade, setFade] = useState(true)
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
 
   const current = slides[activeIndex]
 
@@ -32,13 +34,13 @@ export const DataDrivenSection = () => {
     const interval = setInterval(() => {
       setFade(false)
       setTimeout(() => {
-        setActiveIndex((prev) => (prev + 1) % slides.length)
+        setActiveIndex((prev) => (isArabic ? (prev - 1 + slides.length) % slides.length : (prev + 1) % slides.length))
         setFade(true)
       }, 300)
     }, 3000)
 
     return () => clearInterval(interval)
-  }, [activeIndex, isDesktop, slides.length])
+  }, [activeIndex, isDesktop, slides.length, isArabic])
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -52,8 +54,7 @@ export const DataDrivenSection = () => {
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
-  const locale = useLocale()
-  const isArabic = locale == 'ar'
+
   useEffect(() => {
     AOS.init()
   }, [])
@@ -76,7 +77,7 @@ export const DataDrivenSection = () => {
 
       {isTablet || isMobile ? (
         <div className="relative w-full max-w-[373px]">
-          <div className="relative flex flex-col gap-8 bg-secondary-300 rounded-[20px] overflow-hidden justify-center items-center p-[35px] pb-[76px] max-md:p-5 max-md:pb-[50px] ">
+          <div className="relative flex flex-col gap-8 bg-secondary-300 rounded-[20px] overflow-hidden justify-center items-center p-[35px] pb-[40px] max-md:p-5 max-md:pb-[35px] ">
             <img
               src="/assets/data_driven/data_driven_1.png"
               alt="bg"
@@ -85,7 +86,7 @@ export const DataDrivenSection = () => {
 
             <Swiper
               modules={[Autoplay]}
-              autoplay={{ delay: 3000 }}
+              autoplay={{ delay: 3000, reverseDirection: isArabic }}
               loop
               slidesPerView={1}
               onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
@@ -128,7 +129,7 @@ export const DataDrivenSection = () => {
         </div>
       ) : (
         <FadeInOnView variant="slide-left">
-          <div className="relative flex flex-col gap-8 shrink-0 h-[500px] w-[480px] bg-secondary-300 rounded-[20px] overflow-hidden justify-center items-center p-[50px] pb-[28px]">
+          <div className="relative flex flex-col gap-8 shrink-0 h-[500px] w-[480px] bg-secondary-300 rounded-[20px] overflow-hidden justify-center items-center p-[50px] pb-10">
             <img
               src="/assets/data_driven/data_driven_1.png"
               alt="bg"
@@ -143,10 +144,10 @@ export const DataDrivenSection = () => {
                 fade ? 'opacity-100' : 'opacity-0'
               )}
             />
-            <div className="relative z-10 flex flex-col justify-center items-center text-center gap-5">
+            <div className="relative z-10 flex flex-col justify-between items-center text-center gap-5 w-[380px]">
               <div
                 className={clsx(
-                  'flex flex-col gap-4 transition-opacity duration-500',
+                  'flex flex-col gap-4 transition-opacity duration-500 mt-auto h-[100px]',
                   fade ? 'opacity-100' : 'opacity-0'
                 )}>
                 <Typography variant="body1" weight="medium">
@@ -156,7 +157,24 @@ export const DataDrivenSection = () => {
                   {current.description}
                 </Typography>
               </div>
-              <div className="flex gap-[10px] justify-center">
+
+              <div className="absolute bottom-[-30px] left-0 right-0 flex gap-[10px] justify-center items-center z-10">
+                <button
+                  onClick={() => {
+                    setFade(false)
+                    setTimeout(() => {
+                      setActiveIndex((prev) => (prev - 1 + slides.length) % slides.length)
+                      setFade(true)
+                    }, 300)
+                  }}
+                  className="group w-6 h-6 flex items-center justify-center transition">
+                  <ChevronLeftIcon
+                    className={cn(
+                      'h-6 w-6 stroke-[#1C8DC1] group-hover:stroke-[#1C8DC1]/50 transition',
+                      isArabic ? ' -scale-x-100' : ''
+                    )}
+                  />
+                </button>
                 {slides.map((_, dotIndex) => (
                   <button
                     key={dotIndex}
@@ -173,22 +191,9 @@ export const DataDrivenSection = () => {
                     )}
                   />
                 ))}
-                <button
-                  onClick={() => {
-                    setFade(false)
-                    setTimeout(() => {
-                      setActiveIndex((prev) => (prev - 1 + slides.length) % slides.length)
-                      setFade(true)
-                    }, 300)
-                  }}
-                  className="group absolute left-[35%] bottom-[-7%] z-10  w-6 h-6    flex items-center justify-center transition">
-                  <ChevronLeftIcon
-                    className={cn(
-                      'h-6 w-6  stroke-[#1C8DC1] group-hover:stroke-[#1C8DC1]/50 transition',
-                      isArabic ? 'scale-x-100' : ''
-                    )}
-                  />
-                </button>
+                {/* Стрілка назад (вліво) */}
+
+                {/* Стрілка вперед (вправо) */}
                 <button
                   onClick={() => {
                     setFade(false)
@@ -197,10 +202,10 @@ export const DataDrivenSection = () => {
                       setFade(true)
                     }, 300)
                   }}
-                  className="group absolute right-[35%] bottom-[-7%] z-10  w-6 h-6    flex items-center justify-center transition -scale-x-100">
+                  className="group w-6 h-6 flex items-center justify-center transition">
                   <ChevronLeftIcon
                     className={cn(
-                      'h-6 w-6  stroke-[#1C8DC1] group-hover:stroke-[#1C8DC1]/50  transition ',
+                      'h-6 w-6 stroke-[#1C8DC1] group-hover:stroke-[#1C8DC1]/50 transition',
                       isArabic ? '' : 'scale-x-100'
                     )}
                   />
