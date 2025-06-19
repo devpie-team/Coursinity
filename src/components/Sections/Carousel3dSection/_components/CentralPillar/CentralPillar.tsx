@@ -5,17 +5,22 @@ import { useFrame } from '@react-three/fiber'
 interface CentralPillarProps {
   scrollProgressRef: React.MutableRefObject<{ value: number }>
   circleCenter?: [number, number, number]
+  isMobile?: boolean
 }
 
-export function CentralPillar({ scrollProgressRef, circleCenter = [0, -0.1, -0.4] }: CentralPillarProps) {
+export function CentralPillar({
+  scrollProgressRef,
+  circleCenter = [0, -0.1, -0.4],
+  isMobile = false
+}: CentralPillarProps) {
   const groupRef = useRef<THREE.Group>(null)
   const meshRef = useRef<THREE.InstancedMesh>(null)
 
   // Параметри частинок стовпа
-  const particleCount = 2000
-  const pillarHeight = 8
-  const pillarWidth = 1.3
-  const particleSize = 0.08
+  const particleCount = isMobile ? 700 : 1000
+  const pillarHeight = isMobile ? 5 : 5
+  const pillarWidth = isMobile ? 0.7 : 1.1
+  const particleSize = isMobile ? 0.06 : 0.09
 
   // Створюємо геометрію для кожної частинки
   const particleGeometry = useMemo(() => {
@@ -31,17 +36,26 @@ export function CentralPillar({ scrollProgressRef, circleCenter = [0, -0.1, -0.4
 
     // Кольори для частинок стовпа
     const colorVariations = [
-      new THREE.Color(0x9400d3), // Темно-фіолетовий
-      new THREE.Color(0x8a2be2), // Синьо-фіолетовий (blueviolet)
-      new THREE.Color(0x7fffd4), // Бірюзовий блиск (aquamarine)
-      new THREE.Color(0xdb7093), // Блідо-рожевий (pale violet red)
-      new THREE.Color(0x00ffff), // Ціан (glow-style)
-      new THREE.Color(0xff69b4), // Яскраво-рожевий (hotpink)
-      new THREE.Color(0x1e90ff), // Світлий синій (dodger blue)
-      new THREE.Color(0xba55d3), // Орхідея
-      new THREE.Color(0xff1493), // Насичений рожевий
-      new THREE.Color(0x483d8b), // Темний фіолетово-синій
-      new THREE.Color(0xe0ffff)
+      new THREE.Color(0x2c2c2c), // Темно-сірий (charcoal)
+      new THREE.Color(0x3b3b3b), // Ще темніший сірий
+      new THREE.Color(0x5a5a5a), // Графіт
+      new THREE.Color(0x708090), // Сіро-блакитний (slate gray)
+      new THREE.Color(0x778899), // Світлий слейт грей
+      new THREE.Color(0xa9a9a9), // Темно-сірий
+      new THREE.Color(0x8f9aa3), // Сіро-синій
+      new THREE.Color(0xb0c4de), // Блідо-блакитно-сірий
+      new THREE.Color(0x6c7b8b), // Синювато-сірий
+      new THREE.Color(0x999999), // Стандартний сірий
+      new THREE.Color(0xc0c0c0), // Сріблястий
+
+      // Додані фіолетово-сірі відтінки
+      new THREE.Color(0x6a5acd), // Середній слейт фіолетовий (slate blue)
+      new THREE.Color(0x7b68ee), // Середній фіолетовий (medium slate blue)
+      new THREE.Color(0x8470ff), // Світлий фіолетовий (light slate blue)
+      new THREE.Color(0x836fff), // Сіро-фіолетовий
+      new THREE.Color(0x9370db), // Орхідея/сіро-фіолетовий (medium purple)
+      new THREE.Color(0xaaa9c3), // Сіро-лавандовий
+      new THREE.Color(0x8b80b0) // Приглушено-фіолетовий
     ]
 
     // Розподіляємо частинки по стовпу

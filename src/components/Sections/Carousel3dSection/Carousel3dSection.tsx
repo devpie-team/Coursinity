@@ -9,16 +9,33 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { PerformanceMonitor } from '@react-three/drei'
 import { SceneContent } from './_components/SceneContent/SceneContent'
 import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
+import { MyModel } from './_components/Model/Model'
+import { useLocale } from 'use-intl'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const slidesData = [
-  { text: 'AI Transformation', colors: ['#FF6B6B', '#4ECDC4', '#45B7D1'] },
-  { text: 'Immersive VR Labs', colors: ['#A8E6CF', '#DCEDC1', '#FFD3B6'] },
-  { text: 'Tailored Journeys', colors: ['#FF9A9E', '#FECFEF', '#FECFEF'] },
-  { text: 'Beyond-Class Engagement', colors: ['#A8E6CF', '#FF8B94', '#FFC3A0'] },
-  { text: 'Live Coaching', colors: ['#FFD93D', '#FF6B6B', '#4ECDC4'] },
-  { text: 'Reusable Programs', colors: ['#6C5CE7', '#A29BFE', '#FD79A8'] },
+  {
+    text: { en: 'AI Transformation', ar: 'تبّني الذكاء الاصطناعي' },
+    colors: ['#5a5a9e', '#7a7abf', '#2c2a33']
+  },
+  {
+    text: { en: 'Activity-Based Training', ar: 'سيناريوهات تدريب واقعية' },
+    colors: ['#5a5a9e', '#7a7abf', '#2c2a33']
+  },
+  {
+    text: { en: 'Meta Verse & VR', ar: 'ميتاڤيرس وواقع افتراضي' },
+    colors: ['#5a5a9e', '#7a7abf', '#2c2a33']
+  },
+  {
+    text: { en: 'Customised Learning Journeys', ar: 'رحلات تدريبية' },
+    colors: ['#5a5a9e', '#7a7abf', '#2c2a33']
+  },
+  {
+    text: { en: 'Data Driven Tracking', ar: 'عائد ببيانات وتقارير' },
+    colors: ['#5a5a9e', '#7a7abf', '#2c2a33']
+  }
+  /*  { text: 'Reusable Programs', colors: ['#6C5CE7', '#A29BFE', '#FD79A8'] }
   { text: 'Gamified Learning', colors: ['#00B894', '#00CEC9', '#74B9FF'] },
   { text: 'On-Job Upskilling', colors: ['#FDCB6E', '#E17055', '#D63031'] },
   { text: 'Success Partners', colors: ['#6C5CE7', '#A29BFE', '#FD79A8'] },
@@ -26,7 +43,7 @@ const slidesData = [
   { text: 'Hybrid Delivery', colors: ['#FDCB6E', '#E17055', '#D63031'] },
   { text: 'Audit-Ready Compliance', colors: ['#6C5CE7', '#A29BFE', '#FD79A8'] },
   { text: 'White-Label Academies', colors: ['#00B894', '#00CEC9', '#74B9FF'] },
-  { text: 'Certifications', colors: ['#FDCB6E', '#E17055', '#D63031'] }
+  { text: 'Certifications', colors: ['#FDCB6E', '#E17055', '#D63031'] } */
 ]
 
 const useMediaQuery = (query: string): boolean => {
@@ -43,12 +60,13 @@ const useMediaQuery = (query: string): boolean => {
 
 export function Carousel3dSection() {
   const isMobile = useMediaQuery('(max-width: 768px)')
+  const locale = useLocale()
   const sectionRef = useRef(null)
   const scrollProxy = useRef({ value: 0 })
   const [dpr, setDpr] = useState(1.5)
 
   useEffect(() => {
-    const triggerLength = window.innerHeight * slidesData.length * 1.2
+    const triggerLength = window.innerHeight * slidesData.length * 0.8
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
@@ -105,17 +123,21 @@ export function Carousel3dSection() {
               maxPolarAngle={Math.PI / 2}
               rotateSpeed={0.5}
             /> */}
-            <SceneContent isMobile={isMobile} scrollProgressRef={scrollProxy} slidesData={slidesData} />
-            <EffectComposer>
-              <Bloom
-                intensity={1.5}
-                luminanceThreshold={0.1}
-                luminanceSmoothing={0.025}
-                radius={0.8}
-                mipmapBlur
-                layers={1}
-              />
-            </EffectComposer>
+
+            <SceneContent
+              isMobile={isMobile}
+              scrollProgressRef={scrollProxy}
+              slidesData={slidesData}
+              locale={locale}
+              waveFrequency={20.0}
+              waveSpeed={5.0}
+              waveDecay={0.5}
+              rippleOpacity={0.3}
+              rippleEmissiveIntensity={0.02}
+            />
+            {/* <EffectComposer>
+              <Bloom intensity={1.5} luminanceThreshold={0.1} luminanceSmoothing={0.025} radius={0.8} mipmapBlur />
+            </EffectComposer> */}
           </PerformanceMonitor>
         </Canvas>
       </div>

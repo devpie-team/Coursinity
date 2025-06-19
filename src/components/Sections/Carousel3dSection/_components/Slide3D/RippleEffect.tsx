@@ -6,21 +6,21 @@ import { extend, useFrame } from '@react-three/fiber'
 const RippleMaterial = shaderMaterial(
   {
     u_time: 0,
-    u_center: new THREE.Vector2(0.5, 0.5),
+    u_center: new THREE.Vector2(0, 0),
     u_resolution: new THREE.Vector2(window.innerWidth, window.innerHeight),
     u_waveFrequency: 10.0,
     u_waveSpeed: 3.5,
     u_waveDecay: 3.0,
     u_baseColor: new THREE.Color(0.2, 0.3, 0.8),
-    u_opacity: 0.5,
+    u_opacity: 0.7,
     u_metalness: 1.0,
-    u_roughness: 0.5,
-    u_clearcoat: 0.8,
-    u_clearcoatRoughness: 1.0,
-    u_reflectivity: 0.5,
-    u_emissive: new THREE.Color(0.011764, 0.011764, 0.309804),
-    u_emissiveIntensity: 0.01,
-    u_strength: 2.0
+    u_roughness: 0.3,
+    u_clearcoat: 1.0,
+    u_clearcoatRoughness: 0.5,
+    u_reflectivity: 0.8,
+    u_emissive: new THREE.Color(1.0, 1.0, 1.0),
+    u_emissiveIntensity: 0.15,
+    u_strength: 2.5
   },
   `
     varying vec2 vUv;
@@ -61,8 +61,8 @@ const RippleMaterial = shaderMaterial(
       float dist = distance(uv, u_center);
       float ripple = sin(u_waveFrequency * dist - u_time * u_waveSpeed) * exp(-u_waveDecay * dist);
 
-      vec3 rippleColor = vec3(0.294, 0.337, 0.412) * ripple;
-      vec3 color = mix(u_baseColor, rippleColor, 0.7);
+      vec3 rippleColor = u_emissive * ripple;
+      vec3 color = mix(u_baseColor, rippleColor, 0.8);
 
       vec3 viewDir = normalize(vViewPosition);
       float fresnel = pow(1.0 - dot(viewDir, normalize(vNormal)), 3.0);
@@ -88,9 +88,24 @@ type RippleEffectProps = {
   baseColor: THREE.Color
   rippleColor: THREE.Color
   rippleCenter?: [number, number]
+  waveFrequency?: number
+  waveSpeed?: number
+  waveDecay?: number
+  opacity?: number
+  emissiveIntensity?: number
 }
 
-export function RippleEffect({ geometry, baseColor, rippleColor, rippleCenter }: RippleEffectProps) {
+export function RippleEffect({ 
+  geometry, 
+  baseColor, 
+  rippleColor, 
+  rippleCenter,
+  waveFrequency = 10.0,
+  waveSpeed = 3.5,
+  waveDecay = 3.0,
+  opacity = 0.5,
+  emissiveIntensity = 0.01
+}: RippleEffectProps) {
   const rippleMaterialRef = useRef<THREE.ShaderMaterial>(null!)
 
   useEffect(() => {
@@ -106,6 +121,11 @@ export function RippleEffect({ geometry, baseColor, rippleColor, rippleCenter }:
       rippleMaterialRef.current.uniforms.u_time.value = clock.getElapsedTime()
       const center = rippleCenter || [0.5, 0.5]
       rippleMaterialRef.current.uniforms.u_center.value.set(center[0], center[1])
+      rippleMaterialRef.current.uniforms.u_waveFrequency.value = waveFrequency
+      rippleMaterialRef.current.uniforms.u_waveSpeed.value = waveSpeed
+      rippleMaterialRef.current.uniforms.u_waveDecay.value = waveDecay
+      rippleMaterialRef.current.uniforms.u_opacity.value = opacity
+      rippleMaterialRef.current.uniforms.u_emissiveIntensity.value = emissiveIntensity
     }
   })
 

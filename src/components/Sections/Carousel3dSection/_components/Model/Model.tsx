@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
@@ -9,7 +9,7 @@ type MyModelProps = {
 }
 
 export function MyModel({ rotationY, position = [0, 0, 0] }: MyModelProps) {
-  const model = useGLTF('/assets/3d/models/arab2.glb')
+  const model = useGLTF('/assets/3d/models/spiral.glb')
   const ref = useRef<THREE.Group>(null)
 
   useFrame(() => {
@@ -18,5 +18,5 @@ export function MyModel({ rotationY, position = [0, 0, 0] }: MyModelProps) {
     }
   })
 
-  return <primitive ref={ref} object={model.scene} position={position} scale={2} />
+  return <primitive ref={ref} object={model.scene} position={position} scale={0.7} />
 }
