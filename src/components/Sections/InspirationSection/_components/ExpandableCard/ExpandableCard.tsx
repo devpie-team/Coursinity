@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { Typography } from '@/components/ui'
+import { useLocale } from 'next-intl'
 
 type ExpandableCardProps = {
   title?: string
@@ -27,6 +28,8 @@ export const ExpandableCard = ({
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [isTablet, setIsTablet] = useState<boolean>(false)
   const [isDesktop, setIsDesktop] = useState<boolean>(true)
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -86,7 +89,11 @@ export const ExpandableCard = ({
       )}
 
       {!isMobile && (
-        <div className="flex flex-row items-start justify-between gap-4 p-7 pt-[13px] min-h-[100%] relative pr-20 max-lg:pr-14 max-md:pr-0 ">
+        <div
+          className={cn(
+            'flex flex-row items-start justify-between gap-4 p-7 pt-[13px] min-h-[100%] relative  ',
+            isArabic ? 'pl-20 max-lg:pl-14 max-md:pl-0 ' : 'pr-20 max-lg:pr-14 max-md:pr-0'
+          )}>
           <div className="flex flex-col gap-4 items-start h-full">
             <Typography variant={isDesktop ? 'body1' : 'body2'} weight="medium" className="">
               {title}
@@ -101,20 +108,30 @@ export const ExpandableCard = ({
           </div>
 
           <div
-            className="absolute flex bg-primary-blue bg-opacity-5 h-16 w-16 justify-center items-center rounded-full shrink-0 right-0 transition-opacity duration-300 max-lg:w-12 max-lg:h-12 translate-y-1/2"
+            className={cn(
+              'absolute flex bg-primary-blue bg-opacity-5 h-16 w-16 justify-center items-center rounded-full shrink-0  transition-opacity duration-300 max-lg:w-12 max-lg:h-12 translate-y-1/2',
+              isArabic ? 'left-0' : 'right-0 '
+            )}
             style={{ opacity: 0.3 + openPercent * 0.7 }}>
             {icon}
           </div>
         </div>
       )}
       {isMobile && (
-        <div className="flex items-start  gap-4 p-7 pt-[13px] min-h-[100%] relative pr-20 max-ld:pr-17 max-md:pr-0 flex-col max-md:pl-0">
+        <div
+          className={cn(
+            'flex items-start  gap-4 p-7 pt-[13px] min-h-[100%] relative pr-20 max-ld:pr-17 max-md:pr-0 flex-col max-md:pl-0',
+            isArabic ? 'pl-20 max-lg:pl-14 max-md:pl-0 ' : 'pr-20 max-lg:pr-14 max-md:pr-0'
+          )}>
           <div className="flex items-center justify-between w-full h-full gap-4">
             <Typography variant={isDesktop ? 'body1' : 'body2'} weight="medium" className="">
               {title}
             </Typography>
             <div
-              className=" flex bg-primary-blue bg-opacity-5 h-16 w-16 justify-center items-center rounded-full shrink-0 right-0 transition-opacity duration-300 max-lg:w-12 max-lg:h-12 "
+              className={cn(
+                ' flex bg-primary-blue bg-opacity-5 h-16 w-16 justify-center items-center rounded-full shrink-0 right-0 transition-opacity duration-300 max-lg:w-12 max-lg:h-12 ',
+                isArabic ? 'left-0' : 'right-0 '
+              )}
               style={{ opacity: 0.3 + openPercent * 0.7 }}>
               {icon}
             </div>
