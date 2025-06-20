@@ -16,11 +16,11 @@ import { Typography } from '@/components/ui/Typography/Typography'
 gsap.registerPlugin(ScrollTrigger)
 
 const slidesData = [
-  { text: { en: 'AI Transformation', ar: 'تبّني الذكاء الاصطناعي' }, colors: ['#5a5a9e', '#7a7abf', '#2c2a33'] },
-  { text: { en: 'Activity-Based Training', ar: 'سيناريوهات تدريب واقعية' }, colors: ['#5a5a9e', '#7a7abf', '#2c2a33'] },
-  { text: { en: 'Meta Verse & VR', ar: 'ميتاڤيرس وواقع افتراضي' }, colors: ['#5a5a9e', '#7a7abf', '#2c2a33'] },
-  { text: { en: 'Customised Learning Journeys', ar: 'رحلات تدريبية' }, colors: ['#5a5a9e', '#7a7abf', '#2c2a33'] },
-  { text: { en: 'Data Driven Tracking', ar: 'عائد ببيانات وتقارير' }, colors: ['#5a5a9e', '#7a7abf', '#2c2a33'] }
+  { text: { en: 'AI Transformation', ar: 'تبّني الذكاء الاصطناعي' }, colors: ['#5a5a9e', '#535157', '#4a5568'] },
+  { text: { en: 'Activity-Based Training', ar: 'سيناريوهات تدريب واقعية' }, colors: ['#5a5a9e', '#2c2a33', '#4a5568'] },
+  { text: { en: 'Meta Verse & VR', ar: 'ميتاڤيرس وواقع افتراضي' }, colors: ['#5a5a9e', '#2c2a33', '#4a5568'] },
+  { text: { en: 'Customised Learning Journeys', ar: 'رحلات تدريبية' }, colors: ['#5a5a9e', '#2c2a33', '#4a5568'] },
+  { text: { en: 'Data Driven Tracking', ar: 'عائد ببيانات وتقارير' }, colors: ['#5a5a9e', '#2c2a33', '#4a5568'] }
 ]
 
 const useMediaQuery = (query: string): boolean => {
@@ -153,10 +153,11 @@ export function Carousel3dSection() {
                 rippleOpacity={0.4}
                 rippleEmissiveIntensity={0.02}
               />
-              <EffectComposer>
+              {/*   <EffectComposer>
                 <Bloom intensity={1.5} luminanceThreshold={0.1} luminanceSmoothing={0.025} radius={0.8} mipmapBlur />
-              </EffectComposer>
+              </EffectComposer> */}
             </PerformanceMonitor>
+            +-
             <Torus
               position={[0, -0.2, -0.9]}
               rotation={[Math.PI, 0, 0]}

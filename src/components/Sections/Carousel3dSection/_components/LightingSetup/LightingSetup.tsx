@@ -17,6 +17,7 @@ export function LightingSetup({ rotation, effectStrength, currentSlideIndex, sli
     <group ref={mainLightingRef}>
       {/* Мʼяке загальне освітлення */}
       <ambientLight intensity={0.5} />
+      <ambientLight intensity={0.25} />
 
       {/* Основне спрямоване світло з тінями */}
       <directionalLight
@@ -49,10 +50,10 @@ export function LightingSetup({ rotation, effectStrength, currentSlideIndex, sli
       />
 
       {/* Додаткове синьо-блакитне освітлення */}
-      <spotLight position={[0, 1, 1]} intensity={200.2} color={'#0b1736'} />
-      <spotLight position={[0, -1, 1]} intensity={300.2} color={'#0b1736'} />
-      <spotLight position={[0, 0.5, 3]} intensity={100.2} distance={3} color={'#39235e'} />
-      <spotLight position={[0, -1, 3]} intensity={100.2} distance={3} color={'#39235e'} />
+      <spotLight position={[0, 1, 1]} intensity={150.2} color={'#0b1736'} />
+      <spotLight position={[0, -1, 1]} intensity={150.2} color={'#0b1736'} />
+      <spotLight position={[0, 0.5, 3]} intensity={20.2} distance={20} color={'#4b4359'} />
+      <spotLight position={[0, -1, 3]} intensity={20.2} distance={3} color={'#4b4359'} />
     </group>
   )
 }
