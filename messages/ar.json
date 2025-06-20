@@ -145,7 +145,9 @@
       }
     ],
     "title": "بُنيت حولك. صُممت من أجلك",
-    "subtitle": "مصممة خصيصًا لتعكس هوية مؤسستك ورؤيتها وأهدافها"
+    "subtitle": "مصممة خصيصًا لتعكس هوية مؤسستك ورؤيتها وأهدافها",
+    "title": "Build your success story with us",
+    "description": "We are a team of experts in the field of education and technology, and we are here to help you achieve your goals."
   },
   "FutureSection": {
     "title": "المستقبل يبدأ الآن. جهّز فريقك",
@@ -450,5 +452,14 @@
     "review": "ساعدتنا كورسينيتي في تدريب أكثر من 4000 موظف دون تعطيل العمليات اليومية. كانت الأكاديمية تعكس هويتنا وقيمنا وكانت النتائج قابلة للقياس منذ الشهر الأول.",
     "author": "م. علي",
     "author_position": "رئيس التدريب، البحري"
+  },
+  "Carousel3d": {
+    "title": "ماذا تبحث عنه؟",
+    "point1": "نظام إدارة التعلم المدعوم بالذكاء الاصطناعي",
+    "point2": "مخصص لمؤسستك",
+    "point3": "عملي للإنتاجية",
+    "point4": "قابل للتطوير للتأثير",
+    "point5": "محسن للعائد على الاستثمار",
+    "endTitle": "لنتحدث."
   }
 }
