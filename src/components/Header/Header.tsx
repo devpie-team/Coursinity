@@ -1,68 +1,56 @@
 'use client'
 
-import { useEffect, useRef, useState, useLayoutEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
-import { gsap } from 'gsap'
 import ToggleLanguage from '../ToggleLanguage'
 import { useHeaderVisibility } from './HeaderVisibilityContext'
 import { Button } from '../primitives/button'
 import { X } from 'lucide-react'
-import { LogoIcon, TreeLines } from '../icons'
+import { CaretDown, LogoIcon, TreeLines } from '../icons'
+import { HeaderDropdown } from '../HeaderDropdown'
+import { Typography } from '../ui'
 
 export const Header = () => {
   const t = useTranslations('Header')
   const headerRef = useRef<HTMLDivElement>(null)
 
-  // --- State Management ---
-  const [isOpen, setIsOpen] = useState(false) // State for mobile menu
-  const [start, setStart] = useState(true) // Is user at the top of the page?
-  const [isScrolledDown, setIsScrolledDown] = useState(false) // Is user scrolling down?
-  const [isMobile, setIsMobile] = useState(false)
-  const [isTablet, setIsTablet] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [opened, setOpened] = useState(false)
+  const [start, setStart] = useState(true)
+  const [isScrolledDown, setIsScrolledDown] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
 
-  // --- Refs ---
-  const lastScrollRef = useRef(0) // To track scroll position without re-renders
+  const lastScrollRef = useRef(0)
 
-  // --- Hooks ---
   const locale = useLocale()
   const pathname = usePathname()
   const router = useRouter()
-  const { isVisible } = useHeaderVisibility() // From context
+  const { isVisible } = useHeaderVisibility()
 
-  // --- Effect for Scroll Handling (Optimized) ---
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY
 
-      // Update 'start' state for background/shadow
       setStart(currentScroll <= 10)
 
-      // Determine scroll direction and hide/show header
-      // Hide if: scrolling down, past 50px, menu is closed, or context says invisible
       if ((currentScroll > lastScrollRef.current && currentScroll > 50 && !isOpen) || (!isVisible && !isOpen)) {
         setIsScrolledDown(true)
       } else {
         setIsScrolledDown(false)
       }
 
-      // Update last scroll position
       lastScrollRef.current = currentScroll
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
 
     return () => window.removeEventListener('scroll', handleScroll)
-    // Dependencies are external states that should trigger a re-evaluation of the logic
   }, [isOpen, isVisible])
 
-  // --- Effect for Screen Size ---
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth
-      setIsMobile(width < 768)
-      setIsTablet(width >= 768 && width <= 1024)
       setIsDesktop(width > 1024)
     }
     checkScreenSize()
@@ -70,7 +58,6 @@ export const Header = () => {
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
 
-  // --- Effect for Body Scroll Lock ---
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add('overflow-hidden')
@@ -91,10 +78,10 @@ export const Header = () => {
     'items-center',
     'justify-between',
     'py-[20px]',
-    'transition-transform', // Added for CSS animation
-    'duration-500', // Animation duration
-    'ease-in-out', // Animation timing function
-    isScrolledDown ? '-translate-y-full' : 'translate-y-0', // CSS class for hiding/showing
+    'transition-transform',
+    'duration-500',
+    'ease-in-out',
+    isScrolledDown ? '-translate-y-full' : 'translate-y-0',
     !start || isOpen ? 'bg-white' : 'bg-transparent',
     !start && 'shadow-[0px_12px_30px_0px_#0000000D]'
   ]
@@ -104,7 +91,7 @@ export const Header = () => {
   return (
     <header ref={headerRef} className={headerClasses}>
       <LogoIcon className="h-[14px] w-[127px]" />
-      {isDesktop && <div />}
+      {isDesktop && <HeaderDropdown start={start} />}
       {isDesktop ? (
         <div className="flex items-center gap-[18px]">
           <ToggleLanguage
@@ -142,6 +129,31 @@ export const Header = () => {
                 router.replace(newPath)
               }}
             />
+            <div className="flex flex-col gap-4 items-center">
+              <div
+                className="gap-[10px] flex items-center cursor-pointer select-none "
+                onClick={() => setOpened((v) => !v)}>
+                <Typography weight="medium" variant="h6">
+                  {t('services')}
+                </Typography>
+                <div className={`transition-transform duration-300 ${opened ? 'rotate-180' : ''}`}>
+                  <CaretDown />
+                </div>
+              </div>
+              {opened && (
+                <div className="flex flex-col gap-[6px]">
+                  <button className="py-[7px]">
+                    <Typography>{t('academy')}</Typography>
+                  </button>
+                  <button className="py-[7px]">
+                    <Typography>{t('smarter')}</Typography>
+                  </button>
+                </div>
+              )}
+              <Typography weight="medium" variant="h6">
+                {t('blog')}
+              </Typography>
+            </div>
           </div>
           <Button variant="purple">{t('button')}</Button>
         </div>

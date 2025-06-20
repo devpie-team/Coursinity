@@ -3,11 +3,12 @@
 import { useState } from 'react'
 import { X } from 'lucide-react'
 import { Button } from '../primitives/button'
-import { TreeLines } from '../icons'
+import { CaretDown, TreeLines } from '../icons'
 import ToggleLanguage from '../ToggleLanguage'
 import { usePathname, useRouter } from 'next/navigation'
 import { useLocale } from 'next-intl'
 import { useTranslations } from 'use-intl'
+import { Typography } from '../ui'
 
 export const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -15,6 +16,7 @@ export const MobileMenu = () => {
   const router = useRouter()
   const locale = useLocale()
   const t = useTranslations('Header')
+  const [opened, setOpened] = useState(false)
 
   return (
     <>
@@ -30,6 +32,28 @@ export const MobileMenu = () => {
               <button onClick={() => setIsOpen(false)}>
                 <X className="w-6 h-6" />
               </button>
+            </div>
+            <div
+              className="gap-[10px] flex items-center cursor-pointer select-none "
+              onClick={() => setOpened((v) => !v)}>
+              <Typography weight="medium" variant="caption">
+                {t('services')}
+              </Typography>
+              <div className={`transition-transform duration-300 ${opened ? 'rotate-180' : ''}`}>
+                <CaretDown />
+              </div>
+              {opened && (
+                <div
+                  className="absolute py-1 left-0 right-0 top-[50px] z-10 mt-2 min-w-[180px] rounded-2xl bg-white shadow-lg border border-neutral-200
+                     flex flex-col animate-fadeIn">
+                  <button className="text-left px-6 py-3 hover:bg-neutral-100 transition-colors rounded-2xl mx-[6px]">
+                    {t('academy')}
+                  </button>
+                  <button className="text-left px-6 py-3 hover:bg-neutral-100 transition-colors rounded-2xl mx-[6px]">
+                    {t('smarter')}
+                  </button>
+                </div>
+              )}
             </div>
             <ToggleLanguage
               value={locale !== 'en'}

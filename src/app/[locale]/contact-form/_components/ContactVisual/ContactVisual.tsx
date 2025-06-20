@@ -14,6 +14,21 @@ export const ContactVisual = ({ className }: ContactVisualProps) => {
   const [animationData1, setAnimationData1] = useState<any>(null)
   const [animationData2, setAnimationData2] = useState<any>(null)
   const t = useTranslations('ContactVisual')
+  const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
+  const [isDesktop, setIsDesktop] = useState(true)
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+      setIsTablet(width >= 768 && width <= 1024)
+      setIsDesktop(width > 1024)
+    }
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
 
   useEffect(() => {
     fetch('/assets/lottie/contact_form/contact_form_1.json')
@@ -26,7 +41,7 @@ export const ContactVisual = ({ className }: ContactVisualProps) => {
 
   return (
     <div className="relative order-1 max-md:order-2">
-      <div className="absolute inset-0 z-0 pointer-events-none  overflow-hidden rotate-180 rounded-e-3xl max-md:rounded-3xl">
+      <div className="absolute inset-0 z-0 pointer-events-none  overflow-hidden rotate-180 rounded-e-[22px] max-md:rounded-[22px]">
         <div
           className="
         bg-[radial-gradient(80%_60%_at_50%_70%,rgba(255,255,255,0.7)_60%,rgba(28,141,193,0.7)_85%,rgba(165,120,242,0.7)_100%)] blur-[80px]
@@ -37,7 +52,7 @@ export const ContactVisual = ({ className }: ContactVisualProps) => {
       </div>
       <div className={cn('', className)}>
         <div className="flex flex-col gap-8 z-10 text-center">
-          <Typography variant="h3" weight="medium">
+          <Typography variant={isMobile ? 'h6' : 'h3'} weight="medium">
             {t('title')}
           </Typography>
           <Typography variant="body2" weight="regular">
@@ -46,7 +61,7 @@ export const ContactVisual = ({ className }: ContactVisualProps) => {
         </div>
         <CompanyCard />
 
-        <div className="relative border-gradient min-w-[275px] bg-[#E4EDF2] p-4 !rounded-full  text-center flex-1">
+        <div className="relative border-gradient min-w-[275px] bg-[#E4EDF2] p-4 !rounded-full  text-center flex-1 max-md:w-[275px] self-center">
           <Typography variant="body3" weight="regular">
             {t('footer')}
           </Typography>
