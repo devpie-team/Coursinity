@@ -2,53 +2,31 @@
 
 import { useRef, useEffect, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, PerformanceMonitor } from '@react-three/drei'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { PerformanceMonitor } from '@react-three/drei'
+import { useLocale, useTranslations } from 'use-intl'
+
 import { SceneContent } from './_components/SceneContent/SceneContent'
 import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
-import { MyModel } from './_components/Model/Model'
-import { useLocale } from 'use-intl'
+import { Torus } from './_components/Torus/Torus'
+import { Typography } from '@/components/ui/Typography/Typography'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const slidesData = [
-  {
-    text: { en: 'AI Transformation', ar: 'تبّني الذكاء الاصطناعي' },
-    colors: ['#5a5a9e', '#7a7abf', '#2c2a33']
-  },
-  {
-    text: { en: 'Activity-Based Training', ar: 'سيناريوهات تدريب واقعية' },
-    colors: ['#5a5a9e', '#7a7abf', '#2c2a33']
-  },
-  {
-    text: { en: 'Meta Verse & VR', ar: 'ميتاڤيرس وواقع افتراضي' },
-    colors: ['#5a5a9e', '#7a7abf', '#2c2a33']
-  },
-  {
-    text: { en: 'Customised Learning Journeys', ar: 'رحلات تدريبية' },
-    colors: ['#5a5a9e', '#7a7abf', '#2c2a33']
-  },
-  {
-    text: { en: 'Data Driven Tracking', ar: 'عائد ببيانات وتقارير' },
-    colors: ['#5a5a9e', '#7a7abf', '#2c2a33']
-  }
-  /*  { text: 'Reusable Programs', colors: ['#6C5CE7', '#A29BFE', '#FD79A8'] }
-  { text: 'Gamified Learning', colors: ['#00B894', '#00CEC9', '#74B9FF'] },
-  { text: 'On-Job Upskilling', colors: ['#FDCB6E', '#E17055', '#D63031'] },
-  { text: 'Success Partners', colors: ['#6C5CE7', '#A29BFE', '#FD79A8'] },
-  { text: 'Evergreen Paths', colors: ['#00B894', '#00CEC9', '#74B9FF'] },
-  { text: 'Hybrid Delivery', colors: ['#FDCB6E', '#E17055', '#D63031'] },
-  { text: 'Audit-Ready Compliance', colors: ['#6C5CE7', '#A29BFE', '#FD79A8'] },
-  { text: 'White-Label Academies', colors: ['#00B894', '#00CEC9', '#74B9FF'] },
-  { text: 'Certifications', colors: ['#FDCB6E', '#E17055', '#D63031'] } */
+  { text: { en: 'AI Transformation', ar: 'تبّني الذكاء الاصطناعي' }, colors: ['#5a5a9e', '#7a7abf', '#2c2a33'] },
+  { text: { en: 'Activity-Based Training', ar: 'سيناريوهات تدريب واقعية' }, colors: ['#5a5a9e', '#7a7abf', '#2c2a33'] },
+  { text: { en: 'Meta Verse & VR', ar: 'ميتاڤيرس وواقع افتراضي' }, colors: ['#5a5a9e', '#7a7abf', '#2c2a33'] },
+  { text: { en: 'Customised Learning Journeys', ar: 'رحلات تدريبية' }, colors: ['#5a5a9e', '#7a7abf', '#2c2a33'] },
+  { text: { en: 'Data Driven Tracking', ar: 'عائد ببيانات وتقارير' }, colors: ['#5a5a9e', '#7a7abf', '#2c2a33'] }
 ]
 
 const useMediaQuery = (query: string): boolean => {
   const [matches, setMatches] = useState(false)
   useEffect(() => {
+    if (typeof window === 'undefined') return
     const media = window.matchMedia(query)
     if (media.matches !== matches) setMatches(media.matches)
     const listener = () => setMatches(media.matches)
@@ -61,27 +39,44 @@ const useMediaQuery = (query: string): boolean => {
 export function Carousel3dSection() {
   const isMobile = useMediaQuery('(max-width: 768px)')
   const locale = useLocale()
-  const sectionRef = useRef(null)
+  const pinSectionRef = useRef<HTMLDivElement>(null)
   const scrollProxy = useRef({ value: 0 })
   const [dpr, setDpr] = useState(1.5)
+  const t = useTranslations('Carousel3d')
 
   useEffect(() => {
-    const triggerLength = window.innerHeight * slidesData.length * 0.8
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top top',
-        end: `+=${triggerLength}px`,
-        pin: true,
-        scrub: 1
-      }
-    })
-    tl.to(scrollProxy.current, { value: slidesData.length, ease: 'none' })
-    return () => {
-      tl.kill()
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
-    }
-  }, [])
+    if (!pinSectionRef.current) return
+
+    const totalScrollDuration = slidesData.length
+    const startCurtainDuration = 1
+    const endCurtainDuration = 1
+    const totalVh = (totalScrollDuration + startCurtainDuration + endCurtainDuration) * 100
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: pinSectionRef.current,
+          pin: true,
+          scrub: 1,
+          start: 'top top',
+          end: `+=${totalVh}%`
+        }
+      })
+
+      // Анімація шторок та сцени
+      // tl.to('#curtain-start', { yPercent: -100, ease: 'power2.out', duration: startCurtainDuration })
+      tl.fromTo(
+        '#canvas-container',
+        { opacity: 0 },
+        { opacity: 1, ease: 'power1.in', duration: startCurtainDuration } /*, '<'*/
+      ) // Fade-in сцени
+        .to(scrollProxy.current, { value: slidesData.length, ease: 'none', duration: totalScrollDuration }, '>')
+        .to('#canvas-container', { opacity: 0, ease: 'power1.out', duration: endCurtainDuration }, '>') // Fade-out сцени
+      // .fromTo('#curtain-end', { yPercent: 100 }, { yPercent: 0, ease: 'power2.in', duration: endCurtainDuration }, '<') // Поява кінцевої шторки
+    }, pinSectionRef)
+
+    return () => ctx.revert()
+  }, [slidesData.length])
 
   const { hideHeaderForSection, showHeaderForSection } = useHeaderVisibility()
   const sectionId = useRef(Math.random()?.toString())
@@ -89,58 +84,97 @@ export function Carousel3dSection() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          hideHeaderForSection(sectionId.current)
-        } else {
-          showHeaderForSection(sectionId.current)
-        }
+        if (entry.isIntersecting) hideHeaderForSection(sectionId.current)
+        else showHeaderForSection(sectionId.current)
       },
-      { threshold: 0.5 }
+      { threshold: 0.1 }
     )
-
-    if (sectionRef.current) observer.observe(sectionRef.current)
+    const currentRef = pinSectionRef.current
+    if (currentRef) observer.observe(currentRef)
     return () => {
-      if (sectionRef.current) observer.unobserve(sectionRef.current)
+      if (currentRef) observer.unobserve(currentRef)
       showHeaderForSection(sectionId.current)
     }
-  }, [])
+  }, [hideHeaderForSection, showHeaderForSection])
 
   return (
-    <section
-      ref={sectionRef}
-      style={{ position: 'relative', height: '100vh', background: '#0D0D0D', overflow: 'hidden' }}>
-      <div style={{ position: 'relative', height: '100vh', width: '100vw' }}>
-        <Canvas
-          shadows
-          dpr={dpr}
-          camera={{ position: [0, -0.1, isMobile ? 1.4 : 1.65], fov: isMobile ? 75 : 70 }}
-          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-          <PerformanceMonitor onIncline={() => setDpr(2)} onDecline={() => setDpr(1)}>
-            {/*  <OrbitControls
-              enableZoom={false}
-              enablePan={false}
-              minPolarAngle={Math.PI / 4}
-              maxPolarAngle={Math.PI / 2}
-              rotateSpeed={0.5}
-            /> */}
+    <div ref={pinSectionRef} className="relative h-screen w-full overflow-hidden bg-[#0D0D0D]">
+      {/* <div id="curtain-start" className="absolute top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-[#0D0D0D]">
+        ...
+      </div> */}
 
-            <SceneContent
-              isMobile={isMobile}
+      <div style={{ position: 'relative', height: '100vh', width: '100vw' }}>
+        <div id="canvas-container" className="relative h-full w-full">
+          <div className="absolute inset-0 z-10  flex items-end pl-4 pb-14 ">
+            <div className="flex flex-col text-white text-start  max-w-[600px] gap-6  p-6 rounded-xl">
+              <Typography variant="body1" weight="medium">
+                – {t('title')}
+              </Typography>
+              <div className="flex flex-col gap-4  text-[#A578F2]   ">
+                <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
+                  – {t('point1')}
+                </Typography>
+                <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
+                  – {t('point2')}
+                </Typography>
+                <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
+                  – {t('point3')}
+                </Typography>
+                <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
+                  – {t('point4')}
+                </Typography>
+                <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
+                  – {t('point5')}
+                </Typography>
+              </div>
+            </div>
+          </div>
+          <Canvas
+            shadows
+            dpr={dpr}
+            camera={{ position: [0, -0.1, isMobile ? 1.4 : 1.65], fov: isMobile ? 75 : 70 }}
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
+            <PerformanceMonitor onIncline={() => setDpr(2)} onDecline={() => setDpr(1)}>
+              <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.5} />
+              <SceneContent
+                isMobile={isMobile}
+                scrollProgressRef={scrollProxy}
+                slidesData={slidesData}
+                locale={locale}
+                textOpacityFadePower={4}
+                textFadeStartDistance={0}
+                textFadeEndDistance={1}
+                waveFrequency={10.0}
+                waveSpeed={5.0}
+                waveDecay={1}
+                rippleOpacity={0.4}
+                rippleEmissiveIntensity={0.02}
+              />
+              <EffectComposer>
+                <Bloom intensity={1.5} luminanceThreshold={0.1} luminanceSmoothing={0.025} radius={0.8} mipmapBlur />
+              </EffectComposer>
+            </PerformanceMonitor>
+            <Torus
+              position={[0, -0.2, -0.9]}
+              rotation={[Math.PI, 0, 0]}
               scrollProgressRef={scrollProxy}
-              slidesData={slidesData}
-              locale={locale}
-              waveFrequency={20.0}
-              waveSpeed={5.0}
-              waveDecay={0.5}
-              rippleOpacity={0.3}
-              rippleEmissiveIntensity={0.02}
+              animationSpeed={0.0002}
+              scrollSpeed={0.8}
             />
-            {/* <EffectComposer>
-              <Bloom intensity={1.5} luminanceThreshold={0.1} luminanceSmoothing={0.025} radius={0.8} mipmapBlur />
-            </EffectComposer> */}
-          </PerformanceMonitor>
-        </Canvas>
+            <Torus
+              position={[0, -0.9, -0.9]}
+              rotation={[Math.PI, 0, Math.PI * 1.03]}
+              scrollProgressRef={scrollProxy}
+              animationSpeed={0.00005}
+              scrollSpeed={0.3}
+            />
+          </Canvas>
+        </div>
       </div>
-    </section>
+
+      {/* <div id="curtain-end" className="absolute top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-[#0D0D0D] text-white">
+        <Typography variant="h2" weight="medium">{t('endTitle')}</Typography>
+      </div> */}
+    </div>
   )
 }

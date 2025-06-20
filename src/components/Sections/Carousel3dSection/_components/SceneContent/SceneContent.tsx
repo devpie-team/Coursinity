@@ -21,6 +21,9 @@ interface SceneContentProps {
   waveDecay?: number
   rippleOpacity?: number
   rippleEmissiveIntensity?: number
+  textOpacityFadePower?: number
+  textFadeStartDistance?: number
+  textFadeEndDistance?: number
 }
 
 export const SceneContent = ({
@@ -32,7 +35,10 @@ export const SceneContent = ({
   waveSpeed,
   waveDecay,
   rippleOpacity,
-  rippleEmissiveIntensity
+  rippleEmissiveIntensity,
+  textOpacityFadePower,
+  textFadeStartDistance,
+  textFadeEndDistance
 }: SceneContentProps) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
   const effectStrengthRef = useRef(0)
@@ -70,7 +76,7 @@ export const SceneContent = ({
         width={8}
         height={4}
         depth={6}
-        particleCount={isMobile ? 5000 : 8000}
+        particleCount={isMobile ? 2000 : 6000}
         particleSize={0.01}
         randomness={150}
         waveIntensity={50}
@@ -97,12 +103,21 @@ export const SceneContent = ({
           waveDecay={waveDecay}
           rippleOpacity={rippleOpacity}
           rippleEmissiveIntensity={rippleEmissiveIntensity}
+          opacityFadePower={textOpacityFadePower}
+          fadeStartDistance={textFadeStartDistance}
+          fadeEndDistance={textFadeEndDistance}
         />
       ))}
       <CentralPillar
         scrollProgressRef={scrollProgressRef}
         circleCenter={spiralParams.circleCenter}
         isMobile={isMobile}
+        position={[0, 0, 0]}
+        width={isMobile ? 0.5 : 1.2}
+        particleCount={isMobile ? 800 : 800}
+        particleSize={isMobile ? 0.04 : 0.12}
+        animationSpeed={0.8}
+        rotationSpeed={0.9}
       />
     </>
   )

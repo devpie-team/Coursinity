@@ -6,21 +6,31 @@ interface CentralPillarProps {
   scrollProgressRef: React.MutableRefObject<{ value: number }>
   circleCenter?: [number, number, number]
   isMobile?: boolean
+  position?: [number, number, number] // Позиція стовпа
+  width?: number // Ширина стовпа
+  particleCount?: number // Кількість частинок
+  particleSize?: number // Розмір частинок
+  animationSpeed?: number // Швидкість анімації частинок
+  rotationSpeed?: number // Швидкість обертання стовпа
 }
 
 export function CentralPillar({
   scrollProgressRef,
   circleCenter = [0, -0.1, -0.4],
-  isMobile = false
+  isMobile = false,
+  position = [0, 0, 0],
+  width = 1.1,
+  particleCount = isMobile ? 700 : 1000,
+  particleSize = isMobile ? 0.06 : 0.09,
+  animationSpeed = 0.5,
+  rotationSpeed = 0.7
 }: CentralPillarProps) {
   const groupRef = useRef<THREE.Group>(null)
   const meshRef = useRef<THREE.InstancedMesh>(null)
 
   // Параметри частинок стовпа
-  const particleCount = isMobile ? 700 : 1000
   const pillarHeight = isMobile ? 5 : 5
-  const pillarWidth = isMobile ? 0.7 : 1.1
-  const particleSize = isMobile ? 0.06 : 0.09
+  const pillarWidth = width // Використовуємо пропс width
 
   // Створюємо геометрію для кожної частинки
   const particleGeometry = useMemo(() => {
@@ -147,7 +157,7 @@ export function CentralPillar({
     const effectiveTime = time * 0.3
 
     // Обертання всього стовпа
-    groupRef.current.rotation.y = effectiveTime * 0.7
+    groupRef.current.rotation.y = effectiveTime * rotationSpeed
 
     // Анімуємо окремі частинки
     const tempObject = new THREE.Object3D()
@@ -166,7 +176,7 @@ export function CentralPillar({
       const waveZ = Math.sin(particleTime + z * 2) * 0.02
 
       // Рух вгору/вниз на основі скролу з індивідуальною швидкістю
-      const scrollMovement = progress * speed
+      const scrollMovement = progress * speed * animationSpeed
       let newY = y + scrollMovement
 
       // Зациклюємо частинки
@@ -198,7 +208,7 @@ export function CentralPillar({
   })
 
   return (
-    <group ref={groupRef}>
+    <group ref={groupRef} position={position}>
       <instancedMesh
         ref={meshRef}
         args={[particleGeometry, material, particleCount]}

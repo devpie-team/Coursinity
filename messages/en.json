@@ -57,7 +57,7 @@
   },
   "Features": {
     "certified": {
-      "title": "Certified by the World’s Best",
+      "title": "Certified by the World's Best",
       "subtitle": "Coursinity is the go-to partner for global institutions driving progress through training.",
       "items": [
         "Prestigious universities with international recognition",
@@ -67,7 +67,7 @@
     },
     "trusted": {
       "title": "Trusted by Organizations That Invest in People",
-      "subtitle": "Coursinity is more than a training provider, it’s your strategic partner in building organizational readiness.",
+      "subtitle": "Coursinity is more than a training provider, it's your strategic partner in building organizational readiness.",
       "items": [
         {
           "title": "Proven success stories",
@@ -90,13 +90,13 @@
     "subtitle": "Empower your team with AI-driven, tailored training paths that bring your vision to life. The leader in Edu-tech solutions.",
     "bookDemo": "Book a Demo Now",
     "titleGradientMobile": "Spark a learning revolution.",
-    "subtitleMobile": "Take your team’s productivity to a new paradigm",
+    "subtitleMobile": "Take your team's productivity to a new paradigm",
     "spark": "Spark a learning",
     "revolution": " revolution."
   },
   "AiTeamSection": {
     "title": "Build an AI‑Proficient Team",
-    "description": "We help you build a team that masters AI interaction, using it to boost productivity and drive task completion. Training is fully customized for each role, in a style that fits your team’s culture, tools, and ambitions.",
+    "description": "We help you build a team that masters AI interaction, using it to boost productivity and drive task completion. Training is fully customized for each role, in a style that fits your team's culture, tools, and ambitions.",
     "button": "Learn More",
     "items": [
       "Training teams to write smarter AI prompts",
@@ -121,7 +121,7 @@
     "cards": [
       {
         "title": "In-Person, Remote, Self-Paced & Hybrid",
-        "subtitle": "Flexible training formats tailored to your team’s needs, fostering a culture of continuous growth."
+        "subtitle": "Flexible training formats tailored to your team's needs, fostering a culture of continuous growth."
       },
       {
         "title": "Tailored Learning Paths",
@@ -129,7 +129,7 @@
       },
       {
         "title": "Sector-Specific Design",
-        "subtitle": "We leverage modern, interactive training techniques to deliver programs that sharpen your organization’s competitive edge across every sector."
+        "subtitle": "We leverage modern, interactive training techniques to deliver programs that sharpen your organization's competitive edge across every sector."
       },
       {
         "title": "Bespoke Digital Content",
@@ -141,11 +141,11 @@
       },
       {
         "title": "Flexible Scheduling",
-        "subtitle": "Synced with your team’s availability, no disruption, no delays."
+        "subtitle": "Synced with your team's availability, no disruption, no delays."
       }
     ],
     "title": "Built Around You. Branded For You",
-    "subtitle": "Custom-built to reflect your organization’s identity, vision, and goals"
+    "subtitle": "Custom-built to reflect your organization's identity, vision, and goals"
   },
   "FutureSection": {
     "title": "The Future Starts Now. Get Your Team Ready",
@@ -179,7 +179,7 @@
       },
       {
         "title": "Track Growth Journeys",
-        "description": "Map each team member’s development and guide them forward."
+        "description": "Map each team member's development and guide them forward."
       },
       {
         "title": "Live Insights Hub & Smart Filters",
@@ -227,7 +227,7 @@
   "StackSection": {
     "left": {
       "title": "Training Your Team. Your Smartest Investment",
-      "description": "Coursinity turns your ambition into tailored training shaped by your goals, your team’s strengths, and your culture’s pulse.",
+      "description": "Coursinity turns your ambition into tailored training shaped by your goals, your team's strengths, and your culture's pulse.",
       "button": "Talk to a Learning Advisor"
     },
     "steps": [
@@ -269,9 +269,9 @@
       },
       {
         "company": "Second Riyadh Health Cluster 2",
-        "feedback": "In record time, employee skill levels rose significantly, and job satisfaction was clearly enhanced. Coursinity’s customized journeys helped us train 20,000+ medical staff without disrupting care.",
+        "feedback": "In record time, employee skill levels rose significantly, and job satisfaction was clearly enhanced. Coursinity's customized journeys helped us train 20,000+ medical staff without disrupting care.",
         "userName": "M. Ali",
-        "userPosition": "Training Director, Second Riyadh Health Cluster​"
+        "userPosition": "Training Director, Second Riyadh Health Cluster"
       },
       {
         "company": "Bahri company 3",
@@ -281,9 +281,9 @@
       },
       {
         "company": "Second Riyadh Health Cluster 4",
-        "feedback": "In record time, employee skill levels rose significantly, and job satisfaction was clearly enhanced. Coursinity’s customized journeys helped us train 20,000+ medical staff without disrupting care.",
+        "feedback": "In record time, employee skill levels rose significantly, and job satisfaction was clearly enhanced. Coursinity's customized journeys helped us train 20,000+ medical staff without disrupting care.",
         "userName": "M. Ali",
-        "userPosition": "Training Director, Second Riyadh Health Cluster​"
+        "userPosition": "Training Director, Second Riyadh Health Cluster"
       },
       {
         "company": "Bahri company 5",
@@ -293,9 +293,9 @@
       },
       {
         "company": "Second Riyadh Health Cluster 6",
-        "feedback": "In record time, employee skill levels rose significantly, and job satisfaction was clearly enhanced. Coursinity’s customized journeys helped us train 20,000+ medical staff without disrupting care.",
+        "feedback": "In record time, employee skill levels rose significantly, and job satisfaction was clearly enhanced. Coursinity's customized journeys helped us train 20,000+ medical staff without disrupting care.",
         "userName": "M. Ali",
-        "userPosition": "Training Director, Second Riyadh Health Cluster​"
+        "userPosition": "Training Director, Second Riyadh Health Cluster"
       },
       {
         "company": "Bahri company 7",
@@ -362,7 +362,7 @@
     "phone_number": "Phone Number",
     "phone_number_placeholder": "+966",
     "company_name": "Company Name",
-    "company_name_placeholder": "Your organization’s name",
+    "company_name_placeholder": "Your organization's name",
     "job_title": "Job Title",
     "job_title_placeholder": "Your role or position",
     "number_of_employees": "Number of Employees",
@@ -446,5 +446,14 @@
     "review": "Coursinity helped us train over 4,000 employees without disrupting daily operations. The academy reflected our identity and values and the results were measurable from the first month.",
     "author": "M. Ali",
     "author_position": "Training Lead, Bahri"
+  },
+  "Carousel3d": {
+    "title": "What are you looking for?",
+    "point1": "Engaging for your team",
+    "point2": "Customised for your organization",
+    "point3": "Practical for productivity",
+    "point4": "Scalable for impact",
+    "point5": "Optimized for RoI",
+    "endTitle": "Let's talk."
   }
 }

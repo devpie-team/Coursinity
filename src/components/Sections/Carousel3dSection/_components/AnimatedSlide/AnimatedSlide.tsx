@@ -33,6 +33,9 @@ interface AnimatedSlideProps {
   waveDecay?: number
   rippleOpacity?: number
   rippleEmissiveIntensity?: number
+  opacityFadePower?: number
+  fadeStartDistance?: number
+  fadeEndDistance?: number
 }
 
 export const AnimatedSlide = memo(
@@ -52,7 +55,10 @@ export const AnimatedSlide = memo(
     waveSpeed,
     waveDecay,
     rippleOpacity,
-    rippleEmissiveIntensity
+    rippleEmissiveIntensity,
+    opacityFadePower,
+    fadeStartDistance,
+    fadeEndDistance
   }: AnimatedSlideProps) => {
     const groupRef = useRef<Group>(null)
     const [offsetFromCenter, setOffsetFromCenter] = useState(0)
@@ -120,6 +126,9 @@ export const AnimatedSlide = memo(
           rippleEmissiveIntensity={rippleEmissiveIntensity}
           isMobile={isMobile}
           locale={locale}
+          opacityFadePower={opacityFadePower}
+          fadeStartDistance={fadeStartDistance}
+          fadeEndDistance={fadeEndDistance}
         />
       </group>
     )
