@@ -2,7 +2,7 @@
 
 import { BadgeIcon } from '@/components/icons/BadgeIcon'
 import { Typography } from '@/components/ui'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -31,6 +31,8 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
   const [isTablet, setIsTablet] = useState<boolean>(false)
   const [isDesktop, setIsDesktop] = useState<boolean>(true)
   const t = useTranslations('StackSection')
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -190,7 +192,7 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
         </div>
         <div className="flex justify-center pb-[100px]" style={activeStyle(3)}>
           <img
-            src="/assets/stack_section/stack_3.png"
+            src={isArabic ? '/assets/stack_section/stack_3_ar.png' : '/assets/stack_section/stack_3.png'}
             alt="Step 3"
             className=" object-cover max-md:absolute max-md:bottom-[120px]"
           />
