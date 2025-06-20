@@ -21,7 +21,11 @@ export const HeaderDropdown = ({ start }: THeaderDropdown) => {
       setShow(false)
       animTimeout.current = setTimeout(() => setMounted(false), 200)
     }
-    return () => animTimeout.current && clearTimeout(animTimeout.current)
+    return () => {
+      if (animTimeout.current) {
+        clearTimeout(animTimeout.current)
+      }
+    }
   }, [opened])
 
   useEffect(() => {

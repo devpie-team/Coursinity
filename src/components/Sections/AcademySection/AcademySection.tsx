@@ -94,18 +94,18 @@ export const AcademySection = () => {
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
   useEffect(() => {
     AOS.init()
   }, [])
-
-  const locale = useLocale()
 
   useEffect(() => {
     if (!animationContainerRef.current) return
 
     const animation = LottieScrollTrigger({
       target: animationContainerRef.current,
-      path: '/assets/lottie/academic/academic.json'
+      path: isArabic ? '/assets/lottie/academic/academicAr.json' : '/assets/lottie/academic/academic.json'
     })
 
     return () => {

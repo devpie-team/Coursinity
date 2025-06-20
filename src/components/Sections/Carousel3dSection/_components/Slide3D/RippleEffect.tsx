@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useMemo, useLayoutEffect } from 'react'
 import * as THREE from 'three'
 import { shaderMaterial } from '@react-three/drei'
 import { extend, useFrame } from '@react-three/fiber'
@@ -7,7 +7,7 @@ const RippleMaterial = shaderMaterial(
   {
     u_time: 0,
     u_center: new THREE.Vector2(0, 0),
-    u_resolution: new THREE.Vector2(window.innerWidth, window.innerHeight),
+    u_resolution: new THREE.Vector2(0, 0),
     u_waveFrequency: 10.0,
     u_waveSpeed: 3.5,
     u_waveDecay: 3.0,
@@ -108,14 +108,6 @@ export function RippleEffect({
 }: RippleEffectProps) {
   const rippleMaterialRef = useRef<THREE.ShaderMaterial>(null!)
 
-  useEffect(() => {
-    const handleResize = () => {
-      rippleMaterialRef.current?.uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight)
-    }
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
   useFrame(({ clock }) => {
     if (rippleMaterialRef.current) {
       rippleMaterialRef.current.uniforms.u_time.value = clock.getElapsedTime()
@@ -128,6 +120,21 @@ export function RippleEffect({
       rippleMaterialRef.current.uniforms.u_emissiveIntensity.value = emissiveIntensity
     }
   })
+
+  useLayoutEffect(() => {
+    const handleResize = () => {
+      if (rippleMaterialRef.current) {
+        rippleMaterialRef.current.uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight)
+      }
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   return (
     <mesh geometry={geometry}>

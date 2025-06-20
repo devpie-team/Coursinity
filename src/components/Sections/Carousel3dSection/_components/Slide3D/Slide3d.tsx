@@ -20,6 +20,9 @@ type Slide3DProps = {
   rippleEmissiveIntensity?: number
   isMobile?: boolean
   locale?: string
+  opacityFadePower?: number
+  fadeStartDistance?: number
+  fadeEndDistance?: number
 }
 
 export function Slide3D({
@@ -37,7 +40,10 @@ export function Slide3D({
   rippleOpacity,
   rippleEmissiveIntensity,
   isMobile = false,
-  locale
+  locale,
+  opacityFadePower,
+  fadeStartDistance,
+  fadeEndDistance
 }: Slide3DProps) {
   const groupRef = useRef<THREE.Group>(null!)
   const meshRef = useRef<THREE.Mesh>(null)
@@ -114,16 +120,16 @@ export function Slide3D({
       <mesh ref={meshRef} geometry={geometry}>
         <meshPhysicalMaterial
           map={gradientTexture}
-          metalness={1}
-          roughness={0.5}
-          clearcoat={0.8}
+          metalness={1.4}
+          roughness={0.4}
+          clearcoat={0.1}
           clearcoatRoughness={1}
           reflectivity={0.5}
           transparent={true}
-          opacity={0.75}
+          opacity={0.7}
           toneMapped={true}
           emissive={base}
-          emissiveIntensity={0.01}
+          emissiveIntensity={0}
         />
       </mesh>
 
@@ -141,7 +147,16 @@ export function Slide3D({
       />
 
       {/* Текст */}
-      <SlideText text={text} offsetFromCenter={offsetFromCenter} side={side} isMobile={isMobile} locale={locale} />
+      <SlideText
+        text={text}
+        offsetFromCenter={offsetFromCenter}
+        side={side}
+        isMobile={isMobile}
+        locale={locale}
+        opacityFadePower={opacityFadePower}
+        fadeStartDistance={fadeStartDistance}
+        fadeEndDistance={fadeEndDistance}
+      />
     </group>
   )
 }

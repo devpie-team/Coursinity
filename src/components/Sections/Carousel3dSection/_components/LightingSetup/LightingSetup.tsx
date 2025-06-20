@@ -49,9 +49,10 @@ export function LightingSetup({ rotation, effectStrength, currentSlideIndex, sli
       />
 
       {/* Додаткове синьо-блакитне освітлення */}
-      <spotLight position={[1, 1, 0]} intensity={800.2} color={'#0b1736'} />
-      <spotLight position={[0, 0.5, 3]} intensity={100.2} distance={3} color={'#423b57'} />
-      <spotLight position={[0, -1, 3]} intensity={100.2} distance={3} color={'#423b57'} />
+      <spotLight position={[0, 1, 1]} intensity={200.2} color={'#0b1736'} />
+      <spotLight position={[0, -1, 1]} intensity={300.2} color={'#0b1736'} />
+      <spotLight position={[0, 0.5, 3]} intensity={100.2} distance={3} color={'#39235e'} />
+      <spotLight position={[0, -1, 3]} intensity={100.2} distance={3} color={'#39235e'} />
     </group>
   )
 }

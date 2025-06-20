@@ -95,7 +95,11 @@ export const DataDrivenSection = () => {
                 <SwiperSlide key={index}>
                   <div className="flex flex-col gap-8 justify-center items-center ">
                     <img
-                      src={`/assets/data_driven/data_driven_${index + 2}.png`}
+                      src={
+                        isArabic
+                          ? `/assets/data_driven/data_driven_${index + 2}_ar.png`
+                          : `/assets/data_driven/data_driven_${index + 2}.png`
+                      }
                       alt={`slide_${index}`}
                       className="relative object-cover h-[195px] w-[270px]"
                     />
@@ -137,7 +141,11 @@ export const DataDrivenSection = () => {
             />
             <img
               key={activeIndex}
-              src={`/assets/data_driven/data_driven_${activeIndex + 2}.png`}
+              src={
+                isArabic
+                  ? `/assets/data_driven/data_driven_${activeIndex + 2}_ar.png`
+                  : `/assets/data_driven/data_driven_${activeIndex + 2}.png`
+              }
               alt={`slide_${activeIndex}`}
               className={clsx(
                 'relative z-10 object-cover h-[270px] w-[380px] transition-opacity duration-500',
@@ -202,11 +210,11 @@ export const DataDrivenSection = () => {
                       setFade(true)
                     }, 300)
                   }}
-                  className="group w-6 h-6 flex items-center justify-center transition">
+                  className="group w-6 h-6 flex items-center justify-center transition -scale-x-100">
                   <ChevronLeftIcon
                     className={cn(
                       'h-6 w-6 stroke-[#1C8DC1] group-hover:stroke-[#1C8DC1]/50 transition',
-                      isArabic ? '' : 'scale-x-100'
+                      isArabic ? '-scale-x-100' : ''
                     )}
                   />
                 </button>
