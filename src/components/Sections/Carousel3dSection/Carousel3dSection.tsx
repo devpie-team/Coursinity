@@ -105,30 +105,33 @@ export function Carousel3dSection() {
 
       <div style={{ position: 'relative', height: '100vh', width: '100vw' }}>
         <div id="canvas-container" className="relative h-full w-full">
-          <div className="absolute inset-0 z-10  flex items-end pl-4 pb-14 ">
-            <div className="flex flex-col text-white text-start  max-w-[600px] gap-6  p-6 rounded-xl">
-              <Typography variant="body1" weight="medium">
-                – {t('title')}
-              </Typography>
-              <div className="flex flex-col gap-4  text-[#A578F2]   ">
-                <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
-                  – {t('point1')}
+          {!isMobile && (
+            <div className="absolute inset-0 z-10  flex items-end pl-4 pb-14 ">
+              <div className="flex flex-col text-white text-start  max-w-[600px] gap-6  p-6 rounded-xl">
+                <Typography variant="body1" weight="medium">
+                  – {t('title')}
                 </Typography>
-                <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
-                  – {t('point2')}
-                </Typography>
-                <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
-                  – {t('point3')}
-                </Typography>
-                <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
-                  – {t('point4')}
-                </Typography>
-                <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
-                  – {t('point5')}
-                </Typography>
+                <div className="flex flex-col gap-4  text-[#A578F2]   ">
+                  <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
+                    – {t('point1')}
+                  </Typography>
+                  <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
+                    – {t('point2')}
+                  </Typography>
+                  <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
+                    – {t('point3')}
+                  </Typography>
+                  <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
+                    – {t('point4')}
+                  </Typography>
+                  <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
+                    – {t('point5')}
+                  </Typography>
+                </div>
               </div>
             </div>
-          </div>
+          )}
+
           <Canvas
             shadows
             dpr={dpr}
