@@ -51,6 +51,23 @@ export const ImpactSectionNew = () => {
   )
 
   const [isMobile, setIsMobile] = useState<boolean>(false)
+  const [animations, setAnimations] = useState<AnimationItem[]>([])
+  const [isTablet, setIsTablet] = useState<boolean>(false)
+  const [isDesktop, setIsDesktop] = useState<boolean>(true)
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+      setIsTablet(width >= 768 && width <= 1024)
+      setIsDesktop(width > 1024)
+    }
+
+    checkScreenSize()
+
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
 
   const loadAnimation = useCallback(
     async (path: string): Promise<AnimationData | null> => {
@@ -83,29 +100,12 @@ export const ImpactSectionNew = () => {
     [isMobile]
   )
 
-  const [animations, setAnimations] = useState<AnimationItem[]>([])
-  const [isTablet, setIsTablet] = useState<boolean>(false)
-  const [isDesktop, setIsDesktop] = useState<boolean>(true)
-  useEffect(() => {
-    const checkScreenSize = () => {
-      const width = window.innerWidth
-      setIsMobile(width < 768)
-      setIsTablet(width >= 768 && width <= 1024)
-      setIsDesktop(width > 1024)
-    }
-
-    checkScreenSize()
-
-    window.addEventListener('resize', checkScreenSize)
-    return () => window.removeEventListener('resize', checkScreenSize)
-  }, [])
-
   const animationPaths = useMemo<AnimationPath[]>(() => {
     return [
       {
         path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/${locale}/1.json`,
         className:
-          'absolute w-[167px] h-[143px] left-[24px] top-[52px] md:w-[362px] md:h-[280px] md:top-[146px] md:left-[30px] lg:left-0'
+          'absolute w-[167px] h-[243px] left-[24px] top-[52px] md:w-[362px] md:h-[280px] md:top-[146px] md:left-[30px] lg:left-0'
       },
       {
         path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/${locale}/2.json`,
@@ -170,6 +170,7 @@ export const ImpactSectionNew = () => {
     if (!wrapper || !container) return
 
     const wrapperWidth = wrapper.offsetWidth / 2
+
     gsap.fromTo(
       wrapper,
       { x: locale === 'ar' ? wrapperWidth : 0 },
@@ -220,8 +221,6 @@ export const ImpactSectionNew = () => {
     }
   }, [animations, isMobile])
 
-  console.log(animations, 'a', animationPaths, 'p')
-
   return (
     <section className="pt-32 pb-[89px] bg-black flex flex-col gap-[52px] overflow-hidden max-md:pt-20">
       <div className="flex flex-col gap-4 text-center text-white px-4">
@@ -239,11 +238,14 @@ export const ImpactSectionNew = () => {
 
       <div
         ref={containerRef}
-        className="relative h-[372px] min-w-[786px] md:h-[572px] lg:h-[672px] md:min-w-[1905px] max-[1705]:min-w-[1705px] bg-black overflow-hidden">
+        className="relative h-[408px] min-w-[786px] md:h-[572px] lg:h-[672px] md:min-w-[1905px] max-[1705]:min-w-[1705px] bg-black overflow-hidden">
         <div ref={wrapperRef} className="absolute flex">
           {Array.from({ length: GROUP_COUNT }).map((_, groupIdx) => (
-            <div key={groupIdx} className="relative flex-shrink-0" style={{ width: '1705px', height: '633px' }}>
-              <div className="blue-gradient-border absolute w-[100px] h-[100px] bottom-[237px] md:bottom-[57px] lg:bottom-[17px] left-[264px] flex items-center justify-center scale-50 sm:scale-75 lg:scale-100">
+            <div
+              key={groupIdx}
+              className="relative flex-shrink-0"
+              style={{ width: isMobile ? '768px' : '1705px', height: isMobile ? '408px' : '633px' }}>
+              {/* <div className="blue-gradient-border absolute w-[100px] h-[100px] bottom-[237px] md:bottom-[57px] lg:bottom-[17px] left-[264px] flex items-center justify-center scale-50 sm:scale-75 lg:scale-100">
                 <BusinessIcon />
               </div>
               <div className="blue-gradient-border absolute w-[100px] h-[100px] top-[15px] md:top-[30px] right-[50px] flex items-center justify-center scale-50 sm:scale-75 lg:scale-100">
@@ -254,7 +256,7 @@ export const ImpactSectionNew = () => {
               </div>
               <div className="blue-gradient-border absolute w-[100px] h-[100px] bottom-[238px] md:bottom-[58px] right-[507px] flex items-center justify-center scale-50 sm:scale-75 lg:scale-100">
                 <SmileIcon />
-              </div>
+              </div> */}
               {animations.map(
                 ({ animation, className }, i) =>
                   animation && (
