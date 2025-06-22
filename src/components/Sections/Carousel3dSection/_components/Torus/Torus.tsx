@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { useMemo, useRef, forwardRef } from 'react'
+import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 
 type TorusOfSpheresProps = {
@@ -8,33 +8,11 @@ type TorusOfSpheresProps = {
   maxSphereSize?: number
   randomness?: number
   position?: [number, number, number]
-  rotation?: [number, number, number] // Обертання торуса
+  rotation?: [number, number, number]
   scrollProgressRef: React.MutableRefObject<{ value: number }>
-  animationSpeed?: number // Швидкість анімації кульок
-  scrollSpeed?: number // Швидкість реакції на скрол
+  animationSpeed?: number
+  scrollSpeed?: number
 }
-
-// Компонент однієї кульки, що приймає ref
-const Sphere = forwardRef<
-  THREE.Mesh,
-  { position: [number, number, number]; size: number; color: THREE.Color; opacity: number }
->(({ position, size, color, opacity }, ref) => {
-  return (
-    <mesh ref={ref} position={position}>
-      <sphereGeometry args={[size, 16, 16]} />
-      <meshStandardMaterial
-        color={color}
-        roughness={0.1}
-        metalness={1}
-        emissive={color}
-        emissiveIntensity={0.2}
-        transparent={true}
-        opacity={opacity}
-      />
-    </mesh>
-  )
-})
-Sphere.displayName = 'Sphere'
 
 export function Torus({
   radius = 2.7,
@@ -47,7 +25,7 @@ export function Torus({
   animationSpeed = 0.0001,
   scrollSpeed = 0.0001
 }: TorusOfSpheresProps) {
-  const groupRef = useRef<THREE.Group>(null!)
+  const meshRef = useRef<THREE.InstancedMesh>(null!)
   const lastScrollValue = useRef(0)
 
   const animationData = useMemo(() => {
@@ -72,11 +50,11 @@ export function Torus({
       const size = Math.random() * maxSphereSize
       const color = colorVariations[Math.floor(Math.random() * colorVariations.length)]
       const opacity = Math.random() * 0.7 + 0.3
-      const speed = animationSpeed + Math.random() * 0.03 // Випадкова швидкість для кожної кульки
+      const speed = animationSpeed + Math.random() * 0.03
 
       data.push({
         initialAngle: angle,
-        scrollAngle: 0, // Окремий кут для скролу
+        scrollAngle: 0,
         randomOffset,
         size,
         color,
@@ -85,45 +63,57 @@ export function Torus({
       })
     }
     return data
-  }, [radius, sphereCount, maxSphereSize, randomness, animationSpeed])
+  }, [sphereCount, maxSphereSize, randomness, animationSpeed])
+
+  // Створюємо атрибути для кольорів
+  const instanceColors = useMemo(() => {
+    const colors = new Float32Array(sphereCount * 3)
+    animationData.forEach((data, i) => data.color.toArray(colors, i * 3))
+    return new THREE.InstancedBufferAttribute(colors, 3)
+  }, [sphereCount, animationData])
+
+  const dummy = new THREE.Object3D()
 
   useFrame((state) => {
-    const elapsedTime = state.clock.getElapsedTime()
+    if (!meshRef.current) return
 
-    // Обробка скролу
+    const elapsedTime = state.clock.getElapsedTime()
     const scrollValue = scrollProgressRef.current.value
     const scrollDelta = scrollValue - lastScrollValue.current
     lastScrollValue.current = scrollValue
 
-    groupRef.current.children.forEach((mesh, i) => {
-      const data = animationData[i]
-      if (mesh && data) {
-        // Оновлюємо кут скролу для кожної кульки окремо
-        data.scrollAngle += scrollDelta * -scrollSpeed
+    animationData.forEach((d, i) => {
+      d.scrollAngle += scrollDelta * -scrollSpeed
+      const newAngle = d.initialAngle + d.scrollAngle + elapsedTime * d.speed
 
-        const newAngle = data.initialAngle + data.scrollAngle + elapsedTime * data.speed
-        mesh.position.set(
-          radius * Math.cos(newAngle) + data.randomOffset.x,
-          data.randomOffset.y,
-          radius * Math.sin(newAngle) + data.randomOffset.z
-        )
-      }
+      dummy.position.set(
+        radius * Math.cos(newAngle) + d.randomOffset.x,
+        d.randomOffset.y,
+        radius * Math.sin(newAngle) + d.randomOffset.z
+      )
+      dummy.scale.setScalar(d.size)
+      dummy.updateMatrix()
+      meshRef.current.setMatrixAt(i, dummy.matrix)
     })
+
+    meshRef.current.instanceMatrix.needsUpdate = true
   })
 
   return (
-    <group ref={groupRef} position={position} rotation={rotation}>
-      {animationData.map((props, i) => (
-        <Sphere
-          key={i}
-          position={[
-            radius * Math.cos(props.initialAngle) + props.randomOffset.x,
-            props.randomOffset.y,
-            radius * Math.sin(props.initialAngle) + props.randomOffset.z
-          ]}
-          {...props}
-        />
-      ))}
-    </group>
+    <instancedMesh ref={meshRef} args={[undefined, undefined, sphereCount]} position={position} rotation={rotation}>
+      <sphereGeometry args={[1, 8, 8]}>
+        <primitive object={instanceColors} attach="attributes-color" />
+      </sphereGeometry>
+      <meshStandardMaterial
+        vertexColors
+        toneMapped={false}
+        roughness={0.1}
+        metalness={1}
+        emissive={0x1e3a8a}
+        emissiveIntensity={0.2}
+        transparent={true}
+        depthWrite={false}
+      />
+    </instancedMesh>
   )
 }
