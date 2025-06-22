@@ -162,7 +162,7 @@ export function SlideText({
     ctx.fillStyle = gradient
 
     // Визначаємо шрифт залежно від мови
-    const fontSize = isMobile ? 140 : 142
+    const fontSize = isMobile ? 120 : 142
     const fontFamily = locale === 'ar' ? 'Arial, sans-serif' : 'Arial, sans-serif'
     ctx.font = `bold ${fontSize}px ${fontFamily}`
 
@@ -172,7 +172,7 @@ export function SlideText({
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
 
-    const PADDING = 700
+    const PADDING = isMobile ? 900 : 700
     const textMetrics = ctx.measureText(text)
 
     if (textMetrics.width > canvas.width - PADDING) {

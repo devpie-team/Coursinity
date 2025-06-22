@@ -65,44 +65,20 @@ export const SceneContent = ({
     <>
       {/* Атмосферне світіння */}
       <fog attach="fog" args={['#0a0a0a', 2, 15]} />
-      
+
       {/* Додаткові джерела світла для атмосфери */}
       <ambientLight intensity={0.1} color="#1a1a2e" />
-      
+
       {/* Кольорове світіння знизу */}
-      <pointLight 
-        position={[0, -3, 0]} 
-        intensity={0.8} 
-        color="#4f46e5" 
-        distance={8}
-        decay={2}
-      />
-      
+      <pointLight position={[0, -3, 0]} intensity={0.8} color="#4f46e5" distance={8} decay={2} />
+
       {/* Світіння зверху */}
-      <pointLight 
-        position={[0, 3, 0]} 
-        intensity={0.6} 
-        color="#7c3aed" 
-        distance={6}
-        decay={1.5}
-      />
-      
+      <pointLight position={[0, 3, 0]} intensity={0.6} color="#7c3aed" distance={6} decay={1.5} />
+
       {/* Бокове світіння */}
-      <pointLight 
-        position={[3, 0, 0]} 
-        intensity={0.4} 
-        color="#06b6d4" 
-        distance={5}
-        decay={2}
-      />
-      
-      <pointLight 
-        position={[-3, 0, 0]} 
-        intensity={0.4} 
-        color="#8b5cf6" 
-        distance={5}
-        decay={2}
-      />
+      <pointLight position={[3, 0, 0]} intensity={0.4} color="#06b6d4" distance={5} decay={2} />
+
+      <pointLight position={[-3, 0, 0]} intensity={0.4} color="#8b5cf6" distance={5} decay={2} />
 
       <LightingSetup
         rotation={scrollProgressRef.current.value}
@@ -154,9 +130,7 @@ export const SceneContent = ({
         circleCenter={spiralParams.circleCenter}
         isMobile={isMobile}
         position={[0, 0, 0]}
-        width={isMobile ? 0.5 : 1.2}
-        particleCount={isMobile ? 800 : 800}
-        particleSize={isMobile ? 0.04 : 0.12}
+        width={isMobile ? 0.6 : 1.2}
         animationSpeed={0.8}
         rotationSpeed={0.9}
       />

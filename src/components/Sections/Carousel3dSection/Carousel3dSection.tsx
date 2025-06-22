@@ -28,11 +28,11 @@ const useMediaQuery = (query: string): boolean => {
   useEffect(() => {
     if (typeof window === 'undefined') return
     const media = window.matchMedia(query)
-    if (media.matches !== matches) setMatches(media.matches)
-    const listener = () => setMatches(media.matches)
-    window.addEventListener('change', listener)
-    return () => window.removeEventListener('change', listener)
-  }, [matches, query])
+    setMatches(media.matches)
+    const listener = (event: MediaQueryListEvent) => setMatches(event.matches)
+    media.addEventListener('change', listener)
+    return () => media.removeEventListener('change', listener)
+  }, [query])
   return matches
 }
 
@@ -41,7 +41,7 @@ export function Carousel3dSection() {
   const locale = useLocale()
   const pinSectionRef = useRef<HTMLDivElement>(null)
   const scrollProxy = useRef({ value: 0 })
-  const [dpr, setDpr] = useState(1.5)
+  const [dpr, setDpr] = useState(isMobile ? 1 : 1.5)
   const t = useTranslations('Carousel3d')
 
   useEffect(() => {
@@ -137,8 +137,11 @@ export function Carousel3dSection() {
             dpr={dpr}
             camera={{ position: [0, -0.1, isMobile ? 1.4 : 1.65], fov: isMobile ? 75 : 70 }}
             style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-            <PerformanceMonitor onIncline={() => setDpr(2)} onDecline={() => setDpr(1)}>
-              <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.5} />
+            <PerformanceMonitor 
+              onIncline={() => setDpr(isMobile ? 1.5 : 2)} 
+              onDecline={() => setDpr(isMobile ? 0.8 : 1)}
+            >
+              {/* <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.5} /> */}
               <SceneContent
                 isMobile={isMobile}
                 scrollProgressRef={scrollProxy}
