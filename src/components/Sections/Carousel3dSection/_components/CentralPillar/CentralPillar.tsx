@@ -20,7 +20,7 @@ export function CentralPillar({
   isMobile = false,
   position = [0, 0, 0],
   width = 1.1,
-  particleCount = isMobile ? 700 : 1000,
+  particleCount = isMobile ? 400 : 600,
   particleSize = isMobile ? 0.06 : 0.09,
   animationSpeed = 0.5,
   rotationSpeed = 0.7
@@ -139,7 +139,7 @@ export function CentralPillar({
     return new THREE.MeshStandardMaterial({
       transparent: true,
       opacity: 0.9,
-      emissive: new THREE.Color(0x333333),
+      emissive: new THREE.Color(0x4a5568), // Сіро-синій
       emissiveIntensity: 0.2,
       roughness: 0.4,
       metalness: 0.8
@@ -152,7 +152,7 @@ export function CentralPillar({
     // Використовуємо таку ж логіку обертання, як у частинках
     const progress = scrollProgressRef.current.value
     const scrollTime = progress * 0.5
-    const clockTime = state.clock.elapsedTime * 0.2
+    const clockTime = state.clock.elapsedTime * 0.1 // Reduced background animation
     const time = scrollTime + clockTime
     const effectiveTime = time * 0.3
 
@@ -170,10 +170,10 @@ export function CentralPillar({
       const speed = speeds[i]
       const size = sizes[i]
 
-      // Додаємо легку анімацію для кожної частинки
-      const particleTime = effectiveTime + i * 0.1
-      const waveX = Math.sin(particleTime + x * 2) * 0.02
-      const waveZ = Math.sin(particleTime + z * 2) * 0.02
+      // Simplified animation for each particle
+      const particleTime = effectiveTime + i * 0.05 // Reduced variation
+      const waveX = Math.sin(particleTime + x * 2) * 0.01 // Reduced amplitude
+      const waveZ = Math.sin(particleTime + z * 2) * 0.01
 
       // Рух вгору/вниз на основі скролу з індивідуальною швидкістю
       const scrollMovement = progress * speed * animationSpeed
@@ -189,12 +189,12 @@ export function CentralPillar({
         newY = pillarTop - (pillarBottom - newY)
       }
 
-      // Додаємо хвильову анімацію по Y
-      const waveY = Math.cos(particleTime + y * 2) * 0.02
+      // Simplified wave animation
+      const waveY = Math.cos(particleTime + y * 2) * 0.01
 
-      // Пульсація розміру з урахуванням швидкості та базового розміру
-      const pulse = 1 + Math.sin(particleTime * 2) * 0.1 * (speed * 0.3)
-      const finalScale = (size / particleSize) * pulse // Нормалізуємо розмір та додаємо пульсацію
+      // Simplified pulsation
+      const pulse = 1 + Math.sin(particleTime * 1.5) * 0.05 * (speed * 0.2)
+      const finalScale = (size / particleSize) * pulse
 
       tempObject.position.set(x + waveX, newY + waveY, z + waveZ)
       tempObject.scale.setScalar(finalScale)
