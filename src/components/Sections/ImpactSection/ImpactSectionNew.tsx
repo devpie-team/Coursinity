@@ -50,87 +50,40 @@ export const ImpactSectionNew = () => {
     Array.from({ length: GROUP_COUNT }, () => useRef<LottieRefCurrentProps>(null))
   )
 
-  const loadAnimation = useCallback(async (path: string): Promise<AnimationData | null> => {
-    if (animationCache[path]) return animationCache[path]
+  const [isMobile, setIsMobile] = useState<boolean>(false)
 
-    const cached = sessionStorage.getItem(path)
-    if (cached) {
+  const loadAnimation = useCallback(
+    async (path: string): Promise<AnimationData | null> => {
+      if (animationCache[path]) return animationCache[path]
+
+      const cached = sessionStorage.getItem(path)
+      if (cached) {
+        try {
+          const parsed = JSON.parse(cached) as AnimationData
+          animationCache[path] = parsed
+          return parsed
+        } catch (error) {
+          console.error(`❌ Failed to parse cached animation: ${path}`, error)
+        }
+      }
+
       try {
-        const parsed = JSON.parse(cached) as AnimationData
-        animationCache[path] = parsed
-        return parsed
+        const response = await fetch(path)
+        const data = (await response.json()) as AnimationData
+
+        animationCache[path] = data
+        sessionStorage.setItem(path, JSON.stringify(data))
+
+        return data
       } catch (error) {
-        console.error(`❌ Failed to parse cached animation: ${path}`, error)
+        console.error(`❌ Failed to load animation: ${path}`, error)
+        return null
       }
-    }
-
-    try {
-      const response = await fetch(path)
-      const data = (await response.json()) as AnimationData
-
-      // Кешуємо в пам'яті та sessionStorage
-      animationCache[path] = data
-      sessionStorage.setItem(path, JSON.stringify(data))
-
-      return data
-    } catch (error) {
-      console.error(`❌ Failed to load animation: ${path}`, error)
-      return null
-    }
-  }, [])
-
-  const animationPaths = useMemo<AnimationPath[]>(
-    () => [
-      {
-        path: `/assets/lottie/impact/${locale}/1.json`,
-        className:
-          'absolute w-[362px] h-[280px] top-[74px] md:top-[146px] left-[30px] lg:left-0 scale-50 sm:scale-75 lg:scale-100'
-      },
-      {
-        path: `/assets/lottie/impact/${locale}/2.json`,
-        className:
-          'absolute w-[362px] h-[308px] bottom-[220px] md:bottom-[27px] right-[16px] scale-50 sm:scale-75 lg:scale-100'
-      },
-      {
-        path: `/assets/lottie/impact/${locale}/3.json`,
-        className: 'absolute w-[253px] h-[65px] top-[11px] md:top-[22px] left-[162px] scale-50 sm:scale-75 lg:scale-100'
-      },
-      {
-        path: `/assets/lottie/impact/${locale}/4.json`,
-        className:
-          'absolute w-[296px] h-[65px] bottom-[331px] md:bottom-[231px] right-[390px] scale-50 sm:scale-75 lg:scale-100'
-      },
-      {
-        path: '/assets/lottie/impact/en/5.json',
-        className:
-          'absolute w-[156px] h-[52px] bottom-[251px] md:bottom-[151px] left-[421px] scale-50 sm:scale-75 lg:scale-100'
-      },
-      {
-        path: `/assets/lottie/impact/${locale}/6.json`,
-        className:
-          'absolute w-[309px] h-[223px] top-[16px] md:top-[35px] right-[556px] scale-50 sm:scale-75 lg:scale-100'
-      },
-      {
-        path: `/assets/lottie/impact/${locale}/7.json`,
-        className:
-          'absolute w-[269px] h-[160px] top-[46px] md:top-[93px] left-[488px] scale-50 sm:scale-75 lg:scale-100'
-      },
-      {
-        path: `/assets/lottie/impact/${locale}/8.json`,
-        className:
-          'absolute w-[362px] h-[316px] bottom-[220px] md:bottom-0 left-[619px] scale-50 sm:scale-75 lg:scale-100'
-      },
-      {
-        path: '/assets/lottie/impact/en/5.json',
-        className:
-          'absolute w-[156px] h-[52px] top-[62px] md:top-[133px] right-[251px] scale-50 sm:scale-75 lg:scale-100'
-      }
-    ],
-    [locale]
+    },
+    [isMobile]
   )
 
   const [animations, setAnimations] = useState<AnimationItem[]>([])
-  const [isMobile, setIsMobile] = useState<boolean>(false)
   const [isTablet, setIsTablet] = useState<boolean>(false)
   const [isDesktop, setIsDesktop] = useState<boolean>(true)
   useEffect(() => {
@@ -147,6 +100,56 @@ export const ImpactSectionNew = () => {
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
 
+  const animationPaths = useMemo<AnimationPath[]>(() => {
+    return [
+      {
+        path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/${locale}/1.json`,
+        className:
+          'absolute w-[167px] h-[143px] left-[24px] top-[52px] md:w-[362px] md:h-[280px] md:top-[146px] md:left-[30px] lg:left-0'
+      },
+      {
+        path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/${locale}/2.json`,
+        className:
+          'absolute w-[171px] h-[227px] right-[24px] bottom-[0px] md:w-[362px] md:h-[308px] md:bottom-[27px] md:right-[16px]'
+      },
+      {
+        path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/${locale}/3.json`,
+        className:
+          'absolute w-[139px] h-[21px] left-[108px] top-[0px] md:w-[253px] md:h-[65px] md:top-[22px] md:left-[162px]'
+      },
+      {
+        path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/${locale}/4.json`,
+        className:
+          'absolute w-[162px] h-[24px] right-[222px] top-[150px] md:w-[296px]md: h-[65px] md:bottom-[231px] md:right-[390px]'
+      },
+      {
+        path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/en/5.json`,
+        className:
+          'absolute w-[87px] h-[29px] left-[223px] top-[243px] md:w-[156px] md:h-[52px]  md:bottom-[151px] md:left-[421px]'
+      },
+      {
+        path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/${locale}/6.json`,
+        className:
+          'absolute w-[146px] h-[110px] right-[232px] top-[5px] md:w-[309px] md:h-[223px]  md:top-[35px] md:right-[556px]'
+      },
+      {
+        path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/${locale}/7.json`,
+        className:
+          'absolute w-[136px] h-[132px] left-[273px] top-[43px] md:w-[269px] md:h-[160px] md:top-[93px] md:left-[488px]'
+      },
+      {
+        path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/${locale}/8.json`,
+        className:
+          'absolute w-[154px] h-[192px] left-[352px] bottom-[17px] md:w-[362px] md:h-[316px] md:bottom-0 md:left-[619px]'
+      },
+      {
+        path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/en/5.json`,
+        className:
+          'absolute w-[87px] h-[29px] right-[103px] top-[121px] md:w-[156px] md:h-[52px] md:top-[133px] md:right-[251px]'
+      }
+    ]
+  }, [locale, isMobile])
+
   useEffect(() => {
     const loadAllAnimations = async () => {
       const loadedAnimations = await Promise.all(
@@ -159,7 +162,7 @@ export const ImpactSectionNew = () => {
     }
 
     loadAllAnimations()
-  }, [animationPaths, loadAnimation])
+  }, [animationPaths, loadAnimation, isMobile])
 
   useEffect(() => {
     const wrapper = wrapperRef.current
@@ -172,7 +175,7 @@ export const ImpactSectionNew = () => {
       { x: locale === 'ar' ? wrapperWidth : 0 },
       {
         x: locale === 'ar' ? 0 : -wrapperWidth,
-        duration: 12,
+        duration: 4000,
         ease: 'linear',
         repeat: -1
       }
@@ -215,7 +218,9 @@ export const ImpactSectionNew = () => {
       timeouts.forEach(clearTimeout)
       intervals.forEach(clearInterval)
     }
-  }, [animations])
+  }, [animations, isMobile])
+
+  console.log(animations, 'a', animationPaths, 'p')
 
   return (
     <section className="pt-32 pb-[89px] bg-black flex flex-col gap-[52px] overflow-hidden max-md:pt-20">
@@ -234,7 +239,7 @@ export const ImpactSectionNew = () => {
 
       <div
         ref={containerRef}
-        className="relative h-[372px] md:h-[572px] lg:h-[672px] min-w-[1905px] max-[1705]:min-w-[1705px] bg-black overflow-hidden">
+        className="relative h-[372px] min-w-[786px] md:h-[572px] lg:h-[672px] md:min-w-[1905px] max-[1705]:min-w-[1705px] bg-black overflow-hidden">
         <div ref={wrapperRef} className="absolute flex">
           {Array.from({ length: GROUP_COUNT }).map((_, groupIdx) => (
             <div key={groupIdx} className="relative flex-shrink-0" style={{ width: '1705px', height: '633px' }}>
