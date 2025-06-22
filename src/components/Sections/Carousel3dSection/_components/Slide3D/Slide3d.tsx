@@ -120,13 +120,13 @@ export function Slide3D({
       <mesh ref={meshRef} geometry={geometry}>
         <meshPhysicalMaterial
           map={gradientTexture}
-          metalness={1.4}
-          roughness={0.4}
+          metalness={0.5}
+          roughness={0.5}
           clearcoat={0.1}
           clearcoatRoughness={1}
           reflectivity={0.5}
           transparent={true}
-          opacity={0.7}
+          opacity={0.85}
           toneMapped={true}
           emissive={base}
           emissiveIntensity={0}

@@ -17,19 +17,19 @@ interface CentralPillarProps {
 export function CentralPillar({
   scrollProgressRef,
   circleCenter = [0, -0.1, -0.4],
-  isMobile = false,
+  isMobile,
   position = [0, 0, 0],
   width = 1.1,
-  particleCount = isMobile ? 700 : 1000,
-  particleSize = isMobile ? 0.06 : 0.09,
+  particleCount = isMobile ? 600 : 800,
+  particleSize = isMobile ? 0.06 : 0.12,
   animationSpeed = 0.5,
   rotationSpeed = 0.7
 }: CentralPillarProps) {
   const groupRef = useRef<THREE.Group>(null)
   const meshRef = useRef<THREE.InstancedMesh>(null)
 
-  // Параметри частинок стовпа
-  const pillarHeight = isMobile ? 5 : 5
+  // Параметри частинок стовпа - збільшуємо для мобільної версії
+  const pillarHeight = isMobile ? 6 : 5
   const pillarWidth = width // Використовуємо пропс width
 
   // Створюємо геометрію для кожної частинки
@@ -68,7 +68,7 @@ export function CentralPillar({
       new THREE.Color(0x8b80b0) // Приглушено-фіолетовий
     ]
 
-    // Розподіляємо частинки по стовпу
+    // Розподіляємо частинки по стовпу - оптимізуємо для мобільної версії
     const particlesPerLayer = Math.floor(particleCount / (pillarHeight / particleSize))
     const layers = Math.floor(pillarHeight / particleSize)
 
@@ -99,8 +99,8 @@ export function CentralPillar({
         const finalSpeed = baseSpeed + speedVariation * 1.0 // Додаткова варіація
         tempSpeeds.push(finalSpeed)
 
-        // Створюємо індивідуальний розмір для кожної частинки
-        const sizeVariation = Math.random() * 0.8 + 0.3 // Розмір від 0.3 до 1.1 від базового
+        // Створюємо індивідуальний розмір для кожної частинки - збільшуємо для мобільної версії
+        const sizeVariation = Math.random() * 0.8 + (isMobile ? 0.5 : 0.3) // Розмір від 0.5-1.3 для мобільної, 0.3-1.1 для десктопної
         const individualSize = particleSize * sizeVariation
         tempSizes.push(individualSize)
       }
@@ -112,7 +112,7 @@ export function CentralPillar({
       speeds: new Float32Array(tempSpeeds),
       sizes: new Float32Array(tempSizes)
     }
-  }, [particleCount, pillarHeight, pillarWidth, particleSize])
+  }, [particleCount, pillarHeight, pillarWidth, particleSize, isMobile])
 
   // Створюємо матриці для instanced mesh
   const instanceMatrix = useMemo(() => {
@@ -138,13 +138,13 @@ export function CentralPillar({
   const material = useMemo(() => {
     return new THREE.MeshStandardMaterial({
       transparent: true,
-      opacity: 0.9,
-      emissive: new THREE.Color(0x333333),
-      emissiveIntensity: 0.2,
+      opacity: isMobile ? 1.0 : 0.9, // Збільшуємо непрозорість для мобільної версії
+      emissive: new THREE.Color(0x4a5568), // Сіро-синій
+      emissiveIntensity: isMobile ? 0.4 : 0.2, // Збільшуємо світіння для мобільної версії
       roughness: 0.4,
       metalness: 0.8
     })
-  }, [])
+  }, [isMobile])
 
   useFrame((state) => {
     if (!groupRef.current || !meshRef.current) return
@@ -152,7 +152,7 @@ export function CentralPillar({
     // Використовуємо таку ж логіку обертання, як у частинках
     const progress = scrollProgressRef.current.value
     const scrollTime = progress * 0.5
-    const clockTime = state.clock.elapsedTime * 0.2
+    const clockTime = state.clock.elapsedTime * 0.1 // Reduced background animation
     const time = scrollTime + clockTime
     const effectiveTime = time * 0.3
 
@@ -170,10 +170,10 @@ export function CentralPillar({
       const speed = speeds[i]
       const size = sizes[i]
 
-      // Додаємо легку анімацію для кожної частинки
-      const particleTime = effectiveTime + i * 0.1
-      const waveX = Math.sin(particleTime + x * 2) * 0.02
-      const waveZ = Math.sin(particleTime + z * 2) * 0.02
+      // Simplified animation for each particle
+      const particleTime = effectiveTime + i * 0.05 // Reduced variation
+      const waveX = Math.sin(particleTime + x * 2) * 0.01 // Reduced amplitude
+      const waveZ = Math.sin(particleTime + z * 2) * 0.01
 
       // Рух вгору/вниз на основі скролу з індивідуальною швидкістю
       const scrollMovement = progress * speed * animationSpeed
@@ -189,12 +189,12 @@ export function CentralPillar({
         newY = pillarTop - (pillarBottom - newY)
       }
 
-      // Додаємо хвильову анімацію по Y
-      const waveY = Math.cos(particleTime + y * 2) * 0.02
+      // Simplified wave animation
+      const waveY = Math.cos(particleTime + y * 2) * 0.01
 
-      // Пульсація розміру з урахуванням швидкості та базового розміру
-      const pulse = 1 + Math.sin(particleTime * 2) * 0.1 * (speed * 0.3)
-      const finalScale = (size / particleSize) * pulse // Нормалізуємо розмір та додаємо пульсацію
+      // Simplified pulsation
+      const pulse = 1 + Math.sin(particleTime * 1.5) * 0.05 * (speed * 0.2)
+      const finalScale = (size / particleSize) * pulse
 
       tempObject.position.set(x + waveX, newY + waveY, z + waveZ)
       tempObject.scale.setScalar(finalScale)

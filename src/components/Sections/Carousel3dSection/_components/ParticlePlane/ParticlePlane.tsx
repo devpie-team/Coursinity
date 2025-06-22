@@ -24,7 +24,7 @@ export function ParticlePlane({
   width = 6,
   height = 4,
   depth = 2,
-  particleCount = 16000,
+  particleCount = 8000,
   particleSize = 0.05,
   randomness = 0.2,
   waveIntensity = 0.5,
@@ -160,10 +160,10 @@ export function ParticlePlane({
     // Create different geometries for variety
     const shapes = [
       new THREE.BoxGeometry(particleSize, particleSize, particleSize), // Cube
-      new THREE.SphereGeometry(particleSize * 0.6, 8, 6), // Sphere
+      new THREE.SphereGeometry(particleSize * 0.6, 6, 4), // Sphere
       new THREE.TetrahedronGeometry(particleSize * 0.8), // Tetrahedron
       new THREE.OctahedronGeometry(particleSize * 0.7), // Octahedron
-      new THREE.ConeGeometry(particleSize * 0.5, particleSize * 1.2, 6) // Cone
+      new THREE.ConeGeometry(particleSize * 0.5, particleSize * 1.2, 4) // Cone
     ]
 
     const tempMatrix = new THREE.Matrix4()
@@ -218,7 +218,7 @@ export function ParticlePlane({
       transparent: true,
       opacity: 0.8,
       vertexColors: false,
-      emissive: new THREE.Color(0x2a1f5f), // Purple glow
+      emissive: new THREE.Color(0x4a5568), // Сіро-синій glow
       emissiveIntensity: 0.3,
       roughness: 0.1,
       metalness: 0.9
@@ -247,7 +247,7 @@ export function ParticlePlane({
     if (meshRefs.current.length > 0) {
       // Use scroll progress as the primary animation driver
       const scrollTime = progress * waveSpeed
-      const clockTime = state.clock.elapsedTime * 0.2 // Slow background animation
+      const clockTime = state.clock.elapsedTime * 0.1 // Reduced background animation
       const time = scrollTime + clockTime
 
       const tempMatrix = new THREE.Matrix4()
@@ -274,9 +274,9 @@ export function ParticlePlane({
           const scrollInfluence = 1 + Math.abs(progress) * 0.2 * speedMultiplier
           const effectiveTime = time * speedMultiplier * scrollInfluence
 
-          // Calculate wave offset with varying speeds
-          const waveOffsetX = Math.sin(effectiveTime + baseX * 2 + baseY * 1.5) * waveIntensity * 0.1 * speedMultiplier
-          const waveOffsetZ = Math.sin(effectiveTime + baseZ * 3 + baseX * 2) * waveIntensity * 0.15 * speedMultiplier
+          // Simplified wave offset calculation
+          const waveOffsetX = Math.sin(effectiveTime + baseX * 2) * waveIntensity * 0.1 * speedMultiplier
+          const waveOffsetZ = Math.sin(effectiveTime + baseZ * 3) * waveIntensity * 0.15 * speedMultiplier
 
           // Scroll-based flow animation
           const baseFlowSpeed = 0.5 + speedMultiplier * 1.0
@@ -289,28 +289,26 @@ export function ParticlePlane({
             flowY = -height / 2 - 1 + (flowY - (height / 2 + 1))
           }
 
-          // Combine wave motion with flow
-          const waveOffsetY = Math.cos(effectiveTime + baseY * 2 + baseX * 1.5) * waveIntensity * 0.1 * speedMultiplier
+          // Simplified wave motion
+          const waveOffsetY = Math.cos(effectiveTime + baseY * 2) * waveIntensity * 0.1 * speedMultiplier
 
           // Apply motion
           const x = baseX + waveOffsetX
           const y = flowY + waveOffsetY
           const z = baseZ + waveOffsetZ
 
-          // Add pulsating effect based on time and scroll
-          const pulseFreq = 0.5 + particleVariation * 2.0 // Different pulse speeds
-          const pulseEffect = 1 + Math.sin(effectiveTime * pulseFreq) * 0.3 * (1 + Math.abs(progress) * 0.5)
+          // Simplified pulsating effect
+          const pulseFreq = 0.5 + particleVariation * 1.0
+          const pulseEffect = 1 + Math.sin(effectiveTime * pulseFreq) * 0.2 * (1 + Math.abs(progress) * 0.3)
           const finalSize = sizeMultiplier * pulseEffect
 
-          // Add rotation effect for some shapes
-          const rotationSpeed = particleVariation * 2.0
-          const rotationX = effectiveTime * rotationSpeed
-          const rotationY = effectiveTime * rotationSpeed * 0.7
-          const rotationZ = effectiveTime * rotationSpeed * 0.3
+          // Simplified rotation effect
+          const rotationSpeed = particleVariation * 1.0
+          const rotationY = effectiveTime * rotationSpeed
 
           tempObject.position.set(x, y, z)
           tempObject.scale.setScalar(finalSize)
-          tempObject.rotation.set(rotationX, rotationY, rotationZ)
+          tempObject.rotation.set(0, rotationY, 0)
           tempObject.updateMatrix()
 
           tempMatrix.copy(tempObject.matrix)

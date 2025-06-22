@@ -16,11 +16,11 @@ import { Typography } from '@/components/ui/Typography/Typography'
 gsap.registerPlugin(ScrollTrigger)
 
 const slidesData = [
-  { text: { en: 'AI Transformation', ar: 'تبّني الذكاء الاصطناعي' }, colors: ['#5a5a9e', '#7a7abf', '#2c2a33'] },
-  { text: { en: 'Activity-Based Training', ar: 'سيناريوهات تدريب واقعية' }, colors: ['#5a5a9e', '#7a7abf', '#2c2a33'] },
-  { text: { en: 'Meta Verse & VR', ar: 'ميتاڤيرس وواقع افتراضي' }, colors: ['#5a5a9e', '#7a7abf', '#2c2a33'] },
-  { text: { en: 'Customised Learning Journeys', ar: 'رحلات تدريبية' }, colors: ['#5a5a9e', '#7a7abf', '#2c2a33'] },
-  { text: { en: 'Data Driven Tracking', ar: 'عائد ببيانات وتقارير' }, colors: ['#5a5a9e', '#7a7abf', '#2c2a33'] }
+  { text: { en: 'AI Transformation', ar: 'تبّني الذكاء الاصطناعي' }, colors: ['#5a5a9e', '#535157', '#4a5568'] },
+  { text: { en: 'Activity-Based Training', ar: 'سيناريوهات تدريب واقعية' }, colors: ['#5a5a9e', '#2c2a33', '#4a5568'] },
+  { text: { en: 'Meta Verse & VR', ar: 'ميتاڤيرس وواقع افتراضي' }, colors: ['#5a5a9e', '#2c2a33', '#4a5568'] },
+  { text: { en: 'Customised Learning Journeys', ar: 'رحلات تدريبية' }, colors: ['#5a5a9e', '#2c2a33', '#4a5568'] },
+  { text: { en: 'Data Driven Tracking', ar: 'عائد ببيانات وتقارير' }, colors: ['#5a5a9e', '#2c2a33', '#4a5568'] }
 ]
 
 const useMediaQuery = (query: string): boolean => {
@@ -28,11 +28,11 @@ const useMediaQuery = (query: string): boolean => {
   useEffect(() => {
     if (typeof window === 'undefined') return
     const media = window.matchMedia(query)
-    if (media.matches !== matches) setMatches(media.matches)
-    const listener = () => setMatches(media.matches)
-    window.addEventListener('change', listener)
-    return () => window.removeEventListener('change', listener)
-  }, [matches, query])
+    setMatches(media.matches)
+    const listener = (event: MediaQueryListEvent) => setMatches(event.matches)
+    media.addEventListener('change', listener)
+    return () => media.removeEventListener('change', listener)
+  }, [query])
   return matches
 }
 
@@ -41,7 +41,7 @@ export function Carousel3dSection() {
   const locale = useLocale()
   const pinSectionRef = useRef<HTMLDivElement>(null)
   const scrollProxy = useRef({ value: 0 })
-  const [dpr, setDpr] = useState(1.5)
+  const [dpr, setDpr] = useState(isMobile ? 1 : 1.5)
   const t = useTranslations('Carousel3d')
 
   useEffect(() => {
@@ -105,37 +105,43 @@ export function Carousel3dSection() {
 
       <div style={{ position: 'relative', height: '100vh', width: '100vw' }}>
         <div id="canvas-container" className="relative h-full w-full">
-          <div className="absolute inset-0 z-10  flex items-end pl-4 pb-14 ">
-            <div className="flex flex-col text-white text-start  max-w-[600px] gap-6  p-6 rounded-xl">
-              <Typography variant="body1" weight="medium">
-                – {t('title')}
-              </Typography>
-              <div className="flex flex-col gap-4  text-[#A578F2]   ">
-                <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
-                  – {t('point1')}
+          {!isMobile && (
+            <div className="absolute inset-0 z-10  flex items-end pl-4 pb-14 ">
+              <div className="flex flex-col text-white text-start  max-w-[600px] gap-6  p-6 rounded-xl">
+                <Typography variant="body1" weight="medium">
+                  – {t('title')}
                 </Typography>
-                <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
-                  – {t('point2')}
-                </Typography>
-                <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
-                  – {t('point3')}
-                </Typography>
-                <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
-                  – {t('point4')}
-                </Typography>
-                <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
-                  – {t('point5')}
-                </Typography>
+                <div className="flex flex-col gap-4  text-[#A578F2]   ">
+                  <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
+                    – {t('point1')}
+                  </Typography>
+                  <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
+                    – {t('point2')}
+                  </Typography>
+                  <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
+                    – {t('point3')}
+                  </Typography>
+                  <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
+                    – {t('point4')}
+                  </Typography>
+                  <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
+                    – {t('point5')}
+                  </Typography>
+                </div>
               </div>
             </div>
-          </div>
+          )}
+
           <Canvas
             shadows
             dpr={dpr}
             camera={{ position: [0, -0.1, isMobile ? 1.4 : 1.65], fov: isMobile ? 75 : 70 }}
             style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-            <PerformanceMonitor onIncline={() => setDpr(2)} onDecline={() => setDpr(1)}>
-              <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.5} />
+            <PerformanceMonitor 
+              onIncline={() => setDpr(isMobile ? 1.5 : 2)} 
+              onDecline={() => setDpr(isMobile ? 0.8 : 1)}
+            >
+              {/* <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.5} /> */}
               <SceneContent
                 isMobile={isMobile}
                 scrollProgressRef={scrollProxy}
@@ -150,10 +156,11 @@ export function Carousel3dSection() {
                 rippleOpacity={0.4}
                 rippleEmissiveIntensity={0.02}
               />
-              <EffectComposer>
+              {/*   <EffectComposer>
                 <Bloom intensity={1.5} luminanceThreshold={0.1} luminanceSmoothing={0.025} radius={0.8} mipmapBlur />
-              </EffectComposer>
+              </EffectComposer> */}
             </PerformanceMonitor>
+            +-
             <Torus
               position={[0, -0.2, -0.9]}
               rotation={[Math.PI, 0, 0]}

@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { useMemo, useRef } from 'react'
+import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 
 type TorusOfSpheresProps = {
@@ -28,7 +28,6 @@ export function Torus({
   const meshRef = useRef<THREE.InstancedMesh>(null!)
   const lastScrollValue = useRef(0)
 
-  // Створюємо дані для анімації один раз
   const animationData = useMemo(() => {
     const data = []
     const colorVariations = [
@@ -41,7 +40,6 @@ export function Torus({
       new THREE.Color(0x8b5cf6),
       new THREE.Color(0x5b21b6)
     ]
-
     for (let i = 0; i < sphereCount; i++) {
       const angle = (i / sphereCount) * Math.PI * 2
       const randomOffset = {
@@ -51,6 +49,7 @@ export function Torus({
       }
       const size = Math.random() * maxSphereSize
       const color = colorVariations[Math.floor(Math.random() * colorVariations.length)]
+      const opacity = Math.random() * 0.7 + 0.3
       const speed = animationSpeed + Math.random() * 0.03
 
       data.push({
@@ -59,11 +58,12 @@ export function Torus({
         randomOffset,
         size,
         color,
+        opacity,
         speed
       })
     }
     return data
-  }, [sphereCount, randomness, maxSphereSize, animationSpeed])
+  }, [sphereCount, maxSphereSize, randomness, animationSpeed])
 
   // Створюємо атрибути для кольорів
   const instanceColors = useMemo(() => {
@@ -72,7 +72,8 @@ export function Torus({
     return new THREE.InstancedBufferAttribute(colors, 3)
   }, [sphereCount, animationData])
 
-  // Оптимізована анімація з використанням Object3D для оновлення матриць
+  const dummy = new THREE.Object3D()
+
   useFrame((state) => {
     if (!meshRef.current) return
 
@@ -81,24 +82,19 @@ export function Torus({
     const scrollDelta = scrollValue - lastScrollValue.current
     lastScrollValue.current = scrollValue
 
-    const tempObject = new THREE.Object3D()
+    animationData.forEach((d, i) => {
+      d.scrollAngle += scrollDelta * -scrollSpeed
+      const newAngle = d.initialAngle + d.scrollAngle + elapsedTime * d.speed
 
-    // Оновлюємо тільки матриці, не позиції окремо
-    for (let i = 0; i < sphereCount; i++) {
-      const data = animationData[i]
-      data.scrollAngle += scrollDelta * -scrollSpeed
-
-      const newAngle = data.initialAngle + data.scrollAngle + elapsedTime * data.speed
-
-      tempObject.position.set(
-        radius * Math.cos(newAngle) + data.randomOffset.x,
-        data.randomOffset.y,
-        radius * Math.sin(newAngle) + data.randomOffset.z
+      dummy.position.set(
+        radius * Math.cos(newAngle) + d.randomOffset.x,
+        d.randomOffset.y,
+        radius * Math.sin(newAngle) + d.randomOffset.z
       )
-      tempObject.scale.setScalar(data.size)
-      tempObject.updateMatrix()
-      meshRef.current.setMatrixAt(i, tempObject.matrix)
-    }
+      dummy.scale.setScalar(d.size)
+      dummy.updateMatrix()
+      meshRef.current.setMatrixAt(i, dummy.matrix)
+    })
 
     meshRef.current.instanceMatrix.needsUpdate = true
   })
@@ -109,13 +105,13 @@ export function Torus({
         <primitive object={instanceColors} attach="attributes-color" />
       </sphereGeometry>
       <meshStandardMaterial
+        vertexColors
+        toneMapped={false}
         roughness={0.1}
         metalness={1}
         emissive={0x1e3a8a}
         emissiveIntensity={0.2}
-        vertexColors={true}
         transparent={true}
-        opacity={0.7}
         depthWrite={false}
       />
     </instancedMesh>
