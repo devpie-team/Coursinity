@@ -127,16 +127,17 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
             {t('steps.1.subtitle')}
           </Typography>
           {t('steps.1.button') && (
-            <button
+            <a
               style={activeStyle(2)}
               className="
                 button-gradient
                 h-14 rounded-full px-6 py-5 text-center mt-4
                 text-white text-caption
                 transition-all 
-              ">
+              "
+              href={`/${locale}/contact-form`}>
               {t('steps.1.button')}
-            </button>
+            </a>
           )}
         </div>
         <div className="flex justify-center">
@@ -178,16 +179,17 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
             {t('steps.2.subtitle')}
           </Typography>
           {t('steps.2.button') && (
-            <button
+            <a
               style={activeStyle(3)}
               className="
                 button-gradient
                 h-14 rounded-full px-6 py-5 text-center mt-4
                 text-white text-caption
                 transition-all 
-              ">
+              "
+              href={`/${locale}/contact-form`}>
               {t('steps.2.button')}
-            </button>
+            </a>
           )}
         </div>
         <div className="flex justify-center pb-[100px]" style={activeStyle(3)}>

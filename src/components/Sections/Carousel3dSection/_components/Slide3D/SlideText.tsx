@@ -81,14 +81,19 @@ const TextGlitchMaterial = shaderMaterial(
         discard;
       }
       
-      // Додаємо хроматичну аберацію
-      float chromaShift = u_glitchIntensity * 0.02;
-      vec4 redChannel = texture2D(u_texture, glitchedUV + vec2(chromaShift, 0.0));
-      vec4 blueChannel = texture2D(u_texture, glitchedUV - vec2(chromaShift, 0.0));
-      
+      // Додаємо хроматичну аберацію з іншим кольором
+      float chromaShiftFactor = u_glitchIntensity * 0.02; // Базова величина зсуву
+
+      // Окремі зсуви для червоного, зеленого та синього каналів
+      // Ці значення можна налаштувати для зміни кольору аберації
+      vec4 redColor = texture2D(u_texture, glitchedUV + vec2(chromaShiftFactor * 1.5, 0.0)); // Сильніший червоний зсув
+      vec4 greenColor = texture2D(u_texture, glitchedUV - vec2(chromaShiftFactor * 0.5, 0.0)); // Невеликий зелений зсув у протилежний бік
+      vec4 blueColor = texture2D(u_texture, glitchedUV + vec2(chromaShiftFactor * 0.8, 0.0)); // Помірний синій зсув, в той же бік, що й червоний
+
       // Змішуємо канали
-      color.r = redChannel.r;
-      color.b = blueChannel.b;
+      
+      color.g = greenColor.g ;
+      color.b = blueColor.b;
       
       // Додаємо scan lines
       float scanLine = step(0.95, random(vec2(0.0, floor(uv.y * 50.0))));
@@ -106,6 +111,10 @@ const TextGlitchMaterial = shaderMaterial(
       // Чим менша прозорість, тим більше підмішуємо білого кольору для ефекту світіння
       float brightness = 1.0 - u_opacity;
       color.rgb = mix(color.rgb, vec3(1.0), brightness * 0.8);
+      
+      // Додаємо фіолетовий глітч
+      vec3 glitchColor = vec3(0.8, 0.2, 1.0); // фіолетово-рожевий
+      color.rgb = mix(color.rgb, glitchColor, 0.5 * u_glitchIntensity);
       
       // Встановлюємо фінальний колір та прозорість
       gl_FragColor = vec4(color.rgb, color.a * u_opacity);
@@ -264,8 +273,8 @@ export function SlideText({
       const baseGlitchIntensity = visualOffset > 0.1 ? Math.min(visualOffset, 1) : 0
 
       // Додаємо випадкові спайки тільки якщо є offset
-      const randomSpike = visualOffset > 0.1 && Math.random() > 0.95 ? 1.0 : 0.0
-      const glitchIntensity = Math.max(baseGlitchIntensity * 0.8, randomSpike * 0.6)
+      const randomSpike = visualOffset > 0.3 && Math.random() > 0.95 ? 1.0 : 0.0
+      const glitchIntensity = Math.max(baseGlitchIntensity * 0.5, randomSpike * 0.6)
 
       textShaderRef.current.uniforms.u_glitchIntensity.value = glitchIntensity
       textShaderRef.current.uniforms.u_offset.value = visualOffset

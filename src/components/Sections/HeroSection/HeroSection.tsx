@@ -212,10 +212,11 @@ export const HeroSection = ({ loading }: THeroSection) => {
               {t(isTablet ? 'subtitleMobile' : 'subtitle')}
             </Typography>
           </div>
-
-          <Button variant="purple" className="max-[1440px]:max-w-[425px] max-[1440px]:w-full max-lg:h-16">
-            {t('bookDemo')}
-          </Button>
+          <a href={`/${locale}/contact-form`} className="max-[1440px]:max-w-[425px] max-[1440px]:w-full max-lg:h-16">
+            <Button variant="purple" className="w-full">
+              {t('bookDemo')}
+            </Button>
+          </a>
         </div>
       </div>
 
