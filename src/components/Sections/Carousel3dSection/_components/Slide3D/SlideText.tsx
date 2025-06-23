@@ -162,9 +162,9 @@ export function SlideText({
     ctx.fillStyle = gradient
 
     // Визначаємо шрифт залежно від мови
-    const fontSize = isMobile ? 120 : 142
-    const fontFamily = locale === 'ar' ? 'Arial, sans-serif' : 'Arial, sans-serif'
-    ctx.font = `bold ${fontSize}px ${fontFamily}`
+    const fontSize = isMobile ? 110 : 142
+    const fontFamily = locale === 'ar' ? 'Poppins, sans-serif' : 'Poppins, Arial, sans-serif'
+    ctx.font = `normal ${fontSize}px ${fontFamily}`
 
     if (locale === 'ar') {
       ctx.direction = 'rtl'
@@ -172,7 +172,7 @@ export function SlideText({
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
 
-    const PADDING = isMobile ? 900 : 700
+    const PADDING = isMobile ? 1000 : 700
     const textMetrics = ctx.measureText(text)
 
     if (textMetrics.width > canvas.width - PADDING) {

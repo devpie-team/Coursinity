@@ -57,7 +57,15 @@ export default {
           rgba(30, 141, 194, 0.64) 8%,
           rgba(165, 120, 242, 0.64) 35%,
           rgba(30, 141, 194, 0.64) 100%
-        )`
+        )`,
+        'contact-gradient': `
+        linear-gradient(60.86deg, #FFFFFF 73.58%, #BABFC8 99.16%),
+        linear-gradient(60.04deg, rgba(255, 255, 255, 0) 53.93%, rgba(217, 219, 226, 0.24) 67.04%, rgba(255, 255, 255, 0.3) 73.28%),
+        linear-gradient(243.68deg, rgba(255, 255, 255, 0) 73.71%, rgba(226, 228, 233, 0.7) 83.63%, #F5F5F5 89.47%),
+        linear-gradient(233.15deg, rgba(255, 255, 255, 0) 55.83%, rgba(215, 218, 226, 0.288632) 71.39%, rgba(255, 255, 255, 0.3) 79.64%),
+        radial-gradient(27.06% 41.6% at 22.01% 31.61%, #D7DAE2 0%, rgba(255, 255, 255, 0) 100%),
+        radial-gradient(18.23% 46.67% at 82.05% 84.72%, rgba(200, 204, 214, 0.3) 0%, rgba(255, 255, 255, 0.3) 100%)
+      `
       },
       screens: {
         'min1150': '1150px',
