@@ -69,13 +69,17 @@ export function CentralPillar({
     ]
 
     // Розподіляємо частинки по стовпу - оптимізуємо для мобільної версії
-    const particlesPerLayer = Math.floor(particleCount / (pillarHeight / particleSize))
-    const layers = Math.floor(pillarHeight / particleSize)
+    const particlesPerLayer = Math.max(1, Math.floor(particleCount / (pillarHeight / particleSize)))
+    const layers = Math.max(1, Math.floor(pillarHeight / particleSize))
+    const actualParticleCount = Math.min(particleCount, particlesPerLayer * layers)
 
     for (let layer = 0; layer < layers; layer++) {
       const y = (layer - layers / 2) * particleSize
 
       for (let i = 0; i < particlesPerLayer; i++) {
+        // Перевіряємо, чи не перевищили ми загальну кількість частинок
+        if (tempPositions.length / 3 >= actualParticleCount) break
+
         // Розподіляємо частинки по квадрату в кожному шарі
         const x = (Math.random() - 0.5) * pillarWidth
         const z = (Math.random() - 0.5) * pillarWidth
@@ -116,10 +120,13 @@ export function CentralPillar({
 
   // Створюємо матриці для instanced mesh
   const instanceMatrix = useMemo(() => {
-    const matrix = new Float32Array(particleCount * 16)
+    const particlesPerLayer = Math.max(1, Math.floor(particleCount / (pillarHeight / particleSize)))
+    const layers = Math.max(1, Math.floor(pillarHeight / particleSize))
+    const actualParticleCount = Math.min(particleCount, particlesPerLayer * layers)
+    const matrix = new Float32Array(actualParticleCount * 16)
     const tempObject = new THREE.Object3D()
 
-    for (let i = 0; i < particleCount; i++) {
+    for (let i = 0; i < actualParticleCount; i++) {
       const x = positions[i * 3]
       const y = positions[i * 3 + 1]
       const z = positions[i * 3 + 2]
@@ -132,7 +139,7 @@ export function CentralPillar({
     }
 
     return matrix
-  }, [positions, particleCount])
+  }, [positions, particleCount, pillarHeight, particleSize])
 
   // Створюємо матеріал для частинок
   const material = useMemo(() => {
@@ -163,7 +170,11 @@ export function CentralPillar({
     const tempObject = new THREE.Object3D()
     const tempMatrix = new THREE.Matrix4()
 
-    for (let i = 0; i < particleCount; i++) {
+    const particlesPerLayer = Math.max(1, Math.floor(particleCount / (pillarHeight / particleSize)))
+    const layers = Math.max(1, Math.floor(pillarHeight / particleSize))
+    const actualParticleCount = Math.min(particleCount, particlesPerLayer * layers)
+
+    for (let i = 0; i < actualParticleCount; i++) {
       const x = positions[i * 3]
       const y = positions[i * 3 + 1]
       const z = positions[i * 3 + 2]
@@ -211,7 +222,15 @@ export function CentralPillar({
     <group ref={groupRef} position={position}>
       <instancedMesh
         ref={meshRef}
-        args={[particleGeometry, material, particleCount]}
+        args={[
+          particleGeometry,
+          material,
+          (() => {
+            const particlesPerLayer = Math.max(1, Math.floor(particleCount / (pillarHeight / particleSize)))
+            const layers = Math.max(1, Math.floor(pillarHeight / particleSize))
+            return Math.min(particleCount, particlesPerLayer * layers)
+          })()
+        ]}
         instanceMatrix={new THREE.InstancedBufferAttribute(instanceMatrix, 16)}>
         <instancedBufferAttribute attach="instanceColor" args={[colors, 3]} />
       </instancedMesh>
