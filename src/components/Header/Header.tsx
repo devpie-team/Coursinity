@@ -76,7 +76,7 @@ export const Header = () => {
     'max-lg:px-6',
     'grid',
     'items-center',
-    'grid-cols-3',
+    !isDesktop ? 'grid-cols-2' : 'grid-cols-3',
     'py-[20px]',
     'transition-transform',
     'duration-500',
