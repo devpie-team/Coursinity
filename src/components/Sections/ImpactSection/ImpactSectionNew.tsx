@@ -176,7 +176,7 @@ export const ImpactSectionNew = () => {
       { x: locale === 'ar' ? wrapperWidth : 0 },
       {
         x: locale === 'ar' ? 0 : -wrapperWidth,
-        duration: 4000,
+        duration: 12,
         ease: 'linear',
         repeat: -1
       }
