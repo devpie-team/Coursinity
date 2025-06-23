@@ -64,7 +64,9 @@ export const MobileMenu = () => {
               }}
             />
           </div>
-          <Button variant="purple">{t('button')}</Button>
+          <Button variant="purple" className="mb-[env(safe-area-inset-bottom)]">
+            {t('button')}
+          </Button>
         </div>
       )}
     </>
