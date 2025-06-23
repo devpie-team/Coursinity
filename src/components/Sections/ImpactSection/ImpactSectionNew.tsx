@@ -105,27 +105,27 @@ export const ImpactSectionNew = () => {
       {
         path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/${locale}/1.json`,
         className:
-          'absolute w-[167px] h-[243px] left-[24px] top-[52px] md:w-[362px] md:h-[280px] md:top-[146px] md:left-[30px] lg:left-0'
+          'absolute w-[167px] h-[243px] left-[0-px] top-[52px] md:w-[362px] md:h-[280px] md:top-[146px] md:left-[30px] lg:left-0'
       },
       {
         path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/${locale}/2.json`,
         className:
-          'absolute w-[171px] h-[227px] right-[24px] bottom-[0px] md:w-[362px] md:h-[308px] md:bottom-[27px] md:right-[16px]'
+          'absolute w-[171px] h-[227px] right-[14px] bottom-[0px] md:w-[362px] md:h-[308px] md:bottom-[27px] md:right-[16px]'
       },
       {
         path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/${locale}/3.json`,
         className:
-          'absolute w-[139px] h-[21px] left-[108px] top-[0px] md:w-[253px] md:h-[65px] md:top-[22px] md:left-[162px]'
+          'absolute w-[139px] h-[31px] left-[80px] top-[0px] md:w-[253px] md:h-[65px] md:top-[22px] md:left-[162px]'
       },
       {
         path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/${locale}/4.json`,
         className:
-          'absolute w-[162px] h-[24px] right-[222px] top-[150px] md:w-[296px]md: h-[65px] md:bottom-[231px] md:right-[390px]'
+          'absolute w-[162px] h-[24px] right-[242px] top-[120px] md:w-[296px]md: h-[65px] md:bottom-[231px] md:right-[390px]'
       },
       {
         path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/en/5.json`,
         className:
-          'absolute w-[87px] h-[29px] left-[223px] top-[243px] md:w-[156px] md:h-[52px]  md:bottom-[151px] md:left-[421px]'
+          'absolute w-[87px] h-[29px] left-[223px] md:w-[156px] md:h-[52px]  bottom-[30px] md:bottom-[151px] md:left-[421px]'
       },
       {
         path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/${locale}/6.json`,
@@ -135,7 +135,7 @@ export const ImpactSectionNew = () => {
       {
         path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/${locale}/7.json`,
         className:
-          'absolute w-[136px] h-[132px] left-[273px] top-[43px] md:w-[269px] md:h-[160px] md:top-[93px] md:left-[488px]'
+          'absolute w-[136px] h-[132px] left-[213px] top-[43px] md:w-[269px] md:h-[160px] md:top-[93px] md:left-[488px]'
       },
       {
         path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/${locale}/8.json`,
@@ -169,7 +169,7 @@ export const ImpactSectionNew = () => {
     const container = containerRef.current
     if (!wrapper || !container) return
 
-    const wrapperWidth = wrapper.offsetWidth / 2
+    const wrapperWidth = wrapper.offsetWidth / (isMobile ? 4.5 : 2)
 
     gsap.fromTo(
       wrapper,
@@ -181,7 +181,7 @@ export const ImpactSectionNew = () => {
         repeat: -1
       }
     )
-  }, [locale])
+  }, [locale, isMobile])
 
   useEffect(() => {
     AOS.init()
@@ -245,18 +245,18 @@ export const ImpactSectionNew = () => {
               key={groupIdx}
               className="relative flex-shrink-0"
               style={{ width: isMobile ? '768px' : '1705px', height: isMobile ? '408px' : '633px' }}>
-              {/* <div className="blue-gradient-border absolute w-[100px] h-[100px] bottom-[237px] md:bottom-[57px] lg:bottom-[17px] left-[264px] flex items-center justify-center scale-50 sm:scale-75 lg:scale-100">
+              <div className="blue-gradient-border rounded-[10px] absolute w-[48px] h-[48px]  md:w-[100px] md:h-[100px]  top-[243px] md:bottom-[17px] left-[264px] flex items-center justify-center ">
                 <BusinessIcon />
               </div>
-              <div className="blue-gradient-border absolute w-[100px] h-[100px] top-[15px] md:top-[30px] right-[50px] flex items-center justify-center scale-50 sm:scale-75 lg:scale-100">
+              <div className="blue-gradient-border rounded-[10px] absolute w-[48px] h-[48px]  md:w-[100px] md:h-[100px] top-[15px] md:top-[30px] right-[50px] flex items-center justify-center ">
                 <BuildingIcon />
               </div>
-              <div className="blue-gradient-border absolute w-[100px] h-[100px] top-0 right-[438px] flex items-center justify-center scale-50 sm:scale-75 lg:scale-100">
+              <div className="blue-gradient-border rounded-[10px] absolute w-[48px] h-[48px]  md:w-[100px] md:h-[100px] top-0 right-[380px] md:right-[438px] flex items-center justify-center ">
                 <EducationIcon />
               </div>
-              <div className="blue-gradient-border absolute w-[100px] h-[100px] bottom-[238px] md:bottom-[58px] right-[507px] flex items-center justify-center scale-50 sm:scale-75 lg:scale-100">
+              <div className="blue-gradient-border rounded-[10px] absolute w-[48px] h-[48px]  md:w-[100px] md:h-[100px] bottom-[40px] md:bottom-[58px] right-[600px] md:right-[507px] flex items-center justify-center ">
                 <SmileIcon />
-              </div> */}
+              </div>
               {animations.map(
                 ({ animation, className }, i) =>
                   animation && (

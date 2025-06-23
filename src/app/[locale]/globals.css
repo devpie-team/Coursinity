@@ -92,6 +92,21 @@ a {
   /* border: none; */
 }
 
+@media screen and (max-width: 768px) {
+  .blue-gradient-border {
+    border-radius: 10px;
+  }
+
+  .blue-gradient-border svg {
+    height: 30px;
+    width: 30px;
+  }
+
+  .blue-gradient-border::before {
+    border-radius: 10px;
+  }
+}
+
 .border-gradient::before {
   content: '';
   position: absolute;

@@ -74,9 +74,9 @@ export const Header = () => {
     'z-50',
     'px-[115px]',
     'max-lg:px-6',
-    'flex',
+    'grid',
     'items-center',
-    'justify-between',
+    'grid-cols-3',
     'py-[20px]',
     'transition-transform',
     'duration-500',
@@ -90,10 +90,10 @@ export const Header = () => {
 
   return (
     <header ref={headerRef} className={headerClasses}>
-      <LogoIcon className="h-[14px] w-[127px]" />
+      <LogoIcon className="h-[14px] w-[127px] justify-self-start" />
       {isDesktop && <HeaderDropdown start={start} />}
       {isDesktop ? (
-        <div className="flex items-center gap-[18px]">
+        <div className="flex items-center gap-[18px] justify-self-end">
           <ToggleLanguage
             value={locale !== 'en'}
             onToggle={(isEn) => {
@@ -110,7 +110,7 @@ export const Header = () => {
           </button>
         </div>
       ) : (
-        <button onClick={() => setIsOpen((prev) => !prev)} className="p-2 z-[51]">
+        <button onClick={() => setIsOpen((prev) => !prev)} className="p-2 z-[51] grid justify-self-end">
           {!isOpen ? <TreeLines /> : <X className="w-6 h-6" />}
         </button>
       )}
