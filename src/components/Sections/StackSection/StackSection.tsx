@@ -92,6 +92,7 @@ export const StackSection = () => {
     const ctx = gsap.context(() => {
       const steps = 3
       const triggerLength = window.innerHeight * steps
+
       ScrollTrigger.create({
         anticipatePin: 1,
         trigger: sectionRef.current,
@@ -108,10 +109,9 @@ export const StackSection = () => {
     }, sectionRef)
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill())
       ctx.revert()
     }
-  }, [isMobileAnimation])
+  }, [isMobileAnimation, isLowScreen])
 
   useEffect(() => {
     const observer = new IntersectionObserver(

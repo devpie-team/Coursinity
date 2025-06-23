@@ -10,6 +10,7 @@ import { X } from 'lucide-react'
 import { CaretDown, LogoIcon, TreeLines } from '../icons'
 import { HeaderDropdown } from '../HeaderDropdown'
 import { Typography } from '../ui'
+import Link from 'next/link'
 
 export const Header = () => {
   const t = useTranslations('Header')
@@ -90,7 +91,9 @@ export const Header = () => {
 
   return (
     <header ref={headerRef} className={headerClasses}>
-      <LogoIcon className="h-[14px] w-[127px] justify-self-start" />
+      <a href={`/${locale}`}>
+        <LogoIcon className="h-[14px] w-[127px] justify-self-start" />
+      </a>
       {isDesktop && <HeaderDropdown start={start} />}
       {isDesktop ? (
         <div className="flex items-center gap-[18px] justify-self-end">
@@ -102,12 +105,13 @@ export const Header = () => {
               router.replace(newPath)
             }}
           />
-          <button
+          <a
             className="flex button-gradient h-[56px] rounded-full px-6 py-4 text-center items-center justify-center
                 text-white text-body3 !bg-black
-                transition-all w-[200px]">
+                transition-all w-[200px]"
+            href={`/${locale}/contact-form`}>
             {t('button')}
-          </button>
+          </a>
         </div>
       ) : (
         <button onClick={() => setIsOpen((prev) => !prev)} className="p-2 z-[51] grid justify-self-end">
