@@ -29,6 +29,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.18.1",
     "gsap": "^3.13.0",
+    "idb-keyval": "^6.2.2",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.469.0",
     "modern-normalize": "^3.0.1",

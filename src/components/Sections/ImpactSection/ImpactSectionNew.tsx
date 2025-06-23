@@ -9,6 +9,7 @@ import 'aos/dist/aos.css'
 import Lottie, { type LottieRefCurrentProps, type LottieComponentProps } from 'lottie-react'
 
 import { BuildingIcon, BusinessIcon, EducationIcon, SmileIcon } from '@/components/icons'
+import { get, set } from 'idb-keyval'
 
 // Types
 type AnimationData = {
@@ -73,24 +74,17 @@ export const ImpactSectionNew = () => {
     async (path: string): Promise<AnimationData | null> => {
       if (animationCache[path]) return animationCache[path]
 
-      const cached = sessionStorage.getItem(path)
+      const cached = await get(path)
       if (cached) {
-        try {
-          const parsed = JSON.parse(cached) as AnimationData
-          animationCache[path] = parsed
-          return parsed
-        } catch (error) {
-          console.error(`❌ Failed to parse cached animation: ${path}`, error)
-        }
+        animationCache[path] = cached
+        return cached as AnimationData
       }
 
       try {
         const response = await fetch(path)
         const data = (await response.json()) as AnimationData
-
         animationCache[path] = data
-        sessionStorage.setItem(path, JSON.stringify(data))
-
+        await set(path, data)
         return data
       } catch (error) {
         console.error(`❌ Failed to load animation: ${path}`, error)
@@ -105,7 +99,7 @@ export const ImpactSectionNew = () => {
       {
         path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/${locale}/1.json`,
         className:
-          'absolute w-[167px] h-[243px] left-[0-px] top-[52px] md:w-[362px] md:h-[280px] md:top-[146px] md:left-[30px] lg:left-0'
+          'absolute w-[167px] h-[243px] left-[0px] top-[52px] md:w-[362px] md:h-[280px] md:top-[146px] md:left-[30px] lg:left-0'
       },
       {
         path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/${locale}/2.json`,
@@ -120,7 +114,7 @@ export const ImpactSectionNew = () => {
       {
         path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/${locale}/4.json`,
         className:
-          'absolute w-[162px] h-[24px] right-[242px] top-[120px] md:w-[296px]md: h-[65px] md:bottom-[231px] md:right-[390px]'
+          'absolute w-[162px] h-[24px] right-[242px] top-[120px] md:w-[296px] md:h-[65px] md:top-[341px] md:right-[390px]'
       },
       {
         path: `/assets/lottie/impact/${!isMobile ? 'desktop' : 'mobile'}/en/5.json`,
@@ -169,7 +163,7 @@ export const ImpactSectionNew = () => {
     const container = containerRef.current
     if (!wrapper || !container) return
 
-    const wrapperWidth = wrapper.offsetWidth / (isMobile ? 4.5 : 2)
+    const wrapperWidth = wrapper.offsetWidth / 2
 
     gsap.fromTo(
       wrapper,
@@ -245,7 +239,7 @@ export const ImpactSectionNew = () => {
               key={groupIdx}
               className="relative flex-shrink-0"
               style={{ width: isMobile ? '768px' : '1705px', height: isMobile ? '408px' : '633px' }}>
-              <div className="blue-gradient-border rounded-[10px] absolute w-[48px] h-[48px]  md:w-[100px] md:h-[100px]  top-[243px] md:bottom-[17px] left-[264px] flex items-center justify-center ">
+              <div className="blue-gradient-border rounded-[10px] absolute w-[48px] h-[48px]  md:w-[100px] md:h-[100px] bottom-[113px] md:bottom-[17px]  left-[264px] flex items-center justify-center ">
                 <BusinessIcon />
               </div>
               <div className="blue-gradient-border rounded-[10px] absolute w-[48px] h-[48px]  md:w-[100px] md:h-[100px] top-[15px] md:top-[30px] right-[50px] flex items-center justify-center ">
