@@ -83,7 +83,7 @@ export const StackSection = () => {
   const isDesktop = windowWidth > 1024
 
   const { isMobile: isMobileAnimation, isLowScreen } = useMediaBreakpoints()
-  const activeIndexRef = useRef(0)
+
   useEffect(() => {
     AOS.init()
 
@@ -101,17 +101,19 @@ export const StackSection = () => {
         pin: true,
         scrub: 1,
         fastScrollEnd: false,
+        onEnter: () => setActiveIndex(0),
+        onEnterBack: () => setActiveIndex(0),
+        onLeave: () => setActiveIndex(2),
+        onLeaveBack: () => setActiveIndex(0),
         onUpdate: (self) => {
           const progress = self.progress
-          const idx = Math.min(steps - 1, Math.floor(progress * steps + 0.15))
-          if (idx !== activeIndexRef.current) {
-            activeIndexRef.current = idx
-            setActiveIndex(idx)
+          if (progress < 0.33) {
+            setActiveIndex(0)
+          } else if (progress < 0.66) {
+            setActiveIndex(1)
+          } else {
+            setActiveIndex(2)
           }
-        },
-
-        onLeaveBack: () => {
-          setActiveIndex(0)
         }
       })
     }, sectionRef)
