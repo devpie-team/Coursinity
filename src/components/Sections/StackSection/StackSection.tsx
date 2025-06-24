@@ -121,7 +121,7 @@ export const StackSection = () => {
     return () => {
       ctx.revert()
     }
-  }, [isMobileAnimation, isLowScreen])
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
