@@ -27,14 +27,7 @@ export function LightingSetup({
       <ambientLight intensity={0.25} />
 
       {/* Основне спрямоване світло з тінями */}
-      <directionalLight
-        position={[2, 4, 2]}
-        intensity={2.2}
-        castShadow
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
-        shadow-bias={-0.0001}
-      />
+      <directionalLight position={[2, 4, 2]} intensity={2.2} shadow-bias={-0.0001} />
 
       {/* Кольоровий PointLight, який можна анімувати */}
       <pointLight
@@ -45,16 +38,7 @@ export function LightingSetup({
       />
 
       {/* Яскравий SpotLight для акценту */}
-      <spotLight
-        position={[0, 6, 4]}
-        angle={0.5}
-        penumbra={0.7}
-        intensity={1.5}
-        color="#fff"
-        castShadow
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
-      />
+      <spotLight position={[0, 6, 4]} angle={0.5} intensity={1.5} color="#fff" />
 
       {/* Додаткове синьо-блакитне освітлення */}
       <spotLight position={isMobile ? [0, 1, 0.5] : [0, 1, 1]} intensity={isMobile ? 200 : 150.2} color={'#0b1736'} />
