@@ -134,18 +134,19 @@ export function Slide3D({
       </mesh>
 
       {/* Хвилі */}
-      <RippleEffect
-        geometry={geometry}
-        baseColor={base}
-        rippleColor={ripple}
-        rippleCenter={rippleCenter}
-        waveFrequency={waveFrequency}
-        waveSpeed={waveSpeed}
-        waveDecay={waveDecay}
-        opacity={rippleOpacity}
-        emissiveIntensity={rippleEmissiveIntensity}
-      />
-
+      {!isMobile && (
+        <RippleEffect
+          geometry={geometry}
+          baseColor={base}
+          rippleColor={ripple}
+          rippleCenter={rippleCenter}
+          waveFrequency={waveFrequency}
+          waveSpeed={waveSpeed}
+          waveDecay={waveDecay}
+          opacity={rippleOpacity}
+          emissiveIntensity={rippleEmissiveIntensity}
+        />
+      )}
       {/* Текст */}
       <SlideText
         text={text}

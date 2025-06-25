@@ -268,15 +268,18 @@ export function SlideText({
     // Анімація глітч ефекту
     if (textShaderRef.current && textShaderRef.current.uniforms) {
       const time = clock.getElapsedTime()
+      if (isMobile) {
+        textShaderRef.current.uniforms.u_glitchIntensity.value = 0
+      } else {
+        // Інтенсивність глітчу залежить від offset
+        const baseGlitchIntensity = visualOffset > 0.1 ? Math.min(visualOffset, 1) : 0
 
-      // Інтенсивність глітчу залежить від offset
-      const baseGlitchIntensity = visualOffset > 0.1 ? Math.min(visualOffset, 1) : 0
+        // Додаємо випадкові спайки тільки якщо є offset
+        const randomSpike = visualOffset > 0.3 && Math.random() > 0.95 ? 1.0 : 0.0
+        const glitchIntensity = Math.max(baseGlitchIntensity * 0.5, randomSpike * 0.6)
 
-      // Додаємо випадкові спайки тільки якщо є offset
-      const randomSpike = visualOffset > 0.3 && Math.random() > 0.95 ? 1.0 : 0.0
-      const glitchIntensity = Math.max(baseGlitchIntensity * 0.5, randomSpike * 0.6)
-
-      textShaderRef.current.uniforms.u_glitchIntensity.value = glitchIntensity
+        textShaderRef.current.uniforms.u_glitchIntensity.value = glitchIntensity
+      }
       textShaderRef.current.uniforms.u_offset.value = visualOffset
       textShaderRef.current.uniforms.u_time.value = time
     }
