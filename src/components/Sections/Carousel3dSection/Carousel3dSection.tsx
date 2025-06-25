@@ -128,7 +128,7 @@ export function Carousel3dSection() {
             <PerformanceMonitor
               onIncline={() => setDpr(isMobile ? 1.5 : 2)}
               onDecline={() => setDpr(isMobile ? 0.8 : 1)}>
-              {/* <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.5} /> */}
+              {/*  <OrbitControls rotateSpeed={0.5} /> */}
               <SceneContent
                 isMobile={isMobile}
                 scrollProgressRef={scrollProxy}
@@ -154,6 +154,8 @@ export function Carousel3dSection() {
               scrollProgressRef={scrollProxy}
               animationSpeed={0.0002}
               scrollSpeed={0.8}
+              showHalfTorus={true}
+              startAngle={-0.1}
             />
             <Torus
               position={[0, -0.9, -0.9]}
@@ -161,6 +163,8 @@ export function Carousel3dSection() {
               scrollProgressRef={scrollProxy}
               animationSpeed={0.00005}
               scrollSpeed={0.3}
+              showHalfTorus={true}
+              startAngle={-0.3}
             />
           </Canvas>
         </div>
