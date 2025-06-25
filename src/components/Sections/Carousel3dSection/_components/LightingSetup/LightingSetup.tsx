@@ -41,8 +41,8 @@ export function LightingSetup({
       <spotLight position={[0, 6, 4]} angle={0.5} intensity={1.5} color="#fff" />
 
       {/* Додаткове синьо-блакитне освітлення */}
-      <spotLight position={isMobile ? [0, 1, 0.5] : [0, 1, 1]} intensity={isMobile ? 200 : 150.2} color={'#0b1736'} />
-      <spotLight position={isMobile ? [0, -1, 0.5] : [0, -1, 1]} intensity={150.2} color={'#0b1736'} />
+      <spotLight position={isMobile ? [0, 1, 0.5] : [0, 1, 1]} intensity={isMobile ? 10 : 100} color={'#0b1736'} />
+      <spotLight position={isMobile ? [0, -1, 0.5] : [0, -1, 1]} intensity={isMobile ? 10 : 100} color={'#0b1736'} />
       <spotLight position={isMobile ? [0, 0.5, 2.5] : [0, 0.5, 3]} intensity={20.2} distance={20} color={'#4b4359'} />
       <spotLight position={isMobile ? [0, -1, 3] : [0, -1, 3]} intensity={20.2} distance={3} color={'#4b4359'} />
     </group>
