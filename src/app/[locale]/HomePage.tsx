@@ -62,14 +62,14 @@ export default function HomePage() {
   return (
     <>
       {loading && <Loader loading={loading} />}
-      <Carousel3dSection />
+
       <Header />
       <HeroSection loading={loading} />
       <FutureSection />
       <StackSection />
       <GrowthStepSection />
       <AiTeamSection />
-
+      <Carousel3dSection />
       <InspirationSection />
       <BuildSection />
       <ImpactSectionNew />
