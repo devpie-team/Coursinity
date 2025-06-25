@@ -7,9 +7,16 @@ interface LightingSetupProps {
   effectStrength: number
   currentSlideIndex: number
   slidesData: SlideData[]
+  isMobile: boolean
 }
 
-export function LightingSetup({ rotation, effectStrength, currentSlideIndex, slidesData }: LightingSetupProps) {
+export function LightingSetup({
+  rotation,
+  effectStrength,
+  currentSlideIndex,
+  slidesData,
+  isMobile
+}: LightingSetupProps) {
   const mainLightingRef = useRef<THREE.Group>(null)
   const slideLightingRef = useRef<THREE.Group>(null)
 
@@ -50,10 +57,10 @@ export function LightingSetup({ rotation, effectStrength, currentSlideIndex, sli
       />
 
       {/* Додаткове синьо-блакитне освітлення */}
-      <spotLight position={[0, 1, 1]} intensity={150.2} color={'#0b1736'} />
-      <spotLight position={[0, -1, 1]} intensity={150.2} color={'#0b1736'} />
-      <spotLight position={[0, 0.5, 3]} intensity={20.2} distance={20} color={'#4b4359'} />
-      <spotLight position={[0, -1, 3]} intensity={20.2} distance={3} color={'#4b4359'} />
+      <spotLight position={isMobile ? [0, 1, 0.5] : [0, 1, 1]} intensity={isMobile ? 200 : 150.2} color={'#0b1736'} />
+      <spotLight position={isMobile ? [0, -1, 0.5] : [0, -1, 1]} intensity={150.2} color={'#0b1736'} />
+      <spotLight position={isMobile ? [0, 0.5, 2.5] : [0, 0.5, 3]} intensity={20.2} distance={20} color={'#4b4359'} />
+      <spotLight position={isMobile ? [0, -1, 3] : [0, -1, 3]} intensity={20.2} distance={3} color={'#4b4359'} />
     </group>
   )
 }

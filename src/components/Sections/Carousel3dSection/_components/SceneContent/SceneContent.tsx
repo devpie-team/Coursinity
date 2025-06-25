@@ -85,6 +85,7 @@ export const SceneContent = ({
         effectStrength={effectStrengthRef.current}
         currentSlideIndex={currentSlideIndex}
         slidesData={slidesData}
+        isMobile={isMobile}
       />
       <ParticlePlane
         position={[0, 0, -5]}
