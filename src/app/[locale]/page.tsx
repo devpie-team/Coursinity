@@ -11,7 +11,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       : 'Best Training Companies in Saudi Arabia | Coursinity',
     description: isArabic
       ? 'استكشف COURSINITY: دورات تدريبية مُجزأة تجمع بين الخبرة الحياتية والتعلم التفاعلي، للحصول على أفضل الشهادات الاحترافية والتدريب المعتمد دوليا في السعودية.'
-      : 'Explore COURSINITY: Blended courses that combine real-life experience and interactive learning, for the best professional certifications and internationally accredited training in Saudi Arabia.'
+      : 'Explore COURSINITY: Blended courses that combine real-life experience and interactive learning, for the best professional certifications and internationally accredited training in Saudi Arabia.',
+    icons: {
+      icon: '/assets/favicon.png',
+      shortcut: '/assets/favicon.png',
+      apple: '/assets/favicon.png'
+    }
   }
 }
 
