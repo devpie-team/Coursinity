@@ -12,6 +12,8 @@ import { SceneContent } from './_components/SceneContent/SceneContent'
 import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
 import { Torus } from './_components/Torus/Torus'
 import { Typography } from '@/components/ui/Typography/Typography'
+import { start } from 'repl'
+import { cn } from '@/lib/utils'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -63,16 +65,10 @@ export function Carousel3dSection() {
         }
       })
 
-      // Анімація шторок та сцени
-      // tl.to('#curtain-start', { yPercent: -100, ease: 'power2.out', duration: startCurtainDuration })
-      tl.fromTo(
-        '#canvas-container',
-        { opacity: 0 },
-        { opacity: 1, ease: 'power1.in', duration: startCurtainDuration } /*, '<'*/
-      ) // Fade-in сцени
-        .to(scrollProxy.current, { value: slidesData.length, ease: 'none', duration: totalScrollDuration }, '>')
-        .to('#canvas-container', { opacity: 0, ease: 'power1.out', duration: endCurtainDuration }, '>') // Fade-out сцени
-      // .fromTo('#curtain-end', { yPercent: 100 }, { yPercent: 0, ease: 'power2.in', duration: endCurtainDuration }, '<') // Поява кінцевої шторки
+      tl.fromTo('#canvas-container', { opacity: 0 }, { opacity: 1, ease: 'power1.in', duration: startCurtainDuration })
+        /* value is scroll length */
+        .to(scrollProxy.current, { value: slidesData.length - 1, ease: 'none', duration: totalScrollDuration }, '>')
+        .to('#canvas-container', { opacity: 0, ease: 'power1.out', duration: endCurtainDuration }, '>') //
     }, pinSectionRef)
 
     return () => ctx.revert()
@@ -105,42 +101,33 @@ export function Carousel3dSection() {
 
       <div style={{ position: 'relative', height: '100vh', width: '100vw' }}>
         <div id="canvas-container" className="relative h-full w-full">
-          {!isMobile && (
-            <div className="absolute inset-0 z-10  flex items-end pl-4 pb-14 ">
-              <div className="flex flex-col text-white text-start  max-w-[600px] gap-6  p-6 rounded-xl">
-                <Typography variant="body1" weight="medium">
-                  – {t('title')}
-                </Typography>
-                <div className="flex flex-col gap-4  text-[#A578F2]   ">
-                  <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
-                    – {t('point1')}
+          <div className="absolute inset-0 z-10 flex items-end pl-4 pb-14 max-md:pb-0 max-md:pl-0">
+            <div className="flex flex-col text-white text-start max-w-[600px] gap-6 p-6 max-md:gap-2 max-md:bg-black/40 max-md:w-full max-md:pt-3">
+              <Typography variant="body1" weight="medium">
+                – {t('title')}
+              </Typography>
+              <div className="flex flex-col gap-4 text-[#A578F2] max-md:gap-2 ">
+                {['point1', 'point2', 'point3', 'point4', 'point5'].map((key) => (
+                  <Typography
+                    key={key}
+                    variant={isMobile ? 'body3' : 'body2'}
+                    className="hover:text-white transition-all duration-300"
+                    as="a">
+                    – {t(key)}
                   </Typography>
-                  <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
-                    – {t('point2')}
-                  </Typography>
-                  <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
-                    – {t('point3')}
-                  </Typography>
-                  <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
-                    – {t('point4')}
-                  </Typography>
-                  <Typography variant="body2" className="hover:text-white transition-all duration-300" as="a">
-                    – {t('point5')}
-                  </Typography>
-                </div>
+                ))}
               </div>
             </div>
-          )}
+          </div>
 
           <Canvas
             shadows
             dpr={dpr}
             camera={{ position: [0, -0.1, isMobile ? 1.4 : 1.65], fov: isMobile ? 75 : 70 }}
             style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-            <PerformanceMonitor 
-              onIncline={() => setDpr(isMobile ? 1.5 : 2)} 
-              onDecline={() => setDpr(isMobile ? 0.8 : 1)}
-            >
+            <PerformanceMonitor
+              onIncline={() => setDpr(isMobile ? 1.5 : 2)}
+              onDecline={() => setDpr(isMobile ? 0.8 : 1)}>
               {/* <OrbitControls enableZoom={false} enablePan={false} rotateSpeed={0.5} /> */}
               <SceneContent
                 isMobile={isMobile}
