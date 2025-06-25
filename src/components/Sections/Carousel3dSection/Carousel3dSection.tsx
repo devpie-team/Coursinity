@@ -102,7 +102,7 @@ export function Carousel3dSection() {
       <div style={{ position: 'relative', height: '100vh', width: '100vw' }}>
         <div id="canvas-container" className="relative h-full w-full">
           <div className="absolute inset-0 z-10 flex items-end pl-4 pb-14 max-md:pb-0 max-md:pl-0">
-            <div className="flex flex-col text-white text-start max-w-[600px] gap-6 p-6 max-md:gap-2 max-md:bg-black/40 max-md:w-full max-md:pt-3">
+            <div className="flex flex-col text-white text-start max-w-[600px] gap-6 p-6 max-md:gap-2 max-md:bg-gradient-to-t max-md:from-black/70 max-md:w-full max-md:pt-3 max-md:backdrop-blur-[2px]">
               <Typography variant="body1" weight="medium">
                 – {t('title')}
               </Typography>
