@@ -147,25 +147,28 @@ export function Carousel3dSection() {
                 <Bloom intensity={1.5} luminanceThreshold={0.1} luminanceSmoothing={0.025} radius={0.8} mipmapBlur />
               </EffectComposer> */}
             </PerformanceMonitor>
-            +-
-            <Torus
-              position={[0, -0.2, -0.9]}
-              rotation={[Math.PI, 0, 0]}
-              scrollProgressRef={scrollProxy}
-              animationSpeed={0.0002}
-              scrollSpeed={0.8}
-              showHalfTorus={true}
-              startAngle={-0.1}
-            />
-            <Torus
-              position={[0, -0.9, -0.9]}
-              rotation={[Math.PI, 0, Math.PI * 1.03]}
-              scrollProgressRef={scrollProxy}
-              animationSpeed={0.00005}
-              scrollSpeed={0.3}
-              showHalfTorus={true}
-              startAngle={-0.3}
-            />
+            {!isMobile && (
+              <Torus
+                position={[0, -0.2, -0.9]}
+                rotation={[Math.PI, 0, 0]}
+                scrollProgressRef={scrollProxy}
+                animationSpeed={0.0002}
+                scrollSpeed={0.8}
+                showHalfTorus={true}
+                startAngle={-0.1}
+              />
+            )}
+            {!isMobile && (
+              <Torus
+                position={[0, -0.9, -0.9]}
+                rotation={[Math.PI, 0, Math.PI * 1.03]}
+                scrollProgressRef={scrollProxy}
+                animationSpeed={0.00005}
+                scrollSpeed={0.3}
+                showHalfTorus={true}
+                startAngle={-0.3}
+              />
+            )}
           </Canvas>
         </div>
       </div>
