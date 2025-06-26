@@ -60,39 +60,6 @@ export const HeroSection = ({ loading }: THeroSection) => {
       lottieRef2.current?.goToAndPlay(0, true)
       lottieRef3.current?.goToAndPlay(0, true)
       lottieRef4.current?.goToAndPlay(0, true)
-      // elementSettings.forEach(({ selector, x, y, duration, fade }) => {
-      //   if (fade) {
-      //     gsap.fromTo(
-      //       selector,
-      //       {
-      //         opacity: 0,
-      //         x: x,
-      //         y: y,
-      //         duration: 2,
-      //         ease: 'sine.inOut'
-      //       },
-      //       {
-      //         opacity: 1,
-      //         duration: 2,
-      //         x: 0,
-      //         y: 0,
-      //         ease: 'sine.inOut'
-      //       }
-      //     )
-      //   } else {
-      //     gsap.fromTo(
-      //       selector,
-      //       {
-      //         opacity: 0,
-      //         duration: 2,
-      //         ease: 'sine.inOut'
-      //       },
-      //       {
-      //         opacity: 1
-      //       }
-      //     )
-      //   }
-      // })
     }
   }, [loading])
 
@@ -228,19 +195,19 @@ export const HeroSection = ({ loading }: THeroSection) => {
       />
       <img
         src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}2.png/`}
-        className="absolute bottom-[-40px] right-[-40px] max-[1024px]:right-[-20px]  max-[1024px]:bottom-[-15px] animate-element hero-element2"
+        className="absolute bottom-[-40px] right-[-40px] animate-element hero-element2 max-w-[228px] max-md:max-w-[163px]"
       />
       {isTablet ? (
         <BubbleIcon />
       ) : (
         <img
           src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}3.png/`}
-          className="absolute top-[15%] left-0  max-[768px]:top-[10%] animate-element hero-element3"
+          className="absolute top-[15%] left-0  max-[768px]:top-[10%] animate-element hero-element3  max-w-[222px] max-md:max-w-[117px]"
         />
       )}
       <img
         src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}4.png/`}
-        className="absolute top-[15%] right-[-40px] max-[768px]:top-[10%] max-[1024px]:right-[-15px] animate-element hero-element4"
+        className="absolute top-[15%] right-[-30px] max-[768px]:top-[10%] max-[1024px]:right-[-15px] animate-element hero-element4 max-w-[86px] max-md:max-w-[54px]"
       />
       <Lottie
         animationData={hero3}
