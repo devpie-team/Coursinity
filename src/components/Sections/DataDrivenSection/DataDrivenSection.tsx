@@ -85,8 +85,6 @@ export const DataDrivenSection = () => {
             />
 
             <Swiper
-              modules={[Autoplay]}
-              autoplay={{ delay: 3000, reverseDirection: isArabic }}
               loop
               slidesPerView={1}
               onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
