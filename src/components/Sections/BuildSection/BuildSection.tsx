@@ -288,7 +288,7 @@ export const BuildSection = () => {
 
   return (
     <section
-      className="h-[100vh] build-section flex flex-col items-center justify-center gap-4  px-10 max-w-[100vw] bg-black text-white max-lg:pt-0 max-lg:px-6 max-lg:pb-0  max-lg:h-auto max-md:pt-20 max-md:px-4"
+      className="h-[100vh] build-section flex flex-col items-center justify-center gap-11  px-10 max-w-[100vw] bg-black text-white max-lg:pt-0 max-lg:px-6 max-lg:pb-0  max-lg:h-auto max-md:pt-20 max-md:px-4"
       ref={scrollWrapperBuildRef}>
       <div className="flex flex-col items-center gap-4 text-center">
         <FadeInOnView variant="fade-up">

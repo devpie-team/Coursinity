@@ -1,80 +1,25 @@
-'use client'
+import { Metadata } from 'next'
+import HomePage from './HomePage'
 
-import { useTranslations } from 'next-intl'
-import {
-  AcademySection,
-  AiTeamSection,
-  BuildSection,
-  FeaturesSection,
-  FutureSection,
-  HeroSection,
-  ImpactSection,
-  StackSection,
-  TeamTrainingSection
-} from '@/components/Sections'
-import { Header } from '@/components/Header'
-import Footer from '@/components/Footer/Footer'
-import { GrowthStepSection } from '@/components/Sections/GrowthStepSection'
-import { InspirationSection } from '@/components/Sections/InspirationSection'
-import { DataDrivenSection } from '@/components/Sections/DataDrivenSection'
-import { TestimonialsSection } from '@/components/Sections/TestimonialsSection'
-import { Carousel3dSection } from '@/components/Sections/Carousel3dSection'
-import { ImpactSectionNew } from '@/components/Sections/ImpactSection'
-import { useEffect, useState } from 'react'
-import AOS from 'aos'
-import { Loader } from '@/components/Loader'
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  const isArabic = locale === 'ar'
 
-export default function HomePage() {
-  const t = useTranslations('HomePage')
-  useEffect(() => {
-    AOS.init({
-      once: false,
-      duration: 700,
-      offset: 100,
-      easing: 'ease-in-out',
-
-      mirror: true
-    })
-  }, [])
-
-  const [loading, setLoading] = useState(true)
-  const [isMobile, setIsMobile] = useState(false)
-  const [isTablet, setIsTablet] = useState(false)
-
-  useEffect(() => {
-    const checkScreenSize = () => {
-      const width = window.innerWidth
-      setIsMobile(width < 768)
-      setIsTablet(width >= 768 && width <= 1024)
+  return {
+    title: isArabic
+      ? 'أفضل شركات التدريب في السعودية | Coursinity'
+      : 'Best Training Companies in Saudi Arabia | Coursinity',
+    description: isArabic
+      ? 'استكشف COURSINITY: دورات تدريبية مُجزأة تجمع بين الخبرة الحياتية والتعلم التفاعلي، للحصول على أفضل الشهادات الاحترافية والتدريب المعتمد دوليا في السعودية.'
+      : 'Explore COURSINITY: Blended courses that combine real-life experience and interactive learning, for the best professional certifications and internationally accredited training in Saudi Arabia.',
+    icons: {
+      icon: '/assets/favicon.png',
+      shortcut: '/assets/favicon.png',
+      apple: '/assets/favicon.png'
     }
-    checkScreenSize()
-    window.addEventListener('resize', checkScreenSize)
-    return () => window.removeEventListener('resize', checkScreenSize)
-  }, [])
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), isMobile ? 6000 : isTablet ? 6500 : 5700)
-    return () => clearTimeout(timer)
-  }, [isMobile, isTablet])
+  }
+}
 
-  return (
-    <>
-      {loading && <Loader loading={loading} />}
-      <Header />
-      <HeroSection loading={loading} />
-      <FutureSection />
-      <StackSection />
-      <GrowthStepSection />
-      <AiTeamSection />
-      <Carousel3dSection />
-      <InspirationSection />
-      <BuildSection />
-      <ImpactSectionNew />
-      <AcademySection />
-      <TeamTrainingSection />
-      <DataDrivenSection />
-      <FeaturesSection />
-      <TestimonialsSection />
-      <Footer />
-    </>
-  )
+export default function Page() {
+  return <HomePage />
 }

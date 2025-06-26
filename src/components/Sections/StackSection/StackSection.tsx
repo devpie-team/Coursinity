@@ -100,10 +100,20 @@ export const StackSection = () => {
         end: `+=${triggerLength}`,
         pin: true,
         scrub: 1,
+        fastScrollEnd: false,
+        onEnter: () => setActiveIndex(0),
+        onEnterBack: () => setActiveIndex(0),
+        onLeave: () => setActiveIndex(2),
+        onLeaveBack: () => setActiveIndex(0),
         onUpdate: (self) => {
           const progress = self.progress
-          const idx = Math.min(steps - 1, Math.floor(progress * steps + 0.15))
-          setActiveIndex(idx)
+          if (progress < 0.33) {
+            setActiveIndex(0)
+          } else if (progress < 0.66) {
+            setActiveIndex(1)
+          } else {
+            setActiveIndex(2)
+          }
         }
       })
     }, sectionRef)
@@ -111,7 +121,7 @@ export const StackSection = () => {
     return () => {
       ctx.revert()
     }
-  }, [isMobileAnimation, isLowScreen])
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -189,11 +199,13 @@ export const StackSection = () => {
           <Typography variant={isDesktop ? 'body2' : 'body3'} weight="regular">
             {t('left.description')}
           </Typography>
-          <Button
-            variant="secondary"
+          <a
+            href={`/${locale}/contact-form`}
             className="w-[255px] mt-4 max-md:mx-auto max-lg:w-[343px] max-[400px]:w-full max-[400px]:mt-0">
-            {t('left.button')}
-          </Button>
+            <Button variant="secondary" className="w-full">
+              {t('left.button')}
+            </Button>
+          </a>
         </div>
         {/* {!isMobile && (
           <div>

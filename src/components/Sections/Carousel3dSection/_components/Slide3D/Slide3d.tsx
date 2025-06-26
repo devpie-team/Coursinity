@@ -1,6 +1,7 @@
-import { useRef, useState, useMemo } from 'react'
+import { useRef, useState, useMemo, useEffect } from 'react'
 import * as THREE from 'three'
 import { useThree } from '@react-three/fiber'
+import { gsap } from 'gsap'
 import { RippleEffect } from './RippleEffect'
 import { SlideText } from './SlideText'
 
@@ -54,6 +55,70 @@ export function Slide3D({
   // Створюємо кольори
   const base = useMemo(() => new THREE.Color(baseColor), [baseColor])
   const ripple = useMemo(() => new THREE.Color(rippleColor), [rippleColor])
+
+  // Hover анімація з GSAP
+  useEffect(() => {
+    if (!groupRef.current) return
+
+    if (isHovered) {
+      // Анімація при наведенні - збільшення по Z та легке збільшення масштабу
+      gsap.to(groupRef.current.position, {
+        z: 0.009, // Збільшення по осі Z
+        duration: 0.3,
+        ease: 'power2.out'
+      })
+
+      gsap.to(groupRef.current.scale, {
+        x: baseScale * 1.05,
+        y: baseScale * 1.05,
+        z: baseScale * 1.05,
+        duration: 0.3,
+        ease: 'power2.out'
+      })
+    } else {
+      // Повернення до початкового стану
+      gsap.to(groupRef.current.position, {
+        z: 0,
+        duration: 0.3,
+        ease: 'power2.out'
+      })
+
+      gsap.to(groupRef.current.scale, {
+        x: baseScale,
+        y: baseScale,
+        z: baseScale,
+        duration: 0.3,
+        ease: 'power2.out'
+      })
+    }
+  }, [isHovered, baseScale])
+
+  // Анімація світіння при hover
+  useEffect(() => {
+    if (!meshRef.current) return
+
+    const material = meshRef.current.material as THREE.MeshPhysicalMaterial
+
+    if (isHovered) {
+      // Збільшення світіння при hover
+      gsap.to(material, {
+        emissiveIntensity: 0.1,
+        clearcoat: 0.4,
+        clearcoatRoughness: 1,
+        duration: 0.3,
+        ease: 'power2.out'
+      })
+    } else {
+      // Повернення до початкового стану
+      gsap.to(material, {
+        emissiveIntensity: 0,
+        clearcoat: 0.1,
+        clearcoatRoughness: 1,
+        duration: 0.3,
+        ease: 'power2.out'
+      })
+    }
+  }, [isHovered])
 
   // Створюємо градієнтну текстуру для слайда
   const gradientTexture = useMemo(() => {
@@ -129,23 +194,24 @@ export function Slide3D({
           opacity={0.85}
           toneMapped={true}
           emissive={base}
-          emissiveIntensity={0}
+          emissiveIntensity={isHovered ? 0.1 : 0} // Додаткове світіння при hover
         />
       </mesh>
 
       {/* Хвилі */}
-      <RippleEffect
-        geometry={geometry}
-        baseColor={base}
-        rippleColor={ripple}
-        rippleCenter={rippleCenter}
-        waveFrequency={waveFrequency}
-        waveSpeed={waveSpeed}
-        waveDecay={waveDecay}
-        opacity={rippleOpacity}
-        emissiveIntensity={rippleEmissiveIntensity}
-      />
-
+      {!isMobile && (
+        <RippleEffect
+          geometry={geometry}
+          baseColor={base}
+          rippleColor={ripple}
+          rippleCenter={rippleCenter}
+          waveFrequency={waveFrequency}
+          waveSpeed={waveSpeed}
+          waveDecay={waveDecay}
+          opacity={rippleOpacity}
+          emissiveIntensity={rippleEmissiveIntensity}
+        />
+      )}
       {/* Текст */}
       <SlideText
         text={text}

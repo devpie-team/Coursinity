@@ -29,7 +29,7 @@ export const DataDrivenSection = () => {
 
   const current = slides[activeIndex]
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (!isDesktop) return
     const interval = setInterval(() => {
       setFade(false)
@@ -40,7 +40,7 @@ export const DataDrivenSection = () => {
     }, 3000)
 
     return () => clearInterval(interval)
-  }, [activeIndex, isDesktop, slides.length, isArabic])
+  }, [activeIndex, isDesktop, slides.length, isArabic]) */
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -85,8 +85,6 @@ export const DataDrivenSection = () => {
             />
 
             <Swiper
-              modules={[Autoplay]}
-              autoplay={{ delay: 3000, reverseDirection: isArabic }}
               loop
               slidesPerView={1}
               onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}

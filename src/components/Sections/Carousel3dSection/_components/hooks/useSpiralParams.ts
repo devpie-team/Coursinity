@@ -17,7 +17,7 @@ export function useSpiralParams(isMobile: boolean, slidesData: SlideData[]) {
             radius: isMobile ? 0.6 : 1.2,
             verticalSpacing:isMobile ? 0.2 : 0.25,
             spiralTurns: isMobile ? 0.7 : 0.7,
-            circleCenter: isMobile ? [0, -0.1, 0.1] : [0, -0.1, -0.2],
+            circleCenter: isMobile ? [0, 0, 0.1] : [0, -0.1, -0.2],
             totalSlides: slidesData.length,
             startOffset: isMobile ? 6 : 8,
             endOffset: isMobile ? 6 : 8

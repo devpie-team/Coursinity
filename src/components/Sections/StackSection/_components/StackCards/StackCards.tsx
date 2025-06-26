@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 type Position = 'top' | 'middle' | 'bottom'
 
 const POSITIONS: Record<Position, string> = {
@@ -24,9 +25,10 @@ type StackCardsProps = {
   activeIndex: number
   setActiveIndex: (idx: number) => void
   isVisible: boolean
+  setIsVisible?: (visible: boolean) => void
 }
 
-export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIndex, isVisible }) => {
+export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIndex, isVisible, setIsVisible }) => {
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [isTablet, setIsTablet] = useState<boolean>(false)
   const [isDesktop, setIsDesktop] = useState<boolean>(true)
@@ -50,12 +52,16 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
     AOS.init()
   }, [])
 
-  const activeStyle = (step: number) => {
-    return {
-      opacity: isVisible && activeIndex + 1 == step ? 1 : 0,
-      transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
-      transitionDelay: isVisible && activeIndex + 1 == step ? '400ms' : '0ms'
+  const handleCardClick = (index: number) => {
+    setActiveIndex(index)
+    // Якщо карточка не активна, робимо її видимою
+    if (index !== activeIndex && setIsVisible) {
+      setIsVisible(true)
     }
+  }
+
+  const activeStyle = (step: number) => {
+    return {}
   }
 
   return (
@@ -69,22 +75,25 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
           ${POSITIONS[getRelativePosition(0, activeIndex)]}
           ${activeIndex === 0 ? 'rounded-t-3xl' : ''}
         `}
-        // onClick={() => setActiveIndex(0)}s
-      >
+        onClick={() => handleCardClick(0)}>
         <div className="flex flex-col gap-2 px-[18px] pt-12 text-center justify-center items-center">
           <Typography variant="h4" weight="medium" className="opacity-65 mb-1">
             {t('steps.0.title')}
           </Typography>
-          <Typography variant="h4" weight="medium" style={activeStyle(1)}>
-            {t('steps.0.subtitle')}
-          </Typography>
-          <Typography
-            variant="body3"
-            weight="regular"
-            className="opacity-80 w-[305px] text-center"
-            style={activeStyle(1)}>
-            {t('steps.0.description')}
-          </Typography>
+          <FadeInOnView>
+            <Typography variant="h4" weight="medium" style={activeStyle(1)}>
+              {t('steps.0.subtitle')}
+            </Typography>
+          </FadeInOnView>
+          <FadeInOnView>
+            <Typography
+              variant="body3"
+              weight="regular"
+              className="opacity-80 w-[305px] text-center"
+              style={activeStyle(1)}>
+              {t('steps.0.description')}
+            </Typography>
+          </FadeInOnView>
         </div>
         <div className="flex justify-center pb-[255px]">
           <img
@@ -117,16 +126,17 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
           ${POSITIONS[getRelativePosition(1, activeIndex)]}
           ${activeIndex === 1 ? 'rounded-t-3xl' : ''}
         `}
-        // onClick={() => setActiveIndex(1)}
-      >
+        onClick={() => handleCardClick(1)}>
         <div className="flex flex-col gap-3 px-[18px] pt-12 text-center justify-center items-center">
           <Typography variant="h4" weight="medium" className="opacity-65 ">
             {t('steps.1.title')}
           </Typography>
-          <Typography variant="h4" weight="medium" style={activeStyle(2)}>
-            {t('steps.1.subtitle')}
-          </Typography>
-          {t('steps.1.button') && (
+          <FadeInOnView>
+            <Typography variant="h4" weight="medium" style={activeStyle(2)}>
+              {t('steps.1.subtitle')}
+            </Typography>
+          </FadeInOnView>
+          {/* {t('steps.1.button') && (
             <a
               style={activeStyle(2)}
               className="
@@ -138,13 +148,13 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
               href={`/${locale}/contact-form`}>
               {t('steps.1.button')}
             </a>
-          )}
+          )} */}
         </div>
         <div className="flex justify-center">
           <img
             src="/assets/stack_section/stack_2.png"
             alt="Step 2"
-            className=" object-cover max-md:absolute max-md:bottom-12 "
+            className=" object-cover max-md:absolute max-md:bottom-20 "
             style={activeStyle(2)}
           />
         </div>
@@ -169,16 +179,17 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
           ${POSITIONS[getRelativePosition(2, activeIndex)]}
           ${activeIndex === 2 ? 'rounded-t-3xl' : ''}
         `}
-        // onClick={() => setActiveIndex(2)}
-      >
+        onClick={() => handleCardClick(2)}>
         <div className="flex flex-col gap-3 px-[18px] pt-12 text-center justify-center items-center">
           <Typography variant="h4" weight="medium" className="opacity-65 ">
             {t('steps.2.title')}
           </Typography>
-          <Typography variant="h4" weight="medium" style={activeStyle(3)}>
-            {t('steps.2.subtitle')}
-          </Typography>
-          {t('steps.2.button') && (
+          <FadeInOnView>
+            <Typography variant="h4" weight="medium" style={activeStyle(3)}>
+              {t('steps.2.subtitle')}
+            </Typography>
+          </FadeInOnView>
+          {/*   {t('steps.2.button') && (
             <a
               style={activeStyle(3)}
               className="
@@ -190,13 +201,13 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
               href={`/${locale}/contact-form`}>
               {t('steps.2.button')}
             </a>
-          )}
+          )} */}
         </div>
-        <div className="flex justify-center pb-[100px]" style={activeStyle(3)}>
+        <div className="flex justify-center pb-[170px]" style={activeStyle(3)}>
           <img
             src={isArabic ? '/assets/stack_section/stack_3_ar.png' : '/assets/stack_section/stack_3.png'}
             alt="Step 3"
-            className=" object-cover max-md:absolute max-md:bottom-[120px]"
+            className=" object-cover max-md:absolute max-md:bottom-[160px]"
           />
         </div>
       </div>

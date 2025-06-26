@@ -12,6 +12,8 @@ type TorusOfSpheresProps = {
   scrollProgressRef: React.MutableRefObject<{ value: number }>
   animationSpeed?: number
   scrollSpeed?: number
+  showHalfTorus?: boolean
+  startAngle?: number
 }
 
 export function Torus({
@@ -23,7 +25,9 @@ export function Torus({
   rotation = [0, 0, 0],
   scrollProgressRef,
   animationSpeed = 0.0001,
-  scrollSpeed = 0.0001
+  scrollSpeed = 0.0001,
+  showHalfTorus = false,
+  startAngle = 0
 }: TorusOfSpheresProps) {
   const meshRef = useRef<THREE.InstancedMesh>(null!)
   const lastScrollValue = useRef(0)
@@ -40,8 +44,13 @@ export function Torus({
       new THREE.Color(0x8b5cf6),
       new THREE.Color(0x5b21b6)
     ]
-    for (let i = 0; i < sphereCount; i++) {
-      const angle = (i / sphereCount) * Math.PI * 2
+    
+    // Якщо showHalfTorus = true, створюємо частинки тільки для частини торуса
+    const effectiveSphereCount = showHalfTorus ? Math.floor(sphereCount * 0.625) : sphereCount
+    const angleRange = showHalfTorus ? Math.PI * 1.25 : Math.PI * 2
+    
+    for (let i = 0; i < effectiveSphereCount; i++) {
+      const angle = startAngle + (i / effectiveSphereCount) * angleRange
       const randomOffset = {
         x: (Math.random() - 0.5) * randomness,
         y: (Math.random() - 0.5) * randomness,
@@ -63,14 +72,15 @@ export function Torus({
       })
     }
     return data
-  }, [sphereCount, maxSphereSize, randomness, animationSpeed])
+  }, [sphereCount, maxSphereSize, randomness, animationSpeed, showHalfTorus, startAngle])
 
   // Створюємо атрибути для кольорів
   const instanceColors = useMemo(() => {
-    const colors = new Float32Array(sphereCount * 3)
+    const effectiveSphereCount = showHalfTorus ? Math.floor(sphereCount * 0.625) : sphereCount
+    const colors = new Float32Array(effectiveSphereCount * 3)
     animationData.forEach((data, i) => data.color.toArray(colors, i * 3))
     return new THREE.InstancedBufferAttribute(colors, 3)
-  }, [sphereCount, animationData])
+  }, [sphereCount, animationData, showHalfTorus])
 
   const dummy = new THREE.Object3D()
 
@@ -84,7 +94,18 @@ export function Torus({
 
     animationData.forEach((d, i) => {
       d.scrollAngle += scrollDelta * -scrollSpeed
-      const newAngle = d.initialAngle + d.scrollAngle + elapsedTime * d.speed
+      let newAngle = d.initialAngle + d.scrollAngle + elapsedTime * d.speed
+      
+      // Якщо showHalfTorus = true, телепортуємо частинки
+      if (showHalfTorus) {
+        const endAngle = startAngle + Math.PI * 1.25
+        // Якщо частинка виходить за межі частини торуса, телепортуємо її на початок
+        if (newAngle > endAngle) {
+          newAngle = startAngle + (newAngle - endAngle)
+        } else if (newAngle < startAngle) {
+          newAngle = endAngle - (startAngle - newAngle)
+        }
+      }
 
       dummy.position.set(
         radius * Math.cos(newAngle) + d.randomOffset.x,
@@ -100,7 +121,12 @@ export function Torus({
   })
 
   return (
-    <instancedMesh ref={meshRef} args={[undefined, undefined, sphereCount]} position={position} rotation={rotation}>
+    <instancedMesh 
+      ref={meshRef} 
+      args={[undefined, undefined, showHalfTorus ? Math.floor(sphereCount * 0.625) : sphereCount]} 
+      position={position} 
+      rotation={rotation}
+    >
       <sphereGeometry args={[1, 8, 8]}>
         <primitive object={instanceColors} attach="attributes-color" />
       </sphereGeometry>

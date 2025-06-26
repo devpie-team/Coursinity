@@ -121,7 +121,7 @@ export const Header = () => {
 
       {!isDesktop && (
         <div
-          className={`absolute inset-0 z-50 bg-white px-6 py-6 flex flex-col justify-between md:h-[300px] top-[79px] h-[calc(100vh-79px)]
+          className={`absolute inset-0 z-50 bg-white px-6 py-6 flex flex-col justify-between md:h-[300px] top-[79px] h-[calc(100dvh-79px)]
             transition-opacity duration-300 ease-in-out
             ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
           <div className="flex flex-col gap-8 items-center">
@@ -159,7 +159,11 @@ export const Header = () => {
               </Typography>
             </div>
           </div>
-          <Button variant="purple">{t('button')}</Button>
+          <a href={`/${locale}/contact-form`}>
+            <Button variant="purple" className="w-full">
+              {t('button')}
+            </Button>
+          </a>
         </div>
       )}
     </header>
