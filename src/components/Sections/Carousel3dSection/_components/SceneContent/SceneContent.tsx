@@ -109,7 +109,7 @@ export const SceneContent = ({
           fadeEndDistance={textFadeEndDistance}
         />
       ))}
-      <CentralPillar
+      {/*   <CentralPillar
         scrollProgressRef={scrollProgressRef}
         circleCenter={spiralParams.circleCenter}
         isMobile={isMobile}
@@ -117,7 +117,7 @@ export const SceneContent = ({
         width={isMobile ? 0.6 : 1.2}
         animationSpeed={0.8}
         rotationSpeed={0.9}
-      />
+      /> */}
     </>
   )
 }
