@@ -72,7 +72,7 @@ export default function HomePage() {
       <Carousel3dSection />
       <InspirationSection />
       <BuildSection />
-      <ImpactSectionNew />
+      <ImpactSection />
       <AcademySection />
       <TeamTrainingSection />
       <DataDrivenSection />
