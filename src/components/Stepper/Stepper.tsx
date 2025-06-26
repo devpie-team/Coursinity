@@ -18,7 +18,7 @@ const Stepper = ({ steps, activeStep, onStepClick }: StepperProps) => {
             key={step}
             onClick={() => onStepClick?.(step)}
             className={`w-12 h-12 flex items-center justify-center rounded-full border-[1.5px] 
-              transition-colors text-white text-[24px] leading-8 font-medium
+               text-white text-[24px] leading-8 font-medium transition-all duration-300
               ${isActive ? 'border-white' : 'border-[#FFFFFF52]'}
             `}>
             {step}
