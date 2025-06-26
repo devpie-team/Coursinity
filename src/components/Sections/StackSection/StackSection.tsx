@@ -199,11 +199,13 @@ export const StackSection = () => {
           <Typography variant={isDesktop ? 'body2' : 'body3'} weight="regular">
             {t('left.description')}
           </Typography>
-          <Button
-            variant="secondary"
+          <a
+            href={`/${locale}/contact-form`}
             className="w-[255px] mt-4 max-md:mx-auto max-lg:w-[343px] max-[400px]:w-full max-[400px]:mt-0">
-            {t('left.button')}
-          </Button>
+            <Button variant="secondary" className="w-full">
+              {t('left.button')}
+            </Button>
+          </a>
         </div>
         {/* {!isMobile && (
           <div>

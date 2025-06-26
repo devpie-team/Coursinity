@@ -23,6 +23,7 @@ import { ImpactSectionNew } from '@/components/Sections/ImpactSection'
 import { useEffect, useState } from 'react'
 import AOS from 'aos'
 import { Loader } from '@/components/Loader'
+import { StackSectionNew } from '@/components/Sections/StackSection/StackSectionNew'
 
 export default function HomePage() {
   const t = useTranslations('HomePage')
@@ -66,7 +67,7 @@ export default function HomePage() {
       <Header />
       <HeroSection loading={loading} />
       <FutureSection />
-      <StackSection />
+      <StackSectionNew />
       <GrowthStepSection />
       <AiTeamSection />
       <Carousel3dSection />

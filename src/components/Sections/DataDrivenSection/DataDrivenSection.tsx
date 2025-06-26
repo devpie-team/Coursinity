@@ -29,7 +29,7 @@ export const DataDrivenSection = () => {
 
   const current = slides[activeIndex]
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (!isDesktop) return
     const interval = setInterval(() => {
       setFade(false)
@@ -40,7 +40,7 @@ export const DataDrivenSection = () => {
     }, 3000)
 
     return () => clearInterval(interval)
-  }, [activeIndex, isDesktop, slides.length, isArabic])
+  }, [activeIndex, isDesktop, slides.length, isArabic]) */
 
   useEffect(() => {
     const checkScreenSize = () => {
