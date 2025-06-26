@@ -165,13 +165,13 @@ export const ImpactSection = () => {
 
     const wrapperWidth = wrapper.offsetWidth / 2
 
-    const scrollDistance = wrapperWidth * 0.1
+    const scrollDistance = 200
 
     const ctx = gsap.context(() => {
       gsap.set(wrapper, { x: isMobile ? -500 : isTablet ? -1000 : -1500 })
 
       gsap.to(wrapper, {
-        x: locale === 'ar' ? -scrollDistance : scrollDistance,
+        x: `+=${scrollDistance}`,
         ease: 'none',
         scrollTrigger: {
           trigger: container,
