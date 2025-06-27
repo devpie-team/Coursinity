@@ -55,20 +55,21 @@ export function Carousel3dSection() {
     const totalVh = (totalScrollDuration + startCurtainDuration + endCurtainDuration) * 100
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: pinSectionRef.current,
-          pin: true,
-          scrub: 1,
-          start: 'top top',
-          end: `+=${totalVh}%`
-        }
-      })
+      const tl = gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: pinSectionRef.current,
+            pin: true,
+            scrub: 1,
+            start: 'top top',
+            end: `+=${totalVh}%`
+          }
+        })
 
-      tl.fromTo('#canvas-container', { opacity: 0 }, { opacity: 1, ease: 'power1.in', duration: startCurtainDuration })
-        /* value is scroll length */
+        /* tl.fromTo('#canvas-container', { opacity: 0 }, { opacity: 1, ease: 'power1.in', duration: startCurtainDuration }) */
+
         .to(scrollProxy.current, { value: slidesData.length - 1, ease: 'none', duration: totalScrollDuration }, '>')
-        .to('#canvas-container', { opacity: 0, ease: 'power1.out', duration: endCurtainDuration }, '>') //
+      /*  .to('#canvas-container', { opacity: 0, ease: 'power1.out', duration: endCurtainDuration }, '>') */
     }, pinSectionRef)
 
     return () => ctx.revert()
