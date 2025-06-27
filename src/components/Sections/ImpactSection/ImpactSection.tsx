@@ -41,6 +41,7 @@ const animationCache: Record<string, AnimationData> = {}
 export const ImpactSection = () => {
   const t = useTranslations('ImpactSection')
   const locale = useLocale()
+  const isArabic = locale == 'ar'
   const containerRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLDivElement>(null)
@@ -195,8 +196,8 @@ export const ImpactSection = () => {
     const container = containerRef.current
     if (!wrapper || !container) return
 
-    const fromX = isMobile ? -200 : isTablet ? -1000 : -1500
-    const toX = fromX + 200
+    const fromX = isArabic ? (isMobile ? 200 : isTablet ? 1000 : 1500) : isMobile ? -200 : isTablet ? -1000 : -1500
+    const toX = isArabic ? fromX - 200 : fromX + 200
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
