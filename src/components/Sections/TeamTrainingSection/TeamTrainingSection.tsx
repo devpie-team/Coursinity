@@ -254,7 +254,7 @@ export const TeamTrainingSection = () => {
         <button
           className="button-gradient h-[56px] rounded-full px-6 py-5 text-center
               text-white text-caption !bg-black
-              transition-all w-[200px] max-lg:w-[343px]">
+              transition-all w-[200px] max-lg:w-[343px] max-md:self-center">
           {t('button')}
         </button>
       </div>
