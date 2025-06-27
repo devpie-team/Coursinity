@@ -1,11 +1,11 @@
 'use client'
 
+import React from 'react'
 import { useEffect, useRef, useMemo, useCallback, useState } from 'react'
 import { gsap } from 'gsap'
 import { useLocale, useTranslations } from 'next-intl'
 import { Typography } from '@/components/ui'
-import AOS from 'aos'
-import 'aos/dist/aos.css'
+
 import Lottie, { type LottieRefCurrentProps, type LottieComponentProps } from 'lottie-react'
 
 import { BuildingIcon, BusinessIcon, EducationIcon, SmileIcon } from '@/components/icons'
@@ -43,18 +43,12 @@ export const ImpactSection = () => {
   const locale = useLocale()
   const containerRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
-
-  const GROUP_COUNT = 2
-  const ANIMATION_COUNT = 9
-
-  const lottieRefs = Array.from({ length: ANIMATION_COUNT }, () =>
-    Array.from({ length: GROUP_COUNT }, () => useRef<LottieRefCurrentProps>(null))
-  )
-
+  const sectionRef = useRef<HTMLDivElement>(null)
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [animations, setAnimations] = useState<AnimationItem[]>([])
   const [isTablet, setIsTablet] = useState<boolean>(false)
   const [isDesktop, setIsDesktop] = useState<boolean>(true)
+  const [isVisible, setIsVisible] = useState<boolean>(false)
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -68,6 +62,44 @@ export const ImpactSection = () => {
 
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  const GROUP_COUNT = 2
+  const ANIMATION_COUNT = 9
+  const lottieRefs = useRef(
+    Array.from({ length: ANIMATION_COUNT }, () =>
+      Array.from({ length: GROUP_COUNT }, () => React.createRef<LottieRefCurrentProps>())
+    )
+  ).current
+
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        setIsVisible(entry.isIntersecting)
+
+        if (!entry.isIntersecting) {
+          lottieRefs.forEach((animationGroup) => {
+            animationGroup.forEach((ref) => {
+              ref.current?.stop()
+            })
+          })
+        }
+      },
+      {
+        rootMargin: '100px',
+        threshold: 0.1
+      }
+    )
+
+    observer.observe(section)
+
+    return () => {
+      observer.disconnect()
+    }
   }, [])
 
   const loadAnimation = useCallback(
@@ -163,34 +195,31 @@ export const ImpactSection = () => {
     const container = containerRef.current
     if (!wrapper || !container) return
 
-    const wrapperWidth = wrapper.offsetWidth / 2
-
-    const scrollDistance = 200
+    const fromX = isMobile ? -200 : isTablet ? -1000 : -1500
+    const toX = fromX + 200
 
     const ctx = gsap.context(() => {
-      gsap.set(wrapper, { x: isMobile ? -500 : isTablet ? -1000 : -1500 })
-
-      gsap.to(wrapper, {
-        x: `+=${scrollDistance}`,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: container,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true
+      gsap.fromTo(
+        wrapper,
+        { x: fromX },
+        {
+          x: toX,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: container,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
         }
-      })
+      )
     }, container)
 
     return () => ctx.revert()
   }, [locale, isMobile, isTablet])
 
   useEffect(() => {
-    AOS.init()
-  }, [])
-
-  useEffect(() => {
-    if (animations.length === 0) return
+    if (animations.length === 0 || !isVisible) return
 
     let timeouts: NodeJS.Timeout[] = []
     let intervals: NodeJS.Timeout[] = []
@@ -198,9 +227,13 @@ export const ImpactSection = () => {
     const STAGGER = 600
 
     const playAllStaggered = () => {
+      if (!isVisible) return
+
       animations.forEach((_, i) => {
         timeouts.push(
           setTimeout(() => {
+            if (!isVisible) return
+
             for (let group = 0; group < GROUP_COUNT; group++) {
               const ref = lottieRefs[i][group].current
               ref?.stop()
@@ -211,20 +244,34 @@ export const ImpactSection = () => {
       })
     }
 
-    playAllStaggered()
+    if (isVisible) {
+      playAllStaggered()
 
-    const intervalDuration = 3000 + (ANIMATION_COUNT - 1) * STAGGER
-    const interval = setInterval(playAllStaggered, intervalDuration)
-    intervals.push(interval)
+      const intervalDuration = 3000 + (ANIMATION_COUNT - 1) * STAGGER
+      const interval = setInterval(() => {
+        if (isVisible) {
+          playAllStaggered()
+        }
+      }, intervalDuration)
+      intervals.push(interval)
+    }
 
     return () => {
       timeouts.forEach(clearTimeout)
       intervals.forEach(clearInterval)
+
+      lottieRefs.forEach((animationGroup) => {
+        animationGroup.forEach((ref) => {
+          ref.current?.stop()
+        })
+      })
     }
-  }, [animations, isMobile])
+  }, [animations, isMobile, isVisible])
 
   return (
-    <section className="pt-32 pb-[80px] bg-black flex flex-col gap-[52px] overflow-hidden max-md:pt-20 max-lg:pb-[100px]">
+    <section
+      ref={sectionRef}
+      className="pt-32 pb-[80px] bg-black flex flex-col gap-[52px] overflow-hidden max-md:pt-20 max-lg:pb-[100px]">
       <div className="flex flex-col gap-4 text-center text-white px-4">
         <Typography
           variant={isDesktop ? 'h3' : 'h5'}
@@ -242,7 +289,7 @@ export const ImpactSection = () => {
         ref={containerRef}
         className="relative h-[408px] min-w-[786px]  md:h-[672px] md:min-w-[1905px] max-[1705]:min-w-[1705px] bg-black overflow-hidden ">
         <div ref={wrapperRef} className="absolute flex">
-          {Array.from({ length: GROUP_COUNT }).map((_, groupIdx) => (
+          {Array.from({ length: isMobile ? 1 : GROUP_COUNT }).map((_, groupIdx) => (
             <div
               key={groupIdx}
               className="relative flex-shrink-0"
@@ -269,6 +316,9 @@ export const ImpactSection = () => {
                       autoplay={false}
                       className={className}
                       loop={false}
+                      style={{
+                        visibility: isVisible ? 'visible' : 'hidden'
+                      }}
                     />
                   )
               )}
