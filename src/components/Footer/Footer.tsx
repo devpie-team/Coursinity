@@ -84,7 +84,7 @@ const Footer = ({ className }: FooterProps) => {
           <div className="grid grid-cols-[1fr_3fr] gap-[50px] pb-20 max-md:pb-0 max-lg:pb-8 max-lg:gap-8  max-md:grid-rows-[1fr_3fr] max-md:grid-cols-1">
             {/* Coursinity column */}
             <FadeInOnView>
-              <div className="flex flex-col gap-[20px] font-medium flex-none max-w-[240px] max-[834px]:max-w-full">
+              <div className="flex flex-col gap-[20px] font-medium flex-none max-w-[240px] max-md:max-w-full">
                 <Typography variant={isTablet ? 'body1' : 'body2'} weight="medium">
                   {t('columns.coursinity.title')}
                 </Typography>
