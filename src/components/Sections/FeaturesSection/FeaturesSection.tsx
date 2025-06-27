@@ -11,18 +11,18 @@ import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 
-const certifications = [
-  { src: '/assets/certifications/CompTia.png', alt: 'CompTIA logo' },
-  { src: '/assets/certifications/Microsoft_Partner.png', alt: 'Microsoft logo' },
-  { src: '/assets/certifications/Minestry_of_Health.png', alt: 'Ministry of Health logo' },
-  { src: '/assets/certifications/Axelos.png', alt: 'Axelos logo' },
-  { src: '/assets/certifications/Dubai_Courts.png', alt: 'Dubai_Courts logo' },
-  { src: '/assets/certifications/Bahri_Ship_Mgmt.png', alt: 'Bahri_Ship_Mgmt logo' },
-  { src: '/assets/certifications/dubai_digital.png', alt: 'Digital_Dubai logo' },
-  { src: '/assets/certifications/Minestry_of_Health.png', alt: 'Ministry of Health logo' }
+const certificationsLeft = [
+  { src: '/assets/certifications/CompTia.png', alt: 'CompTIA logo', padding: 'py-2' },
+  { src: '/assets/certifications/Microsoft_Partner.png', alt: 'Microsoft logo', padding: 'py-2' },
+  { src: '/assets/certifications/Minestry_of_Health.png', alt: 'Ministry of Health logo', padding: 'py-2' },
+  { src: '/assets/certifications/Axelos.png', alt: 'Axelos logo', padding: 'py-2' }
 ]
-const certificationsLeft = certifications.slice(0, 4)
-const certificationsRight = certifications.slice(4)
+const certificationsRight = [
+  { src: '/assets/certifications/Dubai_Courts.png', alt: 'Dubai_Courts logo', padding: 'py-2' },
+  { src: '/assets/certifications/Bahri_Ship_Mgmt.png', alt: 'Bahri_Ship_Mgmt logo', padding: 'py-[3px]' },
+  { src: '/assets/certifications/dubai_digital.png', alt: 'Digital_Dubai logo', padding: 'py-1' },
+  { src: '/assets/certifications/Minestry_of_Health.png', alt: 'Ministry of Health logo', padding: 'p-[6px]' }
+]
 
 export const FeaturesSection = () => {
   const t = useTranslations('Features')
@@ -91,9 +91,9 @@ export const FeaturesSection = () => {
               })}
 
               <div className="grid grid-cols-2 grid-rows-2 place-items-center mt-auto gap-[10px] max-lg:mt-0 max-lg:pt-3">
-                {certificationsLeft.map(({ src, alt }, i) => (
-                  <div key={i} className="flex  rounded-[10px] justify-center items-center w-full h-12 max-lg:h-10">
-                    <img src={src} alt={alt} className="max-h-[48px] max-lg:max-h-10" />
+                {certificationsLeft.map(({ src, alt, padding }, i) => (
+                  <div key={i} className="flex rounded-[10px] justify-center items-center w-full h-12 max-lg:h-10">
+                    <img src={src} alt={alt} className={`max-h-[48px] max-lg:max-h-[42px] ${padding}`} />
                   </div>
                 ))}
               </div>
@@ -142,9 +142,14 @@ export const FeaturesSection = () => {
               ))}
 
               <div className={cn('grid grid-cols-2 grid-rows-2 place-items-center  gap-4  mt-4', !isDesktop && 'pt-3')}>
-                {certificationsRight.map(({ src, alt }, i) => (
-                  <div key={i} className="flex  rounded-[10px] justify-center items-center w-full h-12 max-lg:h-[42px]">
-                    <img src={src} alt={alt} className="max-h-[64px] max-lg:max-h-[42px]" />
+                {certificationsRight.map(({ src, alt, padding }, i) => (
+                  <div key={i} className="flex rounded-[10px] justify-center items-center w-full h-12 max-lg:h-[42px] ">
+                    <img
+                      src={src}
+                      alt={alt}
+                      className={`max-h-[64px] max-lg:max-h-[42px] 
+                      ${padding}`}
+                    />
                   </div>
                 ))}
               </div>
