@@ -71,7 +71,7 @@ export const Typography = <T extends ElementType = 'p'>({
         case 'regular':
           return 'font-normal'
         case 'medium':
-          return 'font-medium'
+          return 'font-bold'
         case 'semibold':
           return 'font-bold'
         case 'bold':

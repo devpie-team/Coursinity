@@ -19,6 +19,7 @@ import hero4Ar from '../../../../public/assets/lottie/hero/ar/h_4.json'
 import type { LottieRefCurrentProps } from 'lottie-react'
 import 'aos/dist/aos.css'
 import { BubbleIcon } from '@/components/icons'
+import { cn } from '@/lib/utils'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -26,19 +27,19 @@ type THeroSection = {
   loading: boolean
 }
 
-const elementSettings = [
-  { selector: '.hero-element1', x: -1200, y: 1200, duration: 2, fade: true },
-  { selector: '.hero-element2', x: 1200, y: 1200, duration: 2, fade: true },
-  { selector: '.hero-element3', x: -1200, y: -1200, duration: 2, fade: true },
-  { selector: '.hero-element4', x: 1200, y: -1200, duration: 2, fade: true },
-  { selector: '.hero-element5', x: 0, y: 0, duration: 1, fade: false },
-  { selector: '.hero-element6', x: 1200, y: 0, duration: 2, fade: true },
-  { selector: '.hero-element7', x: -1200, y: 0, duration: 2, fade: true }
-]
-
 export const HeroSection = ({ loading }: THeroSection) => {
   const locale = useLocale()
   const isArabic = locale == 'ar'
+
+  const elementSettings = [
+    { selector: '.hero-element1', x: -1200, y: 1200, duration: 2, fade: true },
+    { selector: '.hero-element2', x: 1200, y: 1200, duration: 2, fade: true },
+    { selector: '.hero-element3', x: -1200, y: -1200, duration: 2, fade: true },
+    { selector: '.hero-element4', x: 1200, y: -1200, duration: 2, fade: true },
+    { selector: '.hero-element5', x: 0, y: isArabic ? 100 : 0, duration: 1, fade: false },
+    { selector: '.hero-element6', x: 1200, y: 0, duration: 2, fade: true },
+    { selector: '.hero-element7', x: -1200, y: 0, duration: 2, fade: true }
+  ]
 
   const hero1 = isArabic ? hero1Ar : hero1En
   const hero2 = isArabic ? hero2Ar : hero2En
@@ -163,7 +164,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
               </div>
             ) : (
               <div>
-                <Typography variant="h1" as="span" weight="medium">
+                <Typography variant="h1" as="span" weight="medium" className="leading-[120px]">
                   {t('title')}
                 </Typography>
                 <Typography
@@ -213,8 +214,12 @@ export const HeroSection = ({ loading }: THeroSection) => {
         animationData={hero3}
         loop={false}
         lottieRef={lottieRef3}
-        className="absolute top-[15%] left-[42%] max-[768px]:top-[22%] max-[768px]:left-[25%] animate-element hero-element5 max-lg:h-[85px] max-lg:w-[199px]"
+        className={cn(
+          'absolute left-[42%] max-[768px]:top-[22%] max-[768px]:left-[25%] animate-element hero-element5 max-lg:h-[85px] max-lg:w-[199px]',
+          isArabic ? 'top-[13%]' : 'top-[15%]'
+        )}
       />
+
       {isMobile ? null : (
         <>
           <Lottie
