@@ -285,7 +285,7 @@ export const ImpactSectionNew = () => {
   )
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="pt-32 pb-[89px] bg-black flex flex-col gap-[52px] overflow-hidden max-md:pt-20">
       <div className="flex flex-col gap-4 text-center text-white px-4">
@@ -304,11 +304,12 @@ export const ImpactSectionNew = () => {
       <div
         ref={containerRef}
         className="scroll-wrapper relative h-[408px] min-w-[786px] md:h-[572px] lg:h-[672px] md:min-w-[1905px] max-[1705]:min-w-[1705px] bg-black overflow-hidden">
-        <div 
+        <div
           className={`scroll-track ${isVisible ? `animate-scroll-${locale === 'ar' ? 'right' : 'left'}` : ''}`}
           style={{
             display: 'flex',
-            width: 'max-content'
+            width: 'max-content',
+            transform: locale === 'ar' ? 'translateX(-500%)' : 'translateX(0%)'
           }}>
           {renderGroup(0)} {/* Перша копія */}
           {renderGroup(1)} {/* Дубль контенту */}
@@ -340,7 +341,7 @@ export const ImpactSectionNew = () => {
 
         @keyframes scroll-right {
           0% {
-            transform: translateX(-50%);
+            transform: translateX(50%);
           }
           100% {
             transform: translateX(0%);
