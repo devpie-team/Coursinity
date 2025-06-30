@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 import { Theme } from '@radix-ui/themes'
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
@@ -13,6 +14,27 @@ const poppins = Poppins({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-poppins'
+})
+
+const kanunAR = localFont({
+  src: [
+    {
+      path: '../../fonts/KanunAR-Regular.otf',
+      weight: '400',
+      style: 'normal'
+    },
+    {
+      path: '../../fonts/KanunAR-Medium.otf',
+      weight: '500',
+      style: 'medium'
+    },
+    {
+      path: '../../fonts/KanunAR-Bold.otf',
+      weight: '700',
+      style: 'bold'
+    }
+  ],
+  variable: '--font-kanun-ar'
 })
 
 export const metadata: Metadata = {
@@ -32,8 +54,11 @@ export default async function LocaleLayout({
     notFound()
   }
 
+  const isArabic = locale === 'ar'
+  const fontClass = isArabic ? kanunAR.variable : poppins.variable
+
   return (
-    <html lang={locale} className={poppins.variable} dir={locale == 'ar' ? 'rtl' : 'ltr'}>
+    <html lang={locale} className={fontClass} dir={locale == 'ar' ? 'rtl' : 'ltr'}>
       <body>
         <NextIntlClientProvider>
           <Theme>

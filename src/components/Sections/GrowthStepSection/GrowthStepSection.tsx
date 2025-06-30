@@ -124,7 +124,7 @@ export const GrowthStepSection = () => {
           <Typography variant="h6" weight="regular" className="text-white">
             {t('common.subtitle')}
           </Typography>
-          <Button variant="secondary" className="w-[190px]">
+          <Button variant="purple" className="w-[190px]">
             {t('common.cta')}
           </Button>
           <div className="absolute bottom-[140px] right-[140px]" data-aos="fade" data-aos-offset="-80">
@@ -160,7 +160,7 @@ export const GrowthStepSection = () => {
             activeStep={getStepperIndex(activeIndex)}
             onStepClick={(step) => setActiveIndex(step - 1)}
           />
-          <Button variant="secondary" className="w-[343px]">
+          <Button variant="purple" className="w-[343px]">
             {t('common.cta')}
           </Button>
         </div>
