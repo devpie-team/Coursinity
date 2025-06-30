@@ -195,19 +195,21 @@ export const HeroSection = ({ loading }: THeroSection) => {
         className="absolute bottom-[-40px] left-3 max-[1024px]:left-1  max-[1024px]:bottom-[-20px] animate-element hero-element1  max-lg:h-[135px] max-lg:w-[135px]"
       />
       <img
-        src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}2.png/`}
+        src={`/assets/hero/${locale}/${isTablet ? 'tabletElement' : 'element'}2.png/`}
         className="absolute bottom-[-40px] right-[-40px] animate-element hero-element2 max-w-[228px] max-md:max-w-[163px]"
       />
-      {isTablet ? (
+      {isTablet && !isArabic ? (
         <BubbleIcon />
       ) : (
         <img
-          src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}3.png/`}
-          className="absolute top-[15%] left-0  max-[768px]:top-[10%] animate-element hero-element3  max-w-[222px] max-md:max-w-[117px]"
+          src={`/assets/hero/${locale}/${isTablet && !isArabic ? 'tabletElement' : 'element'}3.png/`}
+          className={`absolute top-[15%] left-0  max-[768px]:top-[10%] animate-element hero-element3 max-w-[${
+            !isArabic ? '222px' : '126px'
+          }] max-md:max-w-[80px]`}
         />
       )}
       <img
-        src={`/assets/hero/${'en'}/${isTablet ? 'tabletElement' : 'element'}4.png/`}
+        src={`/assets/hero/${locale}/${isTablet ? 'tabletElement' : 'element'}4.png/`}
         className="absolute top-[15%] right-[-30px] max-[768px]:top-[10%] max-[1024px]:right-[-15px] animate-element hero-element4 max-w-[86px] max-md:max-w-[54px]"
       />
       <Lottie
