@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.coursinity.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.coursinity.com/en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.coursinity.com/ar"/>
+    <lastmod>2025-01-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.coursinity.com/en</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.coursinity.com/en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.coursinity.com/ar"/>
+    <lastmod>2025-01-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.coursinity.com/ar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.coursinity.com/en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.coursinity.com/ar"/>
+    <lastmod>2025-01-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.coursinity.com/en/contact-form</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.coursinity.com/en/contact-form"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.coursinity.com/ar/contact-form"/>
+    <lastmod>2025-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.coursinity.com/ar/contact-form</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.coursinity.com/en/contact-form"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.coursinity.com/ar/contact-form"/>
+    <lastmod>2025-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset> 
