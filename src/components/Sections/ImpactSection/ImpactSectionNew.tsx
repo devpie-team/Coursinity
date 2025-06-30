@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef, useMemo, useCallback, useState } from 'react'
-import { gsap } from 'gsap'
 import { useLocale, useTranslations } from 'next-intl'
 import { Typography } from '@/components/ui'
 import AOS from 'aos'
@@ -10,6 +9,7 @@ import Lottie, { type LottieRefCurrentProps, type LottieComponentProps } from 'l
 
 import { BuildingIcon, BusinessIcon, EducationIcon, SmileIcon } from '@/components/icons'
 import { get, set } from 'idb-keyval'
+import { ChartNotificationIcon } from '@/components/icons/ChartNotificationIcon'
 
 // Types
 type AnimationData = {
@@ -42,19 +42,20 @@ export const ImpactSectionNew = () => {
   const t = useTranslations('ImpactSection')
   const locale = useLocale()
   const containerRef = useRef<HTMLDivElement>(null)
-  const wrapperRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLDivElement>(null)
 
-  const GROUP_COUNT = 2
   const ANIMATION_COUNT = 9
 
-  const lottieRefs = Array.from({ length: ANIMATION_COUNT }, () =>
-    Array.from({ length: GROUP_COUNT }, () => useRef<LottieRefCurrentProps>(null))
+  const lottieRefs = Array.from(
+    { length: ANIMATION_COUNT },
+    () => Array.from({ length: 2 }, () => useRef<LottieRefCurrentProps>(null)) // 2 копії для безшовного скролу
   )
 
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [animations, setAnimations] = useState<AnimationItem[]>([])
   const [isTablet, setIsTablet] = useState<boolean>(false)
   const [isDesktop, setIsDesktop] = useState<boolean>(true)
+  const [isVisible, setIsVisible] = useState<boolean>(false)
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -68,6 +69,38 @@ export const ImpactSectionNew = () => {
 
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  // Intersection Observer для визначення видимості секції
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        setIsVisible(entry.isIntersecting)
+
+        // Зупиняємо всі Lottie анімації коли секція не видима
+        if (!entry.isIntersecting) {
+          lottieRefs.forEach((animationGroup) => {
+            animationGroup.forEach((ref) => {
+              ref.current?.stop()
+            })
+          })
+        }
+      },
+      {
+        rootMargin: '100px',
+        threshold: 0.1
+      }
+    )
+
+    observer.observe(section)
+
+    return () => {
+      observer.disconnect()
+    }
   }, [])
 
   const loadAnimation = useCallback(
@@ -159,30 +192,11 @@ export const ImpactSectionNew = () => {
   }, [animationPaths, loadAnimation, isMobile])
 
   useEffect(() => {
-    const wrapper = wrapperRef.current
-    const container = containerRef.current
-    if (!wrapper || !container) return
-
-    const wrapperWidth = wrapper.offsetWidth / 2
-
-    gsap.fromTo(
-      wrapper,
-      { x: locale === 'ar' ? wrapperWidth : 0 },
-      {
-        x: locale === 'ar' ? 0 : -wrapperWidth,
-        duration: 12,
-        ease: 'linear',
-        repeat: -1
-      }
-    )
-  }, [locale, isMobile])
-
-  useEffect(() => {
     AOS.init()
   }, [])
 
   useEffect(() => {
-    if (animations.length === 0) return
+    if (animations.length === 0 || !isVisible) return
 
     let timeouts: NodeJS.Timeout[] = []
     let intervals: NodeJS.Timeout[] = []
@@ -190,11 +204,16 @@ export const ImpactSectionNew = () => {
     const STAGGER = 600
 
     const playAllStaggered = () => {
+      if (!isVisible) return
+
       animations.forEach((_, i) => {
         timeouts.push(
           setTimeout(() => {
-            for (let group = 0; group < GROUP_COUNT; group++) {
-              const ref = lottieRefs[i][group].current
+            if (!isVisible) return
+
+            // Запускаємо анімації для обох копій
+            for (let copy = 0; copy < 2; copy++) {
+              const ref = lottieRefs[i][copy].current
               ref?.stop()
               ref?.play()
             }
@@ -203,20 +222,72 @@ export const ImpactSectionNew = () => {
       })
     }
 
-    playAllStaggered()
+    if (isVisible) {
+      playAllStaggered()
 
-    const intervalDuration = 3000 + (ANIMATION_COUNT - 1) * STAGGER
-    const interval = setInterval(playAllStaggered, intervalDuration)
-    intervals.push(interval)
+      const intervalDuration = 3000 + (ANIMATION_COUNT - 1) * STAGGER
+      const interval = setInterval(() => {
+        if (isVisible) {
+          playAllStaggered()
+        }
+      }, intervalDuration)
+      intervals.push(interval)
+    }
 
     return () => {
       timeouts.forEach(clearTimeout)
       intervals.forEach(clearInterval)
+
+      // Зупиняємо всі анімації при cleanup
+      lottieRefs.forEach((animationGroup) => {
+        animationGroup.forEach((ref) => {
+          ref.current?.stop()
+        })
+      })
     }
-  }, [animations, isMobile])
+  }, [animations, isMobile, isVisible])
+
+  // Функція для рендерингу однієї групи контенту
+  const renderGroup = (copyIndex: number) => (
+    <div
+      key={copyIndex}
+      className="scroll-item relative flex-shrink-0"
+      style={{ width: isMobile ? '768px' : '1705px', height: isMobile ? '408px' : '633px' }}>
+      <div className="blue-gradient-border rounded-[10px] absolute w-[48px] h-[48px]  md:w-[100px] md:h-[100px] bottom-[113px] md:bottom-[17px]  left-[264px] flex items-center justify-center ">
+        <BusinessIcon />
+      </div>
+      <div className="blue-gradient-border rounded-[10px] absolute w-[48px] h-[48px]  md:w-[100px] md:h-[100px] top-[15px] md:top-[30px] right-[50px] flex items-center justify-center ">
+        <BuildingIcon />
+      </div>
+      <div className="blue-gradient-border rounded-[10px] absolute w-[48px] h-[48px]  md:w-[100px] md:h-[100px] top-0 right-[380px] md:right-[438px] flex items-center justify-center ">
+        <EducationIcon />
+      </div>
+      <div className="blue-gradient-border rounded-[10px] absolute w-[48px] h-[48px]  md:w-[100px] md:h-[100px] bottom-[40px] md:bottom-[58px] right-[600px] md:right-[507px] flex items-center justify-center ">
+        <ChartNotificationIcon />
+      </div>
+      {animations.map(
+        ({ animation, className }, i) =>
+          animation && (
+            <Lottie
+              key={`${copyIndex}-${i}`}
+              lottieRef={lottieRefs[i][copyIndex]}
+              animationData={animation}
+              autoplay={false}
+              className={className}
+              loop={false}
+              style={{
+                visibility: isVisible ? 'visible' : 'hidden'
+              }}
+            />
+          )
+      )}
+    </div>
+  )
 
   return (
-    <section className="pt-32 pb-[89px] bg-black flex flex-col gap-[52px] overflow-hidden max-md:pt-20">
+    <section 
+      ref={sectionRef}
+      className="pt-32 pb-[89px] bg-black flex flex-col gap-[52px] overflow-hidden max-md:pt-20">
       <div className="flex flex-col gap-4 text-center text-white px-4">
         <Typography
           variant={isDesktop ? 'h3' : 'h5'}
@@ -232,42 +303,58 @@ export const ImpactSectionNew = () => {
 
       <div
         ref={containerRef}
-        className="relative h-[408px] min-w-[786px] md:h-[572px] lg:h-[672px] md:min-w-[1905px] max-[1705]:min-w-[1705px] bg-black overflow-hidden">
-        <div ref={wrapperRef} className="absolute flex">
-          {Array.from({ length: GROUP_COUNT }).map((_, groupIdx) => (
-            <div
-              key={groupIdx}
-              className="relative flex-shrink-0"
-              style={{ width: isMobile ? '768px' : '1705px', height: isMobile ? '408px' : '633px' }}>
-              <div className="blue-gradient-border rounded-[10px] absolute w-[48px] h-[48px]  md:w-[100px] md:h-[100px] bottom-[113px] md:bottom-[17px]  left-[264px] flex items-center justify-center ">
-                <BusinessIcon />
-              </div>
-              <div className="blue-gradient-border rounded-[10px] absolute w-[48px] h-[48px]  md:w-[100px] md:h-[100px] top-[15px] md:top-[30px] right-[50px] flex items-center justify-center ">
-                <BuildingIcon />
-              </div>
-              <div className="blue-gradient-border rounded-[10px] absolute w-[48px] h-[48px]  md:w-[100px] md:h-[100px] top-0 right-[380px] md:right-[438px] flex items-center justify-center ">
-                <EducationIcon />
-              </div>
-              <div className="blue-gradient-border rounded-[10px] absolute w-[48px] h-[48px]  md:w-[100px] md:h-[100px] bottom-[40px] md:bottom-[58px] right-[600px] md:right-[507px] flex items-center justify-center ">
-                <SmileIcon />
-              </div>
-              {animations.map(
-                ({ animation, className }, i) =>
-                  animation && (
-                    <Lottie
-                      key={`${groupIdx}-${i}`}
-                      lottieRef={lottieRefs[i][groupIdx]}
-                      animationData={animation}
-                      autoplay={false}
-                      className={className}
-                      loop={false}
-                    />
-                  )
-              )}
-            </div>
-          ))}
+        className="scroll-wrapper relative h-[408px] min-w-[786px] md:h-[572px] lg:h-[672px] md:min-w-[1905px] max-[1705]:min-w-[1705px] bg-black overflow-hidden">
+        <div 
+          className={`scroll-track ${isVisible ? `animate-scroll-${locale === 'ar' ? 'right' : 'left'}` : ''}`}
+          style={{
+            display: 'flex',
+            width: 'max-content'
+          }}>
+          {renderGroup(0)} {/* Перша копія */}
+          {renderGroup(1)} {/* Дубль контенту */}
         </div>
       </div>
+
+      <style jsx>{`
+        .scroll-wrapper {
+          overflow: hidden;
+        }
+
+        .scroll-track {
+          display: flex;
+          width: max-content;
+        }
+
+        .scroll-item {
+          flex-shrink: 0;
+        }
+
+        @keyframes scroll-left {
+          0% {
+            transform: translateX(0%);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        @keyframes scroll-right {
+          0% {
+            transform: translateX(-50%);
+          }
+          100% {
+            transform: translateX(0%);
+          }
+        }
+
+        .animate-scroll-left {
+          animation: scroll-left 15s linear infinite;
+        }
+
+        .animate-scroll-right {
+          animation: scroll-right 15s linear infinite;
+        }
+      `}</style>
     </section>
   )
 }
