@@ -64,14 +64,13 @@ export const Typography = <T extends ElementType = 'p'>({
   const isArabic = locale === 'ar'
   const fontClass = isArabic ? 'font-kanun-ar' : 'font-poppins'
 
-  // Умовний мапінг ваг для арабської мови
   const getWeightClass = () => {
     if (isArabic) {
       switch (weight) {
         case 'regular':
           return 'font-normal'
         case 'medium':
-          return 'font-medium'
+          return 'font-bold'
         case 'semibold':
           return 'font-bold'
         case 'bold':
@@ -80,7 +79,6 @@ export const Typography = <T extends ElementType = 'p'>({
           return 'font-normal'
       }
     } else {
-      // Для англійської мови звичайний мапінг
       switch (weight) {
         case 'regular':
           return 'font-normal'
