@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { ElementType, ReactNode, ComponentPropsWithoutRef } from 'react'
 import React from 'react'
+import { useLocale } from 'next-intl'
 
 type Variant =
   | 'h1'
@@ -59,7 +60,43 @@ export const Typography = <T extends ElementType = 'p'>({
   ...props
 }: TypographyProps<T>) => {
   const Component = as || 'p'
-  const combinedClassName = clsx(variantMap[variant], weightMap[weight], 'font-poppins', className)
+  const locale = useLocale()
+  const isArabic = locale === 'ar'
+  const fontClass = isArabic ? 'font-kanun-ar' : 'font-poppins'
+
+  // Умовний мапінг ваг для арабської мови
+  const getWeightClass = () => {
+    if (isArabic) {
+      switch (weight) {
+        case 'regular':
+          return 'font-normal'
+        case 'medium':
+          return 'font-medium'
+        case 'semibold':
+          return 'font-bold'
+        case 'bold':
+          return 'font-bold'
+        default:
+          return 'font-normal'
+      }
+    } else {
+      // Для англійської мови звичайний мапінг
+      switch (weight) {
+        case 'regular':
+          return 'font-normal'
+        case 'medium':
+          return 'font-medium'
+        case 'semibold':
+          return 'font-semibold'
+        case 'bold':
+          return 'font-bold'
+        default:
+          return 'font-normal'
+      }
+    }
+  }
+
+  const combinedClassName = clsx(variantMap[variant], getWeightClass(), fontClass, className)
 
   return React.createElement(Component, { className: combinedClassName, ...props }, children)
 }

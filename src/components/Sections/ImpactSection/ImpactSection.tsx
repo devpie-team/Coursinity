@@ -304,9 +304,9 @@ export const ImpactSection = () => {
               <div className="blue-gradient-border rounded-[10px] absolute w-[48px] h-[48px]  md:w-[100px] md:h-[100px] top-0 right-[380px] md:right-[438px] flex items-center justify-center ">
                 <EducationIcon />
               </div>
-              <div className="blue-gradient-border rounded-[10px] absolute w-[48px] h-[48px]  md:w-[100px] md:h-[100px] bottom-[40px] md:bottom-[58px] right-[600px] md:right-[507px] flex items-center justify-center ">
+              {/*   <div className="blue-gradient-border rounded-[10px] absolute w-[48px] h-[48px]  md:w-[100px] md:h-[100px] bottom-[40px] md:bottom-[58px] right-[600px] md:right-[507px] flex items-center justify-center ">
                 <SmileIcon />
-              </div>
+              </div> */}
               {animations.map(
                 ({ animation, className }, i) =>
                   animation && (

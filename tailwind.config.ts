@@ -14,7 +14,9 @@ export default {
         slideRight: 'slide-right 20s linear infinite'
       },
       fontFamily: {
-        sans: ['var(--font-poppins)', ...defaultTheme.fontFamily.sans]
+        sans: ['var(--font-poppins)', 'var(--font-kanun-ar)', ...defaultTheme.fontFamily.sans],
+        'poppins': ['var(--font-poppins)', ...defaultTheme.fontFamily.sans],
+        'kanun-ar': ['var(--font-kanun-ar)', ...defaultTheme.fontFamily.sans]
       },
       fontSize: {
         h1: ['80px', { lineHeight: '80px', fontWeight: '400', letterSpacing: '-0.03em' }],
@@ -69,7 +71,7 @@ export default {
       },
       screens: {
         'min1150': '1150px',
-        
+
       }
     }
   },

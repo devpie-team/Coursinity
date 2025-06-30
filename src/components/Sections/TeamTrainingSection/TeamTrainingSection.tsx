@@ -50,6 +50,12 @@ export const TeamTrainingSection = () => {
     () => [
       {
         path: isArabic
+          ? '/assets/lottie/team_train/team_train_3_ar.json'
+          : '/assets/lottie/team_train/team_train_3_en.json',
+        type: 'lottie'
+      },
+      {
+        path: isArabic
           ? '/assets/lottie/team_train/team_train_1_ar.json'
           : '/assets/lottie/team_train/team_train_1_en.json',
         type: 'lottie'
@@ -58,12 +64,6 @@ export const TeamTrainingSection = () => {
         path: isArabic
           ? '/assets/lottie/team_train/team_train_2_ar.json'
           : '/assets/lottie/team_train/team_train_2_en.json',
-        type: 'lottie'
-      },
-      {
-        path: isArabic
-          ? '/assets/lottie/team_train/team_train_3_ar.json'
-          : '/assets/lottie/team_train/team_train_3_en.json',
         type: 'lottie'
       },
       {
