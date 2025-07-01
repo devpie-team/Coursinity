@@ -48,7 +48,7 @@ export const HeaderDropdown = ({ start }: THeaderDropdown) => {
     <div
       className={`${
         start ? 'shadow-md' : ''
-      } relative px-6 py-4 gap-6 flex items-center bg-white rounded-[40px] justify-self-center`}>
+      } relative px-6 py-4 gap-6 flex items-center bg-white rounded-[40px] justify-self-center `}>
       <div
         className="gap-[10px] flex items-center cursor-pointer select-none"
         onClick={() => setOpened((v) => !v)}
