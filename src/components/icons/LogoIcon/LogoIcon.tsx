@@ -1,8 +1,24 @@
+import { useLocale } from 'next-intl'
+import { LogoIconAr } from '../LogoIconAr/LogoIconAr'
+
 type TLogoIcon = {
   className?: string
 }
 
 export const LogoIcon = ({ className }: TLogoIcon) => {
+  const locale = useLocale()
+  const isArabic = locale === 'ar'
+
+  if (isArabic) {
+    return (
+      <img
+        src="/assets/logos/logo_arabic.png"
+        alt="Coursinity Arabic Logo"
+        className={className}
+        style={{ width: '126px', height: '27px' }}
+      />
+    )
+  }
   return (
     <svg
       width="271"

@@ -42,9 +42,9 @@ export const CustomSelect = ({
       <Select value={value} onValueChange={onChange}>
         <SelectTrigger
           className={cn(
-            'w-full border disabled:pointer-events-none disabled:opacity-50 hover:border-description focus:border-black focus:outline-none',
+            'w-full border disabled:pointer-events-none disabled:opacity-50 hover:border-description focus:border-black focus:outline-none ',
             'relative h-[60px] px-5 py-[18px] rounded-2xl',
-            '[&_[data-placeholder]]:text-description transition-all duration-300', // ← це і є рішення
+            '[&_[data-placeholder]]:text-description transition-all duration-300',
             isError ? 'border-[#D92D20]' : 'border-secondary-400',
             className
           )}>

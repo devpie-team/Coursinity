@@ -73,16 +73,16 @@ export const ContactVisual = ({ className }: ContactVisualProps) => {
           <Lottie
             animationData={animationData1}
             className="absolute w-[110px] h-[100px] right-[-30px] bottom-[100px] opacity-30 max-md:hidden"
-            loop
-            autoplay
+            loop={false}
+            autoplay={true}
           />
         )}
         {animationData2 && (
           <Lottie
             animationData={animationData2}
             className="absolute w-[180px] h-[80px] left-[20px] top-[200px] rotate-[-9.75deg] opacity-30 max-md:hidden"
-            loop
-            autoplay
+            loop={false}
+            autoplay={true}
           />
         )}
       </div>

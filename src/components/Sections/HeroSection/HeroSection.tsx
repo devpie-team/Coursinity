@@ -164,7 +164,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
               </div>
             ) : (
               <div>
-                <Typography variant="h1" as="span" weight="medium" className={cn(isArabic ? 'leading-[120px]' : '')}>
+                <Typography variant="h1" as="span" weight="medium" className={cn(isArabic ? 'leading-[120px] ' : '')}>
                   {t('title')}
                 </Typography>
                 <Typography

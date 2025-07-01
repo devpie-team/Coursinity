@@ -136,7 +136,9 @@ export const AcademySection = () => {
       </div>
       <div className="flex flex-col items-center gap-8">
         <div ref={animationContainerRef} className="w-full rounded-2xl overflow-hidden" />
-        <Button variant="purple">{t('button')}</Button>
+        <a href={`/${locale}/contact-form`}>
+          <Button variant="purple">{t('button')}</Button>
+        </a>
       </div>
     </section>
   )

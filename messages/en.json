@@ -85,9 +85,9 @@
     }
   },
   "Hero": {
-    "title": "Lead The Change with a Future - ",
-    "titleGradient": "Ready Team",
-    "subtitle": "Empower your team with AI-driven, tailored training paths that bring your vision to life. The leader in Edu-tech solutions.",
+    "title": "Spark a Learning ",
+    "titleGradient": "revolution",
+    "subtitle": "Take your team’s productivity to a new paradigm",
     "bookDemo": "Book a Demo Now",
     "titleGradientMobile": "Spark a learning revolution.",
     "subtitleMobile": "Take your team's productivity to a new paradigm",
@@ -360,7 +360,7 @@
     "first_name": "First Name",
     "first_name_placeholder": "What should we call you?",
     "last_name": "Last Name",
-    "last_name_placeholder": "Your last name, please",
+    "last_name_placeholder": "Your last name",
     "business_email": "Business Email",
     "business_email_placeholder": "Where can we reach you?",
     "phone_number": "Phone Number",

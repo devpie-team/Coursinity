@@ -30,7 +30,12 @@ export default function ContactFormPage() {
       <Header />
       <main className="flex px-[116px] py-[101px] pb-[148px] bg-contact-gradient  justify-center items-center max-[1100px]:px-6 max-lg:py-20 ">
         <div className="flex border border-black border-opacity-10 rounded-3xl max-md:flex-col ">
-          <ContactVisual className="relative z-10  p-8 gap-[120px] flex flex-col justify-between items-center overflow-hidden max-lg:p-4  max-md:gap-12 max-md:pb-9" />
+          <ContactVisual
+            className={cn(
+              'relative z-10  p-8  flex flex-col justify-between items-center overflow-hidden max-lg:p-4  max-md:gap-12 max-md:pb-9',
+              isArabic ? 'gap-[80px]' : 'gap-[120px]'
+            )}
+          />
 
           <ContactForm
             className={cn(

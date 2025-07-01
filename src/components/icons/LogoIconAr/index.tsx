@@ -1,0 +1,1 @@
+export { LogoIconAr } from './LogoIconAr'
