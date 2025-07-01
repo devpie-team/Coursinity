@@ -30,19 +30,16 @@ export const TeamTrainingSection = () => {
   const locale = useLocale()
   const isArabic = locale == 'ar'
 
-  // Створюємо окремі refs для кожного Lottie-компонента (десктоп)
   const lottieRef0 = useRef<LottieRefCurrentProps>(null)
   const lottieRef1 = useRef<LottieRefCurrentProps>(null)
   const lottieRef2 = useRef<LottieRefCurrentProps>(null)
   const lottieRef3 = useRef<LottieRefCurrentProps>(null)
 
-  // Створюємо окремі refs для мобільної версії
   const mobileLottieRef0 = useRef<LottieRefCurrentProps>(null)
   const mobileLottieRef1 = useRef<LottieRefCurrentProps>(null)
   const mobileLottieRef2 = useRef<LottieRefCurrentProps>(null)
   const mobileLottieRef3 = useRef<LottieRefCurrentProps>(null)
 
-  // Масив refs для зручності
   const lottieRefs = [lottieRef0, lottieRef1, lottieRef2, lottieRef3]
   const mobileLottieRefs = [mobileLottieRef0, mobileLottieRef1, mobileLottieRef2, mobileLottieRef3]
 
@@ -96,18 +93,16 @@ export const TeamTrainingSection = () => {
 
       animationCache[path] = data
 
-      // Спробуємо зберегти в sessionStorage з обробкою помилок
       try {
         sessionStorage.setItem(path, JSON.stringify(data))
       } catch (storageError) {
         console.warn("Не вдалося зберегти в sessionStorage, використовуємо тільки пам'ять:", storageError)
-        // Очищаємо старий кеш якщо місця немає
+
         try {
           const keys = Object.keys(sessionStorage)
           if (keys.length > 10) {
-            // Видаляємо перші 5 ключів для звільнення місця
             keys.slice(0, 5).forEach((key) => sessionStorage.removeItem(key))
-            // Повторна спроба збереження
+
             sessionStorage.setItem(path, JSON.stringify(data))
           }
         } catch (cleanupError) {
@@ -157,13 +152,11 @@ export const TeamTrainingSection = () => {
   const handleFeatureClick = (i: number) => {
     if (i === selectedIndex) return
 
-    // Перезапускаємо анімацію при переключенні (десктоп)
     if (lottieRefs[i].current) {
       lottieRefs[i].current?.stop()
       lottieRefs[i].current?.play()
     }
 
-    // Перезапускаємо анімацію при переключенні (мобільна версія)
     if (mobileLottieRefs[i].current) {
       mobileLottieRefs[i].current?.stop()
       mobileLottieRefs[i].current?.play()
@@ -251,12 +244,13 @@ export const TeamTrainingSection = () => {
           </div>
         </FadeInOnView>
 
-        <button
+        <a
+          href={`/${locale}/contact-form`}
           className="button-gradient h-[56px] rounded-full px-6 py-5 text-center
               text-white text-caption !bg-black
               transition-all w-[200px] max-lg:w-[343px] max-md:self-center">
           {t('button')}
-        </button>
+        </a>
       </div>
 
       <div className="flex items-start shrink-0 max-md:hidden max-lg:items-center ">

@@ -19,7 +19,7 @@ export default {
         'kanun-ar': ['var(--font-kanun-ar)', ...defaultTheme.fontFamily.sans]
       },
       fontSize: {
-        h1: ['80px', { lineHeight: '80px', fontWeight: '400', letterSpacing: '-0.03em' }],
+        h1: ['80px', { lineHeight: '80px', fontWeight: '400', letterSpacing: '-0.06em' }],
         h2: ['64px', { lineHeight: '120%', fontWeight: '400', letterSpacing: '-0.04em' }],
         h3: ['42px', { lineHeight: '130%', fontWeight: '400', letterSpacing: '-0.04em' }],
         h4: ['32px', { lineHeight: '40px', fontWeight: '400' }],

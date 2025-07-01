@@ -127,7 +127,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={fontClass} dir={locale == 'ar' ? 'rtl' : 'ltr'}>
       <head>
-        <JsonLdSchema />
+        <JsonLdSchema locale={locale} />
       </head>
       <body>
         <NextIntlClientProvider>

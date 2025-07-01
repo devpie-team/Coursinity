@@ -127,11 +127,11 @@ export const ContactForm = ({ className, onSuccess }: ContactFormProps) => {
           )}
         </div>
 
-        <div className="min-w-0">
+        <div className="min-w-0 ">
           <Input
             label={t('phone_number')}
             placeholder={t('phone_number_placeholder')}
-            className="w-full"
+            className="w-full "
             type="tel"
             inputMode="tel"
             pattern="^\+\d{7,15}$"

@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { LogoIcon } from '../icons'
+import { useLocale } from 'next-intl'
 
 type TLoading = {
   loading?: boolean
@@ -11,6 +12,8 @@ export const Loader = ({ loading }: TLoading) => {
   const iconRef = useRef<HTMLDivElement>(null)
   const topBlockRef = useRef<HTMLDivElement>(null)
   const bottomBlockRef = useRef<HTMLDivElement>(null)
+  const locale = useLocale()
+  const isArabic = locale === 'ar'
 
   useEffect(() => {
     if (loading) {
@@ -89,7 +92,15 @@ export const Loader = ({ loading }: TLoading) => {
       />
 
       <div ref={iconRef} className="relative z-30">
-        <LogoIcon />
+        {isArabic ? (
+          <img
+            src="/assets/logos/logo_arabic.png"
+            alt="Coursinity Arabic Logo"
+            style={{ width: '270px', height: '54px' }}
+          />
+        ) : (
+          <LogoIcon />
+        )}
         <div
           ref={maskRef}
           className="pointer-events-none absolute inset-0 z-10"

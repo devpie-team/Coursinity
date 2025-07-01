@@ -172,7 +172,7 @@ export function SlideText({
 
     // Визначаємо шрифт залежно від мови
     const fontSize = isMobile ? 110 : 142
-    const fontFamily = locale === 'ar' ? 'Poppins, sans-serif' : 'Poppins, Arial, sans-serif'
+    const fontFamily = locale === 'ar' ? 'KanunAR, sans-serif' : 'Poppins, Arial, sans-serif'
     ctx.font = `normal ${fontSize}px ${fontFamily}`
 
     if (locale === 'ar') {

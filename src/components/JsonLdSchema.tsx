@@ -1,7 +1,8 @@
-import { useLocale } from 'next-intl'
+type JsonLdSchemaProps = {
+  locale: string
+}
 
-export const JsonLdSchema = () => {
-  const locale = useLocale()
+export const JsonLdSchema = ({ locale }: JsonLdSchemaProps) => {
   const isArabic = locale === 'ar'
 
   const organizationSchema = {
@@ -70,11 +71,14 @@ export const JsonLdSchema = () => {
     "@graph": [organizationSchema, serviceSchema, reviewSchema]
   }
 
+  // Використовуємо детермінований JSON формат
+  const jsonString = JSON.stringify(combinedSchema, null, 2)
+
   return (
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(combinedSchema, null, 2)
+        __html: jsonString
       }}
     />
   )

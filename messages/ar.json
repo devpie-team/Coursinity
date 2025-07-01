@@ -352,25 +352,25 @@
     "smarter": "Smarter"
   },
   "ContactVisual": {
-    "title": "جاهز عندما تكون مستعدًا",
-    "description": "احصل على لمحة سريعة عما يمكن أن تفعله تدريبات كورسينيتي المخصصة حقًا",
-    "footer": "ستسمع منا خلال 24 ساعة. فقط البشر."
+    "title": "اطلب عرضًا توضيحيًا واكتشف كيف نُحوّل التدريب إلى أداء",
+    "description": "استكشف كيف تصمم كورسنيتي تجربة تدريبية مخصصة لهوية مؤسستك، ومرتبطة بأدوار فريقك واحتياجه الفعلي، دون تعطيل سير العمل",
+    "footer": "سيتواصل معكم أحد ممثلي فريق الحلول التدريبية خلال يوم عمل"
   },
   "ContactForm": {
     "first_name": "الاسم الأول",
-    "first_name_placeholder": "كيف يجب أن نناديك؟",
+    "first_name_placeholder": "مثال: احمد",
     "last_name": "اسم العائلة",
-    "last_name_placeholder": "اسم عائلتك، من فضلك",
+    "last_name_placeholder": "مثال: الزهراني",
     "business_email": "البريد الإلكتروني التجاري",
-    "business_email_placeholder": "أين يمكننا الوصول إليك؟",
+    "business_email_placeholder": "مثال: name@company.sa",
     "phone_number": "رقم الهاتف",
-    "phone_number_placeholder": "+966",
-    "company_name": "اسم الشركة",
-    "company_name_placeholder": "اسم مؤسستك",
+    "phone_number_placeholder": "+966********",
+    "company_name": "اسم المؤسسة",
+    "company_name_placeholder": "اسم الجهة أو الشركة",
     "job_title": "المسمى الوظيفي",
-    "job_title_placeholder": "دورك أو منصبك",
-    "number_of_employees": "عدد الموظفين",
-    "number_of_employees_placeholder": "حجم فريقك",
+    "job_title_placeholder": "ما هو دورك الوظيفي؟",
+    "number_of_employees": "عدد أعضاء فريقك",
+    "number_of_employees_placeholder": "اختر عدد الأعضاء الذين ترغب بتدريبهم",
     "number_of_employees_options": [
       {
         "label": "1-10",
@@ -402,7 +402,7 @@
       }
     ],
     "areas_of_interest": "مجالات الاهتمام",
-    "areas_of_interest_placeholder": "ما الذي تود التركيز عليه",
+    "areas_of_interest_placeholder": "اختر المجال أو الخدمة التي تود مناقشتها",
     "areas_of_interest_options": [
       {
         "label": "إطلاق الأكاديمية الرقمية",
@@ -438,17 +438,17 @@
       }
     ],
     "additional_info": "معلومات إضافية",
-    "additional_info_placeholder": "هل هناك شيء محدد يجب أن نعرفه؟",
-    "agreement_1": "أوافق على ",
-    "agreement_terms": "شروط الخدمة",
-    "agreement_and": " و",
-    "agreement_privacy": "سياسة الخصوصية",
-    "submit": "دعنا نتحدث"
+    "additional_info_placeholder": "هل هناك تفاصيل أو أهداف محددة ترغب بمشاركتها؟",
+    "agreement_1": "أوافق على الشروط والأحكام",
+    "agreement_terms": "",
+    "agreement_and": "",
+    "agreement_privacy": "",
+    "submit": "احجز عرض توضيحي"
   },
   "CompanyCard": {
     "company": "شركة البحري",
-    "review": "ساعدتنا كورسينيتي في تدريب أكثر من 4000 موظف دون تعطيل العمليات اليومية. كانت الأكاديمية تعكس هويتنا وقيمنا وكانت النتائج قابلة للقياس منذ الشهر الأول.",
-    "author": "م. علي",
+    "review": "ساعدتنا كورسنيتي في تدريب أكثر من 4000 موظف دون تعطيل العمليات اليومية. كانت الأكاديمية تعكس هويتنا وقيمنا وكانت النتائج قابلة للقياس منذ الشهر الأول.",
+    "author": "أ. علي",
     "author_position": "رئيس التدريب، البحري"
   },
   "Carousel3d": {
