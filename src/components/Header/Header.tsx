@@ -133,7 +133,7 @@ export const Header = () => {
                 router.replace(newPath)
               }}
             />
-            <div className="flex flex-col gap-4 items-center">
+            {/*  <div className="flex flex-col gap-4 items-center">
               <div
                 className="gap-[10px] flex items-center cursor-pointer select-none "
                 onClick={() => setOpened((v) => !v)}>
@@ -157,7 +157,7 @@ export const Header = () => {
               <Typography weight="medium" variant="h6">
                 {t('blog')}
               </Typography>
-            </div>
+            </div> */}
           </div>
           <a href={`/${locale}/contact-form`}>
             <Button variant="purple" className="w-full">

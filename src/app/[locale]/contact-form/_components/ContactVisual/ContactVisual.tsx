@@ -4,7 +4,7 @@ import { CompanyCard } from '../CompanyCard/CompanyCard'
 import Lottie from 'lottie-react'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
-import { useTranslations } from 'next-intl' // або свій хук
+import { useTranslations } from 'next-intl'
 
 type ContactVisualProps = {
   className?: string
@@ -51,7 +51,7 @@ export const ContactVisual = ({ className }: ContactVisualProps) => {
         />
       </div>
       <div className={cn('', className)}>
-        <div className="flex flex-col gap-8 z-10 text-center">
+        <div className="flex flex-col gap-8 z-5 text-center">
           <Typography variant={isMobile ? 'h6' : 'h3'} weight="medium">
             {t('title')}
           </Typography>
