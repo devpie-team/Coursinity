@@ -1,6 +1,7 @@
 'use client'
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Typography } from '@/components/ui'
 import { cn } from '@/lib/utils'
 
 type Option = {
@@ -32,10 +33,10 @@ export const CustomSelect = ({
   return (
     <div className="flex flex-col">
       {label && (
-        <p className="text-sm font-medium mb-[6px]">
+        <Typography variant="caption" weight="medium" className="mb-[6px]">
           {label}
           <span className="text-[#7662E8] ml-[2px]">*</span>
-        </p>
+        </Typography>
       )}
 
       <Select value={value} onValueChange={onChange}>

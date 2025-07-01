@@ -5,11 +5,13 @@ import { Button } from '@/components/primitives/button'
 import { Checkbox } from '@/components/primitives/checkbox'
 import { Input } from '@/components/primitives/input'
 import { Typography } from '@/components/ui'
+import { SuccessModal } from '@/components/SuccessModal'
 import { cn } from '@/lib/utils'
-import { useTranslations } from 'next-intl'
+import { useTranslations, useLocale } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
+import { useState } from 'react'
 
 // Схема валідації
 const contactFormSchema = z.object({
@@ -29,17 +31,21 @@ type ContactFormData = z.infer<typeof contactFormSchema>
 
 type ContactFormProps = {
   className?: string
+  onSuccess?: () => void
 }
 
-export const ContactForm = ({ className }: ContactFormProps) => {
+export const ContactForm = ({ className, onSuccess }: ContactFormProps) => {
   const t = useTranslations('ContactForm')
+  const locale = useLocale()
+  const isArabic = locale === 'ar'
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     watch,
-    setValue
+    setValue,
+    reset
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
@@ -64,15 +70,21 @@ export const ContactForm = ({ className }: ContactFormProps) => {
         body: JSON.stringify(data)
       })
 
-      if (!res.ok) {
+      if (res.ok) {
+        // Очистити форму
+        reset()
+        // Викликати callback успіху
+        onSuccess?.()
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error('Error submitting form:', error)
+    }
   }
 
   return (
-    <div className={cn('', className)}>
+    <div className={cn('', className, isArabic ? 'font-kanun-ar' : 'font-poppins')}>
       <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-2 gap-4 max-md:grid-cols-1">
-        <div>
+        <div className="min-w-0">
           <Input
             label={t('first_name')}
             placeholder={t('first_name_placeholder')}
@@ -86,7 +98,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
           )}
         </div>
 
-        <div>
+        <div className="min-w-0">
           <Input
             label={t('last_name')}
             placeholder={t('last_name_placeholder')}
@@ -100,7 +112,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
           )}
         </div>
 
-        <div>
+        <div className="min-w-0">
           <Input
             label={t('business_email')}
             placeholder={t('business_email_placeholder')}
@@ -115,7 +127,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
           )}
         </div>
 
-        <div>
+        <div className="min-w-0">
           <Input
             label={t('phone_number')}
             placeholder={t('phone_number_placeholder')}
@@ -143,7 +155,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
           )}
         </div>
 
-        <div>
+        <div className="min-w-0">
           <Input
             label={t('company_name')}
             placeholder={t('company_name_placeholder')}
@@ -157,7 +169,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
           )}
         </div>
 
-        <div>
+        <div className="min-w-0">
           <Input
             label={t('job_title')}
             placeholder={t('job_title_placeholder')}
@@ -171,7 +183,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
           )}
         </div>
 
-        <div>
+        <div className="min-w-0">
           <CustomSelect
             options={t.raw('number_of_employees_options')}
             label={t('number_of_employees')}
@@ -187,7 +199,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
           )}
         </div>
 
-        <div>
+        <div className="min-w-0">
           <CustomSelect
             options={t.raw('areas_of_interest_options')}
             label={t('areas_of_interest')}
@@ -203,7 +215,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
           )}
         </div>
 
-        <div className="col-span-2 max-md:col-span-1 flex flex-col gap-[6px]">
+        <div className="col-span-2 max-md:col-span-1 flex flex-col gap-[6px] min-w-0">
           <Typography className="text-sm" weight="medium">
             {t('additional_info')}
           </Typography>
@@ -214,7 +226,7 @@ export const ContactForm = ({ className }: ContactFormProps) => {
           />
         </div>
 
-        <div className="col-span-2 max-md:col-span-1 flex flex-col gap-3 mt-1">
+        <div className="col-span-2 max-md:col-span-1 flex flex-col gap-3 mt-1 min-w-0">
           <div className="flex items-center gap-3">
             <Checkbox
               checked={watch('agreement')}

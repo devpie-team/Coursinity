@@ -141,21 +141,39 @@ const Footer = ({ className }: FooterProps) => {
                 </Typography>
               </div>
               <div className="flex gap-2 w-[33%] justify-end order-3 max-lg:order-2 max-lg:justify-center">
-                <button className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all ">
+                <a
+                  href="#"
+                  className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
                   <XIcon />
-                </button>
-                <button className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
+                </a>
+                <a
+                  href="https://www.facebook.com/share/1CyXhQZjqb/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
                   <FacebookIcon />
-                </button>
-                <button className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
+                </a>
+                <a
+                  href="https://www.instagram.com/coursinity?igsh=d2w3aDVndmx5ZmIw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
                   <InstagramIcon />
-                </button>
-                <button className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/coursinitypage/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
                   <LinkedInIcon />
-                </button>
-                <button className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
+                </a>
+                <a
+                  href="https://youtube.com/@coursinity?si=oZ3MtbPcir5ZxSKG"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
                   <YouTubeIcon />
-                </button>
+                </a>
               </div>
             </div>
           </FadeInOnView>
