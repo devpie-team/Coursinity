@@ -6,7 +6,7 @@ import { CheckCircleIcon } from '@/components/icons'
 import { PlayCircleIcon } from '@/components/icons/PlayCircleIcon'
 import clsx from 'clsx'
 import { cn } from '@/lib/utils'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useResponsiveBreakpoints } from '@/hooks/useResponsiveBreakpoints'
 
 type SlideData = {
@@ -50,6 +50,8 @@ export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: 
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -93,7 +95,7 @@ export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: 
             {data.title}
           </Typography>
           <div>
-            <PlayCircleIcon size={isDesktop ? '40px' : '27px'} />
+            <PlayCircleIcon size={isDesktop ? '40px' : '27px'} className={isArabic ? 'scale-x-[-1]' : ''} />
           </div>
         </div>
         {!isDesktop && showDetails && index === 0 && (

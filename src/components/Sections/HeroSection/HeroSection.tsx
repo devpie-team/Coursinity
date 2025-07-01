@@ -203,9 +203,8 @@ export const HeroSection = ({ loading }: THeroSection) => {
       ) : (
         <img
           src={`/assets/hero/${locale}/${isTablet && !isArabic ? 'tabletElement' : 'element'}3.png/`}
-          className={`absolute top-[15%] left-0  max-[768px]:top-[10%] animate-element hero-element3 max-w-[${
-            !isArabic ? '222px' : '126px'
-          }] max-md:max-w-[80px]`}
+          className={`absolute top-[15%] left-0  max-[768px]:top-[10%] animate-element hero-element3 max-md:max-w-[80px]`}
+          style={{ width: isArabic ? '126px' : '222px' }}
         />
       )}
       <img
