@@ -14,14 +14,15 @@ import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 const certificationsLeft = [
   { src: '/assets/certifications/CompTia.png', alt: 'CompTIA logo', padding: 'py-2' },
   { src: '/assets/certifications/Microsoft_Partner.png', alt: 'Microsoft logo', padding: 'py-2' },
-  { src: '/assets/certifications/Minestry_of_Health.png', alt: 'Ministry of Health logo', padding: 'py-2' },
+
+  { src: '/assets/certifications/IoSCM.png', alt: 'Institute of Supply Chain Managment logo', padding: 'p-[6px]' },
   { src: '/assets/certifications/Axelos.png', alt: 'Axelos logo', padding: 'py-2' }
 ]
 const certificationsRight = [
-  { src: '/assets/certifications/Dubai_Courts.png', alt: 'Dubai_Courts logo', padding: 'py-2' },
+  { src: '/assets/certifications/Dubai_Courts.png', alt: 'Dubai_Courts logo', padding: 'py-3' },
   { src: '/assets/certifications/Bahri_Ship_Mgmt.png', alt: 'Bahri_Ship_Mgmt logo', padding: 'py-[3px]' },
-  { src: '/assets/certifications/dubai_digital.png', alt: 'Digital_Dubai logo', padding: 'py-1' },
-  { src: '/assets/certifications/Minestry_of_Health.png', alt: 'Ministry of Health logo', padding: 'p-[6px]' }
+  { src: '/assets/certifications/dubai_digital.png', alt: 'Digital_Dubai logo', padding: 'py-2' },
+  { src: '/assets/certifications/Minestry_of_Health.png', alt: 'Ministry of Health logo', padding: 'py-2' }
 ]
 
 export const FeaturesSection = () => {
