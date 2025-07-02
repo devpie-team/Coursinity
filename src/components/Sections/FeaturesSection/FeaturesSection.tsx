@@ -49,12 +49,12 @@ export const FeaturesSection = () => {
   }, [])
 
   return (
-    <section className="bg-white px-[140px] pb-[140px] max-lg:px-6 max-lg:pt-20 max-lg:pb-0 max-[1400px]:px-[100px] max-[1250px]:px-[50px] max-md:px-4 ">
+    <section className="flex justify-center bg-white px-[140px] pb-[140px]    max-lg:px-6 max-lg:pt-20 max-lg:pb-0 max-[1400px]:px-[100px] max-[1250px]:px-[50px] max-md:px-4 ">
       <div
         className={cn(
           isTablet || isMobile
             ? 'flex gap-4 max-md:flex-col '
-            : 'flex p-8 rounded-[20px] gap-8 bg-[linear-gradient(180deg,_rgba(255,255,255,0.16)_0%,_rgba(30,141,194,0.16)_100%)] '
+            : 'flex justify-center max-w-[1150px]  p-8 rounded-[20px] gap-8 bg-[linear-gradient(180deg,_rgba(255,255,255,0.16)_0%,_rgba(30,141,194,0.16)_100%)] '
         )}>
         {/* Left Block */}
 
