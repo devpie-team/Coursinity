@@ -168,6 +168,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
                   {t('title1')}
                   {t('title2')}
                 </Typography>
+                <br />{' '}
                 <Typography
                   variant="h1"
                   as="span"
