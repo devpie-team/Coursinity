@@ -85,7 +85,8 @@
     }
   },
   "Hero": {
-    "title": "Spark a Learning ",
+    "title1": "Spark a Learning ",
+    "title2": " ",
     "titleGradient": "revolution",
     "subtitle": "Take your team’s productivity to a new paradigm",
     "bookDemo": "Book a Demo Now",
