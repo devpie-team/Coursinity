@@ -165,7 +165,8 @@ export const HeroSection = ({ loading }: THeroSection) => {
             ) : (
               <div>
                 <Typography variant="h1" as="span" weight="medium" className={cn(isArabic ? 'leading-[120px] ' : '')}>
-                  {t('title')}
+                  {t('title1')}
+                  {t('title2')}
                 </Typography>
                 <Typography
                   variant="h1"
@@ -176,12 +177,12 @@ export const HeroSection = ({ loading }: THeroSection) => {
                 </Typography>
               </div>
             )}
-            <Typography variant={isTablet ? 'body3' : 'body1'} className="min-[1440px]:max-w-[693px]">
+            <Typography variant={isTablet ? 'body3' : 'body1'} className="max-w-[693px]">
               {t(isTablet ? 'subtitleMobile' : 'subtitle')}
             </Typography>
           </div>
-          <a href={`/${locale}/contact-form`} className="max-[1440px]:max-w-[425px] max-[1440px]:w-full max-lg:h-16">
-            <Button variant="purple" className="w-full">
+          <a href={`/${locale}/contact-form`} className="">
+            <Button variant="purple" className="w-[193px] max-lg:w-[393px] max-md:w-[343px] h-16">
               {t('bookDemo')}
             </Button>
           </a>
