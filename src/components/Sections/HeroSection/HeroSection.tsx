@@ -49,6 +49,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
   const t = useTranslations('Hero')
   const [isTablet, setIsTablet] = useState<boolean>(false)
   const [isMobile, setIsMobile] = useState<boolean>(false)
+  const [isDesktop, setIsDesktop] = useState<boolean>(true)
 
   const lottieRef1 = useRef<LottieRefCurrentProps>(null)
   const lottieRef2 = useRef<LottieRefCurrentProps>(null)
@@ -81,7 +82,8 @@ export const HeroSection = ({ loading }: THeroSection) => {
     const checkScreenSize = () => {
       const width = window.innerWidth
       setIsMobile(width < 768)
-      setIsTablet(width <= 1024)
+      setIsTablet(width >= 768 && width <= 1024)
+      setIsDesktop(width > 1024)
     }
 
     checkScreenSize()
@@ -150,37 +152,32 @@ export const HeroSection = ({ loading }: THeroSection) => {
         </div>
 
         <div
-          className={`flex flex-col gap-8 items-center z-10 text-center px-4 ${locale ? 'w-[1010px]' : 'w-[910px]'} `}
+          className={`flex flex-col gap-8 items-center z-10 text-center px-4  max-md:px-4 ${
+            locale ? 'w-full' : 'w-[910px]'
+          } `}
           data-aos="fade-up">
-          <div className="flex flex-col gap-6 max-[1024px]:gap-4 items-center">
-            {isTablet ? (
-              <div className=" leading-tight text-transparent bg-gradient-to-b from-[#1C8DC1] to-[#D3E7F0] bg-clip-text w-fit">
-                <Typography variant="h3" weight="medium">
-                  {t('spark')}
-                </Typography>
-                <Typography variant="h3" weight="medium">
-                  {t('revolution')}
-                </Typography>
-              </div>
-            ) : (
-              <div>
-                <Typography variant="h1" as="span" weight="medium" className={cn(isArabic ? 'leading-[120px] ' : '')}>
-                  {t('title1')}
-                  <br />
-                  {t('title2')}
-                </Typography>
-                <br />{' '}
-                <Typography
-                  variant="h1"
-                  as="span"
-                  weight="medium"
-                  className="bg-gradient-to-b from-[#1C8DC1] to-[#D3E7F0] bg-clip-text text-transparent">
-                  {t('titleGradient')}
-                </Typography>
-              </div>
-            )}
-            <Typography variant={isTablet ? 'body3' : 'body1'} className="max-w-[693px]">
-              {t(isTablet ? 'subtitleMobile' : 'subtitle')}
+          <div className="flex flex-col gap-6 max-lg:gap-4 items-center">
+            <div>
+              <Typography
+                variant={isDesktop ? 'h1' : isTablet ? 'h3' : isArabic ? 'h6' : 'h3'}
+                as="span"
+                weight="medium"
+                className={cn(isArabic ? 'leading-[120px] max-lg:leading-[60px] max-md:leading-[0px]' : '')}>
+                {t('title1')}
+                <br /> {t('title2')}
+              </Typography>
+
+              <Typography
+                variant={isDesktop ? 'h1' : 'h3'}
+                as="span"
+                weight="medium"
+                className="bg-gradient-to-b from-[#1C8DC1] to-[#D3E7F0] bg-clip-text text-transparent">
+                {t('titleGradient')}
+              </Typography>
+            </div>
+
+            <Typography variant={isDesktop ? 'body1' : 'body4'} className="max-w-[693px]">
+              {t('subtitle')}
             </Typography>
           </div>
           <a href={`/${locale}/contact-form`} className="">
@@ -205,9 +202,10 @@ export const HeroSection = ({ loading }: THeroSection) => {
         <BubbleIcon />
       ) : (
         <img
-          src={`/assets/hero/${locale}/${isTablet && !isArabic ? 'tabletElement' : 'element'}3.png/`}
-          className={`absolute top-[15%] left-0  max-[768px]:top-[10%] animate-element hero-element3 max-md:max-w-[80px]`}
-          style={{ width: isArabic ? '126px' : '222px' }}
+          src={`/assets/hero/${locale}/${isTablet && !isArabic ? 'tabletElement' : 'element'}3.png`}
+          className={`absolute top-[15%] left-0 max-[768px]:top-[10%] animate-element hero-element3 ${
+            isArabic ? 'w-[126px] max-md:max-w-[80px]' : 'w-[222px] max-md:max-w-[123px]'
+          }`}
         />
       )}
       <img
