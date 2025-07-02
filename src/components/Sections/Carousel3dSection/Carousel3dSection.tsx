@@ -18,7 +18,7 @@ import { cn } from '@/lib/utils'
 gsap.registerPlugin(ScrollTrigger)
 
 const slidesData = [
-  { text: { en: 'AI Transformation', ar: 'تبّني الذكاء الاصطناعي' }, colors: ['#5a5a9e', '#535157', '#4a5568'] },
+  { text: { en: 'AI Transformation', ar: 'تبنّي الذكاء الاصطناعي' }, colors: ['#5a5a9e', '#535157', '#4a5568'] },
   { text: { en: 'Activity-Based Training', ar: 'سيناريوهات تدريب واقعية' }, colors: ['#5a5a9e', '#2c2a33', '#4a5568'] },
   { text: { en: 'Meta Verse & VR', ar: 'ميتاڤيرس وواقع افتراضي' }, colors: ['#5a5a9e', '#2c2a33', '#4a5568'] },
   { text: { en: 'Customised Learning Journeys', ar: 'رحلات تدريبية' }, colors: ['#5a5a9e', '#2c2a33', '#4a5568'] },

@@ -5,7 +5,7 @@ import DealIcon from '@/components/icons/DealIcon'
 import DiplomaIcon from '@/components/icons/DiplomaIcon'
 import { Typography } from '@/components/ui'
 import { cn } from '@/lib/utils'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -30,6 +30,8 @@ export const FeaturesSection = () => {
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [isTablet, setIsTablet] = useState<boolean>(false)
   const [isDesktop, setIsDesktop] = useState<boolean>(true)
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -58,7 +60,11 @@ export const FeaturesSection = () => {
         )}>
         {/* Left Block */}
 
-        <div className="flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6">
+        <div
+          className={cn(
+            'flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6 ',
+            isArabic ? 'order-2' : 'order-1'
+          )}>
           <div className={cn(isDesktop ? 'mb-6' : 'mb-2')}>
             <DiplomaIcon size={!isDesktop ? 40 : 64} />
           </div>
@@ -104,7 +110,11 @@ export const FeaturesSection = () => {
 
         {/* Right Block */}
 
-        <div className="flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6">
+        <div
+          className={cn(
+            'flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6 ',
+            isArabic ? 'order-1' : 'order-2'
+          )}>
           <div className="mb-6 max-lg:mb-2">
             <DealIcon width={!isDesktop ? 40 : 64} height={isTablet ? 40 : 64} />
           </div>

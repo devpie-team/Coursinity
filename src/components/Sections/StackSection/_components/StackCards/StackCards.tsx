@@ -136,6 +136,15 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
               {t('steps.1.subtitle')}
             </Typography>
           </FadeInOnView>
+          <FadeInOnView>
+            <Typography
+              variant="body3"
+              weight="regular"
+              className="opacity-80 w-[305px] text-center"
+              style={activeStyle(1)}>
+              {t('steps.1.description')}
+            </Typography>
+          </FadeInOnView>
           {/* {t('steps.1.button') && (
             <a
               style={activeStyle(2)}
@@ -189,6 +198,15 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
               {t('steps.2.subtitle')}
             </Typography>
           </FadeInOnView>
+          <FadeInOnView>
+            <Typography
+              variant="body3"
+              weight="regular"
+              className="opacity-80 w-[305px] text-center"
+              style={activeStyle(1)}>
+              {t('steps.2.description')}
+            </Typography>
+          </FadeInOnView>
           {/*   {t('steps.2.button') && (
             <a
               style={activeStyle(3)}
@@ -203,7 +221,7 @@ export const StackCards: React.FC<StackCardsProps> = ({ activeIndex, setActiveIn
             </a>
           )} */}
         </div>
-        <div className="flex justify-center pb-[170px]" style={activeStyle(3)}>
+        <div className="flex justify-center pb-[140px]" style={activeStyle(3)}>
           <img
             src={isArabic ? '/assets/stack_section/stack_3_ar.png' : '/assets/stack_section/stack_3.png'}
             alt="Step 3"
