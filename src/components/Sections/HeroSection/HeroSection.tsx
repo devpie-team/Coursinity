@@ -164,7 +164,9 @@ export const HeroSection = ({ loading }: THeroSection) => {
                 weight="medium"
                 className={cn(isArabic ? 'leading-[120px] max-lg:leading-[60px] max-md:leading-[0px]' : '')}>
                 {t('title1')}
-                <br /> {t('title2')}
+                <br />
+                <span className="text-primary-purple"> {t('title3')}</span>
+                {t('title2')}
               </Typography>
 
               <Typography
