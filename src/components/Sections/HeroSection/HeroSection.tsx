@@ -211,16 +211,13 @@ export const HeroSection = ({ loading }: THeroSection) => {
         src={`/assets/hero/${locale}/${isTablet ? 'tabletElement' : 'element'}2.png/`}
         className="absolute bottom-[-40px] right-[-40px] animate-element hero-element2 max-w-[228px] max-md:max-w-[163px]"
       />
-      {isTablet && !isArabic ? (
-        <BubbleIcon />
-      ) : (
-        <img
-          src={`/assets/hero/${locale}/${isTablet && !isArabic ? 'tabletElement' : 'element'}3.png`}
-          className={`absolute top-[15%] left-0 max-[768px]:top-[10%] animate-element hero-element3 ${
-            isArabic ? 'w-[126px] max-md:max-w-[80px]' : 'w-[222px] max-md:max-w-[123px]'
-          }`}
-        />
-      )}
+
+      <img
+        src={`/assets/hero/${locale}/${isTablet ? 'tabletElement' : 'element'}3.png`}
+        className={`absolute top-[15%] left-0 max-[768px]:top-[10%] animate-element hero-element3 w-[126px] max-md:max-w-[80px] 
+          `}
+      />
+
       <img
         src={`/assets/hero/${locale}/${isTablet ? 'tabletElement' : 'element'}4.png/`}
         className="absolute top-[15%] right-[-30px] max-[768px]:top-[10%] max-[1024px]:right-[-15px] animate-element hero-element4 max-w-[86px] max-md:max-w-[54px]"
