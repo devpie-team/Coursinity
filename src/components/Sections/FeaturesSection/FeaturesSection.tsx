@@ -60,11 +60,7 @@ export const FeaturesSection = () => {
         )}>
         {/* Left Block */}
 
-        <div
-          className={cn(
-            'flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6 ',
-            isArabic ? 'order-2' : 'order-1'
-          )}>
+        <div className={cn('flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6 order-2')}>
           <div className={cn(isDesktop ? 'mb-6' : 'mb-2')}>
             <DiplomaIcon size={!isDesktop ? 40 : 64} />
           </div>
@@ -110,11 +106,7 @@ export const FeaturesSection = () => {
 
         {/* Right Block */}
 
-        <div
-          className={cn(
-            'flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6 ',
-            isArabic ? 'order-1' : 'order-2'
-          )}>
+        <div className={cn('flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6  order-1')}>
           <div className="mb-6 max-lg:mb-2">
             <DealIcon width={!isDesktop ? 40 : 64} height={isTablet ? 40 : 64} />
           </div>
