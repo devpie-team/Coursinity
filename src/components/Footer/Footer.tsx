@@ -134,13 +134,13 @@ const Footer = ({ className }: FooterProps) => {
                 {t('bottom.copyright')}
               </Typography>
               <div className="flex text-button gap-6 w-[33%] justify-center order-2 max-lg:order-1 max-lg:justify-center">
-                <Typography as="a" href="#" variant={isDesktop ? 'body3' : 'caption'}>
+                <Typography as="a" href={`/${locale}/terms-of-use`} variant={isDesktop ? 'body3' : 'caption'}>
                   {t('bottom.links.terms')}
                 </Typography>
-                <Typography as="a" href="#" variant={isDesktop ? 'body3' : 'caption'}>
+                <Typography as="a" href={`/${locale}/privacy-policy`} variant={isDesktop ? 'body3' : 'caption'}>
                   {t('bottom.links.privacy')}
                 </Typography>
-                <Typography as="a" href="#" variant={isDesktop ? 'body3' : 'caption'}>
+                <Typography as="a" href={`/${locale}/cookie-policy`} variant={isDesktop ? 'body3' : 'caption'}>
                   {t('bottom.links.cookies')}
                 </Typography>
               </div>

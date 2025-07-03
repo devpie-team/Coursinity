@@ -234,11 +234,11 @@ export const ContactForm = ({ className, onSuccess }: ContactFormProps) => {
             />
             <Typography variant="caption">
               {t('agreement_1')}
-              <a href="/terms" className="underline">
+              <a href={`/${locale}/terms-of-use`} className="underline">
                 {t('agreement_terms')}
               </a>
               {t('agreement_and')}
-              <a href="/privacy" className="underline">
+              <a href={`/${locale}/privacy-policy`} className="underline">
                 {t('agreement_privacy')}
               </a>
             </Typography>
