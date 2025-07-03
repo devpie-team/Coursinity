@@ -89,7 +89,7 @@
     "title2": " ",
     "title3": "",
     "titleGradient": "revolution",
-    "subtitle": "Take your team’s productivity to a new paradigm",
+    "subtitle": "Take your team's productivity to a new paradigm",
     "bookDemo": "Book a Demo Now",
     "titleGradientMobile": "Spark a learning revolution.",
     "subtitleMobile": "Take your team's productivity to a new paradigm",
@@ -461,5 +461,392 @@
     "point4": "Scalable for impact",
     "point5": "Optimized for RoI",
     "endTitle": "Let's talk."
+  },
+  "TermsOfUse": {
+    "title": "COURSINITY TERMS OF USE (TERMS & CONDITIONS)",
+    "lastUpdated": "Last updated: July 1, 2025",
+    "intro": {
+      "paragraph1": "Welcome to Coursinity. By accessing or using any Coursinity services, tools, or content (\"Services\"), you agree to be bound by the terms and conditions outlined below (the \"Terms of Use\").",
+      "paragraph2": "In these Terms of Use, \"Coursinity,\" \"we,\" \"us,\" or \"our\" refers to Management Training LLC KLD, the operator of the Coursinity platform. \"You\" refers to any individual or entity accessing or using our Services, whether as a learner, trainer, partner, or authorized representative of an organization.",
+      "paragraph3": "Coursinity is a digital training platform that enables public and private sector organizations to upskill their workforce through customized learning journeys. These include virtual academies, AI-powered modules, live mentorship, and other practical training tools. Any updates, new services, or tools introduced are also subject to these Terms.",
+      "paragraph4": "You must carefully read and accept all the terms and conditions set forth here, as well as our Privacy Policy, Cookie Policy, and any other applicable guidelines or service-specific agreements, before using any of our Services.",
+      "paragraph5": "We may update these Terms from time to time, so we recommend reviewing them regularly."
+    },
+    "tableOfContents": {
+      "title": "Table of Content",
+      "items": [
+        "Agreement to Terms",
+        "Site Access",
+        "Intellectual Property",
+        "User Responsibilities",
+        "Accuracy of Information",
+        "Third-party Content & Links",
+        "Privacy",
+        "Additional Terms",
+        "Liability & Disclaimers",
+        "Limitation of Liability",
+        "Changes to the Terms",
+        "Termination",
+        "Governing Law & Jurisdiction",
+        "Severability",
+        "Waivers",
+        "Force Majeure",
+        "Assignment",
+        "Full Agreement",
+        "Contact Information"
+      ]
+    },
+    "sections": {
+      "agreement": {
+        "title": "1. Agreement to Terms",
+        "content": "By using the COURSINITY website (\"Site\") and related services by Management Training LLC KLD (the \"Company\"), you agree to these Terms & Conditions and our Privacy Policy. If you disagree, please do not access the Site or use any services."
+      },
+      "access": {
+        "title": "2. Site Access",
+        "content": "You are responsible for necessary access arrangements and technology. We may modify or suspend the Site or any service at any time without notice. We are not liable if the Site or services are unavailable due to circumstances beyond our control."
+      },
+      "intellectual": {
+        "title": "3. Intellectual Property",
+        "subsections": {
+          "ownership": {
+            "title": "3.1 Ownership",
+            "content": "All content, texts, software, audiovisual materials, images, etc. is protected by copyright, trademark, patent, or other proprietary rights. You shall not copy, modify, distribute, or exploit any content without our express written consent."
+          },
+          "license": {
+            "title": "3.2 User License",
+            "content": "Upon payment (if applicable), we grant you a limited, non-transferable license to access and use the content for personal or internal business purposes only. Any other use is prohibited unless expressly permitted in writing."
+          },
+          "recordings": {
+            "title": "3.3 Recordings & Marketing",
+            "paragraph1": "We may record service sessions (e.g., chat, voice) for quality, marketing, or promotional purposes.",
+            "paragraph2": "You grant us permission to use your name, likeness, voice, and image in connection with our marketing and delivery activities, as permitted by applicable law."
+          }
+        }
+      },
+      "responsibilities": {
+        "title": "4. User Responsibilities",
+        "intro": "You agree not to:",
+        "list": [
+          "Use the Site unlawfully or against regulations.",
+          "Misrepresent your identity or interfere with Site operation.",
+          "Upload harmful software or infringing content.",
+          "Use bots or automated systems improperly.",
+          "Share passwords, promote products, or conduct spamming activities."
+        ],
+        "conclusion": "You are responsible for any tax obligations arising from your usage. You indemnify the Company and affiliates from any claims related to your misuse of the Site."
+      },
+      "accuracy": {
+        "title": "5. Accuracy of Information",
+        "content": "Content on the Site is tailored to the needs of our clients and is not generic in nature. We stand behind its accuracy and reliability. While it is designed to support informed decision-making, it remains the user's responsibility to apply it appropriately to their specific context. We are not liable for outcomes resulting from misuse or misapplication."
+      },
+      "thirdParty": {
+        "title": "6. Third-party Content & Links",
+        "content": "The Site may contain content or links from third parties. We do not endorse or assume responsibility for any third-party content, products, or services you encounter."
+      },
+      "privacy": {
+        "title": "7. Privacy",
+        "content": "Any personal data collected is handled pursuant to our Privacy Policy, and your use of the Site implies your consent to that policy."
+      },
+      "additional": {
+        "title": "8. Additional Terms",
+        "content": "Certain paid or subscription-based services may require separate terms. These will be agreed upon during your subscription."
+      },
+      "disclaimers": {
+        "title": "9. Liability & Disclaimers",
+        "content": "The Site and its content are provided \"as is\" without warranty. To the fullest extent permitted by law, the Company disclaims all warranties, express or implied, including suitability for a particular purpose."
+      },
+      "limitation": {
+        "title": "10. Limitation of Liability",
+        "content": "The Company and its affiliates shall not be liable for indirect, incidental, or consequential damages, including loss of profits, data, or business, arising from your use of the Site, even if we have been informed of potential damages."
+      },
+      "changes": {
+        "title": "11. Changes to the Terms",
+        "content": "We reserve the right to modify these Terms at any time. Changes become effective when posted. Continued use of the Site after changes indicates acceptance."
+      },
+      "termination": {
+        "title": "12. Termination",
+        "intro": "We may suspend or terminate your access immediately if:",
+        "list": [
+          "Payment obligations are not met.",
+          "You violate these Terms.",
+          "You engage in fraudulent or abusive conduct."
+        ],
+        "conclusion": "You may terminate your account at any time via your account portal. Refund eligibility depends on the service-specific policy."
+      },
+      "governing": {
+        "title": "13. Governing Law & Jurisdiction",
+        "content": "These Terms are governed by the laws of the UAE. Any disputes shall be resolved exclusively in the UAE courts. You waive objections to jurisdiction or venue."
+      },
+      "severability": {
+        "title": "14. Severability",
+        "content": "If a provision is deemed invalid, it will be modified to reflect intent, and the remaining provisions will remain in effect."
+      },
+      "waivers": {
+        "title": "15. Waivers",
+        "content": "Failure to enforce any right does not constitute a waiver. Any waiver must be in writing and signed by the Company."
+      },
+      "forceMajeure": {
+        "title": "16. Force Majeure",
+        "content": "We are not liable for delays or omissions caused by circumstances beyond our reasonable control (e.g., system failures, legal changes)."
+      },
+      "assignment": {
+        "title": "17. Assignment",
+        "content": "The Company may transfer or assign these Terms in connection with a merger or sale. By using the Site, you consent to such assignment."
+      },
+      "fullAgreement": {
+        "title": "18. Full Agreement",
+        "content": "These Terms and any documents referenced herein constitute the entire agreement between you and the Company, superseding all prior understandings or statements."
+      },
+      "contact": {
+        "title": "19. Contact Information",
+        "content": "For questions or reports, contact us at",
+        "email": "info@coursinity.com"
+      }
+    }
+  },
+  "PrivacyPolicy": {
+    "title": "Coursinity Privacy Policy",
+    "lastUpdated": "Last updated: July 1, 2025",
+    "intro": "By using our Services, you agree to how we collect, use, and share your information as described below. Please review this policy carefully.",
+    "introductionScope": {
+      "title": "INTRODUCTION & SCOPE",
+      "paragraph1": "At Coursinity, our mission is to help organizations unlock their full potential through smart, scalable, and customized training solutions. In order to deliver our services effectively, we collect and use information about the people who interact with us, including:",
+      "list": [
+        "Learners enrolled in courses powered by Coursinity",
+        "Organizations using our platform to train their teams",
+        "Trainers, mentors, and coaches delivering instruction through Coursinity",
+        "Partners and vendors who collaborate with us to support our training ecosystem",
+        "Visitors to our website or anyone who contacts our support team"
+      ],
+      "paragraph2": "This Privacy Policy explains how we collect, use, and share your personal information, and the choices you have regarding that data. If we make significant changes to our practices, we'll update this policy and notify you as appropriate (e.g., through your registered account or by email)."
+    },
+    "tableOfContents": {
+      "title": "Table of Content",
+      "items": [
+        "INTRODUCTION & SCOPE",
+        "Information We Collect",
+        "How We Use Your Data",
+        "Data Sharing & Transfers",
+        "Cookies & Tracking",
+        "Data Retention",
+        "Your Rights & Choices",
+        "Third-Party Links",
+        "Security Measures",
+        "Children's Privacy",
+        "Changes to This Policy",
+        "Contact Us"
+      ]
+    },
+    "sections": {
+      "informationCollect": {
+        "title": "1. Information We Collect",
+        "intro": "We collect data to deliver and improve your learning experience:",
+        "items": [
+          {
+            "title": "Information You Provide:",
+            "content": "name, email, job title, organization, payment details, training preferences, feedback."
+          },
+          {
+            "title": "Usage Data:",
+            "content": "course progress, device and browser info, IP address, session duration."
+          },
+          {
+            "title": "Automatic Data:",
+            "content": "cookies, activity logs, analytics within our platform."
+          }
+        ]
+      },
+      "howWeUse": {
+        "title": "2. How We Use Your Data",
+        "intro": "We process your information to:",
+        "items": [
+          {
+            "title": "Deliver Services:",
+            "content": "enroll in courses, track progress, provide coaching."
+          },
+          {
+            "title": "Communicate:",
+            "content": "send session reminders, updates, and relevant content."
+          },
+          {
+            "title": "Improve Offerings:",
+            "content": "identify skill gaps, personalize learning paths, refine platform efficiency."
+          },
+          {
+            "title": "Compliance & Safety:",
+            "content": "ensure data security, meet legal obligations, and generate audit reports."
+          }
+        ]
+      },
+      "dataSharing": {
+        "title": "3. Data Sharing & Transfers",
+        "intro": "We may share your information with:",
+        "items": [
+          {
+            "title": "Service Providers:",
+            "content": "payment processors, analytics tools, customer support vendors."
+          },
+          {
+            "title": "Training Partners:",
+            "content": "coaches or mentors delivering courses—only data needed for your sessions."
+          },
+          {
+            "title": "Legal & Compliance:",
+            "content": "government authorities or third parties if required by law."
+          }
+        ],
+        "conclusion": "In the event of a merger or sale, your data may be transferred—under the same privacy terms."
+      },
+      "cookies": {
+        "title": "4. Cookies & Tracking",
+        "intro": "We use cookies and similar trackers to:",
+        "list": [
+          "Enhance site functionality,",
+          "Analyze usage trends,",
+          "Tailor content and communications."
+        ],
+        "conclusion": "You can manage or opt out of cookies via your browser or site banner."
+      },
+      "dataRetention": {
+        "title": "5. Data Retention",
+        "content": "We retain personal data as long as necessary to fulfill training purposes, comply with legal obligations, and support disputes. When no longer needed, data is securely deleted or anonymized."
+      },
+      "yourRights": {
+        "title": "6. Your Rights & Choices",
+        "intro": "You have control over your data:",
+        "items": [
+          {
+            "title": "Access & Update:",
+            "content": "request correction or deletion via INFO@COURSINITY.COM."
+          },
+          {
+            "title": "Opt-Out:",
+            "content": "unsubscribe from marketing emails anytime."
+          },
+          {
+            "title": "Consent Management:",
+            "content": "withdraw cookie consent (website footer)."
+          }
+        ]
+      },
+      "thirdPartyLinks": {
+        "title": "7. Third-Party Links",
+        "content": "Our platform or communications may contain links to third-party websites or tools. We do not control or take responsibility for their content, privacy practices, or terms of use. We recommend reviewing their policies before sharing personal data."
+      },
+      "security": {
+        "title": "8. Security Measures",
+        "content": "We employ industry-standard security: encryption (TLS), secure storage, access controls, regular system audits. While we strive for maximum protection, absolute security cannot be guaranteed."
+      },
+      "childrensPrivacy": {
+        "title": "9. Children's Privacy",
+        "content": "Our services are not intended for children under 18. We do not knowingly collect personal information from minors. If we learn that such data has been collected, we will take appropriate action to delete it."
+      },
+      "changes": {
+        "title": "10. Changes to This Policy",
+        "content": "We may update this policy periodically. Significant changes will be communicated via email or notification. Continued use of our Services implies acceptance of the updated policy."
+      },
+      "contact": {
+        "title": "11. Contact Us",
+        "content": "Questions or requests? Reach out at",
+        "email": "info@coursinity.com"
+      }
+    }
+  },
+  "CookiePolicy": {
+    "title": "Coursinity Cookie Policy",
+    "lastUpdated": "Last Updated: July 1, 2025",
+    "intro": {
+      "paragraph1": "This Cookie Policy explains how Coursinity (\"we\", \"our\", or \"us\") uses cookies and similar technologies to collect and process information when you visit our websites, learning platforms, or any digital services that link to this policy.",
+      "paragraph2": "It describes what these technologies are, why we use them, and how you can manage your cookie preferences.",
+      "paragraph3": "For more details on how we handle personal data, please refer to our [Privacy Policy]."
+    },
+    "tableOfContents": {
+      "title": "Table of Content",
+      "items": [
+        "What are cookies?",
+        "Types of cookies we use",
+        "How we use cookies",
+        "Managing your cookie preferences",
+        "Other tracking technologies",
+        "Contact us"
+      ]
+    },
+    "sections": {
+      "whatAreCookies": {
+        "title": "1. What are cookies?",
+        "content": "Cookies are small text files that websites place on your browser or device when you visit. They help us remember your preferences, improve site functionality, and better understand how users engage with our platform. Cookies can be \"first-party\" (set by us) or \"third-party\" (set by others like analytics providers or social media platforms)."
+      },
+      "typesOfCookies": {
+        "title": "2. Types of cookies we use",
+        "intro": "We use both session (temporary) and persistent (long-term) cookies across the Coursinity platform:",
+        "types": [
+          {
+            "title": "Essential Cookies",
+            "description": "Required for the operation of our website and platform. These cookies enable core functionality like page navigation, account access, and course enrollment."
+          },
+          {
+            "title": "Performance & Analytics Cookies",
+            "description": "Help us understand how users interact with our site, such as which training modules are most visited or where learners drop off. We use analytics tools to track aggregate usage and improve user experience."
+          },
+          {
+            "title": "Functionality Cookies",
+            "description": "Enable enhanced features like saving your language preferences, resuming training where you left off, or customizing dashboard views."
+          },
+          {
+            "title": "Advertising & Marketing Cookies",
+            "description": "Used to deliver relevant ads and track the performance of campaigns. These cookies help us promote training solutions that may interest you, based on your behavior on our site and others."
+          },
+          {
+            "title": "Third-Party Cookies",
+            "description": "Partners like LinkedIn, Meta (Facebook), and YouTube may set cookies through embedded content or marketing tools. These cookies are governed by their own policies."
+          }
+        ]
+      },
+      "howWeUseCookies": {
+        "title": "3. How we use cookies",
+        "intro": "Cookies help us:",
+        "list": [
+          "Secure user sessions during login and assessments",
+          "Save your course progress and preferences",
+          "Measure engagement across training modules",
+          "Improve platform performance and usability",
+          "Personalize the learning experience and support services",
+          "Deliver relevant content and program suggestions"
+        ]
+      },
+      "managingPreferences": {
+        "title": "4. Managing your cookie preferences",
+        "intro": "You can manage your cookie settings in several ways:",
+        "methods": [
+          {
+            "title": "On-Site Consent Tool",
+            "description": "When you first visit Coursinity, you'll see a cookie banner allowing you to accept or adjust your preferences. You can revisit these settings anytime by clicking \"Manage Cookies\" in the footer."
+          },
+          {
+            "title": "Browser Settings",
+            "description": "Most browsers let you block or delete cookies. Please note that disabling certain cookies may impact the functionality of our site or learning tools."
+          },
+          {
+            "title": "Do Not Track & Global Privacy Controls",
+            "description": "Coursinity supports browser-level Do Not Track signals and Global Privacy Control (GPC) standards when legally required. These may automatically reject certain cookies if activated on your device."
+          }
+        ]
+      },
+      "otherTechnologies": {
+        "title": "5. Other tracking technologies",
+        "intro": "In addition to cookies, we use tracking pixels (web beacons) and local storage to:",
+        "list": [
+          "Monitor email open rates for training notifications",
+          "Analyze usage within interactive simulations",
+          "Keep your session active during assessments"
+        ],
+        "conclusion": "These tools operate similarly to cookies and help us deliver a seamless learning experience."
+      },
+      "contact": {
+        "title": "6. Contact us",
+        "content": "If you have questions about this Cookie Policy or want to exercise your rights under data privacy laws, contact us at:",
+        "email": "info@coursinity.com"
+      }
+    }
   }
 }
