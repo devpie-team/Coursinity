@@ -15,9 +15,6 @@ export const Loader = ({ loading }: TLoading) => {
   const locale = useLocale()
   const isArabic = locale === 'ar'
 
-  const locale = useLocale()
-  const isArabic = locale === 'ar'
-
   useEffect(() => {
     if (loading) {
       document.body.classList.add('no-scroll')
