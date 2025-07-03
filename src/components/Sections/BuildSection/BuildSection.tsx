@@ -31,8 +31,9 @@ export const BuildSection = () => {
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
-  const t = useTranslations('Build')
   const locale = useLocale()
+  const isArabic = locale == 'ar'
+  const t = useTranslations('Build')
   const scrollWrapperBuildRef = useRef<HTMLDivElement>(null)
   const { hideHeaderForSection, showHeaderForSection } = useHeaderVisibility()
   const sectionId = useRef(Math.random()?.toString())
@@ -292,7 +293,15 @@ export const BuildSection = () => {
       ref={scrollWrapperBuildRef}>
       <div className="flex flex-col items-center gap-4 text-center">
         <FadeInOnView variant="fade-up">
-          <Typography variant={isDesktop ? 'h3' : 'h5'}>{t('title')}</Typography>
+          <Typography variant={isDesktop ? 'h3' : 'h5'}>
+            {t('title')}
+            {isArabic && (
+              <>
+                <br />
+                {t('bottomTitle')}
+              </>
+            )}
+          </Typography>
         </FadeInOnView>
         <FadeInOnView variant="fade-up">
           <Typography variant="body3" className="text-white text-opacity-80">

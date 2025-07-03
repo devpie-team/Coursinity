@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { ElementType, ComponentPropsWithoutRef } from 'react'
+import { useLocale } from 'next-intl'
 
 import { cn } from '@/lib/utils'
 
@@ -30,7 +31,8 @@ type ButtonProps<T extends ElementType> = {
   as?: T
   asChild?: boolean
   className?: string
-} & VariantProps<typeof buttonVariants> & ComponentPropsWithoutRef<T>
+} & VariantProps<typeof buttonVariants> &
+  ComponentPropsWithoutRef<T>
 
 const Button = <T extends ElementType = 'button'>({
   as,
@@ -40,10 +42,14 @@ const Button = <T extends ElementType = 'button'>({
   size,
   ...props
 }: ButtonProps<T>) => {
+  const locale = useLocale()
+  const isArabic = locale === 'ar'
+  const fontClass = isArabic ? 'font-kanun-ar' : 'font-poppins'
+
   const Component = as || (asChild ? Slot : 'button')
-  
+
   return React.createElement(Component, {
-    className: cn(buttonVariants({ variant, size, className })),
+    className: cn(buttonVariants({ variant, size }), fontClass, className),
     ...props
   })
 }
