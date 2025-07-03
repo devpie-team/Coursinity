@@ -62,7 +62,7 @@ export const ContactVisual = ({ className }: ContactVisualProps) => {
       </div>
       <div className={cn('', className)}>
         <div className="flex flex-col gap-8 z-5 text-center">
-          <Typography variant={isMobile ? 'h6' : 'h3'} weight="medium">
+          <Typography variant={isMobile ? 'h6' : 'h3'} weight="medium" className="max-w-[426px]">
             {t('title')}
           </Typography>
           <Typography variant="body2" weight="regular">
@@ -92,7 +92,7 @@ export const ContactVisual = ({ className }: ContactVisualProps) => {
             animationData={animationData2}
             className={cn(
               'absolute w-[180px] h-[80px]  rotate-[-9.75deg] opacity-30 max-md:hidden',
-              isArabic ? 'left-[20px] top-[280px]' : 'left-[20px] top-[200px]'
+              isArabic ? 'left-[20px] top-[220px]' : 'left-[20px] top-[200px]'
             )}
             loop={false}
             autoplay={true}
