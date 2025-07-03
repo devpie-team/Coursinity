@@ -53,7 +53,7 @@ export const TeamTrainingSection = () => {
       },
       {
         path: isArabic
-          ? '/assets/lottie/team_train/team_train_1_ar.json'
+          ? '/assets/lottie/team_train/team_train_1_en.json'
           : '/assets/lottie/team_train/team_train_1_en.json',
         type: 'lottie'
       },

@@ -131,7 +131,7 @@ export const ContactForm = ({ className, onSuccess }: ContactFormProps) => {
           <Input
             label={t('phone_number')}
             placeholder={t('phone_number_placeholder')}
-            className="w-full "
+            className="w-full text-end"
             type="tel"
             inputMode="tel"
             pattern="^\+\d{7,15}$"
