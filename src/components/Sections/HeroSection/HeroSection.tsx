@@ -50,6 +50,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
   const [isTablet, setIsTablet] = useState<boolean>(false)
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [isDesktop, setIsDesktop] = useState<boolean>(true)
+  const [windowWidth, setWindowWidth] = useState<number>(0)
 
   const lottieRef1 = useRef<LottieRefCurrentProps>(null)
   const lottieRef2 = useRef<LottieRefCurrentProps>(null)
@@ -81,6 +82,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth
+      setWindowWidth(width)
       setIsMobile(width < 768)
       setIsTablet(width >= 768 && width <= 1024)
       setIsDesktop(width > 1024)
@@ -140,6 +142,15 @@ export const HeroSection = ({ loading }: THeroSection) => {
     })
   }, [])
 
+  const getTypographyVariant = () => {
+    if (isDesktop) return 'h1'
+    if (isTablet) return 'h3'
+    if (isArabic) {
+      return windowWidth < 365 ? 'h6' : 'h5'
+    }
+    return 'h3'
+  }
+
   return (
     <section
       className="overflow-hidden relative min-h-[900px] max-[768px]:min-h-[766px] max-[1024px]:min-h-[600px] w-full bg-cover bg-center bg-no-repeat hero-section"
@@ -152,17 +163,17 @@ export const HeroSection = ({ loading }: THeroSection) => {
         </div>
 
         <div
-          className={`flex flex-col gap-8 items-center z-10 text-center px-4  max-md:px-4 ${
-            locale ? 'w-full' : 'w-[910px]'
+          className={`flex flex-col gap-8 items-center z-10 text-center px-4   w-full ${
+            isArabic ? 'max-md:px-0' : ''
           } `}
           data-aos="fade-up">
           <div className="flex flex-col gap-6 max-lg:gap-4 items-center">
             <div>
               <Typography
-                variant={isDesktop ? 'h1' : isTablet ? 'h3' : isArabic ? 'h6' : 'h3'}
+                variant={getTypographyVariant()}
                 as="span"
                 weight="medium"
-                className={cn(isArabic ? 'leading-[120px] max-lg:leading-[60px] max-md:leading-[0px]' : '')}>
+                className={cn(isArabic ? 'leading-[120px] max-lg:leading-[60px] max-md:leading-[0px] ' : '')}>
                 {t('title1')}
                 <br />
                 <span className="text-primary-purple"> {t('title3')}</span>
@@ -183,7 +194,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
             </Typography>
           </div>
           <a href={`/${locale}/contact-form`} className="">
-            <Button variant="purple" className="w-[193px] max-lg:w-[393px] max-md:w-[343px] h-16">
+            <Button variant="purple" className="w-[195px] max-lg:w-[393px] max-md:w-[343px] h-16">
               {t('bookDemo')}
             </Button>
           </a>

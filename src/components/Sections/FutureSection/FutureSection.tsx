@@ -229,7 +229,10 @@ export const FutureSection = () => {
             <div>
               <ZapIcon size={isDesktop ? '24' : '14'} />
             </div>
-            <Typography variant={isDesktop ? 'body2' : 'caption'} weight={isDesktop ? 'semibold' : 'medium'}>
+            <Typography
+              variant={isDesktop ? 'body2' : 'caption'}
+              weight={isDesktop ? 'semibold' : 'medium'}
+              className="max-w-[142px]">
               {t('card5Title')}
             </Typography>
           </div>

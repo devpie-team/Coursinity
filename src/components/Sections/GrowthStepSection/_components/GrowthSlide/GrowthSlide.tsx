@@ -149,12 +149,26 @@ export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: 
                   <div>
                     <CheckCircleIcon size={isDesktop ? '32px' : '16px'} fill="white" />
                   </div>
-                  <Typography
-                    variant={isDesktop ? 'body2' : 'subtitle'}
-                    weight={isDesktop ? 'semibold' : 'regular'}
-                    className="text-white opacity-80">
-                    {text}
-                  </Typography>
+                  {index === 0 && i === 2 ? (
+                    <div className="text-white opacity-80">
+                      {text.split('\n').map((line, lineIndex) => (
+                        <Typography
+                          key={lineIndex}
+                          variant={isDesktop ? 'body2' : 'subtitle'}
+                          weight={isDesktop ? 'semibold' : 'regular'}
+                          className="text-white opacity-80">
+                          {line}
+                        </Typography>
+                      ))}
+                    </div>
+                  ) : (
+                    <Typography
+                      variant={isDesktop ? 'body2' : 'subtitle'}
+                      weight={isDesktop ? 'semibold' : 'regular'}
+                      className="text-white opacity-80">
+                      {text}
+                    </Typography>
+                  )}
                 </div>
               ))}
             </div>

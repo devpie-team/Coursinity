@@ -4,7 +4,7 @@ import { CompanyCard } from '../CompanyCard/CompanyCard'
 import Lottie from 'lottie-react'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 type ContactVisualProps = {
   className?: string
@@ -17,6 +17,8 @@ export const ContactVisual = ({ className }: ContactVisualProps) => {
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -31,10 +33,18 @@ export const ContactVisual = ({ className }: ContactVisualProps) => {
   }, [])
 
   useEffect(() => {
-    fetch('/assets/lottie/contact_form/contact_form_1.json')
+    fetch(
+      isArabic
+        ? '/assets/lottie/contact_form/contact_form_1_ar.json'
+        : '/assets/lottie/contact_form/contact_form_1.json'
+    )
       .then((res) => res.json())
       .then(setAnimationData1)
-    fetch('/assets/lottie/contact_form/contact_form_2.json')
+    fetch(
+      isArabic
+        ? '/assets/lottie/contact_form/contact_form_2_ar.json'
+        : '/assets/lottie/contact_form/contact_form_2.json'
+    )
       .then((res) => res.json())
       .then(setAnimationData2)
   }, [])
