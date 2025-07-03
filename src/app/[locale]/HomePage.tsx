@@ -62,7 +62,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Loader loading={loading} />
+      {loading && <Loader loading={loading} />}
 
       <Header />
       <HeroSection loading={loading} />
