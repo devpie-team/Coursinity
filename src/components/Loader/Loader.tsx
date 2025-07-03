@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { LogoIcon } from '../icons'
+import { useLocale } from 'next-intl'
 
 type TLoading = {
   loading?: boolean
@@ -11,6 +12,9 @@ export const Loader = ({ loading }: TLoading) => {
   const iconRef = useRef<HTMLDivElement>(null)
   const topBlockRef = useRef<HTMLDivElement>(null)
   const bottomBlockRef = useRef<HTMLDivElement>(null)
+
+  const locale = useLocale()
+  const isArabic = locale === 'ar'
 
   useEffect(() => {
     if (loading) {
@@ -30,7 +34,7 @@ export const Loader = ({ loading }: TLoading) => {
         maskRef.current,
         { x: '0%' },
         {
-          x: '100%',
+          x: isArabic ? '-100%' : '100%',
           duration: 3,
           ease: 'linear',
           onComplete: () => {
@@ -64,7 +68,7 @@ export const Loader = ({ loading }: TLoading) => {
       gsap.set(topBlockRef.current, { y: '0%' })
       gsap.set(bottomBlockRef.current, { y: '0%' })
     }
-  }, [loading])
+  }, [loading, isArabic])
 
   return (
     <div
@@ -94,7 +98,7 @@ export const Loader = ({ loading }: TLoading) => {
           ref={maskRef}
           className="pointer-events-none absolute inset-0 z-10"
           style={{
-            background: 'linear-gradient(to right, white 0%, transparent 85%)',
+            background: 'linear-gradient(to right, white 100%, transparent 85%)',
             opacity: 0.8,
             mixBlendMode: 'lighten',
             transition: 'none'
