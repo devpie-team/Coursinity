@@ -194,7 +194,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
             </Typography>
           </div>
           <a href={`/${locale}/contact-form`} className="">
-            <Button variant="purple" className="w-[195px] max-lg:w-[393px] max-md:w-[343px] h-16">
+            <Button variant="hero" className="w-[210px] max-lg:w-[393px] max-md:w-[343px] h-16">
               {t('bookDemo')}
             </Button>
           </a>

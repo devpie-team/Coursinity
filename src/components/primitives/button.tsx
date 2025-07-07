@@ -6,7 +6,7 @@ import { useLocale } from 'next-intl'
 
 import { cn } from '@/lib/utils'
 
-const buttonVariants = cva('rounded-full leading-4 font-medium', {
+const buttonVariants = cva('rounded-full leading-4 font-medium transition-all duration-300', {
   variants: {
     variant: {
       primary:
@@ -14,8 +14,10 @@ const buttonVariants = cva('rounded-full leading-4 font-medium', {
       secondary:
         'btn-gradient-secondary bg-white backdrop-blur-[40px] text-black  hover:text-primary-purple hover:shadow-[0px_12px_40px_0px_#A578F240] hover:bg-[#F6F1FE]  active:text-[#8759D5] disabled:pointer-events-none  disabled:bg-opacity-30 disabled:text-opacity-40 disabled:text-white',
       purple:
-        'btn-gradient-purple bg-primary-purple text-white hover:bg-secondary-purple hover:shadow-[0px_12px_30px_0px_#A578F240] active:bg-none active:bg-primary-purple active:shadow-none disabled:pointer-events-none  disabled:bg-opacity-20 disabled:text-opacity-90 '
+        'btn-gradient-purple bg-primary-purple text-white hover:bg-secondary-purple hover:shadow-[0px_12px_30px_0px_#A578F240] active:bg-none active:bg-primary-purple active:shadow-none disabled:pointer-events-none  disabled:bg-opacity-20 disabled:text-opacity-90 ',
+      hero: ' bg-white text-primary-purple border border-secondary-400 hover:bg-primary-purple hover:text-white hover:shadow-[0px_12px_30px_0px_#A578F240] active:bg-none active:bg-secondary-purple active:shadow-none disabled:pointer-events-none  disabled:bg-opacity-20 disabled:text-opacity-90'
     },
+
     size: {
       md: 'h-14 px-6 py-5',
       lg: 'h-16 px-8 py-5'
