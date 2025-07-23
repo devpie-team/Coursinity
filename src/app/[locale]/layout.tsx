@@ -61,14 +61,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false
   },
-  metadataBase: new URL('https://www.coursinity.com'),
-  alternates: {
-    canonical: '/',
-    languages: {
-      en: '/en',
-      ar: '/ar'
-    }
-  },
+
   openGraph: {
     type: 'website',
     locale: 'en_US',
