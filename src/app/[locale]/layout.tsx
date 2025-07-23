@@ -39,6 +39,11 @@ const kanunAR = localFont({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.coursinity.com'),
+  icons: {
+    icon: '/assets/favicon.png',
+    apple: '/assets/favicon.png'
+  },
   title: {
     template: '%s | Coursinity',
     default: 'Coursinity - Corporate Training in Saudi Arabia'
