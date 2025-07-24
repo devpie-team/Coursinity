@@ -97,7 +97,7 @@ export const GrowthStepSection = () => {
       {...(!isDesktop ? swipeHandlers : {})}>
       <FadeInOnView variant="fade-up">
         <div className="flex flex-col gap-4 text-center pb-10 pt-[140px] max-lg:pt-20 max-md:px-4">
-          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
+          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white ">
             {t('common.sectionTitle')}
           </Typography>
           <Typography variant="body3" weight="regular" className="text-white opacity-80">
@@ -124,9 +124,11 @@ export const GrowthStepSection = () => {
           <Typography variant="h6" weight="regular" className="text-white">
             {t('common.subtitle')}
           </Typography>
-          <Button variant="purple" className="w-[190px]">
-            {t('common.cta')}
-          </Button>
+          <a href={`/${locale}/contact-form`} className="w-[190px]">
+            <Button variant="purple" className="w-full">
+              {t('common.cta')}
+            </Button>
+          </a>
           <div className="absolute bottom-[140px] right-[140px]" data-aos="fade" data-aos-offset="-80">
             <Stepper
               steps={3}
@@ -160,9 +162,11 @@ export const GrowthStepSection = () => {
             activeStep={getStepperIndex(activeIndex)}
             onStepClick={(step) => setActiveIndex(step - 1)}
           />
-          <Button variant="purple" className="w-[343px]">
-            {t('common.cta')}
-          </Button>
+          <a href={`/${locale}/contact-form`} className="w-[343px]">
+            <Button variant="purple" className="w-full">
+              {t('common.cta')}
+            </Button>
+          </a>
         </div>
       )}
     </section>

@@ -1,10 +1,18 @@
 type PlayCircleIconProps = {
   size?: number | string // можна передавати і 40, і '40px'
+  className?: string // новий проп
 }
 
-export const PlayCircleIcon = ({ size = 40 }: PlayCircleIconProps) => {
+export const PlayCircleIcon = ({ size = 40, className }: PlayCircleIconProps) => {
   return (
-    <svg width={size} height={size} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className} // передаємо клас
+    >
       <path
         d="M20 0C8.96 0 0 8.96 0 20C0 31.04 8.96 40 20 40C31.04 40 40 31.04 40 20C40 8.96 31.04 0 20 0ZM15 25.34V14.66C15 13.08 16.76 12.12 18.08 12.98L26.38 18.32C27.6 19.1 27.6 20.9 26.38 21.68L18.08 27.02C16.76 27.88 15 26.92 15 25.34Z"
         fill="#FDFDFD"

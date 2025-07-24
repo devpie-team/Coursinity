@@ -39,6 +39,11 @@ const kanunAR = localFont({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.coursinity.com'),
+  icons: {
+    icon: '/assets/favicon.png',
+    apple: '/assets/favicon.png'
+  },
   title: {
     template: '%s | Coursinity',
     default: 'Coursinity - Corporate Training in Saudi Arabia'
@@ -61,14 +66,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false
   },
-  metadataBase: new URL('https://www.coursinity.com'),
-  alternates: {
-    canonical: '/',
-    languages: {
-      en: '/en',
-      ar: '/ar'
-    }
-  },
+
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -127,7 +125,20 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={fontClass} dir={locale == 'ar' ? 'rtl' : 'ltr'}>
       <head>
-        <JsonLdSchema />
+        <JsonLdSchema locale={locale} />
+        {(() => {
+          let canonical = 'https://www.coursinity.com/'
+          if (locale === 'en') canonical = 'https://www.coursinity.com/en'
+          if (locale === 'ar') canonical = 'https://www.coursinity.com/ar'
+          return (
+            <>
+              <link rel="canonical" href={canonical} />
+              <link rel="alternate" hrefLang="x-default" href="https://www.coursinity.com/" />
+              <link rel="alternate" hrefLang="en" href="https://www.coursinity.com/en" />
+              <link rel="alternate" hrefLang="ar" href="https://www.coursinity.com/ar" />
+            </>
+          )
+        })()}
       </head>
       <body>
         <NextIntlClientProvider>

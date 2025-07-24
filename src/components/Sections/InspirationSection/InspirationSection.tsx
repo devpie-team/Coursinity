@@ -10,7 +10,7 @@ import { BriefCaseIcon } from '@/components/icons/BriefCaseIcon'
 import { EducationProperty2Icon } from '@/components/icons/EducationProperty2Icon'
 import { GamingPadIcon } from '@/components/icons/GamingPadIcon'
 import DiplomaIcon from '@/components/icons/DiplomaIcon'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
@@ -39,6 +39,8 @@ export const InspirationSection = () => {
   const [isTablet, setIsTablet] = useState<boolean>(false)
   const [isDesktop, setIsDesktop] = useState<boolean>(true)
   const [isVisible, setIsVisible] = useState<boolean>(false)
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth
@@ -199,9 +201,12 @@ export const InspirationSection = () => {
           <Typography variant="body3" weight="medium" className="text-white">
             {t('successMetric')}
           </Typography>
-          <Button variant="purple" className="w-[343px]">
-            {t('learnMore')}
-          </Button>
+
+          <a href={`/${locale}/contact-form`} className="w-[343px]">
+            <Button variant="purple" className="w-[343px]">
+              {t('learnMore')}
+            </Button>
+          </a>
         </div>
       </section>
     )
@@ -266,7 +271,7 @@ export const InspirationSection = () => {
               }
             : {}
         }>
-        <div className="shrink min1150:hidden">
+        <div className="shrink 1150:hidden">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
             {t('title')}
           </Typography>
@@ -281,9 +286,11 @@ export const InspirationSection = () => {
             {t('successMetric')}
           </Typography>
         </FadeInOnView>
-        <Button variant="purple" className="max-lg:w-[253px] max-md:w-full">
-          {t('learnMore')}
-        </Button>
+        <a href={`/${locale}/contact-form`} className="max-lg:w-[253px] max-md:w-full">
+          <Button variant="purple" className="w-full">
+            {t('learnMore')}
+          </Button>
+        </a>
       </div>
     </section>
   )

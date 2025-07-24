@@ -5,7 +5,7 @@ import DealIcon from '@/components/icons/DealIcon'
 import DiplomaIcon from '@/components/icons/DiplomaIcon'
 import { Typography } from '@/components/ui'
 import { cn } from '@/lib/utils'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -14,14 +14,15 @@ import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 const certificationsLeft = [
   { src: '/assets/certifications/CompTia.png', alt: 'CompTIA logo', padding: 'py-2' },
   { src: '/assets/certifications/Microsoft_Partner.png', alt: 'Microsoft logo', padding: 'py-2' },
-  { src: '/assets/certifications/Minestry_of_Health.png', alt: 'Ministry of Health logo', padding: 'py-2' },
+
+  { src: '/assets/certifications/IoSCM.png', alt: 'Institute of Supply Chain Managment logo', padding: 'p-[6px]' },
   { src: '/assets/certifications/Axelos.png', alt: 'Axelos logo', padding: 'py-2' }
 ]
 const certificationsRight = [
-  { src: '/assets/certifications/Dubai_Courts.png', alt: 'Dubai_Courts logo', padding: 'py-2' },
+  { src: '/assets/certifications/Dubai_Courts.png', alt: 'Dubai_Courts logo', padding: 'py-3' },
   { src: '/assets/certifications/Bahri_Ship_Mgmt.png', alt: 'Bahri_Ship_Mgmt logo', padding: 'py-[3px]' },
-  { src: '/assets/certifications/dubai_digital.png', alt: 'Digital_Dubai logo', padding: 'py-1' },
-  { src: '/assets/certifications/Minestry_of_Health.png', alt: 'Ministry of Health logo', padding: 'p-[6px]' }
+  { src: '/assets/certifications/dubai_digital.png', alt: 'Digital_Dubai logo', padding: 'py-2' },
+  { src: '/assets/certifications/Minestry_of_Health.png', alt: 'Ministry of Health logo', padding: 'py-2' }
 ]
 
 export const FeaturesSection = () => {
@@ -29,6 +30,8 @@ export const FeaturesSection = () => {
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [isTablet, setIsTablet] = useState<boolean>(false)
   const [isDesktop, setIsDesktop] = useState<boolean>(true)
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -48,16 +51,16 @@ export const FeaturesSection = () => {
   }, [])
 
   return (
-    <section className="bg-white px-[140px] pb-[140px] max-lg:px-6 max-lg:pt-20 max-lg:pb-0 max-[1400px]:px-[100px] max-[1250px]:px-[50px] max-md:px-4 ">
+    <section className="flex justify-center bg-white px-[140px] pb-[140px]    max-lg:px-6 max-lg:pt-20 max-lg:pb-0 max-[1400px]:px-[100px] max-[1250px]:px-[50px] max-md:px-4 ">
       <div
         className={cn(
           isTablet || isMobile
             ? 'flex gap-4 max-md:flex-col '
-            : 'flex p-8 rounded-[20px] gap-8 bg-[linear-gradient(180deg,_rgba(255,255,255,0.16)_0%,_rgba(30,141,194,0.16)_100%)] '
+            : 'flex justify-center max-w-[1150px]  p-8 rounded-[20px] gap-8 bg-[linear-gradient(180deg,_rgba(255,255,255,0.16)_0%,_rgba(30,141,194,0.16)_100%)] '
         )}>
         {/* Left Block */}
 
-        <div className="flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6">
+        <div className={cn('flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6 order-2')}>
           <div className={cn(isDesktop ? 'mb-6' : 'mb-2')}>
             <DiplomaIcon size={!isDesktop ? 40 : 64} />
           </div>
@@ -103,7 +106,7 @@ export const FeaturesSection = () => {
 
         {/* Right Block */}
 
-        <div className="flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6">
+        <div className={cn('flex flex-col bg-white border rounded-2xl p-8 flex-1 max-lg:px-5 max-lg:py-6  order-1')}>
           <div className="mb-6 max-lg:mb-2">
             <DealIcon width={!isDesktop ? 40 : 64} height={isTablet ? 40 : 64} />
           </div>

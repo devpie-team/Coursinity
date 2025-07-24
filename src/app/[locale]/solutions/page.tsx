@@ -1,0 +1,56 @@
+'use client'
+
+import { useLocale, useTranslations } from 'next-intl'
+
+import { Header } from '@/components/Header'
+import Footer from '@/components/Footer/Footer'
+
+import { useEffect, useState } from 'react'
+import AOS from 'aos'
+import { HeroSection } from '@/components/SolutionsSections/HeroSection/HeroSection'
+
+export default function HomePage() {
+  const t = useTranslations('HomePage')
+  const locale = useLocale()
+  const isArabic = locale === 'ar'
+
+  const [loading, setLoading] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
+
+  useEffect(() => {
+    AOS.init({
+      once: false,
+      duration: 700,
+      offset: 100,
+      easing: 'ease-in-out',
+      mirror: true
+    })
+  }, [])
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+      setIsTablet(width >= 768 && width <= 1024)
+    }
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), isMobile ? 6000 : isTablet ? 6500 : 5700)
+    return () => clearTimeout(timer)
+  }, [isMobile, isTablet])
+
+  return (
+    <>
+      {/*  {loading && <Loader loading={loading} />} */}
+
+      <Header />
+      <HeroSection loading />
+      <Footer />
+    </>
+  )
+}

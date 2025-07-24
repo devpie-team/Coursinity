@@ -8,7 +8,7 @@ import InstagramIcon from '../icons/InstagramIcon'
 import LinkedInIcon from '../icons/LinkedInIcon'
 import YouTubeIcon from '../icons/YouTubeIcon'
 import { Typography } from '../ui'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import React, { useEffect, useState } from 'react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -24,6 +24,8 @@ const Footer = ({ className }: FooterProps) => {
   const [isMobile, setIsMobile] = useState<boolean>(false)
   const [isTablet, setIsTablet] = useState<boolean>(false)
   const [isDesktop, setIsDesktop] = useState<boolean>(true)
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -73,9 +75,11 @@ const Footer = ({ className }: FooterProps) => {
             <Typography variant={isDesktop ? 'body2' : 'button'} weight="regular" className="text-opacity-80">
               {t('subheadline')}
             </Typography>
-            <Button variant="secondary" size="md" className="w-[263px] max-lg:w-[343px] mt-4">
-              {t('button')}
-            </Button>
+            <a href={`/${locale}/contact-form`} className="w-[263px] max-lg:w-[343px] mt-4">
+              <Button variant="secondary" size="md" className="w-[263px] max-lg:w-[343px] mt-4">
+                {t('button')}
+              </Button>
+            </a>
           </FadeInOnView>
         </div>
 
@@ -130,32 +134,50 @@ const Footer = ({ className }: FooterProps) => {
                 {t('bottom.copyright')}
               </Typography>
               <div className="flex text-button gap-6 w-[33%] justify-center order-2 max-lg:order-1 max-lg:justify-center">
-                <Typography as="a" href="#" variant={isDesktop ? 'body3' : 'caption'}>
+                <Typography as="a" href={`/${locale}/terms-of-use`} variant={isDesktop ? 'body3' : 'caption'}>
                   {t('bottom.links.terms')}
                 </Typography>
-                <Typography as="a" href="#" variant={isDesktop ? 'body3' : 'caption'}>
+                <Typography as="a" href={`/${locale}/privacy-policy`} variant={isDesktop ? 'body3' : 'caption'}>
                   {t('bottom.links.privacy')}
                 </Typography>
-                <Typography as="a" href="#" variant={isDesktop ? 'body3' : 'caption'}>
+                <Typography as="a" href={`/${locale}/cookie-policy`} variant={isDesktop ? 'body3' : 'caption'}>
                   {t('bottom.links.cookies')}
                 </Typography>
               </div>
               <div className="flex gap-2 w-[33%] justify-end order-3 max-lg:order-2 max-lg:justify-center">
-                <button className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all ">
+                <a
+                  href="https://x.com/Coursinity?t=Fjk0FBmWW0UsU2afg_y9DA&s=09"
+                  className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
                   <XIcon />
-                </button>
-                <button className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
+                </a>
+                <a
+                  href="https://www.facebook.com/share/1CyXhQZjqb/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
                   <FacebookIcon />
-                </button>
-                <button className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
+                </a>
+                <a
+                  href="https://www.instagram.com/coursinity?igsh=d2w3aDVndmx5ZmIw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
                   <InstagramIcon />
-                </button>
-                <button className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/coursinitypage/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
                   <LinkedInIcon />
-                </button>
-                <button className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
+                </a>
+                <a
+                  href="https://youtube.com/@coursinity?si=oZ3MtbPcir5ZxSKG"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex min-w-14 h-14 rounded-full bg-white bg-opacity-[12%] justify-center items-center hover:bg-opacity-25 transition-all">
                   <YouTubeIcon />
-                </button>
+                </a>
               </div>
             </div>
           </FadeInOnView>

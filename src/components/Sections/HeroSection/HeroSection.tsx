@@ -49,6 +49,8 @@ export const HeroSection = ({ loading }: THeroSection) => {
   const t = useTranslations('Hero')
   const [isTablet, setIsTablet] = useState<boolean>(false)
   const [isMobile, setIsMobile] = useState<boolean>(false)
+  const [isDesktop, setIsDesktop] = useState<boolean>(true)
+  const [windowWidth, setWindowWidth] = useState<number>(0)
 
   const lottieRef1 = useRef<LottieRefCurrentProps>(null)
   const lottieRef2 = useRef<LottieRefCurrentProps>(null)
@@ -80,8 +82,10 @@ export const HeroSection = ({ loading }: THeroSection) => {
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth
+      setWindowWidth(width)
       setIsMobile(width < 768)
-      setIsTablet(width <= 1024)
+      setIsTablet(width >= 768 && width <= 1024)
+      setIsDesktop(width > 1024)
     }
 
     checkScreenSize()
@@ -138,6 +142,15 @@ export const HeroSection = ({ loading }: THeroSection) => {
     })
   }, [])
 
+  const getTypographyVariant = () => {
+    if (isDesktop) return 'h1'
+    if (isTablet) return 'h3'
+    if (isArabic) {
+      return windowWidth < 365 ? 'h6' : 'h5'
+    }
+    return 'h3'
+  }
+
   return (
     <section
       className="overflow-hidden relative min-h-[900px] max-[768px]:min-h-[766px] max-[1024px]:min-h-[600px] w-full bg-cover bg-center bg-no-repeat hero-section"
@@ -150,38 +163,38 @@ export const HeroSection = ({ loading }: THeroSection) => {
         </div>
 
         <div
-          className={`flex flex-col gap-8 items-center z-10 text-center px-4 ${locale ? 'w-[1010px]' : 'w-[910px]'} `}
+          className={`flex flex-col gap-8 items-center z-10 text-center px-4   w-full ${
+            isArabic ? 'max-md:px-0' : ''
+          } `}
           data-aos="fade-up">
-          <div className="flex flex-col gap-6 max-[1024px]:gap-4 items-center">
-            {isTablet ? (
-              <div className=" leading-tight text-transparent bg-gradient-to-b from-[#1C8DC1] to-[#D3E7F0] bg-clip-text w-fit">
-                <Typography variant="h3" weight="medium">
-                  {t('spark')}
-                </Typography>
-                <Typography variant="h3" weight="medium">
-                  {t('revolution')}
-                </Typography>
-              </div>
-            ) : (
-              <div>
-                <Typography variant="h1" as="span" weight="medium" className="leading-[120px]">
-                  {t('title')}
-                </Typography>
-                <Typography
-                  variant="h1"
-                  as="span"
-                  weight="medium"
-                  className="bg-gradient-to-b from-[#1C8DC1] to-[#D3E7F0] bg-clip-text text-transparent">
-                  {t('titleGradient')}
-                </Typography>
-              </div>
-            )}
-            <Typography variant={isTablet ? 'body3' : 'body1'} className="min-[1440px]:max-w-[693px]">
-              {t(isTablet ? 'subtitleMobile' : 'subtitle')}
+          <div className="flex flex-col gap-6 max-lg:gap-4 items-center">
+            <div>
+              <Typography
+                variant={getTypographyVariant()}
+                as="span"
+                weight="medium"
+                className={cn(isArabic ? 'leading-[120px] max-lg:leading-[60px] max-md:leading-[0px] ' : '')}>
+                {t('title1')}
+                <br />
+                <span className="text-primary-purple"> {t('title3')}</span>
+                {t('title2')}
+              </Typography>
+
+              <Typography
+                variant={isDesktop ? 'h1' : 'h3'}
+                as="span"
+                weight="medium"
+                className="bg-gradient-to-b from-[#1C8DC1] to-[#D3E7F0] bg-clip-text text-transparent">
+                {t('titleGradient')}
+              </Typography>
+            </div>
+
+            <Typography variant={isDesktop ? 'body1' : 'body4'} className="max-w-[693px]">
+              {t('subtitle')}
             </Typography>
           </div>
-          <a href={`/${locale}/contact-form`} className="max-[1440px]:max-w-[425px] max-[1440px]:w-full max-lg:h-16">
-            <Button variant="purple" className="w-full">
+          <a href={`/${locale}/contact-form`} className="">
+            <Button variant="hero" className="w-[210px] max-lg:w-[393px] max-md:w-[343px] h-16">
               {t('bookDemo')}
             </Button>
           </a>
@@ -198,16 +211,13 @@ export const HeroSection = ({ loading }: THeroSection) => {
         src={`/assets/hero/${locale}/${isTablet ? 'tabletElement' : 'element'}2.png/`}
         className="absolute bottom-[-40px] right-[-40px] animate-element hero-element2 max-w-[228px] max-md:max-w-[163px]"
       />
-      {isTablet && !isArabic ? (
-        <BubbleIcon />
-      ) : (
-        <img
-          src={`/assets/hero/${locale}/${isTablet && !isArabic ? 'tabletElement' : 'element'}3.png/`}
-          className={`absolute top-[15%] left-0  max-[768px]:top-[10%] animate-element hero-element3 max-w-[${
-            !isArabic ? '222px' : '126px'
-          }] max-md:max-w-[80px]`}
-        />
-      )}
+
+      <img
+        src={`/assets/hero/${locale}/${isTablet ? 'tabletElement' : 'element'}3.png`}
+        className={`absolute top-[15%] left-0 max-[768px]:top-[10%] animate-element hero-element3 w-[126px] max-md:max-w-[80px] 
+          `}
+      />
+
       <img
         src={`/assets/hero/${locale}/${isTablet ? 'tabletElement' : 'element'}4.png/`}
         className="absolute top-[15%] right-[-30px] max-[768px]:top-[10%] max-[1024px]:right-[-15px] animate-element hero-element4 max-w-[86px] max-md:max-w-[54px]"

@@ -10,6 +10,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
+import { cn } from '@/lib/utils'
 
 export const StackSectionNew = () => {
   const [isMobile, setIsMobile] = useState<boolean>(false)
@@ -103,8 +104,11 @@ export const StackSectionNew = () => {
           </FadeInOnView>
           <a
             href={`/${locale}/contact-form`}
-            className="w-[255px] mt-4 max-md:mx-auto max-lg:w-[343px] max-[400px]:w-full max-[400px]:mt-0">
-            <Button variant="secondary" className="w-full">
+            className={cn(
+              'w-[285px] mt-4 max-md:mx-auto max-lg:w-[343px] max-[400px]:w-full max-[400px]:mt-0',
+              isArabic ? 'w-[290px]' : 'w-[265px]'
+            )}>
+            <Button variant="secondary" className={cn('w-full', isArabic ? 'px-4' : '')}>
               {t('left.button')}
             </Button>
           </a>

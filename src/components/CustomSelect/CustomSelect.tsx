@@ -1,6 +1,7 @@
 'use client'
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Typography } from '@/components/ui'
 import { cn } from '@/lib/utils'
 
 type Option = {
@@ -32,18 +33,18 @@ export const CustomSelect = ({
   return (
     <div className="flex flex-col">
       {label && (
-        <p className="text-sm font-medium mb-[6px]">
+        <Typography variant="caption" weight="medium" className="mb-[6px]">
           {label}
           <span className="text-[#7662E8] ml-[2px]">*</span>
-        </p>
+        </Typography>
       )}
 
       <Select value={value} onValueChange={onChange}>
         <SelectTrigger
           className={cn(
-            'w-full border disabled:pointer-events-none disabled:opacity-50 hover:border-description focus:border-black focus:outline-none',
+            'w-full border disabled:pointer-events-none disabled:opacity-50 hover:border-description focus:border-black focus:outline-none ',
             'relative h-[60px] px-5 py-[18px] rounded-2xl',
-            '[&_[data-placeholder]]:text-description transition-all duration-300', // ← це і є рішення
+            '[&_[data-placeholder]]:text-description transition-all duration-300',
             isError ? 'border-[#D92D20]' : 'border-secondary-400',
             className
           )}>

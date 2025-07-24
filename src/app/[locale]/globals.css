@@ -44,6 +44,17 @@ a {
   cursor: pointer;
 }
 
+.custom-dashed-border {
+  position: relative;
+  border: 2px solid transparent;
+  border-image: repeating-linear-gradient(to right,
+      #A578F2 0,
+      #A578F2 8px,
+      transparent 8px,
+      transparent 16px);
+  border-image-slice: 1;
+}
+
 .build-section .pin-spacer {
   background: #0d0d0d;
 }

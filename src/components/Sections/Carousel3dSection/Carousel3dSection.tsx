@@ -18,7 +18,7 @@ import { cn } from '@/lib/utils'
 gsap.registerPlugin(ScrollTrigger)
 
 const slidesData = [
-  { text: { en: 'AI Transformation', ar: 'تبّني الذكاء الاصطناعي' }, colors: ['#5a5a9e', '#535157', '#4a5568'] },
+  { text: { en: 'AI Transformation', ar: 'تبنّي الذكاء الاصطناعي' }, colors: ['#5a5a9e', '#535157', '#4a5568'] },
   { text: { en: 'Activity-Based Training', ar: 'سيناريوهات تدريب واقعية' }, colors: ['#5a5a9e', '#2c2a33', '#4a5568'] },
   { text: { en: 'Meta Verse & VR', ar: 'ميتاڤيرس وواقع افتراضي' }, colors: ['#5a5a9e', '#2c2a33', '#4a5568'] },
   { text: { en: 'Customised Learning Journeys', ar: 'رحلات تدريبية' }, colors: ['#5a5a9e', '#2c2a33', '#4a5568'] },
@@ -100,14 +100,14 @@ export function Carousel3dSection() {
         ...
       </div> */}
 
-      <div style={{ position: 'relative', height: '100dvh', width: '100vw' }}>
+      <div style={{ position: 'relative', height: '100vh', width: '100vw' }}>
         <div id="canvas-container" className="relative h-full w-full">
           <div className="absolute inset-0 z-10 flex items-end pl-4 pb-14 max-md:pb-0 max-md:pl-0 pointer-events-none">
             <div className="flex flex-col text-white text-start max-w-[600px] gap-6 p-6 max-md:gap-2 max-md:bg-gradient-to-t max-md:from-black/70 max-md:w-full max-md:pt-3 max-md:backdrop-blur-[2px]">
               {/*  <Typography variant="body1" weight="medium">
                 {t('title')}
               </Typography> */}
-              <div className="flex flex-col gap-4 text-[#A578F2] max-md:gap-2 ">
+              <div className="flex flex-col gap-4 text-[#A578F2] max-md:gap-2 max-md:pb-[80px]">
                 {['point1', 'point2', 'point3', 'point4', 'point5'].map((key) => (
                   <Typography
                     key={key}

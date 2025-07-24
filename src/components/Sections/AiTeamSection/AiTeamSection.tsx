@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Button } from '@/components/primitives/button'
 import { Typography } from '@/components/ui'
 
@@ -24,6 +24,8 @@ export const AiTeamSection = () => {
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(false)
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -94,9 +96,11 @@ export const AiTeamSection = () => {
             </Typography>
           </FadeInOnView>
           <FadeInOnView>
-            <Button variant="purple" size="md" className="mt-10 w-[190px] max-lg:w-full max-md:w-full max-lg:mt-4">
-              {t('button')}
-            </Button>
+            <a href={`/${locale}/contact-form`} className="mt-10  max-lg:mt-4">
+              <Button variant="purple" size="md" className="mt-10 w-[190px] max-lg:w-full max-md:w-full max-lg:mt-4">
+                {t('button')}
+              </Button>
+            </a>
           </FadeInOnView>
         </div>
 

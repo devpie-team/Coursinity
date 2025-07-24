@@ -80,8 +80,8 @@ export const TestimonialsSection = () => {
 
   const visibleSlides = getVisibleSlides()
   const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => (isMobile || isTablet) && handleNext(),
-    onSwipedRight: () => (isMobile || isTablet) && handlePrev(),
+    onSwipedLeft: () => (isMobile || isTablet) && (isArabic ? handlePrev() : handleNext()),
+    onSwipedRight: () => (isMobile || isTablet) && (isArabic ? handleNext() : handlePrev()),
     trackMouse: true
   })
 

@@ -4,7 +4,7 @@ import { CompanyCard } from '../CompanyCard/CompanyCard'
 import Lottie from 'lottie-react'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
-import { useTranslations } from 'next-intl' // або свій хук
+import { useLocale, useTranslations } from 'next-intl'
 
 type ContactVisualProps = {
   className?: string
@@ -17,6 +17,8 @@ export const ContactVisual = ({ className }: ContactVisualProps) => {
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -31,10 +33,18 @@ export const ContactVisual = ({ className }: ContactVisualProps) => {
   }, [])
 
   useEffect(() => {
-    fetch('/assets/lottie/contact_form/contact_form_1.json')
+    fetch(
+      isArabic
+        ? '/assets/lottie/contact_form/contact_form_1_ar.json'
+        : '/assets/lottie/contact_form/contact_form_1.json'
+    )
       .then((res) => res.json())
       .then(setAnimationData1)
-    fetch('/assets/lottie/contact_form/contact_form_2.json')
+    fetch(
+      isArabic
+        ? '/assets/lottie/contact_form/contact_form_2_ar.json'
+        : '/assets/lottie/contact_form/contact_form_2.json'
+    )
       .then((res) => res.json())
       .then(setAnimationData2)
   }, [])
@@ -51,8 +61,8 @@ export const ContactVisual = ({ className }: ContactVisualProps) => {
         />
       </div>
       <div className={cn('', className)}>
-        <div className="flex flex-col gap-8 z-10 text-center">
-          <Typography variant={isMobile ? 'h6' : 'h3'} weight="medium">
+        <div className="flex flex-col gap-8 z-5 text-center">
+          <Typography variant={isMobile ? 'h6' : 'h3'} weight="medium" className="max-w-[426px]">
             {t('title')}
           </Typography>
           <Typography variant="body2" weight="regular">
@@ -72,17 +82,20 @@ export const ContactVisual = ({ className }: ContactVisualProps) => {
         {animationData1 && (
           <Lottie
             animationData={animationData1}
-            className="absolute w-[110px] h-[100px] right-[-30px] bottom-[100px] opacity-30 max-md:hidden"
-            loop
-            autoplay
+            className={cn('absolute w-[110px] h-[100px] right-[-30px] bottom-[100px] opacity-30 max-md:hidden')}
+            loop={false}
+            autoplay={true}
           />
         )}
         {animationData2 && (
           <Lottie
             animationData={animationData2}
-            className="absolute w-[180px] h-[80px] left-[20px] top-[200px] rotate-[-9.75deg] opacity-30 max-md:hidden"
-            loop
-            autoplay
+            className={cn(
+              'absolute w-[180px] h-[80px]  rotate-[-9.75deg] opacity-30 max-md:hidden',
+              isArabic ? 'left-[20px] top-[220px]' : 'left-[20px] top-[200px]'
+            )}
+            loop={false}
+            autoplay={true}
           />
         )}
       </div>

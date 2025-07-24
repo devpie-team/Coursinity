@@ -1,0 +1,1 @@
+export { FeaturedCheckIcon } from './FeaturedCheckIcon'

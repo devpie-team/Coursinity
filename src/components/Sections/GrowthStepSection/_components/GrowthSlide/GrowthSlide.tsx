@@ -6,7 +6,7 @@ import { CheckCircleIcon } from '@/components/icons'
 import { PlayCircleIcon } from '@/components/icons/PlayCircleIcon'
 import clsx from 'clsx'
 import { cn } from '@/lib/utils'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useResponsiveBreakpoints } from '@/hooks/useResponsiveBreakpoints'
 
 type SlideData = {
@@ -50,6 +50,8 @@ export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: 
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
+  const locale = useLocale()
+  const isArabic = locale == 'ar'
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -93,7 +95,7 @@ export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: 
             {data.title}
           </Typography>
           <div>
-            <PlayCircleIcon size={isDesktop ? '40px' : '27px'} />
+            <PlayCircleIcon size={isDesktop ? '40px' : '27px'} className={isArabic ? 'scale-x-[-1]' : ''} />
           </div>
         </div>
         {!isDesktop && showDetails && index === 0 && (
@@ -147,12 +149,26 @@ export const GrowthSlide = ({ index, activeIndex, onClick, data, showDetails }: 
                   <div>
                     <CheckCircleIcon size={isDesktop ? '32px' : '16px'} fill="white" />
                   </div>
-                  <Typography
-                    variant={isDesktop ? 'body2' : 'subtitle'}
-                    weight={isDesktop ? 'semibold' : 'regular'}
-                    className="text-white opacity-80">
-                    {text}
-                  </Typography>
+                  {index === 0 && i === 2 ? (
+                    <div className="text-white opacity-80">
+                      {text.split('\n').map((line, lineIndex) => (
+                        <Typography
+                          key={lineIndex}
+                          variant={isDesktop ? 'body2' : 'subtitle'}
+                          weight={isDesktop ? 'semibold' : 'regular'}
+                          className="text-white opacity-80">
+                          {line}
+                        </Typography>
+                      ))}
+                    </div>
+                  ) : (
+                    <Typography
+                      variant={isDesktop ? 'body2' : 'subtitle'}
+                      weight={isDesktop ? 'semibold' : 'regular'}
+                      className="text-white opacity-80">
+                      {text}
+                    </Typography>
+                  )}
                 </div>
               ))}
             </div>

@@ -77,7 +77,7 @@ export const Header = () => {
     'max-lg:px-6',
     'grid',
     'items-center',
-    !isDesktop ? 'grid-cols-2' : 'grid-cols-3',
+    !isDesktop ? 'grid-cols-2' : 'grid-cols-2',
     'py-[20px]',
     'transition-transform',
     'duration-500',
@@ -94,7 +94,7 @@ export const Header = () => {
       <a href={`/${locale}`}>
         <LogoIcon className="h-[14px] w-[127px] justify-self-start" />
       </a>
-      {isDesktop && <HeaderDropdown start={start} />}
+      {/* {isDesktop && <HeaderDropdown start={start} />} */}
       {isDesktop ? (
         <div className="flex items-center gap-[18px] justify-self-end">
           <ToggleLanguage
@@ -133,7 +133,7 @@ export const Header = () => {
                 router.replace(newPath)
               }}
             />
-            <div className="flex flex-col gap-4 items-center">
+            {/*  <div className="flex flex-col gap-4 items-center">
               <div
                 className="gap-[10px] flex items-center cursor-pointer select-none "
                 onClick={() => setOpened((v) => !v)}>
@@ -157,7 +157,7 @@ export const Header = () => {
               <Typography weight="medium" variant="h6">
                 {t('blog')}
               </Typography>
-            </div>
+            </div> */}
           </div>
           <a href={`/${locale}/contact-form`}>
             <Button variant="purple" className="w-full">
