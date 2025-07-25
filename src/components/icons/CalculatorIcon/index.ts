@@ -1,0 +1,1 @@
+export { CalculatorIcon } from './CalculatorIcon'

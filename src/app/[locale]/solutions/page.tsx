@@ -8,6 +8,8 @@ import Footer from '@/components/Footer/Footer'
 import { useEffect, useState } from 'react'
 import AOS from 'aos'
 import { HeroSection } from '@/components/SolutionsSections/HeroSection/HeroSection'
+import { TestimonialsSection } from '@/components/Sections'
+import { CardSection } from '@/components/SolutionsSections/CardSection'
 
 export default function HomePage() {
   const t = useTranslations('HomePage')
@@ -50,6 +52,8 @@ export default function HomePage() {
 
       <Header />
       <HeroSection loading />
+      <CardSection />
+      <TestimonialsSection />
       <Footer />
     </>
   )
