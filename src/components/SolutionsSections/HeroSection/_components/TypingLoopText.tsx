@@ -1,5 +1,3 @@
-'use client'
-
 import { Typography } from '@/components/ui'
 import { useEffect, useState, useRef } from 'react'
 
@@ -15,6 +13,20 @@ const TypingLoopText = () => {
   )
   const [hasFinishedCycle, setHasFinishedCycle] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+  const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
+  const [isDesktop, setIsDesktop] = useState(true)
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+      setIsTablet(width >= 768 && width <= 1024)
+      setIsDesktop(width > 1024)
+    }
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
 
   // Перезапуск при вході у viewport
   useEffect(() => {
@@ -96,13 +108,14 @@ const TypingLoopText = () => {
   return (
     <div
       ref={containerRef}
-      className="relative inline-block px-6 py-4 border-2 border-dashed border-primary-purple min-h-[116px]">
-      <Typography variant="h1" weight="medium" className="text-primary-purple flex items-center gap-4">
+      className="flex relative px-6 py-4 border-2 border-dashed border-primary-purple min-h-[116px] max-lg:py-0 items-center max-lg:min-h-16">
+      <Typography
+        variant={isDesktop ? 'h1' : 'h3'}
+        weight="medium"
+        className="text-primary-purple flex items-center gap-4">
         <span className="whitespace-pre">{shouldHideText ? '\u00A0' : displayed}</span>
         <span
-          className={`w-[8px] h-[64px] transition-opacity duration-200 ${
-            showCursor ? 'bg-primary-purple' : 'invisible'
-          }`}
+          className={`w-[8px] h-[64px]   max-lg:h-10 max-lg:w-1 ${showCursor ? 'bg-primary-purple' : 'invisible'}`}
         />
       </Typography>
 

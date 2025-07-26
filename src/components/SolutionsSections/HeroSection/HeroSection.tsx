@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import TypingLoopText from './_components/TypingLoopText'
 import { Typography } from '@/components/ui'
 import { Button } from '@/components/primitives/button'
+import StepScroll from './_components/StepScrollSection'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -34,27 +35,32 @@ export const HeroSection = ({ loading }: THeroSection) => {
   }, [])
 
   return (
-    <section className="h-[2300px] bg-[linear-gradient(180deg,_#F9FAFB_0%,_#A578F2_57.98%,_#F9FAFB_100%)] pt-[180px]">
-      <div className="flex flex-col justify-center items-center  gap-8">
-        <div className="flex flex-col gap-4 justify-center items-center">
+    <section className="flex flex-col justify-between  pt-[180px] items-center max-lg:pt-[120px]">
+      <div className="flex flex-col justify-center items-center text-center gap-8 max-lg:max-w-[440px] max-lg:gap-4 max-md:px-4">
+        <Button variant="hero" className="h-[30px] flex items-center max-md:mb-4">
+          Solutions
+        </Button>
+        <div className="flex flex-col gap-4 justify-center items-center ">
           <div className="flex gap-2 items-center">
-            <Typography variant="h1" weight="medium">
+            <Typography variant={isDesktop ? 'h1' : 'h3'} weight="medium">
               Train
             </Typography>
-            <div></div>
+
             <TypingLoopText />
-            <Typography variant="h1" weight="medium">
-              with
-            </Typography>
+            {isDesktop && (
+              <Typography variant={isDesktop ? 'h1' : 'h3'} weight="medium">
+                with
+              </Typography>
+            )}
           </div>
-          <Typography variant="h1" weight="medium">
-            Team-centric Solutions
+          <Typography variant={isDesktop ? 'h1' : 'h3'} weight="medium">
+            {!isDesktop && 'with '}Team-centric Solutions
           </Typography>
         </div>
         <Typography variant="body2" weight="medium">
           Programs designed for your organization’s goals and your team's daily needs.
         </Typography>
-        <Button variant="primary" className="mt-4">
+        <Button variant="primary" className="mt-4 max-lg:w-full max-lg:bt-4">
           Book a Demo
         </Button>
       </div>
