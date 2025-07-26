@@ -1,0 +1,32 @@
+{
+    "S_CardSection": {
+        "title": "أكاديمية مؤسستك الرقمية المخصّصة",
+        "subtitle": "منصة رقمية  تتكامل بشكل سلس مع أنظمة مؤسستك التقنية ، تعزّز علامتك التجارية، تتوافق مع سير عملك.",
+        "cards": [
+            {
+                "title": "صمّم حسب قطاع مؤسستك",
+                "subtitle": "تصميم التدريب ليتناسب مع طبيعة وخصوصية قطاع عملك."
+            },
+            {
+                "title": "حدّد موضوع التدريب الدقيق",
+                "subtitle": "اختيار المحتوى التدريبي الذي يحقق أهداف مؤسستك واحتياجات فريقك."
+            },
+            {
+                "title": "اختر أسلوب التدريب المناسب",
+                "subtitle": "تحديد طريقة التدريب التي تناسب فريقك - حضوري، إلكتروني، أو مدمج."
+            },
+            {
+                "title": "Tailor by Role",
+                "subtitle": "Deliver training that fits every level, executives, managers, staff, or new hires."
+            },
+            {
+                "title": "Target the Right Expertise",
+                "subtitle": "Direct training toward specific fields, finance, management, technical, or marketing."
+            },
+            {
+                "title": "Design It in Your Brand",
+                "subtitle": "Deliver a platform that looks, feels, and sounds like your organization."
+            }
+        ]
+    }
+}

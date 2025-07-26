@@ -1,0 +1,67 @@
+.card-corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  opacity: 0.8;
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.43, 0.24, 0.38, 1.17);
+  z-index: 10;
+}
+.card-corner--tl {
+  border-bottom: none;
+  border-right: none;
+}
+.card-corner--tr {
+  border-bottom: none;
+  border-left: none;
+}
+.card-corner--bl {
+  border-top: none;
+  border-right: none;
+}
+.card-corner--br {
+  border-top: none;
+  border-left: none;
+}
+
+.card-corner--init-tl {
+  top: 40px;
+  left: 40px;
+  opacity: 0;
+}
+.card-corner--init-tr {
+  top: 40px;
+  right: 40px;
+  opacity: 0;
+}
+.card-corner--init-bl {
+  bottom: 40px;
+  left: 40px;
+  opacity: 0;
+}
+.card-corner--init-br {
+  bottom: 40px;
+  right: 40px;
+  opacity: 0;
+}
+
+.card-corner--final-tl {
+  top: 22px;
+  left: 20px;
+  opacity: 1;
+}
+.card-corner--final-tr {
+  top: 22px;
+  right: 20px;
+  opacity: 1;
+}
+.card-corner--final-bl {
+  bottom: 22px;
+  left: 20px;
+  opacity: 1;
+}
+.card-corner--final-br {
+  bottom: 22px;
+  right: 20px;
+  opacity: 1;
+}

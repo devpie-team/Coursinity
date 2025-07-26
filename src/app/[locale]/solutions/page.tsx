@@ -8,7 +8,12 @@ import Footer from '@/components/Footer/Footer'
 import { useEffect, useState } from 'react'
 import AOS from 'aos'
 import { HeroSection } from '@/components/SolutionsSections/HeroSection/HeroSection'
+
 import StepScroll from '@/components/SolutionsSections/HeroSection/_components/StepScrollSection'
+
+import { TestimonialsSection } from '@/components/Sections'
+import { CardSection } from '@/components/SolutionsSections/CardSection'
+
 
 export default function HomePage() {
   const t = useTranslations('HomePage')
@@ -54,7 +59,8 @@ export default function HomePage() {
         <HeroSection loading />
         <StepScroll />
       </div>
-
+      <CardSection />
+      <TestimonialsSection />
       <Footer />
     </>
   )
