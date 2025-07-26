@@ -90,13 +90,14 @@ const StepScroll = () => {
     const OPEN_HEIGHT = isDesktop ? 150 : 120
 
     cardRefs.current.forEach((card, idx) => {
-      if (card) gsap.set(card, { height: idx === 0 ? OPEN_HEIGHT : CLOSED_HEIGHT })
+      if (card) {
+      }
     })
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: isTablet ? 'top top' : 'top+=100 top',
+        start: isMobile ? 'top+=240 top' : 'top top',
         end: `+=${150 * (steps.length - 1)}%`,
         pin: true,
         scrub: true
@@ -121,9 +122,6 @@ const StepScroll = () => {
         },
         label
       )
-
-      tl.to(cardRefs.current[i], { height: CLOSED_HEIGHT }, label)
-      tl.to(cardRefs.current[next], { height: OPEN_HEIGHT }, label)
     }
 
     return () => {
@@ -136,7 +134,7 @@ const StepScroll = () => {
     <div ref={wrapperRef}>
       <div
         ref={containerRef}
-        className="flex flex-col bg-white rounded-[40px] mx-8 py-[120px] border border-secondary-400 gap-10 items-center max-lg:gap-0 max-md:gap-8">
+        className="flex flex-col bg-white rounded-[40px] mx-8 py-[40px] border border-secondary-400 gap-10 items-center max-lg:gap-0 max-md:gap-8 min-h-[100vh] max-md:px-4 max-md:pb-20">
         <div className="flex flex-col gap-6 mb-5 max-w-[800px] text-center max-lg:mb-10 max-lg:max-w-[690px] max-md:mb-0">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
             Not Off-the-Shelf, Just Off-the-Charts Solutions
@@ -184,7 +182,7 @@ const StepScroll = () => {
             ))}
           </div>
 
-          <div className="w-[470px] h-[470px] relative overflow-hidden max-lg:w-[330px] max-lg:h-[330px]">
+          <div className="w-[470px] h-[470px] relative overflow-hidden max-lg:w-[330px] max-lg:h-[340px]">
             {steps.map((step, i) => (
               <img
                 key={i}
