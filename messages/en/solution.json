@@ -28,5 +28,28 @@
                 "subtitle": "Deliver a platform that looks, feels, and sounds like your organization."
             }
         ]
+    },
+    "S_CultureSection": {
+        "title": "Training That Feels Native to Your Culture",
+        "description": "When your culture sets the rhythm, training shouldn't miss a beat. Coursinity co-creates every module around your workflows, values, and tools, so learning feels like an extension of daily work, not an add-on.",
+        "button": "Discuss Your Training Needs",
+        "cards": [
+            {
+                "title": "On-Site, On-Point",
+                "description": "A polished in-person experience that combines active learning with real-world application."
+            },
+            {
+                "title": "Ready Whenever Your Team Is",
+                "description": "Flexible access for on-the-go learning, quick reviews, and steady growth."
+            },
+            {
+                "title": "Self-Guided, Not Self-Served",
+                "description": "Engaging digital content built for independent learning and backed by expert-led coaching sessions"
+            },
+            {
+                "title": "Simulations, Scenarios & Gamification",
+                "description": "AI-powered training journeys packed with expert insights, hands-on exercises, and interactive challenges."
+            }
+        ]
     }
 }
