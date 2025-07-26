@@ -55,7 +55,12 @@ export const StepCard = forwardRef<HTMLDivElement, StepCardProps>(
     }, [])
 
     return (
-      <div ref={setRefs} className="transition-all overflow-hidden">
+      <div
+        ref={setRefs}
+        className="transition-all duration-300 ease-out overflow-hidden"
+        style={{
+          height: isOpen ? (isDesktop ? '150px' : '120px') : '86px'
+        }}>
         <div className="flex gap-4 items-start cursor-pointer" onClick={onClick}>
           <div className="flex flex-col w-6 min-w-[24px] items-center relative">
             <Typography variant={isDesktop ? 'h4' : 'h6'} weight="medium" className=" flex items-center justify-center">
@@ -66,7 +71,7 @@ export const StepCard = forwardRef<HTMLDivElement, StepCardProps>(
                 <GradientTickIcon />
               </span>
               <span
-                className={`absolute transition-all duration-200 ${
+                className={`absolute transition-all duration-300 ${
                   isCompleted ? 'opacity-0 scale-0' : 'opacity-100 scale-100'
                 }`}>
                 {number}
@@ -75,7 +80,7 @@ export const StepCard = forwardRef<HTMLDivElement, StepCardProps>(
 
             {!isLast && (
               <span
-                className="absolute left-1/2 top-full translate-x-[-50%] rounded-full transition-[height,margin-top,background] duration-700"
+                className="absolute left-1/2 top-full translate-x-[-50%] rounded-full transition-[height,margin-top,background] duration-1000"
                 style={{
                   marginTop: isOpen ? '6px' : '12px',
                   height: isOpen ? ` ${isDesktop ? 96 : 64}px` : '20px',
@@ -94,7 +99,7 @@ export const StepCard = forwardRef<HTMLDivElement, StepCardProps>(
             </Typography>
             <Typography
               variant="body2"
-              className="text-description transition-opacity duration-300"
+              className="text-description transition-opacity duration-0"
               style={{ opacity: openPercent }}>
               {description}
             </Typography>
