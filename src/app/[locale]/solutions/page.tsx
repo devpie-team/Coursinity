@@ -8,6 +8,7 @@ import Footer from '@/components/Footer/Footer'
 import { useEffect, useState } from 'react'
 import AOS from 'aos'
 import { HeroSection } from '@/components/SolutionsSections/HeroSection/HeroSection'
+import StepScroll from '@/components/SolutionsSections/HeroSection/_components/StepScrollSection'
 
 export default function HomePage() {
   const t = useTranslations('HomePage')
@@ -49,7 +50,11 @@ export default function HomePage() {
       {/*  {loading && <Loader loading={loading} />} */}
 
       <Header />
-      <HeroSection loading />
+      <div className=" bg-[linear-gradient(180deg,_#F9FAFB_0%,_#A578F2_57.98%,_#F9FAFB_100%)]">
+        <HeroSection loading />
+        <StepScroll />
+      </div>
+
       <Footer />
     </>
   )

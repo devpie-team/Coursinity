@@ -1,0 +1,1 @@
+export { GradientTickIcon } from './GradientTickIcon'
