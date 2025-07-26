@@ -6,6 +6,7 @@ import { Typography } from '@/components/ui'
 import { Card } from './_components/Card/Cards'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useLocale, useTranslations } from 'next-intl'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -13,6 +14,9 @@ export const CultureAlignedSection = () => {
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
+  const locale = useLocale()
+  const isArabic = locale === 'ar'
+  const t = useTranslations('S_CultureSection')
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -30,25 +34,28 @@ export const CultureAlignedSection = () => {
 
   const cards = [
     {
-      title: 'On-Site, On-Point',
-      description: 'A polished in-person experience that combines active learning with real-world application.',
-      className: 'absolute left-[-300px] top-[120px]'
+      title: t('cards.0.title'),
+      description: t('cards.0.description'),
+      className: `absolute ${isDesktop ? ' left-[-300px] top-[220px]' : ' left-[-240px] top-[280px]'}`
     },
     {
-      title: 'Ready Whenever Your Team Is',
-      description: 'Flexible access for on-the-go learning, quick reviews, and steady growth.',
-      className: 'absolute left-[-350px] bottom-[240px] rotate-[-2.95deg]'
+      title: t('cards.1.title'),
+      description: t('cards.1.description'),
+      className: `absolute ${
+        isDesktop ? 'left-[-350px] bottom-[140px] rotate-[-2.95deg]' : 'left-[-240px] bottom-[40px] rotate-[-2deg]'
+      }`
     },
     {
-      title: 'Self-Guided, Not Self-Served',
-      description: 'Engaging digital content built for independent learning and backed by expert-led coaching sessions',
-      className: 'absolute left-[400px] top-[115px]'
+      title: t('cards.2.title'),
+      description: t('cards.2.description'),
+      className: `absolute ${isDesktop ? 'left-[400px] top-[215px]' : 'left-[340px] top-[265px]'}`
     },
     {
-      title: 'Simulations, Scenarios & Gamification',
-      description:
-        'AI-powered training journeys packed with expert insights, hands-on exercises, and interactive challenges.',
-      className: 'absolute left-[375px] bottom-[250px] rotate-[5deg]'
+      title: t('cards.3.title'),
+      description: t('cards.3.description'),
+      className: `absolute ${
+        isDesktop ? 'left-[375px] bottom-[150px] rotate-[5deg]' : 'left-[365px] bottom-[20px] rotate-[2deg]'
+      }`
     }
   ]
 
@@ -95,19 +102,18 @@ export const CultureAlignedSection = () => {
   }, [])
 
   return (
-    <section className="flex flex-col bg-black gap-10 pt-[120px] justify-center items-center">
-      <div className="flex flex-col gap-8 max-w-[800px] items-center">
+    <section className="flex flex-col bg-black gap-10 pt-[120px] justify-center items-center max-lg:pt-20">
+      <div className="flex flex-col gap-8 max-w-[800px]  items-center max-lg:max-w-[430px]">
         <div className="flex flex-col gap-6 text-center">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
-            Training That Feels Native to Your Culture
+            {t('title')}
           </Typography>
           <Typography variant="body3" weight="regular" className="text-white opacity-70">
-            When your culture sets the rhythm, training shouldn't miss a beat. Coursinity co-creates every module around
-            your workflows, values, and tools, so learning feels like an extension of daily work, not an add-on.
+            {t('description')}
           </Typography>
         </div>
         <Button variant="purple" className="w-[275px]">
-          Discuss Your Training Needs
+          {t('button')}
         </Button>
       </div>
 
