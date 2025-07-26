@@ -1,0 +1,136 @@
+'use client'
+
+import { useEffect, useRef, useState, useLayoutEffect } from 'react'
+import { Button } from '@/components/primitives/button'
+import { Typography } from '@/components/ui'
+import { Card } from './_components/Card/Cards'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
+export const CultureAlignedSection = () => {
+  const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
+  const [isDesktop, setIsDesktop] = useState(true)
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+      setIsTablet(width >= 768 && width <= 1024)
+      setIsDesktop(width > 1024)
+    }
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
+
+  const cards = [
+    {
+      title: 'On-Site, On-Point',
+      description: 'A polished in-person experience that combines active learning with real-world application.',
+      className: 'absolute left-[-300px] top-[120px]'
+    },
+    {
+      title: 'Ready Whenever Your Team Is',
+      description: 'Flexible access for on-the-go learning, quick reviews, and steady growth.',
+      className: 'absolute left-[-350px] bottom-[240px] rotate-[-2.95deg]'
+    },
+    {
+      title: 'Self-Guided, Not Self-Served',
+      description: 'Engaging digital content built for independent learning and backed by expert-led coaching sessions',
+      className: 'absolute left-[400px] top-[115px]'
+    },
+    {
+      title: 'Simulations, Scenarios & Gamification',
+      description:
+        'AI-powered training journeys packed with expert insights, hands-on exercises, and interactive challenges.',
+      className: 'absolute left-[375px] bottom-[250px] rotate-[5deg]'
+    }
+  ]
+
+  useLayoutEffect(() => {
+    const timeoutId = setTimeout(() => {
+      const ctx = gsap.context(() => {
+        cardRefs.current.forEach((card, i) => {
+          if (!card) return
+
+          ScrollTrigger.getAll().forEach((trigger) => {
+            if (trigger.vars.id === `culture-card-${i}`) {
+              trigger.kill()
+            }
+          })
+
+          gsap.fromTo(
+            card,
+            { y: 0, opacity: 1 },
+            {
+              y: -300,
+              opacity: 0.5,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: '.culture-cards-trigger',
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true,
+                id: `culture-card-${i}`,
+                markers: false
+              }
+            }
+          )
+        })
+      })
+
+      return () => {
+        ctx.revert()
+      }
+    }, 100)
+
+    return () => {
+      clearTimeout(timeoutId)
+    }
+  }, [])
+
+  return (
+    <section className="flex flex-col bg-black gap-10 pt-[120px] justify-center items-center">
+      <div className="flex flex-col gap-8 max-w-[800px] items-center">
+        <div className="flex flex-col gap-6 text-center">
+          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
+            Training That Feels Native to Your Culture
+          </Typography>
+          <Typography variant="body3" weight="regular" className="text-white opacity-70">
+            When your culture sets the rhythm, training shouldn't miss a beat. Coursinity co-creates every module around
+            your workflows, values, and tools, so learning feels like an extension of daily work, not an add-on.
+          </Typography>
+        </div>
+        <Button variant="purple" className="w-[275px]">
+          Discuss Your Training Needs
+        </Button>
+      </div>
+
+      <div className="relative w-[410px] h-[810px] culture-cards-trigger">
+        <img
+          src="/assets/solutions/culture_section/culture_section_1.png"
+          alt="culture_section_1"
+          className="object-contain w-full h-full"
+        />
+        <div className="absolute bottom-0 left-0 w-full h-[450px] bg-[linear-gradient(0deg,_#0D0D0D_0%,_rgba(13,13,13,0)_100%)]" />
+
+        {cards.map((card, idx) => (
+          <Card
+            key={idx}
+            ref={(el) => {
+              cardRefs.current[idx] = el
+            }}
+            title={card.title}
+            description={card.description}
+            className={card.className}
+          />
+        ))}
+      </div>
+    </section>
+  )
+}

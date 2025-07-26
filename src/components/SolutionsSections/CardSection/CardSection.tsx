@@ -100,36 +100,38 @@ export const CardSection = () => {
 
     const triggerLength = window.innerHeight * 2
 
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: container,
-        start: 'top top',
-        end: `+=${triggerLength}`,
-        pin: true,
-        scrub: true,
-        anticipatePin: 1,
-        onUpdate: (self) => {
-          const progress = self.progress
-          if (progress < 0.5) {
-            gsap.to(sections, {
-              xPercent: 0,
-              duration: 1.5,
-              ease: 'ease.inOut'
-            })
-            setCurrentStep(0)
-          } else {
-            gsap.to(sections, {
-              xPercent: locale === 'ar' ? 100 : -122,
-              duration: 1.5,
-              ease: 'ease.inOut'
-            })
-            setCurrentStep(1)
-          }
+    const trigger = ScrollTrigger.create({
+      trigger: container,
+      start: 'top top',
+      end: `+=${triggerLength}`,
+      pin: true,
+      scrub: true,
+      anticipatePin: 1,
+      onUpdate: (self) => {
+        const progress = self.progress
+        if (progress < 0.5) {
+          gsap.to(sections, {
+            xPercent: 0,
+            duration: 1.5,
+            ease: 'ease.inOut'
+          })
+          setCurrentStep(0)
+        } else {
+          gsap.to(sections, {
+            xPercent: locale === 'ar' ? 100 : -122,
+            duration: 1.5,
+            ease: 'ease.inOut'
+          })
+          setCurrentStep(1)
         }
-      })
-    }, container)
+      }
+    })
 
-    return () => ctx.revert()
+    scrollTriggerRef.current = trigger
+
+    return () => {
+      trigger.kill()
+    }
   }, [isDesktop, locale])
 
   const handleStepClick = (step: number) => {

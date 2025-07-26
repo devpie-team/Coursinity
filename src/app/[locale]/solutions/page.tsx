@@ -13,7 +13,7 @@ import StepScroll from '@/components/SolutionsSections/HeroSection/_components/S
 
 import { TestimonialsSection } from '@/components/Sections'
 import { CardSection } from '@/components/SolutionsSections/CardSection'
-
+import { CultureAlignedSection } from '@/components/SolutionsSections/CultureAlignedSection'
 
 export default function HomePage() {
   const t = useTranslations('HomePage')
@@ -60,6 +60,7 @@ export default function HomePage() {
         <StepScroll />
       </div>
       <CardSection />
+      <CultureAlignedSection />
       <TestimonialsSection />
       <Footer />
     </>
