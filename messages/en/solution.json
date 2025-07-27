@@ -51,5 +51,23 @@
                 "description": "AI-powered training journeys packed with expert insights, hands-on exercises, and interactive challenges."
             }
         ]
+    },
+    "S_PathSection": {
+        "title": "We Design Paths, Not Shortcuts",
+        "subtitle": "Custom journeys that get your team exactly where they need to go",
+        "cards": [
+            {
+                "title": "Target Real Skill Gaps",
+                "description": "Paths built around real gaps and job needs."
+            },
+            {
+                "title": "Expert Eyes on Every Step",
+                "description": "Your team trains with experts by their side."
+            },
+            {
+                "title": "Performance You Can Track",
+                "description": "Set goals, track progress and see real change."
+            }
+        ]
     }
 }
