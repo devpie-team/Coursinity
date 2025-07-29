@@ -1,9 +1,13 @@
+'use client'
+
 import { Typography } from '@/components/ui'
 import { useEffect, useState, useRef } from 'react'
-
-const texts = ['Smarter', 'Sharper', 'Faster', 'For Impact', 'For Trust', 'To Lead']
+import { useTranslations } from 'use-intl'
 
 const TypingLoopText = () => {
+  const t = useTranslations('S_TypingLoopText')
+  const texts = t.raw('texts') as string[]
+
   const [currentTextIndex, setCurrentTextIndex] = useState(0)
   const [displayed, setDisplayed] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
@@ -16,6 +20,7 @@ const TypingLoopText = () => {
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
+
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth
@@ -28,11 +33,10 @@ const TypingLoopText = () => {
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
 
-  // Перезапуск при вході у viewport
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
-    const observer = new window.IntersectionObserver(
+    const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setCurrentTextIndex(0)
@@ -49,7 +53,6 @@ const TypingLoopText = () => {
     return () => observer.disconnect()
   }, [])
 
-  // Миготіння курсора після завершення
   useEffect(() => {
     if (!hasFinishedCycle) return
     const interval = setInterval(() => {
@@ -59,7 +62,7 @@ const TypingLoopText = () => {
   }, [hasFinishedCycle])
 
   useEffect(() => {
-    if (hasFinishedCycle) return
+    if (hasFinishedCycle || texts.length === 0) return
 
     const fullText = texts[currentTextIndex]
     const isFull = displayed === fullText
@@ -101,7 +104,7 @@ const TypingLoopText = () => {
     }
 
     return () => clearTimeout(timeout)
-  }, [displayed, isDeleting, pauseStage, currentTextIndex, hasFinishedCycle])
+  }, [displayed, isDeleting, pauseStage, currentTextIndex, hasFinishedCycle, texts])
 
   const shouldHideText = isDeleting && displayed === ''
 
@@ -114,12 +117,10 @@ const TypingLoopText = () => {
         weight="medium"
         className="text-primary-purple flex items-center gap-4">
         <span className="whitespace-pre">{shouldHideText ? '\u00A0' : displayed}</span>
-        <span
-          className={`w-[8px] h-[64px]   max-lg:h-10 max-lg:w-1 ${showCursor ? 'bg-primary-purple' : 'invisible'}`}
-        />
+        <span className={`w-[8px] h-[64px] max-lg:h-10 max-lg:w-1 ${showCursor ? 'bg-primary-purple' : 'invisible'}`} />
       </Typography>
 
-      {/* Кутові кружечки */}
+      {/* Dots */}
       {[
         'top-[-4px] left-[-4px]',
         'top-[-4px] right-[-4px]',
