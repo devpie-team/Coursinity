@@ -69,5 +69,50 @@
                 "description": "Set goals, track progress and see real change."
             }
         ]
+    },
+    "S_CustomTrainingSection": {
+        "headline": "Custom Training,",
+        "subheadline": "No Matter Your Playing Field",
+        "subtitle": "Sector-specific training designed around your reality",
+        "footerText": "Different industries need different training. We tailor every program to meet yours.",
+        "cta": "Start Training for Success",
+        "elements": {
+            "card1": {
+                "title": "Healthcare",
+                "description": "Protect your institution from compliance risks while raising the standard of care.",
+                "tags": [
+                    "Patient confidentiality and HIPAA compliance",
+                    "Clinical documentation and protocol adherence",
+                    "Facility safety and infection control"
+                ]
+            },
+            "card2": {
+                "title": "Tourism & Hospitality",
+                "description": "Train staff to deliver excellent service while staying safe and culturally aware.",
+                "tags": [
+                    "Customer service and guest interaction",
+                    "Crisis response and safety protocols",
+                    "Cross-cultural communication"
+                ]
+            },
+            "card3": {
+                "title": "Financial Services",
+                "description": "Protect your reputation and stay one step ahead of compliance audits.",
+                "tags": [
+                    "AML, KYC, and regulatory compliance",
+                    "Financial product and reporting standards",
+                    "Risk management and audit readiness"
+                ]
+            },
+            "card4": {
+                "title": "Safety-Critical Industries",
+                "description": "Protect your people and stay compliant in high-risk environments.",
+                "tags": [
+                    "Equipment operation and safety",
+                    "Hazard awareness and prevention",
+                    "Emergency response training"
+                ]
+            }
+        }
     }
 }
