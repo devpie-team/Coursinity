@@ -15,6 +15,7 @@ import { TestimonialsSection } from '@/components/Sections'
 import { CardSection } from '@/components/SolutionsSections/CardSection'
 import { CultureAlignedSection } from '@/components/SolutionsSections/CultureAlignedSection'
 import { PathSection } from '@/components/SolutionsSections/PathSection'
+import { CustomTrainingSection } from '@/components/SolutionsSections/CustomTrainingSection'
 
 export default function HomePage() {
   const t = useTranslations('HomePage')
@@ -61,7 +62,8 @@ export default function HomePage() {
         <StepScroll />
       </div>
       <CardSection />
-      {/* <CultureAlignedSection /> */}
+      <CultureAlignedSection />
+      <CustomTrainingSection />
       <PathSection />
       <TestimonialsSection />
       <Footer />
