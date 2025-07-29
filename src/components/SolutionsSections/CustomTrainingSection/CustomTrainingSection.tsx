@@ -214,7 +214,9 @@ export const CustomTrainingSection = () => {
     {
       id: 'lottie1',
       type: 'lottie',
-      src: '/assets/lottie/solutions/custom_training_section/custom_training_1.json',
+      src: isArabic
+        ? '/assets/lottie/solutions/custom_training_section/custom_training_ar/custom_training_1.json'
+        : '/assets/lottie/solutions/custom_training_section/custom_training_en/custom_training_1.json',
       className:
         'absolute w-[165px] h-[31px] top-[690px] max-lg:top-[520px] max-lg:!left-[55vw] max-md:top-[565px] max-md:!left-[10vw]',
       style: {
@@ -224,9 +226,11 @@ export const CustomTrainingSection = () => {
     {
       id: 'lottie2',
       type: 'lottie',
-      src: '/assets/lottie/solutions/custom_training_section/custom_training_7.json',
+      src: isArabic
+        ? '/assets/lottie/solutions/custom_training_section/custom_training_ar/custom_training_7.json'
+        : '/assets/lottie/solutions/custom_training_section/custom_training_en/custom_training_7.json',
       className:
-        'absolute w-[96px] h-[32px] top-[380px] max-lg:top-[270px] max-lg:!left-[80vw] max-md:top-[320px] max-md:!left-[65vw] ',
+        'absolute w-[96px] h-[32px] top-[380px] max-lg:top-[270px] max-lg:!left-[80vw] max-md:top-[320px] max-md:!left-[65vw]',
       style: {
         left: 'calc(50vw + 109px)'
       }
@@ -234,7 +238,9 @@ export const CustomTrainingSection = () => {
     {
       id: 'lottie3',
       type: 'lottie',
-      src: '/assets/lottie/solutions/custom_training_section/custom_training_2.json',
+      src: isArabic
+        ? '/assets/lottie/solutions/custom_training_section/custom_training_ar/custom_training_2.json'
+        : '/assets/lottie/solutions/custom_training_section/custom_training_en/custom_training_2.json',
       className:
         'absolute w-[160px] h-[32px] top-[910px] max-lg:top-[800px] max-lg:!left-[30vw] max-md:top-[1300px] max-md:!left-[45vw]',
       style: {
@@ -244,7 +250,9 @@ export const CustomTrainingSection = () => {
     {
       id: 'lottie4',
       type: 'lottie',
-      src: '/assets/lottie/solutions/custom_training_section/custom_training_3.json',
+      src: isArabic
+        ? '/assets/lottie/solutions/custom_training_section/custom_training_ar/custom_training_3.json'
+        : '/assets/lottie/solutions/custom_training_section/custom_training_en/custom_training_3.json',
       className:
         'absolute w-[160px] h-[32px] top-[1220px] max-lg:top-[1050px] max-lg:!left-[8vw] max-md:top-[1530px] max-md:!left-[3vw]',
       style: {
@@ -254,7 +262,9 @@ export const CustomTrainingSection = () => {
     {
       id: 'lottie5',
       type: 'lottie',
-      src: '/assets/lottie/solutions/custom_training_section/custom_training_4.json',
+      src: isArabic
+        ? '/assets/lottie/solutions/custom_training_section/custom_training_ar/custom_training_4.json'
+        : '/assets/lottie/solutions/custom_training_section/custom_training_en/custom_training_4.json',
       className:
         'absolute w-[196px] h-[32px] top-[1780px] max-lg:top-[1360px] max-lg:!left-[75vw] max-md:top-[2150px] max-md:!left-[45vw]',
       style: {
@@ -264,7 +274,9 @@ export const CustomTrainingSection = () => {
     {
       id: 'lottie6',
       type: 'lottie',
-      src: '/assets/lottie/solutions/custom_training_section/custom_training_5.json',
+      src: isArabic
+        ? '/assets/lottie/solutions/custom_training_section/custom_training_ar/custom_training_5.json'
+        : '/assets/lottie/solutions/custom_training_section/custom_training_en/custom_training_5.json',
       className:
         'absolute w-[150px] h-[32px] top-[1960px] max-lg:top-[1530px] max-lg:!left-[30vw] max-md:top-[2480px] max-md:!left-[54vw]',
       style: {
@@ -274,7 +286,9 @@ export const CustomTrainingSection = () => {
     {
       id: 'lottie7',
       type: 'lottie',
-      src: '/assets/lottie/solutions/custom_training_section/custom_training_6.json',
+      src: isArabic
+        ? '/assets/lottie/solutions/custom_training_section/custom_training_ar/custom_training_6.json'
+        : '/assets/lottie/solutions/custom_training_section/custom_training_en/custom_training_6.json',
       className: 'absolute w-[160px] h-[32px] top-[2265px] max-lg:top-[1760px] max-lg:!left-[5vw] max-md:top-[2710px]',
       style: {
         left: 'calc(50vw - 525px)'
@@ -300,7 +314,7 @@ export const CustomTrainingSection = () => {
 
   return (
     <section
-      className="relative flex flex-col py-[120px] justify-between items-center text-center h-[2600px] bg-[url('/assets/solutions/custom_training_section/custom_training_1.png')] bg-cover bg-no-repeat max-lg:py-20 max-lg:h-[2100px] max-md:h-[3000px] max-lg:px-4 overflow-hidden"
+      className="relative flex flex-col py-[120px] justify-between items-center text-center h-[2600px] bg-[url('/assets/solutions/custom_training_section/custom_training_1.png')] bg-cover bg-no-repeat bg-fixed max-lg:py-20 max-lg:h-[2100px] max-md:h-[3000px] max-lg:px-4 overflow-hidden"
       style={{ backgroundPosition: 'center 60%' }}>
       <FadeInOnView variant="fade-up">
         <div className="flex flex-col gap-8">
@@ -328,7 +342,7 @@ export const CustomTrainingSection = () => {
         <Typography variant="body3" weight="regular" className="text-white/80">
           {t('footerText')}
         </Typography>
-        <Button variant="purple" className="w-[253px] max-lg:w-full">
+        <Button variant="purple" className="w-auto max-lg:w-full">
           {t('cta')}
         </Button>
       </div>
