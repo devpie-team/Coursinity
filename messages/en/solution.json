@@ -114,5 +114,48 @@
                 ]
             }
         }
+    },
+    "S_StepScrollSection": {
+        "heading": "Not Off-the-Shelf, Just Off-the-Charts Solutions",
+        "description": "Forget generic programs—get training built around your strategy and team. Take full control over the entire design of your training organization's solutions. Choose the topics, target the right teams, and deliver it your way for maximum impact.",
+        "button": "Discuss Your Training Needs",
+        "steps": [
+            {
+                "title": "Focus on Your Goals",
+                "description": "Training solution aimed at your business objectives"
+            },
+            {
+                "title": "Learn From Experts",
+                "description": "Job-ready skills from content created by industry experts."
+            },
+            {
+                "title": "Fit Your Structure",
+                "description": "Use custom platforms and learning paths designed to match how you operate"
+            },
+            {
+                "title": "Track Real Results",
+                "description": "See your progress with clear reporting"
+            }
+        ]
+    },
+    "S_TypingLoopText": {
+        "texts": [
+            "Smarter",
+            "Sharper",
+            "Faster",
+            "For Impact",
+            "For Trust",
+            "To Lead"
+        ]
+    },
+    "S_HeroSection": {
+        "badge": "Solutions",
+        "title": {
+            "prefix": "Train",
+            "with": "with",
+            "suffix": "Team-centric Solutions"
+        },
+        "description": "Programs designed for your organization’s goals and your team's daily needs.",
+        "button": "Book a Demo"
     }
 }
