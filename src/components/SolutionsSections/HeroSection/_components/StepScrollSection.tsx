@@ -28,6 +28,7 @@ const StepScroll = () => {
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
+  const scrollTriggerRef = useRef<ScrollTrigger | null>(null)
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -65,38 +66,23 @@ const StepScroll = () => {
   useEffect(() => {
     if (!containerRef.current) return
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: isMobile ? 'top+=240 top' : 'top top',
-        end: `+=${150 * (steps.length - 1)}%`,
-        pin: true,
-        scrub: true
+    const trigger = ScrollTrigger.create({
+      trigger: containerRef.current,
+      start: isMobile ? 'top+=240 top' : 'top top',
+      end: `+=${150 * (steps.length - 1)}%`,
+      pin: true,
+      scrub: true,
+      onUpdate: (self) => {
+        const idx = Math.round(self.progress * (steps.length - 1))
+        setActiveStepIndex(idx)
+        setOpenStates((prev) => prev.map((_, i) => i === idx))
       }
     })
-    timelineRef.current = tl
 
-    for (let i = 0; i < steps.length - 1; i++) {
-      const label = `step-${i}`
-      tl.addLabel(label)
-
-      tl.to(
-        {},
-        {
-          duration: 1,
-          onUpdate: () => {
-            const idx = Math.round(tl.progress() * (steps.length - 1))
-            setActiveStepIndex(idx)
-            setOpenStates((prev) => prev.map((_, i) => i === idx))
-          }
-        },
-        label
-      )
-    }
+    scrollTriggerRef.current = trigger
 
     return () => {
-      tl.scrollTrigger?.kill()
-      tl.kill()
+      trigger.kill()
     }
   }, [isDesktop, isMobile, steps.length])
 

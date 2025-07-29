@@ -16,6 +16,7 @@ import { CardSection } from '@/components/SolutionsSections/CardSection'
 import { CultureAlignedSection } from '@/components/SolutionsSections/CultureAlignedSection'
 import { PathSection } from '@/components/SolutionsSections/PathSection'
 import { CustomTrainingSection } from '@/components/SolutionsSections/CustomTrainingSection'
+import { Loader } from '@/components/Loader'
 
 export default function HomePage() {
   const t = useTranslations('HomePage')
@@ -61,6 +62,7 @@ export default function HomePage() {
         <HeroSection loading />
         <StepScroll />
       </div>
+
       <CardSection />
       <CultureAlignedSection />
       <CustomTrainingSection />
