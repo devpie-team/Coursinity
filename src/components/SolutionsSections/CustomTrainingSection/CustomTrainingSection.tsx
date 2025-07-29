@@ -300,7 +300,7 @@ export const CustomTrainingSection = () => {
 
   return (
     <section
-      className="relative flex flex-col py-[120px] justify-between items-center text-center h-[2600px] bg-[url('/assets/solutions/custom_training_section/custom_training_1.png')] bg-cover bg-no-repeat max-lg:py-20 max-lg:h-[2100px] max-md:h-[3000px] max-lg:px-4"
+      className="relative flex flex-col py-[120px] justify-between items-center text-center h-[2600px] bg-[url('/assets/solutions/custom_training_section/custom_training_1.png')] bg-cover bg-no-repeat max-lg:py-20 max-lg:h-[2100px] max-md:h-[3000px] max-lg:px-4 overflow-hidden"
       style={{ backgroundPosition: 'center 60%' }}>
       <FadeInOnView variant="fade-up">
         <div className="flex flex-col gap-8">

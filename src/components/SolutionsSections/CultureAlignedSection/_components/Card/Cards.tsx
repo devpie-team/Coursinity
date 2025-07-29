@@ -11,7 +11,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(({ title, description,
   return (
     <div
       ref={ref}
-      className={`flex flex-col gap-2 bg-[linear-gradient(180deg,_rgba(255,255,255,0.06)_0%,_rgba(30,141,194,0.06)_100%)] w-[300px] p-6 rounded-2xl blue-gradient-border backdrop-blur-[10px] max-lg:w-[280px] ${className}`}>
+      className={`flex flex-col gap-2 bg-[linear-gradient(180deg,_rgba(255,255,255,0.06)_0%,_rgba(30,141,194,0.06)_100%)] w-[300px] p-6 rounded-2xl blue-gradient-border backdrop-blur-[15px] max-lg:w-[280px] max-md:p-4 ${className}`}>
       <Typography variant="body3" weight="medium" className="text-white">
         {title}
       </Typography>
