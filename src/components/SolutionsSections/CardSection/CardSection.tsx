@@ -80,8 +80,8 @@ export const CardSection = () => {
     const checkScreenSize = () => {
       const width = window.innerWidth
       setIsMobile(width < 768)
-      setIsTablet(width >= 768 && width <= 1024)
-      setIsDesktop(width > 1024)
+      setIsTablet(width >= 768 && width <= 1260)
+      setIsDesktop(width > 1260)
     }
     checkScreenSize()
     window.addEventListener('resize', checkScreenSize)
@@ -160,6 +160,7 @@ export const CardSection = () => {
         <Swiper
           slidesPerView={1}
           spaceBetween={40}
+          style={{ paddingBottom: '40px' }}
           className="w-full tablet-swiper"
           allowTouchMove={true}
           onSwiper={(swiper) => (swiperRef.current = swiper)}

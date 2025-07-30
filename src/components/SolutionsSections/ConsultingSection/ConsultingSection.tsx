@@ -13,25 +13,23 @@ import lottie1Ar from '../../../../public/assets/lottie/consulting/ar/con_1.json
 import lottie2Ar from '../../../../public/assets/lottie/consulting/ar/con_2.json'
 import lottie3Ar from '../../../../public/assets/lottie/consulting/ar/con_3.json'
 import lottie4Ar from '../../../../public/assets/lottie/consulting/ar/con_4.json'
+import { ConsultingCard } from './components/ConsultingCard'
 
 export const ConsultingSection = () => {
   const [isDesktop, setIsDesktop] = useState(false)
-  const [isTablet, setIsTablet] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   const t = useTranslations('S_ConsultingSection')
   const locale = useLocale()
-  const isArabic = locale == 'ar'
+  const isArabic = locale === 'ar'
 
-  const lottie1 = isArabic ? lottie1Ar : lottie1En
-  const lottie2 = isArabic ? lottie2Ar : lottie2En
-  const lottie3 = isArabic ? lottie3Ar : lottie3En
-  const lottie4 = isArabic ? lottie4Ar : lottie4En
+  const lotties = isArabic ? [lottie1Ar, lottie2Ar, lottie3Ar, lottie4Ar] : [lottie1En, lottie2En, lottie3En, lottie4En]
 
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth
       setIsDesktop(width > 1024)
-      setIsTablet(width >= 768 && width <= 1024)
+      setIsMobile(width < 768)
     }
 
     checkScreenSize()
@@ -39,20 +37,9 @@ export const ConsultingSection = () => {
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
 
-  const lottieRefs = [
-    useRef<LottieRefCurrentProps | null>(null),
-    useRef<LottieRefCurrentProps | null>(null),
-    useRef<LottieRefCurrentProps | null>(null),
-    useRef<LottieRefCurrentProps | null>(null)
-  ]
-  const cardRefs = [
-    useRef<HTMLDivElement | null>(null),
-    useRef<HTMLDivElement | null>(null),
-    useRef<HTMLDivElement | null>(null),
-    useRef<HTMLDivElement | null>(null)
-  ]
-
-  const [wasInView, setWasInView] = useState([false, false, false])
+  const lottieRefs = Array.from({ length: 4 }, () => useRef<LottieRefCurrentProps | null>(null))
+  const cardRefs = Array.from({ length: 4 }, () => useRef<HTMLDivElement | null>(null))
+  const [wasInView, setWasInView] = useState([false, false, false, false])
   const inViews = cardRefs.map((ref) => useInView(ref as React.RefObject<HTMLElement>, { threshold: 0.3 }))
 
   useEffect(() => {
@@ -63,8 +50,8 @@ export const ConsultingSection = () => {
       if (inView && !wasInView[i]) {
         lottie.stop?.()
         lottie.goToAndPlay?.(0, true)
-        setWasInView((was) => {
-          const arr = [...was]
+        setWasInView((prev) => {
+          const arr = [...prev]
           arr[i] = true
           return arr
         })
@@ -72,8 +59,8 @@ export const ConsultingSection = () => {
 
       if (!inView && wasInView[i]) {
         lottie.stop?.()
-        setWasInView((was) => {
-          const arr = [...was]
+        setWasInView((prev) => {
+          const arr = [...prev]
           arr[i] = false
           return arr
         })
@@ -81,8 +68,27 @@ export const ConsultingSection = () => {
     })
   }, [inViews, wasInView])
 
+  const cardData = lotties.map((lottie, i) => ({
+    index: i,
+    layout: i === 0 || i === 3 ? 'wide' : 'tall',
+    lottieData: lottie,
+    title: t(`cards.${i}.title`),
+    description: t(`cards.${i}.description`),
+    refEl: cardRefs[i],
+    lottieRef: lottieRefs[i],
+    isMobile,
+    lottieClassName:
+      i === 0
+        ? 'max-w-[365px] max-h-[243px] min-w-[365px] min-h-[243px] max-lg:min-w-[330px] max-lg:min-h-[300px] max-md:min-w-full max-md:min-h-fit'
+        : i === 1
+        ? 'min-w-[367px] min-h-[300px] max-lg:min-w-[330px] max-lg:min-h-[300px] max-md:min-w-full max-md:min-h-fit'
+        : i === 2
+        ? 'min-w-[313px] min-h-[292px] max-lg:min-w-[330px] max-lg:min-h-[300px] max-md:min-w-full max-md:min-h-fit'
+        : 'max-w-[568px] max-h-[238px] max-lg:min-w-[330px] max-lg:min-h-[300px] max-md:min-w-full max-md:min-h-fit'
+  }))
+
   return (
-    <section className="py-[120px]  max-lg:pt-[80px] flex flex-col items-center text-center justify-center bg-white gap-[40px] px-[150px] max-lg:px-6 max-md:px-4">
+    <section className="py-[120px] max-lg:py-0 max-lg:pt-[80px] flex flex-col items-center text-center justify-center bg-white gap-[40px] max-1250:px-[40px] px-[150px]  max-lg:px-6 max-md:px-4">
       <div className="flex flex-col max-w-full scaleText opacityText">
         <FadeInOnView>
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
@@ -95,82 +101,17 @@ export const ConsultingSection = () => {
           </Typography>
         </FadeInOnView>
       </div>
-      <div className="flex flex-col items-center justify-center gap-5">
-        <div className="flex max-lg:flex-col gap-5 w-full justify-center">
-          <div
-            className="flex items-center max-lg:flex-col px-10 py-8 gap-5 h-[500px] w-[753px] max-lg:w-full border border-black/8 rounded-[20px] bg-[linear-gradient(to_bottom,rgba(217,45,32,0.16),rgba(255,255,255,0.16))]"
-            ref={cardRefs[0]}>
-            <div className="text-left flex flex-col gap-1 leading-7">
-              <Typography variant={!isTablet && !isDesktop ? 'body2' : 'body1'} className="leading-7">
-                {t(`cards.0.title`)}
-              </Typography>
-              <Typography variant={!isTablet && !isDesktop ? 'body2' : 'body1'} className="opacity-65 leading-7">
-                {t(`cards.0.description`)}
-              </Typography>
-            </div>
-            <Lottie
-              animationData={lottie1}
-              lottieRef={lottieRefs[0]}
-              loop={false}
-              className="max-w-[365px] max-h-[243px] min-w-[365px] min-h-[243px] max-lg:min-w-[330px] max-lg:min-h-[300px]"
-            />
-          </div>{' '}
-          <div
-            className="flex flex-col gap-10 h-[500px] w-[367px] max-lg:w-full pb-10 border border-black/8 rounded-[20px] bg-[linear-gradient(to_bottom,rgba(118,98,235,0.16),rgba(255,255,255,0.16))] overflow-hidden"
-            ref={cardRefs[1]}>
-            <Lottie
-              animationData={lottie2}
-              lottieRef={lottieRefs[1]}
-              loop={false}
-              className="min-w-[367px] min-h-[300px] max-lg:min-w-[330px] max-lg:min-h-[300px]"
-            />
-            <div className="text-left flex mx-10 flex-col gap-1 ">
-              <Typography variant={!isTablet && !isDesktop ? 'body2' : 'body1'} className="leading-7">
-                {t(`cards.1.title`)}
-              </Typography>
-              <Typography variant={!isTablet && !isDesktop ? 'body2' : 'body1'} className="opacity-65 leading-7">
-                {t(`cards.1.description`)}
-              </Typography>
-            </div>
-          </div>
+
+      <div className="flex flex-col items-center justify-center gap-5 w-full">
+        <div className="flex flex-col md:flex-row gap-5 w-full justify-center">
+          {cardData.slice(0, 2).map((card) => (
+            <ConsultingCard key={card.index} {...card} />
+          ))}
         </div>
-        <div className="flex max-lg:flex-col gap-5 w-full items-center justify-center">
-          <div
-            className="flex flex-col max-lg:justify-between max-lg:pb-5 gap-10 h-[500px] w-[367px] max-lg:w-full border border-black/8 rounded-[20px] bg-[linear-gradient(to_bottom,rgba(30,141,194,0.16),rgba(255,255,255,0.16))]"
-            ref={cardRefs[2]}>
-            <Lottie
-              animationData={lottie3}
-              lottieRef={lottieRefs[2]}
-              loop={false}
-              className="min-w-[313px] min-h-[292px] max-lg:min-w-[330px] max-lg:min-h-[300px]"
-            />
-            <div className="text-left flex mx-10 max-lg:mx-5 flex-col gap-1 ">
-              <Typography variant={!isTablet && !isDesktop ? 'body2' : 'body1'} className="leading-7">
-                {t(`cards.2.title`)}
-              </Typography>
-              <Typography variant={!isTablet && !isDesktop ? 'body2' : 'body1'} className="opacity-65 leading-7">
-                {t(`cards.2.description`)}
-              </Typography>
-            </div>
-          </div>
-          <div
-            className="flex flex-col max-lg:justify-between items-center px-10 pb-10 max-lg:px-5 max-lg:pb-5 gap-[66px] h-[500px] w-[753px] max-lg:w-full border border-black/8 rounded-[20px] bg-[linear-gradient(to_bottom,rgba(118,98,235,0.16),rgba(255,255,255,0.16))]"
-            ref={cardRefs[3]}>
-            <Lottie
-              animationData={lottie4}
-              lottieRef={lottieRefs[3]}
-              loop={false}
-              className="max-w-[568px] max-h-[238px] max-lg:min-w-[330px] max-lg:min-h-[300px]"
-            />
-            <div className="text-left flex flex-col gap-1 self-start">
-              <Typography variant={!isTablet && !isDesktop ? 'body2' : 'body1'} className="leading-7">
-                {t(`cards.3.title`)}
-              </Typography>
-              <Typography variant={!isTablet && !isDesktop ? 'body2' : 'body1'} className="opacity-65 leading-7">
-                {t(`cards.3.description`)}
-              </Typography>
-            </div>
-          </div>
+        <div className="flex flex-col md:flex-row gap-5 w-full justify-center">
+          {cardData.slice(2).map((card) => (
+            <ConsultingCard key={card.index} {...card} />
+          ))}
         </div>
       </div>
     </section>

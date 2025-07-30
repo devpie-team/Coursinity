@@ -106,10 +106,10 @@ export const PathSection = () => {
               animationData={card.lottie}
               lottieRef={lottieRefs[i]}
               loop={false}
-              className="min-w-[440px] min-h-[440px] max-lg:min-w-[330px] max-lg:min-h-[300px]"
+              className="min-w-[440px] min-h-[440px] max-lg:min-w-[330px] max-lg:min-h-[300px]  max-md:min-w-full max-md:min-h-[333px]"
             />
             <div
-              className={`flex flex-col h-full text-left mx-8 pb-10 max-lg:pb-5 max-lg:mx-5 gap-4 max-lg:gap-2 self-start ${
+              className={`flex flex-col h-full text-left mx-8 pb-10 max-md:pt-3 max-lg:pb-5 max-lg:mx-5 gap-4 max-lg:gap-2 self-start ${
                 isDesktop ? card.maxWidth : isTablet && i === 0 && 'w-[200px]'
               }`}>
               <Typography variant={!isDesktop ? 'body1' : 'h5'} weight={!isDesktop ? 'medium' : 'regular'}>

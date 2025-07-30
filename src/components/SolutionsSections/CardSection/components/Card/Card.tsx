@@ -2,7 +2,7 @@ import { Typography } from '@/components/ui'
 import { cn } from '@/lib/utils'
 import React, { ReactElement, forwardRef, useEffect, useState } from 'react'
 
-import './Card.css'
+import './Card.styles.css'
 
 type TRotateCardProps = {
   bg: string
