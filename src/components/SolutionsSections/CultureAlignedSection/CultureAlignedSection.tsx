@@ -36,26 +36,26 @@ export const CultureAlignedSection = () => {
     {
       title: t('cards.0.title'),
       description: t('cards.0.description'),
-      className: `absolute ${isDesktop ? ' left-[-300px] top-[220px]' : ' left-[-240px] top-[280px]'}`
+      className:
+        'absolute left-[-300px] top-[320px] max-lg:left-[-20vw] max-lg:top-[380px] max-md:left-[0px] max-md:top-[480px] '
     },
     {
       title: t('cards.1.title'),
       description: t('cards.1.description'),
-      className: `absolute ${
-        isDesktop ? 'left-[-350px] bottom-[140px] rotate-[-2.95deg]' : 'left-[-240px] bottom-[40px] rotate-[-2deg]'
-      }`
+      className:
+        'absolute left-[-320px] bottom-[40px] rotate-[-2.95deg] max-lg:left-[-20vw] max-lg:bottom-[-40px] max-lg:rotate-[-2deg] max-md:bottom-[-280px] max-md:left-[130px] max-md:rotate-0'
     },
     {
       title: t('cards.2.title'),
       description: t('cards.2.description'),
-      className: `absolute ${isDesktop ? 'left-[400px] top-[215px]' : 'left-[340px] top-[265px]'}`
+      className:
+        'absolute  left-[400px] top-[315px]  max-lg:left-[35vw] max-lg:top-[365px] max-md:top-[620px] max-md:left-[130px]'
     },
     {
       title: t('cards.3.title'),
       description: t('cards.3.description'),
-      className: `absolute ${
-        isDesktop ? 'left-[375px] bottom-[150px] rotate-[5deg]' : 'left-[365px] bottom-[20px] rotate-[2deg]'
-      }`
+      className:
+        'absolute left-[375px] bottom-[50px] rotate-[5deg] max-lg:left-[35vw] max-lg:bottom-[-80px] max-lg:rotate-[2deg] max-md:rotate-0 max-md:bottom-[-130px] max-md:left-[0px]'
     }
   ]
 
@@ -75,7 +75,7 @@ export const CultureAlignedSection = () => {
             card,
             { y: 0, opacity: 1 },
             {
-              y: -300,
+              y: -600,
               opacity: 0.5,
               ease: 'none',
               scrollTrigger: {
@@ -102,7 +102,7 @@ export const CultureAlignedSection = () => {
   }, [])
 
   return (
-    <section className="flex flex-col bg-black gap-10 pt-[120px] justify-center items-center max-lg:pt-20">
+    <section className="flex flex-col  gap-10 pt-[120px] justify-center items-center max-lg:pt-20 max-md:px-4">
       <div className="flex flex-col gap-8 max-w-[800px]  items-center max-lg:max-w-[430px]">
         <div className="flex flex-col gap-6 text-center">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">

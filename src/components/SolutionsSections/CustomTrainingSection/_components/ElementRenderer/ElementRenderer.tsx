@@ -34,19 +34,22 @@ export const ElementRenderer = ({ el, animationData }: ElementRendererProps) => 
   useEffect(() => {
     if (!containerRef.current) return
 
-    if (el.type === 'lottie') {
-      if (inView) {
-        lottieRef.current?.stop()
-        lottieRef.current?.play()
-        gsap.to(containerRef.current, { opacity: 1, scale: 1, duration: 0.6, ease: 'power2.out' })
-      }
-    } else {
-      gsap.to(containerRef.current, {
+    const containerElement = containerRef.current
+
+    gsap.fromTo(
+      containerElement,
+      { opacity: 0, scale: 0.8, transformOrigin: 'center center' },
+      {
         opacity: inView ? 1 : 0,
-        scale: inView ? 1 : 0.2,
-        duration: 1,
+        scale: inView ? 1 : 0.8,
+        duration: 0.6,
         ease: 'power2.out'
-      })
+      }
+    )
+
+    if (inView && el.type === 'lottie') {
+      lottieRef.current?.stop()
+      lottieRef.current?.play()
     }
   }, [inView, el.type])
 
