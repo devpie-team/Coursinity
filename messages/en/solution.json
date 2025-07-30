@@ -55,6 +55,7 @@
     "S_PathSection": {
         "title": "We Design Paths, Not Shortcuts",
         "subtitle": "Custom journeys that get your team exactly where they need to go",
+        "button": "Start Your Learning Journey",
         "cards": [
             {
                 "title": "Target Real Skill Gaps",
@@ -67,6 +68,29 @@
             {
                 "title": "Performance You Can Track",
                 "description": "Set goals, track progress and see real change."
+            }
+        ]
+    },
+    "S_ConsultingSection": {
+        "title": "Consulting That Clears the Fog",
+        "subtitle": "Step-by-step support from experts who know what your team needs",
+        "button": "Talk to an Expert",
+        "cards": [
+            {
+                "title": "Pinpoint Skill Gaps",
+                "description": "Get crystal-clear clarity on exactly what’s holding your team back, and how to fix it."
+            },
+            {
+                "title": "Link Training to KPIs",
+                "description": "Forget generic KPIs. Your business goals drive every training decision."
+            },
+            {
+                "title": "Maximize ROI",
+                "description": "Invest only where it truly moves the needle for your business."
+            },
+            {
+                "title": "Ongoing Support",
+                "description": "Get ongoing support from consultants who know your business."
             }
         ]
     },

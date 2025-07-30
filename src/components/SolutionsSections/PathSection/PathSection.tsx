@@ -11,6 +11,7 @@ import lottie3En from '../../../../public/assets/lottie/path/en/l_3.json'
 import lottie1Ar from '../../../../public/assets/lottie/path/ar/l_1.json'
 import lottie2Ar from '../../../../public/assets/lottie/path/ar/l_2.json'
 import lottie3Ar from '../../../../public/assets/lottie/path/ar/l_3.json'
+import { Button } from '@/components/primitives/button'
 
 export const PathSection = () => {
   const [isDesktop, setIsDesktop] = useState(false)
@@ -106,10 +107,10 @@ export const PathSection = () => {
               animationData={card.lottie}
               lottieRef={lottieRefs[i]}
               loop={false}
-              className="min-w-[440px] min-h-[440px] max-lg:min-w-[330px] max-lg:min-h-[300px]"
+              className="min-w-[440px] min-h-[440px] max-lg:min-w-[330px] max-lg:min-h-[300px]  max-md:min-w-full max-md:min-h-[333px]"
             />
             <div
-              className={`flex flex-col h-full text-left mx-8 pb-10 max-lg:pb-5 max-lg:mx-5 gap-4 max-lg:gap-2 self-start ${
+              className={`flex flex-col h-full text-left mx-8 pb-10 max-md:pt-3 max-lg:pb-5 max-lg:mx-5 gap-4 max-lg:gap-2 self-start ${
                 isDesktop ? card.maxWidth : isTablet && i === 0 && 'w-[200px]'
               }`}>
               <Typography variant={!isDesktop ? 'body1' : 'h5'} weight={!isDesktop ? 'medium' : 'regular'}>
@@ -122,6 +123,9 @@ export const PathSection = () => {
           </div>
         ))}
       </div>
+      <Button variant="purple" className="w-[327px] max-md:w-full">
+        {t('button')}
+      </Button>
     </section>
   )
 }

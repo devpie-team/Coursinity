@@ -16,6 +16,7 @@ import { CardSection } from '@/components/SolutionsSections/CardSection'
 import { CultureAlignedSection } from '@/components/SolutionsSections/CultureAlignedSection'
 import { PathSection } from '@/components/SolutionsSections/PathSection'
 import { CustomTrainingSection } from '@/components/SolutionsSections/CustomTrainingSection'
+import { ConsultingSection } from '@/components/SolutionsSections/ConsultingSection'
 import { Loader } from '@/components/Loader'
 
 export default function HomePage() {
@@ -67,6 +68,7 @@ export default function HomePage() {
       <CultureAlignedSection />
       <CustomTrainingSection />
       <PathSection />
+      <ConsultingSection />
       <TestimonialsSection />
       <Footer />
     </>
