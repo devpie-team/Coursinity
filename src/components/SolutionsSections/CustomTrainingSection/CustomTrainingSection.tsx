@@ -1,12 +1,16 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Typography } from '@/components/ui'
 import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 import { ElementRenderer } from './_components/ElementRenderer'
 import { Button } from '@/components/primitives/button'
 import { useLocale } from 'next-intl'
 import { useTranslations } from 'use-intl'
+
+gsap.registerPlugin(ScrollTrigger)
 
 type ElementType = 'card' | 'img' | 'lottie'
 
@@ -30,6 +34,7 @@ export const CustomTrainingSection = () => {
   const locale = useLocale()
   const isArabic = locale === 'ar'
   const t = useTranslations('S_CustomTrainingSection')
+  const bgRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -41,6 +46,26 @@ export const CustomTrainingSection = () => {
     checkScreenSize()
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  useEffect(() => {
+    if (!bgRef.current) return
+
+    const ctx = gsap.context(() => {
+      gsap.to(bgRef.current, {
+        yPercent: 63,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: bgRef.current,
+          start: '73% top ',
+          end: '173% bottom',
+          scrub: true,
+          markers: true
+        }
+      })
+    })
+
+    return () => ctx.revert()
   }, [])
 
   const elements: ElementConfig[] = [
@@ -313,38 +338,46 @@ export const CustomTrainingSection = () => {
   }, [])
 
   return (
-    <section
-      className="relative flex flex-col py-[120px] justify-between items-center text-center h-[2600px] bg-[url('/assets/solutions/custom_training_section/custom_training_1.png')] bg-cover bg-no-repeat bg-fixed max-lg:py-20 max-lg:h-[2100px] max-md:h-[3000px] max-lg:px-4 overflow-hidden"
-      style={{ backgroundPosition: 'center 60%' }}>
-      <FadeInOnView variant="fade-up">
-        <div className="flex flex-col gap-8">
-          <Typography variant={isDesktop ? 'h1' : 'h5'} weight="medium" className="text-white opacity-50">
-            {t('headline')}
+    <section className="relative overflow-hidden h-[2600px] max-lg:h-[2100px] max-md:h-[3000px] ">
+      <div
+        ref={bgRef}
+        className="absolute inset-0 bg-cover  transform translate-y-0 bg-[center_350%]"
+        style={{
+          backgroundImage: "url('/assets/solutions/custom_training_section/custom_training_1.png')"
+        }}
+      />
+
+      <div className="relative z-10 flex flex-col py-[120px] justify-between items-center text-center max-lg:py-20 max-lg:px-4">
+        <FadeInOnView variant="fade-up">
+          <div className="flex flex-col gap-8">
+            <Typography variant={isDesktop ? 'h1' : 'h5'} weight="medium" className="text-white opacity-50">
+              {t('headline')}
+            </Typography>
+            <Typography variant={isDesktop ? 'h1' : 'h5'} weight="medium" className="text-white opacity-30">
+              {t('subheadline')}
+            </Typography>
+            <Typography variant="body3" weight="regular" className="text-white opacity-60">
+              {t('subtitle')}
+            </Typography>
+          </div>
+        </FadeInOnView>
+
+        {elements.map((el) => (
+          <ElementRenderer
+            key={el.id}
+            el={el}
+            animationData={el.type === 'lottie' ? lottieAnimations[el.src!] : undefined}
+          />
+        ))}
+
+        <div className="flex flex-col gap-8 items-center max-lg:w-[343px]">
+          <Typography variant="body3" weight="regular" className="text-white/80">
+            {t('footerText')}
           </Typography>
-          <Typography variant={isDesktop ? 'h1' : 'h5'} weight="medium" className="text-white opacity-30">
-            {t('subheadline')}
-          </Typography>
-          <Typography variant="body3" weight="regular" className="text-white opacity-60">
-            {t('subtitle')}
-          </Typography>
+          <Button variant="purple" className="w-auto max-lg:w-full">
+            {t('cta')}
+          </Button>
         </div>
-      </FadeInOnView>
-
-      {elements.map((el) => (
-        <ElementRenderer
-          key={el.id}
-          el={el}
-          animationData={el.type === 'lottie' ? lottieAnimations[el.src!] : undefined}
-        />
-      ))}
-
-      <div className="flex flex-col gap-8 items-center max-lg:w-[343px]">
-        <Typography variant="body3" weight="regular" className="text-white/80">
-          {t('footerText')}
-        </Typography>
-        <Button variant="purple" className="w-auto max-lg:w-full">
-          {t('cta')}
-        </Button>
       </div>
     </section>
   )

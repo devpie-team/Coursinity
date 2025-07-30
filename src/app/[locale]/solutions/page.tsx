@@ -17,6 +17,7 @@ import { CultureAlignedSection } from '@/components/SolutionsSections/CultureAli
 import { PathSection } from '@/components/SolutionsSections/PathSection'
 import { CustomTrainingSection } from '@/components/SolutionsSections/CustomTrainingSection'
 import { Loader } from '@/components/Loader'
+import { VideoSection } from '@/components/SolutionsSections/HeroSection/_components/VideoSection'
 
 export default function HomePage() {
   const t = useTranslations('HomePage')
@@ -58,10 +59,15 @@ export default function HomePage() {
       {/*  {loading && <Loader loading={loading} />} */}
 
       <Header />
-      <div className=" bg-[linear-gradient(180deg,_#F9FAFB_0%,_#A578F2_57.98%,_#F9FAFB_100%)]">
+      <div className="relative">
+        <div
+          className="absolute inset-0 bg-[repeating-linear-gradient(180deg,_#F9FAFB_0%,_#A578F2_110%)]  bg-cover bg- bg-no-repeat -z-10"
+          style={{ backgroundPosition: 'center 2000%' }}
+        />
         <HeroSection loading />
-        <StepScroll />
+        <VideoSection />
       </div>
+      <StepScroll />
 
       <CardSection />
       <CultureAlignedSection />
