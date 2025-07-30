@@ -11,6 +11,7 @@ import lottie3En from '../../../../public/assets/lottie/path/en/l_3.json'
 import lottie1Ar from '../../../../public/assets/lottie/path/ar/l_1.json'
 import lottie2Ar from '../../../../public/assets/lottie/path/ar/l_2.json'
 import lottie3Ar from '../../../../public/assets/lottie/path/ar/l_3.json'
+import { Button } from '@/components/primitives/button'
 
 export const PathSection = () => {
   const [isDesktop, setIsDesktop] = useState(false)
@@ -122,6 +123,9 @@ export const PathSection = () => {
           </div>
         ))}
       </div>
+      <Button variant="purple" className="w-[327px] max-md:w-full">
+        {t('button')}
+      </Button>
     </section>
   )
 }

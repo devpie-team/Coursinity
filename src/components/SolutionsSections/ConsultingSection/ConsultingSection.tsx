@@ -14,6 +14,7 @@ import lottie2Ar from '../../../../public/assets/lottie/consulting/ar/con_2.json
 import lottie3Ar from '../../../../public/assets/lottie/consulting/ar/con_3.json'
 import lottie4Ar from '../../../../public/assets/lottie/consulting/ar/con_4.json'
 import { ConsultingCard } from './components/ConsultingCard'
+import { Button } from '@/components/primitives/button'
 
 export const ConsultingSection = () => {
   const [isDesktop, setIsDesktop] = useState(false)
@@ -114,6 +115,9 @@ export const ConsultingSection = () => {
           ))}
         </div>
       </div>
+      <Button variant="purple" className="w-fit max-md:w-full">
+        {t('button')}
+      </Button>
     </section>
   )
 }

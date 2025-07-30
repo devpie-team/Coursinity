@@ -118,7 +118,7 @@ export const CardSection = () => {
           setCurrentStep(0)
         } else {
           gsap.to(sections, {
-            xPercent: locale === 'ar' ? 100 : -122,
+            xPercent: locale === 'ar' ? 122 : -122,
             duration: 1.5,
             ease: 'ease.inOut'
           })
@@ -276,7 +276,7 @@ export const CardSection = () => {
 
   return (
     <section
-      className="py-[140px] flex flex-col items-center text-center justify-center bg-secondary-300 min-h-[100vh]"
+      className="py-[32px] flex flex-col items-center text-center justify-center bg-secondary-300 min-h-[100vh]"
       ref={scrollWrapperBuildRef}>
       <div className="flex flex-col max-w-full w-[500px] scaleText opacityText">
         <FadeInOnView>
