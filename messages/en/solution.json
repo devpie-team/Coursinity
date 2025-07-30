@@ -70,6 +70,28 @@
             }
         ]
     },
+    "S_ConsultingSection": {
+        "title": "Consulting That Clears the Fog",
+        "subtitle": "Step-by-step support from experts who know what your team needs",
+        "cards": [
+            {
+                "title": "Pinpoint Skill Gaps",
+                "description": "Get crystal-clear clarity on exactly what’s holding your team back, and how to fix it."
+            },
+            {
+                "title": "Link Training to KPIs",
+                "description": "Forget generic KPIs. Your business goals drive every training decision."
+            },
+            {
+                "title": "Maximize ROI",
+                "description": "Invest only where it truly moves the needle for your business."
+            },
+            {
+                "title": "Ongoing Support",
+                "description": "Get ongoing support from consultants who know your business."
+            }
+        ]
+    },
     "S_CustomTrainingSection": {
         "headline": "Custom Training,",
         "subheadline": "No Matter Your Playing Field",
