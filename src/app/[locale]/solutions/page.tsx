@@ -69,7 +69,7 @@ export default function HomePage() {
       </div>
       <StepScroll />
 
-      <CardSection />
+      {/*   <CardSection /> */}
       <CultureAlignedSection />
       <CustomTrainingSection />
       <PathSection />

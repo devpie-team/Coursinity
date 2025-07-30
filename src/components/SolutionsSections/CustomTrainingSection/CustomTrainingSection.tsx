@@ -1,16 +1,12 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useEffect, useState } from 'react'
 import { Typography } from '@/components/ui'
 import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 import { ElementRenderer } from './_components/ElementRenderer'
 import { Button } from '@/components/primitives/button'
 import { useLocale } from 'next-intl'
 import { useTranslations } from 'use-intl'
-
-gsap.registerPlugin(ScrollTrigger)
 
 type ElementType = 'card' | 'img' | 'lottie'
 
@@ -34,7 +30,6 @@ export const CustomTrainingSection = () => {
   const locale = useLocale()
   const isArabic = locale === 'ar'
   const t = useTranslations('S_CustomTrainingSection')
-  const bgRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -46,26 +41,6 @@ export const CustomTrainingSection = () => {
     checkScreenSize()
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
-  }, [])
-
-  useEffect(() => {
-    if (!bgRef.current) return
-
-    const ctx = gsap.context(() => {
-      gsap.to(bgRef.current, {
-        yPercent: 63,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: bgRef.current,
-          start: '73% top ',
-          end: '173% bottom',
-          scrub: true,
-          markers: true
-        }
-      })
-    })
-
-    return () => ctx.revert()
   }, [])
 
   const elements: ElementConfig[] = [
@@ -338,16 +313,18 @@ export const CustomTrainingSection = () => {
   }, [])
 
   return (
-    <section className="relative overflow-hidden h-[2600px] max-lg:h-[2100px] max-md:h-[3000px] ">
+    <div className="relative">
+      {/* Sticky Background */}
       <div
-        ref={bgRef}
-        className="absolute inset-0 bg-cover  transform translate-y-0 bg-[center_350%]"
+        className="sticky top-0 h-[100vh] w-full bg-cover bg-no-repeat bg-center z-0"
         style={{
-          backgroundImage: "url('/assets/solutions/custom_training_section/custom_training_1.png')"
+          backgroundImage: "url('/assets/solutions/custom_training_section/custom_training_1.png')",
+          backgroundPosition: 'center 65%'
         }}
       />
 
-      <div className="relative z-10 flex flex-col py-[120px] justify-between items-center text-center max-lg:py-20 max-lg:px-4">
+      {/* Content Section */}
+      <section className="relative z-10 flex flex-col py-[120px] justify-between items-center text-center mt-[-100vh] max-lg:py-20 max-lg:px-4 h-[2600px] max-lg:h-[2100px] max-md:h-[3000px] overflow-hidden">
         <FadeInOnView variant="fade-up">
           <div className="flex flex-col gap-8">
             <Typography variant={isDesktop ? 'h1' : 'h5'} weight="medium" className="text-white opacity-50">
@@ -378,7 +355,7 @@ export const CustomTrainingSection = () => {
             {t('cta')}
           </Button>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   )
 }
