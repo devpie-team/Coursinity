@@ -54,6 +54,15 @@ const TypingLoopText = () => {
   }, [])
 
   useEffect(() => {
+    setCurrentTextIndex(0)
+    setDisplayed('')
+    setIsDeleting(false)
+    setPauseStage('none')
+    setShowCursor(true)
+    setHasFinishedCycle(false)
+  }, [])
+
+  useEffect(() => {
     if (!hasFinishedCycle) return
     const interval = setInterval(() => {
       setShowCursor((v) => !v)

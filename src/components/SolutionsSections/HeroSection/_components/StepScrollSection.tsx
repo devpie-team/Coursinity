@@ -87,10 +87,10 @@ const StepScroll = () => {
   }, [isDesktop, isMobile, steps.length])
 
   return (
-    <div ref={wrapperRef}>
+    <div ref={wrapperRef} className="bg-[repeating-linear-gradient(180deg,_#A578F2_-10%,_#F9FAFB_100%)]">
       <div
         ref={containerRef}
-        className="flex flex-col bg-white rounded-[40px] mx-8 py-[40px] border border-secondary-400 gap-10 items-center max-lg:gap-0 max-md:gap-8 min-h-[100vh] max-md:px-4 max-md:pb-20 justify-center ">
+        className="flex flex-col bg-white rounded-[40px] max-md:rounded-3xl max-md:mx-2 mx-8 py-[40px] border border-secondary-400 gap-10 items-center max-lg:gap-0 max-md:gap-8 min-h-[100vh] max-md:px-4 max-md:pb-20 justify-center  ">
         <div className="flex flex-col gap-6 mb-5 max-w-[800px] text-center max-lg:mb-10 max-lg:max-w-[690px] max-md:mb-0 ">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
             {t('heading')}
@@ -121,7 +121,7 @@ const StepScroll = () => {
                   const total = steps.length - 1
                   const targetProgress = i / total
 
-                  const st = timelineRef.current?.scrollTrigger
+                  const st = scrollTriggerRef.current
                   if (st) {
                     const scroll = gsap.utils.interpolate(st.start, st.end, targetProgress)
                     gsap.killTweensOf(window)
