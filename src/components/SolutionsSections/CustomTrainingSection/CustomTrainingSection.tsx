@@ -313,39 +313,49 @@ export const CustomTrainingSection = () => {
   }, [])
 
   return (
-    <section
-      className="relative flex flex-col py-[120px] justify-between items-center text-center h-[2600px] bg-[url('/assets/solutions/custom_training_section/custom_training_1.png')] bg-cover bg-no-repeat bg-fixed max-lg:py-20 max-lg:h-[2100px] max-md:h-[3000px] max-lg:px-4 overflow-hidden"
-      style={{ backgroundPosition: 'center 60%' }}>
-      <FadeInOnView variant="fade-up">
-        <div className="flex flex-col gap-8">
-          <Typography variant={isDesktop ? 'h1' : 'h5'} weight="medium" className="text-white opacity-50">
-            {t('headline')}
+    <div className="relative">
+      {/* Sticky Background */}
+      <div
+        className="sticky top-0 h-[100vh] w-full bg-cover bg-no-repeat bg-center z-0"
+        style={{
+          backgroundImage: "url('/assets/solutions/custom_training_section/custom_training_1.png')",
+          backgroundPosition: 'center 65%'
+        }}
+      />
+
+      {/* Content Section */}
+      <section className="relative z-10 flex flex-col py-[120px] justify-between items-center text-center mt-[-100vh] max-lg:py-20 max-lg:px-4 h-[2600px] max-lg:h-[2100px] max-md:h-[3000px] overflow-hidden">
+        <FadeInOnView variant="fade-up">
+          <div className="flex flex-col gap-8">
+            <Typography variant={isDesktop ? 'h1' : 'h5'} weight="medium" className="text-white opacity-50">
+              {t('headline')}
+            </Typography>
+            <Typography variant={isDesktop ? 'h1' : 'h5'} weight="medium" className="text-white opacity-30">
+              {t('subheadline')}
+            </Typography>
+            <Typography variant="body3" weight="regular" className="text-white opacity-60">
+              {t('subtitle')}
+            </Typography>
+          </div>
+        </FadeInOnView>
+
+        {elements.map((el) => (
+          <ElementRenderer
+            key={el.id}
+            el={el}
+            animationData={el.type === 'lottie' ? lottieAnimations[el.src!] : undefined}
+          />
+        ))}
+
+        <div className="flex flex-col gap-8 items-center max-lg:w-[343px]">
+          <Typography variant="body3" weight="regular" className="text-white/80">
+            {t('footerText')}
           </Typography>
-          <Typography variant={isDesktop ? 'h1' : 'h5'} weight="medium" className="text-white opacity-30">
-            {t('subheadline')}
-          </Typography>
-          <Typography variant="body3" weight="regular" className="text-white opacity-60">
-            {t('subtitle')}
-          </Typography>
+          <Button variant="purple" className="w-auto max-lg:w-full">
+            {t('cta')}
+          </Button>
         </div>
-      </FadeInOnView>
-
-      {elements.map((el) => (
-        <ElementRenderer
-          key={el.id}
-          el={el}
-          animationData={el.type === 'lottie' ? lottieAnimations[el.src!] : undefined}
-        />
-      ))}
-
-      <div className="flex flex-col gap-8 items-center max-lg:w-[343px]">
-        <Typography variant="body3" weight="regular" className="text-white/80">
-          {t('footerText')}
-        </Typography>
-        <Button variant="purple" className="w-auto max-lg:w-full">
-          {t('cta')}
-        </Button>
-      </div>
-    </section>
+      </section>
+    </div>
   )
 }

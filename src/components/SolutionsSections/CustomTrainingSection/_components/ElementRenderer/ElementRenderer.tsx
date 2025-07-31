@@ -38,10 +38,10 @@ export const ElementRenderer = ({ el, animationData }: ElementRendererProps) => 
 
     gsap.fromTo(
       containerElement,
-      { opacity: 0, scale: 0.8, transformOrigin: 'center center' },
+      { opacity: 1, scale: 0.6, transformOrigin: 'center center' },
       {
-        opacity: inView ? 1 : 0,
-        scale: inView ? 1 : 0.8,
+        opacity: inView ? 1 : 1,
+        scale: inView ? 1 : 0.6,
         duration: 0.6,
         ease: 'power2.out'
       }
@@ -58,7 +58,7 @@ export const ElementRenderer = ({ el, animationData }: ElementRendererProps) => 
       ref={containerRef}
       id={el.id}
       className={`${el.className} ${el.type === 'card' ? 'min-w-[440px] min-h-[370px]' : ''}`}
-      style={{ ...el.style, opacity: 0, scale: 0.2 }}>
+      style={{ ...el.style, opacity: 1, scale: 0.2 }}>
       {el.type === 'card' && (
         <TrainingCard title={el.title!} description={el.description!} tags={el.tags!} className="" />
       )}
