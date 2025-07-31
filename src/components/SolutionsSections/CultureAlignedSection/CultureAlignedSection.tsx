@@ -102,7 +102,7 @@ export const CultureAlignedSection = () => {
   }, [])
 
   return (
-    <section className="flex flex-col  gap-10 pt-[120px] justify-center items-center max-lg:pt-20 max-md:px-4">
+    <section className="flex flex-col  gap-10 pt-[120px] justify-center items-center max-lg:pt-20 max-md:px-4 overflow-hidden">
       <div className="flex flex-col gap-8 max-w-[800px]  items-center max-lg:max-w-[430px]">
         <div className="flex flex-col gap-6 text-center">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
