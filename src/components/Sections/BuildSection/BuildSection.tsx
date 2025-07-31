@@ -311,7 +311,7 @@ export const BuildSection = () => {
       </div>
       {renderCards()}
 
-      <SwipeStepper steps={steps} activeStep={currentStep + 1} onStepClick={handleStepClick} />
+      <SwipeStepper steps={steps} activeStep={currentStep + 1} onStepClick={handleStepClick} type="white" />
     </section>
   )
 }

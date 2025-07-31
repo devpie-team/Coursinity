@@ -161,6 +161,7 @@ export const GrowthStepSection = () => {
             steps={3}
             activeStep={getStepperIndex(activeIndex)}
             onStepClick={(step) => setActiveIndex(step - 1)}
+            type="white"
           />
           <a href={`/${locale}/contact-form`} className="w-[343px]">
             <Button variant="purple" className="w-full">
