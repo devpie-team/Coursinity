@@ -1,7 +1,10 @@
+'use client'
+
 import { Typography } from '@/components/ui'
 import { DoubleQuotesIcon } from '@/components/icons/DoubleQuotesIcon'
 import { useLocale, useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
+import { useEffect, useRef } from 'react'
 
 type Testimonial = {
   company: string
@@ -9,6 +12,7 @@ type Testimonial = {
   userImg: string
   userName: string
   userPosition: string
+  businessTypes?: string[]
 }
 type Position = 'left' | 'center' | 'right'
 
@@ -18,10 +22,32 @@ type TestimonialCardProps = {
   isDesktop: boolean
 }
 
+// 👇 Хук для блокування Lenis прокрутки
+const usePreventLenisScroll = (ref: React.RefObject<HTMLElement | null>) => {
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    const handleWheel = (e: WheelEvent) => {
+      const isScrollable = el.scrollHeight > el.clientHeight || el.scrollWidth > el.clientWidth
+
+      if (isScrollable) {
+        e.stopPropagation()
+      }
+    }
+
+    el.addEventListener('wheel', handleWheel, { passive: false })
+    return () => el.removeEventListener('wheel', handleWheel)
+  }, [ref])
+}
+
 export const TestimonialCard = ({ data, position, isDesktop }: TestimonialCardProps) => {
   const t = useTranslations('TestimonialsSection')
   const locale = useLocale()
-  const isArabic = locale == 'ar'
+  const isArabic = locale === 'ar'
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+
+  usePreventLenisScroll(scrollContainerRef)
 
   let positionClass = ''
   if (position === 'left')
@@ -35,38 +61,32 @@ export const TestimonialCard = ({ data, position, isDesktop }: TestimonialCardPr
       ? 'absolute scale-[70%] opacity-40 -translate-y-[160px] -translate-x-[425px] z-0 transition-all duration-700 pointer-events-none max-[1600px]:scale-[55%] max-lg:-translate-y-0 max-lg:scale-100 max-lg:opacity-80 max-lg:-translate-x-[150%]'
       : 'absolute scale-[70%] opacity-40 -translate-y-[160px] translate-x-[425px] z-0 transition-all duration-700 pointer-events-none max-[1600px]:scale-[55%] max-lg:-translate-y-0 max-lg:scale-100 max-lg:opacity-80 max-lg:translate-x-[150%]'
 
-  const businessTypes: string[] = t.raw('businessTypes')
+  const businessTypes = data.businessTypes?.filter((type) => type.trim() !== '') || []
 
   return (
     <div
       className={cn(
-        `w-[880px] h-[440px] p-4 bg-secondary-300 rounded-[20px] flex gap-12 max-lg:w-[710px] max-lg:h-[290px] max-md:flex-col max-md:w-[343px] max-md:gap-[18px] max-md:p-[10px] justify-between max-md:h-[470px] ${positionClass}`,
+        `w-[880px] h-[440px] p-4 bg-secondary-300 rounded-[20px] flex gap-12 max-lg:gap-4 max-lg:w-[710px] max-lg:h-auto max-md:flex-col max-md:w-[343px] max-md:gap-[18px] max-md:p-[10px] justify-between ${positionClass}`,
         isArabic && 'max-md:h-[500px]'
       )}>
-      <div className="flex flex-col justify-between p-4 order-1 max-md:order-2 max-md:p-0 max-md:gap-4">
+      <div className="flex flex-col justify-between p-4 max-lg:p-2 order-1 max-md:order-2 max-md:p-0 max-md:gap-4">
         <Typography variant={isDesktop ? 'h6' : 'body3'} weight="medium" className="max-md:px-2">
           {t('businessTypesTitle')}
         </Typography>
-        <div className="flex flex-col gap-3 items-start max-md:flex-row max-lg:min-w-[150px] ">
-          <div className="bg-secondary-100 rounded-[8px] p-[10px]">
-            <Typography variant={isDesktop ? 'body2' : 'body3'} weight="medium" className="text-primary-purple">
-              {businessTypes[0]}
-            </Typography>
+
+        {businessTypes.length > 0 && (
+          <div className="flex flex-wrap gap-3 max-w-[300px]">
+            {businessTypes.map((type, index) => (
+              <div key={index} className="bg-secondary-100 rounded-[8px] px-3 py-2 whitespace-nowrap">
+                <Typography variant={isDesktop ? 'body2' : 'body3'} weight="medium" className="text-primary-purple">
+                  {type}
+                </Typography>
+              </div>
+            ))}
           </div>
-          <div className={isArabic ? 'flex flex-col gap-3' : 'flex gap-3'}>
-            <div className="bg-secondary-100 rounded-[8px] p-[10px]">
-              <Typography variant={isDesktop ? 'body2' : 'body3'} weight="medium" className="text-primary-purple">
-                {businessTypes[1]}
-              </Typography>
-            </div>
-            <div className="bg-secondary-100 rounded-[8px] p-[10px]">
-              <Typography variant={isDesktop ? 'body2' : 'body3'} weight="medium" className="text-primary-purple">
-                {businessTypes[2]}
-              </Typography>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
+
       <div className="flex flex-col bg-white p-5 gap-[10px] rounded-2xl max-w-[560px] order-2 max-md:order-1 max-md:p-4">
         <div>
           <DoubleQuotesIcon />
@@ -76,10 +96,20 @@ export const TestimonialCard = ({ data, position, isDesktop }: TestimonialCardPr
             <Typography variant={isDesktop ? 'h6' : 'body2'} weight="medium">
               {data.company}
             </Typography>
-            <Typography variant={isDesktop ? 'h6' : 'caption'} weight="regular" className="text-description">
-              {data.feedback}
-            </Typography>
+            <div
+              ref={scrollContainerRef}
+              className={cn(
+                isDesktop
+                  ? 'max-h-[170px] overflow-y-auto pr-2 pl-2 lenis-exclude scroll-smooth-custom'
+                  : 'max-h-none overflow-visible',
+                'text-description'
+              )}>
+              <Typography variant={isDesktop ? 'h6' : 'caption'} weight="regular">
+                {data.feedback}
+              </Typography>
+            </div>
           </div>
+
           <div className="flex gap-[20px] p-[10px] rounded-[5px] bg-secondary-300 max-md:gap-3 items-center">
             <img
               src={data.userImg}
