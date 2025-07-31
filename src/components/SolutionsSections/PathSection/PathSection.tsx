@@ -86,12 +86,12 @@ export const PathSection = () => {
   return (
     <section className="pt-[120px]  max-lg:pt-[80px] flex flex-col items-center text-center justify-center bg-white gap-[40px] max-lg:px-6 max-md:px-4">
       <div className="flex flex-col max-w-full scaleText opacityText">
-        <FadeInOnView>
+        <FadeInOnView variant="fade-up">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
             {t('title')}
           </Typography>
         </FadeInOnView>
-        <FadeInOnView>
+        <FadeInOnView variant="fade-up">
           <Typography variant="body3" weight="regular" className="text-description">
             {t('subtitle')}
           </Typography>
@@ -123,9 +123,11 @@ export const PathSection = () => {
           </div>
         ))}
       </div>
-      <Button variant="purple" className="w-[327px] max-md:w-full">
-        {t('button')}
-      </Button>
+      <FadeInOnView>
+        <Button variant="purple" className="w-[327px] max-md:w-full">
+          {t('button')}
+        </Button>
+      </FadeInOnView>
     </section>
   )
 }

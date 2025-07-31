@@ -91,12 +91,12 @@ export const ConsultingSection = () => {
   return (
     <section className="py-[120px] max-lg:py-0 max-lg:pt-[80px] flex flex-col items-center text-center justify-center bg-white gap-[40px] max-1250:px-[40px] px-[150px]  max-lg:px-6 max-md:px-4">
       <div className="flex flex-col max-w-full scaleText opacityText">
-        <FadeInOnView>
+        <FadeInOnView variant="fade-up">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
             {t('title')}
           </Typography>
         </FadeInOnView>
-        <FadeInOnView>
+        <FadeInOnView variant="fade-up">
           <Typography variant="body3" weight="regular" className="text-description">
             {t('subtitle')}
           </Typography>
@@ -115,9 +115,11 @@ export const ConsultingSection = () => {
           ))}
         </div>
       </div>
-      <Button variant="purple" className="w-fit max-md:w-full">
-        {t('button')}
-      </Button>
+      <FadeInOnView>
+        <Button variant="purple" className="w-fit max-md:w-full">
+          {t('button')}
+        </Button>
+      </FadeInOnView>
     </section>
   )
 }

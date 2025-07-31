@@ -9,6 +9,7 @@ import TypingLoopText from './_components/TypingLoopText'
 import { Typography } from '@/components/ui'
 import { Button } from '@/components/primitives/button'
 import StepScroll from './_components/StepScrollSection'
+import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -45,28 +46,38 @@ export const HeroSection = ({ loading }: THeroSection) => {
 
         <div className="flex flex-col gap-4 justify-center items-center">
           <div className="flex gap-2 items-center">
-            <Typography variant={isDesktop ? 'h1' : 'h3'} weight="medium">
-              {t('title.prefix')}
-            </Typography>
+            <FadeInOnView>
+              <Typography variant={isDesktop ? 'h1' : 'h3'} weight="medium">
+                {t('title.prefix')}
+              </Typography>
+            </FadeInOnView>
 
-            <TypingLoopText />
+            <FadeInOnView>
+              <TypingLoopText />
+            </FadeInOnView>
 
             {isDesktop && (
-              <Typography variant="h1" weight="medium">
-                {t('title.with')}
-              </Typography>
+              <FadeInOnView>
+                <Typography variant="h1" weight="medium">
+                  {t('title.with')}
+                </Typography>
+              </FadeInOnView>
             )}
           </div>
 
-          <Typography variant={isDesktop ? 'h1' : 'h3'} weight="medium">
-            {!isDesktop && `${t('title.with')} `}
-            {t('title.suffix')}
-          </Typography>
+          <FadeInOnView>
+            <Typography variant={isDesktop ? 'h1' : 'h3'} weight="medium">
+              {!isDesktop && `${t('title.with')} `}
+              {t('title.suffix')}
+            </Typography>
+          </FadeInOnView>
         </div>
 
-        <Typography variant={!isDesktop ? 'body3' : 'body2'} weight={!isDesktop ? 'regular' : 'medium'}>
-          {t('description')}
-        </Typography>
+        <FadeInOnView>
+          <Typography variant={!isDesktop ? 'body3' : 'body2'} weight={!isDesktop ? 'regular' : 'medium'}>
+            {t('description')}
+          </Typography>
+        </FadeInOnView>
 
         <Button variant="primary" className="mt-4 max-lg:w-full max-lg:bt-4">
           {t('button')}

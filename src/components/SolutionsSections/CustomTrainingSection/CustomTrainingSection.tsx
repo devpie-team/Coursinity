@@ -348,12 +348,16 @@ export const CustomTrainingSection = () => {
         ))}
 
         <div className="flex flex-col gap-8 items-center max-lg:w-[343px]">
-          <Typography variant="body3" weight="regular" className="text-white/80">
-            {t('footerText')}
-          </Typography>
-          <Button variant="purple" className="w-auto max-lg:w-full">
-            {t('cta')}
-          </Button>
+          <FadeInOnView variant='fade-up'>
+            <Typography variant="body3" weight="regular" className="text-white/80">
+              {t('footerText')}
+            </Typography>
+          </FadeInOnView>
+          <FadeInOnView>
+            <Button variant="purple" className="w-auto max-lg:w-full">
+              {t('cta')}
+            </Button>
+          </FadeInOnView>
         </div>
       </section>
     </div>

@@ -7,6 +7,7 @@ import { Card } from './_components/Card/Cards'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useLocale, useTranslations } from 'next-intl'
+import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -37,25 +38,25 @@ export const CultureAlignedSection = () => {
       title: t('cards.0.title'),
       description: t('cards.0.description'),
       className:
-        'absolute left-[-300px] top-[320px] max-lg:left-[-20vw] max-lg:top-[380px] max-md:left-[0px] max-md:top-[480px] '
+        'absolute left-[-300px] top-[320px] max-lg:left-[-20vw] max-lg:top-[380px] max-md:left-[10px] max-md:top-[480px] '
     },
     {
       title: t('cards.1.title'),
       description: t('cards.1.description'),
       className:
-        'absolute left-[-320px] bottom-[40px] rotate-[-2.95deg] max-lg:left-[-20vw] max-lg:bottom-[-40px] max-lg:rotate-[-2deg] max-md:bottom-[-280px] max-md:left-[130px] max-md:rotate-0'
+        'absolute left-[-320px] bottom-[40px] rotate-[-2.95deg] max-lg:left-[-20vw] max-lg:bottom-[-40px] max-lg:rotate-[-2deg] max-md:bottom-[-280px] max-md:left-[120px] max-md:rotate-0'
     },
     {
       title: t('cards.2.title'),
       description: t('cards.2.description'),
       className:
-        'absolute  left-[400px] top-[315px]  max-lg:left-[35vw] max-lg:top-[365px] max-md:top-[620px] max-md:left-[130px]'
+        'absolute  left-[400px] top-[315px]  max-lg:left-[35vw] max-lg:top-[365px] max-md:top-[620px] max-md:left-[120px]'
     },
     {
       title: t('cards.3.title'),
       description: t('cards.3.description'),
       className:
-        'absolute left-[375px] bottom-[50px] rotate-[5deg] max-lg:left-[35vw] max-lg:bottom-[-80px] max-lg:rotate-[2deg] max-md:rotate-0 max-md:bottom-[-130px] max-md:left-[0px]'
+        'absolute left-[375px] bottom-[50px] rotate-[5deg] max-lg:left-[35vw] max-lg:bottom-[-80px] max-lg:rotate-[2deg] max-md:rotate-0 max-md:bottom-[-130px] max-md:left-[10px]'
     }
   ]
 
@@ -105,16 +106,22 @@ export const CultureAlignedSection = () => {
     <section className="flex flex-col  gap-10 pt-[120px] justify-center items-center max-lg:pt-20 max-md:px-4 overflow-hidden">
       <div className="flex flex-col gap-8 max-w-[800px]  items-center max-lg:max-w-[430px]">
         <div className="flex flex-col gap-6 text-center">
-          <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
-            {t('title')}
-          </Typography>
-          <Typography variant="body3" weight="regular" className="text-white opacity-70">
-            {t('description')}
-          </Typography>
+          <FadeInOnView variant="fade-up">
+            <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
+              {t('title')}
+            </Typography>
+          </FadeInOnView>
+          <FadeInOnView variant="fade-up">
+            <Typography variant="body3" weight="regular" className="text-white opacity-70">
+              {t('description')}
+            </Typography>
+          </FadeInOnView>
         </div>
-        <Button variant="purple" className="w-[275px]">
-          {t('button')}
-        </Button>
+        <FadeInOnView variant="fade-up">
+          <Button variant="purple" className="w-[275px]">
+            {t('button')}
+          </Button>
+        </FadeInOnView>
       </div>
 
       <div className="relative w-[410px] h-[810px] culture-cards-trigger">
