@@ -64,7 +64,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
           </Typography>
         </div>
 
-        <Typography variant="body2" weight="medium">
+        <Typography variant={!isDesktop ? 'body3' : 'body2'} weight={!isDesktop ? 'regular' : 'medium'}>
           {t('description')}
         </Typography>
 
