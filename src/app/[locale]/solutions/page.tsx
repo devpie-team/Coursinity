@@ -56,7 +56,7 @@ export default function HomePage() {
 
   return (
     <>
-      {/*  {loading && <Loader loading={loading} />} */}
+      {loading && <Loader loading={loading} />}
 
       <Header />
       <div className=" bg-[linear-gradient(180deg,_#F9FAFB_0%,_#A578F2_57.98%,_#F9FAFB_100%)]">
@@ -70,6 +70,7 @@ export default function HomePage() {
       <PathSection />
       <ConsultingSection />
       <TestimonialsSection />
+
       <Footer />
     </>
   )
