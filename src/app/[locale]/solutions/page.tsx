@@ -57,7 +57,7 @@ export default function HomePage() {
 
   return (
     <>
-      {/*  {loading && <Loader loading={loading} />} */}
+      {/* {loading && <Loader loading={loading} />} */}
 
       <Header />
       <div className="relative">
@@ -71,7 +71,7 @@ export default function HomePage() {
       <StepScroll />
 
       {/*   <CardSection /> */}
-      <CultureAlignedSection />
+      {/* <CultureAlignedSection /> */}
       <CustomTrainingSection />
       <PathSection />
       <ConsultingSection />
