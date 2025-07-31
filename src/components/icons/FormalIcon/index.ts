@@ -1,0 +1,1 @@
+export { FormalIcon } from './FormalIcon'

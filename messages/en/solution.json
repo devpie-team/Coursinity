@@ -1,0 +1,185 @@
+{
+    "S_CardSection": {
+        "title": "Tailored Isn’t a Feature. It’s the Foundation",
+        "subtitle": "Custom from the inside out, sector, team, goals, and voice.",
+        "cards": [
+            {
+                "title": "Pick Your Delivery Style",
+                "subtitle": "Deliver training in the format that fits your team best, on-site, online, or blended."
+            },
+            {
+                "title": "Choose the Exact Topic",
+                "subtitle": "Create programs tailored to your team’s goals and company culture."
+            },
+            {
+                "title": "Adapt to Your Sector",
+                "subtitle": "Align learning with the tools, standards, and pace of your industry."
+            },
+            {
+                "title": "Tailor by Role",
+                "subtitle": "Deliver training that fits every level, executives, managers, staff, or new hires."
+            },
+            {
+                "title": "Target the Right Expertise",
+                "subtitle": "Direct training toward specific fields, finance, management, technical, or marketing."
+            },
+            {
+                "title": "Design It in Your Brand",
+                "subtitle": "Deliver a platform that looks, feels, and sounds like your organization."
+            }
+        ]
+    },
+    "S_CultureSection": {
+        "title": "Training That Feels Native to Your Culture",
+        "description": "When your culture sets the rhythm, training shouldn't miss a beat. Coursinity co-creates every module around your workflows, values, and tools, so learning feels like an extension of daily work, not an add-on.",
+        "button": "Discuss Your Training Needs",
+        "cards": [
+            {
+                "title": "On-Site, On-Point",
+                "description": "A polished in-person experience that combines active learning with real-world application."
+            },
+            {
+                "title": "Ready Whenever Your Team Is",
+                "description": "Flexible access for on-the-go learning, quick reviews, and steady growth."
+            },
+            {
+                "title": "Self-Guided, Not Self-Served",
+                "description": "Engaging digital content built for independent learning and backed by expert-led coaching sessions"
+            },
+            {
+                "title": "Simulations, Scenarios & Gamification",
+                "description": "AI-powered training journeys packed with expert insights, hands-on exercises, and interactive challenges."
+            }
+        ]
+    },
+    "S_PathSection": {
+        "title": "We Design Paths, Not Shortcuts",
+        "subtitle": "Custom journeys that get your team exactly where they need to go",
+        "button": "Start Your Learning Journey",
+        "cards": [
+            {
+                "title": "Target Real Skill Gaps",
+                "description": "Paths built around real gaps and job needs."
+            },
+            {
+                "title": "Expert Eyes on Every Step",
+                "description": "Your team trains with experts by their side."
+            },
+            {
+                "title": "Performance You Can Track",
+                "description": "Set goals, track progress and see real change."
+            }
+        ]
+    },
+    "S_ConsultingSection": {
+        "title": "Consulting That Clears the Fog",
+        "subtitle": "Step-by-step support from experts who know what your team needs",
+        "button": "Talk to an Expert",
+        "cards": [
+            {
+                "title": "Pinpoint Skill Gaps",
+                "description": "Get crystal-clear clarity on exactly what’s holding your team back, and how to fix it."
+            },
+            {
+                "title": "Link Training to KPIs",
+                "description": "Forget generic KPIs. Your business goals drive every training decision."
+            },
+            {
+                "title": "Maximize ROI",
+                "description": "Invest only where it truly moves the needle for your business."
+            },
+            {
+                "title": "Ongoing Support",
+                "description": "Get ongoing support from consultants who know your business."
+            }
+        ]
+    },
+    "S_CustomTrainingSection": {
+        "headline": "Custom Training,",
+        "subheadline": "No Matter Your Playing Field",
+        "subtitle": "Sector-specific training designed around your reality",
+        "footerText": "Different industries need different training. We tailor every program to meet yours.",
+        "cta": "Start Training for Success",
+        "elements": {
+            "card1": {
+                "title": "Healthcare",
+                "description": "Protect your institution from compliance risks while raising the standard of care.",
+                "tags": [
+                    "Patient confidentiality and HIPAA compliance",
+                    "Clinical documentation and protocol adherence",
+                    "Facility safety and infection control"
+                ]
+            },
+            "card2": {
+                "title": "Tourism & Hospitality",
+                "description": "Train staff to deliver excellent service while staying safe and culturally aware.",
+                "tags": [
+                    "Customer service and guest interaction",
+                    "Crisis response and safety protocols",
+                    "Cross-cultural communication"
+                ]
+            },
+            "card3": {
+                "title": "Financial Services",
+                "description": "Protect your reputation and stay one step ahead of compliance audits.",
+                "tags": [
+                    "AML, KYC, and regulatory compliance",
+                    "Financial product and reporting standards",
+                    "Risk management and audit readiness"
+                ]
+            },
+            "card4": {
+                "title": "Safety-Critical Industries",
+                "description": "Protect your people and stay compliant in high-risk environments.",
+                "tags": [
+                    "Equipment operation and safety",
+                    "Hazard awareness and prevention",
+                    "Emergency response training"
+                ]
+            }
+        }
+    },
+    "S_StepScrollSection": {
+        "heading": "Not Off-the-Shelf, Just Off-the-Charts Solutions",
+        "description": "Forget generic programs—get training built around your strategy and team. Take full control over the entire design of your training organization's solutions. Choose the topics, target the right teams, and deliver it your way for maximum impact.",
+        "button": "Discuss Your Training Needs",
+        "steps": [
+            {
+                "title": "Focus on Your Goals",
+                "description": "Training solution aimed at your business objectives"
+            },
+            {
+                "title": "Learn From Experts",
+                "description": "Job-ready skills from content created by industry experts."
+            },
+            {
+                "title": "Fit Your Structure",
+                "description": "Use custom platforms and learning paths designed to match how you operate"
+            },
+            {
+                "title": "Track Real Results",
+                "description": "See your progress with clear reporting"
+            }
+        ]
+    },
+    "S_TypingLoopText": {
+        "texts": [
+            "Smarter",
+            "Sharper",
+            "Faster",
+            "For Impact",
+            "For Trust",
+            "To Lead"
+        ]
+    },
+    "S_HeroSection": {
+        "badge": "Solutions",
+        "title": {
+            "prefix": "Train",
+            "with": "with",
+            "suffix": "Team-centric Solutions"
+        },
+        "description": "Programs designed for your organization’s goals and your team's daily needs.",
+        "button": "Book a Demo"
+    }
+}

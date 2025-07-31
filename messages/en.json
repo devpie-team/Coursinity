@@ -257,53 +257,72 @@
     "title": "What Our Partners Are Saying",
     "subtitle": "Real results. Genuine trust. Teams that drive transformation.",
     "businessTypesTitle": "Business Types",
-    "businessTypes": [
-      "Corporation",
-      "LLC",
-      "Other"
-    ],
     "testimonials": [
       {
-        "company": "Bahri company 1",
-        "feedback": "Coursinity helped us train over 4,000 employees without disrupting daily operations. The academy reflected our identity and values and the results were measurable from the first month.",
-        "userName": "M. Ali",
-        "userPosition": "Training Lead, Bahri"
+        "company": "Fazah Industrial Group",
+        "feedback": "As we moved to enhance compliance and operational readiness in a highly regulated industrial environment, we needed more than a training provider — we needed a partner who truly understood our context.We chose Coursinity because they didn’t just deliver a program. They joined us on the journey. They listened, engaged, and co-designed a learning experience that reflected our priorities.What we achieved wasn’t just training — it was a strategic step toward real transformation, one that we led — with Coursinity as our enabler.",
+        "userName": "Fazah Industrial Group",
+        "userPosition": "www.fazah.net",
+        "businessTypes": [
+          "Engagement",
+          "",
+          ""
+        ]
       },
       {
-        "company": "Second Riyadh Health Cluster 2",
-        "feedback": "In record time, employee skill levels rose significantly, and job satisfaction was clearly enhanced. Coursinity's customized journeys helped us train 20,000+ medical staff without disrupting care.",
-        "userName": "M. Ali",
-        "userPosition": "Training Director, Second Riyadh Health Cluster"
+        "company": "MoF",
+        "feedback": "We knew that building financial capabilities across government entities required more than conceptual learning—it demanded a program rooted in our day-to-day fiscal realities. That’s why we partnered with Coursinity to co-create the Revenue Essentials Program—a hands-on experience grounded in real scenarios our teams face, from revenue forecasting to budget planning. The result was a practical, outcomes-driven journey that gave our leaders not just knowledge, but tools they could immediately apply. We defined the need. Coursinity helped us turn it into actionable progress.",
+        "userName": "Ministry of Finance",
+        "userPosition": "Kingdom of Saudi Arabi",
+        "businessTypes": [
+          "Practicality",
+          "",
+          ""
+        ]
       },
       {
-        "company": "Bahri company 3",
-        "feedback": "Coursinity helped us train over 4,000 employees without disrupting daily operations. The academy reflected our identity and values and the results were measurable from the first month.",
-        "userName": "M. Ali",
-        "userPosition": "Training Lead, Bahri"
+        "company": "Buna AlKhalij",
+        "feedback": "As we looked to elevate workforce performance across departments, we needed a training solution that could scale with us—adapting to our structure, evolving needs, and ambitious goals. We partnered with Coursinity to build a flexible and interactive learning experience that goes beyond one-time training. Together, we designed a program that grows with our people and drives ROI through long-term capability building. This collaboration isn’t just about upskilling—it’s part of our broader vision to lead operational excellence across the sector. We set the pace. Coursinity helped us deliver at scale.",
+        "userName": "Buna Al-Khaleej",
+        "userPosition": "Jeddah, Saudi Arabia",
+        "businessTypes": [
+          "Scalability",
+          "",
+          ""
+        ]
       },
       {
-        "company": "Second Riyadh Health Cluster 4",
-        "feedback": "In record time, employee skill levels rose significantly, and job satisfaction was clearly enhanced. Coursinity's customized journeys helped us train 20,000+ medical staff without disrupting care.",
-        "userName": "M. Ali",
-        "userPosition": "Training Director, Second Riyadh Health Cluster"
+        "company": "SFCL",
+        "feedback": "In a competitive and fast-moving logistics environment, investing in our people had to be both impactful and cost-conscious. We needed a solution that would deliver measurable results without overextending our resources. Partnering with Coursinity allowed us to do just that. Together, we developed a targeted, high-impact training journey that aligned with our business objectives—maximizing value at every stage. This wasn’t about spending more, but about spending smart—upskilling our teams in ways that translated directly into improved performance and operational efficiency. We drove the strategy. Coursinity helped us unlock its full value.",
+        "userName": "Specialized Facilities Company Limited",
+        "userPosition": "Kingdom of Saudi Arabia",
+        "businessTypes": [
+          "CorpCost-Effectivenessoration",
+          "",
+          ""
+        ]
       },
       {
-        "company": "Bahri company 5",
-        "feedback": "Coursinity helped us train over 4,000 employees without disrupting daily operations. The academy reflected our identity and values and the results were measurable from the first month.",
-        "userName": "M. Ali",
-        "userPosition": "Training Lead, Bahri"
+        "company": "Shobokshi Development & Trading Co.",
+        "feedback": "With evolving disclosure requirements and the pace of institutional transformation accelerating, we at Shobokshi recognized that true compliance isn't achieved through policies alone—it starts with equipping people with the right skills and knowledge. We set out to launch a digital learning platform that delivers practical, real-world content aligned with our operational reality and regulatory obligations. Through our partnership with Coursinity, we built an interactive, outcomes-focused experience tailored to our needs. We led the vision—Coursinity helped us turn it into a measurable reality.",
+        "userName": "Shobokshi Development & Trading Co.",
+        "userPosition": "Kingdom of Saudi Arabia",
+        "businessTypes": [
+          "Practicality",
+          "",
+          ""
+        ]
       },
       {
-        "company": "Second Riyadh Health Cluster 6",
-        "feedback": "In record time, employee skill levels rose significantly, and job satisfaction was clearly enhanced. Coursinity's customized journeys helped us train 20,000+ medical staff without disrupting care.",
-        "userName": "M. Ali",
-        "userPosition": "Training Director, Second Riyadh Health Cluster"
-      },
-      {
-        "company": "Bahri company 7",
-        "feedback": "Coursinity helped us train over 4,000 employees without disrupting daily operations. The academy reflected our identity and values and the results were measurable from the first month.",
-        "userName": "M. Ali",
-        "userPosition": "Training Lead, Bahri"
+        "company": "Starlinks",
+        "feedback": "At Starlinks, we aimed to equip our people with meaningful communication skills that make a difference in the workplace. That’s why we launched the Mastering Workplace Communication program with Coursinity—an engaging experience designed to reach teams across the organization. From expert delivery to smooth coordination, the journey reflected our commitment to scalable talent development. We led the vision. Coursinity helped bring it to life.",
+        "userName": "Starlinks",
+        "userPosition": "Kingdom of Saudi Arabia",
+        "businessTypes": [
+          "Engagement ",
+          "Scalability",
+          ""
+        ]
       }
     ]
   },

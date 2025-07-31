@@ -86,8 +86,9 @@ export const TestimonialsSection = () => {
   })
 
   return (
-    <section className="flex flex-col h-[933px] bg-white items-center gap-[105px] relative justify-between px-[140px] pb-[140px] overflow-hidden max-lg:px-[60px] max-lg:py-20 max-lg:h-[650px] max-md:h-[862px] max-md:px-4">
-      <div className="flex flex-col gap-4 text-center">
+    <section className="flex flex-col h-[933px] bg-white items-center gap-[105px] relative justify-between px-[140px] pb-[140px] overflow-hidden max-lg:px-[60px] max-lg:py-20 max-lg:h-[950px] max-md:h-[1060px] max-md:px-4">
+      <div className="absolute inset-0 grid-background"></div>
+      <div className="flex flex-col gap-4 text-center relative z-10">
         <FadeInOnView>
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
             {t('title')}
@@ -101,7 +102,7 @@ export const TestimonialsSection = () => {
       </div>
 
       <div
-        className="relative w-full min-h-[440px] flex items-center justify-center max-lg:w-auto max-lg:min-h-0 max-"
+        className="relative w-full min-h-[440px] flex items-center justify-center max-lg:w-auto max-lg:min-h-0 max- z-10"
         {...(isMobile || isTablet ? swipeHandlers : {})}>
         {visibleSlides.map((slide) => (
           <TestimonialCard key={slide.id} data={slide} position={slide.pos} isDesktop={isDesktop} />
@@ -109,7 +110,7 @@ export const TestimonialsSection = () => {
       </div>
 
       <FadeInOnView>
-        <div>
+        <div className="relative z-10">
           <CarouselStepper
             total={testimonials.length}
             activeStep={activeIndex}
