@@ -70,8 +70,8 @@ export default function HomePage() {
       </div>
       <StepScroll />
 
-      {/*   <CardSection /> */}
-      {/* <CultureAlignedSection /> */}
+      <CardSection />
+      <CultureAlignedSection />
       <CustomTrainingSection />
       <PathSection />
       <ConsultingSection />

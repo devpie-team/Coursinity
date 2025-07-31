@@ -1,12 +1,40 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import ReactPlayer from 'react-player'
 import './VideoSection.style.css'
+import Lottie, { LottieRefCurrentProps } from 'lottie-react'
+import hero from '../../../../../public/assets/lottie/solutions/hero/hero.json'
 
 export const VideoSection = () => {
+  const lottieRef = useRef<LottieRefCurrentProps>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    if (!sectionRef.current) return
+
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          lottieRef.current?.goToAndPlay(0, true)
+        }
+      },
+      { threshold: 0.5 }
+    )
+    observer.observe(sectionRef.current)
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <section className="relative flex items-center justify-center mt-[60px] max-md:mb-[-10px] h-[650px] max-lg:h-[515px] max-md:h-[290px] overflow-hidden z-0">
+    <section
+      ref={sectionRef}
+      className="relative flex items-center justify-center mt-[60px] max-md:mb-[-10px] h-[650px] max-lg:h-[515px] max-md:h-[290px] overflow-hidden z-0">
       <div className="absolute flex flex-col items-center justify-between px-2 bg-white/20 rounded-t-[20px] w-[850px] max-lg:w-[675px] max-md:w-[350px] h-[600px] max-lg:h-[480px] max-md:h-[250px] backdrop-blur-[72px] z-30 bottom-0 custom-shadow ">
+        <Lottie
+          lottieRef={lottieRef}
+          animationData={hero}
+          loop={false}
+          className="absolute z-20 lg:left-[-166px] lg:bottom-[150px] max-lg:left-[20px] max-md:left-[15px] max-lg:top-[56px] max-md:top-[34px] max-lg:w-[120px] max-md:w-[62px] max-lg:h-[152px] max-md:h-[80px]"
+        />
         <img src="/Toolbar.svg" className="w-full" />
         <ReactPlayer
           src="/assets/video/heroVideo.mp4"
