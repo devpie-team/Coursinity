@@ -57,9 +57,7 @@ export default function HomePage() {
 
   return (
     <>
-
       {loading && <Loader loading={loading} />}
-
 
       <Header />
       <div className="relative">

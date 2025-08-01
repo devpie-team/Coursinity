@@ -38,25 +38,25 @@ export const CultureAlignedSection = () => {
       title: t('cards.0.title'),
       description: t('cards.0.description'),
       className:
-        'absolute left-[-300px] top-[320px] max-lg:left-[-20vw] max-lg:top-[380px] max-md:left-[10px] max-md:top-[480px] '
+        'absolute left-[-300px] top-[320px] max-lg:left-[-20vw] max-lg:top-[180px] max-md:left-[40px] max-md:top-[200px] '
     },
     {
       title: t('cards.1.title'),
       description: t('cards.1.description'),
       className:
-        'absolute left-[-320px] bottom-[40px] rotate-[-2.95deg] max-lg:left-[-20vw] max-lg:bottom-[-40px] max-lg:rotate-[-2deg] max-md:bottom-[-280px] max-md:left-[120px] max-md:rotate-0'
+        'absolute left-[-320px] bottom-[40px] rotate-[-2.95deg] max-lg:left-[-20vw] max-lg:bottom-[160px] max-lg:rotate-[-2deg] max-md:bottom-[30px] max-md:left-[80px] max-md:rotate-0'
     },
     {
       title: t('cards.2.title'),
       description: t('cards.2.description'),
       className:
-        'absolute  left-[400px] top-[315px]  max-lg:left-[35vw] max-lg:top-[365px] max-md:top-[620px] max-md:left-[120px]'
+        'absolute  left-[400px] top-[315px]  max-lg:left-[35vw] max-lg:top-[165px] max-md:top-[340px] max-md:left-[80px]'
     },
     {
       title: t('cards.3.title'),
       description: t('cards.3.description'),
       className:
-        'absolute left-[375px] bottom-[50px] rotate-[5deg] max-lg:left-[35vw] max-lg:bottom-[-80px] max-lg:rotate-[2deg] max-md:rotate-0 max-md:bottom-[-130px] max-md:left-[10px]'
+        'absolute left-[375px] bottom-[50px] rotate-[5deg] max-lg:left-[35vw] max-lg:bottom-[120px] max-lg:rotate-[2deg] max-md:rotate-0 max-md:bottom-[170px] max-md:left-[40px]'
     }
   ]
 
@@ -72,30 +72,49 @@ export const CultureAlignedSection = () => {
             }
           })
 
-          gsap.fromTo(
-            card,
-            { y: 0, opacity: 1 },
-            {
-              y: -600,
-              opacity: 0.5,
-              ease: 'none',
-              scrollTrigger: {
-                trigger: '.culture-cards-trigger',
-                start: 'top bottom',
-                end: 'bottom top',
-                scrub: true,
-                id: `culture-card-${i}`,
-                markers: false
+          if (isDesktop) {
+            gsap.fromTo(
+              card,
+              { y: 0, opacity: 1 },
+              {
+                y: -600,
+                opacity: 0.5,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: '.culture-cards-trigger',
+                  start: 'top bottom',
+                  end: 'bottom top',
+                  scrub: true,
+                  id: `culture-card-${i}`,
+                  markers: false
+                }
               }
-            }
-          )
+            )
+          } else {
+            gsap.fromTo(
+              card,
+              { opacity: 1, scale: 0, transformOrigin: 'center center' },
+              {
+                opacity: 1,
+                scale: 1,
+                ease: 'power2.out',
+                duration: 0.7,
+                scrollTrigger: {
+                  trigger: card,
+                  start: 'top bottom',
+                  end: 'bottom top',
+                  toggleActions: 'play reverse play reverse',
+                  id: `culture-card-${i}`,
+                  markers: false
+                }
+              }
+            )
+          }
         })
       })
 
-      return () => {
-        ctx.revert()
-      }
-    }, 100)
+      return () => ctx.revert()
+    }, 200)
 
     return () => {
       clearTimeout(timeoutId)

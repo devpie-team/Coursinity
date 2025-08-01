@@ -57,7 +57,9 @@ export const ElementRenderer = ({ el, animationData }: ElementRendererProps) => 
     <div
       ref={containerRef}
       id={el.id}
-      className={`${el.className} ${el.type === 'card' ? 'min-w-[440px] min-h-[370px]' : ''}`}
+      className={`${el.className} ${
+        el.type === 'card' ? 'min-w-[440px] min-h-[370px] max-lg:min-w-[300px] max-lg:min-h-[280px]' : ''
+      }`}
       style={{ ...el.style, opacity: 1, scale: 0.2 }}>
       {el.type === 'card' && (
         <TrainingCard title={el.title!} description={el.description!} tags={el.tags!} className="" />
