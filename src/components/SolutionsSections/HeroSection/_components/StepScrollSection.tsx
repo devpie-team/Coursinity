@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useLayoutEffect } from 'react'
 import { StepCard } from './StepCard'
 import { Button } from '@/components/primitives/button'
 import { Typography } from '@/components/ui'
@@ -8,7 +8,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollToPlugin } from 'gsap/all'
 import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
-import { useLocale, useTranslations } from 'use-intl'
+import { useTranslations } from 'use-intl'
 import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
@@ -20,6 +20,7 @@ const StepScroll = () => {
   const timelineRef = useRef<gsap.core.Timeline | null>(null)
   const sectionId = useRef(Math.random().toString())
   const { hideHeaderForSection, showHeaderForSection } = useHeaderVisibility()
+  const headerRef = useRef<HTMLDivElement>(null)
 
   const t = useTranslations('S_StepScrollSection')
   const steps = t.raw('steps') as { title: string; description: string }[]
@@ -29,6 +30,7 @@ const StepScroll = () => {
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
+  const [headerHeight, setHeaderHeight] = useState(0)
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null)
 
   useEffect(() => {
@@ -42,6 +44,12 @@ const StepScroll = () => {
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
+
+  useLayoutEffect(() => {
+    if (headerRef.current) {
+      setHeaderHeight(headerRef.current.offsetHeight)
+    }
+  }, [isDesktop, t])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -67,9 +75,11 @@ const StepScroll = () => {
   useEffect(() => {
     if (!containerRef.current) return
 
+    const startValue = `top+=${headerHeight + 30}px top`
+
     const trigger = ScrollTrigger.create({
       trigger: containerRef.current,
-      start: isMobile ? 'top+=320 top' : 'top top',
+      start: isMobile ? startValue : 'top top',
       end: `+=${150 * (steps.length - 1)}%`,
       pin: true,
       scrub: true,
@@ -85,14 +95,16 @@ const StepScroll = () => {
     return () => {
       trigger.kill()
     }
-  }, [isDesktop, isMobile, steps.length])
+  }, [isDesktop, isMobile, steps.length, headerHeight])
 
   return (
     <div ref={wrapperRef} className="bg-[repeating-linear-gradient(180deg,_#A578F2_-10%,_#F9FAFB_100%)]">
       <div
         ref={containerRef}
-        className="flex flex-col bg-white rounded-[40px] max-md:rounded-3xl max-md:mx-2 mx-8 py-[40px] border border-secondary-400 gap-10 items-center max-lg:gap-0 max-md:gap-8 min-h-[100vh] max-md:px-4 max-md:pb-20 justify-center  ">
-        <div className="flex flex-col gap-6 mb-5 max-w-[800px] text-center max-lg:mb-10 max-lg:max-w-[690px] max-md:mb-0 ">
+        className="flex flex-col bg-white rounded-[40px] max-md:rounded-3xl max-md:mx-2 mx-8 py-[40px] border border-secondary-400 gap-10 items-center max-lg:gap-0 max-md:gap-8 min-h-[100vh] max-md:px-4 max-md:pb-20 justify-center">
+        <div
+          ref={headerRef}
+          className="flex flex-col gap-6 mb-5 max-w-[800px] text-center max-lg:mb-10 max-lg:max-w-[690px] max-md:mb-0">
           <FadeInOnView variant="fade-up">
             <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
               {t('heading')}

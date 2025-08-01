@@ -100,7 +100,7 @@ export const CultureAlignedSection = () => {
     return () => {
       clearTimeout(timeoutId)
     }
-  }, [])
+  }, [isMobile, isTablet, isDesktop])
 
   return (
     <section className="flex flex-col  gap-10 pt-[120px] justify-center items-center max-lg:pt-20 max-md:px-4 overflow-hidden">
