@@ -353,7 +353,7 @@ export const CustomTrainingSection = () => {
             </Typography>
           </FadeInOnView>
           <FadeInOnView>
-            <Button variant="purple" className="w-auto max-lg:w-full max-md:p-2">
+            <Button variant="purple" className="w-auto max-lg:w-full max-lg:p-2">
               {t('cta')}
             </Button>
           </FadeInOnView>
