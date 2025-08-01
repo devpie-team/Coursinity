@@ -29,7 +29,7 @@ export const Card = forwardRef<HTMLDivElement, TRotateCardProps>((props, ref) =>
     <div
       ref={props.innerRef}
       className={cn(
-        'card-corners min-w-[400px] h-[400px] flex items-center justify-center relative rounded-[40px] bg-[rgba(232,221,252,0.11)] backdrop-blur-md',
+        'card-corners min-w-[400px] max-md:min-w-[320px] h-[400px] max-md:h-[320px] flex items-center justify-center relative rounded-[40px] bg-[rgba(232,221,252,0.11)] backdrop-blur-md',
         props.className
       )}>
       <svg
@@ -71,11 +71,10 @@ export const Card = forwardRef<HTMLDivElement, TRotateCardProps>((props, ref) =>
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className={cn(
-          'group page flex flex-col w-[320px] h-[320px] items-start gap-8 p-6 pb-10 relative rounded-[10px] text-left transition-colors duration-500 ease-in-out'
+          'group page flex flex-col w-[320px] max-md:w-[280px] h-[320px] max-md:h-[280px] items-start gap-8 p-6 pb-10 relative rounded-[10px] text-left transition-colors duration-500 ease-in-out'
         )}
         style={{
           zIndex: props.id,
-          marginLeft: props.id === 0 ? '10px' : '0px',
           backgroundColor: isHovered ? props.bg : '#ffffff',
           color: isHovered ? '#ffffff' : undefined
         }}>

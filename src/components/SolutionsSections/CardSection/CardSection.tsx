@@ -276,7 +276,7 @@ export const CardSection = () => {
 
   return (
     <section
-      className="py-[32px] flex flex-col items-center text-center justify-center bg-secondary-300 min-h-[100vh]"
+      className="py-[32px] flex flex-col items-center text-center justify-center bg-secondary-300 min-h-[100vh] max-md:gap-10"
       ref={scrollWrapperBuildRef}>
       <div className="flex flex-col max-w-full w-[500px] scaleText opacityText">
         <FadeInOnView variant="fade-up">
