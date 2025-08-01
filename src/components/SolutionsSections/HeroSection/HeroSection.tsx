@@ -38,7 +38,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
   }, [])
 
   return (
-    <section className="flex flex-col justify-between pt-[180px] items-center max-lg:pt-[120px]">
+    <section className="flex flex-col justify-between pt-[180px] items-center max-lg:pt-[120px] overflow-x-hidden">
       <div className="flex flex-col justify-center items-center text-center gap-8 max-lg:max-w-[440px] max-lg:gap-4 max-md:px-4">
         <Button variant="hero" className="h-[30px] flex items-center max-md:mb-4">
           {t('badge')}
