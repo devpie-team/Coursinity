@@ -81,7 +81,7 @@ const TypingLoopText = () => {
     if (!isDeleting && !isFull) {
       timeout = setTimeout(() => {
         setDisplayed(fullText.slice(0, displayed.length + 1))
-      }, 50)
+      }, 75)
     } else if (!isDeleting && isFull) {
       if (pauseStage === 'none') {
         timeout = setTimeout(() => setPauseStage('wait'), 300)
@@ -104,12 +104,12 @@ const TypingLoopText = () => {
     } else if (isDeleting && !isEmpty) {
       timeout = setTimeout(() => {
         setDisplayed(fullText.slice(0, displayed.length - 1))
-      }, 50)
+      }, 75)
     } else if (isDeleting && isEmpty) {
       timeout = setTimeout(() => {
         setIsDeleting(false)
         setCurrentTextIndex((prev) => prev + 1)
-      }, 400)
+      }, 200)
     }
 
     return () => clearTimeout(timeout)
@@ -120,13 +120,13 @@ const TypingLoopText = () => {
   return (
     <div
       ref={containerRef}
-      className="flex relative px-6 py-4 border-2 border-dashed border-primary-purple min-h-[116px] max-lg:py-0 items-center max-lg:min-h-16">
+      className="flex relative px-6 py-4 border-2 border-dashed border-primary-purple min-h-[116px] max-lg:py-0 items-center max-lg:min-h-16 ">
       <Typography
         variant={isDesktop ? 'h1' : 'h3'}
-        weight="medium"
+        weight="regular"
         className="text-primary-purple flex items-center gap-4">
         <span className="whitespace-pre">{shouldHideText ? '\u00A0' : displayed}</span>
-        <span className={`w-[8px] h-[64px] max-lg:h-10 max-lg:w-1 ${showCursor ? 'bg-primary-purple' : 'invisible'}`} />
+        <span className={`w-[4px] h-[64px] max-lg:h-10 max-lg:w-1 ${showCursor ? 'bg-primary-purple' : 'invisible'}`} />
       </Typography>
 
       {/* Dots */}

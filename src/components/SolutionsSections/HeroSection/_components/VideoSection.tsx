@@ -4,6 +4,7 @@ import ReactPlayer from 'react-player'
 import './VideoSection.style.css'
 import Lottie, { LottieRefCurrentProps } from 'lottie-react'
 import hero from '../../../../../public/assets/lottie/solutions/hero/hero.json'
+import { Toolbar } from '../../../../../public/Toolbar'
 
 export const VideoSection = () => {
   const lottieRef = useRef<LottieRefCurrentProps>(null)
@@ -15,6 +16,7 @@ export const VideoSection = () => {
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          lottieRef.current?.setSpeed(0.5)
           lottieRef.current?.goToAndPlay(0, true)
         }
       },
@@ -35,13 +37,15 @@ export const VideoSection = () => {
           loop={false}
           className="absolute z-20 lg:left-[-166px] lg:bottom-[150px] max-lg:left-[20px] max-md:left-[15px] max-lg:top-[56px] max-md:top-[34px] max-lg:w-[120px] max-md:w-[62px] max-lg:h-[152px] max-md:h-[80px]"
         />
-        <img src="/Toolbar.svg" className="w-full" />
+        {/* <Toolbar /> */}
+        <img src="/Toolbar.png" alt="Toolbar" />
         <ReactPlayer
           src="/assets/video/heroVideo.mp4"
           width="100%"
           height="auto"
           playing
           muted={true}
+          playsInline
           loop
           controls={false}
           style={{ borderRadius: '16px 16px 0 0', overflow: 'hidden' }}
