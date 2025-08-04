@@ -2,7 +2,7 @@
 
 import { Typography } from '@/components/ui'
 import { useEffect, useState, useRef } from 'react'
-import { useTranslations } from 'use-intl'
+import { useLocale, useTranslations } from 'use-intl'
 
 const TypingLoopText = () => {
   const t = useTranslations('S_TypingLoopText')
@@ -20,7 +20,7 @@ const TypingLoopText = () => {
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
-
+  const locale = useLocale()
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth
@@ -60,7 +60,7 @@ const TypingLoopText = () => {
     setPauseStage('none')
     setShowCursor(true)
     setHasFinishedCycle(false)
-  }, [])
+  }, [locale])
 
   useEffect(() => {
     if (!hasFinishedCycle) return
