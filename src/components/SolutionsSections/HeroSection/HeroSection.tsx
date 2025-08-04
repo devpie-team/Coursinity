@@ -25,6 +25,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
 
+  console.log('[HeroSection] rendered. locale:', locale)
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth
@@ -44,7 +45,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
           {t('badge')}
         </button>
 
-        <div className="flex flex-col gap-4 justify-center items-center overflow-hidden">
+        <div className="flex flex-col gap-4 justify-center items-center ">
           <div className="flex gap-2 items-center">
             <FadeInOnView>
               <Typography variant={isDesktop ? 'h1' : 'h3'} weight="regular">
@@ -66,7 +67,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
           </div>
 
           <FadeInOnView>
-            <Typography variant={isDesktop ? 'h1' : 'h3'} weight="regular" className="opacity-80">
+            <Typography variant={isDesktop ? 'h1' : 'h3'} weight="regular" className="opacity-80 max-md:h-[110px]">
               {!isDesktop && `${t('title.with')} `}
               {t('title.suffix')}
             </Typography>

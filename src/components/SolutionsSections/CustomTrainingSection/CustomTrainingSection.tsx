@@ -330,9 +330,11 @@ export const CustomTrainingSection = () => {
             <Typography variant={isDesktop ? 'h1' : 'h5'} weight="medium" className="text-white opacity-50">
               {t('headline')}
             </Typography>
-            <Typography variant={isDesktop ? 'h1' : 'h5'} weight="medium" className="text-white opacity-30 ">
-              {t('subheadline')}
-            </Typography>
+            {t('subheadline') && (
+              <Typography variant={isDesktop ? 'h1' : 'h5'} weight="medium" className="text-white opacity-30">
+                {t('subheadline')}
+              </Typography>
+            )}
             <Typography variant="body3" weight="regular" className="text-white opacity-60 max-lg:mt-7">
               {t('subtitle')}
             </Typography>

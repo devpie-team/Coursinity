@@ -56,7 +56,7 @@ export const CultureAlignedSection = () => {
       title: t('cards.3.title'),
       description: t('cards.3.description'),
       className:
-        'absolute left-[375px] bottom-[50px] rotate-[5deg] max-lg:left-[35vw] max-lg:bottom-[120px] max-lg:rotate-[2deg] max-md:rotate-0 max-md:bottom-[170px] max-md:left-[40px]'
+        'absolute left-[375px] bottom-[50px] rotate-[5deg] max-lg:left-[35vw] max-lg:bottom-[160px] max-lg:rotate-[2deg] max-md:rotate-0 max-md:bottom-[170px] max-md:left-[40px]'
     }
   ]
 
@@ -137,7 +137,7 @@ export const CultureAlignedSection = () => {
             </Typography>
           </FadeInOnView>
           <FadeInOnView variant="fade-up">
-            <Typography variant="body3" weight="regular" className="text-white opacity-70">
+            <Typography variant="body3" weight="regular" className="text-white opacity-70 ">
               {t('description')}
             </Typography>
           </FadeInOnView>
