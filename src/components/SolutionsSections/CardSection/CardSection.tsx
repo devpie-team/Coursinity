@@ -98,7 +98,7 @@ export const CardSection = () => {
     const container = scrollWrapperBuildRef.current
     const sections = gsap.utils.toArray('.horizontal-container .card-group')
 
-    const triggerLength = window.innerHeight * 2
+    const triggerLength = window.innerHeight * 1.3
 
     const trigger = ScrollTrigger.create({
       trigger: container,
