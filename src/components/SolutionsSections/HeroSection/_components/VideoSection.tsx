@@ -4,7 +4,6 @@ import ReactPlayer from 'react-player'
 import './VideoSection.style.css'
 import Lottie, { LottieRefCurrentProps } from 'lottie-react'
 import hero from '../../../../../public/assets/lottie/solutions/hero/hero.json'
-import { Toolbar } from '../../../../../public/Toolbar'
 
 export const VideoSection = () => {
   const lottieRef = useRef<LottieRefCurrentProps>(null)

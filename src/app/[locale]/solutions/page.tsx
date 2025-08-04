@@ -62,7 +62,7 @@ export default function HomePage() {
       <Header />
       <div className="relative">
         <div
-          className="absolute inset-0 bg-[linear-gradient(180deg,_#F9FAFB_0%,_#A578F2_57.98%,_#F9FAFB_100%)]  bg-cover bg- bg-no-repeat -z-10"
+          className="absolute inset-0 bg-[linear-gradient(180deg,_#F9FAFB_0%,_#A578F2_57.98%,_#F9FAFB_100%)]  bg-cover  bg-repeat -z-10"
           style={{ backgroundPosition: 'center 2000%' }}
         />
         <HeroSection key={locale} loading={loading} />
