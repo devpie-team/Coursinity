@@ -42,6 +42,7 @@ export const VideoSection = () => {
           height="auto"
           playing
           muted={true}
+          playsInline
           loop
           controls={false}
           style={{ borderRadius: '16px 16px 0 0', overflow: 'hidden' }}

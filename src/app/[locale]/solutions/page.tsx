@@ -57,10 +57,10 @@ export default function HomePage() {
 
   return (
     <>
-      {loading && <Loader loading={loading} />}
+      {/* {loading && <Loader loading={loading} />} */}
 
       <Header />
-      <div className="relative">
+      {/* <div className="relative">
         <div
           className="absolute inset-0 bg-[repeating-linear-gradient(180deg,_#F9FAFB_0%,_#A578F2_110%)]  bg-cover bg- bg-no-repeat -z-10"
           style={{ backgroundPosition: 'center 2000%' }}
@@ -68,16 +68,16 @@ export default function HomePage() {
         <HeroSection loading />
         <VideoSection />
       </div>
-      <StepScroll />
+      <StepScroll /> */}
 
       <CardSection />
-      <CultureAlignedSection />
+      {/* <CultureAlignedSection />
       <CustomTrainingSection />
       <PathSection />
       <ConsultingSection />
       <TestimonialsSection />
 
-      <Footer />
+      <Footer /> */}
     </>
   )
 }

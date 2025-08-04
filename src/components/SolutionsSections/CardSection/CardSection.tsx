@@ -202,14 +202,15 @@ export const CardSection = () => {
               spaceBetween: -30
             },
             370: {
-              spaceBetween: -50
+              spaceBetween: -60
+            },
+            390: {
+              spaceBetween: -70
             },
             410: {
-              spaceBetween: -80
-            },
-            460: {
               spaceBetween: -100
             },
+
             500: {
               spaceBetween: -120
             },
@@ -236,6 +237,7 @@ export const CardSection = () => {
                 bg={card.bg}
                 id={idx}
                 className="page"
+                isSelected={currentStep === idx}
               />
             </SwiperSlide>
           ))}
@@ -278,7 +280,7 @@ export const CardSection = () => {
     <section
       className="py-[32px] flex flex-col items-center text-center justify-center bg-secondary-300 min-h-[100vh] max-md:gap-10"
       ref={scrollWrapperBuildRef}>
-      <div className="flex flex-col max-w-full w-[500px] scaleText opacityText">
+      <div className="flex flex-col max-w-full w-[500px] scaleText opacityText max-md:px-4">
         <FadeInOnView variant="fade-up">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
             {t('title')}
