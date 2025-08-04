@@ -34,7 +34,7 @@ export const TrainingCard = forwardRef<HTMLDivElement, TrainingCardProps>(
           <Typography variant="h5" weight="medium" className="text-white max-1150:text-xl">
             {title}
           </Typography>
-          <Typography variant="body3" weight="regular" className="text-white opacity-80 max-1150:text-[13px] leading-4">
+          <Typography variant="body3" weight="regular" className="text-white opacity-80 max-1150:text-[13px] leading-6">
             {description}
           </Typography>
         </div>
