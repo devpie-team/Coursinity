@@ -38,7 +38,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
   }, [])
 
   return (
-    <section className="flex flex-col justify-between pt-[180px] items-center max-lg:pt-[120px] overflow-x-hidden">
+    <section className="flex flex-col justify-between pt-[120px] items-center max-lg:pt-[120px] overflow-x-hidden">
       <div className="flex flex-col justify-center items-center text-center gap-8 max-lg:max-w-[440px] max-lg:gap-4 max-md:px-4">
         <Button variant="hero" className="h-[30px] flex items-center max-md:mb-4">
           {t('badge')}
@@ -47,7 +47,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
         <div className="flex flex-col gap-4 justify-center items-center">
           <div className="flex gap-2 items-center">
             <FadeInOnView>
-              <Typography variant={isDesktop ? 'h1' : 'h3'} weight="medium">
+              <Typography variant={isDesktop ? 'h1' : 'h3'} weight="regular">
                 {t('title.prefix')}
               </Typography>
             </FadeInOnView>
@@ -58,7 +58,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
 
             {isDesktop && (
               <FadeInOnView>
-                <Typography variant="h1" weight="medium">
+                <Typography variant="h1" weight="regular">
                   {t('title.with')}
                 </Typography>
               </FadeInOnView>
@@ -66,7 +66,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
           </div>
 
           <FadeInOnView>
-            <Typography variant={isDesktop ? 'h1' : 'h3'} weight="medium">
+            <Typography variant={isDesktop ? 'h1' : 'h3'} weight="regular" className="opacity-80">
               {!isDesktop && `${t('title.with')} `}
               {t('title.suffix')}
             </Typography>
@@ -74,7 +74,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
         </div>
 
         <FadeInOnView>
-          <Typography variant={!isDesktop ? 'body3' : 'body2'} weight={!isDesktop ? 'regular' : 'medium'}>
+          <Typography variant={!isDesktop ? 'body3' : 'body2'} weight="regular" className="">
             {t('description')}
           </Typography>
         </FadeInOnView>
