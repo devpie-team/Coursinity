@@ -315,9 +315,10 @@ export const CustomTrainingSection = () => {
   return (
     <div className="relative">
       <div
-        className="sticky top-0 h-[100vh] w-full bg-cover bg-no-repeat bg-center z-0"
+        className="sticky top-0 h-[100vh] w-full bg-no-repeat z-0"
         style={{
           backgroundImage: "url('/assets/solutions/custom_training_section/custom_training_1.png')",
+          backgroundSize: '1920px auto',
           backgroundPosition: 'center 65%'
         }}
       />

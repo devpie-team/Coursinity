@@ -120,7 +120,7 @@ const TypingLoopText = () => {
   return (
     <div
       ref={containerRef}
-      className="flex relative px-6 py-4 border-2 border-dashed border-primary-purple min-h-[116px] max-lg:py-0 items-center max-lg:min-h-16">
+      className="flex relative px-6 py-4 border-2 border-dashed border-primary-purple min-h-[116px] max-lg:py-0 items-center max-lg:min-h-16 ">
       <Typography
         variant={isDesktop ? 'h1' : 'h3'}
         weight="regular"

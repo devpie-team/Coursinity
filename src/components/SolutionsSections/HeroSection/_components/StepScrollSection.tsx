@@ -72,7 +72,7 @@ const StepScroll = () => {
 
   return (
     <div
-      className="flex flex-col bg-white rounded-[40px] mx-8 py-[40px] border border-secondary-400 gap-10 items-center max-md:px-4 max-md:pb-20 pt-[120px] max-lg:pt-[80px]"
+      className="flex flex-col bg-white rounded-[40px] mx-8 py-[40px] border border-secondary-400 gap-10 max-lg:gap-8 items-center max-md:px-4 max-md:pb-20 pt-[120px] max-lg:pt-[80px]"
       ref={wrapperRef}>
       <div className="flex flex-col gap-6 mb-5 max-w-[800px] text-center">
         <FadeInOnView variant="fade-up">

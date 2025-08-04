@@ -122,7 +122,13 @@ export const CultureAlignedSection = () => {
   }, [isMobile, isTablet, isDesktop])
 
   return (
-    <section className="flex flex-col  gap-10 pt-[120px] justify-center items-center max-lg:pt-20 max-md:px-4 overflow-hidden">
+    <section
+      className="flex flex-col gap-10 pt-[120px] justify-center items-center max-lg:pt-20 max-md:px-4 overflow-hidden w-full bg-no-repeat"
+      style={{
+        backgroundImage: "url('/assets/solutions/custom_training_section/custom_training_1.png')",
+        backgroundSize: '1920px auto', // 👈 встановлений розмір
+        backgroundPosition: 'center 6%'
+      }}>
       <div className="flex flex-col gap-8 max-w-[800px]  items-center max-lg:max-w-[430px]">
         <div className="flex flex-col gap-6 text-center">
           <FadeInOnView variant="fade-up">
@@ -149,7 +155,7 @@ export const CultureAlignedSection = () => {
           alt="culture_section_1"
           className="object-contain w-full h-full"
         />
-        <div className="absolute bottom-0 left-0 w-full h-[450px] bg-[linear-gradient(0deg,_#0D0D0D_0%,_rgba(13,13,13,0)_100%)]" />
+        {/* <div className="absolute bottom-0 left-0 w-full h-[450px] bg-[linear-gradient(0deg,_#0D0D0D_0%,_rgba(13,13,13,0)_100%)]" /> */}
 
         {cards.map((card, idx) => (
           <Card
