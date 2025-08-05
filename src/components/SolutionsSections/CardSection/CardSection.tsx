@@ -292,11 +292,11 @@ export const CardSection = () => {
   return (
     <section
       className={cn(
-        'pt-20 pb-8 max flex flex-col items-center text-center justify-center bg-secondary-300 lg:min-h-[100vh] max-md:min-h-[100vh] max-md:gap-10',
-        smallHeight ? 'pt-4' : ''
+        'pt-20 pb-8 max flex flex-col items-center text-center justify-center bg-secondary-300 lg:min-h-[100vh] max-md:gap-10',
+        smallHeight && isDesktop ? 'pt-4' : ''
       )}
       ref={scrollWrapperBuildRef}>
-      <div className="flex flex-col max-w-full w-[500px] scaleText opacityText max-md:px-4">
+      <div className="flex flex-col max-w-full w-[500px] scaleText opacityText max-md:px-4 gap-6">
         <FadeInOnView variant="fade-up">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
             {t('title')}
