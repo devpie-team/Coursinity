@@ -24,25 +24,6 @@ const StepScroll = () => {
   const [autoPlayActive, setAutoPlayActive] = useState(true)
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          hideHeaderForSection(sectionId.current)
-        } else {
-          showHeaderForSection(sectionId.current)
-        }
-      },
-      { threshold: 0.1 }
-    )
-    const currentRef = wrapperRef.current
-    if (currentRef) observer.observe(currentRef)
-    return () => {
-      if (currentRef) observer.unobserve(currentRef)
-      showHeaderForSection(sectionId.current)
-    }
-  }, [hideHeaderForSection, showHeaderForSection])
-
-  useEffect(() => {
     if (!isInView || !autoPlayActive || activeStepIndex >= steps.length) return
 
     let animationFrame: number
@@ -72,9 +53,9 @@ const StepScroll = () => {
 
   return (
     <div
-      className="flex flex-col bg-white rounded-[40px] mx-8 max-lg:mx-6 max-md:mx-2 py-[40px]  px-12 border border-secondary-400 gap-10 max-lg:gap-8 items-center max-md:px-4 max-md:pb-20 pt-[120px] max-lg:pt-[80px] max-lg:rounded-3xl "
+      className="relative flex flex-col bg-white rounded-[40px] mx-8 max-lg:mx-6 max-md:mx-2 py-[40px]  px-12 border border-secondary-400 gap-10 max-lg:gap-8 items-center max-md:px-4 max-md:pb-20 pt-[120px] max-lg:pt-[80px] max-lg:rounded-3xl "
       ref={wrapperRef}>
-      <div className="flex flex-col gap-6 mb-5 max-w-[800px] text-center">
+      <div className="flex flex-col gap-6 mb-5 max-w-[800px] text-center items-center">
         <FadeInOnView variant="fade-up">
           <Typography variant="h3" weight="medium" className="max-w-[600px]">
             {t('heading')}
@@ -108,7 +89,7 @@ const StepScroll = () => {
         </div>
 
         <FadeInOnView>
-          <div className="w-[470px] h-[470px] relative overflow-hidden max-lg:w-[330px] max-lg:h-[340px]">
+          <div className="w-[470px] h-[470px] relative  max-lg:w-[330px] max-lg:h-[340px]">
             {steps.map((_, i) => (
               <img
                 key={i}

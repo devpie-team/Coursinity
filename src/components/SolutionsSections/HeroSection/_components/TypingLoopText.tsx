@@ -4,7 +4,11 @@ import { Typography } from '@/components/ui'
 import { useEffect, useState, useRef } from 'react'
 import { useLocale, useTranslations } from 'use-intl'
 
-const TypingLoopText = () => {
+type Props = {
+  ready?: boolean // коли true — можна стартувати анімацію
+}
+
+const TypingLoopText = ({ ready = true }: Props) => {
   const t = useTranslations('S_TypingLoopText')
   const texts = t.raw('texts') as string[]
 
@@ -16,29 +20,29 @@ const TypingLoopText = () => {
     'none'
   )
   const [hasFinishedCycle, setHasFinishedCycle] = useState(false)
+
+  const [inView, setInView] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
-  const [isMobile, setIsMobile] = useState(false)
-  const [isTablet, setIsTablet] = useState(false)
+
   const [isDesktop, setIsDesktop] = useState(true)
   const locale = useLocale()
+
+  // екрани
   useEffect(() => {
-    const checkScreenSize = () => {
-      const width = window.innerWidth
-      setIsMobile(width < 768)
-      setIsTablet(width >= 768 && width <= 1024)
-      setIsDesktop(width > 1024)
-    }
-    checkScreenSize()
-    window.addEventListener('resize', checkScreenSize)
-    return () => window.removeEventListener('resize', checkScreenSize)
+    const check = () => setIsDesktop(window.innerWidth > 1024)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
   }, [])
 
+  // спостерігач за видимістю — reset тільки коли ready === true
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        setInView(entry.isIntersecting)
+        if (entry.isIntersecting && ready) {
           setCurrentTextIndex(0)
           setDisplayed('')
           setIsDeleting(false)
@@ -51,26 +55,26 @@ const TypingLoopText = () => {
     )
     observer.observe(el)
     return () => observer.disconnect()
-  }, [])
+  }, [ready])
 
   useEffect(() => {
+    if (!ready) return
     setCurrentTextIndex(0)
     setDisplayed('')
     setIsDeleting(false)
     setPauseStage('none')
     setShowCursor(true)
     setHasFinishedCycle(false)
-  }, [locale])
+  }, [locale, ready])
 
   useEffect(() => {
-    if (!hasFinishedCycle) return
-    const interval = setInterval(() => {
-      setShowCursor((v) => !v)
-    }, 600)
+    if (!ready || !hasFinishedCycle) return
+    const interval = setInterval(() => setShowCursor((v) => !v), 600)
     return () => clearInterval(interval)
-  }, [hasFinishedCycle])
+  }, [hasFinishedCycle, ready])
 
   useEffect(() => {
+    if (!ready || !inView) return
     if (hasFinishedCycle || texts.length === 0) return
 
     const fullText = texts[currentTextIndex]
@@ -113,7 +117,7 @@ const TypingLoopText = () => {
     }
 
     return () => clearTimeout(timeout)
-  }, [displayed, isDeleting, pauseStage, currentTextIndex, hasFinishedCycle, texts])
+  }, [ready, inView, displayed, isDeleting, pauseStage, currentTextIndex, hasFinishedCycle, texts])
 
   const shouldHideText = isDeleting && displayed === ''
 
@@ -125,11 +129,14 @@ const TypingLoopText = () => {
         variant={isDesktop ? 'h1' : 'h3'}
         weight="regular"
         className="text-primary-purple flex items-center gap-4">
-        <span className="whitespace-pre">{shouldHideText ? '\u00A0' : displayed}</span>
-        <span className={`w-[4px] h-[64px] max-lg:h-10 max-lg:w-1 ${showCursor ? 'bg-primary-purple' : 'invisible'}`} />
+        <span className="whitespace-pre">{ready ? (shouldHideText ? '\u00A0' : displayed) : '\u00A0'}</span>
+        <span
+          className={`w-[4px] h-[64px] max-lg:h-10 max-lg:w-1 ${
+            ready && showCursor ? 'bg-primary-purple' : 'invisible'
+          }`}
+        />
       </Typography>
 
-      {/* Dots */}
       {[
         'top-[-4px] left-[-4px]',
         'top-[-4px] right-[-4px]',

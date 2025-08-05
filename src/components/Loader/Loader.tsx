@@ -5,9 +5,10 @@ import { useLocale } from 'next-intl'
 
 type TLoading = {
   loading?: boolean
+  onFinish?: () => void
 }
 
-export const Loader = ({ loading }: TLoading) => {
+export const Loader = ({ loading = true, onFinish }: TLoading) => {
   const maskRef = useRef<HTMLDivElement>(null)
   const iconRef = useRef<HTMLDivElement>(null)
   const topBlockRef = useRef<HTMLDivElement>(null)
@@ -28,46 +29,45 @@ export const Loader = ({ loading }: TLoading) => {
   }, [loading])
 
   useEffect(() => {
-    if (loading && maskRef.current && iconRef.current && topBlockRef.current && bottomBlockRef.current) {
-      gsap.fromTo(
-        maskRef.current,
-        { x: '0%' },
-        {
-          x: isArabic ? '-100%' : '100%',
-          duration: 3,
-          ease: 'linear',
-          onComplete: () => {
-            gsap.to(iconRef.current, {
-              opacity: 0,
-              duration: 1,
-              ease: 'power2.out',
-              onComplete: () => {
-                gsap.to(topBlockRef.current, {
-                  y: '-100%',
-                  duration: 1,
-                  ease: 'power2.inOut'
-                })
-                gsap.to(bottomBlockRef.current, {
-                  y: '100%',
-                  duration: 1,
-                  ease: 'power2.inOut'
-                })
-              }
-            })
-          }
-        }
-      )
+    const mask = maskRef.current
+    const icon = iconRef.current
+    const top = topBlockRef.current
+    const bottom = bottomBlockRef.current
+    if (!mask || !icon || !top || !bottom) return
 
-      gsap.set(iconRef.current, { opacity: 1 })
-      gsap.set(topBlockRef.current, { y: '0%' })
-      gsap.set(bottomBlockRef.current, { y: '0%' })
-    } else if (maskRef.current && iconRef.current && topBlockRef.current && bottomBlockRef.current) {
-      gsap.set(maskRef.current, { x: '0%' })
-      gsap.set(iconRef.current, { opacity: 1 })
-      gsap.set(topBlockRef.current, { y: '0%' })
-      gsap.set(bottomBlockRef.current, { y: '0%' })
+    // скиди станів (залишаємо як було)
+    gsap.set(icon, { opacity: 1 })
+    gsap.set(top, { y: '0%' })
+    gsap.set(bottom, { y: '0%' })
+    gsap.set(mask, { x: '0%' })
+
+    // якщо не loading — просто тримаємо все скинутим
+    if (!loading) return
+
+    // будуємо таймлайн з onComplete => onFinish()
+    const tl = gsap.timeline({
+      onComplete: () => {
+        onFinish?.()
+      }
+    })
+
+    // 1) маска
+    tl.fromTo(mask, { x: '0%' }, { x: isArabic ? '-100%' : '100%', duration: 3, ease: 'linear' })
+
+    // 2) фейд логотипу (після маски)
+    tl.to(icon, { opacity: 0, duration: 1, ease: 'power2.out' })
+
+    // 3) верхній/нижній блоки одночасно (після фейду)
+    tl.to(top, { y: '-100%', duration: 1, ease: 'power2.inOut' }).to(
+      bottom,
+      { y: '100%', duration: 1, ease: 'power2.inOut' },
+      '<'
+    )
+
+    return () => {
+      tl.kill()
     }
-  }, [loading, isArabic])
+  }, [loading, isArabic, onFinish])
 
   return (
     <div

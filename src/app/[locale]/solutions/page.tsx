@@ -1,16 +1,13 @@
 'use client'
 
 import { useLocale, useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
+import AOS from 'aos'
 
 import { Header } from '@/components/Header'
 import Footer from '@/components/Footer/Footer'
-
-import { useEffect, useState } from 'react'
-import AOS from 'aos'
 import { HeroSection } from '@/components/SolutionsSections/HeroSection/HeroSection'
-
 import StepScroll from '@/components/SolutionsSections/HeroSection/_components/StepScrollSection'
-
 import { TestimonialsSection } from '@/components/Sections'
 import { CardSection } from '@/components/SolutionsSections/CardSection'
 import { CultureAlignedSection } from '@/components/SolutionsSections/CultureAlignedSection'
@@ -23,7 +20,6 @@ import { VideoSection } from '@/components/SolutionsSections/HeroSection/_compon
 export default function HomePage() {
   const t = useTranslations('HomePage')
   const locale = useLocale()
-  const isArabic = locale === 'ar'
 
   const [loading, setLoading] = useState(true)
   const [isMobile, setIsMobile] = useState(false)
@@ -40,36 +36,31 @@ export default function HomePage() {
   }, [])
 
   useEffect(() => {
-    const checkScreenSize = () => {
-      const width = window.innerWidth
-      setIsMobile(width < 768)
-      setIsTablet(width >= 768 && width <= 1024)
+    const check = () => {
+      const w = window.innerWidth
+      setIsMobile(w < 768)
+      setIsTablet(w >= 768 && w <= 1024)
     }
-    checkScreenSize()
-    window.addEventListener('resize', checkScreenSize)
-    return () => window.removeEventListener('resize', checkScreenSize)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
   }, [])
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), isMobile ? 6000 : isTablet ? 6500 : 5700)
-    return () => clearTimeout(timer)
-  }, [isMobile, isTablet])
 
   return (
     <>
-      {loading && <Loader loading={loading} />}
+      {loading && <Loader loading={loading} onFinish={() => setLoading(false)} />}
 
       <Header />
       <div className="relative">
         <div
-          className="absolute inset-0 bg-[linear-gradient(180deg,_#F9FAFB_0%,_#A578F2_57.98%,_#F9FAFB_100%)]  bg-cover  bg-repeat -z-10"
+          className="absolute inset-0 bg-[linear-gradient(180deg,_#F9FAFB_0%,_#A578F2_57.98%,_#F9FAFB_100%)] bg-cover bg-repeat -z-10"
           style={{ backgroundPosition: 'center 2000%' }}
         />
         <HeroSection key={locale} loading={loading} />
         <VideoSection />
-
         <StepScroll />
       </div>
+
       <CardSection />
       <CultureAlignedSection />
       <CustomTrainingSection />
