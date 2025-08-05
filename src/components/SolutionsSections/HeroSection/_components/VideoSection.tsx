@@ -39,9 +39,9 @@ export const VideoSection = () => {
         {/* <Toolbar /> */}
         <img src="/Toolbar.png" alt="Toolbar" />
         <ReactPlayer
-          src="/assets/video/heroVideo.mp4"
+          src="https://cdn.shopify.com/videos/c/o/v/2c4c5ecb05f649578bec5aac380730e1.mp4"
           width="100%"
-          height="auto"
+          height="100%"
           playing
           muted={true}
           playsInline
