@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { ElementType, ReactNode, ComponentPropsWithoutRef } from 'react'
+import { ElementType, ReactNode, ComponentPropsWithoutRef, ComponentProps } from 'react'
 import React from 'react'
 import { useLocale } from 'next-intl'
 
@@ -26,6 +26,7 @@ type TypographyProps<T extends ElementType> = {
   weight?: Weight
   className?: string
   children: ReactNode
+  ref?: React.Ref<T>
 } & ComponentPropsWithoutRef<T>
 
 const variantMap: Record<Variant, string> = {
