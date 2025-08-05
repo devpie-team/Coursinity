@@ -53,7 +53,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
             </FadeInOnView>
 
             <FadeInOnView>
-              <TypingLoopText />
+              <TypingLoopText ready={!loading} />
             </FadeInOnView>
 
             {isDesktop && (

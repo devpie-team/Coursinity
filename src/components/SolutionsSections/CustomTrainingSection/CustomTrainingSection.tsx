@@ -324,7 +324,7 @@ export const CustomTrainingSection = () => {
       />
 
       {/* Content Section */}
-      <section className="relative z-10 flex flex-col py-[120px] justify-between items-center text-center mt-[-100vh] max-lg:py-20 max-lg:px-4 h-[2600px] max-lg:h-[2100px] max-md:h-[3000px] overflow-hidden">
+      <section className="relative z-10 flex flex-col py-[120px] justify-between items-center text-center mt-[-100vh] max-lg:py-20 max-lg:px-4 h-[2600px] max-lg:h-[2100px] max-md:h-[3000px] overflow-hidden custom-shadow-bg2">
         <FadeInOnView variant="fade-up">
           <div className="flex flex-col gap-8 max-lg:gap-1">
             <Typography variant={isDesktop ? 'h1' : 'h5'} weight="medium" className="text-white opacity-50">
