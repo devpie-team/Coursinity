@@ -1,12 +1,13 @@
 import { Typography } from '@/components/ui'
 import { cn } from '@/lib/utils'
-import React, { ReactElement, forwardRef, useEffect, useState } from 'react'
+import React, { ElementType, ReactElement, forwardRef, useEffect, useRef, useState } from 'react'
 
 import './Card.styles.css'
+import gsap from 'gsap'
 
 type TRotateCardProps = {
   bg: string
-  icon: ReactElement<{ color?: string; className?: string }>
+  icon: ReactElement<{ color?: string; className?: string; ref?: React.Ref<HTMLDivElement> }>
   title: string
   subtitle: string
   id: number
@@ -16,8 +17,11 @@ type TRotateCardProps = {
 }
 
 export const Card = forwardRef<HTMLDivElement, TRotateCardProps>((props, ref) => {
+  const alwaysHovered = props.id == 5
   const [isDesktop, setIsDesktop] = useState(true)
-  const [isHovered, setIsHovered] = useState(false)
+  const [stateHovered, setIsHovered] = useState(alwaysHovered)
+
+  const isHovered = alwaysHovered || stateHovered
 
   useEffect(() => {
     const checkScreenSize = () => setIsDesktop(window.innerWidth > 1024)
@@ -26,6 +30,38 @@ export const Card = forwardRef<HTMLDivElement, TRotateCardProps>((props, ref) =>
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
 
+  const cardRef = useRef<HTMLDivElement>(null)
+  const iconRef = useRef<HTMLDivElement>(null)
+  const iconWrapperRef = useRef<HTMLDivElement>(null)
+  const subtextRef = useRef<ElementType>(null)
+
+  useEffect(() => {
+    if (!cardRef.current || !iconWrapperRef.current || !subtextRef.current) return
+
+    gsap.to(cardRef.current, {
+      backgroundColor: isHovered ? props.bg : '#ffffff',
+      color: isHovered ? '#ffffff' : '#000000',
+      duration: 0.15,
+      overwrite: 'auto',
+      ease: 'power2.out'
+    })
+
+    gsap.to(subtextRef.current, {
+      color: isHovered ? '#ffffff' : '#6e6e6e ',
+      duration: 0.15,
+      overwrite: 'auto',
+      ease: 'power2.out'
+    })
+    gsap.to(iconWrapperRef.current, {
+      backgroundColor: !isHovered ? props.bg : '#ffffff',
+      color: isHovered ? props.bg : '#ffffff',
+
+      duration: 0.15,
+      overwrite: 'auto',
+      ease: 'power2.out'
+    })
+  }, [isHovered, props.bg])
+
   const CardLayout = ({ top }: { top?: boolean }) => {
     return (
       <div
@@ -33,21 +69,24 @@ export const Card = forwardRef<HTMLDivElement, TRotateCardProps>((props, ref) =>
         onMouseLeave={() => setIsHovered(false)}
         className={cn(
           top && 'mt-5',
-          'group page flex flex-col w-[320px] max-md:w-[280px] h-[320px] max-md:h-[280px] items-start gap-8 p-6 pb-10 relative rounded-[10px] text-left transition-colors duration-500 ease-in-out'
+          'animation-wrapper group page flex flex-col w-[320px] max-md:w-[280px] h-[320px] max-md:h-[280px] items-start gap-8 p-6 pb-10 relative rounded-[10px] text-left transition-colors duration-500 ease-in-out'
         )}
+        ref={cardRef}
         style={{
           zIndex: props.id,
-          backgroundColor: isHovered ? props.bg : '#ffffff',
-          color: isHovered ? '#ffffff' : undefined
+          backgroundColor: !alwaysHovered ? '#ffffff' : props.bg,
+          color: alwaysHovered ? '#ffffff' : ''
         }}>
         <div
+          ref={iconWrapperRef}
           className={`flex items-center justify-center p-[10px] rounded-2xl w-[68px] h-[68px] transition-colors duration-500 ease-in-out ${props.bg}`}
           style={{
-            backgroundColor: !isHovered ? props.bg : '#ffffff'
+            backgroundColor: alwaysHovered ? 'white' : props.bg,
+            color: alwaysHovered ? props.bg : 'white'
           }}>
           {React.isValidElement(props.icon) &&
             React.cloneElement(props.icon, {
-              color: isHovered ? props.bg : '#fff',
+              ref: iconRef,
               className: 'transition-colors duration-500 ease-in-out'
             })}
         </div>
@@ -60,12 +99,13 @@ export const Card = forwardRef<HTMLDivElement, TRotateCardProps>((props, ref) =>
             {props.title}
           </Typography>
           <Typography
+            ref={subtextRef}
             variant={isDesktop ? 'body3' : 'caption'}
             weight="regular"
-            className="leading-[24px] text-description transition-colors duration-500 ease-in-out"
-            style={{
-              color: isHovered ? '#ffffff' : undefined
-            }}>
+            className={cn(
+              'leading-[24px] transition-colors duration-500 ease-in-out',
+              alwaysHovered ? 'text-white' : 'text-description'
+            )}>
             {props.subtitle}
           </Typography>
         </div>
