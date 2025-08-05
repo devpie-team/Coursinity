@@ -28,8 +28,8 @@ export const VideoSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative flex items-center justify-center mt-[60px] max-md:mb-[-10px] h-[650px] max-lg:h-[515px] max-md:h-[290px] overflow-hidden z-0 bottom">
-      <div className="absolute flex flex-col items-center justify-between px-2 bg-white/20 rounded-t-[20px] max-md:rounded-t-lg  w-[850px] max-lg:w-[675px] max-md:w-[350px] h-[600px] max-lg:h-[480px] max-md:h-[250px] backdrop-blur-[72px] z-30 bottom-0 custom-shadow ">
+      className="relative flex items-center justify-center mt-[60px] max-md:mb-[-10px] h-[650px] max-lg:h-[515px] max-md:h-[290px]  z-0 ">
+      <div className="absolute flex flex-col items-center justify-between px-2 bg-white/20 rounded-t-[20px] max-md:rounded-t-lg  w-[850px] max-lg:w-[675px] max-md:w-[350px] h-[600px] max-lg:h-[480px] max-md:h-[250px] backdrop-blur-[72px] z-30 bottom-[-2] max-lg:bottom-[-5]  custom-shadow ">
         <Lottie
           lottieRef={lottieRef}
           animationData={hero}
@@ -41,7 +41,7 @@ export const VideoSection = () => {
         <ReactPlayer
           src="https://cdn.shopify.com/videos/c/o/v/2c4c5ecb05f649578bec5aac380730e1.mp4"
           width="100%"
-          height="100%"
+          height="auto"
           playing
           muted={true}
           playsInline
