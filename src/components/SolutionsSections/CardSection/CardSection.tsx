@@ -49,8 +49,11 @@ export const CardSection = () => {
 
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
+
+  const [smallHeight, setSmallHeight] = useState(false)
+  const [smallerHeight, setSmallerHeight] = useState(false)
+
   const locale = useLocale()
-  const isArabic = locale == 'ar'
   const scrollWrapperBuildRef = useRef<HTMLDivElement>(null)
   const { hideHeaderForSection, showHeaderForSection } = useHeaderVisibility()
   const sectionId = useRef(Math.random()?.toString())
@@ -79,6 +82,12 @@ export const CardSection = () => {
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth
+      const height = window.innerHeight
+
+      console.log('Width:', width, 'Height:', height)
+
+      setSmallHeight(height <= 1010)
+      setSmallerHeight(height <= 842)
       setIsMobile(width < 768)
       setIsTablet(width >= 768 && width <= 1260)
       setIsDesktop(width > 1260)
@@ -246,7 +255,11 @@ export const CardSection = () => {
     }
 
     return (
-      <div className="horizontal-container flex items-center overflow-hidden w-full py-[173px] gap-[20vw] px-[40px]">
+      <div
+        className={cn(
+          'horizontal-container flex items-center overflow-hidden w-full py-[173px] gap-[20vw] px-[40px]',
+          smallHeight ? 'py-[100px]' : smallerHeight ? 'py-[50px]' : ''
+        )}>
         <Lottie
           animationData={planet}
           loop={true}
@@ -278,7 +291,10 @@ export const CardSection = () => {
 
   return (
     <section
-      className="pt-20 pb-8 max flex flex-col items-center text-center justify-center bg-secondary-300 lg:min-h-[100vh] max-md:min-h-[100vh] max-md:gap-10"
+      className={cn(
+        'pt-20 pb-8 max flex flex-col items-center text-center justify-center bg-secondary-300 lg:min-h-[100vh] max-md:min-h-[100vh] max-md:gap-10',
+        smallHeight ? 'pt-4' : ''
+      )}
       ref={scrollWrapperBuildRef}>
       <div className="flex flex-col max-w-full w-[500px] scaleText opacityText max-md:px-4">
         <FadeInOnView variant="fade-up">
