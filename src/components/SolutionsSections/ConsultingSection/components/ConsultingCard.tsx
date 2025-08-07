@@ -52,7 +52,7 @@ export const ConsultingCard = ({
         '0.16'
       ].join(',')}),rgba(255,255,255,0.16))] gap-5`}>
       {isWide && (
-        <div className="text-left flex flex-col gap-1">
+        <div className="flex flex-col gap-1">
           <Typography variant={isMobile ? 'body2' : 'body1'} className={sharedClasses.text}>
             {title}
           </Typography>
@@ -63,7 +63,7 @@ export const ConsultingCard = ({
       )}
       <Lottie animationData={lottieData} lottieRef={lottieRef} loop={false} className={lottieClassName} />
       {!isWide && (
-        <div className="text-left flex mx-10 max-md:mx-5 flex-col gap-1 ">
+        <div className="flex mx-10 max-md:mx-5 flex-col gap-1 ">
           <Typography variant={isMobile ? 'body2' : 'body1'} className={sharedClasses.text}>
             {title}
           </Typography>
