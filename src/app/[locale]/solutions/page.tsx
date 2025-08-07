@@ -57,7 +57,7 @@ export default function HomePage() {
           style={{ backgroundPosition: 'center 2000%' }}
         />
         <HeroSection key={locale} loading={loading} />
-        <VideoSection />
+        <VideoSection key={locale} loading={loading} />
         <StepScroll />
       </div>
 

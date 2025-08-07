@@ -1,12 +1,11 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import ReactPlayer from 'react-player'
 import './VideoSection.style.css'
 import Lottie, { LottieRefCurrentProps } from 'lottie-react'
 import hero from '../../../../../public/assets/lottie/solutions/hero/hero.json'
 import { useLocale } from 'next-intl'
 
-export const VideoSection = () => {
+export const VideoSection = ({ loading }: { loading: boolean }) => {
   const lottieRef = useRef<LottieRefCurrentProps>(null)
   const sectionRef = useRef<HTMLElement>(null)
   const locale = useLocale()
@@ -39,6 +38,25 @@ export const VideoSection = () => {
     return () => observer.disconnect()
   }, [])
 
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  const videoElement: HTMLVideoElement | null = document.getElementById('myVideoID') as HTMLVideoElement | null
+  videoElement
+    ?.play()
+    .then(() => {})
+    .catch((error) => {
+      videoElement.setAttribute('controls', 'controls')
+    })
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = true
+      videoRef.current.play().catch((err) => {
+        console.warn('Autoplay error:', err)
+      })
+    }
+  }, [locale])
+
   return (
     <section
       ref={sectionRef}
@@ -52,18 +70,18 @@ export const VideoSection = () => {
         />
         <img src="/Toolbar.png" alt="Toolbar" />
         {isClient && (
-          <ReactPlayer
-            key={`player-${locale}-${key}`}
+          <video
+            id="myVideoID"
+            ref={videoRef}
             src="https://cdn.shopify.com/videos/c/o/v/2c4c5ecb05f649578bec5aac380730e1.mp4"
             width="100%"
             height="auto"
-            playing
-            muted={true}
             playsInline
+            autoPlay
             loop
+            muted
             controls={false}
             style={{ borderRadius: '16px 16px 0 0', overflow: 'hidden' }}
-            onError={(e) => console.error('ReactPlayer error:', e)}
           />
         )}
       </div>
