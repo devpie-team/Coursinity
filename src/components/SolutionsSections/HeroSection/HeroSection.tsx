@@ -45,7 +45,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
         </button>
 
         <div className="flex flex-col gap-4 justify-center items-center ">
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center max-md:flex-col">
             <FadeInOnView>
               <Typography variant={isDesktop ? 'h1' : 'h3'} weight="regular">
                 {t('title.prefix')}

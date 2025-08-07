@@ -292,7 +292,7 @@ export const CardSection = () => {
   return (
     <section
       className={cn(
-        'pt-20 pb-8 max flex flex-col items-center text-center justify-center bg-secondary-300 lg:min-h-[100vh] max-md:gap-10',
+        'pt-20 pb-8 max-md:pb-20 max flex flex-col items-center text-center justify-center bg-secondary-300 lg:min-h-[100vh] max-md:gap-10',
         smallHeight && isDesktop ? 'pt-4' : ''
       )}
       ref={scrollWrapperBuildRef}>
