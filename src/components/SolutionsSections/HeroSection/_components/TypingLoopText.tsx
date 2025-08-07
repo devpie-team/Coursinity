@@ -126,7 +126,7 @@ const TypingLoopText = ({ ready = true }: Props) => {
       ref={containerRef}
       className="flex relative px-6 py-4 border-2 border-dashed border-primary-purple min-h-[116px] max-lg:py-0 items-center max-lg:min-h-16 ">
       <Typography
-        variant={isDesktop ? 'h1' : 'h3'}
+        variant={isDesktop ? 'h1' : 'h5'}
         weight="regular"
         className="text-primary-purple flex items-center gap-4">
         <span className="whitespace-pre">{ready ? (shouldHideText ? '\u00A0' : displayed) : '\u00A0'}</span>

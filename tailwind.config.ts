@@ -15,7 +15,7 @@ export default {
       },
       fontFamily: {
         sans: ['var(--font-poppins)', 'var(--font-kanun-ar)', ...defaultTheme.fontFamily.sans],
-        'poppins': ['var(--font-poppins)', ...defaultTheme.fontFamily.sans],
+        poppins: ['var(--font-poppins)', ...defaultTheme.fontFamily.sans],
         'kanun-ar': ['var(--font-kanun-ar)', ...defaultTheme.fontFamily.sans]
       },
       fontSize: {
@@ -45,7 +45,7 @@ export default {
         'secondary-200': '#E4EDF2',
         'secondary-300': '#F9FAFB',
         'secondary-400': '#D0D5DD',
-        'description': '#6E6E6E'
+        description: '#6E6E6E'
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -72,7 +72,8 @@ export default {
       screens: {
         '1150': '1150px',
         '1250': '1250px',
-        '1350': '1350px'
+        '1350': '1350px',
+        '350': '350px'
       }
     }
   },
