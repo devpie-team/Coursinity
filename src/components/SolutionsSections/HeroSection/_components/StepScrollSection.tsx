@@ -14,6 +14,18 @@ const StepScroll = () => {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(wrapperRef, { once: false, amount: 0.4 })
 
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+    }
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
   const { hideHeaderForSection, showHeaderForSection } = useHeaderVisibility()
   const sectionId = useRef(Math.random().toString())
 
@@ -58,7 +70,7 @@ const StepScroll = () => {
       ref={wrapperRef}>
       <div className="flex flex-col gap-6 mb-5 max-w-[800px] text-center items-center">
         <FadeInOnView variant="fade-up">
-          <Typography variant="h3" weight="medium" className="max-w-[600px]">
+          <Typography variant={isMobile ? 'h5' : 'h3'} weight="medium" className="max-w-[600px]">
             {t('heading')}
           </Typography>
         </FadeInOnView>

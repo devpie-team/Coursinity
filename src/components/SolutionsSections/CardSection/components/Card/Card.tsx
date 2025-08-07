@@ -69,7 +69,7 @@ export const Card = forwardRef<HTMLDivElement, TRotateCardProps>((props, ref) =>
         onMouseLeave={() => setIsHovered(false)}
         className={cn(
           top && 'mt-5',
-          'animation-wrapper group page flex flex-col w-[320px] max-md:w-[280px] h-[320px] max-md:h-[280px] items-start gap-8 p-6 pb-10 relative rounded-[10px] text-left transition-colors duration-500 ease-in-out'
+          'animation-wrapper group page flex flex-col w-[320px] max-md:w-[280px] h-[320px] max-md:h-[280px] items-start gap-8 p-6 pb-10 relative rounded-[10px]  transition-colors duration-500 ease-in-out'
         )}
         ref={cardRef}
         style={{

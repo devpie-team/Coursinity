@@ -84,8 +84,8 @@ export const PathSection = () => {
   }, [inViews, wasInView])
 
   return (
-    <section className="pt-[120px] mb-[-2px]  max-lg:pt-[80px] flex flex-col items-center text-center justify-center bg-white gap-[40px] max-lg:px-6 max-md:px-4">
-      <div className="flex flex-col max-w-full scaleText opacityText">
+    <section className="pt-[120px] mb-[-2px]  max-lg:pt-[80px] flex flex-col items-center justify-center bg-white gap-[40px] max-lg:px-6 max-md:px-4">
+      <div className="flex flex-col max-w-full scaleText opacityText  text-center">
         <FadeInOnView variant="fade-up">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
             {t('title')}
@@ -110,7 +110,7 @@ export const PathSection = () => {
               className="min-w-[440px] min-h-[440px] max-lg:min-w-[330px] max-lg:min-h-[300px]  max-md:min-w-full max-md:min-h-[333px]"
             />
             <div
-              className={`flex flex-col h-full text-left mx-8 pb-10 max-md:pt-3 max-lg:pb-5 max-lg:mx-5 gap-4 max-lg:gap-2 self-start ${
+              className={`flex flex-col h-full mx-8 pb-10 max-md:pt-3 max-lg:pb-5 max-lg:mx-5 gap-4 max-lg:gap-2 self-start ${
                 isDesktop ? card.maxWidth : isTablet && i === 0 && 'w-[200px]'
               }`}>
               <Typography variant={!isDesktop ? 'body1' : 'h5'} weight={!isDesktop ? 'medium' : 'regular'}>
