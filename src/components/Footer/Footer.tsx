@@ -75,7 +75,7 @@ const Footer = ({ className }: FooterProps) => {
             <Typography variant={isDesktop ? 'body2' : 'button'} weight="regular" className="text-opacity-80">
               {t('subheadline')}
             </Typography>
-            <a href={`/${locale}/contact-form`} className="w-[263px] max-lg:w-[343px] mt-4">
+            <a href={`/${locale}/contact-form`} className="w-[263px] max-lg:w-[343px] max-md:w-full mt-4">
               <Button variant="secondary" size="md" className="w-[263px] max-lg:w-[343px] mt-4">
                 {t('button')}
               </Button>

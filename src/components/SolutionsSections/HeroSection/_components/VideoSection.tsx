@@ -43,7 +43,7 @@ export const VideoSection = () => {
     <section
       ref={sectionRef}
       className="relative flex items-center justify-center mt-[60px] max-md:mb-[-10px] h-[650px] max-lg:h-[515px] max-md:h-[290px]  z-0 ">
-      <div className="first-block absolute flex flex-col items-center justify-between px-2 bg-white/20 rounded-t-[20px] max-md:rounded-t-lg  w-[850px] max-lg:w-[675px] max-md:w-[350px] max-350:bg-red h-[600px] max-lg:h-[480px] max-md:h-[250px] backdrop-blur-[72px] z-30 bottom-[-2px] max-lg:bottom-[-5px]  custom-shadow ">
+      <div className="first-block absolute flex flex-col items-center justify-between px-2 bg-white/20 rounded-t-[20px] max-md:rounded-t-lg  w-[850px] max-lg:w-[675px] max-md:w-[350px] h-[600px] max-lg:h-[480px] max-md:h-[250px] backdrop-blur-[72px] z-30 bottom-[-2px] max-lg:bottom-[-5px]  custom-shadow ">
         <Lottie
           lottieRef={lottieRef}
           animationData={hero}
@@ -56,7 +56,7 @@ export const VideoSection = () => {
             key={`player-${locale}-${key}`}
             src="https://cdn.shopify.com/videos/c/o/v/2c4c5ecb05f649578bec5aac380730e1.mp4"
             width="100%"
-            height="100%"
+            height="auto"
             playing
             muted={true}
             playsInline

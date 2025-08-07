@@ -6,13 +6,16 @@
 @media screen and (max-width: 350px) {
   .first-block {
     width: 280px;
+    height: 190px;
   }
 
   .second-block {
+    height: 120px;
     width: 290px;
   }
 
   .third-block {
-    width: 310px;
+    height: 150px;
+    width: 300px;
   }
 }

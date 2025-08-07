@@ -20,7 +20,7 @@ export const SwipeStepper = ({ steps, activeStep, onStepClick, type }: SwipeStep
           <button
             key={step}
             onClick={() => onStepClick?.(step)}
-            className={`w-12 h-1 flex items-center justify-center rounded-[99px]
+            className={`w-12 max-350:w-8 h-1 flex items-center justify-center rounded-[99px]
                text-white text-[24px] leading-8 font-medium transition-all duration-300
               ${
                 isActive

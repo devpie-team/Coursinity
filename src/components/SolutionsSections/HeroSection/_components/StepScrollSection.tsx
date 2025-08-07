@@ -8,6 +8,7 @@ import { useInView } from 'framer-motion'
 import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
 import { useTranslations } from 'next-intl'
 import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
+import './StepScrollSection.css'
 
 const StepScroll = () => {
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -89,7 +90,7 @@ const StepScroll = () => {
         </div>
 
         <FadeInOnView>
-          <div className="w-[470px] h-[470px] relative  max-lg:w-[330px] max-lg:h-[340px]">
+          <div className="image-wrapper w-[470px] h-[470px] relative  max-lg:w-[330px] max-lg:h-[340px]">
             {steps.map((_, i) => (
               <img
                 key={i}
@@ -105,7 +106,7 @@ const StepScroll = () => {
       </div>
 
       <FadeInOnView>
-        <Button variant="purple" className="max-lg:w-[330px] max-md:w-[330px]">
+        <Button variant="purple" className="button-wrapper max-lg:w-[330px] max-md:w-[330px]">
           {t('button')}
         </Button>
       </FadeInOnView>
