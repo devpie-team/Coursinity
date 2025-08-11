@@ -80,6 +80,10 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
     }
   }, [])
 
+  function useDetectAppleDevice() {
+    return /(iPhone|iPod|iPad)/i.test(navigator.userAgent)
+  }
+
   return (
     <section
       ref={sectionRef}
@@ -92,21 +96,32 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
           className="absolute z-20 lg:left-[-166px] lg:bottom-[150px] max-lg:left-[20px] max-md:left-[15px] max-lg:top-[56px] max-md:top-[34px] max-lg:w-[120px] max-md:w-[62px] max-lg:h-[152px] max-md:h-[80px]"
         />
         <img src="/Toolbar.png" alt="Toolbar" />
-        {isClient && (
-          <video
-            id="myVideoID"
-            ref={videoRef}
+        {useDetectAppleDevice() ? (
+          <img
             src="https://cdn.shopify.com/videos/c/o/v/2c4c5ecb05f649578bec5aac380730e1.mp4"
             width="100%"
             height="auto"
-            playsInline
-            autoPlay
-            loop
-            muted
-            controls={false}
             className="inlinevideo"
             style={{ borderRadius: '16px 16px 0 0', overflow: 'hidden' }}
+            alt="404 image"
           />
+        ) : (
+          isClient && (
+            <video
+              id="myVideoID"
+              ref={videoRef}
+              src="https://cdn.shopify.com/videos/c/o/v/2c4c5ecb05f649578bec5aac380730e1.mp4"
+              width="100%"
+              height="auto"
+              playsInline
+              autoPlay
+              loop
+              muted
+              controls={false}
+              className="inlinevideo"
+              style={{ borderRadius: '16px 16px 0 0', overflow: 'hidden' }}
+            />
+          )
         )}
       </div>
       <div className="second-block absolute bg-gradient-to-b from-white/10 to-white/0 rounded-t-[20px] w-[880px] max-lg:w-[700px] max-md:w-[360px] h-[505px] max-lg:h-[402px] max-md:h-[208px] backdrop-blur-[40px]  z-20  bottom-[40px]"></div>
