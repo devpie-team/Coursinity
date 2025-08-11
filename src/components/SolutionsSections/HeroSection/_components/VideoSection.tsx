@@ -36,7 +36,7 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
     )
     observer.observe(sectionRef.current)
     return () => observer.disconnect()
-  }, [])
+  }, [isClient, key])
 
   const videoRef = useRef<HTMLVideoElement>(null)
 
@@ -56,6 +56,29 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
       })
     }
   }, [locale])
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    video.classList.add('inlinevideo')
+
+    const handlePlayOnInteraction = () => {
+      if (video.paused || video.ended) {
+        video.play().catch((err) => {
+          console.warn('Play error after user interaction:', err)
+        })
+      }
+    }
+
+    document.body.addEventListener('click', handlePlayOnInteraction, { once: true })
+    document.body.addEventListener('touchstart', handlePlayOnInteraction, { once: true })
+
+    return () => {
+      document.body.removeEventListener('click', handlePlayOnInteraction)
+      document.body.removeEventListener('touchstart', handlePlayOnInteraction)
+    }
+  }, [])
 
   return (
     <section
@@ -81,6 +104,7 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
             loop
             muted
             controls={false}
+            className="inlinevideo"
             style={{ borderRadius: '16px 16px 0 0', overflow: 'hidden' }}
           />
         )}
