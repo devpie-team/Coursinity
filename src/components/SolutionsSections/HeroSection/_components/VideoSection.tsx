@@ -73,6 +73,7 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
     observer.observe(sectionRef.current)
 
     return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current)
       observer.disconnect()
     }
   }, [])
