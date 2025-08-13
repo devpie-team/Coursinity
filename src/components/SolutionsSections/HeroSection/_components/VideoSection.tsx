@@ -71,10 +71,13 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
     )
 
     observer.observe(sectionRef.current)
+
     return () => {
-      observer.disconnect()
-    }
-  }, [])
+    observer.unobserve(el);
+    observer.disconnect();
+  };
+}, []);
+
 
   useEffect(() => {
     if (!videoRef.current) return
@@ -93,6 +96,33 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
     }
   }, [])
 
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    video.classList.add('inlinevideo')
+
+    const handlePlayOnInteraction = () => {
+      if (video.paused || video.ended) {
+        video.play().catch((err) => {
+          console.warn('Play error after user interaction:', err)
+        })
+      }
+    }
+
+    document.body.addEventListener('click', handlePlayOnInteraction, { once: true })
+    document.body.addEventListener('touchstart', handlePlayOnInteraction, { once: true })
+
+    return () => {
+      document.body.removeEventListener('click', handlePlayOnInteraction)
+      document.body.removeEventListener('touchstart', handlePlayOnInteraction)
+    }
+  }, [])
+
+  function useDetectAppleDevice() {
+    return /(iPhone|iPod|iPad)/i.test(navigator.userAgent)
+  }
+
   return (
     <section
       ref={sectionRef}
@@ -109,20 +139,34 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
 
         <img src="/Toolbar.png" alt="Toolbar" />
 
-        {isClient && (
-          <video
-            id="myVideoID"
-            ref={videoRef}
+
+        {useDetectAppleDevice() ? (
+          <img
+
             src="https://cdn.shopify.com/videos/c/o/v/2c4c5ecb05f649578bec5aac380730e1.mp4"
             width="100%"
             height="auto"
-            playsInline
-            autoPlay
-            loop
-            muted
-            controls={false}
+            className="inlinevideo"
             style={{ borderRadius: '16px 16px 0 0', overflow: 'hidden' }}
+            alt="404 image"
           />
+        ) : (
+          isClient && (
+            <video
+              id="myVideoID"
+              ref={videoRef}
+              src="https://cdn.shopify.com/videos/c/o/v/2c4c5ecb05f649578bec5aac380730e1.mp4"
+              width="100%"
+              height="auto"
+              playsInline
+              autoPlay
+              loop
+              muted
+              controls={false}
+              className="inlinevideo"
+              style={{ borderRadius: '16px 16px 0 0', overflow: 'hidden' }}
+            />
+          )
         )}
       </div>
 
