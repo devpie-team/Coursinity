@@ -80,11 +80,11 @@ export const StepCard = forwardRef<HTMLDivElement, StepCardProps>(
           </div>
 
           <div className="flex flex-col">
-            <Typography variant={isDesktop ? 'h4' : 'h6'} weight="medium">
+            <Typography variant={isDesktop ? 'h4' : isTablet ? 'h6' : 'body1'} weight="medium">
               {title}
             </Typography>
             <Typography
-              variant="body2"
+              variant={isMobile ? 'body3' : 'body2'}
               className="text-description transition-opacity duration-1000"
               style={{ opacity: isOpen ? 1 : 0 }}>
               {description}
