@@ -85,7 +85,7 @@ export const PathSection = () => {
 
   return (
     <section className="pt-[120px] mb-[-2px]  max-lg:pt-[80px] flex flex-col items-center justify-center bg-white gap-[40px] max-lg:px-6 max-md:px-4">
-      <div className="flex flex-col max-w-full scaleText opacityText  text-center">
+      <div className="flex flex-col max-w-full scaleText opacityText gap-4 text-center">
         <FadeInOnView variant="fade-up">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
             {t('title')}
