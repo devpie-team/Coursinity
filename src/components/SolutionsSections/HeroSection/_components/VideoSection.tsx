@@ -73,11 +73,10 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
     observer.observe(sectionRef.current)
 
     return () => {
-    observer.unobserve(el);
-    observer.disconnect();
-  };
-}, []);
-
+      if (sectionRef.current) observer.unobserve(sectionRef.current)
+      observer.disconnect()
+    }
+  }, [])
 
   useEffect(() => {
     if (!videoRef.current) return
@@ -139,10 +138,8 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
 
         <img src="/Toolbar.png" alt="Toolbar" />
 
-
         {useDetectAppleDevice() ? (
           <img
-
             src="https://cdn.shopify.com/videos/c/o/v/2c4c5ecb05f649578bec5aac380730e1.mp4"
             width="100%"
             height="auto"
