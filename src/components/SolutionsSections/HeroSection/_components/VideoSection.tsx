@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import './VideoSection.style.css'
 import Lottie, { LottieRefCurrentProps } from 'lottie-react'
 import hero from '../../../../../public/assets/lottie/solutions/hero/hero.json'
+import heroAr from '../../../../../public/assets/lottie/solutions/hero/hero_ar.json'
 import { useLocale } from 'next-intl'
 
 export const VideoSection = ({ loading }: { loading: boolean }) => {
@@ -17,6 +18,7 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
   const pauseRef = useRef<number | null>(null)
 
   const locale = useLocale()
+  const isArabic = locale === 'ar'
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => setIsClient(true), [])
@@ -129,7 +131,7 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
       <div className="first-block absolute flex flex-col items-center justify-between px-2 bg-white/20 rounded-t-[20px] max-md:rounded-t-lg w-[850px] max-lg:w-[675px] max-md:w-[350px] h-[600px] max-lg:h-[480px] max-md:h-[250px] backdrop-blur-[72px] z-30 bottom-[-2px] max-lg:bottom-[-5px] custom-shadow">
         <Lottie
           lottieRef={lottieRef}
-          animationData={hero}
+          animationData={isArabic ? heroAr : hero}
           autoplay
           loop={false}
           onComplete={handleLottieComplete}
