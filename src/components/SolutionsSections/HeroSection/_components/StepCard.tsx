@@ -43,7 +43,7 @@ export const StepCard = forwardRef<HTMLDivElement, StepCardProps>(
     return (
       <div
         ref={setRefs}
-        className="transition-all duration-300 ease-out overflow-hidden"
+        className="transition-all duration-300 ease-out "
         style={{
           height: isOpen ? (isDesktop ? '150px' : isTablet ? '130px' : '115px') : isDesktop ? '86px' : '60px'
         }}>
