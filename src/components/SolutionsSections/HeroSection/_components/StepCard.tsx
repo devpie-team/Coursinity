@@ -45,7 +45,7 @@ export const StepCard = forwardRef<HTMLDivElement, StepCardProps>(
         ref={setRefs}
         className="transition-all duration-300 ease-out overflow-hidden"
         style={{
-          height: isOpen ? (isDesktop ? '150px' : '120px') : '86px'
+          height: isOpen ? (isDesktop ? '150px' : isTablet ? '130px' : '115px') : isDesktop ? '86px' : '60px'
         }}>
         <div className="flex gap-4 items-start cursor-pointer" onClick={onClick}>
           <div className="flex flex-col w-6 min-w-[24px] items-center relative">
@@ -68,8 +68,8 @@ export const StepCard = forwardRef<HTMLDivElement, StepCardProps>(
               <span
                 className="absolute left-1/2 top-full translate-x-[-50%] rounded-full"
                 style={{
-                  marginTop: `${12 - openPercent * 6}px`,
-                  height: `${20 + openPercent * (isDesktop ? 76 : 44)}px`,
+                  marginTop: `${isDesktop ? 8 : 0}px`,
+                  height: `${(isDesktop ? 30 : 24) + openPercent * (isDesktop ? 60 : 44)}px`,
                   width: '3px',
                   background: isOpen
                     ? 'linear-gradient(180deg, rgba(30,141,194,0.64) -7.93%, rgba(165,120,242,0.64) 25.83%, rgba(30,141,194,0.64) 105.37%)'
@@ -79,13 +79,16 @@ export const StepCard = forwardRef<HTMLDivElement, StepCardProps>(
             )}
           </div>
 
-          <div className="flex flex-col">
-            <Typography variant={isDesktop ? 'h4' : isTablet ? 'h6' : 'body1'} weight="medium">
+          <div className="flex flex-col ">
+            <Typography
+              variant={isDesktop ? 'h4' : isTablet ? 'h6' : 'body1'}
+              weight="medium"
+              className="flex items-center h-10 ">
               {title}
             </Typography>
             <Typography
               variant={isMobile ? 'body3' : 'body2'}
-              className="text-description transition-opacity duration-1000"
+              className="text-description transition-opacity duration-300"
               style={{ opacity: isOpen ? 1 : 0 }}>
               {description}
             </Typography>
