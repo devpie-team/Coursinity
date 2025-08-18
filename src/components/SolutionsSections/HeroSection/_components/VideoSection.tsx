@@ -124,6 +124,10 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
     return /(iPhone|iPod|iPad)/i.test(navigator.userAgent)
   }
 
+  const videoUrl = isArabic
+    ? 'https://cdn.shopify.com/videos/c/o/v/a037c4fa2fa64bffbec3729c3edfe381.mp4'
+    : 'https://cdn.shopify.com/videos/c/o/v/2c4c5ecb05f649578bec5aac380730e1.mp4'
+
   return (
     <section
       ref={sectionRef}
@@ -142,7 +146,7 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
 
         {useDetectAppleDevice() ? (
           <img
-            src="https://cdn.shopify.com/videos/c/o/v/2c4c5ecb05f649578bec5aac380730e1.mp4"
+            src={videoUrl}
             width="100%"
             height="auto"
             className="inlinevideo"
@@ -154,7 +158,7 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
             <video
               id="myVideoID"
               ref={videoRef}
-              src="https://cdn.shopify.com/videos/c/o/v/2c4c5ecb05f649578bec5aac380730e1.mp4"
+              src={videoUrl}
               width="100%"
               height="auto"
               playsInline
