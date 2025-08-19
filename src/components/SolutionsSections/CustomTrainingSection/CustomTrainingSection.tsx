@@ -355,8 +355,11 @@ export const CustomTrainingSection = () => {
               {t('footerText')}
             </Typography>
           </FadeInOnView>
-          <FadeInOnView>
-            <Button variant="purple" className={`w-auto max-lg:w-full ${isArabic ? 'max-lg:p-2' : ''}`}>
+          <FadeInOnView variant="fade-up">
+            <Button
+              href={`/${locale}/contact-form`}
+              variant="purple"
+              className={`w-auto max-lg:w-full ${isArabic ? 'max-lg:p-2' : ''}`}>
               {t('cta')}
             </Button>
           </FadeInOnView>

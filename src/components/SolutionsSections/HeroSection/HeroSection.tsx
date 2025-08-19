@@ -81,7 +81,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
         </Typography>
         {/*    </FadeInOnView> */}
 
-        <Button variant="primary" className="mt-4 max-lg:w-full max-lg:bt-4">
+        <Button href={`/${locale}/contact-form`} variant="primary" className="mt-4 max-lg:w-full max-lg:bt-4">
           {t('button')}
         </Button>
       </div>

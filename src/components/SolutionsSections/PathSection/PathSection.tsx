@@ -124,7 +124,7 @@ export const PathSection = () => {
         ))}
       </div>
       <FadeInOnView>
-        <Button variant="purple" className="w-[327px] max-md:w-full">
+        <Button href={`/${locale}/contact-form`} variant="purple" className="w-[327px] max-md:w-full">
           {t('button')}
         </Button>
       </FadeInOnView>

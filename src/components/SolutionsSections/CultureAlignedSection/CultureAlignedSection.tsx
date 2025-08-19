@@ -143,7 +143,7 @@ export const CultureAlignedSection = () => {
           </FadeInOnView>
         </div>
         <FadeInOnView variant="fade-up">
-          <Button variant="purple" className="w-[275px]">
+          <Button href={`/${locale}/contact-form`} variant="purple" className="w-[275px]">
             {t('button')}
           </Button>
         </FadeInOnView>
