@@ -24,8 +24,22 @@ const TypingLoopText = ({ ready = true }: Props) => {
   const [inView, setInView] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
+  const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+      setIsTablet(width >= 768 && width <= 1024)
+      setIsDesktop(width > 1024)
+    }
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
   const locale = useLocale()
+  const isArabic = locale === 'ar'
 
   // екрани
   useEffect(() => {
@@ -124,10 +138,10 @@ const TypingLoopText = ({ ready = true }: Props) => {
   return (
     <div
       ref={containerRef}
-      className="flex relative px-6 py-4 border-2 border-dashed border-primary-purple min-h-[116px] max-lg:py-0 items-center max-lg:min-h-16 ">
+      className="flex relative px-6 py-5 border-2 border-dashed border-primary-purple min-h-[116px] max-lg:py-0 items-center max-lg:min-h-16 max-md:px-3">
       <Typography
-        variant={isDesktop ? 'h1' : 'h5'}
-        weight="regular"
+        variant={isDesktop ? 'h1' : isTablet ? 'h3' : isArabic ? 'h6' : 'h5'}
+        weight="medium"
         className="text-primary-purple flex items-center gap-4">
         <span className="whitespace-pre">{ready ? (shouldHideText ? '\u00A0' : displayed) : '\u00A0'}</span>
         <span
