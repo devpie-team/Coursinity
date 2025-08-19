@@ -8,8 +8,11 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { HeaderVisibilityProvider } from '@/components/Header/HeaderVisibilityContext'
 import { JsonLdSchema } from '@/components/JsonLdSchema'
-
 import SmoothScrollProvider from '@/components/SmoothScrollProvider'
+
+// ⬇️ ДОДАТИ:
+import Script from 'next/script'
+import FacebookPixelRouteTracker from '@/utils/FacebookPixelRouteTracker'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -19,35 +22,17 @@ const poppins = Poppins({
 
 const kanunAR = localFont({
   src: [
-    {
-      path: '../../fonts/KanunAR-Regular.otf',
-      weight: '400',
-      style: 'normal'
-    },
-    {
-      path: '../../fonts/KanunAR-Medium.otf',
-      weight: '500',
-      style: 'medium'
-    },
-    {
-      path: '../../fonts/KanunAR-Bold.otf',
-      weight: '700',
-      style: 'bold'
-    }
+    { path: '../../fonts/KanunAR-Regular.otf', weight: '400', style: 'normal' },
+    { path: '../../fonts/KanunAR-Medium.otf', weight: '500', style: 'medium' },
+    { path: '../../fonts/KanunAR-Bold.otf', weight: '700', style: 'bold' }
   ],
   variable: '--font-kanun-ar'
 })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.coursinity.com'),
-  icons: {
-    icon: '/assets/favicon.png',
-    apple: '/assets/favicon.png'
-  },
-  title: {
-    template: '%s | Coursinity',
-    default: 'Coursinity - Corporate Training in Saudi Arabia'
-  },
+  icons: { icon: '/assets/favicon.png', apple: '/assets/favicon.png' },
+  title: { template: '%s | Coursinity', default: 'Coursinity - Corporate Training in Saudi Arabia' },
   description:
     'Coursinity provides customized corporate training programs for businesses and government organizations in Saudi Arabia. Leadership, digital transformation, and soft skills training tailored to Vision 2030.',
   keywords: [
@@ -61,12 +46,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Coursinity' }],
   creator: 'Coursinity',
   publisher: 'Coursinity',
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false
-  },
-
+  formatDetection: { email: false, address: false, telephone: false },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -75,14 +55,7 @@ export const metadata: Metadata = {
     description:
       'Coursinity provides customized corporate training programs for businesses and government organizations in Saudi Arabia.',
     siteName: 'Coursinity',
-    images: [
-      {
-        url: '/assets/favicon.png',
-        width: 1200,
-        height: 630,
-        alt: 'Coursinity Logo'
-      }
-    ]
+    images: [{ url: '/assets/favicon.png', width: 1200, height: 630, alt: 'Coursinity Logo' }]
   },
   twitter: {
     card: 'summary_large_image',
@@ -94,17 +67,9 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1
-    }
+    googleBot: { index: true, follow: true, 'max-video-preview': -1, 'max-image-preview': 'large', 'max-snippet': -1 }
   },
-  verification: {
-    google: '0uSSTBokSb6aR_Ysvt8_eMuZOnXkELumyfoCsQusOpI'
-  }
+  verification: { google: '0uSSTBokSb6aR_Ysvt8_eMuZOnXkELumyfoCsQusOpI' }
 }
 
 export default async function LocaleLayout({
@@ -115,15 +80,13 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
-  if (!hasLocale(routing.locales, locale)) {
-    notFound()
-  }
+  if (!hasLocale(routing.locales, locale)) notFound()
 
   const isArabic = locale === 'ar'
   const fontClass = isArabic ? kanunAR.variable : poppins.variable
 
   return (
-    <html lang={locale} className={fontClass} dir={locale == 'ar' ? 'rtl' : 'ltr'}>
+    <html lang={locale} className={fontClass} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <head>
         <JsonLdSchema locale={locale} />
         <link rel="icon" type="image/png" href="/assets/favicon-96x96.png" sizes="96x96" />
@@ -144,8 +107,29 @@ export default async function LocaleLayout({
             </>
           )
         })()}
+
+        {/* ⬇️ Meta Pixel init (head) */}
+        <Script id="facebook-pixel" strategy="afterInteractive">
+          {`
+            !function(f,b,e,v,n,t,s){
+              if(f.fbq) return;
+              n=f.fbq=function(){ n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments) };
+              if(!f._fbq) f._fbq=n;
+              n.push=n; n.loaded=!0; n.version='2.0';
+              n.queue=[];
+              t=b.createElement(e); t.async=!0; t.src=v;
+              s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s);
+            }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '1255262075149493');
+            fbq('track', 'PageView');
+          `}
+        </Script>
       </head>
+
       <body>
+        {/* ⬇️ SPA-навігації: тригер PageView на зміну маршруту */}
+        <FacebookPixelRouteTracker />
+
         <NextIntlClientProvider>
           <Theme>
             <HeaderVisibilityProvider>
@@ -155,6 +139,17 @@ export default async function LocaleLayout({
             </HeaderVisibilityProvider>
           </Theme>
         </NextIntlClientProvider>
+
+        {/* ⬇️ noscript fallback (обов'язково!) */}
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: 'none' }}
+            src="https://www.facebook.com/tr?id=1255262075149493&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
       </body>
     </html>
   )
