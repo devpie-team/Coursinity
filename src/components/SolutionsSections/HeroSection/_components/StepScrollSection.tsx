@@ -6,7 +6,7 @@ import { Button } from '@/components/primitives/button'
 import { Typography } from '@/components/ui'
 import { useInView } from 'framer-motion'
 import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 import './StepScrollSection.css'
 
@@ -15,7 +15,7 @@ const StepScroll = () => {
   const isInView = useInView(wrapperRef, { once: false, amount: 0.4 })
 
   const [isMobile, setIsMobile] = useState(false)
-
+  const locale = useLocale()
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth
@@ -118,7 +118,10 @@ const StepScroll = () => {
       </div>
 
       <FadeInOnView>
-        <Button variant="purple" className="button-wrapper max-lg:w-[330px] max-md:w-[330px]">
+        <Button
+          href={`/${locale}/contact-form`}
+          variant="purple"
+          className="button-wrapper max-lg:w-[330px] max-md:w-[330px]">
           {t('button')}
         </Button>
       </FadeInOnView>

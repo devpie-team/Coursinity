@@ -116,7 +116,7 @@ export const ConsultingSection = () => {
         </div>
       </div>
       <FadeInOnView>
-        <Button variant="purple" className="w-fit max-md:w-full">
+        <Button href={`/${locale}/contact-form`} variant="purple" className="w-fit max-md:w-full">
           {t('button')}
         </Button>
       </FadeInOnView>
