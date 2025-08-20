@@ -77,6 +77,11 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
   }, [loading])
 
   useEffect(() => {
+    window.scrollBy({
+      top: 3,
+      left: 0,
+      behavior: 'smooth'
+    })
     if (!videoRef.current) return
     videoRef.current.muted = true
     videoRef.current.play().catch(() => {
