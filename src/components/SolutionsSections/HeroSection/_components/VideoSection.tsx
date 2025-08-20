@@ -41,10 +41,49 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
   }
 
   useEffect(() => {
+    if (!sectionRef.current) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          lottieRef.current?.setSpeed(0.5)
+
+          if (pauseRef.current) {
+            clearTimeout(pauseRef.current)
+            pauseRef.current = null
+          }
+          lottieRef.current?.play()
+
+          if (videoRef.current) {
+            videoRef.current.muted = true
+            videoRef.current.play().catch(() => {
+              videoRef.current && (videoRef.current.controls = true)
+            })
+          }
+        } else {
+          if (pauseRef.current) {
+            clearTimeout(pauseRef.current)
+            pauseRef.current = null
+          }
+          lottieRef.current?.pause()
+        }
+      },
+      { threshold: 0.5 }
+    )
+
+    observer.observe(sectionRef.current)
+
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current)
+      observer.disconnect()
+    }
+  }, [])
+
+  useEffect(() => {
     if (!videoRef.current) return
     videoRef.current.muted = true
     videoRef.current.play().catch(() => {
-      if (videoRef.current) videoRef.current.controls = true
+      if (videoRef.current) videoRef.current.controls = false
     })
   }, [locale])
 
