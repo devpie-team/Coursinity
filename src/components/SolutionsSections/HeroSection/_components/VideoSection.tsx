@@ -19,9 +19,6 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
 
   const locale = useLocale()
   const isArabic = locale === 'ar'
-  const [isClient, setIsClient] = useState(false)
-
-  useEffect(() => setIsClient(true), [])
 
   const handleLottieComplete = () => {
     const inst = lottieRef.current
@@ -97,6 +94,32 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
   }, [loading])
 
   useEffect(() => {
+    if (loading) return
+    const v = videoRef.current
+    if (!v) return
+
+    let tries = 0
+    const interval = setInterval(() => {
+      if (!v.paused && !v.ended) {
+        clearInterval(interval)
+        return
+      }
+
+      v.play()
+        .then(() => {
+          console.log('Video started')
+          clearInterval(interval)
+        })
+        .catch(() => {
+          console.log('Retry play attempt', tries)
+        })
+      tries++
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [loading])
+
+  useEffect(() => {
     const video = videoRef.current
     if (!video) return
 
@@ -109,6 +132,8 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
         })
       }
     }
+
+    handlePlayOnInteraction()
 
     document.body.addEventListener('click', handlePlayOnInteraction, { once: true })
     document.body.addEventListener('touchstart', handlePlayOnInteraction, { once: true })
@@ -155,6 +180,7 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
           muted
           controls={false}
           className="inlinevideo"
+          webkit-playsinline="true"
           style={{ borderRadius: '16px 16px 0 0', overflow: 'hidden' }}
         />
       </div>
