@@ -100,15 +100,9 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
 
     let tries = 0
     const interval = setInterval(() => {
-      if (!v.paused && !v.ended) {
-        clearInterval(interval)
-        return
-      }
-
       v.play()
         .then(() => {
           console.log('Video started')
-          clearInterval(interval)
         })
         .catch(() => {
           console.log('Retry play attempt', tries)
