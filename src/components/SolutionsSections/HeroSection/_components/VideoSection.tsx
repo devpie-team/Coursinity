@@ -146,7 +146,7 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
 
         {useDetectAppleDevice() ? (
           <img
-            src={videoUrl}
+            src={isArabic ? '/assets/hero.gif' : '/assets/heroEn.gif'}
             width="100%"
             height="auto"
             className="inlinevideo"

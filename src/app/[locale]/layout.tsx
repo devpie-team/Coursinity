@@ -12,7 +12,6 @@ import SmoothScrollProvider from '@/components/SmoothScrollProvider'
 
 // ⬇️ ДОДАТИ:
 import Script from 'next/script'
-import FacebookPixelRouteTracker from '@/utils/FacebookPixelRouteTracker'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -127,9 +126,6 @@ export default async function LocaleLayout({
       </head>
 
       <body>
-        {/* ⬇️ SPA-навігації: тригер PageView на зміну маршруту */}
-        <FacebookPixelRouteTracker />
-
         <NextIntlClientProvider>
           <Theme>
             <HeaderVisibilityProvider>
