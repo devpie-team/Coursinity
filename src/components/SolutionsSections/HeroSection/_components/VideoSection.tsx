@@ -94,7 +94,7 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
   }, [loading])
 
   useEffect(() => {
-    if (loading) return
+    if (!loading) return
     const v = videoRef.current
     if (!v) return
 
