@@ -125,8 +125,8 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
   }
 
   const videoUrl = isArabic
-    ? 'https://cdn.shopify.com/videos/c/o/v/a037c4fa2fa64bffbec3729c3edfe381.mp4'
-    : 'https://cdn.shopify.com/videos/c/o/v/2c4c5ecb05f649578bec5aac380730e1.mp4'
+    ? 'https://res.cloudinary.com/diflwl506/video/upload/v1755686782/Hero_Video_AR_ymunl8.mp4'
+    : 'https://res.cloudinary.com/diflwl506/video/upload/v1755686595/heroVideo_lzfeam.mp4'
 
   return (
     <section
