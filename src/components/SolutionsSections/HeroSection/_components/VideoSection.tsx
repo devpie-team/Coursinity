@@ -40,6 +40,86 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
     }, PAUSE_MS)
   }
 
+  useEffect(() => {
+    if (!sectionRef.current) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          lottieRef.current?.setSpeed(0.5)
+
+          if (pauseRef.current) {
+            clearTimeout(pauseRef.current)
+            pauseRef.current = null
+          }
+          lottieRef.current?.play()
+
+          if (videoRef.current) {
+            videoRef.current.muted = true
+            videoRef.current.play().catch(() => {
+              videoRef.current && (videoRef.current.controls = true)
+            })
+          }
+        } else {
+          if (pauseRef.current) {
+            clearTimeout(pauseRef.current)
+            pauseRef.current = null
+          }
+          lottieRef.current?.pause()
+          videoRef.current?.pause()
+        }
+      },
+      { threshold: 0.5 }
+    )
+
+    observer.observe(sectionRef.current)
+
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current)
+      observer.disconnect()
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!videoRef.current) return
+    videoRef.current.muted = true
+    videoRef.current.play().catch(() => {
+      if (videoRef.current) videoRef.current.controls = true
+    })
+  }, [locale])
+
+  useEffect(() => {
+    return () => {
+      if (pauseRef.current) {
+        clearTimeout(pauseRef.current)
+        pauseRef.current = null
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    video.classList.add('inlinevideo')
+
+    const handlePlayOnInteraction = () => {
+      if (video.paused || video.ended) {
+        video.play().catch((err) => {
+          console.warn('Play error after user interaction:', err)
+        })
+      }
+    }
+
+    document.body.addEventListener('click', handlePlayOnInteraction, { once: true })
+    document.body.addEventListener('touchstart', handlePlayOnInteraction, { once: true })
+
+    return () => {
+      document.body.removeEventListener('click', handlePlayOnInteraction)
+      document.body.removeEventListener('touchstart', handlePlayOnInteraction)
+    }
+  }, [])
+
   function useDetectAppleDevice() {
     return /(iPhone|iPod|iPad)/i.test(navigator.userAgent)
   }
@@ -61,36 +141,21 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
           onComplete={handleLottieComplete}
           className="absolute z-20 lg:left-[-166px] lg:bottom-[150px] max-lg:left-[20px] max-md:left-[15px] max-lg:top-[56px] max-md:top-[34px] max-lg:w-[120px] max-md:w-[62px] max-lg:h-[152px] max-md:h-[80px]"
         />
-
         <img src="/Toolbar.png" alt="Toolbar" />
-
-        {useDetectAppleDevice() ? (
-          <img
-            src={videoUrl}
-            width="100%"
-            height="auto"
-            className="inlinevideo"
-            style={{ borderRadius: '16px 16px 0 0', overflow: 'hidden' }}
-            alt="404 image"
-          />
-        ) : (
-          isClient && (
-            <video
-              id="myVideoID"
-              ref={videoRef}
-              src={videoUrl}
-              width="100%"
-              height="auto"
-              playsInline
-              autoPlay
-              loop
-              muted
-              controls={false}
-              className="inlinevideo"
-              style={{ borderRadius: '16px 16px 0 0', overflow: 'hidden' }}
-            />
-          )
-        )}
+        <video
+          id="myVideoID"
+          ref={videoRef}
+          src={videoUrl}
+          width="100%"
+          height="auto"
+          playsInline
+          autoPlay
+          loop
+          muted
+          controls={false}
+          className="inlinevideo"
+          style={{ borderRadius: '16px 16px 0 0', overflow: 'hidden' }}
+        />
       </div>
 
       <div className="second-block absolute bg-gradient-to-b from-white/10 to-white/0 rounded-t-[20px] w-[880px] max-lg:w-[700px] max-md:w-[360px] h-[505px] max-lg:h-[402px] max-md:h-[208px] backdrop-blur-[40px] z-20 bottom-[40px]" />
