@@ -57,7 +57,7 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
           if (videoRef.current) {
             videoRef.current.muted = true
             videoRef.current.play().catch(() => {
-              videoRef.current && (videoRef.current.controls = true)
+              videoRef.current && (videoRef.current.controls = false)
             })
           }
         } else {
