@@ -40,86 +40,6 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
     }, PAUSE_MS)
   }
 
-  useEffect(() => {
-    if (!sectionRef.current) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          lottieRef.current?.setSpeed(0.5)
-
-          if (pauseRef.current) {
-            clearTimeout(pauseRef.current)
-            pauseRef.current = null
-          }
-          lottieRef.current?.play()
-
-          if (videoRef.current) {
-            videoRef.current.muted = true
-            videoRef.current.play().catch(() => {
-              videoRef.current && (videoRef.current.controls = true)
-            })
-          }
-        } else {
-          if (pauseRef.current) {
-            clearTimeout(pauseRef.current)
-            pauseRef.current = null
-          }
-          lottieRef.current?.pause()
-          videoRef.current?.pause()
-        }
-      },
-      { threshold: 0.5 }
-    )
-
-    observer.observe(sectionRef.current)
-
-    return () => {
-      if (sectionRef.current) observer.unobserve(sectionRef.current)
-      observer.disconnect()
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!videoRef.current) return
-    videoRef.current.muted = true
-    videoRef.current.play().catch(() => {
-      if (videoRef.current) videoRef.current.controls = true
-    })
-  }, [locale])
-
-  useEffect(() => {
-    return () => {
-      if (pauseRef.current) {
-        clearTimeout(pauseRef.current)
-        pauseRef.current = null
-      }
-    }
-  }, [])
-
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
-
-    video.classList.add('inlinevideo')
-
-    const handlePlayOnInteraction = () => {
-      if (video.paused || video.ended) {
-        video.play().catch((err) => {
-          console.warn('Play error after user interaction:', err)
-        })
-      }
-    }
-
-    document.body.addEventListener('click', handlePlayOnInteraction, { once: true })
-    document.body.addEventListener('touchstart', handlePlayOnInteraction, { once: true })
-
-    return () => {
-      document.body.removeEventListener('click', handlePlayOnInteraction)
-      document.body.removeEventListener('touchstart', handlePlayOnInteraction)
-    }
-  }, [])
-
   function useDetectAppleDevice() {
     return /(iPhone|iPod|iPad)/i.test(navigator.userAgent)
   }
@@ -146,7 +66,7 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
 
         {useDetectAppleDevice() ? (
           <img
-            src={isArabic ? '/assets/hero.gif' : '/assets/heroEn.gif'}
+            src={videoUrl}
             width="100%"
             height="auto"
             className="inlinevideo"
