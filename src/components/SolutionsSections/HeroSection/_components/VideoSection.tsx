@@ -77,7 +77,7 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
       if (sectionRef.current) observer.unobserve(sectionRef.current)
       observer.disconnect()
     }
-  }, [])
+  }, [loading])
 
   useEffect(() => {
     if (!videoRef.current) return
@@ -85,7 +85,7 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
     videoRef.current.play().catch(() => {
       if (videoRef.current) videoRef.current.controls = false
     })
-  }, [locale])
+  }, [locale, loading])
 
   useEffect(() => {
     return () => {
@@ -94,7 +94,7 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
         pauseRef.current = null
       }
     }
-  }, [])
+  }, [loading])
 
   useEffect(() => {
     const video = videoRef.current
@@ -117,7 +117,7 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
       document.body.removeEventListener('click', handlePlayOnInteraction)
       document.body.removeEventListener('touchstart', handlePlayOnInteraction)
     }
-  }, [])
+  }, [loading])
 
   function useDetectAppleDevice() {
     return /(iPhone|iPod|iPad)/i.test(navigator.userAgent)
@@ -126,6 +126,8 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
   const videoUrl = isArabic
     ? 'https://cdn.shopify.com/videos/c/o/v/a037c4fa2fa64bffbec3729c3edfe381.mp4'
     : 'https://cdn.shopify.com/videos/c/o/v/2c4c5ecb05f649578bec5aac380730e1.mp4'
+
+  if (!videoRef.current) null
 
   return (
     <section
