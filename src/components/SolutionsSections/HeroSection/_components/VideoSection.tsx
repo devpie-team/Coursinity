@@ -19,9 +19,6 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
 
   const locale = useLocale()
   const isArabic = locale === 'ar'
-  const [isClient, setIsClient] = useState(false)
-
-  useEffect(() => setIsClient(true), [])
 
   const handleLottieComplete = () => {
     const inst = lottieRef.current
@@ -57,7 +54,7 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
           if (videoRef.current) {
             videoRef.current.muted = true
             videoRef.current.play().catch(() => {
-              videoRef.current && (videoRef.current.controls = true)
+              videoRef.current && (videoRef.current.controls = false)
             })
           }
         } else {
@@ -66,7 +63,6 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
             pauseRef.current = null
           }
           lottieRef.current?.pause()
-          videoRef.current?.pause()
         }
       },
       { threshold: 0.5 }
@@ -78,15 +74,20 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
       if (sectionRef.current) observer.unobserve(sectionRef.current)
       observer.disconnect()
     }
-  }, [])
+  }, [loading])
 
   useEffect(() => {
+    window.scrollBy({
+      top: 3,
+      left: 0,
+      behavior: 'smooth'
+    })
     if (!videoRef.current) return
     videoRef.current.muted = true
     videoRef.current.play().catch(() => {
-      if (videoRef.current) videoRef.current.controls = true
+      if (videoRef.current) videoRef.current.controls = false
     })
-  }, [locale])
+  }, [locale, loading])
 
   useEffect(() => {
     return () => {
@@ -95,7 +96,27 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
         pauseRef.current = null
       }
     }
-  }, [])
+  }, [loading])
+
+  useEffect(() => {
+    if (!loading) return
+    const v = videoRef.current
+    if (!v) return
+
+    let tries = 0
+    const interval = setInterval(() => {
+      v.play()
+        .then(() => {
+          console.log('Video started')
+        })
+        .catch(() => {
+          console.log('Retry play attempt', tries)
+        })
+      tries++
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [loading])
 
   useEffect(() => {
     const video = videoRef.current
@@ -111,6 +132,8 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
       }
     }
 
+    handlePlayOnInteraction()
+
     document.body.addEventListener('click', handlePlayOnInteraction, { once: true })
     document.body.addEventListener('touchstart', handlePlayOnInteraction, { once: true })
 
@@ -118,7 +141,7 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
       document.body.removeEventListener('click', handlePlayOnInteraction)
       document.body.removeEventListener('touchstart', handlePlayOnInteraction)
     }
-  }, [])
+  }, [loading])
 
   function useDetectAppleDevice() {
     return /(iPhone|iPod|iPad)/i.test(navigator.userAgent)
@@ -127,6 +150,8 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
   const videoUrl = isArabic
     ? 'https://res.cloudinary.com/diflwl506/video/upload/v1755686782/Hero_Video_AR_ymunl8.mp4'
     : 'https://res.cloudinary.com/diflwl506/video/upload/v1755686595/heroVideo_lzfeam.mp4'
+
+  if (!videoRef.current) null
 
   return (
     <section
@@ -141,36 +166,22 @@ export const VideoSection = ({ loading }: { loading: boolean }) => {
           onComplete={handleLottieComplete}
           className="absolute z-20 lg:left-[-166px] lg:bottom-[150px] max-lg:left-[20px] max-md:left-[15px] max-lg:top-[56px] max-md:top-[34px] max-lg:w-[120px] max-md:w-[62px] max-lg:h-[152px] max-md:h-[80px]"
         />
-
         <img src="/Toolbar.png" alt="Toolbar" />
-
-        {useDetectAppleDevice() ? (
-          <img
-            src={isArabic ? '/assets/hero.gif' : '/assets/heroEn.gif'}
-            width="100%"
-            height="auto"
-            className="inlinevideo"
-            style={{ borderRadius: '16px 16px 0 0', overflow: 'hidden' }}
-            alt="404 image"
-          />
-        ) : (
-          isClient && (
-            <video
-              id="myVideoID"
-              ref={videoRef}
-              src={videoUrl}
-              width="100%"
-              height="auto"
-              playsInline
-              autoPlay
-              loop
-              muted
-              controls={false}
-              className="inlinevideo"
-              style={{ borderRadius: '16px 16px 0 0', overflow: 'hidden' }}
-            />
-          )
-        )}
+        <video
+          id="myVideoID"
+          ref={videoRef}
+          src={videoUrl}
+          width="100%"
+          height="auto"
+          playsInline
+          autoPlay
+          loop
+          muted
+          controls={false}
+          className="inlinevideo"
+          webkit-playsinline="true"
+          style={{ borderRadius: '16px 16px 0 0', overflow: 'hidden' }}
+        />
       </div>
 
       <div className="second-block absolute bg-gradient-to-b from-white/10 to-white/0 rounded-t-[20px] w-[880px] max-lg:w-[700px] max-md:w-[360px] h-[505px] max-lg:h-[402px] max-md:h-[208px] backdrop-blur-[40px] z-20 bottom-[40px]" />
