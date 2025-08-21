@@ -38,13 +38,13 @@ export const HeroSection = ({ loading }: THeroSection) => {
   }, [])
 
   return (
-    <section className="flex flex-col justify-between pt-[120px] items-center max-lg:pt-[120px] overflow-x-hidden">
+    <section className="flex flex-col justify-between pt-[180px] items-center max-lg:pt-[120px] overflow-x-hidden">
       <div className="flex flex-col justify-center items-center text-center gap-8 max-lg:max-w-[480px]  max-lg:gap-4 max-md:px-4">
-        {!isMobile && (
+        {/*  {!isMobile && (
           <button className="h-[30px]  px-6 py-5 flex items-center max-lg:mb-4  bg-white text-primary-purple border border-secondary-400   hover:shadow-[0px_12px_30px_0px_#A578F240] active:bg-none active:bg-secondary-purple active:shadow-none disabled:pointer-events-none  disabled:bg-opacity-20 disabled:text-opacity-90 rounded-full leading-4 font-medium transition-all duration-300">
             {t('badge')}
           </button>
-        )}
+        )} */}
 
         <div className="flex flex-col gap-4 justify-center items-center ">
           <div className="flex gap-4 items-center">

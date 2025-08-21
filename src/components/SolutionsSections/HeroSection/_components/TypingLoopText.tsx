@@ -138,7 +138,7 @@ const TypingLoopText = ({ ready = true }: Props) => {
   return (
     <div
       ref={containerRef}
-      className="flex relative px-6 py-5 border-2 border-dashed border-primary-purple min-h-[116px] max-lg:py-0 items-center max-lg:min-h-16 max-md:px-3">
+      className="flex relative px-6 py-5 border-2 border-dashed border-primary-purple min-h-[124px] max-lg:py-0 items-center max-lg:min-h-16 max-md:px-3">
       <Typography
         variant={isDesktop ? 'h1' : isTablet ? 'h3' : isArabic ? 'h6' : 'h5'}
         weight="medium"
