@@ -1,14 +1,10 @@
-import type { Metadata } from 'next'
+import './globals.css'
+import { getLocale } from 'next-intl/server'
 import { Poppins } from 'next/font/google'
 import localFont from 'next/font/local'
-import './globals.css'
+import type { Metadata } from 'next'
 
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-poppins'
-})
-
+const poppins = Poppins({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-poppins' })
 const kanunAR = localFont({
   src: [
     { path: '../fonts/KanunAR-Regular.otf', weight: '400', style: 'normal' },
@@ -61,10 +57,11 @@ export const metadata: Metadata = {
   verification: { google: '0uSSTBokSb6aR_Ysvt8_eMuZOnXkELumyfoCsQusOpI' }
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = await getLocale().catch(() => 'ar')
   return (
-    <html lang="en" className={`${poppins.variable} ${kanunAR.variable}`} suppressHydrationWarning>
+    <html lang={locale} className={`${poppins.variable} ${kanunAR.variable}`} suppressHydrationWarning>
       <body>{children}</body>
     </html>
-  );
+  )
 }

@@ -1,4 +1,5 @@
 import { NextIntlClientProvider, hasLocale } from 'next-intl'
+import { getMessages, setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { HeaderVisibilityProvider } from '@/components/Header/HeaderVisibilityContext'
@@ -11,11 +12,16 @@ export default async function LocaleLayout({
   children,
   params,
 }: {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  children: React.ReactNode
+  params: Promise<{ locale: string }>
 }) {
-  const { locale } = await params;
+  const { locale } = await params; // <-- тільки так
   if (!hasLocale(routing.locales, locale)) notFound();
+
+  // (опційно) зафіксувати локаль для статичного рендеру next-intl
+  setRequestLocale(locale);
+
+  const messages = await getMessages();
 
   return (
     <>
@@ -56,7 +62,7 @@ export default async function LocaleLayout({
         `}
       </Script>
 
-      <NextIntlClientProvider>
+      <NextIntlClientProvider locale={locale} messages={messages}>
         <Theme>
           <HeaderVisibilityProvider>
             <SmoothScrollProvider>
