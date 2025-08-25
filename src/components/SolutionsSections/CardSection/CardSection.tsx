@@ -34,6 +34,7 @@ type ScrollTriggerInstance = ReturnType<typeof ScrollTrigger.create>
 
 export const CardSection = () => {
   const [isDesktop, setIsDesktop] = useState(false)
+
   const t = useTranslations('S_CardSection')
 
   useEffect(() => {
@@ -83,8 +84,6 @@ export const CardSection = () => {
     const checkScreenSize = () => {
       const width = window.innerWidth
       const height = window.innerHeight
-
-      console.log('Width:', width, 'Height:', height)
 
       setSmallHeight(height <= 1010)
       setSmallerHeight(height <= 842)

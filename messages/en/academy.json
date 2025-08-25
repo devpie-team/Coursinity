@@ -1,0 +1,26 @@
+{
+    "AC_SkillSection": {
+        "title": "Every Skill Deserves Its Own Journey",
+        "subtitle": "Create programs that equip your team for real-world challenges",
+        "small_title": "Train by Topic",
+        "small_subtitle": "Pick a topic. We’ll drive the growth"
+    },
+    "AC_TrainingSection": {
+        "title": "Training That Clicks in Every Language",
+        "subtitle": "From leadership to frontlines, deliver culturally fluent training that feels native, not just translated.",
+        "bottom_text": "Clients reported a 40% increase in training completion rates when switching to localized training ",
+        "button": "Talk to an Expert",
+        "cards": [
+            {
+                "title": "Faster Learning. Real Impact",
+                "item_1": "Deeper understanding of content",
+                "item_2": "Quicker skill application on the job"
+            },
+            {
+                "title": "Localized Content. Global Standards",
+                "item_1": "Training tailored to your team’s language, culture, and context",
+                "item_2": "Industry-specific terms that match every role and function"
+            }
+        ]
+    }
+}
