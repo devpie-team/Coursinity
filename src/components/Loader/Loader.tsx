@@ -96,7 +96,7 @@ export const Loader = ({ loading = true, onFinish }: TLoading) => {
           <img
             src="/assets/logos/logo_arabic.png"
             alt="Coursinity Arabic Logo"
-            style={{ width: '270px', height: '54px' }}
+            style={{ width: '270px', height: '70px' }}
           />
         ) : (
           <LogoIcon />

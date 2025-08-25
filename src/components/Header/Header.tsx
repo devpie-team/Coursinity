@@ -73,11 +73,11 @@ export const Header = () => {
     'left-0',
     'w-full',
     'z-50',
-    'px-[115px]',
+    'px-[115px] max-1150:px-[70px]',
     'max-lg:px-6',
     'grid',
     'items-center',
-    !isDesktop ? 'grid-cols-2' : 'grid-cols-2',
+    !isDesktop ? 'grid-cols-2' : 'grid-cols-3 ',
     'py-[20px]',
     'transition-transform',
     'duration-500',
@@ -92,9 +92,9 @@ export const Header = () => {
   return (
     <header ref={headerRef} className={headerClasses}>
       <a href={`/${locale}`}>
-        <LogoIcon className="h-[14px] w-[127px] justify-self-start" />
+        <LogoIcon className="min-h-[32px] max-w-[121px] justify-self-start" />
       </a>
-      {/* {isDesktop && <HeaderDropdown start={start} />} */}
+      {isDesktop && <HeaderDropdown start={start} />}
       {isDesktop ? (
         <div className="flex items-center gap-[18px] justify-self-end">
           <ToggleLanguage
@@ -133,7 +133,7 @@ export const Header = () => {
                 router.replace(newPath)
               }}
             />
-            {/*  <div className="flex flex-col gap-4 items-center">
+            <div className="flex flex-col gap-4 items-center">
               <div
                 className="gap-[10px] flex items-center cursor-pointer select-none "
                 onClick={() => setOpened((v) => !v)}>
@@ -146,18 +146,15 @@ export const Header = () => {
               </div>
               {opened && (
                 <div className="flex flex-col gap-[6px]">
-                  <button className="py-[7px]">
-                    <Typography>{t('academy')}</Typography>
-                  </button>
-                  <button className="py-[7px]">
-                    <Typography>{t('smarter')}</Typography>
-                  </button>
+                  <a className="py-[7px] px-2" href={`/${locale}/solutions`}>
+                    <Typography>{t('solutions')}</Typography>
+                  </a>
                 </div>
               )}
               <Typography weight="medium" variant="h6">
                 {t('blog')}
               </Typography>
-            </div> */}
+            </div>
           </div>
           <a href={`/${locale}/contact-form`}>
             <Button variant="purple" className="w-full">
