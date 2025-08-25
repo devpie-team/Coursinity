@@ -1,0 +1,1 @@
+export { SmallCheckIcon } from './SmallCheckIcon'
