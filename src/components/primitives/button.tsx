@@ -16,7 +16,9 @@ const buttonVariants = cva(
           'btn-gradient-secondary bg-white backdrop-blur-[40px] text-black hover:text-primary-purple hover:shadow-[0px_12px_40px_0px_#A578F240] hover:bg-[#F6F1FE] active:text-[#8759D5] disabled:pointer-events-none disabled:bg-opacity-30 disabled:text-opacity-40 disabled:text-white',
         purple:
           'btn-gradient-purple bg-primary-purple text-white hover:bg-secondary-purple hover:shadow-[0px_12px_30px_0px_#A578F240] active:bg-none active:bg-primary-purple active:shadow-none disabled:pointer-events-none disabled:bg-opacity-20 disabled:text-opacity-90',
-        hero: 'bg-white text-primary-purple border border-secondary-400 hover:bg-primary-purple hover:text-white hover:shadow-[0px_12px_30px_0px_#A578F240] active:bg-none active:bg-secondary-purple active:shadow-none disabled:pointer-events-none disabled:bg-opacity-20 disabled:text-opacity-90'
+        hero: 'bg-white text-primary-purple border border-secondary-400 hover:bg-primary-purple hover:text-white hover:shadow-[0px_12px_30px_0px_#A578F240] active:bg-none active:bg-secondary-purple active:shadow-none disabled:pointer-events-none disabled:bg-opacity-20 disabled:text-opacity-90',
+        academy:
+          'h-[56px] px-8 py-4 rounded-full text-primary-green bg-light-green hover:bg-[#0EC2B4] hover:text-white active:bg-[#05A59A] active:text-white disabled:bg-[#D7DCE3] disabled:text-white/70  disabled:pointer-events-none'
       },
       size: {
         md: 'h-14 px-6 py-5',
