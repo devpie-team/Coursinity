@@ -22,5 +22,54 @@
                 "item_2": "Industry-specific terms that match every role and function"
             }
         ]
+    },
+    "AC_CardSection": {
+        "title": "Meet the Standards. Raise the Bar",
+        "subtitle": "Turn must-do regulations into must-have competitive advantages",
+        "button": "Create your digital institution academy now",
+        "cards": [
+            {
+                "title": "Occupational Safety",
+                "subtitle": "Keep your team safe and operations seamless:",
+                "item_1": "Customer service and guest interaction",
+                "item_2": "Crisis response and safety protocols",
+                "item_3": "Cross-cultural communication"
+            },
+            {
+                "title": "Financial & Banking Compliance",
+                "subtitle": "Equip your people to ace financial regulations:",
+                "item_1": "Anti-Money Laundering mastery",
+                "item_2": "Regulator-approved certification prep",
+                "item_3": "Rock-solid customer due diligence"
+            },
+            {
+                "title": "Disclosure & Self-Assessment",
+                "subtitle": "Stay transparent and audit-ready:",
+                "item_1": "Publish on Qiwa without second-guessing",
+                "item_2": "Draft training policies that pass every test",
+                "item_3": "Take full control of your training budget"
+            },
+            {
+                "title": "Cyber & Tech Compliance",
+                "subtitle": "Fortify your digital frontier and meet every mandate:",
+                "item_1": "Embrace National Cybersecurity standards",
+                "item_2": "Lock down PDPL data protections",
+                "item_3": "Seamlessly use government digital services"
+            },
+            {
+                "title": "Education Sector Compliance",
+                "subtitle": "Prepare your educators for tomorrow’s classrooms:",
+                "item_1": "Continuous professional development",
+                "item_2": "Professional-license prep",
+                "item_3": "Next-gen e-learning strategies"
+            },
+            {
+                "title": "Healthcare Sector Compliance",
+                "subtitle": "Empower your health teams to exceed every standard:",
+                "item_1": "Earn CME credits with ease",
+                "item_2": "Lead with premier health practices",
+                "item_3": "Champion safety & quality"
+            }
+        ]
     }
 }

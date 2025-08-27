@@ -50,6 +50,34 @@ const stepsData: Step[] = [
     leftTitle: 'Presentation & Communication',
     leftBullets: ['Narrative & storytelling', 'Visual hierarchy', 'Delivery & audience focus'],
     Right: () => <DemoCard label="Slide UI • 04" />
+  },
+  {
+    id: 'digital',
+    leftTitle: 'Digital & Tech Transformation',
+    leftBullets: [
+      'Communication tech & smart apps',
+      'Data strategy & decision-making',
+      'Cybersecurity & sensitive data safety'
+    ],
+    Right: () => <DemoCard label="App mock • 01" />
+  },
+  {
+    id: 'lead',
+    leftTitle: 'Leadership & Management',
+    leftBullets: ['Leading w/ empathy', 'Delegation & feedback loops', 'Metrics tracking'],
+    Right: () => <DemoCard label="Team list • 02" />
+  },
+  {
+    id: 'sales',
+    leftTitle: 'Sales & Marketing',
+    leftBullets: ['Go-to-market strategy', 'Digital ads analytics', 'High-converting creatives'],
+    Right: () => <DemoCard label="Charts • 03" />
+  },
+  {
+    id: 'presentation',
+    leftTitle: 'Presentation & Communication',
+    leftBullets: ['Narrative & storytelling', 'Visual hierarchy', 'Delivery & audience focus'],
+    Right: () => <DemoCard label="Slide UI • 04" />
   }
 ]
 
@@ -102,39 +130,50 @@ export const SkillSection = () => {
 
     const ctx = gsap.context(() => {
       const stepsCount = stepsData.length
-      const pinDuration = window.innerHeight * (stepsCount - 1)
+      const stepScroll = 1500 // <- скільки пікселів потрібно проскролити щоб перейти на наступний крок
 
       gsap.set([leftTrackRef.current, rightTrackRef.current], {
         y: 0,
         willChange: 'transform'
       })
 
-      const tl = gsap.timeline({
-        defaults: { ease: 'power2.out' },
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: 'top top',
-          end: `+=${pinDuration}`,
-          pin: true,
-          scrub: 0.6,
-          snap: {
-            snapTo: (value) => {
-              const s = stepsCount - 1
-              return s > 0 ? Math.round(value * s) / s : 0
-            },
-            duration: 0.2,
-            ease: 'linear.inOut'
-          }
-        }
-      })
-
+      // для кожного кроку створюємо свій ScrollTrigger
       for (let k = 0; k < stepsCount - 1; k++) {
-        tl.to(rightTrackRef.current, { y: -(k + 1) * panelH, duration: 1 }).to(
-          leftTrackRef.current,
-          { y: -(k + 1) * panelH, duration: 1 },
-          k
-        )
+        ScrollTrigger.create({
+          trigger: rootRef.current,
+          start: () => `top+=${k * stepScroll} top`, // кожен тригер починається через stepScroll пікселів
+          end: () => `+=${stepScroll - 1}`, // і триває stepScroll
+          scrub: false, // важливо: не прив’язуємо до скролу
+          invalidateOnRefresh: true,
+          onEnter: () => {
+            gsap.to([leftTrackRef.current, rightTrackRef.current], {
+              y: -(k + 1) * panelH,
+              duration: 0.6,
+              ease: 'power2.out',
+              overwrite: 'auto',
+              immediateRender: false
+            })
+          },
+          onEnterBack: () => {
+            gsap.to([leftTrackRef.current, rightTrackRef.current], {
+              y: -k * panelH,
+              duration: 0.6,
+              ease: 'power2.out',
+              overwrite: 'auto',
+              immediateRender: false
+            })
+          }
+        })
       }
+
+      // пінімо секцію на весь відрізок
+      ScrollTrigger.create({
+        trigger: rootRef.current,
+        start: 'top top',
+        end: `+=${(stepsCount - 1) * stepScroll}`,
+        pin: true,
+        anticipatePin: 1
+      })
     }, rootRef)
 
     return () => ctx.revert()
@@ -145,8 +184,8 @@ export const SkillSection = () => {
       <section ref={rootRef} className="bg-secondary-300 py-24 ">
         <div className="container mx-auto px-4 space-y-16">
           <Header />
-          {stepsData.map((s) => (
-            <div key={s.id} className="grid grid-cols-1 gap-8">
+          {stepsData.map((s, id) => (
+            <div key={s.id + id} className="grid grid-cols-1 gap-8">
               <LeftStep step={s} />
               <div className="rounded-3xl overflow-hidden">
                 <s.Right />
@@ -169,8 +208,8 @@ export const SkillSection = () => {
           <div className="relative">
             <div ref={leftStageRef} className="relative overflow-hidden" style={{ height: panelH }}>
               <div ref={leftTrackRef} className="absolute inset-0 will-change-transform">
-                {stepsData.map((step) => (
-                  <div key={step.id} className="flex items-start pr-2" style={{ minHeight: panelH }}>
+                {stepsData.map((step, id) => (
+                  <div key={step.id + id} className="flex items-start pr-2" style={{ minHeight: panelH }}>
                     <LeftStep step={step} />
                   </div>
                 ))}
