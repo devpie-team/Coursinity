@@ -1,0 +1,1 @@
+export { RankIcon } from './RankIcon'
