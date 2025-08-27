@@ -20,11 +20,9 @@ export const LearningCalendarSection = () => {
   const locale = useLocale()
   const isArabic = locale === 'ar'
 
-  // ⬇️ керування видимістю хедера (як у CardSection)
   const { hideHeaderForSection, showHeaderForSection } = useHeaderVisibility()
   const sectionId = useRef(Math.random().toString())
 
-  // IO: ховаємо/показуємо хедер за фактом входу секції у вʼюпорт
   useEffect(() => {
     const el = sectionRef.current
     if (!el) return

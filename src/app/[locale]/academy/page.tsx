@@ -7,7 +7,7 @@ import AOS from 'aos'
 import { Header } from '@/components/Header'
 import Footer from '@/components/Footer/Footer'
 import { Loader } from '@/components/Loader'
-import { LearningCalendarSection, SkillSection, TrainingSection } from '@/components/AcademySections'
+import { JourneySection, LearningCalendarSection, SkillSection, TrainingSection } from '@/components/AcademySections'
 import { TestimonialsSection } from '@/components/Sections'
 
 export default function HomePage() {
@@ -30,6 +30,7 @@ export default function HomePage() {
       {/* {loading && <Loader loading={loading} onFinish={() => setLoading(false)} />} */}
 
       <Header />
+      <JourneySection />
       <LearningCalendarSection />
       <SkillSection />
       <TrainingSection />
