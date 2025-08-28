@@ -83,5 +83,95 @@
                 }
             ]
         }
+    },
+    "AC_GrowthSection": {
+        "title": "One Academy. Endless Growth",
+        "subtitle": "Coursinity Academy is your team’s all-in-one hub for skills, knowledge, and real-world learning.",
+        "cta": "Talk to an Expert",
+        "finalText": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization.",
+        "tabs": {
+            "soft-skills": "Soft Skills",
+            "lead-manage": "Lead & Manage",
+            "finance-accounting": "Finance & Accounting",
+            "growth-marketing": "Growth & Marketing"
+        },
+        "accordion": {
+            "soft-skills": [
+                {
+                    "title": "Handling tough conversations & debates",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "Leading productive meetings",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "Creative problem solving",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "Emotional intelligence skills",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "Time management mastery",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                }
+            ],
+            "lead-manage": [
+                {
+                    "title": "Leading organizational change",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "Performance appraisal models",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "Building strong teams",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "Innovation frameworks",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "Crisis management tools",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                }
+            ],
+            "finance-accounting": [
+                {
+                    "title": "Finance for non-financials",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "Anti-money laundering basics",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "Financial markets overview",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                }
+            ],
+            "growth-marketing": [
+                {
+                    "title": "Customer experience & value",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "Pricing strategy essentials",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "Marketing plan development",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "Strategic business planning",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                }
+            ]
+        }
     }
 }

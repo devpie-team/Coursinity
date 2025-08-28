@@ -83,5 +83,95 @@
                 }
             ]
         }
+    },
+    "AC_GrowthSection": {
+        "title": "مكتبة واحدة، نمو لا محدود",
+        "subtitle": "أكاديمية كورسنيتي: عالم متكامل من المعرفة والتفاعل متاح لفريقك",
+        "cta": "تحدث مع أحد خبرائنا",
+        "finalText": "  نوفّر مئات الشهادات المعتمدة في مجالات وتخصصات مختلفة، ويمكن لفريقنا مساعدتك في تصميم برنامج تدريبي يناسب أهداف مؤسستك بدقة. لم تجد ما يناسب احتياج فريقك؟",
+        "tabs": {
+            "soft-skills": "المهارات الشخصية",
+            "lead-manage": "الإدارة والقيادة",
+            "finance-accounting": "المالية والمحاسبة",
+            "growth-marketing": "التسويق وريادة الأعمال"
+        },
+        "accordion": {
+            "soft-skills": [
+                {
+                    "title": "كيف تقود في الحالات الصعبة؟",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "إدارة الاجتماعات الفعالة",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "حل المشكلات بطريقة إبداعية",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "الذكاء العاطفي",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "الإدارة الفعالة للوقت",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                }
+            ],
+            "lead-manage": [
+                {
+                    "title": "قيادة التغيير المؤسسي",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "نماذج تقييم الأداء",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "قيادة وإدارة فرق العمل",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "استراتيجيات الابتكار المؤسسي",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "إدارة الأزمات",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                }
+            ],
+            "finance-accounting": [
+                {
+                    "title": "المفاهيم المالية لغير المتخصصين",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "مكافحة غسيل الأموال",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "الأسواق المالية",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                }
+            ],
+            "growth-marketing": [
+                {
+                    "title": "تجربة العميل والقيمة المضافة",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "استراتيجيات التسعير",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "تطوير خطة التسويق",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                },
+                {
+                    "title": "التخطيط الاستراتيجي للأعمال",
+                    "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                }
+            ]
+        }
     }
 }
