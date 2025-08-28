@@ -22,5 +22,66 @@
                 "item_2": "Industry-specific terms that match every role and function"
             }
         ]
+    },
+    "AC_LearningCalendarSection": {
+        "title": "Put Learning on Your Clock",
+        "subtitle": "One Calendar. Unlimited Growth",
+        "cta": "Develop your team's skills",
+        "cards": [
+            {
+                "title": "Transform Newcomers into Next-Gen Leaders"
+            },
+            {
+                "title": "On-the-Job Skills, On Your Schedule"
+            },
+            {
+                "title": "Auto-Reminders That Keep Teams Moving"
+            },
+            {
+                "title": "Track Progress Across Departments"
+            },
+            {
+                "title": "Add to Calendar in One Click"
+            }
+        ]
+    },
+    "AC_JourneySection": {
+        "title": "Your Training Academy, Built by You",
+        "subtitle": "Coursinity Academy is your team’s all-in-one hub for skills, knowledge, and real-world learning.",
+        "cta": "Build Your Branded Academy Now",
+        "cardsLeft": {
+            "title": "Interactive Training Journeys",
+            "items": [
+                {
+                    "title": "Ongoing Adventures",
+                    "description": "Accelerate skills with engaging challenges, gamification, and instant expert support."
+                },
+                {
+                    "title": "Complete Roadmaps",
+                    "description": "Step-by-step plans that keep your team charging forward."
+                },
+                {
+                    "title": "Expert Success Squad",
+                    "description": "Your dedicated crew of specialists, cheering you on and clearing every hurdle."
+                }
+            ]
+        },
+        "cardsRight": {
+            "title": "Customized Training Paths",
+            "items": [
+                {
+                    "title": "Personalized Blueprints",
+                    "description": "Custom learning maps built for each role, level, and ambition."
+                },
+                {
+                    "title": "Real-Time Progress Check",
+                    "description": "Instant insights on milestones that matter, so you can steer your team to success."
+                },
+                {
+                    "title": "Strategic Coaching",
+                    "description": "Your own training advisor, aligning every lesson with your big-picture goals."
+                }
+            ]
+        }
     }
 }
