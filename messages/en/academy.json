@@ -173,5 +173,11 @@
                 }
             ]
         }
+    },
+    "AC_HeroSection": {
+        "badge": "Academy",
+        "title": "Your Academy, Built With You, Not For You",
+        "subtitle": "Lead with a platform that looks like your brand, trains your team and checks every compliance box",
+        "cta": "Book Your Custom Demo"
     }
 }
