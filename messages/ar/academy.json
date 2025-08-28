@@ -22,5 +22,27 @@
                 "item_2": "  مصطلحات متخصصة تناسب كل قطاع ودور وظيفي"
             }
         ]
+    },
+    "AC_LearningCalendarSection": {
+        "title": "Put Learning on Your Clock",
+        "subtitle": "One Calendar. Unlimited Growth",
+        "cta": "Develop your team's skills",
+        "cards": [
+            {
+                "title": "Transform Newcomers into Next-Gen Leaders"
+            },
+            {
+                "title": "On-the-Job Skills, On Your Schedule"
+            },
+            {
+                "title": "Auto-Reminders That Keep Teams Moving"
+            },
+            {
+                "title": "Track Progress Across Departments"
+            },
+            {
+                "title": "Add to Calendar in One Click"
+            }
+        ]
     }
 }
