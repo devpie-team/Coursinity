@@ -30,11 +30,10 @@ export default function HomePage() {
       {/* {loading && <Loader loading={loading} onFinish={() => setLoading(false)} />} */}
 
       <Header />
-      {/* <SkillSection /> */}
-      <LearningCalendarSection />
+      {/* <LearningCalendarSection /> */}
+      <CardSection />
       <SkillSection />
       <TrainingSection />
-      <CardSection />
       <TestimonialsSection />
       <Footer />
     </>
