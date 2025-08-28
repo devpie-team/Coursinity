@@ -186,7 +186,7 @@ export const JourneySection = () => {
           </div>
         </div>
       </div>
-      <Button variant="academy" className="w-full">
+      <Button variant="academy" className="max-md:w-full">
         Build Your Branded Academy Now
       </Button>
     </section>

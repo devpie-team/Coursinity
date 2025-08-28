@@ -160,7 +160,7 @@ export const GrowthSection = () => {
   }
 
   return (
-    <section className=" flex flex-col bg-white rounded-[40px] border-secondary-400 border pt-[120px] px-[120px] pb-10 mx-8 gap-[60px] items-center max-lg:mx-6 max-lg:px-4 max-md:mx-2 max-md:gap-10">
+    <section className=" flex flex-col bg-white rounded-[40px] border-secondary-400 border pt-[120px] px-[120px] pb-10 mx-8 gap-[60px] items-center max-lg:mx-6 max-lg:px-4 max-md:mx-2 max-md:gap-10 z-20">
       <div className="flex flex-col text-center gap-6">
         <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
           One Academy. Endless Growth

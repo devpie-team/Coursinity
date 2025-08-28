@@ -99,9 +99,8 @@ export const LearningCalendarSection = () => {
 
       const angleMap = [0, -5, -10, -13, -15]
       const yMap = [0, 5, 10, 20, 30]
-      const xMap = [0, 10, 20, 30, 40] // вліво, застосуємо зі знаком «-»
+      const xMap = [0, 10, 20, 30, 40]
 
-      // старт: усі картки приховані та зсунуто праворуч
       gsap.set(elems, {
         autoAlpha: 0,
         xPercent: 60,
@@ -111,7 +110,6 @@ export const LearningCalendarSection = () => {
         transformOrigin: '50% 50%'
       })
 
-      // TL з pin+scrub; тут ДОДАВ onEnter/onLeave для синхронізації хедера з pin-станом
       const tl = gsap.timeline({
         defaults: { ease: 'power3.out', duration: 1 },
         scrollTrigger: {
@@ -128,7 +126,7 @@ export const LearningCalendarSection = () => {
           onLeaveBack: () => showHeaderForSection(sectionId.current),
           onUpdate: (self) => {
             const step = Math.min(n - 1, Math.floor(self.progress * n + 1e-6))
-            // плавно оновлюємо ТІЛЬКИ rotation/x/y
+
             for (let idx = 0; idx < n; idx++) {
               const offset = step - idx
               const deg = offset >= 0 ? angleMap[Math.min(offset, angleMap.length - 1)] : 0
@@ -148,12 +146,10 @@ export const LearningCalendarSection = () => {
         }
       })
 
-      // поява кожної картки (справа -> центр)
       elems.forEach((el, i) => {
         tl.to(el, { xPercent: 0, autoAlpha: 1 }, i)
       })
 
-      // симетрична логіка прозорості (як домовлялись)
       const lastApplied = new Array(n).fill(undefined) as (number | undefined)[]
       ScrollTrigger.create({
         trigger: sectionRef.current!,
@@ -207,7 +203,7 @@ export const LearningCalendarSection = () => {
         <Card key={i} className={`lc-card ${className}`} {...rest} />
       ))}
 
-      <Button variant="academy" className="w-[240px] max-md:w-full">
+      <Button variant="academy" className="max-md:w-full">
         Develop your team's skills
       </Button>
     </section>
