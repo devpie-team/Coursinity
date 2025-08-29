@@ -4,6 +4,7 @@ import { Button } from '@/components/primitives/button'
 import { Typography } from '@/components/ui'
 import Lottie, { LottieRefCurrentProps } from 'lottie-react'
 import Lottie1En from '../../../../public/assets/lottie/academy/hero_section/hero_1.json'
+import Lottie1Ar from '../../../../public/assets/lottie/academy/hero_section/hero_1_ar.json'
 import { useInView } from 'react-intersection-observer'
 import { useEffect, useRef, useState } from 'react'
 import { GrowthSection } from '../GrowthSection'
@@ -57,8 +58,13 @@ export const HeroSection = () => {
             </Button>
           </div>
         </div>
-        <div className="max-w-[1080px] z-10 overflow-hidden" ref={ref}>
-          <Lottie lottieRef={lottieRef} animationData={Lottie1En} loop={false} className="z-10" />
+        <div className="max-w-[1080px] z-10 overflow-hidden px-10 max-md:px-4 translate-y-1" ref={ref}>
+          <Lottie
+            lottieRef={lottieRef}
+            animationData={isArabic ? Lottie1Ar : Lottie1En}
+            loop={false}
+            className="z-10"
+          />
         </div>
       </div>
 
