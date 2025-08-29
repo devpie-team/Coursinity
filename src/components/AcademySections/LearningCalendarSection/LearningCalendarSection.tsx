@@ -7,36 +7,19 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Button } from '@/components/primitives/button'
 import { Typography } from '@/components/ui'
 import { Card } from './components/Card/Card'
-
-import { useLocale } from 'next-intl'
-import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
 import { CardSession } from './components/CardSession/CardSession'
 
+import { useLocale, useTranslations } from 'next-intl'
+import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
+
 gsap.registerPlugin(ScrollTrigger)
-
-type CardImageItem = {
-  variant: 'image'
-  className?: string
-  title: string
-  imageSrc: string
-  imageAlt?: string
-}
-
-type CardSessionItem = {
-  variant: 'session'
-  className?: string
-  title: string
-  subtitle: string
-  meta?: string
-  cta?: string
-}
-
-type CardItem = CardImageItem | CardSessionItem
 
 export const LearningCalendarSection = () => {
   const sectionRef = useRef<HTMLElement | null>(null)
   const [isDesktop, setIsDesktop] = useState(true)
   const locale = useLocale()
+  const t = useTranslations('AC_LearningCalendarSection')
+
   const { hideHeaderForSection, showHeaderForSection } = useHeaderVisibility()
   const sectionId = useRef(Math.random().toString())
 
@@ -47,45 +30,8 @@ export const LearningCalendarSection = () => {
     return () => window.removeEventListener('resize', check)
   }, [])
 
-  const cards: readonly CardItem[] = [
-    {
-      variant: 'image',
-      className: 'z-10',
-      title: 'Transform Newcomers into Next-Gen Leaders',
-      imageSrc: '/assets/academy/learning/learning_1.png',
-      imageAlt: 'Learning card 1'
-    },
-    {
-      variant: 'image',
-      className: 'z-20',
-      title: 'On-the-Job Skills, On Your Schedule',
-      imageSrc: '/assets/academy/learning/learning_2.png',
-      imageAlt: 'Learning card 2'
-    },
-    {
-      variant: 'image',
-      className: 'z-30',
-      title: 'Auto-Reminders That Keep Teams Moving',
-      imageSrc: '/assets/academy/learning/learning_3.png',
-      imageAlt: 'Learning card 3'
-    },
-    // 4-та — особлива (без зображення)
-    {
-      variant: 'session',
-      className: 'z-40',
-      title: 'Online Session',
-      subtitle: 'Mon, 7 January',
-      meta: 'Via Calendar',
-      cta: 'Set a reminder'
-    },
-    {
-      variant: 'image',
-      className: 'z-50',
-      title: 'Fuel Excellence with Continuous Growth',
-      imageSrc: '/assets/academy/learning/learning_4.png',
-      imageAlt: 'Learning card 5'
-    }
-  ] as const
+  // дані карток беруться з JSON
+  const cards = t.raw('cards') as Array<any>
 
   useEffect(() => {
     if (!sectionRef.current) return
@@ -129,10 +75,6 @@ export const LearningCalendarSection = () => {
         onEnterBack: () => hideHeaderForSection(sectionId.current),
         onLeave: () => showHeaderForSection(sectionId.current),
         onLeaveBack: () => showHeaderForSection(sectionId.current),
-        onRefresh: (self) => {
-          if (self.isActive) hideHeaderForSection(sectionId.current)
-          else showHeaderForSection(sectionId.current)
-        },
 
         onUpdate: (self) => {
           const px = self.progress * TOTAL_SCROLL
@@ -191,38 +133,38 @@ export const LearningCalendarSection = () => {
       className="mt-[120px] flex flex-col bg-black py-[120px] h-[100vh] justify-between items-center text-center relative overflow-hidden p-4 max-lg:pt-[80px] max-lg:pb-[80px]">
       <div className="flex flex-col gap-8 max-lg:gap-6 max-md:max-w-[280px] ">
         <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
-          Put Learning on Your Clock
+          {t('title')}
         </Typography>
         <Typography variant="body3" weight="regular" className="text-white/70">
-          One Calendar. Unlimited Growth
+          {t('subtitle')}
         </Typography>
       </div>
 
       <div className="relative flex justify-center items-center w-full h-full">
         {cards.map((card, i) =>
-          card.variant === 'image' ? (
-            <Card
-              key={i}
-              className={`lc-card absolute ${card.className ?? ''}`}
-              title={card.title}
-              imageSrc={card.imageSrc}
-              imageAlt={card.imageAlt}
-            />
-          ) : (
+          card.subtitle || card.cta ? (
             <CardSession
               key={i}
-              className={`lc-card absolute ${card.className ?? ''}`}
+              className={`lc-card absolute z-${i * 10}`}
               title={card.title}
               subtitle={card.subtitle}
               meta={card.meta}
               cta={card.cta}
+            />
+          ) : (
+            <Card
+              key={i}
+              className={`lc-card absolute z-${i * 10}`}
+              title={card.title}
+              imageSrc={`/assets/academy/learning/learning_${i + 1}.png`}
+              imageAlt={`Learning card ${i + 1}`}
             />
           )
         )}
       </div>
 
       <Button variant="academy" className="max-md:w-full">
-        Develop your team's skills
+        {t('cta')}
       </Button>
     </section>
   )

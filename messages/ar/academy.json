@@ -24,24 +24,27 @@
         ]
     },
     "AC_LearningCalendarSection": {
-        "title": "Put Learning on Your Clock",
-        "subtitle": "One Calendar. Unlimited Growth",
-        "cta": "Develop your team's skills",
+        "title": "صمّم تقويم تدريبي خاص بمؤسستك",
+        "subtitle": "تقويم واحد. نمو غير محدود",
+        "cta": "طوّر مهارات فريقك",
         "cards": [
             {
-                "title": "Transform Newcomers into Next-Gen Leaders"
+                "title": "حول المستجدين إلى قادة مستقبل"
             },
             {
-                "title": "On-the-Job Skills, On Your Schedule"
+                "title": "ابنِ ثقافة مشتركة تدعم أهداف مؤسستك"
             },
             {
-                "title": "Auto-Reminders That Keep Teams Moving"
+                "title": "استخدم التدريب كأداة في التقييم وسد الفجوات"
             },
             {
-                "title": "Track Progress Across Departments"
+                "title": "جلسة عن بُعد",
+                "subtitle": "الإثنين، 7 يناير",
+                "meta": "عبر Zoom",
+                "cta": "حدّد تذكيرًا"
             },
             {
-                "title": "Add to Calendar in One Click"
+                "title": "ادعم الامتياز بثقافة تطوير مستمر"
             }
         ]
     },
