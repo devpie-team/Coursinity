@@ -12,8 +12,11 @@ import Lottie, { LottieRefCurrentProps } from 'lottie-react'
 import { useRef, useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 
-import lottie1En from '../../../../public/assets/lottie/academy/journey_section/journey_1.json'
-import lottie2En from '../../../../public/assets/lottie/academy/journey_section/journey_2.json'
+import lottie1En from '../../../../public/assets/lottie/academy/journey_section/en/journey_1.json'
+import lottie2En from '../../../../public/assets/lottie/academy/journey_section/en/journey_2.json'
+import lottie1Ar from '../../../../public/assets/lottie/academy/journey_section/ar/journey_1.json'
+import lottie2Ar from '../../../../public/assets/lottie/academy/journey_section/ar/journey_2.json'
+
 import { useLocale, useTranslations } from 'next-intl'
 
 export const JourneySection = () => {
@@ -121,7 +124,7 @@ export const JourneySection = () => {
             <div ref={ref1} className="flex justify-center items-center">
               <Lottie
                 lottieRef={lottieRef1}
-                animationData={lottie1En}
+                animationData={isArabic ? lottie1Ar : lottie1En}
                 loop={false}
                 autoplay={false}
                 className="h-[300px]"
@@ -183,7 +186,7 @@ export const JourneySection = () => {
             <div ref={ref2} className="flex justify-center items-center">
               <Lottie
                 lottieRef={lottieRef2}
-                animationData={lottie2En}
+                animationData={isArabic ? lottie2Ar : lottie2En}
                 loop={false}
                 autoplay={false}
                 className="h-[300px]"

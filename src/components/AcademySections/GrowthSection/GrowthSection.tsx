@@ -5,19 +5,15 @@ import { Typography } from '@/components/ui'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/primitives/accordion'
 import { useEffect, useRef, useState } from 'react'
 import Lottie, { LottieRefCurrentProps } from 'lottie-react'
-import Lottie1En from '../../../../public/assets/lottie/academy/growth_section/growth_1.json'
-import Lottie2En from '../../../../public/assets/lottie/academy/growth_section/growth_2.json'
-import Lottie3En from '../../../../public/assets/lottie/academy/growth_section/growth_3.json'
-import Lottie4En from '../../../../public/assets/lottie/academy/growth_section/growth_4.json'
+import Lottie1En from '../../../../public/assets/lottie/academy/growth_section/en/growth_1.json'
+import Lottie2En from '../../../../public/assets/lottie/academy/growth_section/en/growth_2.json'
+import Lottie3En from '../../../../public/assets/lottie/academy/growth_section/en/growth_3.json'
+import Lottie4En from '../../../../public/assets/lottie/academy/growth_section/en/growth_4.json'
+import Lottie2Ar from '../../../../public/assets/lottie/academy/growth_section/ar/growth_2.json'
+import Lottie3Ar from '../../../../public/assets/lottie/academy/growth_section/ar/growth_3.json'
+import Lottie4Ar from '../../../../public/assets/lottie/academy/growth_section/ar/growth_4.json'
 import { useInView } from 'react-intersection-observer'
 import { useLocale, useTranslations } from 'next-intl'
-
-const lotties = {
-  'soft-skills': Lottie1En,
-  'lead-manage': Lottie2En,
-  'finance-accounting': Lottie3En,
-  'growth-marketing': Lottie4En
-} as const
 
 const usePreventLenisScroll = (ref: React.RefObject<HTMLElement | null>) => {
   useEffect(() => {
@@ -34,9 +30,6 @@ const usePreventLenisScroll = (ref: React.RefObject<HTMLElement | null>) => {
   }, [ref])
 }
 
-type AccordionItemT = { title: string; content: string }
-type AccordionMap = Record<keyof typeof lotties, AccordionItemT[]>
-
 export const GrowthSection = () => {
   const t = useTranslations('AC_GrowthSection')
 
@@ -44,10 +37,17 @@ export const GrowthSection = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const lottieRef = useRef<LottieRefCurrentProps>(null)
   const { ref, inView } = useInView({ triggerOnce: false })
-
-  const [isDesktop, setIsDesktop] = useState(true)
   const locale = useLocale()
   const isArabic = locale === 'ar'
+  const [isDesktop, setIsDesktop] = useState(true)
+  const lotties = {
+    'soft-skills': Lottie1En,
+    'lead-manage': isArabic ? Lottie2Ar : Lottie2En,
+    'finance-accounting': isArabic ? Lottie3Ar : Lottie3En,
+    'growth-marketing': isArabic ? Lottie4Ar : Lottie4En
+  } as const
+  type AccordionItemT = { title: string; content: string }
+  type AccordionMap = Record<keyof typeof lotties, AccordionItemT[]>
 
   useEffect(() => {
     const checkScreenSize = () => setIsDesktop(window.innerWidth > 1024)
