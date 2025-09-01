@@ -10,7 +10,9 @@ import { useEffect, useRef, useState } from 'react'
 import { GrowthSection } from '../GrowthSection'
 import { useLocale, useTranslations } from 'next-intl'
 
-export const HeroSection = () => {
+type HeroSectionProps = { canPlay?: boolean }
+
+export const HeroSection = ({ canPlay = true }: HeroSectionProps) => {
   const t = useTranslations('AC_HeroSection')
   const lottieRef = useRef<LottieRefCurrentProps>(null)
   const { ref, inView } = useInView({ triggerOnce: false })
@@ -33,11 +35,16 @@ export const HeroSection = () => {
   }, [])
 
   useEffect(() => {
-    if (inView && lottieRef.current) {
-      lottieRef.current.stop()
-      lottieRef.current.play()
+    const api = lottieRef.current
+    if (!api) return
+
+    if (inView && canPlay) {
+      api.stop()
+      api.play()
+    } else {
+      api.stop()
     }
-  }, [inView])
+  }, [inView, canPlay])
 
   return (
     <section className="bg-gradient-to-b from-gray-50 via-teal-500 to-white">
@@ -63,6 +70,7 @@ export const HeroSection = () => {
             lottieRef={lottieRef}
             animationData={isArabic ? Lottie1Ar : Lottie1En}
             loop={false}
+            autoplay={false}
             className="z-10"
           />
         </div>
