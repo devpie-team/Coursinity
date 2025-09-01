@@ -36,8 +36,8 @@ export default function HomePage() {
       {/* {loading && <Loader loading={loading} onFinish={() => setLoading(false)} />} */}
 
       <Header />
-      <JourneySection />
-      <LearningCalendarSection />
+      {/* <JourneySection />
+      <LearningCalendarSection /> */}
       <CardSection />
       <SkillSection />
       <TrainingSection />

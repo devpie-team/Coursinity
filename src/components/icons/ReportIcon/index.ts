@@ -1,0 +1,1 @@
+export { ReportIcon } from './ReportIcon'

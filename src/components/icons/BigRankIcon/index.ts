@@ -1,0 +1,1 @@
+export { BigRankIcon } from './BigRankIcon'

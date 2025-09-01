@@ -3,7 +3,65 @@
         "title": "Every Skill Deserves Its Own Journey",
         "subtitle": "Create programs that equip your team for real-world challenges",
         "small_title": "Train by Topic",
-        "small_subtitle": "Pick a topic. We’ll drive the growth"
+        "small_subtitle": "Pick a topic. We’ll drive the growth",
+        "steps": [
+            {
+                "title": "Digital & Tech Transformation",
+                "description": "Built for the modern workforce:",
+                "item_1": "Communication tech & smart ops",
+                "item_2": "Data strategy & decision-making",
+                "item_3": "Cybersecurity & sensitive data safety"
+            },
+            {
+                "title": "Leadership & Management",
+                "description": "A full journey to future leadership:",
+                "item_1": "Leading with impact",
+                "item_2": "Remote teams & adaptive culture",
+                "item_3": "Decision-making in high-stakes settings"
+            },
+            {
+                "title": "Sales & Marketing",
+                "description": "A performance-driven path to better results:",
+                "item_1": "Digital sales strategies",
+                "item_2": "Customer relationship mastery",
+                "item_3": "High-converting content & digital campaigns"
+            },
+            {
+                "title": "Presentation & Communication",
+                "description": "Help your teams connect and convince:",
+                "item_1": "Presentation & storytelling skills",
+                "item_2": "Negotiation & objection handling",
+                "item_3": "Writing for impact across channels"
+            },
+            {
+                "title": "Healthcare",
+                "description": "Compliance and care go hand in hand:",
+                "item_1": "HIPAA & data privacy",
+                "item_2": "Credentialing and clinical protocols",
+                "item_3": "Infection control & emergency handling"
+            },
+            {
+                "title": "Banking & Finance",
+                "description": "Stay sharp, stay compliant:",
+                "item_1": "AML & KYC procedures",
+                "item_2": "Financial services regulations",
+                "item_3": "Risk and trust management"
+            },
+            {
+                "title": "High-Risk Sectors",
+                "description": "For teams where the stakes are higher:",
+                "item_1": "Safety leadership & risk response",
+                "item_2": "Threat identification & mitigation",
+                "item_3": "Emergency readiness"
+            },
+            {
+                "title": "Tourism & Hospitality",
+                "description": "Service that meets the moment:",
+                "item_1": "Cultural sensitivity & guest experience",
+                "item_2": "Hospitality protocols & excellence",
+                "item_3": "Safety and crisis communication"
+            }
+        ]
     },
     "AC_TrainingSection": {
         "title": "Training That Clicks in Every Language",

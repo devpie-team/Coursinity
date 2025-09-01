@@ -1,0 +1,1 @@
+export { VideoCallIcon } from './VideoCallIcon'
