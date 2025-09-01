@@ -203,7 +203,7 @@ export const CardSection = () => {
 
       <div className="grid w-full max-w-[1240px] grid-cols-3 max-md:hidden">
         <div />
-        <div>
+        <div className="flex justify-center">
           <Button variant="academy" className="max-md:w-full">
             {t('button')}
           </Button>
