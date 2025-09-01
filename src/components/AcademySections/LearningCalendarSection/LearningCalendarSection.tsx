@@ -70,11 +70,9 @@ export const LearningCalendarSection = () => {
         pin: true,
         scrub: true,
         anticipatePin: 1,
-
-        onEnter: () => hideHeaderForSection(sectionId.current),
-        onEnterBack: () => hideHeaderForSection(sectionId.current),
-        onLeave: () => showHeaderForSection(sectionId.current),
-        onLeaveBack: () => showHeaderForSection(sectionId.current),
+        onToggle: (self) => {
+          document.documentElement.classList.toggle('hide-header', self.isActive)
+        },
 
         onUpdate: (self) => {
           const px = self.progress * TOTAL_SCROLL

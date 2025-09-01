@@ -40,7 +40,10 @@ export const TrainingSection = () => {
   }, [])
 
   return (
-    <section className={cn('pb-[120px] flex flex-col items-center justify-center bg-white gap-5 max-md:gap-10 px-4')}>
+    <section
+      className={cn(
+        'pb-[120px] max-md:pb-0 flex flex-col items-center justify-center bg-white gap-5 max-md:gap-10 px-4'
+      )}>
       <div className="flex flex-col max-w-full scaleText opacityText max-md:px-4 gap-4 max-md:gap-6 text-center">
         <FadeInOnView variant="fade-up">
           <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">

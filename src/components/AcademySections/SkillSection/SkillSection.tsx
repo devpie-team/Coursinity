@@ -26,6 +26,7 @@ import Lottie, { LottieRefCurrentProps } from 'lottie-react'
 import { SmallCheckIcon } from '@/components/icons'
 import { useLottieAutoPlay } from './useLottieAutoPlay'
 import { cn } from '@/lib/utils'
+import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -72,6 +73,9 @@ export const SkillSection = () => {
     return () => window.removeEventListener('resize', measure)
   }, [])
 
+  const { hideHeaderForSection, showHeaderForSection } = useHeaderVisibility()
+  const sectionId = useRef(Math.random().toString())
+
   useEffect(() => {
     if (!isDesktop || !stepsData?.length) return
     if (!rootRef.current) return
@@ -99,7 +103,10 @@ export const SkillSection = () => {
         pinSpacing: true,
         anticipatePin: 1,
         scrub: 0.25,
-        invalidateOnRefresh: true
+        invalidateOnRefresh: true,
+        onToggle: (self) => {
+          document.documentElement.classList.toggle('hide-header', self.isActive)
+        }
       })
 
       const onRefreshInit = () => {
