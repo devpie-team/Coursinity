@@ -62,11 +62,13 @@ export const SkillSection = () => {
       setIsMobile(window.innerWidth <= 768)
       setSmallHeight(window.innerHeight <= 900)
 
-      requestAnimationFrame(() => {
-        const rhs = rightStageRef.current
-        if (rhs) setPanelH(rhs.clientHeight)
-        ScrollTrigger.refresh()
-      })
+      if (!isMobile) {
+        requestAnimationFrame(() => {
+          const rhs = rightStageRef.current
+          if (rhs) setPanelH(rhs.clientHeight)
+          ScrollTrigger.refresh()
+        })
+      }
     }
     measure()
     window.addEventListener('resize', measure)
