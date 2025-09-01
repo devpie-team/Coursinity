@@ -22,6 +22,18 @@ export default function HomePage() {
   const locale = useLocale()
 
   const [loading, setLoading] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+      setIsTablet(width >= 768 && width <= 1024)
+    }
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
 
   useEffect(() => {
     AOS.init({
@@ -33,9 +45,14 @@ export default function HomePage() {
     })
   }, [])
 
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), isMobile ? 3000 : isTablet ? 3500 : 3500)
+    return () => clearTimeout(timer)
+  }, [isMobile, isTablet])
+
   return (
     <>
-      {/*   {loading && <Loader loading={loading} onFinish={() => setLoading(false)} />} */}
+      {loading && <Loader loading={loading} onFinish={() => setLoading(false)} shortLoading />}
       <Header />
       <HeroSection canPlay={!loading} />
       <JourneySection />
