@@ -35,9 +35,9 @@ export default function HomePage() {
 
   return (
     <>
-      {loading && <Loader loading={loading} onFinish={() => setLoading(false)} />}
+      {/*   {loading && <Loader loading={loading} onFinish={() => setLoading(false)} />} */}
       <Header />
-      <HeroSection />
+      <HeroSection canPlay={!loading} />
       <JourneySection />
       <LearningCalendarSection />
       <CardSection />

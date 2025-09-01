@@ -130,7 +130,7 @@ export const LearningCalendarSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="mt-[120px] flex flex-col bg-black py-[120px] h-[100vh] justify-between items-center text-center relative overflow-hidden p-4 max-lg:pt-[80px] max-lg:pb-[80px]">
+      className=" flex flex-col bg-black pt-[60px] pb-[60px]  h-[100vh] justify-between items-center text-center relative overflow-hidden p-4 max-lg:pt-[80px] max-lg:pb-[80px]">
       <div className="flex flex-col gap-8 max-lg:gap-6 max-md:max-w-[280px] ">
         <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
           {t('title')}
