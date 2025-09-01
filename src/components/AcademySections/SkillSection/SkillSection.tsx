@@ -57,9 +57,12 @@ export const SkillSection = () => {
     const measure = () => {
       setIsDesktop(window.innerWidth >= 1024)
       setIsMobile(window.innerWidth <= 768)
-      const rhs = rightStageRef.current
-      if (rhs) setPanelH(rhs.clientHeight)
-      setTimeout(() => ScrollTrigger.refresh(), 50)
+
+      requestAnimationFrame(() => {
+        const rhs = rightStageRef.current
+        if (rhs) setPanelH(rhs.clientHeight)
+        ScrollTrigger.refresh()
+      })
     }
     measure()
     window.addEventListener('resize', measure)
@@ -90,6 +93,7 @@ export const SkillSection = () => {
         start: 'top top',
         end: `+=${totalSteps * stepScroll}`,
         pin: true,
+        pinSpacing: true,
         anticipatePin: 1,
         scrub: 0.25,
         invalidateOnRefresh: true
@@ -111,6 +115,7 @@ export const SkillSection = () => {
     return () => ctx.revert()
   }, [isDesktop, panelH, stepsData])
 
+  // === Mobile верстка (залишилась як у тебе)
   if (isMobile) {
     return (
       <section ref={rootRef} className="bg-white py-20">
@@ -126,16 +131,18 @@ export const SkillSection = () => {
     )
   }
 
+  // === Desktop верстка (перероблена під 100vh)
   return (
-    <section ref={rootRef} className="bg-white py-24 lg:py-36 h-screen max-h-screen">
-      <div className=" mx-auto px-4">
+    <section ref={rootRef} className="bg-white h-screen flex flex-col items-start justify-center">
+      <div className="container mx-auto px-4 mb-12 lg:mb-20">
         <Header isMobile={isMobile} />
       </div>
 
-      <div className="container mx-auto px-4 mt-12 lg:mt-20 h-full">
-        <div className="flex w-full justify-between relative">
-          <div className="relative w-full">
-            <div ref={leftStageRef} className="relative overflow-hidden" style={{ height: panelH }}>
+      <div className="container mx-auto px-4 flex-1 min-h-0 max-h-[520px]">
+        <div className="flex w-full justify-between relative h-full">
+          {/* Left column */}
+          <div className="relative w-full h-full">
+            <div ref={leftStageRef} className="relative overflow-hidden h-full">
               <div ref={leftTrackRef} className="absolute inset-0 will-change-transform">
                 {stepsData.map((_, id) => (
                   <div key={id} className="flex items-start pr-2" style={{ minHeight: panelH }}>
@@ -146,15 +153,16 @@ export const SkillSection = () => {
             </div>
           </div>
 
-          <div className="relative">
+          {/* Right column */}
+          <div className="relative h-full ">
             <div
-              className="rounded-2xl overflow-hidden w-[455px]"
+              className="rounded-2xl overflow-hidden w-[455px] h-full"
               style={{
                 backgroundImage: `url('/assets/academy/skill/bg.png')`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center'
               }}>
-              <div ref={rightStageRef} className="relative h-[520px] lg:h-[560px] xl:h-[553px] overflow-hidden">
+              <div ref={rightStageRef} className="relative h-full overflow-hidden">
                 <div ref={rightTrackRef} className="absolute inset-x-0 top-0 will-change-transform">
                   {stepsData.map((anim, id) => (
                     <StepVisual key={id} anim={anim} minHeight={panelH} />
@@ -280,7 +288,7 @@ export function StepVisual({ anim, minHeight }: { anim: any; minHeight: number }
   const lottieRef = useRef<LottieRefCurrentProps | null>(null)
 
   useLottieAutoPlay(cardRef, lottieRef, {
-    threshold: 0.6, // почти целиком в видимой панели
+    threshold: 0.6,
     rootMargin: '0px 0px 0px 0px',
     once: false
   })
