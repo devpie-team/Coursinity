@@ -25,6 +25,7 @@ import lottie8Ar from '../../../../public/assets/lottie/academy/skill/ar/8.json'
 import Lottie, { LottieRefCurrentProps } from 'lottie-react'
 import { SmallCheckIcon } from '@/components/icons'
 import { useLottieAutoPlay } from './useLottieAutoPlay'
+import { cn } from '@/lib/utils'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -50,6 +51,7 @@ export const SkillSection = () => {
   const [isDesktop, setIsDesktop] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [panelH, setPanelH] = useState<number>(560)
+  const [smallHeight, setSmallHeight] = useState(false)
 
   const getTracks = () => [leftTrackRef.current, rightTrackRef.current].filter(Boolean) as HTMLElement[]
 
@@ -57,6 +59,7 @@ export const SkillSection = () => {
     const measure = () => {
       setIsDesktop(window.innerWidth >= 1024)
       setIsMobile(window.innerWidth <= 768)
+      setSmallHeight(window.innerHeight <= 900)
 
       requestAnimationFrame(() => {
         const rhs = rightStageRef.current
@@ -115,7 +118,6 @@ export const SkillSection = () => {
     return () => ctx.revert()
   }, [isDesktop, panelH, stepsData])
 
-  // === Mobile верстка (залишилась як у тебе)
   if (isMobile) {
     return (
       <section ref={rootRef} className="bg-white py-20">
@@ -131,16 +133,14 @@ export const SkillSection = () => {
     )
   }
 
-  // === Desktop верстка (перероблена під 100vh)
   return (
-    <section ref={rootRef} className="bg-white h-screen flex flex-col items-start justify-center">
-      <div className="container mx-auto px-4 mb-12 lg:mb-20">
-        <Header isMobile={isMobile} />
+    <section ref={rootRef} className="bg-white h-screen flex flex-col items-start justify-center py-5">
+      <div className="container mx-auto px-4 mb-[60px]">
+        <Header isMobile={isMobile} smallHeight={smallHeight} />
       </div>
 
       <div className="container mx-auto px-4 flex-1 min-h-0 max-h-[520px]">
         <div className="flex w-full justify-between relative h-full">
-          {/* Left column */}
           <div className="relative w-full h-full">
             <div ref={leftStageRef} className="relative overflow-hidden h-full">
               <div ref={leftTrackRef} className="absolute inset-0 will-change-transform">
@@ -150,10 +150,17 @@ export const SkillSection = () => {
                   </div>
                 ))}
               </div>
+
+              <div
+                className="
+      pointer-events-none
+      absolute inset-x-0 bottom-[-200px] h-[331px]
+      [background-image:linear-gradient(180deg,rgba(255,255,255,0)_0%,#ffffff_31.27%)]
+    "
+              />
             </div>
           </div>
 
-          {/* Right column */}
           <div className="relative h-full ">
             <div
               className="rounded-2xl overflow-hidden w-[455px] h-full"
@@ -177,10 +184,10 @@ export const SkillSection = () => {
   )
 }
 
-const Header = ({ isMobile }: { isMobile: boolean }) => {
+const Header = ({ isMobile, smallHeight }: { isMobile: boolean; smallHeight?: boolean }) => {
   const t = useTranslations('AC_SkillSection')
   return (
-    <div className="flex flex-col items-center gap-8">
+    <div className={cn('flex flex-col items-center gap-8', { 'gap-2': smallHeight })}>
       <div className="flex flex-col max-w-full scaleText opacityText max-md:px-4 gap-4 max-md:gap-6 text-center">
         <FadeInOnView variant="fade-up">
           <Typography variant={isMobile ? 'h5' : 'h3'} weight="medium">
@@ -195,12 +202,12 @@ const Header = ({ isMobile }: { isMobile: boolean }) => {
       </div>
       <div className="flex flex-col max-w-full scaleText opacityText max-md:px-4 gap-2 text-center">
         <FadeInOnView variant="fade-up">
-          <Typography variant="body1" weight="medium">
+          <Typography variant={smallHeight ? 'body2' : 'body1'} weight="medium">
             {t('small_title')}
           </Typography>
         </FadeInOnView>
         <FadeInOnView variant="fade-up">
-          <Typography variant="body3" weight="regular" className="text-description">
+          <Typography variant={smallHeight ? 'body4' : 'body3'} weight="regular" className="text-description">
             {t('small_subtitle')}
           </Typography>
         </FadeInOnView>
