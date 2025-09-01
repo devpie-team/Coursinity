@@ -7,7 +7,13 @@ import AOS from 'aos'
 import { Header } from '@/components/Header'
 import Footer from '@/components/Footer/Footer'
 import { Loader } from '@/components/Loader'
-import { JourneySection, LearningCalendarSection, SkillSection, TrainingSection } from '@/components/AcademySections'
+import {
+  JourneySection,
+  LearningCalendarSection,
+  SkillSection,
+  TrainingSection,
+  CardSection
+} from '@/components/AcademySections'
 import { TestimonialsSection } from '@/components/Sections'
 import { GrowthSection } from '@/components/AcademySections/GrowthSection'
 import { HeroSection } from '@/components/AcademySections/HeroSection'
@@ -29,13 +35,12 @@ export default function HomePage() {
 
   return (
     <>
-      {/* {loading && <Loader loading={loading} onFinish={() => setLoading(false)} />} */}
-
+      {loading && <Loader loading={loading} onFinish={() => setLoading(false)} />}
       <Header />
       <HeroSection />
-
       <JourneySection />
       <LearningCalendarSection />
+      <CardSection />
       <SkillSection />
       <TrainingSection />
       <TestimonialsSection />

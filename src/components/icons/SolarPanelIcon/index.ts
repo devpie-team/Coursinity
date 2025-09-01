@@ -1,0 +1,1 @@
+export { SolarPanelIcon } from './SolarPanelIcon'

@@ -53,7 +53,7 @@ export const HeroSection = () => {
             <Typography variant={isDesktop ? 'body2' : 'body3'} weight="medium">
               {t('subtitle')}
             </Typography>
-            <Button variant="academy" className="max-md:w-full">
+            <Button variant="academy_secondary" className="max-md:w-full">
               {t('cta')}
             </Button>
           </div>

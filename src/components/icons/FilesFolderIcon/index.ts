@@ -1,0 +1,1 @@
+export { FilesFolderIcon } from './FilesFolderIcon'

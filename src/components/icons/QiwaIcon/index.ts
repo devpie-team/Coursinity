@@ -1,0 +1,1 @@
+export { QiwaIcon } from './QiwaIcon'
