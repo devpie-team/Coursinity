@@ -128,6 +128,166 @@
                 "item_2": "الإدارة الصحية والقيادة",
                 "item_3": "السلامة والجودة"
             }
-        ]
+        ],
+        "AC_LearningCalendarSection": {
+            "title": "صمّم تقويم تدريبي خاص بمؤسستك",
+            "subtitle": "تقويم واحد. نمو غير محدود",
+            "cta": "طوّر مهارات فريقك",
+            "cards": [
+                {
+                    "title": "حول المستجدين إلى قادة مستقبل"
+                },
+                {
+                    "title": "ابنِ ثقافة مشتركة تدعم أهداف مؤسستك"
+                },
+                {
+                    "title": "استخدم التدريب كأداة في التقييم وسد الفجوات"
+                },
+                {
+                    "title": "جلسة عن بُعد",
+                    "subtitle": "الإثنين، 7 يناير",
+                    "meta": "عبر Zoom",
+                    "cta": "حدّد تذكيرًا"
+                },
+                {
+                    "title": "ادعم الامتياز بثقافة تطوير مستمر"
+                }
+            ]
+        },
+        "AC_JourneySection": {
+            "title": "رحلات تدريبية تفاعلية. حلول تدريبية مخصّصة. نتائج في شاشة واحدة",
+            "subtitle": "عالم تدريبي قابل للتخصيص، سهل في الإطلاق والتنفيذ، مضمون في متابعة التقدم، كله وفق احتياج فريقك",
+            "cta": "ابنِ أكاديمية مؤسستك الآن",
+            "cardsLeft": {
+                "title": "مسارات تدريبية مخصّصة",
+                "items": [
+                    {
+                        "title": "خطة فردية",
+                        "description": "لكل عضو بفريقك تناسب اختصاصه ومستواه الوظيفي."
+                    },
+                    {
+                        "title": "مراقبة التقدم ",
+                        "description": "في ضوء احتياجات قطاعك وأهداف منشأتك."
+                    },
+                    {
+                        "title": "مستشار تدريب",
+                        "description": "يضمن بناء الخطة التي تحقق النجاح المؤسسي."
+                    }
+                ]
+            },
+            "cardsRight": {
+                "title": "دورات في شكل رحلات تدريبية تفاعلية",
+                "items": [
+                    {
+                        "title": "إطلاق دوري ",
+                        "description": "رحلات تفاعلية لتطوير المهارات تجمع بين التعلم الذاتي والتلعيب ودعم الخبراء."
+                    },
+                    {
+                        "title": "خطة تدريبية متكاملة",
+                        "description": "تضمن تطوّر فريقك بمتابعة دقيقة ومستمرة."
+                    },
+                    {
+                        "title": "فريق دعم متخصص ",
+                        "description": " يتابع التقدم ويحفز المشاركين لإكمال مسارهم بنجاح."
+                    }
+                ]
+            }
+        },
+        "AC_GrowthSection": {
+            "title": "مكتبة واحدة، نمو لا محدود",
+            "subtitle": "أكاديمية كورسنيتي: عالم متكامل من المعرفة والتفاعل متاح لفريقك",
+            "cta": "تحدث مع أحد خبرائنا",
+            "finalText": "  نوفّر مئات الشهادات المعتمدة في مجالات وتخصصات مختلفة، ويمكن لفريقنا مساعدتك في تصميم برنامج تدريبي يناسب أهداف مؤسستك بدقة. لم تجد ما يناسب احتياج فريقك؟",
+            "tabs": {
+                "soft-skills": "المهارات الشخصية",
+                "lead-manage": "الإدارة والقيادة",
+                "finance-accounting": "المالية والمحاسبة",
+                "growth-marketing": "التسويق وريادة الأعمال"
+            },
+            "accordion": {
+                "soft-skills": [
+                    {
+                        "title": "كيف تقود في الحالات الصعبة؟",
+                        "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                    },
+                    {
+                        "title": "إدارة الاجتماعات الفعالة",
+                        "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                    },
+                    {
+                        "title": "حل المشكلات بطريقة إبداعية",
+                        "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                    },
+                    {
+                        "title": "الذكاء العاطفي",
+                        "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                    },
+                    {
+                        "title": "الإدارة الفعالة للوقت",
+                        "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                    }
+                ],
+                "lead-manage": [
+                    {
+                        "title": "قيادة التغيير المؤسسي",
+                        "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                    },
+                    {
+                        "title": "نماذج تقييم الأداء",
+                        "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                    },
+                    {
+                        "title": "قيادة وإدارة فرق العمل",
+                        "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                    },
+                    {
+                        "title": "استراتيجيات الابتكار المؤسسي",
+                        "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                    },
+                    {
+                        "title": "إدارة الأزمات",
+                        "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                    }
+                ],
+                "finance-accounting": [
+                    {
+                        "title": "المفاهيم المالية لغير المتخصصين",
+                        "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                    },
+                    {
+                        "title": "مكافحة غسيل الأموال",
+                        "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                    },
+                    {
+                        "title": "الأسواق المالية",
+                        "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                    }
+                ],
+                "growth-marketing": [
+                    {
+                        "title": "تجربة العميل والقيمة المضافة",
+                        "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                    },
+                    {
+                        "title": "استراتيجيات التسعير",
+                        "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                    },
+                    {
+                        "title": "تطوير خطة التسويق",
+                        "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                    },
+                    {
+                        "title": "التخطيط الاستراتيجي للأعمال",
+                        "content": "Didn’t see your perfect fit? With hundreds of certifications and expert partners across industries, we’ll help you tailor a training journey that perfectly fits your organization."
+                    }
+                ]
+            }
+        },
+        "AC_HeroSection": {
+            "badge": "Academy",
+            "title": "أكاديمية مؤسستك الرقمية منظومة تدريبية متكاملة بهويتها",
+            "subtitle": "منصة واحدة تحمل بصمة مؤسستك. تطور فريقك. تمنحهم شهادات معتمدة. تضمن امتثالهم للمتطلبات التنظيمية",
+            "cta": "احجز عرض توضيحي"
+        }
     }
 }

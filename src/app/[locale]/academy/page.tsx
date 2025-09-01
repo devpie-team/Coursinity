@@ -15,6 +15,8 @@ import {
   CardSection
 } from '@/components/AcademySections'
 import { TestimonialsSection } from '@/components/Sections'
+import { GrowthSection } from '@/components/AcademySections/GrowthSection'
+import { HeroSection } from '@/components/AcademySections/HeroSection'
 
 export default function HomePage() {
   const locale = useLocale()
@@ -33,11 +35,11 @@ export default function HomePage() {
 
   return (
     <>
-      {/* {loading && <Loader loading={loading} onFinish={() => setLoading(false)} />} */}
-
+      {loading && <Loader loading={loading} onFinish={() => setLoading(false)} />}
       <Header />
-      {/* <JourneySection />
-      <LearningCalendarSection /> */}
+      <HeroSection />
+      <JourneySection />
+      <LearningCalendarSection />
       <CardSection />
       <SkillSection />
       <TrainingSection />
