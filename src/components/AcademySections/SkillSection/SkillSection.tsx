@@ -141,53 +141,57 @@ export const SkillSection = () => {
   }
 
   return (
-    <section ref={rootRef} className="bg-white h-screen flex flex-col items-start justify-center py-5">
-      <div className="container mx-auto px-4 mb-[60px]">
-        <Header isMobile={isMobile} smallHeight={smallHeight} />
-      </div>
+    <>
+      {smallHeight && <div className="h-[100px] bg-white w-screen " />}
+      <section ref={rootRef} className="bg-white h-screen flex flex-col items-start justify-center py-5">
+        <div className="container mx-auto px-4 mb-[60px]">
+          <Header isMobile={isMobile} smallHeight={smallHeight} />
+        </div>
 
-      <div className="container mx-auto px-4 flex-1 min-h-0 max-h-[520px]">
-        <div className="flex w-full justify-between relative h-full">
-          <div className="relative w-full h-full">
-            <div ref={leftStageRef} className="relative overflow-hidden h-full">
-              <div ref={leftTrackRef} className="absolute inset-0 will-change-transform">
-                {stepsData.map((_, id) => (
-                  <div key={id} className="flex items-start pr-2" style={{ minHeight: panelH }}>
-                    <LeftStep step={id} />
-                  </div>
-                ))}
-              </div>
+        <div className="container mx-auto px-4 flex-1 min-h-0 max-h-[520px]">
+          <div className="flex w-full justify-between relative h-full">
+            <div className="relative w-full h-full">
+              <div ref={leftStageRef} className="relative overflow-hidden h-full">
+                <div ref={leftTrackRef} className="absolute inset-0 will-change-transform">
+                  {stepsData.map((_, id) => (
+                    <div key={id} className="flex items-start pr-2" style={{ minHeight: panelH }}>
+                      <LeftStep step={id} />
+                    </div>
+                  ))}
+                </div>
 
-              <div
-                className="
+                <div
+                  className="
       pointer-events-none
       absolute inset-x-0 bottom-[-200px] h-[331px]
       [background-image:linear-gradient(180deg,rgba(255,255,255,0)_0%,#ffffff_31.27%)]
     "
-              />
+                />
+              </div>
             </div>
-          </div>
 
-          <div className="relative h-full ">
-            <div
-              className="rounded-2xl overflow-hidden w-[455px] h-full"
-              style={{
-                backgroundImage: `url('/assets/academy/skill/bg.png')`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-              }}>
-              <div ref={rightStageRef} className="relative h-full overflow-hidden">
-                <div ref={rightTrackRef} className="absolute inset-x-0 top-0 will-change-transform">
-                  {stepsData.map((anim, id) => (
-                    <StepVisual key={id} anim={anim} minHeight={panelH} />
-                  ))}
+            <div className="relative h-full ">
+              <div
+                className="rounded-2xl overflow-hidden w-[455px] h-full"
+                style={{
+                  backgroundImage: `url('/assets/academy/skill/bg.png')`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}>
+                <div ref={rightStageRef} className="relative h-full overflow-hidden">
+                  <div ref={rightTrackRef} className="absolute inset-x-0 top-0 will-change-transform">
+                    {stepsData.map((anim, id) => (
+                      <StepVisual key={id} anim={anim} minHeight={panelH} />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      {smallHeight && <div className="h-[100px] bg-white w-screen " />}
+    </>
   )
 }
 
