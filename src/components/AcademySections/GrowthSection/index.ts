@@ -1,1 +1,1 @@
-export {GrowthSection} from './GrowthSection.tsx'
+export {GrowthSection} from './GrowthSection'
