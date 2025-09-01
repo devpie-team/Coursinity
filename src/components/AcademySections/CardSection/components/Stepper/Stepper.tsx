@@ -1,5 +1,7 @@
 'use client'
 import { cn } from '@/lib/utils'
+import { ChevronLeftIcon } from 'lucide-react'
+import { useLocale } from 'next-intl'
 
 type TStepperProps = {
   current: number
@@ -14,6 +16,8 @@ type TStepperProps = {
 export const Stepper = ({ current, total, onPrev, onNext, onGo, rtl, className }: TStepperProps) => {
   if (total <= 1) return null
 
+  const locale = useLocale()
+
   return (
     <div className={cn('flex items-center gap-6', className)} dir={rtl ? 'rtl' : 'ltr'}>
       <button
@@ -22,7 +26,14 @@ export const Stepper = ({ current, total, onPrev, onNext, onGo, rtl, className }
         className="grid place-items-center w-8 h-8 rounded-full text-white/60 hover:text-white/90 disabled:opacity-30"
         disabled={current === 0}
         aria-label="Previous">
-        <span className="text-xl leading-none">{rtl ? '›' : '‹'}</span>
+        <span className="text-xl leading-none">
+          <ChevronLeftIcon
+            className={cn(
+              'h-6 w-6 stroke-[#FFFFFF] group-hover:stroke-[#FFFFFF]/50 transition',
+              locale == 'ar' ? ' -scale-x-100' : ''
+            )}
+          />
+        </span>
       </button>
 
       <div className="flex items-center gap-4">
@@ -53,7 +64,15 @@ export const Stepper = ({ current, total, onPrev, onNext, onGo, rtl, className }
         className="grid place-items-center w-8 h-8 rounded-full text-white/60 hover:text-white/90 disabled:opacity-30"
         disabled={current === 1}
         aria-label="Next">
-        <span className="text-xl leading-none">{rtl ? '‹' : '›'}</span>
+        <span className="text-xl leading-none">
+          {' '}
+          <ChevronLeftIcon
+            className={cn(
+              'h-6 w-6 stroke-[#FFFFFF] group-hover:stroke-[#FFFFFF]/50 transition',
+              locale == 'ar' ? '' : '-scale-x-100'
+            )}
+          />
+        </span>
       </button>
     </div>
   )
