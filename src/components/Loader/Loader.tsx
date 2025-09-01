@@ -6,9 +6,10 @@ import { useLocale } from 'next-intl'
 type TLoading = {
   loading?: boolean
   onFinish?: () => void
+  shortLoading?: boolean
 }
 
-export const Loader = ({ loading = true, onFinish }: TLoading) => {
+export const Loader = ({ loading = true, onFinish, shortLoading }: TLoading) => {
   const maskRef = useRef<HTMLDivElement>(null)
   const iconRef = useRef<HTMLDivElement>(null)
   const topBlockRef = useRef<HTMLDivElement>(null)
@@ -52,15 +53,15 @@ export const Loader = ({ loading = true, onFinish }: TLoading) => {
     })
 
     // 1) маска
-    tl.fromTo(mask, { x: '0%' }, { x: isArabic ? '-100%' : '100%', duration: 3, ease: 'linear' })
+    tl.fromTo(mask, { x: '0%' }, { x: isArabic ? '-100%' : '100%', duration: shortLoading ? 1.5 : 3, ease: 'linear' })
 
     // 2) фейд логотипу (після маски)
-    tl.to(icon, { opacity: 0, duration: 1, ease: 'power2.out' })
+    tl.to(icon, { opacity: 0, duration: shortLoading ? 0.5 : 1, ease: 'power2.out' })
 
     // 3) верхній/нижній блоки одночасно (після фейду)
-    tl.to(top, { y: '-100%', duration: 1, ease: 'power2.inOut' }).to(
+    tl.to(top, { y: '-100%', duration: shortLoading ? 0.5 : 1, ease: 'power2.inOut' }).to(
       bottom,
-      { y: '100%', duration: 1, ease: 'power2.inOut' },
+      { y: '100%', duration: shortLoading ? 0.5 : 1, ease: 'power2.inOut' },
       '<'
     )
 
