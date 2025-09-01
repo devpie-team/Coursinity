@@ -62,7 +62,7 @@ export const SkillSection = () => {
       setIsMobile(window.innerWidth <= 768)
       setSmallHeight(window.innerHeight <= 900)
 
-      if (!isMobile) {
+      if (window.innerWidth > 768) {
         requestAnimationFrame(() => {
           const rhs = rightStageRef.current
           if (rhs) setPanelH(rhs.clientHeight)
