@@ -61,7 +61,7 @@ export default function HomePage() {
       <SkillSection />
       <TrainingSection />
       <TestimonialsSection />
-      <Footer />
+      <Footer page="academy" />
     </>
   )
 }

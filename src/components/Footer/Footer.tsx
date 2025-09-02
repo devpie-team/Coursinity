@@ -16,9 +16,10 @@ import { FadeInOnView } from '../FadeInOnView/FadeInOnView'
 
 type FooterProps = {
   className?: string
+  page?: string
 }
 
-const Footer = ({ className }: FooterProps) => {
+const Footer = ({ className, page }: FooterProps) => {
   const t = useTranslations('Footer.Footer')
 
   const [isMobile, setIsMobile] = useState<boolean>(false)
@@ -53,7 +54,8 @@ const Footer = ({ className }: FooterProps) => {
     <footer
       className={cn(
         'w-full py-[140px] px-[150px] pb-[50px] text-white bg-primary-purple max-[1280px]:px-6 max-lg:py-20 max-lg:pb-16 max-[834px]:px-4 ',
-        className
+        className,
+        page == 'academy' && 'bg-primary-green'
       )}>
       <div className="flex flex-col gap-[120px] max-lg:gap-20">
         {/*Headline*/}
