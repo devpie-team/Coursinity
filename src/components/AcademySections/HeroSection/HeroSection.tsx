@@ -16,8 +16,6 @@ export const HeroSection = ({ canPlay = true }: HeroSectionProps) => {
   const t = useTranslations('AC_HeroSection')
   const lottieRef = useRef<LottieRefCurrentProps>(null)
   const { ref, inView } = useInView({ triggerOnce: false })
-  const [isMobile, setIsMobile] = useState(false)
-  const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
   const locale = useLocale()
   const isArabic = locale === 'ar'
@@ -25,8 +23,6 @@ export const HeroSection = ({ canPlay = true }: HeroSectionProps) => {
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth
-      setIsMobile(width < 768)
-      setIsTablet(width >= 768 && width <= 1024)
       setIsDesktop(width > 1024)
     }
     checkScreenSize()

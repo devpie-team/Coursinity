@@ -10,7 +10,6 @@ import YouTubeIcon from '../icons/YouTubeIcon'
 import { Typography } from '../ui'
 import { useLocale, useTranslations } from 'next-intl'
 import React, { useEffect, useState } from 'react'
-import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { FadeInOnView } from '../FadeInOnView/FadeInOnView'
 
@@ -59,31 +58,33 @@ const Footer = ({ className, page }: FooterProps) => {
       )}>
       <div className="flex flex-col gap-[120px] max-lg:gap-20">
         {/*Headline*/}
-        <div className="flex flex-col gap-8 items-center font-medium text-center max-lg:gap-4">
-          <FadeInOnView>
-            <Typography variant={isDesktop ? 'h2' : 'h5'} weight="medium">
-              {t('headline')
-                .split('\n')
-                .map((line, i) => (
-                  <React.Fragment key={i}>
-                    {' '}
-                    {''}
-                    {line}
-                  </React.Fragment>
-                ))}
-            </Typography>
-          </FadeInOnView>
-          <FadeInOnView>
-            <Typography variant={isDesktop ? 'body2' : 'button'} weight="regular" className="text-opacity-80">
-              {t('subheadline')}
-            </Typography>
-            <a href={`/${locale}/contact-form`} className="w-[263px] max-lg:w-[343px] max-md:w-full mt-4">
-              <Button variant="secondary" size="md" className="w-[263px] max-lg:w-[343px] mt-4">
-                {t('button')}
-              </Button>
-            </a>
-          </FadeInOnView>
-        </div>
+        {page !== 'blog' && (
+          <div className="flex flex-col gap-8 items-center font-medium text-center max-lg:gap-4">
+            <FadeInOnView>
+              <Typography variant={isDesktop ? 'h2' : 'h5'} weight="medium">
+                {t('headline')
+                  .split('\n')
+                  .map((line, i) => (
+                    <React.Fragment key={i}>
+                      {' '}
+                      {''}
+                      {line}
+                    </React.Fragment>
+                  ))}
+              </Typography>
+            </FadeInOnView>
+            <FadeInOnView>
+              <Typography variant={isDesktop ? 'body2' : 'button'} weight="regular" className="text-opacity-80">
+                {t('subheadline')}
+              </Typography>
+              <a href={`/${locale}/contact-form`} className="w-[263px] max-lg:w-[343px] max-md:w-full mt-4">
+                <Button variant="secondary" size="md" className="w-[263px] max-lg:w-[343px] mt-4">
+                  {t('button')}
+                </Button>
+              </a>
+            </FadeInOnView>
+          </div>
+        )}
 
         {/* Middle: Columns */}
         <div className="flex flex-col justify-between ">
