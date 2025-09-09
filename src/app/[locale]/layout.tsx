@@ -112,9 +112,9 @@ export default async function LocaleLayout({
   params
 }: {
   children: React.ReactNode
-  params: Promise<{ locale: string }>
+  params: { locale: string }
 }) {
-  const { locale } = await params
+  const { locale } = params
   if (!hasLocale(routing.locales, locale)) {
     notFound()
   }
@@ -123,7 +123,7 @@ export default async function LocaleLayout({
   const fontClass = isArabic ? kanunAR.variable : poppins.variable
 
   return (
-    <html lang={locale} className={fontClass} dir={locale == 'ar' ? 'rtl' : 'ltr'}>
+    <html lang={locale} className={fontClass} dir={isArabic ? 'rtl' : 'ltr'}>
       <head>
         <JsonLdSchema locale={locale} />
         <link rel="icon" type="image/png" href="/assets/favicon-96x96.png" sizes="96x96" />
@@ -150,7 +150,7 @@ export default async function LocaleLayout({
           <Theme>
             <HeaderVisibilityProvider>
               <SmoothScrollProvider>
-                <div className="main-wrapper ">{children}</div>
+                <div className="main-wrapper">{children}</div>
               </SmoothScrollProvider>
             </HeaderVisibilityProvider>
           </Theme>
