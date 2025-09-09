@@ -63,6 +63,7 @@ export function ArticleCard({ a, isArabic }: { a: Article; isArabic: boolean }) 
   const title = a.Title
   const desc = a?.ShortDescription
   const img = a?.CoverImage?.formats?.small?.url
+  const router = useRouter()
 
   return (
     <div className="flex flex-col gap-5 items-start">
@@ -73,7 +74,11 @@ export function ArticleCard({ a, isArabic }: { a: Article; isArabic: boolean }) 
       )}
       <TagsRow tags={a.Tags} />
       <div className="flex flex-col gap-2 min-w-0 w-full">
-        <Typography variant="button" className="line-clamp-2 break-words h-12">
+        <Typography
+          variant="button"
+          weight="medium"
+          className="line-clamp-2 break-words h-12 cursor-pointer"
+          onClick={() => router.push(`/${isArabic ? 'ar' : 'en'}/blog/${a.Slug}`)}>
           {title}
         </Typography>
         <Typography variant="caption" className="text-description line-clamp-2 break-words h-10">
@@ -194,7 +199,11 @@ export function BlogClient({
                   <CoverImg url={bigImg} alt={bigTitle || 'Featured image'} className="w-full aspect-[16/9]" />
                   <TagsRow tags={firstFeatured?.Tags} />
                   <div className="flex flex-col gap-4 min-w-0 w-full">
-                    <Typography variant="h6" weight="medium" className="line-clamp-2 break-words">
+                    <Typography
+                      variant="h6"
+                      weight="medium"
+                      className="line-clamp-2 break-words cursor-pointer"
+                      onClick={() => router.push(`/${isArabic ? 'ar' : 'en'}/blog/${firstFeatured.Slug}`)}>
                       {bigTitle}
                     </Typography>
                     {bigDesc ? (
@@ -209,19 +218,23 @@ export function BlogClient({
                 {/* Right column with rest */}
                 <div className="flex flex-col gap-4">
                   {restFeatured.map((article) => (
-                    <div key={article.id} className="flex gap-4 md:gap-5 items-start">
+                    <div key={article.id} className="flex gap-4 md:gap-5 items-center">
                       <CoverImg
                         url={article.CoverImage?.formats?.small?.url}
                         alt={article.Title || 'Article image'}
                         className="flex-none w-36 md:w-[300px] aspect-[4/3]"
                       />
                       <div className="flex min-w-0 flex-1 flex-col gap-4">
-                        <TagsRow tags={article.Tags} />
+                        {article.Tags?.length && article.Tags[0].Tag ? <TagsRow tags={article.Tags} /> : null}
                         <div className="flex flex-col gap-2 min-w-0">
-                          <Typography variant="h6" className="line-clamp-2 break-words">
+                          <Typography
+                            variant="button"
+                            weight="medium"
+                            className="line-clamp-2 break-words cursor-pointer"
+                            onClick={() => router.push(`/${isArabic ? 'ar' : 'en'}/blog/${article.Slug}`)}>
                             {article.Title}
                           </Typography>
-                          <Typography variant="body3" className="text-description line-clamp-2 break-words">
+                          <Typography variant="caption" className="text-description line-clamp-2 break-words">
                             {article.ShortDescription}
                           </Typography>
                         </div>
