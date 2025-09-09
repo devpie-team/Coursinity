@@ -142,12 +142,14 @@ export const Header = () => {
                   </a>
                 </div>
               )}
-              <Typography weight="medium" variant="h6">
-                {t('blog')}
-              </Typography>
+              <a href="">
+                <Typography weight="medium" variant="h6">
+                  {t('blog')}
+                </Typography>
+              </a>
             </div>
           </div>
-          <a href={`/${locale}/contact-form`}>
+          <a href={`/${locale}/blog`}>
             <Button variant="purple" className="w-full">
               {t('button')}
             </Button>

@@ -12,6 +12,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import React, { useEffect, useState } from 'react'
 import 'aos/dist/aos.css'
 import { FadeInOnView } from '../FadeInOnView/FadeInOnView'
+import { useRouter } from 'next/navigation'
 
 type FooterProps = {
   className?: string
@@ -40,14 +41,19 @@ const Footer = ({ className, page }: FooterProps) => {
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
 
-  const renderListItems = (baseKey: string, count: number) =>
-    Array.from({ length: count }).map((_, i) => (
-      <li key={i}>
-        <Typography as="a" href="#" variant={isDesktop ? 'body3' : 'caption'}>
-          {t(`${baseKey}.${i}`)}
-        </Typography>
-      </li>
-    ))
+  const renderListItems = (baseKey: string, count: number) => {
+    return Array.from({ length: count }).map((_, i) => {
+      const blog = baseKey === 'columns.company.items' && i == 2
+
+      return (
+        <li key={i}>
+          <Typography as="a" href={blog ? `/${locale}/blog` : '#'} variant={isDesktop ? 'body3' : 'caption'}>
+            {t(`${baseKey}.${i}`)}
+          </Typography>
+        </li>
+      )
+    })
+  }
 
   return (
     <footer
