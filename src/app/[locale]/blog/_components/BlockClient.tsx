@@ -130,11 +130,11 @@ export function BlogClient({
 
   const fa = featuredArticles?.data ?? []
   const as = articles?.data ?? []
-  const firstFeatured = fa[0]
+  const firstFeatured = fa?.[0]
   const restFeatured = fa.slice(1)
 
   const bigTitle = firstFeatured?.Title
-  const bigDesc = featuredArticles.data[0]?.ShortDescription
+  const bigDesc = featuredArticles.data?.[0]?.ShortDescription
   const bigImg = firstFeatured?.CoverImage?.formats?.small?.url
 
   const totalPages = useMemo(
