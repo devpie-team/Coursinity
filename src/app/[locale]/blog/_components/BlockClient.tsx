@@ -115,8 +115,6 @@ export function BlogClient({
   const isArabic = locale === 'ar'
   const router = useRouter()
 
-  console.log(articles)
-
   useEffect(() => {
     AOS.init({ once: false, duration: 700, offset: 100, easing: 'ease-in-out', mirror: true })
     const checkScreenSize = () => {

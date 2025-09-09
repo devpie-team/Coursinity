@@ -11,8 +11,8 @@ import { getArticleBySlug } from '@/services/getArticle'
 import ArticleBlocksRenderer from './_components/ArticleBlocksRenderer'
 import BlogDate from './_components/BlogDate'
 
-export default async function BlogPage({ params }: { params: { slug: string; locale: string } }) {
-  const { slug, locale } = params
+export default async function BlogPage({ params }: { params: Promise<{ slug: string; locale: string }> }) {
+  const { slug, locale } = await params
 
   const isArabic = locale === 'ar'
 
@@ -23,8 +23,6 @@ export default async function BlogPage({ params }: { params: { slug: string; loc
   const latestArticles = await getArticles({ locale })
 
   const article = data
-
-  console.log(data)
 
   return (
     <>
