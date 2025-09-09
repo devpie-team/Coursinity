@@ -28,8 +28,6 @@ export const TrainingSection = () => {
       const width = window.innerWidth
       const height = window.innerHeight
 
-      console.log('Width:', width, 'Height:', height)
-
       setIsMobile(width < 768)
       setIsTablet(width >= 768 && width <= 1260)
       setIsDesktop(width > 1260)

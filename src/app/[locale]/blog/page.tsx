@@ -12,7 +12,6 @@ export default async function BlogPage(_props: { searchParams: Search; params: {
 
   const data = await getArticles({ page, pageSize: 9, locale: _props.params.locale })
   const dataFeatured = await getArticles({ featured: true, page: 1, pageSize: 4, locale: _props.params.locale })
-  console.log('data', dataFeatured)
 
   return <BlogClient articles={data} featuredArticles={dataFeatured} currentPage={page} />
 }
