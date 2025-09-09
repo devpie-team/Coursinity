@@ -27,7 +27,6 @@ function range(start: number, end: number) {
 function buildItems(total: number): Item[] {
   if (total <= 0) return []
   if (total <= 6) return range(1, total)
-  // total >= 7
   return [1, 2, 3, '...', total - 2, total - 1, total]
 }
 
