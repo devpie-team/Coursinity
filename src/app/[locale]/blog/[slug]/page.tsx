@@ -12,8 +12,12 @@ import ArticleBlocksRenderer from './_components/ArticleBlocksRenderer'
 import BlogDate from './_components/BlogDate'
 import { Metadata } from 'next'
 
-export async function generateMetadata({ params }: { params: { slug: string; locale: string } }): Promise<Metadata> {
-  const { slug, locale } = params
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ slug: string; locale: string }>
+}): Promise<Metadata> {
+  const { slug, locale } = await params
 
   const article = await getArticleBySlug(slug, false, locale)
 
