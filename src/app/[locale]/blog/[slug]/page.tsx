@@ -106,7 +106,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
               </div>
             </div>
             <ShareButtons
-              url={`https://coursinity-jawr-git-push-for-build-rostiks-projects-68dc3a47.vercel.app/${locale}/blog/${slug}`}
+              url={`https://coursinity-jawr-git-dev-rostiks-projects-68dc3a47.vercel.app/${locale}/blog/${slug}`}
               title={article?.Share?.ShareTitle || ''}
               content={article?.Share?.ShareContent}
             />
@@ -117,7 +117,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
           <div className="border-t-[1px] border-secondary-400 w-full pt-6 flex items-center justify-between max-md:flex-col max-md:gap-6 max-md:items-start">
             <Typography variant="body3">{t('share_post')}</Typography>
             <ShareButtons
-              url={`https://coursinity-jawr-git-push-for-build-rostiks-projects-68dc3a47.vercel.app/${locale}/blog/${slug}`}
+              url={`https://coursinity-jawr-git-dev-rostiks-projects-68dc3a47.vercel.app/${locale}/blog/${slug}`}
               title={article?.Share?.ShareTitle || ''}
               content={article?.Share?.ShareContent}
             />
