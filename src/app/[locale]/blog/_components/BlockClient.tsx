@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils'
 import Pagination from './Pagination'
 import { useRouter } from 'next/navigation'
 import { setBlogPage } from '../actions'
+import { Helmet } from 'react-helmet'
 
 // ──────────────────────────────────────────────────────────────────────────────
 // UI atoms
@@ -102,6 +103,7 @@ function ArticleCardSkeleton() {
     </div>
   )
 }
+
 export function BlogClient({
   articles,
   featuredArticles,

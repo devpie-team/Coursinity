@@ -10,6 +10,42 @@ import ShareButtons from './_components/ShareButtons'
 import { getArticleBySlug } from '@/services/getArticle'
 import ArticleBlocksRenderer from './_components/ArticleBlocksRenderer'
 import BlogDate from './_components/BlogDate'
+import { Metadata } from 'next'
+
+export async function generateMetadata({ params }: { params: { slug: string; locale: string } }): Promise<Metadata> {
+  const { slug, locale } = params
+
+  const article = await getArticleBySlug(slug, false, locale)
+
+  if (!article) {
+    return {
+      title: 'Coursinity Blog',
+      description: 'Latest blog posts and insights'
+    }
+  }
+
+  const title = article.Share?.ShareTitle || article.Title
+  const description = article.Share?.ShareContent || article.ShortDescription || ''
+  const image = article?.CoverImage?.formats?.large?.url ? API_URL + article.CoverImage.formats.large.url : undefined
+
+  return {
+    title,
+    description,
+    openGraph: {
+      type: 'article',
+      url: `https://www.coursinity.com/${locale}/blog/${slug}`,
+      title,
+      description,
+      images: image ? [{ url: image }] : undefined
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: image ? [image] : undefined
+    }
+  }
+}
 
 export default async function BlogPage({ params }: { params: Promise<{ slug: string; locale: string }> }) {
   const { slug, locale } = await params
@@ -66,7 +102,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
               </div>
             </div>
             <ShareButtons
-              url={`https://www.coursinity.com/${locale}/blog/${slug}`}
+              url={`https://coursinity-jawr-git-push-for-build-rostiks-projects-68dc3a47.vercel.app/${locale}/blog/${slug}`}
               title={article?.Share?.ShareTitle || ''}
               content={article?.Share?.ShareContent}
             />
@@ -77,7 +113,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
           <div className="border-t-[1px] border-secondary-400 w-full pt-6 flex items-center justify-between max-md:flex-col max-md:gap-6 max-md:items-start">
             <Typography variant="body3">{t('share_post')}</Typography>
             <ShareButtons
-              url={`https://www.coursinity.com/${locale}/blog/${slug}`}
+              url={`https://coursinity-jawr-git-push-for-build-rostiks-projects-68dc3a47.vercel.app/${locale}/blog/${slug}`}
               title={article?.Share?.ShareTitle || ''}
               content={article?.Share?.ShareContent}
             />

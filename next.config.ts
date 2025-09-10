@@ -14,6 +14,10 @@ const nextConfig: NextConfig = {
         hostname: '185.254.96.236',
         port: '1337',
         pathname: '/uploads/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'strapi.fearart.dev'
       }
     ]
   }

@@ -1,7 +1,7 @@
 // app/[locale]/blog/[slug]/ShareButtons.tsx
 'use client'
 
-import { FacebookShareButton, TwitterShareButton, LinkedinShareButton } from 'next-share'
+import { FacebookShareButton, TwitterShareButton, LinkedinShareButton } from 'react-share'
 import copy from 'copy-to-clipboard'
 import TwitterIcon from '@/components/icons/TwitterIcon'
 import FacebookIcon from '@/components/icons/FacebookIcon'
@@ -37,7 +37,6 @@ export default function ShareButtons({ url, title, content }: { url: string; tit
       <FacebookShareButton
         className="flex items-center justify-center w-14 h-14 rounded-full bg-secondary-100"
         url={url}
-        quote={title}
         content={content}>
         <div className="flex items-center justify-center w-14 h-14 rounded-full bg-secondary-100">
           <FacebookIcon fill />
