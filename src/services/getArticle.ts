@@ -1,7 +1,7 @@
 import { Article, StrapiResponse } from './types'
 
 export async function getArticleBySlug(slug: string, blocks: boolean, locale?: string): Promise<Article | null> {
-  const base = 'http://185.254.96.236:1337/api/articles'
+  const base = 'https://strapi.fearart.dev/api/articles'
   const url = new URL(base)
 
   url.searchParams.append('filters[Slug][$eq]', slug)
