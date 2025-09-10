@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils'
 import Pagination from './Pagination'
 import { useRouter } from 'next/navigation'
 import { setBlogPage } from '../actions'
-import { Helmet } from 'react-helmet'
+import { Input } from '@/components/primitives/input'
 
 // ──────────────────────────────────────────────────────────────────────────────
 // UI atoms
@@ -48,12 +48,14 @@ function CoverImg({ url, alt, className }: { url?: string; alt?: string; classNa
 
 function ReadMore({ slug, isArabic }: { slug: string; isArabic?: boolean }) {
   const router = useRouter()
+  const t = useTranslations('BL_BlogPost')
+
   return (
     <button
       className="text-left flex gap-1 items-center text-primary-purple"
       onClick={() => router.push(`/${isArabic ? 'ar' : 'en'}/blog/${slug}`)}>
       <Typography variant="button" weight="medium">
-        Read more
+        {t('read_more')}
       </Typography>
       <DirectionRightIcon />
     </button>
@@ -175,9 +177,17 @@ export function BlogClient({
                 {t('subtitle')}
               </Typography>
             </div>
-            <Button variant="purple" className="max-md:w-full">
-              {t('button')}
-            </Button>
+            <div className="flex max-lg:flex-col items-center gap-4 w-full justify-center">
+              <Input
+                placeholder={t('input')}
+                required={false}
+                className="rounded-full h-[60px] max-lg:w-[343px] max-md:w-full"
+                divClassName="h-[60px] max-lg:w-[343px] max-md:w-full"
+              />
+              <Button variant="purple" className=" max-lg:w-[343px] max-md:w-full h-[60px]">
+                {t('button')}
+              </Button>
+            </div>
           </div>
         </div>
 

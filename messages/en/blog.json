@@ -11,6 +11,7 @@
         "author": "Written by",
         "published_at": "Published on",
         "latest_title": "Latest Posts",
-        "share_post": "Share this post"
+        "share_post": "Share this post",
+        "read_more": "Read more"
     }
 }
