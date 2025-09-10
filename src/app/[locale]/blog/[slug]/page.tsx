@@ -30,7 +30,9 @@ export async function generateMetadata({
 
   const title = article.Share?.ShareTitle || article.Title
   const description = article.Share?.ShareContent || article.ShortDescription || ''
-  const image = article?.CoverImage?.formats?.large?.url ? API_URL + article.CoverImage.formats.large.url : undefined
+  const image = article?.CoverImage?.formats?.thumbnail?.url
+    ? API_URL + article.CoverImage.formats.thumbnail.url
+    : undefined
 
   return {
     title,
@@ -46,7 +48,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title,
       description,
-      images: image ? [image] : undefined
+      images: image ? image : undefined
     }
   }
 }
