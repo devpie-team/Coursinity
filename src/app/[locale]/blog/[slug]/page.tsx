@@ -37,7 +37,7 @@ export async function generateMetadata({
     description,
     openGraph: {
       type: 'article',
-      url: `https://www.coursinity.com/${locale}/blog/${slug}`,
+      url: `https://coursinity-jawr-git-dev-rostiks-projects-68dc3a47.vercel.app/${locale}/blog/${slug}`,
       title,
       description,
       images: image ? [{ url: image }] : undefined

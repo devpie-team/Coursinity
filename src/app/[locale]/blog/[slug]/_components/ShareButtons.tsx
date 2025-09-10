@@ -12,12 +12,20 @@ export default function ShareButtons({ url, title, content }: { url: string; tit
   const handleInstagram = async () => {
     if (navigator.share) {
       try {
-        await navigator.share({ title, url })
+        await navigator.share({
+          title,
+          text: content ?? '',
+          url
+        })
         return
-      } catch {}
+      } catch (err) {
+        console.warn('Share cancelled or failed', err)
+      }
     }
+
+    // fallback: copy link
     copy(url)
-    // replace with your toast if you have one
+    // if you have a toast system, use that instead
     alert('Link copied! Open Instagram and paste it.')
   }
 

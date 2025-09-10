@@ -128,6 +128,7 @@ const ArticleBlocksRenderer = memo(function ArticleBlocksRenderer({
         switch (block.__component) {
           case 'article-blocks.text': {
             const { Paragraph } = block as TextBlock
+
             return (
               <div key={key} className="mb-12 text-description text-lg max-lg:text-base">
                 <ReactMarkdown
