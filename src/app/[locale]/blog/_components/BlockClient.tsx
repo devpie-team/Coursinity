@@ -31,9 +31,9 @@ function TagPill({ children }: { children?: string }) {
 }
 
 function TagsRow({ tags }: { tags?: { id: number; Tag?: string }[] }) {
-  if (!tags?.length) return <div className="h-7" />
+  if (!tags?.length) return <div className="h-7 max-md:h-auto" />
   return (
-    <div className="flex flex-wrap gap-2 h-7">
+    <div className="flex flex-wrap gap-2 h-7 max-md:h-auto">
       {tags.map((t) => (
         <TagPill key={t.id}>{t.Tag}</TagPill>
       ))}
@@ -80,11 +80,11 @@ export function ArticleCard({ a, isArabic }: { a: Article; isArabic: boolean }) 
         <Typography
           variant="button"
           weight="medium"
-          className="line-clamp-2 break-words h-12 cursor-pointer"
+          className="line-clamp-2 break-words h-12 cursor-pointer max-md:h-auto"
           onClick={() => router.push(`/${isArabic ? 'ar' : 'en'}/blog/${a.Slug}`)}>
           {title}
         </Typography>
-        <Typography variant="caption" className="text-description line-clamp-2 break-words h-10">
+        <Typography variant="caption" className="text-description line-clamp-2 break-words h-10 max-md:h-auto">
           {desc}
         </Typography>
       </div>
@@ -193,7 +193,7 @@ export function BlogClient({
 
         {/* Featured section */}
         {featuredArticles.data.length ? (
-          <section className="flex flex-col items-center bg-white rounded-[40px] border-secondary-400 border py-[120px] max-lg:py-[80px] px-[85px] max-lg:px-12 max-md:px-4 w-full">
+          <section className="flex flex-col items-center bg-white rounded-[40px] border-secondary-400 border py-[120px] max-lg:py-[80px] max-md:py-[60px] px-[85px] max-lg:px-12 max-md:px-4 w-full">
             <div className="flex flex-col gap-12 w-full max-w-[1740px]">
               <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
                 {t('block_title')}
@@ -261,7 +261,7 @@ export function BlogClient({
         ) : null}
 
         {/* Latest */}
-        <section className="flex flex-col gap-12 px-[85px] max-lg:px-0 py-[120px] w-full max-w-[1540px] self-center max-md:px-2">
+        <section className="flex flex-col gap-12 max-md:gap-8 px-[85px] max-lg:px-0 py-[120px] max-md:py-[60px] w-full max-w-[1540px] self-center max-md:px-2">
           <Typography variant="h3" weight="medium" className="max-lg:!text-2xl">
             {t('latest_title')}
           </Typography>
