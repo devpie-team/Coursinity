@@ -162,7 +162,7 @@ export function BlogClient({
     <>
       <Header />
 
-      <section className="flex flex-col items-center bg-gradient-to-b from-[#F9FAFB] via-[#F9FAFB] to-[#F9FAFB] w-full px-8 ">
+      <section className="flex flex-col items-center bg-gradient-to-b from-[#F9FAFB] via-[#F9FAFB] to-[#F9FAFB] w-full px-8 max-md:px-2 ">
         <div className="flex flex-col gap-[98px] pt-[200px] max-lg:pt-[140px] px-4 items-center max-md:pt-[120px] pb-[88px] max-lg:pb-[72px]">
           <div className="flex flex-col gap-8 items-center">
             <div
@@ -193,7 +193,7 @@ export function BlogClient({
 
         {/* Featured section */}
         {featuredArticles.data.length ? (
-          <section className="flex flex-col items-center bg-white rounded-[40px] border-secondary-400 border py-[120px] max-lg:py-[80px] px-[85px] max-lg:px-12 w-full">
+          <section className="flex flex-col items-center bg-white rounded-[40px] border-secondary-400 border py-[120px] max-lg:py-[80px] px-[85px] max-lg:px-12 max-md:px-4 w-full">
             <div className="flex flex-col gap-12 w-full max-w-[1740px]">
               <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
                 {t('block_title')}
@@ -261,7 +261,7 @@ export function BlogClient({
         ) : null}
 
         {/* Latest */}
-        <section className="flex flex-col gap-12 px-[85px] max-lg:px-0 py-[120px] w-full max-w-[1540px] self-center">
+        <section className="flex flex-col gap-12 px-[85px] max-lg:px-0 py-[120px] w-full max-w-[1540px] self-center max-md:px-2">
           <Typography variant="h3" weight="medium" className="max-lg:!text-2xl">
             {t('latest_title')}
           </Typography>
