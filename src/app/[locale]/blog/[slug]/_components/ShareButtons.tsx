@@ -10,9 +10,11 @@ import LinkedInIcon from '@/components/icons/LinkedInIcon'
 import { Button } from '@/components/primitives/button'
 import { CopyIcon } from '@/components/icons'
 import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 export default function ShareButtons({ url, title, content }: { url: string; title: string; content?: string }) {
   const [isMobile, setIsMobile] = useState(false)
+  const t = useTranslations('BL_BlogPost')
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -47,7 +49,7 @@ export default function ShareButtons({ url, title, content }: { url: string; tit
   return (
     <div className="flex gap-2">
       <Button variant="hero" leftIcon={<CopyIcon />} onClick={handleInstagram} iconButton={isMobile}>
-        {!isMobile ? 'Copy link' : ''}
+        {!isMobile ? t('copyLink') : ''}
       </Button>
 
       <TwitterShareButton
