@@ -16,7 +16,6 @@ export const LogoSlider = () => {
     'assets/logos/nebosh.png',
     'assets/logos/GInI.png',
     'assets/logos/comptia.png',
-    'assets/logos/nebosh.png',
     'assets/logos/GInI.png',
     'assets/logos/iosh.png',
     'assets/logos/axelos.png',
@@ -25,7 +24,6 @@ export const LogoSlider = () => {
     'assets/logos/IoSCM.png',
     'assets/logos/IFA.png',
     'assets/logos/comptia.png',
-    'assets/logos/nebosh.png',
     'assets/logos/GInI.png'
   ]
 
@@ -35,7 +33,6 @@ export const LogoSlider = () => {
     'assets/logos/IoSCM_colored.png',
     'assets/logos/IFA_colored.png',
     'assets/logos/comptia_colored.png',
-    'assets/logos/nebosh_colored.png',
     'assets/logos/GInI_colored.png',
     'assets/logos/iosh_colored.png',
     'assets/logos/axelos_colored.png',
@@ -44,7 +41,6 @@ export const LogoSlider = () => {
     'assets/logos/IoSCM_colored.png',
     'assets/logos/IFA_colored.png',
     'assets/logos/comptia_colored.png',
-    'assets/logos/nebosh_colored.png',
     'assets/logos/GInI_colored.png'
   ]
 
