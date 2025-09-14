@@ -40,8 +40,10 @@ type PolymorphicProps<E extends React.ElementType> = {
   href?: string
   disabled?: boolean
   className?: string
+  leftIcon?: React.ReactNode
+  rightIcon?: React.ReactNode
+  iconButton?: boolean
 } & VariantProps<typeof buttonVariants> &
-  // важливо: уникаємо конфліктів типів з базовими пропами елемента
   Omit<React.ComponentPropsWithoutRef<E>, 'className' | 'href' | 'disabled'>
 
 type ButtonType = (<E extends React.ElementType = 'button'>(
@@ -51,26 +53,41 @@ type ButtonType = (<E extends React.ElementType = 'button'>(
 }
 
 export const Button: ButtonType = (props) => {
-  const { as, asChild = false, href, disabled, className, variant, size, ...rest } = props as PolymorphicProps<any>
+  const {
+    as,
+    asChild = false,
+    href,
+    disabled,
+    className,
+    variant,
+    size,
+    leftIcon,
+    rightIcon,
+    children,
+    iconButton,
+    ...rest
+  } = props as PolymorphicProps<any>
 
   const locale = useLocale()
   const isArabic = locale === 'ar'
   const fontClass = isArabic ? 'font-kanun-ar' : 'font-poppins'
 
-  // якщо є href — рендеримо <a>, інакше <button> (або те, що передали в as)
   const Comp = asChild ? Slot : as ?? (href ? 'a' : 'button')
 
-  const classes = cn(buttonVariants({ variant, size }), fontClass, className)
+  const classes = cn(
+    buttonVariants({ variant, size }),
+    fontClass,
+    className,
+    'gap-2 flex items-center justify-center',
+    iconButton ? 'w-[56px] h-[56px] p-0' : undefined
+  )
 
-  // коректна поведінка disabled для <a>
   const linkDisableProps =
     href && disabled
       ? {
           'aria-disabled': true,
           tabIndex: -1,
-          onClick: (e: React.MouseEvent) => {
-            e.preventDefault()
-          }
+          onClick: (e: React.MouseEvent) => e.preventDefault()
         }
       : {}
 
@@ -81,11 +98,12 @@ export const Button: ButtonType = (props) => {
       type={Comp === 'button' ? (rest as any).type ?? 'button' : undefined}
       className={classes}
       {...linkDisableProps}
-      {...(rest as any)}
-    />
+      {...(rest as any)}>
+      {leftIcon && <span className="flex items-center">{leftIcon}</span>}
+      {iconButton ? null : <span>{children}</span>}
+      {rightIcon && <span className="flex items-center">{rightIcon}</span>}
+    </Comp>
   )
 }
 
 Button.displayName = 'Button'
-
-export { buttonVariants }

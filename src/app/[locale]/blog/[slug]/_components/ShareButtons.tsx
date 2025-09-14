@@ -7,8 +7,23 @@ import TwitterIcon from '@/components/icons/TwitterIcon'
 import FacebookIcon from '@/components/icons/FacebookIcon'
 import InstagramIcon from '@/components/icons/InstagramIcon'
 import LinkedInIcon from '@/components/icons/LinkedInIcon'
+import { Button } from '@/components/primitives/button'
+import { CopyIcon } from '@/components/icons'
+import { useEffect, useState } from 'react'
 
 export default function ShareButtons({ url, title, content }: { url: string; title: string; content?: string }) {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+    }
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
   const handleInstagram = async () => {
     if (navigator.share) {
       try {
@@ -31,6 +46,10 @@ export default function ShareButtons({ url, title, content }: { url: string; tit
 
   return (
     <div className="flex gap-2">
+      <Button variant="hero" leftIcon={<CopyIcon />} onClick={handleInstagram} iconButton>
+        {!isMobile ? 'Copy link' : ''}
+      </Button>
+
       <TwitterShareButton
         className="flex items-center justify-center w-14 h-14 rounded-full bg-secondary-100"
         url={url}
