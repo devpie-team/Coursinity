@@ -46,7 +46,7 @@ export default function ShareButtons({ url, title, content }: { url: string; tit
 
   return (
     <div className="flex gap-2">
-      <Button variant="hero" leftIcon={<CopyIcon />} onClick={handleInstagram} iconButton>
+      <Button variant="hero" leftIcon={<CopyIcon />} onClick={handleInstagram} iconButton={isMobile}>
         {!isMobile ? 'Copy link' : ''}
       </Button>
 
