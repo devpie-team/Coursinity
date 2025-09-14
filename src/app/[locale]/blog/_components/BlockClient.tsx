@@ -57,7 +57,9 @@ function ReadMore({ slug, isArabic }: { slug: string; isArabic?: boolean }) {
       <Typography variant="button" weight="medium">
         {t('read_more')}
       </Typography>
-      <DirectionRightIcon />
+      <div className={isArabic ? 'rotate-180' : ''}>
+        <DirectionRightIcon />
+      </div>
     </button>
   )
 }
@@ -163,14 +165,20 @@ export function BlogClient({
       <Header />
 
       <section className="flex flex-col items-center bg-gradient-to-b from-[#F9FAFB] via-[#F9FAFB] to-[#F9FAFB] w-full px-8 max-md:px-2 ">
-        <div className="flex flex-col gap-[98px] pt-[200px] max-lg:pt-[140px] px-4 items-center max-md:pt-[120px] pb-[88px] max-lg:pb-[72px]">
+        <div
+          className={cn(
+            'flex flex-col gap-[98px] pt-[200px] max-lg:pt-[140px] px-4 items-center max-md:pt-[120px]',
+            !featuredArticles.data.length ? 'pb-0' : ' pb-[88px] max-lg:pb-[72px]'
+          )}>
           <div className="flex flex-col gap-8 items-center">
             <div
               className={cn(
                 'flex flex-col items-center text-center',
-                isArabic ? 'max-w-[1086px] gap-9 max-lg:gap-6' : 'max-w-[778px] max-lg:max-w-[506px] gap-6 max-lg:gap-4'
+                isArabic
+                  ? 'max-w-[1000px] max-lg:max-w-[600px] gap-9 max-lg:gap-6'
+                  : 'max-w-[778px] max-lg:max-w-[506px] gap-6 max-lg:gap-4'
               )}>
-              <Typography variant={isDesktop ? 'h1' : 'h3'} weight="medium">
+              <Typography variant={isDesktop ? 'h1' : isArabic ? 'h5' : 'h3'} weight="medium">
                 {t('title')}
               </Typography>
               <Typography variant="body3" className="text-center text-description">

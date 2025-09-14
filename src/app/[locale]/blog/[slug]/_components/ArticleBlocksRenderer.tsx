@@ -8,6 +8,8 @@ import rehypeRaw from 'rehype-raw'
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize'
 import { Typography } from '@/components/ui'
 import AOS from 'aos'
+import { cn } from '@/lib/utils'
+import { useLocale } from 'next-intl'
 
 // ===== Types (адаптуй під свою схему Strapi, якщо поля відрізняються)
 type BaseBlock = {
@@ -95,6 +97,9 @@ const ArticleBlocksRenderer = memo(function ArticleBlocksRenderer({
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
 
+  const locale = useLocale()
+  const isArabic = locale === 'ar'
+
   useEffect(() => {
     AOS.init({ once: false, duration: 700, offset: 100, easing: 'ease-in-out', mirror: true })
 
@@ -130,7 +135,12 @@ const ArticleBlocksRenderer = memo(function ArticleBlocksRenderer({
             const { Paragraph } = block as TextBlock
 
             return (
-              <div key={key} className="mb-12 text-description text-lg max-lg:text-base">
+              <div
+                key={key}
+                className={cn(
+                  'mb-12 text-description text-lg max-lg:text-base ',
+                  isArabic ? 'font-kanun-ar' : 'font-poppins'
+                )}>
                 <ReactMarkdown
                   rehypePlugins={[rehypeRaw, [rehypeSanitize, sanitizeSchema]]}
                   components={{
