@@ -66,8 +66,8 @@ export const TestimonialCard = ({ data, position, isDesktop }: TestimonialCardPr
   return (
     <div
       className={cn(
-        `w-[880px] h-[440px] p-4 bg-secondary-300 rounded-[20px] flex gap-12 max-lg:gap-4 max-lg:w-[710px] max-lg:h-auto max-md:flex-col max-md:w-[343px] max-md:gap-[18px] max-md:p-[10px] justify-between ${positionClass}`,
-        isArabic && 'max-md:h-[500px]'
+        `w-[880px] h-[440px] p-4 bg-secondary-300 rounded-[20px] flex gap-12 max-lg:gap-4 max-lg:w-[710px] max-md:rounded-2xl max-lg:h-auto max-md:flex-col max-md:w-[343px] max-md:gap-[18px] max-md:p-[10px] justify-between ${positionClass}`,
+        isArabic && 'max-md:h-auto'
       )}>
       <div className="flex flex-col justify-between p-4 max-lg:p-2 order-1 max-md:order-2 max-md:p-0 max-md:gap-4">
         <Typography variant={isDesktop ? 'h6' : 'body3'} weight="medium" className="max-md:px-2">

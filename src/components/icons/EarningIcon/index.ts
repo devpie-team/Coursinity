@@ -1,0 +1,1 @@
+export { EarningIcon } from './EarningIcon'

@@ -13,7 +13,6 @@ export const LogoSlider = () => {
   // Default grayscale logos
   const defaultLogos = [
     'assets/logos/comptia.png',
-    'assets/logos/nebosh.png',
     'assets/logos/GInI.png',
     'assets/logos/comptia.png',
     'assets/logos/GInI.png',

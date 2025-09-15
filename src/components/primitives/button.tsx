@@ -18,6 +18,8 @@ const buttonVariants = cva(
           'btn-gradient-purple bg-primary-purple text-white hover:bg-secondary-purple hover:shadow-[0px_12px_30px_0px_#A578F240] active:bg-none active:bg-primary-purple active:shadow-none disabled:pointer-events-none disabled:bg-opacity-20 disabled:text-opacity-90',
         hero: 'bg-white text-primary-purple border border-secondary-400 hover:bg-primary-purple hover:text-white hover:shadow-[0px_12px_30px_0px_#A578F240] active:bg-none active:bg-secondary-purple active:shadow-none disabled:pointer-events-none disabled:bg-opacity-20 disabled:text-opacity-90',
         academy:
+          'h-[56px] px-8 py-4 rounded-full bg-[#0EC2B4] hover:bg-[#05A59A] text-white active:bg-[#05A59A] active:text-white disabled:bg-[#D7DCE3] disabled:text-white/70  disabled:pointer-events-none',
+        academy_secondary:
           'h-[56px] px-8 py-4 rounded-full text-primary-green bg-light-green hover:bg-[#0EC2B4] hover:text-white active:bg-[#05A59A] active:text-white disabled:bg-[#D7DCE3] disabled:text-white/70  disabled:pointer-events-none'
       },
       size: {
@@ -38,8 +40,10 @@ type PolymorphicProps<E extends React.ElementType> = {
   href?: string
   disabled?: boolean
   className?: string
+  leftIcon?: React.ReactNode
+  rightIcon?: React.ReactNode
+  iconButton?: boolean
 } & VariantProps<typeof buttonVariants> &
-  // важливо: уникаємо конфліктів типів з базовими пропами елемента
   Omit<React.ComponentPropsWithoutRef<E>, 'className' | 'href' | 'disabled'>
 
 type ButtonType = (<E extends React.ElementType = 'button'>(
@@ -49,26 +53,41 @@ type ButtonType = (<E extends React.ElementType = 'button'>(
 }
 
 export const Button: ButtonType = (props) => {
-  const { as, asChild = false, href, disabled, className, variant, size, ...rest } = props as PolymorphicProps<any>
+  const {
+    as,
+    asChild = false,
+    href,
+    disabled,
+    className,
+    variant,
+    size,
+    leftIcon,
+    rightIcon,
+    children,
+    iconButton,
+    ...rest
+  } = props as PolymorphicProps<any>
 
   const locale = useLocale()
   const isArabic = locale === 'ar'
   const fontClass = isArabic ? 'font-kanun-ar' : 'font-poppins'
 
-  // якщо є href — рендеримо <a>, інакше <button> (або те, що передали в as)
   const Comp = asChild ? Slot : as ?? (href ? 'a' : 'button')
 
-  const classes = cn(buttonVariants({ variant, size }), fontClass, className)
+  const classes = cn(
+    buttonVariants({ variant, size }),
+    fontClass,
+    className,
+    'gap-2 flex items-center justify-center',
+    iconButton ? 'w-[56px] h-[56px] p-0' : undefined
+  )
 
-  // коректна поведінка disabled для <a>
   const linkDisableProps =
     href && disabled
       ? {
           'aria-disabled': true,
           tabIndex: -1,
-          onClick: (e: React.MouseEvent) => {
-            e.preventDefault()
-          }
+          onClick: (e: React.MouseEvent) => e.preventDefault()
         }
       : {}
 
@@ -79,11 +98,12 @@ export const Button: ButtonType = (props) => {
       type={Comp === 'button' ? (rest as any).type ?? 'button' : undefined}
       className={classes}
       {...linkDisableProps}
-      {...(rest as any)}
-    />
+      {...(rest as any)}>
+      {leftIcon && <span className="flex items-center">{leftIcon}</span>}
+      {iconButton ? null : <span>{children}</span>}
+      {rightIcon && <span className="flex items-center">{rightIcon}</span>}
+    </Comp>
   )
 }
 
 Button.displayName = 'Button'
-
-export { buttonVariants }

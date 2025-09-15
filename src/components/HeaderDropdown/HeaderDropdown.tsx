@@ -91,10 +91,11 @@ export const HeaderDropdown = ({ start }: { start: boolean }) => {
             )}></a>
         </div>
       )}
-
-      <Typography weight="medium" variant="caption">
-        {t('blog')}
-      </Typography>
+      <a href={`/${locale}/blog`}>
+        <Typography weight="medium" variant="caption">
+          {t('blog')}
+        </Typography>
+      </a>
     </div>
   )
 }

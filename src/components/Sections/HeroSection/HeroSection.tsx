@@ -18,7 +18,6 @@ import hero3Ar from '../../../../public/assets/lottie/hero/ar/h_3.json'
 import hero4Ar from '../../../../public/assets/lottie/hero/ar/h_4.json'
 import type { LottieRefCurrentProps } from 'lottie-react'
 import 'aos/dist/aos.css'
-import { BubbleIcon } from '@/components/icons'
 import { cn } from '@/lib/utils'
 
 gsap.registerPlugin(ScrollTrigger)

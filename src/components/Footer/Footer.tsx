@@ -10,15 +10,16 @@ import YouTubeIcon from '../icons/YouTubeIcon'
 import { Typography } from '../ui'
 import { useLocale, useTranslations } from 'next-intl'
 import React, { useEffect, useState } from 'react'
-import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { FadeInOnView } from '../FadeInOnView/FadeInOnView'
+import { useRouter } from 'next/navigation'
 
 type FooterProps = {
   className?: string
+  page?: string
 }
 
-const Footer = ({ className }: FooterProps) => {
+const Footer = ({ className, page }: FooterProps) => {
   const t = useTranslations('Footer.Footer')
 
   const [isMobile, setIsMobile] = useState<boolean>(false)
@@ -40,48 +41,56 @@ const Footer = ({ className }: FooterProps) => {
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
 
-  const renderListItems = (baseKey: string, count: number) =>
-    Array.from({ length: count }).map((_, i) => (
-      <li key={i}>
-        <Typography as="a" href="#" variant={isDesktop ? 'body3' : 'caption'}>
-          {t(`${baseKey}.${i}`)}
-        </Typography>
-      </li>
-    ))
+  const renderListItems = (baseKey: string, count: number) => {
+    return Array.from({ length: count }).map((_, i) => {
+      const blog = baseKey === 'columns.company.items' && i == 2
+
+      return (
+        <li key={i}>
+          <Typography as="a" href={blog ? `/${locale}/blog` : '#'} variant={isDesktop ? 'body3' : 'caption'}>
+            {t(`${baseKey}.${i}`)}
+          </Typography>
+        </li>
+      )
+    })
+  }
 
   return (
     <footer
       className={cn(
         'w-full py-[140px] px-[150px] pb-[50px] text-white bg-primary-purple max-[1280px]:px-6 max-lg:py-20 max-lg:pb-16 max-[834px]:px-4 ',
-        className
+        className,
+        page == 'academy' && 'bg-primary-green'
       )}>
       <div className="flex flex-col gap-[120px] max-lg:gap-20">
         {/*Headline*/}
-        <div className="flex flex-col gap-8 items-center font-medium text-center max-lg:gap-4">
-          <FadeInOnView>
-            <Typography variant={isDesktop ? 'h2' : 'h5'} weight="medium">
-              {t('headline')
-                .split('\n')
-                .map((line, i) => (
-                  <React.Fragment key={i}>
-                    {' '}
-                    {''}
-                    {line}
-                  </React.Fragment>
-                ))}
-            </Typography>
-          </FadeInOnView>
-          <FadeInOnView>
-            <Typography variant={isDesktop ? 'body2' : 'button'} weight="regular" className="text-opacity-80">
-              {t('subheadline')}
-            </Typography>
-            <a href={`/${locale}/contact-form`} className="w-[263px] max-lg:w-[343px] max-md:w-full mt-4">
-              <Button variant="secondary" size="md" className="w-[263px] max-lg:w-[343px] mt-4">
-                {t('button')}
-              </Button>
-            </a>
-          </FadeInOnView>
-        </div>
+        {page !== 'blog' && (
+          <div className="flex flex-col gap-8 items-center font-medium text-center max-lg:gap-4">
+            <FadeInOnView>
+              <Typography variant={isDesktop ? 'h2' : 'h5'} weight="medium">
+                {t('headline')
+                  .split('\n')
+                  .map((line, i) => (
+                    <React.Fragment key={i}>
+                      {' '}
+                      {''}
+                      {line}
+                    </React.Fragment>
+                  ))}
+              </Typography>
+            </FadeInOnView>
+            <FadeInOnView>
+              <Typography variant={isDesktop ? 'body2' : 'button'} weight="regular" className="text-opacity-80">
+                {t('subheadline')}
+              </Typography>
+              <a href={`/${locale}/contact-form`} className="w-[263px] max-lg:w-[343px] max-md:w-full mt-4">
+                <Button variant="secondary" size="md" className="w-[263px] max-lg:w-[343px] mt-4">
+                  {t('button')}
+                </Button>
+              </a>
+            </FadeInOnView>
+          </div>
+        )}
 
         {/* Middle: Columns */}
         <div className="flex flex-col justify-between ">

@@ -1,0 +1,95 @@
+// app/[locale]/blog/[slug]/ShareButtons.tsx
+'use client'
+
+import { FacebookShareButton, TwitterShareButton, LinkedinShareButton } from 'react-share'
+import copy from 'copy-to-clipboard'
+import TwitterIcon from '@/components/icons/TwitterIcon'
+import FacebookIcon from '@/components/icons/FacebookIcon'
+import InstagramIcon from '@/components/icons/InstagramIcon'
+import LinkedInIcon from '@/components/icons/LinkedInIcon'
+import { Button } from '@/components/primitives/button'
+import { CopyIcon } from '@/components/icons'
+import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
+
+export default function ShareButtons({ url, title, content }: { url: string; title: string; content?: string }) {
+  const [isMobile, setIsMobile] = useState(false)
+  const t = useTranslations('BL_BlogPost')
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+    }
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  const handleInstagram = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title,
+          text: content ?? '',
+          url
+        })
+        return
+      } catch (err) {
+        console.warn('Share cancelled or failed', err)
+      }
+    }
+
+    // fallback: copy link
+    copy(url)
+    // if you have a toast system, use that instead
+    alert('Link copied! Open Instagram and paste it.')
+  }
+
+  return (
+    <div className="flex gap-2">
+      <Button variant="hero" leftIcon={<CopyIcon />} onClick={handleInstagram} iconButton={isMobile}>
+        {!isMobile ? t('copyLink') : ''}
+      </Button>
+
+      <TwitterShareButton
+        className="flex items-center justify-center w-14 h-14 rounded-full bg-secondary-100"
+        url={url}
+        title={title}
+        content={content}
+        hashtags={['yourTag']}>
+        <div className="flex items-center justify-center w-14 h-14 rounded-full bg-secondary-100">
+          <TwitterIcon />
+        </div>
+      </TwitterShareButton>
+
+      <FacebookShareButton
+        className="flex items-center justify-center w-14 h-14 rounded-full bg-secondary-100"
+        url={url}
+        content={content}>
+        <div className="flex items-center justify-center w-14 h-14 rounded-full bg-secondary-100">
+          <FacebookIcon fill />
+        </div>
+      </FacebookShareButton>
+
+      <button
+        className="flex items-center justify-center w-14 h-14 rounded-full bg-secondary-100"
+        onClick={handleInstagram}
+        type="button">
+        <InstagramIcon fill />
+      </button>
+
+      <LinkedinShareButton
+        className="flex items-center justify-center w-14 h-14 rounded-full bg-secondary-100"
+        url={url}
+        title={title}
+        summary={content}
+        source={url}
+        content={content}>
+        <div className="flex items-center justify-center w-14 h-14 rounded-full bg-secondary-100">
+          <LinkedInIcon fill />
+        </div>
+      </LinkedinShareButton>
+    </div>
+  )
+}

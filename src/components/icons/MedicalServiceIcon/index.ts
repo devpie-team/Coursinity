@@ -1,0 +1,1 @@
+export { MedicalServiceIcon } from './MedicalServiceIcon'
