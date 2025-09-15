@@ -125,12 +125,7 @@ export const Header = () => {
               }}
             />
             <div className="flex flex-col gap-4 items-center">
-              <a className="py-[7px] px-2" href={`/${locale}/solutions`}>
-                <Typography weight="medium" variant="h6">
-                  {t('solutions')}
-                </Typography>
-              </a>
-              {/* <div
+              <div
                 className="gap-[10px] flex items-center cursor-pointer select-none"
                 onClick={() => setOpened((v) => !v)}>
                 <Typography weight="medium" variant="h6">
@@ -139,13 +134,19 @@ export const Header = () => {
                 <div className={`transition-transform duration-300 ${opened ? 'rotate-180' : ''}`}>
                   <CaretDown />
                 </div>
-              </div>*/}
-              {opened && <div className="flex flex-col gap-[6px]"></div>}
-              {/* <a href="">
+              </div>
+              {opened && (
+                <div className="flex flex-col gap-[6px]">
+                  <a className="py-[7px] px-2" href={`/${locale}/solutions`}>
+                    <Typography>{t('solutions')}</Typography>
+                  </a>
+                </div>
+              )}
+              <a href="">
                 <Typography weight="medium" variant="h6">
                   {t('blog')}
                 </Typography>
-              </a> */}
+              </a>
             </div>
           </div>
           <a href={`/${locale}/blog`}>
