@@ -63,14 +63,16 @@ export const HeaderDropdown = ({ start }: { start: boolean }) => {
       className={`${
         start ? 'shadow-md' : ''
       } relative px-6 py-4 gap-6 flex items-center bg-white rounded-[40px] justify-self-center`}>
-      <a className="gap-[10px] flex items-center cursor-pointer select-none" href={`/${locale}/solutions`}>
+      <div
+        className="gap-[10px] flex items-center cursor-pointer select-none"
+        onPointerDown={() => setOpened((v) => !v)}>
         <Typography weight="medium" variant="caption">
-          {t('solutions')}
+          {t('services')}
         </Typography>
-        {/* <div className={`transition-transform duration-300 ${opened ? 'rotate-180' : ''}`}>
+        <div className={`transition-transform duration-300 ${opened ? 'rotate-180' : ''}`}>
           <CaretDown />
-        </div> */}
-      </a>
+        </div>
+      </div>
 
       {mounted && (
         <div
@@ -88,7 +90,10 @@ export const HeaderDropdown = ({ start }: { start: boolean }) => {
             className={cn(
               'px-6 py-3 hover:bg-neutral-100 transition-colors rounded-2xl mx-[6px] ',
               isArabic ? 'text-right' : 'text-left'
-            )}></a>
+            )}
+            href={`/${locale}/solutions`}>
+            {t('solutions')}
+          </a>
         </div>
       )}
       <a href={`/${locale}/blog`}>

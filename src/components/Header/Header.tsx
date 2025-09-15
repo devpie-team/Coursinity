@@ -141,11 +141,11 @@ export const Header = () => {
                 </div>
               </div>*/}
               {opened && <div className="flex flex-col gap-[6px]"></div>}
-              <a href="">
+              {/* <a href="">
                 <Typography weight="medium" variant="h6">
                   {t('blog')}
                 </Typography>
-              </a>
+              </a> */}
             </div>
           </div>
           <a href={`/${locale}/blog`}>

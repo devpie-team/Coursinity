@@ -10,6 +10,7 @@ import { HeaderVisibilityProvider } from '@/components/Header/HeaderVisibilityCo
 import { JsonLdSchema } from '@/components/JsonLdSchema'
 
 import SmoothScrollProvider from '@/components/SmoothScrollProvider'
+import Script from 'next/script'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -126,6 +127,22 @@ export default async function LocaleLayout({
     <html lang={locale} className={fontClass} dir={isArabic ? 'rtl' : 'ltr'}>
       <head>
         <JsonLdSchema locale={locale} />
+        {/* Meta Pixel init */}
+        <Script id="facebook-pixel" strategy="afterInteractive">
+          {`
+          !function(f,b,e,v,n,t,s){
+            if(f.fbq) return;
+            n=f.fbq=function(){ n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments) };
+            if(!f._fbq) f._fbq=n;
+            n.push=n; n.loaded=!0; n.version='2.0';
+            n.queue=[];
+            t=b.createElement(e); t.async=!0; t.src=v;
+            s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s);
+          }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '1255262075149493');
+          fbq('track', 'PageView');
+        `}
+        </Script>
         <link rel="icon" type="image/png" href="/assets/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
         <link rel="shortcut icon" href="/assets/favicon.ico" />
@@ -155,6 +172,16 @@ export default async function LocaleLayout({
             </HeaderVisibilityProvider>
           </Theme>
         </NextIntlClientProvider>
+
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: 'none' }}
+            src="https://www.facebook.com/tr?id=1255262075149493&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
       </body>
     </html>
   )
