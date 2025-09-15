@@ -5,13 +5,12 @@ import { Button } from '@/components/primitives/button'
 import { Checkbox } from '@/components/primitives/checkbox'
 import { Input } from '@/components/primitives/input'
 import { Typography } from '@/components/ui'
-import { SuccessModal } from '@/components/SuccessModal'
 import { cn } from '@/lib/utils'
 import { useTranslations, useLocale } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 
 // Схема валідації
 const contactFormSchema = z.object({
@@ -39,6 +38,9 @@ export const ContactForm = ({ className, onSuccess }: ContactFormProps) => {
   const locale = useLocale()
   const isArabic = locale === 'ar'
 
+  const searchParams = useSearchParams()
+  const emailFromQuery = searchParams.get('email') ?? ''
+
   const {
     register,
     handleSubmit,
@@ -51,7 +53,7 @@ export const ContactForm = ({ className, onSuccess }: ContactFormProps) => {
     defaultValues: {
       firstName: '',
       lastName: '',
-      businessEmail: '',
+      businessEmail: emailFromQuery || '',
       phoneNumber: '',
       companyName: '',
       jobTitle: '',

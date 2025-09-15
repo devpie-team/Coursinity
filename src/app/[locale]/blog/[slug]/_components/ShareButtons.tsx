@@ -40,10 +40,7 @@ export default function ShareButtons({ url, title, content }: { url: string; tit
       }
     }
 
-    // fallback: copy link
     copy(url)
-    // if you have a toast system, use that instead
-    alert('Link copied! Open Instagram and paste it.')
   }
 
   return (

@@ -99,7 +99,7 @@ export function BlogClient({
   featuredArticles: StrapiResponse<Article>
   currentPage: number
 }) {
-  const [isMobile, setIsMobile] = useState(false)
+  const [email, setEmail] = useState('')
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
   const [isPending, startTransition] = useTransition() // 👈 для м'якої індикації
@@ -112,7 +112,6 @@ export function BlogClient({
     AOS.init({ once: false, duration: 700, offset: 100, easing: 'ease-in-out', mirror: true })
     const checkScreenSize = () => {
       const width = window.innerWidth
-      setIsMobile(width < 768)
       setIsTablet(width >= 768 && width <= 1024)
       setIsDesktop(width > 1024)
     }
@@ -173,8 +172,13 @@ export function BlogClient({
                 required={false}
                 className="rounded-full h-[60px] max-lg:w-[343px] max-md:w-full"
                 divClassName="h-[60px] max-lg:w-[343px] max-md:w-full"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
               />
-              <Button variant="purple" className=" max-lg:w-[343px] max-md:w-full h-[60px]">
+              <Button
+                variant="purple"
+                className=" max-lg:w-[343px] max-md:w-full h-[60px]"
+                onClick={() => router.push(`/${locale}/contact-form?email=${encodeURIComponent(email)}`)}>
                 {t('button')}
               </Button>
             </div>
