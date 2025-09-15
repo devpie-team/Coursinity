@@ -15,7 +15,6 @@ export const LogoSlider = () => {
     'assets/logos/comptia.png',
     'assets/logos/GInI.png',
     'assets/logos/comptia.png',
-    'assets/logos/nebosh.png',
     'assets/logos/GInI.png',
     'assets/logos/iosh.png',
     'assets/logos/axelos.png',
