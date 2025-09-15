@@ -46,24 +46,6 @@ function CoverImg({ url, alt, className }: { url?: string; alt?: string; classNa
   return <img src={API_URL + url} alt={alt || 'image'} className={cn('object-cover rounded-2xl', className)} />
 }
 
-function ReadMore({ slug, isArabic }: { slug: string; isArabic?: boolean }) {
-  const router = useRouter()
-  const t = useTranslations('BL_BlogPost')
-
-  return (
-    <button
-      className="text-left flex gap-1 items-center text-primary-purple"
-      onClick={() => router.push(`/${isArabic ? 'ar' : 'en'}/blog/${slug}`)}>
-      <Typography variant="button" weight="medium">
-        {t('read_more')}
-      </Typography>
-      <div className={isArabic ? 'rotate-180' : ''}>
-        <DirectionRightIcon />
-      </div>
-    </button>
-  )
-}
-
 export function ArticleCard({ a, isArabic }: { a: Article; isArabic: boolean }) {
   const title = a.Title
   const desc = a?.ShortDescription
@@ -71,7 +53,9 @@ export function ArticleCard({ a, isArabic }: { a: Article; isArabic: boolean }) 
   const router = useRouter()
 
   return (
-    <div className="flex flex-col gap-5 items-start">
+    <div
+      className="flex flex-col gap-5 items-start cursor-pointer"
+      onClick={() => router.push(`/${isArabic ? 'ar' : 'en'}/blog/${a.Slug}`)}>
       {img ? (
         <CoverImg url={img} alt={title || 'Article image'} className="w-full aspect-[16/9]" />
       ) : (
@@ -82,15 +66,13 @@ export function ArticleCard({ a, isArabic }: { a: Article; isArabic: boolean }) 
         <Typography
           variant="button"
           weight="medium"
-          className="line-clamp-2 break-words h-12 cursor-pointer max-md:h-auto"
-          onClick={() => router.push(`/${isArabic ? 'ar' : 'en'}/blog/${a.Slug}`)}>
+          className="line-clamp-2 break-words h-12 cursor-pointer max-md:h-auto">
           {title}
         </Typography>
         <Typography variant="caption" className="text-description line-clamp-2 break-words h-10 max-md:h-auto">
           {desc}
         </Typography>
       </div>
-      <ReadMore slug={a.Slug} isArabic={isArabic} />
     </div>
   )
 }
@@ -215,15 +197,13 @@ export function BlogClient({
               </div>
 
               <div className="hidden lg:grid lg:grid-cols-2 lg:gap-6">
-                <div className="flex flex-col gap-6 items-start">
+                <div
+                  className="flex flex-col gap-6 items-start cursor-pointer"
+                  onClick={() => router.push(`/${isArabic ? 'ar' : 'en'}/blog/${firstFeatured.Slug}`)}>
                   <CoverImg url={bigImg} alt={bigTitle || 'Featured image'} className="w-full aspect-[16/9]" />
                   <TagsRow tags={firstFeatured?.Tags} />
                   <div className="flex flex-col gap-4 min-w-0 w-full">
-                    <Typography
-                      variant="h6"
-                      weight="medium"
-                      className="line-clamp-2 break-words cursor-pointer"
-                      onClick={() => router.push(`/${isArabic ? 'ar' : 'en'}/blog/${firstFeatured.Slug}`)}>
+                    <Typography variant="h6" weight="medium" className="line-clamp-2 break-words cursor-pointer">
                       {bigTitle}
                     </Typography>
                     {bigDesc ? (
@@ -232,13 +212,15 @@ export function BlogClient({
                       </Typography>
                     ) : null}
                   </div>
-                  <ReadMore isArabic={isArabic} slug={firstFeatured?.Slug} />
                 </div>
 
                 {/* Right column with rest */}
                 <div className="flex flex-col gap-4">
                   {restFeatured.map((article) => (
-                    <div key={article.id} className="flex gap-4 md:gap-5 items-center">
+                    <div
+                      key={article.id}
+                      className="flex gap-4 md:gap-5 items-center cursor-pointer"
+                      onClick={() => router.push(`/${isArabic ? 'ar' : 'en'}/blog/${article.Slug}`)}>
                       <CoverImg
                         url={article.CoverImage?.formats?.small?.url}
                         alt={article.Title || 'Article image'}
@@ -250,15 +232,13 @@ export function BlogClient({
                           <Typography
                             variant="button"
                             weight="medium"
-                            className="line-clamp-2 break-words cursor-pointer"
-                            onClick={() => router.push(`/${isArabic ? 'ar' : 'en'}/blog/${article.Slug}`)}>
+                            className="line-clamp-2 break-words cursor-pointer">
                             {article.Title}
                           </Typography>
                           <Typography variant="caption" className="text-description line-clamp-2 break-words">
                             {article.ShortDescription}
                           </Typography>
                         </div>
-                        <ReadMore isArabic={isArabic} slug={article.Slug} />
                       </div>
                     </div>
                   ))}
