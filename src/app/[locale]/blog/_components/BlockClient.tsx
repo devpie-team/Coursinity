@@ -207,7 +207,7 @@ export function BlogClient({
                   className="flex flex-col gap-6 items-start cursor-pointer"
                   onClick={() => router.push(`/${isArabic ? 'ar' : 'en'}/blog/${firstFeatured.Slug}`)}>
                   <CoverImg url={bigImg} alt={bigTitle || 'Featured image'} className="w-full aspect-[16/9]" />
-                  {!!firstFeatured?.Tags?.[0].Tag ? <TagsRow tags={firstFeatured?.Tags} /> : null}
+                  {!!firstFeatured?.Tags?.[0]?.Tag ? <TagsRow tags={firstFeatured?.Tags} /> : null}
                   <div className="flex flex-col gap-4 min-w-0 w-full">
                     <Typography variant="h6" weight="medium" className="line-clamp-2 break-words cursor-pointer">
                       {bigTitle}
