@@ -17,16 +17,7 @@ import {
 import { TestimonialsSection } from '@/components/Sections'
 import { GrowthSection } from '@/components/AcademySections/GrowthSection'
 import { HeroSection } from '@/components/AcademySections/HeroSection'
-import { Metadata } from 'next'
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-  const { locale } = await params
 
-  return {
-    alternates: {
-      canonical: `https://www.coursinity.com/${locale}/academy`
-    }
-  }
-}
 export default function HomePage() {
   const locale = useLocale()
 
