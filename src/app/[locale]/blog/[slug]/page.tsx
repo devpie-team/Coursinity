@@ -34,6 +34,8 @@ export async function generateMetadata({
     ? API_URL + article.CoverImage.formats.thumbnail.url
     : undefined
 
+  const canonicalUrl = `https://www.coursinity.com/${locale}/blog/${slug}`
+
   return {
     title,
     description,
@@ -49,6 +51,9 @@ export async function generateMetadata({
       title,
       description,
       images: image ? image : undefined
+    },
+    alternates: {
+      canonical: canonicalUrl
     }
   }
 }

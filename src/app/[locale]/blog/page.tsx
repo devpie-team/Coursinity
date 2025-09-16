@@ -1,8 +1,19 @@
 import { cookies } from 'next/headers'
 import { getArticles } from '@/services/getArticles'
 import { BlogClient } from './_components/BlockClient'
+import { Metadata } from 'next'
 
 type Search = { page?: string }
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+
+  return {
+    alternates: {
+      canonical: `https://www.coursinity.com/${locale}/blog`
+    }
+  }
+}
 
 export default async function BlogPage({
   searchParams,
