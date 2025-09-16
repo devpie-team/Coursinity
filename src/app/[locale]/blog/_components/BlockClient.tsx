@@ -69,7 +69,7 @@ export function ArticleCard({ a, isArabic }: { a: Article; isArabic: boolean }) 
           className="line-clamp-2 break-words h-12 cursor-pointer max-md:h-auto">
           {title}
         </Typography>
-        <Typography variant="caption" className="text-description line-clamp-2 break-words h-10 max-md:h-auto">
+        <Typography variant="caption" className="text-description line-clamp-2 break-words">
           {desc}
         </Typography>
       </div>
@@ -141,6 +141,8 @@ export function BlogClient({
     })
   }
 
+  console.log(firstFeatured?.Tags?.[0])
+
   return (
     <>
       <Header />
@@ -167,14 +169,14 @@ export function BlogClient({
               </Typography>
             </div>
             <div className="flex max-lg:flex-col items-center gap-4 w-full justify-center">
-              <Input
+              {/* <Input
                 placeholder={t('input')}
                 required={false}
                 className="rounded-full h-[60px] max-lg:w-[343px] max-md:w-full"
                 divClassName="h-[60px] max-lg:w-[343px] max-md:w-full"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
-              />
+              /> */}
               <Button
                 variant="purple"
                 className=" max-lg:w-[343px] max-md:w-full h-[60px]"
@@ -194,18 +196,18 @@ export function BlogClient({
               </Typography>
 
               {/* Mobile/Tablet: такий самий грід, як у Latest */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:hidden">
+              <div className="grid grid-cols-1  sm:grid-cols-2 gap-6 lg:hidden">
                 {fa.map((article) => (
                   <ArticleCard key={article.id} a={article} isArabic={isArabic} />
                 ))}
               </div>
 
-              <div className="hidden lg:grid lg:grid-cols-2 lg:gap-6">
+              <div className="hidden lg:grid lg:grid-cols-2 max-1150:grid-cols-[0.7fr_1fr] lg:gap-6">
                 <div
                   className="flex flex-col gap-6 items-start cursor-pointer"
                   onClick={() => router.push(`/${isArabic ? 'ar' : 'en'}/blog/${firstFeatured.Slug}`)}>
                   <CoverImg url={bigImg} alt={bigTitle || 'Featured image'} className="w-full aspect-[16/9]" />
-                  <TagsRow tags={firstFeatured?.Tags} />
+                  {!!firstFeatured?.Tags?.[0].Tag ? <TagsRow tags={firstFeatured?.Tags} /> : null}
                   <div className="flex flex-col gap-4 min-w-0 w-full">
                     <Typography variant="h6" weight="medium" className="line-clamp-2 break-words cursor-pointer">
                       {bigTitle}

@@ -96,7 +96,7 @@ export const HeaderDropdown = ({ start }: { start: boolean }) => {
           </a>
         </div>
       )}
-      <a href={`/${locale}/blog`}>
+      <a href={`#`}>
         <Typography weight="medium" variant="caption">
           {t('blog')}
         </Typography>
