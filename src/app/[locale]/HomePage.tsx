@@ -24,7 +24,17 @@ import { useEffect, useState } from 'react'
 import AOS from 'aos'
 import { Loader } from '@/components/Loader'
 import { StackSectionNew } from '@/components/Sections/StackSection/StackSectionNew'
+import { Metadata } from 'next'
 
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+
+  return {
+    alternates: {
+      canonical: `https://www.coursinity.com/${locale}`
+    }
+  }
+}
 export default function HomePage() {
   const t = useTranslations('HomePage')
   const locale = useLocale()

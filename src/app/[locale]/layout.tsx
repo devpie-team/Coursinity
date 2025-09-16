@@ -154,7 +154,6 @@ export default async function LocaleLayout({
           if (locale === 'ar') canonical = 'https://www.coursinity.com/ar'
           return (
             <>
-              <link rel="canonical" href={canonical} />
               <link rel="alternate" hrefLang="x-default" href="https://www.coursinity.com/" />
               <link rel="alternate" hrefLang="en" href="https://www.coursinity.com/en" />
               <link rel="alternate" hrefLang="ar" href="https://www.coursinity.com/ar" />

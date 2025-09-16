@@ -16,7 +16,16 @@ import { CustomTrainingSection } from '@/components/SolutionsSections/CustomTrai
 import { ConsultingSection } from '@/components/SolutionsSections/ConsultingSection'
 import { Loader } from '@/components/Loader'
 import { VideoSection } from '@/components/SolutionsSections/HeroSection/_components/VideoSection'
+import { Metadata } from 'next'
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
 
+  return {
+    alternates: {
+      canonical: `https://www.coursinity.com/${locale}/solutions`
+    }
+  }
+}
 export default function HomePage() {
   const t = useTranslations('HomePage')
   const locale = useLocale()
