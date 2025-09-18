@@ -65,7 +65,7 @@ const Footer = ({ className, page }: FooterProps) => {
       <div className="flex flex-col gap-[120px] max-lg:gap-20">
         {/*Headline*/}
         {page !== 'blog' && (
-          <div className="flex flex-col gap-8 items-center font-medium text-center max-lg:gap-4">
+          <div className="flex flex-col gap-8 items-center justify-center font-medium text-center max-lg:gap-4">
             <FadeInOnView>
               <Typography variant={isDesktop ? 'h2' : 'h5'} weight="medium">
                 {t('headline')
@@ -83,7 +83,9 @@ const Footer = ({ className, page }: FooterProps) => {
               <Typography variant={isDesktop ? 'body2' : 'button'} weight="regular" className="text-opacity-80">
                 {t('subheadline')}
               </Typography>
-              <a href={`/${locale}/contact-form`} className="w-[263px] max-lg:w-[343px] max-md:w-full mt-4">
+              <a
+                href={`/${locale}/contact-form`}
+                className="w-[263px] max-lg:w-[343px] max-md:w-full mt-4 flex items-center justify-center w-full">
                 <Button variant="secondary" size="md" className="w-[263px] max-lg:w-[343px] mt-4">
                   {t('button')}
                 </Button>
