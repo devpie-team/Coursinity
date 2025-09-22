@@ -119,12 +119,14 @@ export function BlogClient({
   articles,
   featuredArticles,
   currentPage,
-  info
+  info,
+  mainArticle
 }: {
   articles: StrapiResponse<Article>
   featuredArticles: StrapiResponse<Article>
   currentPage: number
   info: StrapiResponse<GetArticleInfo>
+  mainArticle: Article | null
 }) {
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
@@ -199,27 +201,27 @@ export function BlogClient({
                   {mainInfo?.MainSubtitle ? mainInfo.MainSubtitle : t('subtitle')}
                 </Typography>
               </div>
-              {mainInfo?.MainArticle ? (
+              {mainArticle ? (
                 <div className="bg-secondary-300 rounded-2xl p-3 max-md:pb-6 flex gap-6 items-center max-md:flex-col">
-                  {mainInfo.MainArticle?.CoverImage?.formats.medium?.url ? (
+                  {mainArticle?.CoverImage?.formats.medium?.url ? (
                     <CoverImg
-                      url={mainInfo.MainArticle?.CoverImage?.formats.medium?.url}
+                      url={mainArticle?.CoverImage?.formats.medium?.url}
                       className="rounded-2xl min-w-[480px] max-lg:min-w-[50%] h-[320px] max-lg:w-[50%] max-md:w-full max-md:h-300"
                     />
                   ) : (
                     <div className="rounded-2xl min-w-[480px] max-lg:min-w-[50%] w-[480px] h-[320px] max-lg:w-[50%] max-md:w-full max-md:h-300 bg-secondary-400" />
                   )}
                   <div className="flex flex-col gap-6 max-lg:w-[50%] max-md:w-full">
-                    {mainInfo.MainArticle?.Tags?.[0]?.Tag ? <TagsRow tags={mainInfo.MainArticle.Tags} /> : null}
+                    {mainArticle?.Tags?.[0]?.Tag ? <TagsRow tags={mainArticle.Tags} /> : null}
                     <div className="flex flex-col gap-4 min-w-0 w-full">
                       <Typography
                         variant="h6"
                         weight="medium"
                         className="line-clamp-2 break-words min-h-12 cursor-pointer max-md:h-auto">
-                        {mainInfo.MainArticle.Title}
+                        {mainArticle.Title}
                       </Typography>
                       <Typography variant="body3" className="text-description line-clamp-2 break-words min-h-10">
-                        {mainInfo.MainArticle.ShortDescription}
+                        {mainArticle.ShortDescription}
                       </Typography>
                     </div>
                   </div>

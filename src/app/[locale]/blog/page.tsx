@@ -3,6 +3,7 @@ import { getArticles } from '@/services/getArticles'
 import { Metadata } from 'next'
 import { BlogClient } from './_components/NewBlogClient'
 import { getArticlesInfo } from '@/services/getArticlesInfo'
+import { getArticleBySlug } from '@/services/getArticle'
 
 type Search = { page?: string }
 
@@ -40,9 +41,15 @@ export default async function BlogPage({
   })
   const dataFeatured = await getArticles({ featured: true, page: 1, pageSize: 4, locale })
   const info = await getArticlesInfo(locale)
-  const mainArticle = await getArticlesInfo(locale, true)
+  const mainArticle = await getArticleBySlug(info.data?.[0].MainArticle.Slug, false, locale)
 
-  console.log(mainArticle, data)
-
-  return <BlogClient articles={data} featuredArticles={dataFeatured} currentPage={page} info={info} />
+  return (
+    <BlogClient
+      articles={data}
+      featuredArticles={dataFeatured}
+      currentPage={page}
+      info={info}
+      mainArticle={mainArticle}
+    />
+  )
 }
