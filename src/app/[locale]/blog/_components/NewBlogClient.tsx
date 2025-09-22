@@ -303,7 +303,7 @@ export function BlogClient({
                       spaceBetween: 20
                     }
                   }}>
-                  {[...fa, ...fa].map((article: any) => (
+                  {fa.map((article: any) => (
                     <SwiperSlide key={article.id}>
                       <div className="flex w-full justify-center">
                         <ArticleCard a={article} isArabic={isArabic} isFeatured />
@@ -312,13 +312,15 @@ export function BlogClient({
                   ))}
                 </Swiper>
 
-                <SliderControls
-                  current={currentSliderPage}
-                  total={totalSliderPages}
-                  onPrev={() => swiperRef.current?.slidePrev()}
-                  onNext={() => swiperRef.current?.slideNext()}
-                  onDotClick={(i) => swiperRef.current?.slideTo(i * getPerView())}
-                />
+                {totalSliderPages > 1 ? (
+                  <SliderControls
+                    current={currentSliderPage}
+                    total={totalSliderPages}
+                    onPrev={() => swiperRef.current?.slidePrev()}
+                    onNext={() => swiperRef.current?.slideNext()}
+                    onDotClick={(i) => swiperRef.current?.slideTo(i * getPerView())}
+                  />
+                ) : null}
               </div>
             </section>
           ) : null}
