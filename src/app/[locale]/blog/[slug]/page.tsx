@@ -4,13 +4,13 @@ import { Header } from '@/components/Header'
 import { Typography } from '@/components/ui'
 import { API_URL } from '@/constants/main'
 import { getTranslations } from 'next-intl/server'
-import { ArticleCard } from '../_components/BlockClient'
 
 import ShareButtons from './_components/ShareButtons'
 import { getArticleBySlug } from '@/services/getArticle'
 import ArticleBlocksRenderer from './_components/ArticleBlocksRenderer'
 import BlogDate from './_components/BlogDate'
 import { Metadata } from 'next'
+import { ArticleCard } from '../_components/NewBlogClient'
 
 export async function generateMetadata({
   params
@@ -137,7 +137,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
             {latestArticles.data.slice(0, 3).map((article) => (
-              <ArticleCard key={article?.id} a={article} isArabic={locale == 'ar'} />
+              <ArticleCard key={article?.id} a={article} isArabic={locale == 'ar'} isFeatured={false} />
             ))}
           </div>
         </section>
