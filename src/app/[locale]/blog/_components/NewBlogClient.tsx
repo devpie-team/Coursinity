@@ -178,7 +178,7 @@ export function BlogClient({
       <Header />
 
       <section className=" bg-white w-full flex flex-col">
-        <div className="flex flex-col items-center px-8 max-lf:px-6 max-md:px-2 w-full">
+        <div className="flex flex-col items-center px-8 max-lf:px-6 max-md:px-4 w-full">
           <div
             className={cn(
               'flex flex-col gap-[98px] pt-[156px] max-lg:pt-[100px] w-full  max-w-[1540px]  ',

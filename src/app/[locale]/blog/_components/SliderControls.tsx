@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 import { cn } from '@/lib/utils'
 import { ChevronLeft, ChevronRight } from 'lucide-react' // можна замінити на свої іконки
+import { useLocale } from 'next-intl'
 
 type SliderControlsProps = {
   current: number
@@ -11,6 +12,8 @@ type SliderControlsProps = {
 }
 
 export function SliderControls({ current, total, onPrev, onNext, onDotClick }: SliderControlsProps) {
+  const locale = useLocale()
+
   return (
     <div className="flex items-center justify-between gap-6 w-full">
       <div className="flex gap-2">
@@ -32,24 +35,24 @@ export function SliderControls({ current, total, onPrev, onNext, onDotClick }: S
           onClick={onPrev}
           className={cn(
             'h-12 w-12 rounded-full border flex items-center justify-center',
-            current === total - 1
+            current !== 0
               ? 'border-primary-blue text-primary-blue '
               : 'border-secondary-400 text-secondary-400 hover:bg-gray-100 cursor-not-allowed'
           )}
           disabled={current === 0}>
-          <ChevronLeft size={18} />
+          {locale == 'en' ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
         </button>
 
         <button
           onClick={onNext}
           className={cn(
             'h-12 w-12 rounded-full border flex items-center justify-center',
-            current === 0
+            current !== total - 1
               ? 'border-primary-blue text-primary-blue '
               : 'border-secondary-400 text-secondary-400 hover:bg-gray-100 cursor-not-allowed'
           )}
           disabled={current === total - 1}>
-          <ChevronRight size={18} />
+          {locale == 'ar' ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
         </button>
       </div>
     </div>
