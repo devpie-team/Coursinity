@@ -128,7 +128,7 @@ export function BlogClient({
 }) {
   const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(true)
-  const [isBigDesktop, setIsBigDesktop] = useState(true)
+  const [isBigDesktop, setIsBigDesktop] = useState(false)
 
   const swiperRef = useRef<SwiperType | null>(null)
   const [currentStep, setCurrentStep] = useState(0)
@@ -148,7 +148,6 @@ export function BlogClient({
       setIsMobile(width < 768)
       setIsTablet(width >= 768 && width <= 1024)
       setIsDesktop(width > 1024 && width <= 1836)
-      setIsBigDesktop(width > 1536)
     }
     checkScreenSize()
     window.addEventListener('resize', checkScreenSize)
@@ -181,8 +180,9 @@ export function BlogClient({
         <div className="flex flex-col items-center px-8 max-lf:px-6 max-md:px-4 w-full">
           <div
             className={cn(
-              'flex flex-col gap-[98px] pt-[156px] max-lg:pt-[100px] w-full  max-w-[1540px]  ',
-              'pb-[80] max-lg:pb-[80px]'
+              'flex flex-col gap-[98px] pt-[156px] max-lg:pt-[100px] w-full',
+              'pb-[80px] max-lg:pb-[80px]',
+              isBigDesktop ? 'max-w-[1540px]' : 'max-w-[952px]'
             )}>
             <div className="flex flex-col gap-12 max-lg:gap-10 ">
               <div
@@ -230,7 +230,11 @@ export function BlogClient({
 
           {/* Featured section */}
           {featuredArticles.data.length ? (
-            <section className="flex flex-col items-center pb-[80px] max-md:pb-[60px] w-full max-w-[1540px]">
+            <section
+              className={cn(
+                'flex flex-col items-center pb-[80px] max-md:pb-[60px] w-full max-w-[1540px]',
+                isBigDesktop ? 'max-w-[1540px]' : 'max-w-[952px]'
+              )}>
               <div className="flex flex-col gap-10 max-md:gap-10 w-full">
                 <div className="flex flex-col gap-4">
                   <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
@@ -318,7 +322,11 @@ export function BlogClient({
           ) : null}
 
           {/* Latest */}
-          <section className="flex flex-col gap-10 pb-[120px] max-lg:pb-[80px] w-full max-w-[1540px] self-center max-md:px-2">
+          <section
+            className={cn(
+              'flex flex-col gap-10 pb-[120px] max-lg:pb-[80px] w-full max-w-[1540px] self-center max-md:px-2',
+              isBigDesktop ? 'max-w-[1540px]' : 'max-w-[952px]'
+            )}>
             <div className="flex flex-col gap-4">
               <Typography variant="h3" weight="medium" className="max-lg:!text-3xl">
                 {mainInfo?.LatestTitle ? mainInfo?.LatestTitle : t('latest_title')}
