@@ -141,8 +141,6 @@ export function BlogClient({
     })
   }
 
-  console.log(firstFeatured?.Tags?.[0])
-
   return (
     <>
       <Header />

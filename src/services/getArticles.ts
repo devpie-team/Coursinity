@@ -11,6 +11,8 @@ type GetArticlesOptions = {
   populate?: string | '*' | string[]
   fields?: string[]
   locale?: string
+  search?: string
+  category?: string
 }
 
 function append(qs: URLSearchParams, key: string, value?: string | number | boolean | null) {
@@ -28,7 +30,9 @@ export async function getArticles(opts: GetArticlesOptions = {}): Promise<Strapi
     publicationState = 'live',
     populate = '*',
     fields,
-    locale // ✅ destructure locale
+    locale,
+    search,
+    category
   } = opts
 
   const url = new URL(`${API_URL}/api/articles`)
@@ -51,6 +55,8 @@ export async function getArticles(opts: GetArticlesOptions = {}): Promise<Strapi
   // filters
   if (slug) append(qs, 'filters[Slug][$eq]', slug)
   if (typeof featured === 'boolean') append(qs, 'filters[Featured][$eq]', featured)
+  if (search) append(qs, 'filters[Title][$containsi]', search) // 👈 пошук
+  if (category) append(qs, 'filters[category][Name][$eq]', category) // 👈 фільтр по категорії
 
   // locale
   if (locale) append(qs, 'locale', locale)

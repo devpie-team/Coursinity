@@ -57,6 +57,8 @@ export interface Article {
   localizations: Article[]
   ShortDescription?: string
   Blocks: ArticleBlock[]
+  TimeToRead: string | null
+
   SEO: {
     id: number
     meta_description: string
@@ -81,5 +83,26 @@ export interface StrapiResponse<T> {
   data: T[]
   meta: {
     pagination: Pagination
+  }
+}
+
+export interface GetArticleInfo {
+  id: number
+  documentId: string
+  locale: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+  FeaturedTitle: string | null
+  FeaturedSubtitle: string | null
+  LatestTitle: string | null
+  LatestSubtitle: string | null
+  MainTitle: string | null
+  MainSubtitle: string | null
+  MainArticle: Article
+
+  category: {
+    Name: string
+    id: number
   }
 }
