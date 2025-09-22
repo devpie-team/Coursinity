@@ -95,12 +95,12 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
             <div className="flex gap-6 items-center">
               <div className="flex flex-col gap-3">
                 <Typography variant="caption" className="text-primary-purple">
-                  {t('author')}
+                  {t('time_to_read')}
                 </Typography>
                 <Typography
                   variant="body2"
                   className="max-lg:max-w-[126px] max-md:max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
-                  {article?.Author ? article?.Author : 'Unknown Author'}
+                  {article?.TimeToRead ? article?.TimeToRead + (locale == 'ar' ? 'دقيقة ' : ' Min') : '-'}
                 </Typography>
               </div>
               <div className="flex flex-col gap-3">

@@ -12,6 +12,7 @@
     },
     "BL_BlogPost": {
         "author": "Written by",
+        "time_to_read": "Time to Read",
         "published_at": "Published on",
         "latest_title": "Latest Posts",
         "share_post": "Share this post",
