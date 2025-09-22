@@ -204,10 +204,10 @@ export function BlogClient({
                   {mainInfo.MainArticle?.CoverImage?.formats.medium?.url ? (
                     <CoverImg
                       url={mainInfo.MainArticle?.CoverImage?.formats.medium?.url}
-                      className="rounded-2xl w-[480px] h-[320px] max-lg:w-[50%] max-md:w-full max-md:h-300"
+                      className="rounded-2xl min-w-[480px] max-lg:min-w-[50%] h-[320px] max-lg:w-[50%] max-md:w-full max-md:h-300"
                     />
                   ) : (
-                    <div className="rounded-2xl w-[480px] h-[320px] max-lg:w-[50%] max-md:w-full max-md:h-300 bg-secondary-400" />
+                    <div className="rounded-2xl min-w-[480px] max-lg:min-w-[50%] w-[480px] h-[320px] max-lg:w-[50%] max-md:w-full max-md:h-300 bg-secondary-400" />
                   )}
                   <div className="flex flex-col gap-6 max-lg:w-[50%] max-md:w-full">
                     {mainInfo.MainArticle?.Tags?.[0]?.Tag ? <TagsRow tags={mainInfo.MainArticle.Tags} /> : null}
