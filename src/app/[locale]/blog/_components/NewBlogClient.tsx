@@ -23,6 +23,7 @@ import 'swiper/css'
 import { Input } from '@/components/primitives/input'
 import CustomSelect from '@/components/CustomSelect/CustomSelect'
 import { SliderControls } from './SliderControls'
+import { SearchInput } from './SearchInput'
 function TagPill({ children }: { children?: string }) {
   if (!children) return null
   return (
@@ -339,8 +340,9 @@ export function BlogClient({
                 {mainInfo?.LatestSubtitle ? mainInfo?.LatestSubtitle : t('latest_subtitle')}
               </Typography>
             </div>
-            {/* <div className="flex w-full justify-between items-center">
-              <CustomSelect
+            <div className="flex w-full justify-between items-center">
+              <SearchInput />
+              {/* <CustomSelect
                 label={t('input')}
                 className="rounded-full h-[48px] w-[300px] max-lg:w-[343px] max-md:w-full"
                 options={
@@ -351,14 +353,8 @@ export function BlogClient({
                       ]
                     : [{ value: 'All Posts', label: 'All Posts' }]
                 }
-              />
-              <Input
-                placeholder={t('input')}
-                required={false}
-                className="rounded-full h-[48px] w-[300px] max-lg:w-[343px] max-md:w-full"
-                divClassName="h-[60px] max-lg:w-[343px] max-md:w-full"
-              />
-            </div> */}
+              /> */}
+            </div>
             <div
               className={cn(
                 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-md:gap-4',

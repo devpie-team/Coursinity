@@ -30,6 +30,7 @@ export default async function BlogPage({
   const cookieStore = await cookies()
   const pageCookie = cookieStore.get('blog_page')?.value
   const searchCookie = cookieStore.get('search')?.value
+  console.log(searchCookie)
   const categoryCookie = cookieStore.get('category')?.value
 
   const page = Math.max(1, Number(searchPage ?? pageCookie ?? 1))
@@ -37,7 +38,8 @@ export default async function BlogPage({
   const data = await getArticles({
     page,
     pageSize: 9,
-    locale
+    locale,
+    search: searchCookie
   })
   const dataFeatured = await getArticles({ featured: true, page: 1, pageSize: 4, locale })
   const info = await getArticlesInfo(locale)
