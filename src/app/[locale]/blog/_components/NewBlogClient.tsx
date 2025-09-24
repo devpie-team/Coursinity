@@ -356,7 +356,7 @@ export function BlogClient({
               isBigDesktop ? 'max-w-[1540px]' : 'max-w-[952px]'
             )}>
             <div className="flex flex-col gap-4">
-              <Typography variant="h3" weight="medium" className="max-lg:!text-3xl">
+              <Typography variant="h3" weight="medium" className="max-lg:!text-3xl" as="h2">
                 {mainInfo?.LatestTitle ? mainInfo?.LatestTitle : t('latest_title')}
               </Typography>
               <Typography variant="body3" className="text-description">
