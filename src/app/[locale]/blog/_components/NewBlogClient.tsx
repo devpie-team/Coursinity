@@ -202,10 +202,10 @@ export function BlogClient({
                     : 'max-w-[778px] max-lg:max-w-[506px] gap-6 max-lg:gap-4'
                 )}>
                 <Typography variant={isDesktop ? 'h1' : isArabic ? 'h5' : 'h3'} weight="medium" as="h1">
-                  {t('title')}
+                  {mainInfo?.MainTitle ? mainInfo?.MainTitle : t('title')}
                 </Typography>
                 <Typography variant="body3" className="text-center text-description">
-                  {t('subtitle')}
+                  {mainInfo?.MainSubtitle ? mainInfo?.MainSubtitle : t('subtitle')}
                 </Typography>
               </div>
               <div className="flex max-lg:flex-col items-center gap-4 w-full justify-center">
