@@ -167,14 +167,6 @@ export function BlogClient({
               </Typography>
             </div>
             <div className="flex max-lg:flex-col items-center gap-4 w-full justify-center">
-              {/* <Input
-                placeholder={t('input')}
-                required={false}
-                className="rounded-full h-[60px] max-lg:w-[343px] max-md:w-full"
-                divClassName="h-[60px] max-lg:w-[343px] max-md:w-full"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-              /> */}
               <Button
                 variant="purple"
                 className=" max-lg:w-[343px] max-md:w-full h-[60px]"

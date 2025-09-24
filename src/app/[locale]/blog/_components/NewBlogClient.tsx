@@ -24,6 +24,7 @@ import { Input } from '@/components/primitives/input'
 import CustomSelect from '@/components/CustomSelect/CustomSelect'
 import { SliderControls } from './SliderControls'
 import { SearchInput } from './SearchInput'
+import { NotFoundIcon } from '@/components/icons/NotFoundIcon'
 function TagPill({ children }: { children?: string }) {
   if (!children) return null
   return (
@@ -36,9 +37,9 @@ function TagPill({ children }: { children?: string }) {
 }
 
 function TagsRow({ tags }: { tags?: { id: number; Tag?: string }[] }) {
-  if (!tags?.length) return <div className="h-7 max-md:h-auto" />
+  if (!tags?.length) return <div className="h-7" />
   return (
-    <div className="flex flex-wrap gap-2 h-7 max-md:h-auto">
+    <div className="flex flex-wrap gap-2 h-7">
       {tags.map((t) => (
         <TagPill key={t.id}>{t.Tag}</TagPill>
       ))}
@@ -62,7 +63,7 @@ export function ArticleCard({ a, isArabic, isFeatured }: { a: Article; isArabic:
     <div
       className={cn(
         'flex flex-col gap-5 items-start cursor-pointer bg-secondary-300 rounded-2xl',
-        isFeatured && 'w-full'
+        isFeatured && 'w-full max-md:w-[90%]'
       )}
       onClick={() => router.push(`/${isArabic ? 'ar' : 'en'}/blog/${a.Slug}`)}>
       {img ? (
@@ -150,7 +151,7 @@ export function BlogClient({
       const width = window.innerWidth
       setIsMobile(width < 768)
       setIsTablet(width >= 768 && width <= 1024)
-      setIsDesktop(width > 1024 && width <= 1836)
+      setIsDesktop(width > 1024)
     }
     checkScreenSize()
     window.addEventListener('resize', checkScreenSize)
@@ -180,28 +181,48 @@ export function BlogClient({
       <Header />
 
       <section className=" bg-white w-full flex flex-col">
-        <div className="flex flex-col items-center px-8 max-lf:px-6 max-md:px-6 w-full">
+        <div className="flex flex-col items-center w-full">
           <div
             className={cn(
-              'flex flex-col gap-[98px] pt-[156px] max-lg:pt-[100px] w-full',
-              'pb-[80px] max-lg:pb-[80px]',
-              isBigDesktop ? 'max-w-[1540px]' : 'max-w-[952px]'
+              'flex flex-col items-center gap-[98px] pt-[156px] max-lg:pt-[100px] w-full bg-gradient-to-b from-[#F9FAFB] via-[#F9FAFB] to-[#F9FAFB]',
+              'pb-[100px] max-lg:pb-[60px]'
             )}>
-            <div className="flex flex-col gap-12 max-lg:gap-10 ">
+            <div
+              className={cn(
+                'flex flex-col gap-8 items-center px-8 max-lg:px-6',
+                isBigDesktop ? 'max-w-[1540px]' : 'max-w-[952px]'
+              )}>
               <div
                 className={cn(
-                  'flex flex-col',
+                  'flex flex-col items-center text-center',
                   isArabic
                     ? 'max-w-[1000px] max-lg:max-w-[600px] gap-9 max-lg:gap-6'
                     : 'max-w-[778px] max-lg:max-w-[506px] gap-6 max-lg:gap-4'
                 )}>
-                <Typography variant={isDesktop ? 'h2' : isArabic ? 'h5' : 'h3'} weight="medium">
-                  {mainInfo?.MainTitle ? mainInfo.MainTitle : t('title')}
+                <Typography variant={isDesktop ? 'h1' : isArabic ? 'h5' : 'h3'} weight="medium">
+                  {t('title')}
                 </Typography>
-                <Typography variant="body3" className="text-description">
-                  {mainInfo?.MainSubtitle ? mainInfo.MainSubtitle : t('subtitle')}
+                <Typography variant="body3" className="text-center text-description">
+                  {t('subtitle')}
                 </Typography>
               </div>
+              <div className="flex max-lg:flex-col items-center gap-4 w-full justify-center">
+                <Button
+                  variant="purple"
+                  className="max-w-[200px] max-lg:max-w-[412px] w-full max-md:max-w-full h-[60px]"
+                  onClick={() => router.push(`/${locale}/contact-form`)}>
+                  {t('button')}
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className={cn(
+              'flex flex-col w-full pb-[80px] max-lg:pb-[80px] pt-[80px] px-8 max-lg:px-6',
+              isBigDesktop ? 'max-w-[1540px]' : 'max-w-[952px]'
+            )}>
+            <div className="flex flex-col gap-12 max-lg:gap-10 ">
               {mainArticle ? (
                 <div className="bg-secondary-300 rounded-2xl p-3 max-md:pb-6 flex gap-6 items-center max-md:flex-col">
                   {mainArticle?.CoverImage?.formats.medium?.url ? (
@@ -235,7 +256,7 @@ export function BlogClient({
           {featuredArticles?.data?.length ? (
             <section
               className={cn(
-                'flex flex-col items-center pb-[80px] max-md:pb-[60px] w-full max-w-[1540px]',
+                'flex flex-col items-center pb-[80px] max-md:pb-[60px] w-full max-w-[1540px] px-8 max-lg:px-6',
                 isBigDesktop ? 'max-w-[1540px]' : 'max-w-[952px]'
               )}>
               <div className="flex flex-col gap-10 max-md:gap-10 w-full">
@@ -274,39 +295,39 @@ export function BlogClient({
                   }
                   breakpoints={{
                     350: {
-                      spaceBetween: 20
+                      spaceBetween: -20
                     },
                     370: {
-                      spaceBetween: 20
+                      spaceBetween: -20
                     },
                     410: {
-                      spaceBetween: 20
+                      spaceBetween: -20
                     },
                     460: {
-                      spaceBetween: 20
+                      spaceBetween: -20
                     },
                     500: {
-                      spaceBetween: 20
+                      spaceBetween: -20
                     },
                     550: {
-                      spaceBetween: -80
+                      spaceBetween: -30
                     },
                     600: {
-                      spaceBetween: -100
+                      spaceBetween: -30
                     },
                     670: {
-                      spaceBetween: -120
+                      spaceBetween: -30
                     },
                     700: {
-                      spaceBetween: -120
+                      spaceBetween: -30
                     },
                     767: {
-                      spaceBetween: 20
+                      spaceBetween: 30
                     }
                   }}>
                   {fa.map((article: any) => (
                     <SwiperSlide key={article.id}>
-                      <div className="flex w-full justify-center">
+                      <div className="flex w-full justify-center max-md:justify-start">
                         <ArticleCard a={article} isArabic={isArabic} isFeatured />
                       </div>
                     </SwiperSlide>
@@ -329,7 +350,7 @@ export function BlogClient({
           {/* Latest */}
           <section
             className={cn(
-              'flex flex-col gap-10 pb-[120px] max-lg:pb-[80px] w-full max-w-[1540px] self-center',
+              'flex flex-col gap-10 pb-[120px] max-lg:pb-[80px] w-full max-w-[1540px] self-center px-8 max-lg:px-6',
               isBigDesktop ? 'max-w-[1540px]' : 'max-w-[952px]'
             )}>
             <div className="flex flex-col gap-4">
@@ -355,17 +376,26 @@ export function BlogClient({
                 }
               /> */}
             </div>
-            <div
-              className={cn(
-                'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-md:gap-4',
-                isPending && 'pointer-events-none select-none'
-              )}>
-              {isPending
-                ? Array.from({ length: 3 }).map((_, i) => <ArticleCardSkeleton key={i} />)
-                : as.map((article) => (
-                    <ArticleCard key={article.id} a={article} isArabic={isArabic} isFeatured={false} />
-                  ))}
-            </div>
+            {articles.data.length ? (
+              <div
+                className={cn(
+                  'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-md:gap-4',
+                  isPending && 'pointer-events-none select-none'
+                )}>
+                {isPending
+                  ? Array.from({ length: 3 }).map((_, i) => <ArticleCardSkeleton key={i} />)
+                  : as.map((article) => (
+                      <ArticleCard key={article.id} a={article} isArabic={isArabic} isFeatured={false} />
+                    ))}
+              </div>
+            ) : (
+              <div className="w-full flex items-center justify-center h-[433px]">
+                <div className="flex flex-col items-center justify-center gap-6">
+                  <NotFoundIcon />
+                  <Typography variant="body2">{t('nothing_found')}</Typography>
+                </div>
+              </div>
+            )}
             <Pagination className="mt-8" current={currentPage} total={totalPages} onPageChange={handlePageChange} />
           </section>
         </div>
