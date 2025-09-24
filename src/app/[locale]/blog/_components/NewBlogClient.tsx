@@ -219,10 +219,10 @@ export function BlogClient({
                         variant="h6"
                         weight="medium"
                         className="line-clamp-2 break-words min-h-12 cursor-pointer max-md:h-auto">
-                        {mainArticle.Title}
+                        {mainArticle?.Title}
                       </Typography>
                       <Typography variant="body3" className="text-description line-clamp-2 break-words min-h-10">
-                        {mainArticle.ShortDescription}
+                        {mainArticle?.ShortDescription}
                       </Typography>
                     </div>
                   </div>
@@ -232,7 +232,7 @@ export function BlogClient({
           </div>
 
           {/* Featured section */}
-          {featuredArticles.data.length ? (
+          {featuredArticles?.data?.length ? (
             <section
               className={cn(
                 'flex flex-col items-center pb-[80px] max-md:pb-[60px] w-full max-w-[1540px]',

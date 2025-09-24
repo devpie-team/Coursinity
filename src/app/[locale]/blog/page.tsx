@@ -43,7 +43,7 @@ export default async function BlogPage({
   })
   const dataFeatured = await getArticles({ featured: true, page: 1, pageSize: 4, locale })
   const info = await getArticlesInfo(locale)
-  const mainArticle = await getArticleBySlug(info.data?.[0].MainArticle.Slug, false, locale)
+  const mainArticle = await getArticleBySlug(info.data?.[0]?.MainArticle?.Slug, false, locale)
 
   return (
     <BlogClient

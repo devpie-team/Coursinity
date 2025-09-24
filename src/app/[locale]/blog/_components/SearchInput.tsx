@@ -22,7 +22,7 @@ export function SearchInput({ onSearch }: { onSearch?: (v: string) => void }) {
   }, [debounced, onSearch])
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1 w-full">
       <div className="cursor-pointer" onClick={() => setValue('')}>
         <Typography variant="subtitle">{t('label')}</Typography>
       </div>

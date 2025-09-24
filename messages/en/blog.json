@@ -9,7 +9,8 @@
         "latest_title": "Latest news",
         "latest_subtitle": "Book a demo and experience how a branded Coursinity Academy can elevate your training.",
         "time_to_read": "Min Read",
-        "label": "clear all"
+        "label": "clear all",
+        "search": "Search..."
     },
     "BL_BlogPost": {
         "author": "Written by",
