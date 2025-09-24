@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState, useTransition } from 'react'
+import { useDeferredValue, useEffect, useMemo, useRef, useState, useTransition } from 'react'
 import AOS from 'aos'
 import { Header } from '@/components/Header'
 import Footer from '@/components/Footer/Footer'
@@ -9,7 +9,6 @@ import { useLocale, useTranslations } from 'next-intl'
 import { Button } from '@/components/primitives/button'
 import { Article, GetArticleInfo, StrapiResponse } from '@/services/types'
 import { API_URL } from '@/constants/main'
-import { DirectionRightIcon } from '@/components/icons'
 import { cn } from '@/lib/utils'
 import Pagination from './Pagination'
 import { useRouter } from 'next/navigation'
@@ -17,14 +16,12 @@ import { setBlogPage } from '../actions'
 import BlogDate from '../[slug]/_components/BlogDate'
 import type { Swiper as SwiperType } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Stepper } from '@/components/AcademySections/CardSection/components/Stepper'
-import { SwipeStepper } from '@/components/SwipeStepper/SwipeStepper'
 import 'swiper/css'
-import { Input } from '@/components/primitives/input'
-import CustomSelect from '@/components/CustomSelect/CustomSelect'
 import { SliderControls } from './SliderControls'
 import { SearchInput } from './SearchInput'
 import { NotFoundIcon } from '@/components/icons/NotFoundIcon'
+import { AnimatePresence, motion } from 'framer-motion'
+
 function TagPill({ children }: { children?: string }) {
   if (!children) return null
   return (
@@ -169,7 +166,16 @@ export function BlogClient({
 
   const getPerView = () => Number(swiperRef.current?.params.slidesPerView) || 1
 
+  const [loading, setLoading] = useState(false) // 👈 локальний loading
+  const deferredArticles = useDeferredValue(as) // 👈 зменшує “ривок” під час апдейту
+
+  // коли приїхали нові articles — вимикаємо loading
+  useEffect(() => {
+    setLoading(false)
+  }, [as])
+
   const handlePageChange = (p: number) => {
+    setLoading(true) // 👈 вмикаємо плавний стан
     startTransition(async () => {
       await setBlogPage(p)
       router.refresh()
@@ -349,40 +355,48 @@ export function BlogClient({
               'flex flex-col gap-10 pb-[120px] max-lg:pb-[80px] w-full max-w-[1540px] self-center px-8 max-lg:px-6',
               isBigDesktop ? 'max-w-[1540px]' : 'max-w-[952px]'
             )}>
-            <div className="flex flex-col gap-4">
-              <Typography variant="h3" weight="medium" className="max-lg:!text-3xl">
-                {mainInfo?.LatestTitle ? mainInfo?.LatestTitle : t('latest_title')}
-              </Typography>
-              {/* <Typography variant="body3" className="text-description">
-                {mainInfo?.LatestSubtitle ? mainInfo?.LatestSubtitle : t('latest_subtitle')}
-              </Typography> */}
-            </div>
+            {/* ...заголовки */}
+
             <div className="flex w-full justify-between items-center">
-              <SearchInput />
-              {/* <CustomSelect
-                label={t('input')}
-                className="rounded-full h-[48px] w-[300px] max-lg:w-[343px] max-md:w-full"
-                options={
-                  mainInfo?.category
-                    ? [
-                        { value: 'All Posts', label: 'All Posts' },
-                        { value: String(mainInfo.category.Name), label: mainInfo.category.Name }
-                      ]
-                    : [{ value: 'All Posts', label: 'All Posts' }]
-                }
-              /> */}
+              <SearchInput onSearchStart={() => setLoading(true)} />
             </div>
-            {articles.data.length ? (
-              <div
-                className={cn(
-                  'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-md:gap-4',
-                  isPending && 'pointer-events-none select-none'
-                )}>
-                {isPending
-                  ? Array.from({ length: 3 }).map((_, i) => <ArticleCardSkeleton key={i} />)
-                  : as.map((article) => (
-                      <ArticleCard key={article.id} a={article} isArabic={isArabic} isFeatured={false} />
+
+            {as.length ? (
+              <div className="relative">
+                {/* GRID із плавною заміною карток */}
+                <div
+                  className={cn(
+                    'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-md:gap-4',
+                    loading && 'pointer-events-none select-none'
+                  )}>
+                  <AnimatePresence initial={false}>
+                    {deferredArticles.map((article) => (
+                      <motion.div
+                        key={article.id}
+                        layout="position"
+                        initial={false}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -6 }}
+                        transition={{ duration: 0.18, ease: 'easeOut' }}>
+                        <ArticleCard a={article} isArabic={isArabic} isFeatured={false} />
+                      </motion.div>
                     ))}
+                  </AnimatePresence>
+                </div>
+
+                {/* Скелетони поверх під час loading */}
+                {/* {loading && (
+                  <motion.div
+                    className="absolute inset-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}>
+                    {Array.from({ length: 3 }).map((_, i) => (
+                      <ArticleCardSkeleton key={`sk-${i}`} />
+                    ))}
+                  </motion.div>
+                )} */}
               </div>
             ) : (
               <div className="w-full flex items-center justify-center h-[433px]">
@@ -392,6 +406,7 @@ export function BlogClient({
                 </div>
               </div>
             )}
+
             <Pagination className="mt-8" current={currentPage} total={totalPages} onPageChange={handlePageChange} />
           </section>
         </div>
