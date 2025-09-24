@@ -201,7 +201,7 @@ export function BlogClient({
                     ? 'max-w-[1000px] max-lg:max-w-[600px] gap-9 max-lg:gap-6'
                     : 'max-w-[778px] max-lg:max-w-[506px] gap-6 max-lg:gap-4'
                 )}>
-                <Typography variant={isDesktop ? 'h1' : isArabic ? 'h5' : 'h3'} weight="medium">
+                <Typography variant={isDesktop ? 'h1' : isArabic ? 'h5' : 'h3'} weight="medium" as="h1">
                   {t('title')}
                 </Typography>
                 <Typography variant="body3" className="text-center text-description">
@@ -219,56 +219,21 @@ export function BlogClient({
             </div>
           </div>
 
-          <div
-            className={cn(
-              'flex flex-col w-full pb-[80px] max-lg:pb-[80px] pt-[80px] px-8 max-lg:px-6',
-              isBigDesktop ? 'max-w-[1540px]' : 'max-w-[952px]'
-            )}>
-            <div className="flex flex-col gap-12 max-lg:gap-10 ">
-              {mainArticle ? (
-                <div className="bg-secondary-300 rounded-2xl p-3 max-md:pb-6 flex gap-6 items-center max-md:flex-col">
-                  {mainArticle?.CoverImage?.formats.medium?.url ? (
-                    <CoverImg
-                      url={mainArticle?.CoverImage?.formats.medium?.url}
-                      className="rounded-2xl min-w-[480px] max-lg:min-w-[50%] h-[320px] max-lg:w-[50%] max-md:w-full max-md:h-300"
-                    />
-                  ) : (
-                    <div className="rounded-2xl min-w-[480px] max-lg:min-w-[50%] w-[480px] h-[320px] max-lg:w-[50%] max-md:w-full max-md:h-300 bg-secondary-400" />
-                  )}
-                  <div className="flex flex-col gap-6 max-lg:w-[50%] max-md:w-full">
-                    {mainArticle?.Tags?.[0]?.Tag ? <TagsRow tags={mainArticle.Tags} /> : null}
-                    <div className="flex flex-col gap-4 min-w-0 w-full">
-                      <Typography
-                        variant="h6"
-                        weight="medium"
-                        className="line-clamp-2 break-words min-h-12 cursor-pointer max-md:h-auto">
-                        {mainArticle?.Title}
-                      </Typography>
-                      <Typography variant="body3" className="text-description line-clamp-2 break-words min-h-10">
-                        {mainArticle?.ShortDescription}
-                      </Typography>
-                    </div>
-                  </div>
-                </div>
-              ) : null}
-            </div>
-          </div>
-
           {/* Featured section */}
           {featuredArticles?.data?.length ? (
             <section
               className={cn(
-                'flex flex-col items-center pb-[80px] max-md:pb-[60px] w-full max-w-[1540px] px-8 max-lg:px-6',
+                'flex flex-col items-center pb-[80px] max-md:pb-[60px] w-full max-w-[1540px] px-8 max-lg:px-6 pt-[80px] ',
                 isBigDesktop ? 'max-w-[1540px]' : 'max-w-[952px]'
               )}>
               <div className="flex flex-col gap-10 max-md:gap-10 w-full">
                 <div className="flex flex-col gap-4">
-                  <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
+                  <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" as="h3">
                     {mainInfo?.FeaturedTitle ? mainInfo.FeaturedTitle : t('block_title')}
                   </Typography>
-                  {/* <Typography variant="body3" className="text-description">
+                  <Typography variant="body3" className="text-description">
                     {mainInfo?.FeaturedSubtitle ? mainInfo.FeaturedSubtitle : t('block_subtitle')}
-                  </Typography> */}
+                  </Typography>
                 </div>
 
                 <Swiper
@@ -349,13 +314,55 @@ export function BlogClient({
             </section>
           ) : null}
 
+          <div
+            className={cn(
+              'flex flex-col w-full pb-[80px] max-lg:pb-[80px] px-8 max-lg:px-6',
+              isBigDesktop ? 'max-w-[1540px]' : 'max-w-[952px]'
+            )}>
+            <div className="flex flex-col gap-12 max-lg:gap-10 ">
+              {mainArticle ? (
+                <div className="bg-secondary-300 rounded-2xl p-3 max-md:pb-6 flex gap-6 items-center max-md:flex-col">
+                  {mainArticle?.CoverImage?.formats.medium?.url ? (
+                    <CoverImg
+                      url={mainArticle?.CoverImage?.formats.medium?.url}
+                      className="rounded-2xl min-w-[480px] max-lg:min-w-[50%] h-[320px] max-lg:w-[50%] max-md:w-full max-md:h-300"
+                    />
+                  ) : (
+                    <div className="rounded-2xl min-w-[480px] max-lg:min-w-[50%] w-[480px] h-[320px] max-lg:w-[50%] max-md:w-full max-md:h-300 bg-secondary-400" />
+                  )}
+                  <div className="flex flex-col gap-6 max-lg:w-[50%] max-md:w-full">
+                    {mainArticle?.Tags?.[0]?.Tag ? <TagsRow tags={mainArticle.Tags} /> : null}
+                    <div className="flex flex-col gap-4 min-w-0 w-full">
+                      <Typography
+                        variant="h6"
+                        weight="medium"
+                        className="line-clamp-2 break-words min-h-12 cursor-pointer max-md:h-auto">
+                        {mainArticle?.Title}
+                      </Typography>
+                      <Typography variant="body3" className="text-description line-clamp-2 break-words min-h-10">
+                        {mainArticle?.ShortDescription}
+                      </Typography>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          </div>
+
           {/* Latest */}
           <section
             className={cn(
               'flex flex-col gap-10 pb-[120px] max-lg:pb-[80px] w-full max-w-[1540px] self-center px-8 max-lg:px-6',
               isBigDesktop ? 'max-w-[1540px]' : 'max-w-[952px]'
             )}>
-            {/* ...заголовки */}
+            <div className="flex flex-col gap-4">
+              <Typography variant="h3" weight="medium" className="max-lg:!text-3xl">
+                {mainInfo?.LatestTitle ? mainInfo?.LatestTitle : t('latest_title')}
+              </Typography>
+              <Typography variant="body3" className="text-description">
+                {mainInfo?.LatestSubtitle ? mainInfo?.LatestSubtitle : t('latest_subtitle')}
+              </Typography>
+            </div>
 
             <div className="flex w-full justify-between items-center">
               <SearchInput onSearchStart={() => setLoading(true)} />

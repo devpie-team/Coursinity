@@ -78,7 +78,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
       <section className="bg-white pt-[176px] pb-[120px] flex flex-col items-center  max-lg:px-6 max-md-px-4">
         <div className="flex flex-col max-w-[976px] max-lg:max-w-[560px] w-full gap-8 pb-[72px] max-lg:pb-[60px]">
           <div className="flex flex-col gap-6 max-lg:gap-4">
-            <Typography variant="h3" className="max-lg:text-3xl" weight="medium">
+            <Typography variant="h3" className="max-lg:text-3xl" weight="medium" as="h1">
               {article?.Title}
             </Typography>
             <Typography variant="body2" className="max-lg:text-base">
