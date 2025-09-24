@@ -187,11 +187,7 @@ export function BlogClient({
               'flex flex-col items-center gap-[98px] pt-[156px] max-lg:pt-[100px] w-full bg-gradient-to-b from-[#F9FAFB] via-[#F9FAFB] to-[#F9FAFB]',
               'pb-[100px] max-lg:pb-[60px]'
             )}>
-            <div
-              className={cn(
-                'flex flex-col gap-8 items-center px-8 max-lg:px-6',
-                isBigDesktop ? 'max-w-[1540px]' : 'max-w-[952px]'
-              )}>
+            <div className={cn('flex flex-col gap-8 items-center px-8 max-lg:px-6', 'max-w-[1540px]')}>
               <div
                 className={cn(
                   'flex flex-col items-center text-center',
@@ -264,9 +260,9 @@ export function BlogClient({
                   <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium">
                     {mainInfo?.FeaturedTitle ? mainInfo.FeaturedTitle : t('block_title')}
                   </Typography>
-                  <Typography variant="body3" className="text-description">
+                  {/* <Typography variant="body3" className="text-description">
                     {mainInfo?.FeaturedSubtitle ? mainInfo.FeaturedSubtitle : t('block_subtitle')}
-                  </Typography>
+                  </Typography> */}
                 </div>
 
                 <Swiper
@@ -357,9 +353,9 @@ export function BlogClient({
               <Typography variant="h3" weight="medium" className="max-lg:!text-3xl">
                 {mainInfo?.LatestTitle ? mainInfo?.LatestTitle : t('latest_title')}
               </Typography>
-              <Typography variant="body3" className="text-description">
+              {/* <Typography variant="body3" className="text-description">
                 {mainInfo?.LatestSubtitle ? mainInfo?.LatestSubtitle : t('latest_subtitle')}
-              </Typography>
+              </Typography> */}
             </div>
             <div className="flex w-full justify-between items-center">
               <SearchInput />

@@ -8,10 +8,14 @@ type Props = {
   isError?: boolean
   divClassName?: string
   search?: boolean
+  isArabic?: boolean
 } & React.ComponentProps<'input'>
 
 const Input = React.forwardRef<HTMLInputElement, Props>(
-  ({ className, label, errorMessage, isError, type, required = true, divClassName, search, ...props }, ref) => {
+  (
+    { className, label, errorMessage, isError, type, required = true, divClassName, search, isArabic, ...props },
+    ref
+  ) => {
     return (
       <div className={cn('flex flex-col', divClassName)}>
         {required ? (
@@ -23,7 +27,11 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
 
         <div className="relative w-full">
           {search && (
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400">
+            <div
+              className={cn(
+                'absolute top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400',
+                isArabic ? 'right-4' : 'left-4'
+              )}>
               <SearchIcon />
             </div>
           )}
@@ -31,7 +39,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
             type={type}
             className={cn(
               'w-full flex focus:outline-none h-15 text-md rounded-2xl border bg-white py-[18px] placeholder:text-opacity-60 disabled:pointer-events-none disabled:opacity-50 hover:border-black focus:border-black transition-all duration-300',
-              search ? 'pl-12 pr-5' : 'px-5', // 👈 додаємо відступ під іконку
+              search ? (!isArabic ? 'pl-12 pr-5' : 'pr-12 pl-5') : 'px-5',
               isError ? 'border-[#D92D20]' : 'border-secondary-400',
               className
             )}
