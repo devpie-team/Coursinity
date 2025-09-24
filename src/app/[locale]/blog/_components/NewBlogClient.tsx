@@ -319,13 +319,13 @@ export function BlogClient({
             </section>
           ) : null}
 
-          <div
-            className={cn(
-              'flex flex-col w-full pb-[80px] max-lg:pb-[80px] px-8 max-lg:px-6',
-              isBigDesktop ? 'max-w-[1540px]' : 'max-w-[952px]'
-            )}>
-            <div className="flex flex-col gap-12 max-lg:gap-10 ">
-              {mainArticle ? (
+          {mainArticle ? (
+            <div
+              className={cn(
+                'flex flex-col w-full pb-[80px] max-lg:pb-[80px] px-8 max-lg:px-6',
+                isBigDesktop ? 'max-w-[1540px]' : 'max-w-[952px]'
+              )}>
+              <div className="flex flex-col gap-12 max-lg:gap-10 ">
                 <div className="bg-secondary-300 rounded-2xl p-3 max-md:pb-6 flex gap-6 items-center max-md:flex-col">
                   {mainArticle?.CoverImage?.formats.medium?.url ? (
                     <CoverImg
@@ -350,9 +350,9 @@ export function BlogClient({
                     </div>
                   </div>
                 </div>
-              ) : null}
+              </div>
             </div>
-          </div>
+          ) : null}
 
           {/* Latest */}
           <section
