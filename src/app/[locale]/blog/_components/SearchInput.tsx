@@ -37,7 +37,7 @@ export function SearchInput({
           isArabic={locale === 'ar'}
           search
           required={false}
-          placeholder="Search..."
+          placeholder={t('search')}
           value={value}
           onChange={(e) => setValue(e.target.value)}
           className="rounded-full h-[48px] w-[300px] max-lg:w-[343px] max-md:w-full pr-16"
@@ -52,7 +52,7 @@ export function SearchInput({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 8 }}
               transition={{ duration: 0.25 }}
-              className="absolute left-0 -top-6 cursor-pointer"
+              className={cn('absolute left-0 -top-6 cursor-pointer', locale === 'ar' && 'right-0 -top-6')}
               onClick={() => setValue('')}>
               <Typography variant="subtitle">
                 {t('label')} {/* тут у тебе “Clear all” */}
