@@ -7,6 +7,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import { Input } from '@/components/primitives/input'
 import { Typography } from '@/components/ui'
 import { cn } from '@/lib/utils'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export function SearchInput({
   onSearch,
@@ -22,7 +23,6 @@ export function SearchInput({
   const debounced = useDebounce(value, 600)
 
   useEffect(() => {
-    // стартуємо “loading” ДО refresh
     onSearchStart?.()
     Cookies.set('search', debounced || '')
     router.refresh()
@@ -32,18 +32,35 @@ export function SearchInput({
 
   return (
     <div className={cn('flex flex-col gap-1 w-full', locale == 'ar' && 'gap-2')}>
-      <div className="cursor-pointer" onClick={() => setValue('')}>
-        <Typography variant="subtitle">{t('label')}</Typography>
+      <div className="relative w-fit">
+        <Input
+          isArabic={locale === 'ar'}
+          search
+          required={false}
+          placeholder="Search..."
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          className="rounded-full h-[48px] w-[300px] max-lg:w-[343px] max-md:w-full pr-16"
+        />
+
+        {/* Clear all */}
+        <AnimatePresence>
+          {value && (
+            <motion.div
+              key="clear-label"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              transition={{ duration: 0.25 }}
+              className="absolute left-0 -top-6 cursor-pointer"
+              onClick={() => setValue('')}>
+              <Typography variant="subtitle">
+                {t('label')} {/* тут у тебе “Clear all” */}
+              </Typography>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-      <Input
-        isArabic={locale === 'ar'}
-        search
-        required={false}
-        placeholder="Search..."
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        className="rounded-full h-[48px] w-[300px] max-lg:w-[343px] max-md:w-full"
-      />
     </div>
   )
 }
