@@ -136,6 +136,7 @@ export function BlogClient({
   const [currentSliderPage, setCurrentSliderPage] = useState(0)
   const [totalSliderPages, setTotalSliderPages] = useState(1)
   const [isMobile, setIsMobile] = useState(false)
+  const [isSmallMobile, setIsSmallMobile] = useState(false)
   const [isPending, startTransition] = useTransition() // 👈 для м'якої індикації
   const t = useTranslations('BL_BlogPage')
   const locale = useLocale()
@@ -146,6 +147,7 @@ export function BlogClient({
     AOS.init({ once: false, duration: 700, offset: 100, easing: 'ease-in-out', mirror: true })
     const checkScreenSize = () => {
       const width = window.innerWidth
+      setIsSmallMobile(width < 415)
       setIsMobile(width < 768)
       setIsTablet(width >= 768 && width <= 1024)
       setIsDesktop(width > 1024)
@@ -198,10 +200,13 @@ export function BlogClient({
                 className={cn(
                   'flex flex-col items-center text-center',
                   isArabic
-                    ? 'max-w-[1000px] max-lg:max-w-[600px] gap-9 max-lg:gap-6'
+                    ? 'max-w-[1000px] max-lg:max-w-[432px] gap-9 max-lg:gap-6'
                     : 'max-w-[778px] max-lg:max-w-[506px] gap-6 max-lg:gap-4'
                 )}>
-                <Typography variant={isDesktop ? 'h1' : isArabic ? 'h5' : 'h3'} weight="medium" as="h1">
+                <Typography
+                  variant={isDesktop ? 'h1' : isArabic ? (isSmallMobile ? 'h6' : 'h5') : 'h3'}
+                  weight="medium"
+                  as="h1">
                   {mainInfo?.MainTitle ? mainInfo?.MainTitle : t('title')}
                 </Typography>
                 <Typography variant="body3" className="text-center text-description">
