@@ -69,13 +69,13 @@ export const TrainingSection = () => {
               </Typography>
               <div className="flex flex-col gap-3">
                 <div className="flex gap-3">
-                  <div className="flex items-center justify-center bg-primary-purple min-w-5 h-5 rounded-full">
+                  <div className="flex items-center justify-center bg-primary-green min-w-5 h-5 rounded-full">
                     <SmallCheckIcon />
                   </div>
                   <Typography variant={isDesktop ? 'body2' : 'body3'}>{t(`cards.${index}.item_1`)}</Typography>
                 </div>
                 <div className="flex gap-3">
-                  <div className="flex items-center justify-center bg-primary-purple min-w-5 h-5 rounded-full">
+                  <div className="flex items-center justify-center bg-primary-green min-w-5 h-5 rounded-full">
                     <SmallCheckIcon />
                   </div>
                   <Typography variant={isDesktop ? 'body2' : 'body3'}>{t(`cards.${index}.item_2`)}</Typography>

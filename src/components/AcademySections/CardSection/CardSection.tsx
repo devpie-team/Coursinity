@@ -204,7 +204,7 @@ export const CardSection = () => {
       <div className="grid w-full max-w-[1240px] grid-cols-3 max-md:hidden">
         <div />
         <div className="flex justify-center">
-          <Button variant="academy" className="max-md:w-full">
+          <Button variant="academy" className="max-md:w-full ">
             {t('button')}
           </Button>
         </div>
@@ -224,7 +224,7 @@ export const CardSection = () => {
       </div>
       <div className="flex flex-col items-center md:hidden gap-5">
         <SwipeStepper steps={6} activeStep={currentStep + 1} onStepClick={handleStepClick} type="white" />
-        <Button variant="academy" className="max-md:w-full">
+        <Button variant="academy" className="max-md:w-full max-w-[280px]">
           {t('button')}
         </Button>
       </div>
