@@ -35,13 +35,15 @@ export const LearningCalendarSection = () => {
   useEffect(() => {
     if (!sectionRef.current) return
 
-    const STEP_PX = 700
+    const STEP_PX = 500 // довжина анімації
+    const HOLD_PX = 400 // "стоп" у центрі
+    const TOTAL_STEP = STEP_PX + HOLD_PX
     const X_START = 60
 
     const ctx = gsap.context(() => {
       const elems = gsap.utils.toArray<HTMLElement>('.lc-card')
       const n = elems.length
-      const TOTAL_SCROLL = Math.max(0, n * STEP_PX)
+      const TOTAL_SCROLL = Math.max(0, n * TOTAL_STEP)
 
       const angleMap = [0, -5, -10, -13, -15]
       const yMap = [0, 5, 10, 20, 30]
@@ -135,24 +137,41 @@ export const LearningCalendarSection = () => {
         },
         onUpdate: (self) => {
           const px = self.progress * TOTAL_SCROLL
-          const progressPerCard = STEP_PX
+          const progressPerCard = TOTAL_STEP
+
+          // поточний step, не більше ніж n-1
+          const step = Math.min(Math.floor(px / progressPerCard), n - 1)
 
           elems.forEach((el, idx) => {
             const startPx = idx * progressPerCard
-            const endPx = startPx + progressPerCard
-            const localProgress = gsap.utils.clamp(0, 1, (px - startPx) / progressPerCard)
+            const localRaw = (px - startPx) / progressPerCard
+            const localProgress = gsap.utils.clamp(0, 1, localRaw)
 
-            // зсув відносно активної картки
-            const offset = px / progressPerCard - idx
-            const mi = Math.min(Math.max(Math.floor(offset), 0), angleMap.length - 1)
+            const animPart = STEP_PX / TOTAL_STEP
+            const effectiveProgress =
+              localProgress <= animPart
+                ? localProgress / animPart
+                : 1
+
+            const offset = step - idx // тепер працює правильно
+            let rotationValue = 0
+            let xValue = 0
+            let yValue = 0
+
+            if (offset > 0) {
+              const mi = Math.min(offset, angleMap.length - 1)
+              rotationValue = angleMap[mi]
+              xValue = -xMap[mi]
+              yValue = yMap[mi]
+            }
 
             gsap.to(el, {
-              xPercent: X_START * (1 - localProgress),
-              autoAlpha: localProgress > 0 ? 1 : 0,
-              rotation: angleMap[mi] * localProgress,
-              x: -xMap[mi] * localProgress,
-              y: yMap[mi] * localProgress,
-              duration: 0.5,
+              xPercent: X_START * (1 - effectiveProgress),
+              autoAlpha: effectiveProgress > 0 ? 1 : 0,
+              rotation: rotationValue * effectiveProgress,
+              x: xValue * effectiveProgress,
+              y: yValue * effectiveProgress,
+              duration: 0.4,
               ease: 'power1.out',
               overwrite: 'auto'
             })
