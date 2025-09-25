@@ -244,7 +244,7 @@ function LeftStep({ step }: { step: number }) {
       <ul className="flex flex-col gap-5">
         {[1, 2, 3].map((i) => (
           <li key={i} className="flex items-center gap-3">
-            <div className="flex items-center justify-center bg-primary-purple min-w-5 h-5 rounded-full">
+            <div className="flex items-center justify-center bg-primary-green min-w-5 h-5 rounded-full">
               <SmallCheckIcon />
             </div>
             <Typography variant="body2">{t(`steps.${step}.item_${i}`)}</Typography>

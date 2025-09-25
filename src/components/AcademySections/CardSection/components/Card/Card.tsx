@@ -13,7 +13,7 @@ export const Card = ({ id, bigIcon, smallIcon1, smallIcon2, smallIcon3 }: TCardP
   const t = useTranslations('AC_CardSection')
 
   return (
-    <div className="w-[400px] max-md:w-[300px] h-[436px] rounded-2xl border border-[#FFFFFF29] text-left flex flex-col gap-16 p-6 bg-[linear-gradient(180deg,rgba(255,255,255,0.06)_0%,rgba(30,141,194,0.06)_100%)]">
+    <div className="w-[400px] max-md:w-[300px] h-[436px] rounded-2xl border border-[#FFFFFF29] flex flex-col gap-16 p-6 bg-[linear-gradient(180deg,rgba(255,255,255,0.06)_0%,rgba(30,141,194,0.06)_100%)]">
       {bigIcon}
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-4 ">
