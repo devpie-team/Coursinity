@@ -36,7 +36,7 @@ export const CardSession: React.FC<CardSessionProps> = ({
       className={cn(
         'lc-card opacity-0 will-change-transform origin-center', // важливо для коректного повороту
         'absolute',
-        'w-[425px] h-[425px] rounded-3xl max-lg:w-[360px] max-lg:h-[360px] max-md:w-[260px] max-md:h-[260px]',
+        'w-[425px] h-[425px] rounded-3xl max-lg:w-[260px] max-lg:h-[260px] max-md:w-[260px] max-md:h-[260px]',
         'bg-gradient-to-b from-white/5 to-cyan-600/5',
         'border border-white/20 backdrop-blur-lg',
         'shadow-[0px_12px_30px_0px_rgba(0,0,0,0.05)]',
@@ -58,8 +58,8 @@ export const CardSession: React.FC<CardSessionProps> = ({
           </div>
         </div>
 
-        <Button variant="academy" className="flex gap-2 text-white">
-          <NotificationIcon /> {cta}
+        <Button leftIcon={<NotificationIcon />} variant="academy" className="flex gap-2 text-white">
+          {cta}
         </Button>
       </div>
     </div>
