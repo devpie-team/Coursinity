@@ -234,10 +234,7 @@ export function BlogClient({
                     ? 'max-w-[1000px] max-lg:max-w-[432px] gap-9 max-lg:gap-6'
                     : 'max-w-[778px] max-lg:max-w-[506px] gap-6 max-lg:gap-4'
                 )}>
-                <Typography
-                  variant={isDesktop ? 'h1' : isArabic ? (isSmallMobile ? 'h6' : 'h5') : 'h3'}
-                  weight="medium"
-                  as="h1">
+                <Typography variant={isDesktop ? 'h1' : 'h3'} weight="medium" as="h1" className="text-center">
                   {mainInfo?.MainTitle ? mainInfo?.MainTitle : t('title')}
                 </Typography>
                 <Typography variant="body3" className=" text-description">
