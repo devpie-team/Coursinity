@@ -1,7 +1,9 @@
 import { cookies } from 'next/headers'
 import { getArticles } from '@/services/getArticles'
-import { BlogClient } from './_components/BlockClient'
 import { Metadata } from 'next'
+import { BlogClient } from './_components/NewBlogClient'
+import { getArticlesInfo } from '@/services/getArticlesInfo'
+import { getArticleBySlug } from '@/services/getArticle'
 
 type Search = { page?: string }
 
@@ -27,11 +29,29 @@ export default async function BlogPage({
 
   const cookieStore = await cookies()
   const pageCookie = cookieStore.get('blog_page')?.value
+  const searchCookie = cookieStore.get('search')?.value
+  console.log(searchCookie)
+  const categoryCookie = cookieStore.get('category')?.value
 
   const page = Math.max(1, Number(searchPage ?? pageCookie ?? 1))
 
-  const data = await getArticles({ page, pageSize: 9, locale })
+  const data = await getArticles({
+    page,
+    pageSize: 9,
+    locale,
+    search: searchCookie
+  })
   const dataFeatured = await getArticles({ featured: true, page: 1, pageSize: 4, locale })
+  const info = await getArticlesInfo(locale)
+  const mainArticle = await getArticleBySlug(info.data?.[0]?.MainArticle?.Slug, false, locale)
 
-  return <BlogClient articles={data} featuredArticles={dataFeatured} currentPage={page} />
+  return (
+    <BlogClient
+      articles={data}
+      featuredArticles={dataFeatured}
+      currentPage={page}
+      info={info}
+      mainArticle={mainArticle}
+    />
+  )
 }

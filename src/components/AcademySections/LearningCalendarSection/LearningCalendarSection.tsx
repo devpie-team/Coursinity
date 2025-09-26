@@ -30,24 +30,26 @@ export const LearningCalendarSection = () => {
     return () => window.removeEventListener('resize', check)
   }, [])
 
-  // дані карток беруться з JSON
   const cards = t.raw('cards') as Array<any>
 
   useEffect(() => {
     if (!sectionRef.current) return
 
-    const STEP_PX = 700
+    const STEP_PX = 500 // довжина анімації
+    const HOLD_PX = 400 // "стоп" у центрі
+    const TOTAL_STEP = STEP_PX + HOLD_PX
     const X_START = 60
 
     const ctx = gsap.context(() => {
       const elems = gsap.utils.toArray<HTMLElement>('.lc-card')
       const n = elems.length
-      const TOTAL_SCROLL = Math.max(0, (n - 1) * STEP_PX)
+      const TOTAL_SCROLL = Math.max(0, n * TOTAL_STEP)
 
       const angleMap = [0, -5, -10, -13, -15]
       const yMap = [0, 5, 10, 20, 30]
       const xMap = [0, 10, 20, 30, 40]
 
+      // Початковий стан
       gsap.set(elems, {
         autoAlpha: 0,
         xPercent: X_START,
@@ -56,10 +58,11 @@ export const LearningCalendarSection = () => {
         y: 0,
         transformOrigin: '50% 50%'
       })
-      if (elems[0]) {
-        gsap.set(elems[0], { xPercent: 0, autoAlpha: 1 })
-      }
 
+      gsap.set(elems[-1], { xPercent: 0, autoAlpha: 1 })
+
+      // --- СТАРА ЛОГІКА (залишаємо закоментованою) ---
+      /*
       let currentStep = 0
       let exitingIndex: number | null = null
 
@@ -73,7 +76,6 @@ export const LearningCalendarSection = () => {
         onToggle: (self) => {
           document.documentElement.classList.toggle('hide-header', self.isActive)
         },
-
         onUpdate: (self) => {
           const px = self.progress * TOTAL_SCROLL
           const step = TOTAL_SCROLL === 0 ? 0 : Math.min(n - 1, Math.floor(px / STEP_PX))
@@ -120,6 +122,62 @@ export const LearningCalendarSection = () => {
           }
         }
       })
+      */
+
+      // --- НОВА ЛОГІКА (плавний скрол з каскадом) ---
+      ScrollTrigger.create({
+        trigger: sectionRef.current!,
+        start: 'top top',
+        end: `+=${TOTAL_SCROLL}`,
+        pin: true,
+        scrub: true,
+        anticipatePin: 1,
+        onToggle: (self) => {
+          document.documentElement.classList.toggle('hide-header', self.isActive)
+        },
+        onUpdate: (self) => {
+          const px = self.progress * TOTAL_SCROLL
+          const progressPerCard = TOTAL_STEP
+
+          // поточний step, не більше ніж n-1
+          const step = Math.min(Math.floor(px / progressPerCard), n - 1)
+
+          elems.forEach((el, idx) => {
+            const startPx = idx * progressPerCard
+            const localRaw = (px - startPx) / progressPerCard
+            const localProgress = gsap.utils.clamp(0, 1, localRaw)
+
+            const animPart = STEP_PX / TOTAL_STEP
+            const effectiveProgress =
+              localProgress <= animPart
+                ? localProgress / animPart
+                : 1
+
+            const offset = step - idx // тепер працює правильно
+            let rotationValue = 0
+            let xValue = 0
+            let yValue = 0
+
+            if (offset > 0) {
+              const mi = Math.min(offset, angleMap.length - 1)
+              rotationValue = angleMap[mi]
+              xValue = -xMap[mi]
+              yValue = yMap[mi]
+            }
+
+            gsap.to(el, {
+              xPercent: X_START * (1 - effectiveProgress),
+              autoAlpha: effectiveProgress > 0 ? 1 : 0,
+              rotation: rotationValue * effectiveProgress,
+              x: xValue * effectiveProgress,
+              y: yValue * effectiveProgress,
+              duration: 0.4,
+              ease: 'power1.out',
+              overwrite: 'auto'
+            })
+          })
+        }
+      })
     }, sectionRef)
 
     return () => ctx.revert()
@@ -128,7 +186,7 @@ export const LearningCalendarSection = () => {
   return (
     <section
       ref={sectionRef}
-      className=" flex flex-col bg-black pt-[60px] pb-[60px]  h-[100vh] justify-between items-center text-center relative overflow-hidden p-4 max-lg:pt-[80px] max-lg:pb-[80px]">
+      className="flex flex-col bg-black pt-[60px] pb-[60px] h-[100vh] justify-between items-center text-center relative overflow-hidden p-4 max-lg:pt-[40px] max-lg:pb-[40px]">
       <div className="flex flex-col gap-8 max-lg:gap-6 max-md:max-w-[280px] ">
         <Typography variant={isDesktop ? 'h3' : 'h5'} weight="medium" className="text-white">
           {t('title')}

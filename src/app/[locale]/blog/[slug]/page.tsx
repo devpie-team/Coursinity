@@ -4,13 +4,13 @@ import { Header } from '@/components/Header'
 import { Typography } from '@/components/ui'
 import { API_URL } from '@/constants/main'
 import { getTranslations } from 'next-intl/server'
-import { ArticleCard } from '../_components/BlockClient'
 
 import ShareButtons from './_components/ShareButtons'
 import { getArticleBySlug } from '@/services/getArticle'
 import ArticleBlocksRenderer from './_components/ArticleBlocksRenderer'
 import BlogDate from './_components/BlogDate'
 import { Metadata } from 'next'
+import { ArticleCard } from '../_components/NewBlogClient'
 
 export async function generateMetadata({
   params
@@ -78,7 +78,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
       <section className="bg-white pt-[176px] pb-[120px] flex flex-col items-center  max-lg:px-6 max-md-px-4">
         <div className="flex flex-col max-w-[976px] max-lg:max-w-[560px] w-full gap-8 pb-[72px] max-lg:pb-[60px]">
           <div className="flex flex-col gap-6 max-lg:gap-4">
-            <Typography variant="h3" className="max-lg:text-3xl" weight="medium">
+            <Typography variant="h3" className="max-lg:text-3xl" weight="medium" as="h1">
               {article?.Title}
             </Typography>
             <Typography variant="body2" className="max-lg:text-base">
@@ -95,12 +95,12 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
             <div className="flex gap-6 items-center">
               <div className="flex flex-col gap-3">
                 <Typography variant="caption" className="text-primary-purple">
-                  {t('author')}
+                  {t('time_to_read')}
                 </Typography>
                 <Typography
                   variant="body2"
                   className="max-lg:max-w-[126px] max-md:max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
-                  {article?.Author ? article?.Author : 'Unknown Author'}
+                  {article?.TimeToRead ? article?.TimeToRead + (locale == 'ar' ? 'دقيقة ' : ' Min') : '-'}
                 </Typography>
               </div>
               <div className="flex flex-col gap-3">
@@ -137,7 +137,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
             {latestArticles.data.slice(0, 3).map((article) => (
-              <ArticleCard key={article?.id} a={article} isArabic={locale == 'ar'} />
+              <ArticleCard key={article?.id} a={article} isArabic={locale == 'ar'} isFeatured={false} />
             ))}
           </div>
         </section>

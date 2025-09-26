@@ -3,12 +3,19 @@
         "title": "Insights that Move Learning Forward",
         "subtitle": "Book a demo and experience how a branded Coursinity Academy can elevate your training.",
         "button": "Get started",
-        "input": "Enter your email",
+        "input": "Search",
         "block_title": "Featured Article",
-        "latest_title": "Latest Posts"
+        "block_subtitle": "Book a demo and experience how a branded Coursinity Academy can elevate your training.",
+        "latest_title": "Latest news",
+        "latest_subtitle": "Book a demo and experience how a branded Coursinity Academy can elevate your training.",
+        "time_to_read": "Min Read",
+        "label": "clear all",
+        "search": "Search...",
+        "nothing_found": "Nothing found"
     },
     "BL_BlogPost": {
         "author": "Written by",
+        "time_to_read": "Time to Read",
         "published_at": "Published on",
         "latest_title": "Latest Posts",
         "share_post": "Share this post",
