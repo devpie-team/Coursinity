@@ -192,10 +192,10 @@ export function BlogClient({
         <div className="flex flex-col items-center w-full">
           <div
             className={cn(
-              'flex flex-col items-center gap-[98px] pt-[156px] max-lg:pt-[100px] w-full bg-gradient-to-b from-[#F9FAFB] via-[#F9FAFB] to-[#F9FAFB]',
+              'flex flex-col items-center gap-[98px] pt-[196px] max-lg:pt-[100px] w-full bg-gradient-to-b from-[#F9FAFB] via-[#F9FAFB] to-[#F9FAFB]',
               'pb-[100px] max-lg:pb-[60px]'
             )}>
-            <div className={cn('flex flex-col gap-8 items-center px-8 max-lg:px-6', 'max-w-[1540px]')}>
+            {/* <div className={cn('flex flex-col gap-8 items-center px-8 max-lg:px-6', 'max-w-[1540px]')}>
               <div
                 className={cn(
                   'flex flex-col items-center text-center',
@@ -217,6 +217,37 @@ export function BlogClient({
                 <Button
                   variant="purple"
                   className="max-w-[200px] max-lg:max-w-[412px] w-full max-md:max-w-full h-[60px]"
+                  onClick={() => router.push(`/${locale}/contact-form`)}>
+                  {t('button')}
+                </Button>
+              </div>
+            </div> */}
+            <div
+              className={cn(
+                'flex flex-col gap-8 px-8 max-lg:px-6 w-full',
+                isBigDesktop ? 'max-w-[1540px]' : 'max-w-[952px]'
+              )}>
+              <div
+                className={cn(
+                  'flex flex-col',
+                  isArabic
+                    ? 'max-w-[1000px] max-lg:max-w-[432px] gap-9 max-lg:gap-6'
+                    : 'max-w-[778px] max-lg:max-w-[506px] gap-6 max-lg:gap-4'
+                )}>
+                <Typography
+                  variant={isDesktop ? 'h1' : isArabic ? (isSmallMobile ? 'h6' : 'h5') : 'h3'}
+                  weight="medium"
+                  as="h1">
+                  {mainInfo?.MainTitle ? mainInfo?.MainTitle : t('title')}
+                </Typography>
+                <Typography variant="body3" className=" text-description">
+                  {mainInfo?.MainSubtitle ? mainInfo?.MainSubtitle : t('subtitle')}
+                </Typography>
+              </div>
+              <div className="flex max-lg:flex-col  gap-4 w-full ">
+                <Button
+                  variant="purple_secondary"
+                  className="max-w-[200px]  w-full max-md:max-w-full h-[60px]"
                   onClick={() => router.push(`/${locale}/contact-form`)}>
                   {t('button')}
                 </Button>
