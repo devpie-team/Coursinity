@@ -142,7 +142,7 @@ export const Header = () => {
                   </a>
                 </div>
               )}
-              <a href="#">
+              <a href={`/${locale}/blog`}>
                 <Typography weight="medium" variant="h6">
                   {t('blog')}
                 </Typography>
