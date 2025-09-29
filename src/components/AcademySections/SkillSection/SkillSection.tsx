@@ -27,6 +27,12 @@ import { SmallCheckIcon } from '@/components/icons'
 import { useLottieAutoPlay } from './useLottieAutoPlay'
 import { cn } from '@/lib/utils'
 import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
+import type { Swiper as SwiperType } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import { Pagination } from 'swiper/modules'
+import { SwipeStepper } from '@/components/SwipeStepper/SwipeStepper'
+import { Button } from '@/components/primitives/button'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -127,16 +133,53 @@ export const SkillSection = () => {
     return () => ctx.revert()
   }, [isDesktop, panelH, stepsData])
 
+  const swiperRef = useRef<SwiperType | null>(null)
+  const [currentStep, setCurrentStep] = useState(0)
+
+  const handleStepClick = (step: number) => {
+    if (swiperRef.current) {
+      swiperRef.current?.slideTo(step - 1)
+
+      setCurrentStep(step - 1)
+    }
+  }
+  const t = useTranslations('AC_SkillSection')
+
   if (isMobile) {
     return (
-      <section ref={rootRef} className="bg-white py-20">
-        <div className="flex flex-col gap-[60px] px-[14px]">
+      <section ref={rootRef} className="bg-white py-20" dir={isArabic ? 'rtl' : 'ltr'}>
+        <div className="flex flex-col gap-[32px] px-[14px]">
           <Header isMobile />
-          <div className="flex flex-col gap-10">
+          <Swiper
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper
+              setCurrentStep(swiper.activeIndex)
+            }}
+            pagination={{
+              clickable: true,
+              el: '.skill-swiper-pagination',
+              bulletClass: 'skill-bullet',
+              bulletActiveClass: 'skill-bullet-active',
+              renderBullet: (_, className) => `<span class="${className}"></span>`
+            }}
+            onSlideChange={(swiper) => setCurrentStep(swiper.activeIndex)}
+            slidesPerView={1}
+            slidesPerGroup={1}
+            spaceBetween={16}
+            allowTouchMove
+            observer
+            observeParents
+            className="w-full">
             {stepsData.map((anim, id) => (
-              <MobileStep key={id} step={id} anim={anim} />
+              <SwiperSlide key={id}>
+                <MobileStep step={id} anim={anim} isActive={currentStep === id} />
+              </SwiperSlide>
             ))}
+          </Swiper>
+          <div className="py-[22px] flex w-full items-center justify-center">
+            <SwipeStepper steps={8} activeStep={currentStep + 1} onStepClick={handleStepClick} type="green" />
           </div>
+          <Button variant="academy">{t('button')}</Button>
         </div>
       </section>
     )
@@ -255,22 +298,13 @@ function LeftStep({ step }: { step: number }) {
   )
 }
 
-function MobileStep({ step, anim }: { step: number; anim: any }) {
+function MobileStep({ step, anim, isActive }: { step: number; anim: any; isActive: boolean }) {
   const t = useTranslations('AC_SkillSection')
 
-  const cardRef = useRef<HTMLDivElement | null>(null)
-  const lottieRef = useRef<LottieRefCurrentProps | null>(null)
-
-  useLottieAutoPlay(cardRef, lottieRef, {
-    threshold: 0.3,
-    rootMargin: '0px 0px -18% 0px',
-    once: false
-  })
-
   return (
-    <div className="grid grid-cols-1 gap-10">
-      <div className="flex flex-col gap-8">
-        <div className="flex flex-col gap-4">
+    <div className="grid grid-cols-1 gap-8 ">
+      <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-3">
           <Typography variant="h6" weight="medium">
             {t(`steps.${step}.title`)}
           </Typography>
@@ -278,7 +312,7 @@ function MobileStep({ step, anim }: { step: number; anim: any }) {
             {t(`steps.${step}.description`)}
           </Typography>
         </div>
-        <ul className="mt-2 flex flex-col gap-5">
+        <ul className="mt-2 flex flex-col gap-4">
           {[1, 2, 3].map((i) => (
             <li key={i} className="flex items-center gap-3">
               <div className="flex items-center justify-center bg-primary-purple min-w-5 h-5 rounded-full">
@@ -291,19 +325,19 @@ function MobileStep({ step, anim }: { step: number; anim: any }) {
       </div>
 
       <div
-        className="rounded-2xl overflow-hidden w-full"
+        className="rounded-2xl overflow-hidden w-full h-[380px]"
         style={{
           backgroundImage: `url('/assets/academy/skill/bg.png')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}>
-        <StepVisual anim={anim} minHeight={380} />
+        <StepVisual anim={anim} minHeight={380} play={isActive} />
       </div>
     </div>
   )
 }
 
-export function StepVisual({ anim, minHeight }: { anim: any; minHeight: number }) {
+export function StepVisual({ anim, minHeight, play = false }: { anim: any; minHeight: number; play?: boolean }) {
   const cardRef = useRef<HTMLDivElement | null>(null)
   const lottieRef = useRef<LottieRefCurrentProps | null>(null)
 
@@ -312,6 +346,19 @@ export function StepVisual({ anim, minHeight }: { anim: any; minHeight: number }
     rootMargin: '0px 0px 0px 0px',
     once: false
   })
+
+  useEffect(() => {
+    if (!lottieRef.current) return
+    if (play) {
+      try {
+        lottieRef.current.goToAndPlay(0, true)
+      } catch {}
+    } else {
+      try {
+        lottieRef.current.pause()
+      } catch {}
+    }
+  }, [play])
 
   return (
     <div ref={cardRef} className="p-6 lg:p-8 flex items-center" style={{ minHeight }}>
