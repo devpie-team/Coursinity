@@ -224,7 +224,7 @@ export function BlogClient({
             </div> */}
             <div
               className={cn(
-                'flex flex-col gap-8 px-8 max-lg:px-6 w-full',
+                'flex flex-col gap-8 px-8 max-lg:px-6 w-full max-md:items-center max-md:justify-center',
                 isBigDesktop ? 'max-w-[1540px]' : 'max-w-[952px]'
               )}>
               <div
@@ -237,7 +237,7 @@ export function BlogClient({
                 <Typography variant={isDesktop ? 'h1' : 'h3'} weight="medium" as="h1" className="max-md:text-center">
                   {mainInfo?.MainTitle ? mainInfo?.MainTitle : t('title')}
                 </Typography>
-                <Typography variant="body3" className=" text-description">
+                <Typography variant="body3" className="max-md:text-center text-description">
                   {mainInfo?.MainSubtitle ? mainInfo?.MainSubtitle : t('subtitle')}
                 </Typography>
               </div>
