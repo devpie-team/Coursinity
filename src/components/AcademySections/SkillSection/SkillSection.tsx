@@ -57,7 +57,7 @@ export const SkillSection = () => {
 
   const [isDesktop, setIsDesktop] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
-  const [panelH, setPanelH] = useState<number>(560)
+  const [panelH, setPanelH] = useState<number>(520)
   const [smallHeight, setSmallHeight] = useState(false)
 
   const getTracks = () => [leftTrackRef.current, rightTrackRef.current].filter(Boolean) as HTMLElement[]
@@ -67,22 +67,11 @@ export const SkillSection = () => {
       setIsDesktop(window.innerWidth >= 1024)
       setIsMobile(window.innerWidth <= 768)
       setSmallHeight(window.innerHeight <= 900)
-
-      if (window.innerWidth > 768) {
-        requestAnimationFrame(() => {
-          const rhs = rightStageRef.current
-          if (rhs) setPanelH(rhs.clientHeight)
-          ScrollTrigger.refresh()
-        })
-      }
     }
     measure()
     window.addEventListener('resize', measure)
     return () => window.removeEventListener('resize', measure)
   }, [])
-
-  const { hideHeaderForSection, showHeaderForSection } = useHeaderVisibility()
-  const sectionId = useRef(Math.random().toString())
 
   useEffect(() => {
     if (!isDesktop || !stepsData?.length) return
@@ -361,7 +350,7 @@ export function StepVisual({ anim, minHeight, play = false }: { anim: any; minHe
   }, [play])
 
   return (
-    <div ref={cardRef} className="p-6 lg:p-8 flex items-center" style={{ minHeight }}>
+    <div ref={cardRef} className="p-6 lg:p-8 flex items-center" style={{ maxHeight: minHeight }}>
       <Lottie
         lottieRef={lottieRef}
         animationData={anim}
