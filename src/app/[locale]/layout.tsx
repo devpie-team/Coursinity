@@ -143,6 +143,15 @@ export default async function LocaleLayout({
           fbq('track', 'PageView');
         `}
         </Script>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-4KH6HKMYCG" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-4KH6HKMYCG');
+          `}
+        </Script>
         <link rel="icon" type="image/png" href="/assets/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
         <link rel="shortcut icon" href="/assets/favicon.ico" />
