@@ -14,6 +14,8 @@ import Lottie3Ar from '../../../../public/assets/lottie/academy/growth_section/a
 import Lottie4Ar from '../../../../public/assets/lottie/academy/growth_section/ar/growth_4.json'
 import { useInView } from 'react-intersection-observer'
 import { useLocale, useTranslations } from 'next-intl'
+import { motion, AnimatePresence } from 'framer-motion'
+import { MinusIcon, PlusIcon } from 'lucide-react'
 
 const usePreventLenisScroll = (ref: React.RefObject<HTMLElement | null>) => {
   useEffect(() => {
@@ -32,25 +34,28 @@ const usePreventLenisScroll = (ref: React.RefObject<HTMLElement | null>) => {
 
 export const GrowthSection = () => {
   const t = useTranslations('AC_GrowthSection')
+  const [isDesktop, setIsDesktop] = useState(true)
 
-  const [activeTab, setActiveTab] = useState<keyof typeof lotties>('soft-skills')
+  const [activeTab, setActiveTab] = useState<keyof typeof lotties | ''>('soft-skills')
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const lottieRef = useRef<LottieRefCurrentProps>(null)
   const { ref, inView } = useInView({ triggerOnce: false })
   const locale = useLocale()
   const isArabic = locale === 'ar'
-  const [isDesktop, setIsDesktop] = useState(true)
+
   const lotties = {
     'soft-skills': Lottie1En,
     'lead-manage': isArabic ? Lottie2Ar : Lottie2En,
     'finance-accounting': isArabic ? Lottie3Ar : Lottie3En,
     'growth-marketing': isArabic ? Lottie4Ar : Lottie4En
   } as const
+
   type AccordionItemT = { title: string; content: string }
   type AccordionMap = Record<keyof typeof lotties, AccordionItemT[]>
+  const accordionData = t.raw('accordion') as AccordionMap
 
   useEffect(() => {
-    const checkScreenSize = () => setIsDesktop(window.innerWidth > 1024)
+    const checkScreenSize = () => setIsDesktop(window.innerWidth > 768)
     checkScreenSize()
     window.addEventListener('resize', checkScreenSize)
     return () => window.removeEventListener('resize', checkScreenSize)
@@ -65,8 +70,12 @@ export const GrowthSection = () => {
 
   usePreventLenisScroll(scrollContainerRef)
 
-  // Беремо весь контент акордеонів із перекладу
-  const accordionData = t.raw('accordion') as AccordionMap
+  const tabs = [
+    { key: 'soft-skills', label: t('tabs.soft-skills') },
+    { key: 'lead-manage', label: t('tabs.lead-manage') },
+    { key: 'finance-accounting', label: t('tabs.finance-accounting') },
+    { key: 'growth-marketing', label: t('tabs.growth-marketing') }
+  ] as const
 
   return (
     <section className="flex flex-col bg-white rounded-[40px] border-secondary-400 border pt-[120px] px-[120px] pb-10 mx-8 gap-[60px] items-center max-lg:mx-6 max-lg:px-4 max-md:mx-2 max-md:gap-10 z-20 max-md:pt-10 max-md:rounded-3xl">
@@ -80,98 +89,133 @@ export const GrowthSection = () => {
       </div>
 
       <div className="flex flex-col gap-4 max-w-[1090px] w-full">
-        {/* Tabs */}
-        <div className="flex p-1 rounded-[40px] border-secondary-300 border gap-1 max-md:flex-col">
-          <button
-            onClick={() => setActiveTab('soft-skills')}
-            className={`flex-1 p-3 rounded-full transition-all duration-200 ${
-              activeTab === 'soft-skills'
-                ? 'bg-primary-green text-white'
-                : 'bg-secondary-300 hover:bg-secondary-400 text-black'
-            }`}>
-            <Typography variant="body3" weight="medium">
-              {t('tabs.soft-skills')}
-            </Typography>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('lead-manage')}
-            className={`flex-1 p-3 rounded-full transition-all duration-200 ${
-              activeTab === 'lead-manage'
-                ? 'bg-primary-green text-white'
-                : 'bg-secondary-300 hover:bg-secondary-400 text-black'
-            }`}>
-            <Typography variant="body3" weight="medium">
-              {t('tabs.lead-manage')}
-            </Typography>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('finance-accounting')}
-            className={`flex-1 p-3 rounded-full transition-all duration-200 ${
-              activeTab === 'finance-accounting'
-                ? 'bg-primary-green text-white'
-                : 'bg-secondary-300 hover:bg-secondary-400 text-black'
-            }`}>
-            <Typography variant="body3" weight="medium">
-              {t('tabs.finance-accounting')}
-            </Typography>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('growth-marketing')}
-            className={`flex-1 p-3 rounded-full transition-all duration-200 ${
-              activeTab === 'growth-marketing'
-                ? 'bg-primary-green text-white'
-                : 'bg-secondary-300 hover:bg-secondary-400 text-black'
-            }`}>
-            <Typography variant="body3" weight="medium">
-              {t('tabs.growth-marketing')}
-            </Typography>
-          </button>
-        </div>
-
-        {/* Content */}
-        <div className="bg-secondary-300 rounded-[20px] p-6 h-[450px] max-md:h-auto">
-          <div className="flex max-md:flex-col gap-6">
-            {/* Accordion */}
-            <div
-              ref={scrollContainerRef}
-              className="flex flex-col max-w-[390px] w-full max-h-[400px] overflow-y-scroll overflow-x-hidden lenis-exclude scroll-smooth-custom order-1 max-md:order-2 max-md:max-w-full">
-              <Accordion type="single" collapsible className="w-full space-y-4 max-lg:space-y-2">
-                {accordionData[activeTab].map((item, index) => (
-                  <AccordionItem key={index} value={`item-${index}`} className="border-secondary-400">
-                    <AccordionTrigger className="bg-white hover:no-underline pl-6 pr-6 max-lg:pr-4 max-lg:pl-4 mr-4">
-                      <Typography
-                        variant={isDesktop ? 'body2' : 'body3'}
-                        weight="medium"
-                        className={isArabic ? 'text-right' : 'text-left'}>
-                        {item.title}
-                      </Typography>
-                    </AccordionTrigger>
-                    <AccordionContent className="pl-6 pr-8 bg-white rounded-b-xl mr-4">
-                      <Typography variant="body3" className="text-description">
-                        {item.content}
-                      </Typography>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+        {isDesktop ? (
+          <>
+            <div className="flex p-1 rounded-[40px] border-secondary-300 border gap-1">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.key}
+                  onClick={() => setActiveTab(tab.key)}
+                  className={`flex-1 p-3 rounded-full transition-all duration-200 ${
+                    activeTab === tab.key
+                      ? 'bg-primary-green text-white'
+                      : 'bg-secondary-300 hover:bg-secondary-400 text-black'
+                  }`}>
+                  <Typography variant="body3" weight="medium">
+                    {tab.label}
+                  </Typography>
+                </button>
+              ))}
             </div>
 
-            {/* Lottie */}
-            <div ref={ref} className="mx-auto max-w-[550px] w-full order-2 max-md:order-1">
-              <Lottie
-                lottieRef={lottieRef}
-                animationData={lotties[activeTab]}
-                loop={false}
-                className="w-full h-[400px] max-md:h-[310px]"
-              />
+            <div className="bg-secondary-300 rounded-[20px] p-6 h-[450px]">
+              <div className="flex gap-6">
+                <div
+                  ref={scrollContainerRef}
+                  className="flex flex-col max-w-[390px] w-full max-h-[400px] overflow-y-scroll overflow-x-hidden lenis-exclude scroll-smooth-custom">
+                  <Accordion type="single" collapsible className="w-full space-y-4">
+                    {accordionData[activeTab as keyof typeof accordionData]?.map((item, index) => (
+                      <AccordionItem key={index} value={`item-${index}`} className="border-secondary-400" disabled>
+                        <AccordionTrigger className="bg-white hover:no-underline pl-6 pr-6" disabled>
+                          <Typography variant="body2" weight="medium" className={isArabic ? 'text-right' : 'text-left'}>
+                            {item.title}
+                          </Typography>
+                        </AccordionTrigger>
+                        <AccordionContent className="pl-6 pr-8 bg-white rounded-b-xl">
+                          <Typography variant="body3" className="text-description">
+                            {item.content}
+                          </Typography>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                </div>
+
+                <div ref={ref} className="mx-auto max-w-[550px] w-full">
+                  <Lottie
+                    lottieRef={lottieRef}
+                    animationData={lotties[activeTab as keyof typeof lotties]}
+                    loop={false}
+                    className="w-full h-[400px]"
+                  />
+                </div>
+              </div>
             </div>
+          </>
+        ) : (
+          <div className="flex flex-col gap-3">
+            {tabs.map((tab) => (
+              <div key={tab.key} className="flex flex-col gap-2">
+                <button
+                  onClick={() => setActiveTab((prev) => (prev === tab.key ? '' : (tab.key as keyof typeof lotties)))}
+                  className={`w-full p-3 rounded-full transition-all duration-200 flex justify-between ${
+                    activeTab === tab.key
+                      ? 'bg-primary-green text-white'
+                      : 'bg-secondary-300 hover:bg-secondary-400 text-black'
+                  }`}>
+                  <div className="w-6" />
+                  <Typography variant="body3" weight="medium">
+                    {tab.label}
+                  </Typography>
+                  {activeTab === tab.key ? <MinusIcon /> : <PlusIcon />}
+                </button>
+
+                <AnimatePresence initial={false} mode="wait">
+                  {activeTab === tab.key && (
+                    <motion.div
+                      key={tab.key}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: 'easeInOut' }}
+                      className="overflow-hidden">
+                      <div className="bg-secondary-300 rounded-[20px] p-6 mt-2">
+                        <div className="flex flex-col gap-6">
+                          <div ref={ref} className="mx-auto max-w-[550px] w-full">
+                            <Lottie
+                              lottieRef={lottieRef}
+                              animationData={lotties[tab.key]}
+                              loop={false}
+                              className="w-full h-[310px]"
+                            />
+                          </div>
+                          <div
+                            ref={scrollContainerRef}
+                            className="flex flex-col overflow-y-scroll overflow-x-hidden lenis-exclude scroll-smooth-custom">
+                            <Accordion type="single" collapsible className="w-full space-y-4">
+                              {accordionData[tab.key].map((item, index) => (
+                                <AccordionItem
+                                  key={index}
+                                  value={`item-${index}`}
+                                  className="border-secondary-400"
+                                  disabled>
+                                  <AccordionTrigger className="bg-white hover:no-underline pl-6 pr-6" disabled>
+                                    <Typography
+                                      variant="body2"
+                                      weight="medium"
+                                      className={isArabic ? 'text-right' : 'text-left'}>
+                                      {item.title}
+                                    </Typography>
+                                  </AccordionTrigger>
+                                  <AccordionContent className="pl-6 pr-8 bg-white rounded-b-xl">
+                                    <Typography variant="body3" className="text-description">
+                                      {item.content}
+                                    </Typography>
+                                  </AccordionContent>
+                                </AccordionItem>
+                              ))}
+                            </Accordion>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
           </div>
-        </div>
+        )}
 
-        {/* Footer CTA */}
         <div className="flex flex-col justify-center items-center text-center mt-4 gap-10 max-w-[760px] mx-auto">
           <Typography variant="body3" className="text-description">
             {t('finalText')}

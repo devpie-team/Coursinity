@@ -385,3 +385,32 @@ a {
     --chart-5: 340 75% 55%;
   }
 }
+[data-state='open'] > div {
+  animation: accordion-down 0.3s ease-out forwards;
+}
+
+[data-state='closed'] > div {
+  animation: accordion-up 0.3s ease-in forwards;
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}

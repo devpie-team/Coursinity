@@ -10,7 +10,24 @@ type Search = { page?: string }
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
 
+  const meta = {
+    en: {
+      title: 'Corporate Training Insights & Strategies Blog | Coursinity',
+      description:
+        'Explore expert articles on workforce development, learning strategies, and employee training to boost performance. Read now at Coursinity Blog.'
+    },
+    ar: {
+      title: 'مدونة التدريب المؤسسي وتطوير الكفاءات في السعودية | كورسينتي',
+      description:
+        'اكتشف أحدث المقالات والرؤى حول التدريب المؤسسي وتطوير الكفاءات لرفع إنتاجية الشركات مع كورسينتي. تصفح الآن وتعرّف على طرق تحسين الأداء.'
+    }
+  }
+
+  const { title, description } = meta[locale as 'en' | 'ar']
+
   return {
+    title,
+    description,
     alternates: {
       canonical: `https://www.coursinity.com/${locale}/blog`
     }
