@@ -140,8 +140,10 @@ export const GrowthSection = () => {
               className="flex flex-col max-w-[390px] w-full max-h-[400px] overflow-y-scroll overflow-x-hidden lenis-exclude scroll-smooth-custom order-1 max-md:order-2 max-md:max-w-full">
               <Accordion type="single" collapsible className="w-full space-y-4 max-lg:space-y-2">
                 {accordionData[activeTab].map((item, index) => (
-                  <AccordionItem key={index} value={`item-${index}`} className="border-secondary-400">
-                    <AccordionTrigger className="bg-white hover:no-underline pl-6 pr-6 max-lg:pr-4 max-lg:pl-4 mr-4">
+                  <AccordionItem key={index} value={`item-${index}`} className="border-secondary-400" disabled>
+                    <AccordionTrigger
+                      className="bg-white hover:no-underline pl-6 pr-6 max-lg:pr-4 max-lg:pl-4 mr-4"
+                      disabled>
                       <Typography
                         variant={isDesktop ? 'body2' : 'body3'}
                         weight="medium"
