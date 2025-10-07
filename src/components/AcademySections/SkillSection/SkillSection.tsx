@@ -26,11 +26,9 @@ import Lottie, { LottieRefCurrentProps } from 'lottie-react'
 import { SmallCheckIcon } from '@/components/icons'
 import { useLottieAutoPlay } from './useLottieAutoPlay'
 import { cn } from '@/lib/utils'
-import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
 import type { Swiper as SwiperType } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
-import { Pagination } from 'swiper/modules'
 import { SwipeStepper } from '@/components/SwipeStepper/SwipeStepper'
 import { Button } from '@/components/primitives/button'
 
@@ -158,9 +156,41 @@ export const SkillSection = () => {
             allowTouchMove
             observer
             observeParents
-            className="w-full">
+            className="w-full"
+            breakpoints={{
+              350: {
+                spaceBetween: 0
+              },
+              370: {
+                spaceBetween: -30
+              },
+              410: {
+                spaceBetween: -30
+              },
+              460: {
+                spaceBetween: -40
+              },
+              500: {
+                spaceBetween: -40
+              },
+              550: {
+                spaceBetween: -50
+              },
+              600: {
+                spaceBetween: -50
+              },
+              650: {
+                spaceBetween: -60
+              },
+              700: {
+                spaceBetween: -60
+              },
+              767: {
+                spaceBetween: 20
+              }
+            }}>
             {stepsData.map((anim, id) => (
-              <SwiperSlide key={id}>
+              <SwiperSlide key={id} className="flex justify-items-center">
                 <MobileStep step={id} anim={anim} isActive={currentStep === id} />
               </SwiperSlide>
             ))}
@@ -232,8 +262,8 @@ export const SkillSection = () => {
 const Header = ({ isMobile, smallHeight }: { isMobile: boolean; smallHeight?: boolean }) => {
   const t = useTranslations('AC_SkillSection')
   return (
-    <div className={cn('flex flex-col items-center gap-8', { 'gap-2': smallHeight })}>
-      <div className="flex flex-col max-w-full scaleText opacityText max-md:px-4 gap-4 max-md:gap-6 text-center">
+    <div className={cn('flex flex-col items-center gap-8 max-md:gap-16', { 'gap-5': smallHeight && !isMobile })}>
+      <div className="flex flex-col max-w-full scaleText opacityText max-md:px-4 gap-4 max-md:gap-6 text-center ">
         <FadeInOnView variant="fade-up">
           <Typography variant={isMobile ? 'h5' : 'h3'} weight="medium">
             {t('title')}
@@ -245,14 +275,17 @@ const Header = ({ isMobile, smallHeight }: { isMobile: boolean; smallHeight?: bo
           </Typography>
         </FadeInOnView>
       </div>
-      <div className="flex flex-col max-w-full scaleText opacityText max-md:px-4 gap-2 text-center">
+      <div className="flex flex-col max-w-full w-full scaleText opacityText max-md:px-4 gap-2 md:text-center max-md:pb-2">
         <FadeInOnView variant="fade-up">
-          <Typography variant={smallHeight ? 'body2' : 'body1'} weight="medium">
+          <Typography variant={isMobile ? 'h6' : smallHeight ? 'body2' : 'body1'} weight="medium">
             {t('small_title')}
           </Typography>
         </FadeInOnView>
         <FadeInOnView variant="fade-up">
-          <Typography variant={smallHeight ? 'body4' : 'body3'} weight="regular" className="text-description">
+          <Typography
+            variant={isMobile ? 'body3' : smallHeight ? 'body4' : 'body3'}
+            weight="regular"
+            className="text-description">
             {t('small_subtitle')}
           </Typography>
         </FadeInOnView>
@@ -291,8 +324,8 @@ function MobileStep({ step, anim, isActive }: { step: number; anim: any; isActiv
   const t = useTranslations('AC_SkillSection')
 
   return (
-    <div className="grid grid-cols-1 gap-8 ">
-      <div className="flex flex-col gap-6">
+    <div className="grid grid-cols-1 gap-8 w-[90%] ">
+      <div className="flex flex-col gap-6  min-h-[312px]">
         <div className="flex flex-col gap-3">
           <Typography variant="h6" weight="medium">
             {t(`steps.${step}.title`)}
