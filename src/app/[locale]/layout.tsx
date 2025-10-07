@@ -157,6 +157,7 @@ export default async function LocaleLayout({
         <link rel="shortcut icon" href="/assets/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
         <link rel="manifest" href="/assets/site.webmanifest" />
+        <meta name="google-site-verification" content="7staeOckd_vr-HSrin5GMg4lLxz6OOw0tTrlhCAjaQA" />
         {(() => {
           let canonical = 'https://www.coursinity.com/'
           if (locale === 'en') canonical = 'https://www.coursinity.com/en'
