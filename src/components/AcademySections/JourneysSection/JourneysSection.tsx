@@ -263,7 +263,7 @@ export const JourneySection = () => {
               </div>
             </SwiperSlide>
           </Swiper>
-          <div className="py-[22px] flex w-full items-center justify-center">
+          <div className="pt-[8px] flex w-full items-center justify-center">
             <SwipeStepper steps={2} activeStep={currentStep + 1} onStepClick={handleStepClick} type="green" />
           </div>
         </div>
@@ -400,13 +400,11 @@ export const JourneySection = () => {
         </div>
       )}
 
-      <div className="py-4 flex justify-center">
-        <div className="journey-swiper-pagination flex gap-2"></div>
-      </div>
-
-      <Button variant="academy" className="max-md:w-full">
-        {t('cta')}
-      </Button>
+      {isMobile ? null : (
+        <Button variant="academy" className="max-md:w-full">
+          {t('cta')}
+        </Button>
+      )}
     </section>
   )
 }
