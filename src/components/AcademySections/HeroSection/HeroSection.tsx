@@ -49,7 +49,7 @@ export const HeroSection = ({ canPlay = true }: HeroSectionProps) => {
           {/*   <button className="h-[30px] px-6 py-5 flex items-center max-lg:mb-4 bg-white text-primary-green border border-secondary-400 hover:shadow-[0px_12px_30px_0px_#A578F240] active:bg-none active:bg-secondary-green active:shadow-none disabled:pointer-events-none disabled:bg-opacity-20 disabled:text-opacity-90 rounded-full leading-4 font-medium transition-all duration-300">
             {t('badge')}
           </button> */}
-          <div className="flex flex-col items-center gap-8 text-center max-w-[1000px]">
+          <div className="flex flex-col items-center gap-8 text-center max-w-[1106px]">
             <Typography variant={isDesktop ? 'h1' : 'h3'} weight="medium">
               {t('title')}
             </Typography>

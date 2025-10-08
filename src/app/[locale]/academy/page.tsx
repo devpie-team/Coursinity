@@ -52,7 +52,7 @@ export default function HomePage() {
 
   return (
     <>
-      {/* {loading && <Loader loading={loading} onFinish={() => setLoading(false)} shortLoading />} */}
+      {loading && <Loader loading={loading} onFinish={() => setLoading(false)} shortLoading />}
       <Header />
       <HeroSection canPlay={!loading} />
       <JourneySection />
