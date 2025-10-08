@@ -26,9 +26,11 @@ import Lottie, { LottieRefCurrentProps } from 'lottie-react'
 import { SmallCheckIcon } from '@/components/icons'
 import { useLottieAutoPlay } from './useLottieAutoPlay'
 import { cn } from '@/lib/utils'
+import { useHeaderVisibility } from '@/components/Header/HeaderVisibilityContext'
 import type { Swiper as SwiperType } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
+import { Pagination } from 'swiper/modules'
 import { SwipeStepper } from '@/components/SwipeStepper/SwipeStepper'
 import { Button } from '@/components/primitives/button'
 
@@ -156,41 +158,9 @@ export const SkillSection = () => {
             allowTouchMove
             observer
             observeParents
-            className="w-full"
-            breakpoints={{
-              350: {
-                spaceBetween: 0
-              },
-              370: {
-                spaceBetween: -30
-              },
-              410: {
-                spaceBetween: -30
-              },
-              460: {
-                spaceBetween: -40
-              },
-              500: {
-                spaceBetween: -40
-              },
-              550: {
-                spaceBetween: -50
-              },
-              600: {
-                spaceBetween: -50
-              },
-              650: {
-                spaceBetween: -60
-              },
-              700: {
-                spaceBetween: -60
-              },
-              767: {
-                spaceBetween: 20
-              }
-            }}>
+            className="w-full">
             {stepsData.map((anim, id) => (
-              <SwiperSlide key={id} className="flex justify-items-center">
+              <SwiperSlide key={id}>
                 <MobileStep step={id} anim={anim} isActive={currentStep === id} />
               </SwiperSlide>
             ))}
@@ -262,8 +232,8 @@ export const SkillSection = () => {
 const Header = ({ isMobile, smallHeight }: { isMobile: boolean; smallHeight?: boolean }) => {
   const t = useTranslations('AC_SkillSection')
   return (
-    <div className={cn('flex flex-col items-center gap-8 max-md:gap-16', { 'gap-5': smallHeight && !isMobile })}>
-      <div className="flex flex-col max-w-full scaleText opacityText max-md:px-4 gap-4 max-md:gap-6 text-center ">
+    <div className={cn('flex flex-col items-center gap-8')}>
+      <div className="flex flex-col max-w-full scaleText opacityText max-md:px-4 gap-4 max-md:gap-6 text-center">
         <FadeInOnView variant="fade-up">
           <Typography variant={isMobile ? 'h5' : 'h3'} weight="medium">
             {t('title')}
@@ -275,7 +245,7 @@ const Header = ({ isMobile, smallHeight }: { isMobile: boolean; smallHeight?: bo
           </Typography>
         </FadeInOnView>
       </div>
-      <div className="flex flex-col max-w-full w-full scaleText opacityText max-md:px-4 gap-2 md:text-center max-md:pb-2">
+      <div className="flex flex-col w-full scaleText opacityText gap-2 md:text-center">
         <FadeInOnView variant="fade-up">
           <Typography variant={isMobile ? 'h6' : smallHeight ? 'body2' : 'body1'} weight="medium">
             {t('small_title')}
@@ -324,8 +294,8 @@ function MobileStep({ step, anim, isActive }: { step: number; anim: any; isActiv
   const t = useTranslations('AC_SkillSection')
 
   return (
-    <div className="grid grid-cols-1 gap-8 w-[90%] ">
-      <div className="flex flex-col gap-6  min-h-[312px]">
+    <div className="grid grid-cols-1 gap-8 ">
+      <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-3">
           <Typography variant="h6" weight="medium">
             {t(`steps.${step}.title`)}
@@ -334,16 +304,6 @@ function MobileStep({ step, anim, isActive }: { step: number; anim: any; isActiv
             {t(`steps.${step}.description`)}
           </Typography>
         </div>
-        <ul className="mt-2 flex flex-col gap-4">
-          {[1, 2, 3].map((i) => (
-            <li key={i} className="flex items-center gap-3">
-              <div className="flex items-center justify-center bg-primary-purple min-w-5 h-5 rounded-full">
-                <SmallCheckIcon />
-              </div>
-              <Typography variant="body3">{t(`steps.${step}.item_${i}`)}</Typography>
-            </li>
-          ))}
-        </ul>
       </div>
 
       <div
