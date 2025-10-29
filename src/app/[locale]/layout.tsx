@@ -113,9 +113,9 @@ export default async function LocaleLayout({
   params
 }: {
   children: React.ReactNode
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }) {
-  const { locale } = params
+  const { locale } = await params
   if (!hasLocale(routing.locales, locale)) {
     notFound()
   }
@@ -164,6 +164,7 @@ export default async function LocaleLayout({
           if (locale === 'ar') canonical = 'https://www.coursinity.com/ar'
           return (
             <>
+              <link rel="canonical" href={canonical} />
               <link rel="alternate" hrefLang="x-default" href="https://www.coursinity.com/" />
               <link rel="alternate" hrefLang="en" href="https://www.coursinity.com/en" />
               <link rel="alternate" hrefLang="ar" href="https://www.coursinity.com/ar" />

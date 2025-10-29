@@ -18,6 +18,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       icon: '/assets/favicon.png',
       shortcut: '/assets/favicon.png',
       apple: '/assets/favicon.png'
+    },
+    alternates: {
+      canonical: `https://www.coursinity.com/${locale}/cookie-policy`
     }
   }
 }

@@ -43,6 +43,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         ? 'الرائدة في رفع إنتاجية أعضاء فريقك بأحدث البرامج والتقنيات'
         : 'Explore COURSINITY: Blended courses that combine real-life experience and interactive learning, for the best professional certifications and internationally accredited training in Saudi Arabia.',
       images: ['/assets/favicon.png']
+    },
+    alternates: {
+      canonical: `https://www.coursinity.com/${locale}/contact-form`
     }
   }
 }
