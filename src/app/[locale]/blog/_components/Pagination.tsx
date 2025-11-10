@@ -2,10 +2,12 @@
 
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 type Props = {
-  current: number // текущая страница (1-based)
-  total: number // всего страниц
+  current: number
+  total: number
+  locale?: string
   onPageChange?: (p: number) => void
   hrefBuilder?: (p: number) => string
   className?: string
@@ -13,69 +15,106 @@ type Props = {
 
 type Item = number | '...'
 
-function range(start: number, end: number) {
-  return Array.from({ length: Math.max(0, end - start + 1) }, (_, i) => start + i)
+function buildItems(current: number, total: number): Item[] {
+  const delta = 1
+  const range: Item[] = []
+
+  const left = Math.max(2, current - delta)
+  const right = Math.min(total - 1, current + delta)
+
+  range.push(1)
+
+  if (left > 2) range.push('...')
+
+  for (let i = left; i <= right; i++) {
+    range.push(i)
+  }
+
+  if (right < total - 1) range.push('...')
+
+  if (total > 1) range.push(total)
+
+  return range
 }
 
-/**
- * Правило:
- * - если total <= 6: показываем все страницы
- * - если total >= 7: выводим [1,2,3, '…', total-2, total-1, total]
- *   (три слева, «три точки» посередине, три справа)
- *   Текущая страница может не попасть в видимый ряд — это намеренно.
- */
-function buildItems(total: number): Item[] {
-  if (total <= 0) return []
-  if (total <= 6) return range(1, total)
-  return [1, 2, 3, '...', total - 2, total - 1, total]
-}
-
-export default function Pagination({ current, total, onPageChange, hrefBuilder, className }: Props) {
+export default function Pagination({ current, total, locale = 'en', onPageChange, hrefBuilder, className }: Props) {
   if (total <= 1) return null
 
-  const items = buildItems(total)
+  const items = buildItems(current, total)
 
-  const baseBtn = 'w-10 h-10 rounded-full flex items-center justify-center text-base transition'
-  const numberBtn = 'text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary/30'
+  const numberBtnBase = 'w-10 h-10 rounded-full flex items-center justify-center transition'
+  const numberBtn = 'text-gray-500 hover:text-gray-900'
   const activeBtn = 'bg-gray-100 text-black font-medium'
 
+  const arrowBase = 'w-10 h-10 flex items-center justify-center rounded-full transition'
+  const arrowEnabled = 'text-gray-700 hover:bg-gray-100 cursor-pointer'
+  const arrowDisabled = 'text-gray-300 cursor-default'
+
+  const go = (p: number) => {
+    if (p < 1 || p > total) return
+    if (hrefBuilder) return hrefBuilder(p)
+    return onPageChange?.(p)
+  }
+
   return (
-    <nav className={cn('flex items-center justify-center gap-4 select-none', className)} aria-label="Pagination">
+    <nav className={cn('flex items-center justify-center gap-2 select-none', className)} aria-label="Pagination">
+      {/* ← Always visible */}
+      {hrefBuilder ? (
+        <Link
+          href={current > 1 ? hrefBuilder(current - 1) : '#'}
+          className={cn(arrowBase, current > 1 ? arrowEnabled : arrowDisabled)}>
+          {locale === 'en' ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+        </Link>
+      ) : (
+        <button
+          onClick={() => current > 1 && onPageChange?.(current - 1)}
+          className={cn(arrowBase, current > 1 ? arrowEnabled : arrowDisabled)}>
+          {locale === 'en' ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+        </button>
+      )}
+
       {items.map((it, idx) => {
         if (it === '...') {
           return (
-            <span key={`dots-${idx}`} className="px-2 text-gray-400" aria-hidden>
+            <span key={`dots-${idx}`} className="px-2 text-gray-400">
               …
             </span>
           )
         }
 
         const page = it as number
-        const isActive = page === current
+        const active = page === current
+        const btnClass = cn(numberBtnBase, active ? activeBtn : numberBtn)
 
-        if (hrefBuilder) {
-          return (
-            <Link
-              key={page}
-              href={hrefBuilder(page)}
-              aria-current={isActive ? 'page' : undefined}
-              className={cn(baseBtn, isActive ? activeBtn : numberBtn)}>
-              {page}
-            </Link>
-          )
-        }
-
-        return (
+        return hrefBuilder ? (
+          <Link key={page} href={hrefBuilder(page)} aria-current={active ? 'page' : undefined} className={btnClass}>
+            {page}
+          </Link>
+        ) : (
           <button
             key={page}
-            type="button"
-            aria-current={isActive ? 'page' : undefined}
             onClick={() => onPageChange?.(page)}
-            className={cn(baseBtn, isActive ? activeBtn : numberBtn)}>
+            aria-current={active ? 'page' : undefined}
+            className={btnClass}>
             {page}
           </button>
         )
       })}
+
+      {/* → Always visible */}
+      {hrefBuilder ? (
+        <Link
+          href={current < total ? hrefBuilder(current + 1) : '#'}
+          className={cn(arrowBase, current < total ? arrowEnabled : arrowDisabled)}>
+          {locale === 'en' ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+        </Link>
+      ) : (
+        <button
+          onClick={() => current < total && onPageChange?.(current + 1)}
+          className={cn(arrowBase, current < total ? arrowEnabled : arrowDisabled)}>
+          {locale === 'en' ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+        </button>
+      )}
     </nav>
   )
 }
