@@ -222,9 +222,9 @@ export const CardSection = () => {
           />
         </div>
       </div>
-      <div className="flex flex-col items-center md:hidden gap-5">
+      <div className="flex flex-col items-center md:hidden gap-5 max-md:gap-12">
         <SwipeStepper steps={6} activeStep={currentStep + 1} onStepClick={handleStepClick} type="white" />
-        <Button variant="academy" className="max-md:w-full max-w-[280px]">
+        <Button variant="academy" className="max-md:w-full max-w-[280px] leading-[22px]">
           {t('button')}
         </Button>
       </div>

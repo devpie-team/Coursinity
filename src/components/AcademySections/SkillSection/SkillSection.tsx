@@ -232,7 +232,7 @@ export const SkillSection = () => {
 const Header = ({ isMobile, smallHeight }: { isMobile: boolean; smallHeight?: boolean }) => {
   const t = useTranslations('AC_SkillSection')
   return (
-    <div className={cn('flex flex-col items-center gap-8', { 'gap-2': smallHeight })}>
+    <div className={cn('flex flex-col items-center gap-8')}>
       <div className="flex flex-col max-w-full scaleText opacityText max-md:px-4 gap-4 max-md:gap-6 text-center">
         <FadeInOnView variant="fade-up">
           <Typography variant={isMobile ? 'h5' : 'h3'} weight="medium">
@@ -245,14 +245,17 @@ const Header = ({ isMobile, smallHeight }: { isMobile: boolean; smallHeight?: bo
           </Typography>
         </FadeInOnView>
       </div>
-      <div className="flex flex-col max-w-full scaleText opacityText max-md:px-4 gap-2 text-center">
+      <div className="flex flex-col w-full scaleText opacityText gap-2 md:text-center">
         <FadeInOnView variant="fade-up">
-          <Typography variant={smallHeight ? 'body2' : 'body1'} weight="medium">
+          <Typography variant={isMobile ? 'h6' : smallHeight ? 'body2' : 'body1'} weight="medium">
             {t('small_title')}
           </Typography>
         </FadeInOnView>
         <FadeInOnView variant="fade-up">
-          <Typography variant={smallHeight ? 'body4' : 'body3'} weight="regular" className="text-description">
+          <Typography
+            variant={isMobile ? 'body3' : smallHeight ? 'body4' : 'body3'}
+            weight="regular"
+            className="text-description">
             {t('small_subtitle')}
           </Typography>
         </FadeInOnView>
@@ -301,16 +304,6 @@ function MobileStep({ step, anim, isActive }: { step: number; anim: any; isActiv
             {t(`steps.${step}.description`)}
           </Typography>
         </div>
-        <ul className="mt-2 flex flex-col gap-4">
-          {[1, 2, 3].map((i) => (
-            <li key={i} className="flex items-center gap-3">
-              <div className="flex items-center justify-center bg-primary-purple min-w-5 h-5 rounded-full">
-                <SmallCheckIcon />
-              </div>
-              <Typography variant="body3">{t(`steps.${step}.item_${i}`)}</Typography>
-            </li>
-          ))}
-        </ul>
       </div>
 
       <div

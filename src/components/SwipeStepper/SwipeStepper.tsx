@@ -13,7 +13,11 @@ export const SwipeStepper = ({ steps, activeStep, onStepClick, type }: SwipeStep
   const isGreen = type === 'green'
 
   return (
-    <div className="flex flex-row gap-[10px] w-fit">
+    <div
+      className={cn(
+        'flex flex-row gap-[10px] w-fit ',
+        steps == 8 ? 'grid grid-cols-8 w-full' : steps == 6 ? 'grid grid-cols-6 w-full' : ''
+      )}>
       {Array.from({ length: steps }).map((_, i) => {
         const step = i + 1
         const isActive = step === activeStep
@@ -39,7 +43,7 @@ export const SwipeStepper = ({ steps, activeStep, onStepClick, type }: SwipeStep
                   : 'bg-white opacity-40'
               }
             `,
-              steps == 8 && 'w-[34px]'
+              steps == 8 && 'w-auto'
             )}></button>
         )
       })}
