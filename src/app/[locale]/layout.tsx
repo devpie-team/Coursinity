@@ -152,6 +152,17 @@ export default async function LocaleLayout({
             gtag('config', 'G-4KH6HKMYCG');
           `}
         </Script>
+        <Script id="whatsapp-widget" strategy="afterInteractive">
+          {`
+            (function(d, script) {
+              script = d.createElement('script');
+              script.type = 'text/javascript';
+              script.async = true;
+              script.src = 'https://w.app/widget-v1/6qaFoB.js';
+              d.getElementsByTagName('head')[0].appendChild(script);
+            })(document);
+            `}
+        </Script>
         <link rel="icon" type="image/png" href="/assets/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
         <link rel="shortcut icon" href="/assets/favicon.ico" />
