@@ -245,21 +245,50 @@ const Header = ({ isMobile, smallHeight }: { isMobile: boolean; smallHeight?: bo
           </Typography>
         </FadeInOnView>
       </div>
-      <div className="flex flex-col w-full scaleText opacityText gap-2 md:text-center">
-        <FadeInOnView variant="fade-up">
-          <Typography variant={isMobile ? 'h6' : smallHeight ? 'body2' : 'body1'} weight="medium">
-            {t('small_title')}
-          </Typography>
-        </FadeInOnView>
-        <FadeInOnView variant="fade-up">
-          <Typography
-            variant={isMobile ? 'body3' : smallHeight ? 'body4' : 'body3'}
-            weight="regular"
-            className="text-description">
-            {t('small_subtitle')}
-          </Typography>
-        </FadeInOnView>
-      </div>
+      {isMobile ? (
+        <div className="flex flex-col items-center p-4 pb-[26px] text-center w-full scaleText opacityText gap-2 md:text-center bg-secondary-300 relative">
+          <FadeInOnView variant="fade-up">
+            <Typography variant="body1">{t('small_title')}</Typography>
+          </FadeInOnView>
+
+          <FadeInOnView variant="fade-up">
+            <Typography variant="caption" weight="regular" className="text-description">
+              {t('small_subtitle')}
+            </Typography>
+          </FadeInOnView>
+
+          <div className="mt-3 w-8 h-8 rounded-full bg-[#DDF8F1] flex items-center justify-center absolute bottom-[-16px]">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#26C178"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round">
+              <path d="M12 5v14"></path>
+              <path d="M19 12l-7 7-7-7"></path>
+            </svg>
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col w-full scaleText opacityText gap-2 md:text-center">
+          <FadeInOnView variant="fade-up">
+            <Typography variant={isMobile ? 'h6' : smallHeight ? 'body2' : 'body1'} weight="medium">
+              {t('small_title')}
+            </Typography>
+          </FadeInOnView>
+          <FadeInOnView variant="fade-up">
+            <Typography
+              variant={isMobile ? 'body3' : smallHeight ? 'body4' : 'body3'}
+              weight="regular"
+              className="text-description">
+              {t('small_subtitle')}
+            </Typography>
+          </FadeInOnView>
+        </div>
+      )}
     </div>
   )
 }

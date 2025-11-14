@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import HomePage from './HomePage'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -8,14 +8,21 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: isArabic
       ? 'أفضل شركات التدريب في السعودية | Coursinity'
-      : 'Best Training Companies in Saudi Arabia | Coursinity',
+      : 'Coursinity | Leading Training Company in Saudi Arabia. AI-Powered Training Solutions & Online Courses',
     description: isArabic
       ? 'الرائدة في رفع إنتاجية أعضاء فريقك بأحدث البرامج والتقنيات'
-      : 'Explore COURSINITY: Blended courses that combine real-life experience and interactive learning, for the best professional certifications and internationally accredited training in Saudi Arabia.',
+      : "Coursinity is one of Saudi Arabia's leading training companies, offering innovative programs and online courses powered by advanced AI and edu tech solutions. We help organizations enhance productivity, improve performance, and achieve measurable impact through data-driven learning experiences.",
     icons: {
       icon: '/assets/favicon.png',
       shortcut: '/assets/favicon.png',
       apple: '/assets/favicon.png'
+    },
+    alternates: {
+      canonical: `https://www.coursinity.com/${locale}`,
+      languages: {
+        en: 'https://www.coursinity.com/en',
+        ar: 'https://www.coursinity.com/ar'
+      }
     }
   }
 }

@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl'
 import { Typography } from '@/components/ui'
 import { Header } from '@/components/Header'
 import Footer from '@/components/Footer/Footer'
-
+/* test */
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   const isArabic = locale === 'ar'
@@ -19,6 +19,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       icon: '/assets/favicon.png',
       shortcut: '/assets/favicon.png',
       apple: '/assets/favicon.png'
+    },
+    alternates: {
+      canonical: `https://www.coursinity.com/${locale}/terms-of-use`
     }
   }
 }

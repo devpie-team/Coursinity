@@ -3,11 +3,11 @@
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useLocale } from 'next-intl'
 
 type Props = {
   current: number
   total: number
-  locale?: string
   onPageChange?: (p: number) => void
   hrefBuilder?: (p: number) => string
   className?: string
@@ -37,8 +37,10 @@ function buildItems(current: number, total: number): Item[] {
   return range
 }
 
-export default function Pagination({ current, total, locale = 'en', onPageChange, hrefBuilder, className }: Props) {
+export default function Pagination({ current, total, onPageChange, hrefBuilder, className }: Props) {
   if (total <= 1) return null
+
+  const locale = useLocale()
 
   const items = buildItems(current, total)
 

@@ -113,9 +113,9 @@ export default async function LocaleLayout({
   params
 }: {
   children: React.ReactNode
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }) {
-  const { locale } = params
+  const { locale } = await params
   if (!hasLocale(routing.locales, locale)) {
     notFound()
   }
@@ -152,6 +152,17 @@ export default async function LocaleLayout({
             gtag('config', 'G-4KH6HKMYCG');
           `}
         </Script>
+        <Script id="whatsapp-widget" strategy="afterInteractive">
+          {`
+            (function(d, script) {
+              script = d.createElement('script');
+              script.type = 'text/javascript';
+              script.async = true;
+              script.src = 'https://w.app/widget-v1/6qaFoB.js';
+              d.getElementsByTagName('head')[0].appendChild(script);
+            })(document);
+            `}
+        </Script>
         <link rel="icon" type="image/png" href="/assets/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
         <link rel="shortcut icon" href="/assets/favicon.ico" />
@@ -164,6 +175,7 @@ export default async function LocaleLayout({
           if (locale === 'ar') canonical = 'https://www.coursinity.com/ar'
           return (
             <>
+              <link rel="canonical" href={canonical} />
               <link rel="alternate" hrefLang="x-default" href="https://www.coursinity.com/" />
               <link rel="alternate" hrefLang="en" href="https://www.coursinity.com/en" />
               <link rel="alternate" hrefLang="ar" href="https://www.coursinity.com/ar" />

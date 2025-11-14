@@ -50,7 +50,7 @@ export const HeroSection = ({ canPlay = true }: HeroSectionProps) => {
             {t('badge')}
           </button> */}
           <div className="flex flex-col items-center gap-8 text-center max-w-[1106px]">
-            <Typography variant={isDesktop ? 'h1' : 'h3'} weight="medium">
+            <Typography variant={isDesktop ? 'h1' : 'h4'} weight="medium">
               {t('title')}
             </Typography>
             <Typography variant={isDesktop ? 'body2' : 'body3'} weight="medium">
