@@ -161,7 +161,8 @@ export default async function LocaleLayout({
               script.src = 'https://w.app/widget-v1/6qaFoB.js';
               d.getElementsByTagName('head')[0].appendChild(script);
             })(document);
-            `}
+            `}{' '}
+        </Script>
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`
             (function(c,l,a,r,i,t,y){
