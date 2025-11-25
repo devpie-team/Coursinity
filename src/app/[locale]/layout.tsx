@@ -162,6 +162,7 @@ export default async function LocaleLayout({
               d.getElementsByTagName('head')[0].appendChild(script);
             })(document);
             `}
+        </Script>
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`
             (function(c,l,a,r,i,t,y){
