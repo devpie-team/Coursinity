@@ -257,7 +257,7 @@ const Header = ({ isMobile, smallHeight }: { isMobile: boolean; smallHeight?: bo
             </Typography>
           </FadeInOnView>
 
-          <div className="mt-3 w-8 h-8 rounded-full bg-[#DDF8F1] flex items-center justify-center absolute bottom-[-16px]">
+          {/* <div className="mt-3 w-8 h-8 rounded-full bg-[#DDF8F1] flex items-center justify-center absolute bottom-[-16px]">
             <svg
               width="18"
               height="18"
@@ -270,7 +270,7 @@ const Header = ({ isMobile, smallHeight }: { isMobile: boolean; smallHeight?: bo
               <path d="M12 5v14"></path>
               <path d="M19 12l-7 7-7-7"></path>
             </svg>
-          </div>
+          </div> */}
         </div>
       ) : (
         <div className="flex flex-col w-full scaleText opacityText gap-2 md:text-center">
