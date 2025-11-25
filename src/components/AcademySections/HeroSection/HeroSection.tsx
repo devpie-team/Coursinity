@@ -17,6 +17,7 @@ export const HeroSection = ({ canPlay = true }: HeroSectionProps) => {
   const lottieRef = useRef<LottieRefCurrentProps>(null)
   const { ref, inView } = useInView({ triggerOnce: false })
   const [isDesktop, setIsDesktop] = useState(true)
+  const [isTablet, setIsTablet] = useState(false)
   const locale = useLocale()
   const isArabic = locale === 'ar'
 
@@ -24,6 +25,7 @@ export const HeroSection = ({ canPlay = true }: HeroSectionProps) => {
     const checkScreenSize = () => {
       const width = window.innerWidth
       setIsDesktop(width > 1024)
+      setIsTablet(width >= 768 && width <= 1024)
     }
     checkScreenSize()
     window.addEventListener('resize', checkScreenSize)
@@ -49,8 +51,8 @@ export const HeroSection = ({ canPlay = true }: HeroSectionProps) => {
           {/*   <button className="h-[30px] px-6 py-5 flex items-center max-lg:mb-4 bg-white text-primary-green border border-secondary-400 hover:shadow-[0px_12px_30px_0px_#A578F240] active:bg-none active:bg-secondary-green active:shadow-none disabled:pointer-events-none disabled:bg-opacity-20 disabled:text-opacity-90 rounded-full leading-4 font-medium transition-all duration-300">
             {t('badge')}
           </button> */}
-          <div className="flex flex-col items-center gap-8 text-center max-w-[1106px]">
-            <Typography variant={isDesktop ? 'h1' : 'h3'} weight="medium">
+          <div className="flex flex-col items-center gap-8 text-center max-w-[1006px] max-lg:max-w-[460px] max-md:max-w-[440px]">
+            <Typography variant={isDesktop ? 'h1' : locale !== 'ar' ? 'h3' : isTablet ? 'h3' : 'h4'} weight="medium">
               {t('title')}
             </Typography>
             <Typography variant={isDesktop ? 'body2' : 'body3'} weight="medium">
