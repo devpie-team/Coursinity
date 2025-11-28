@@ -3,7 +3,7 @@ import { getArticles } from '@/services/getArticles'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.coursinity.com'
-  const lastModified = new Date('2025-01-30') // can change to `new Date()`
+  const lastModified = new Date('2025-01-30')
   const locales = ['en', 'ar']
 
   const blogPosts: MetadataRoute.Sitemap = []
@@ -58,7 +58,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       })
     }
 
-    // Додаємо запис для арабської локалі тільки якщо Slug відрізняється
     if (arSlug && !isSameSlug) {
       blogPosts.push({
         url: `${baseUrl}/ar/blog/${arSlug}`,
@@ -76,7 +75,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  // Статичні сторінки
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}`,
