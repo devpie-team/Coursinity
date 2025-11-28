@@ -1,2 +1,1 @@
-export { FeaturesSection } from "./FeaturesSection";
-
+export { FeaturesSection } from './FeaturesSection.server'

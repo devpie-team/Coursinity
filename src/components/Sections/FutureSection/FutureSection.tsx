@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -16,17 +16,11 @@ import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
 
 export const FutureSection = () => {
   const t = useTranslations('FutureSection')
-  const [isMobile, setIsMobile] = useState(false)
-  const [isTablet, setIsTablet] = useState(false)
   const [isDesktop, setIsDesktop] = useState(false)
-  const [windowWidth, setWindowWidth] = useState(0)
 
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth
-      setWindowWidth(width)
-      setIsMobile(width < 768)
-      setIsTablet(width >= 768 && width <= 1024)
       setIsDesktop(width > 1024)
     }
 
