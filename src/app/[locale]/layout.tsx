@@ -41,6 +41,13 @@ const kanunAR = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.coursinity.com'),
+  alternates: {
+    canonical: '/',
+    languages: {
+      en: '/en',
+      ar: '/ar'
+    }
+  },
   icons: {
     icon: '/assets/favicon.png',
     apple: '/assets/favicon.png'
@@ -178,19 +185,6 @@ export default async function LocaleLayout({
         <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
         <link rel="manifest" href="/assets/site.webmanifest" />
         <meta name="google-site-verification" content="7staeOckd_vr-HSrin5GMg4lLxz6OOw0tTrlhCAjaQA" />
-        {(() => {
-          let canonical = 'https://www.coursinity.com/'
-          if (locale === 'en') canonical = 'https://www.coursinity.com/en'
-          if (locale === 'ar') canonical = 'https://www.coursinity.com/ar'
-          return (
-            <>
-              <link rel="canonical" href={canonical} />
-              <link rel="alternate" hrefLang="x-default" href="https://www.coursinity.com/" />
-              <link rel="alternate" hrefLang="en" href="https://www.coursinity.com/en" />
-              <link rel="alternate" hrefLang="ar" href="https://www.coursinity.com/ar" />
-            </>
-          )
-        })()}
       </head>
       <body>
         <NextIntlClientProvider>
