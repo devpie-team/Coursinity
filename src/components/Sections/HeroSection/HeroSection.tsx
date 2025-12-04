@@ -172,7 +172,7 @@ export const HeroSection = ({ loading }: THeroSection) => {
                 variant={getTypographyVariant()}
                 as="span"
                 weight="medium"
-                className={cn(isArabic ? 'leading-[120px] max-lg:leading-[60px] max-md:leading-[0px] ' : '')}>
+                className={cn(isArabic ? 'leading-[120px] max-lg:leading-[60px] ' : '')}>
                 {t('title1')}
                 <br />
                 <span className="text-primary-purple"> {t('title3')}</span>
