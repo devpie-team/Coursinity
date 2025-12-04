@@ -61,7 +61,7 @@ export const Typography = <T extends ElementType = 'p'>({
   ...props
 }: TypographyProps<T>) => {
   const hVariant = variant.startsWith('h')
-  const Component = (hVariant ? variant : as) || 'p'
+  const Component = (as ? as : variant) || 'p'
   const locale = useLocale()
   const isArabic = locale === 'ar'
   const fontClass = isArabic ? 'font-kanun-ar' : 'font-poppins'
