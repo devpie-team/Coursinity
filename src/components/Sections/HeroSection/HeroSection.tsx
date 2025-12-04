@@ -170,7 +170,6 @@ export const HeroSection = ({ loading }: THeroSection) => {
             <div>
               <Typography
                 variant={getTypographyVariant()}
-                as="span"
                 weight="medium"
                 as="h1"
                 className={cn(isArabic ? 'leading-[120px] max-lg:leading-[60px] ' : '')}>
