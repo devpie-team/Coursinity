@@ -11,6 +11,7 @@ import { JsonLdSchema } from '@/components/JsonLdSchema'
 
 import SmoothScrollProvider from '@/components/SmoothScrollProvider'
 import Script from 'next/script'
+import WhatsAppWidget from '@/components/WhatsappWidget/WhatsappWidget'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -159,17 +160,6 @@ export default async function LocaleLayout({
             gtag('config', 'G-4KH6HKMYCG');
           `}
         </Script>
-        <Script id="whatsapp-widget" strategy="afterInteractive">
-          {`
-            (function(d, script) {
-              script = d.createElement('script');
-              script.type = 'text/javascript';
-              script.async = true;
-              script.src = 'https://w.app/widget-v1/6qaFoB.js';
-              d.getElementsByTagName('head')[0].appendChild(script);
-            })(document);
-            `}{' '}
-        </Script>
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`
             (function(c,l,a,r,i,t,y){
@@ -195,6 +185,7 @@ export default async function LocaleLayout({
               </SmoothScrollProvider>
             </HeaderVisibilityProvider>
           </Theme>
+          <WhatsAppWidget />
         </NextIntlClientProvider>
 
         <noscript>
