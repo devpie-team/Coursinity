@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 const certificationsLeft = [
   { src: '/assets/certifications/CompTia.png', alt: 'CompTIA logo', padding: 'py-2' },
@@ -24,11 +24,11 @@ const certificationsRight = [
   { src: '/assets/certifications/dubai_digital.png', alt: 'Digital_Dubai logo', padding: 'py-2' },
   { src: '/assets/certifications/Minestry_of_Health.png', alt: 'Ministry of Health logo', padding: 'py-2' }
 ]
-type FeaturesClientProps = {
-  t: ReturnType<typeof useTranslations<'Features'>>
-  locale: string
-}
-export const FeaturesClient = ({ t, locale }: FeaturesClientProps) => {
+
+export const FeaturesClient = () => {
+  const t = useTranslations('Features')
+  const locale = useLocale()
+
   const [mounted, setMounted] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
@@ -53,6 +53,16 @@ export const FeaturesClient = ({ t, locale }: FeaturesClientProps) => {
 
   useEffect(() => {
     import('aos').then((AOS) => AOS.default.init())
+  }, [])
+
+  useEffect(() => {
+    AOS.init({
+      once: false,
+      duration: 700,
+      offset: 100,
+      easing: 'ease-in-out',
+      mirror: true
+    })
   }, [])
 
   if (!mounted) return null

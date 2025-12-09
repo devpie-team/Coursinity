@@ -13,10 +13,21 @@ import { GridEditIcon } from '@/components/icons/GridEditIcon'
 import { ZapIcon } from '@/components/icons/ZapIcon'
 import { cn } from '@/lib/utils'
 import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
+import AOS from 'aos'
 
 export const FutureSection = () => {
   const t = useTranslations('FutureSection')
   const [isDesktop, setIsDesktop] = useState(false)
+
+  useEffect(() => {
+    AOS.init({
+      once: false,
+      duration: 700,
+      offset: 100,
+      easing: 'ease-in-out',
+      mirror: true
+    })
+  }, [])
 
   useEffect(() => {
     const checkScreenSize = () => {

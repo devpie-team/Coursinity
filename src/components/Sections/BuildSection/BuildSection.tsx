@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -76,7 +78,13 @@ export const BuildSection = () => {
   }, [])
 
   useEffect(() => {
-    AOS.init()
+    AOS.init({
+      once: false,
+      duration: 700,
+      offset: 100,
+      easing: 'ease-in-out',
+      mirror: true
+    })
   }, [])
 
   useEffect(() => {

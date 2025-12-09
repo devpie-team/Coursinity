@@ -13,9 +13,9 @@ import TeacherIcon from '@/components/icons/TeacherIcon'
 import IdeaIcon from '@/components/icons/IdeaIcon'
 import MonitorIcon from '@/components/icons/MonitorIcon'
 import { cn } from '@/lib/utils'
-import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
+import AOS from 'aos'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -79,6 +79,16 @@ export const AiTeamSection = () => {
     })
     return () => ctx.revert()
   }, [items.length])
+
+  useEffect(() => {
+    AOS.init({
+      once: false,
+      duration: 700,
+      offset: 100,
+      easing: 'ease-in-out',
+      mirror: true
+    })
+  }, [])
 
   return (
     <section className={cn('bg-black text-white p-[140px] max-[1200px]:px-6 max-lg:pb-20 max-lg:pt-0 max-md:px-4')}>
