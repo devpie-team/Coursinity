@@ -1,35 +1,35 @@
 // BubbleIcon.tsx
-// import { useEffect, useRef } from 'react'
-// import { gsap } from 'gsap'
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
 
 export const BubbleIcon = () => {
-  // const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
 
-  // useEffect(() => {
-  //   if (ref.current) {
-  //     gsap.fromTo(
-  //       ref.current,
-  //       { opacity: 1, x: 0, y: 0 },
-  //       {
-  //         opacity: 0,
-  //         x: -1200,
-  //         y: -1200,
-  //         duration: 2,
-  //         ease: 'sine.inOut',
-  //         delay: 20,
-  //         scrollTrigger: {
-  //           trigger: '.hero-section',
-  //           start: 'top top',
-  //           end: 'bottom top',
-  //           scrub: 2
-  //         }
-  //       }
-  //     )
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (ref.current) {
+      gsap.fromTo(
+        ref.current,
+        { opacity: 1, x: 0, y: 0 },
+        {
+          opacity: 0,
+          x: -1200,
+          y: -1200,
+          duration: 2,
+          ease: 'sine.inOut',
+          delay: 20,
+          scrollTrigger: {
+            trigger: '.hero-section',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 2
+          }
+        }
+      )
+    }
+  }, [])
 
   return (
-    <div className="absolute top-[15%] left-0 max-[768px]:top-[10%] animate-element hero-element3">
+    <div ref={ref} className="absolute top-[15%] left-0 max-[768px]:top-[10%] animate-element hero-element3">
       <svg width="123" height="51" viewBox="0 0 123 51" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g filter="url(#filter0_d_1196_23339)">
           <rect
