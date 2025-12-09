@@ -24,7 +24,7 @@ export function HomePageClient() {
       <Loader />
       <Header />
       <HeroSection />
-      {/* <FutureSection />
+      <FutureSection />
       <StackSectionNew />
       <GrowthStepSection />
       <AiTeamSection />
@@ -34,9 +34,9 @@ export function HomePageClient() {
       <ImpactSectionNew />
       <AcademySection />
       <TeamTrainingSection />
-      <DataDrivenSection /> */}
+      <DataDrivenSection />
       <FeaturesSection />
-      {/* <TestimonialsSection /> */}
+      <TestimonialsSection />
       <Footer />
     </>
   )
