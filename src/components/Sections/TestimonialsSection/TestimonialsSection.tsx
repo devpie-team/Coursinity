@@ -9,6 +9,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { FadeInOnView } from '@/components/FadeInOnView/FadeInOnView'
+import { cn } from '@/lib/utils'
 
 const testimonialImages = [
   '/assets/testimonials/testimonials_1.png',
@@ -92,7 +93,11 @@ export const TestimonialsSection = () => {
   })
 
   return (
-    <section className="flex flex-col h-[933px] bg-white items-center gap-[105px] relative justify-between px-[140px] pb-[140px] overflow-hidden max-lg:px-[60px] max-lg:py-20 max-lg:h-[950px] max-md:h-[1060px] max-md:px-4">
+    <section
+      className={cn(
+        'flex flex-col h-[933px] bg-white items-center gap-[105px] relative justify-between px-[140px] pb-[140px] overflow-hidden max-lg:px-[60px] max-lg:py-20 max-lg:h-[950px]  max-md:px-4',
+        locale == 'en' ? 'max-md:h-[1060px]' : 'max-md:max-h-[1060px]'
+      )}>
       <div className="absolute inset-0 grid-background"></div>
       <div className="flex flex-col gap-4 text-center relative z-10">
         <FadeInOnView>
