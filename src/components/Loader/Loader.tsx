@@ -1,4 +1,6 @@
-import { useRef, useEffect } from 'react'
+'use client'
+
+import { useRef, useEffect, useState } from 'react'
 import gsap from 'gsap'
 import { LogoIcon } from '../icons'
 import { useLocale } from 'next-intl'
@@ -9,13 +11,33 @@ type TLoading = {
   shortLoading?: boolean
 }
 
-export const Loader = ({ loading = true, onFinish, shortLoading }: TLoading) => {
+export const Loader = ({ onFinish, shortLoading }: TLoading) => {
   const maskRef = useRef<HTMLDivElement>(null)
   const iconRef = useRef<HTMLDivElement>(null)
   const topBlockRef = useRef<HTMLDivElement>(null)
   const bottomBlockRef = useRef<HTMLDivElement>(null)
   const locale = useLocale()
   const isArabic = locale === 'ar'
+
+  const [loading, setLoading] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth
+      setIsMobile(width < 768)
+      setIsTablet(width >= 768 && width <= 1024)
+    }
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), isMobile ? 6000 : isTablet ? 6500 : 5700)
+    return () => clearTimeout(timer)
+  }, [isMobile, isTablet])
 
   useEffect(() => {
     if (loading) {
@@ -69,6 +91,8 @@ export const Loader = ({ loading = true, onFinish, shortLoading }: TLoading) => 
       tl.kill()
     }
   }, [loading, isArabic, onFinish])
+
+  if (!loading) return null
 
   return (
     <div

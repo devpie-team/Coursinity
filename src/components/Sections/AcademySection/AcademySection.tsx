@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useRef, useState } from 'react'
 import Lottie from 'lottie-web'
 import gsap from 'gsap'
@@ -97,7 +99,13 @@ export const AcademySection = () => {
   const locale = useLocale()
   const isArabic = locale == 'ar'
   useEffect(() => {
-    AOS.init()
+    AOS.init({
+      once: false,
+      duration: 700,
+      offset: 100,
+      easing: 'ease-in-out',
+      mirror: true
+    })
   }, [])
 
   useEffect(() => {

@@ -19,16 +19,36 @@ import hero4Ar from '../../../../public/assets/lottie/hero/ar/h_4.json'
 import type { LottieRefCurrentProps } from 'lottie-react'
 import 'aos/dist/aos.css'
 import { cn } from '@/lib/utils'
+import AOS from 'aos'
 
 gsap.registerPlugin(ScrollTrigger)
 
 type THeroSection = {
-  loading: boolean
+  loading?: boolean
 }
 
-export const HeroSection = ({ loading }: THeroSection) => {
+export const HeroSection = ({}: THeroSection) => {
   const locale = useLocale()
   const isArabic = locale == 'ar'
+
+  const [loading, setLoading] = useState(true)
+  const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), isMobile ? 6000 : isTablet ? 6500 : 5700)
+    return () => clearTimeout(timer)
+  }, [isMobile, isTablet])
+
+  useEffect(() => {
+    AOS.init({
+      once: false,
+      duration: 700,
+      offset: 100,
+      easing: 'ease-in-out',
+      mirror: true
+    })
+  }, [])
 
   const elementSettings = [
     { selector: '.hero-element1', x: -1200, y: 1200, duration: 2, fade: true },
@@ -46,8 +66,6 @@ export const HeroSection = ({ loading }: THeroSection) => {
   const hero4 = isArabic ? hero4Ar : hero4En
 
   const t = useTranslations('Hero')
-  const [isTablet, setIsTablet] = useState<boolean>(false)
-  const [isMobile, setIsMobile] = useState<boolean>(false)
   const [isDesktop, setIsDesktop] = useState<boolean>(true)
   const [windowWidth, setWindowWidth] = useState<number>(0)
 

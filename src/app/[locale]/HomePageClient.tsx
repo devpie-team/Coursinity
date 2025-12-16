@@ -1,7 +1,3 @@
-'use client'
-
-import { useEffect, useState } from 'react'
-import AOS from 'aos'
 import { Loader } from '@/components/Loader'
 import {
   AcademySection,
@@ -10,8 +6,6 @@ import {
   FeaturesSection,
   FutureSection,
   HeroSection,
-  ImpactSection,
-  StackSection,
   TeamTrainingSection
 } from '@/components/Sections'
 import { Header } from '@/components/Header'
@@ -24,47 +18,12 @@ import { Carousel3dSection } from '@/components/Sections/Carousel3dSection'
 import { ImpactSectionNew } from '@/components/Sections/ImpactSection'
 import { StackSectionNew } from '@/components/Sections/StackSection/StackSectionNew'
 
-type HomePageClientProps = {
-  locale: string
-}
-
-export function HomePageClient({ locale }: HomePageClientProps) {
-  const [loading, setLoading] = useState(true)
-  const [isMobile, setIsMobile] = useState(false)
-  const [isTablet, setIsTablet] = useState(false)
-
-  useEffect(() => {
-    AOS.init({
-      once: false,
-      duration: 700,
-      offset: 100,
-      easing: 'ease-in-out',
-      mirror: true
-    })
-  }, [])
-
-  useEffect(() => {
-    const checkScreenSize = () => {
-      const width = window.innerWidth
-      setIsMobile(width < 768)
-      setIsTablet(width >= 768 && width <= 1024)
-    }
-    checkScreenSize()
-    window.addEventListener('resize', checkScreenSize)
-    return () => window.removeEventListener('resize', checkScreenSize)
-  }, [])
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), isMobile ? 6000 : isTablet ? 6500 : 5700)
-    return () => clearTimeout(timer)
-  }, [isMobile, isTablet])
-
+export function HomePageClient() {
   return (
     <>
-      {loading && <Loader loading={loading} />}
-
+      <Loader />
       <Header />
-      <HeroSection loading={loading} />
+      <HeroSection />
       <FutureSection />
       <StackSectionNew />
       <GrowthStepSection />
@@ -82,4 +41,3 @@ export function HomePageClient({ locale }: HomePageClientProps) {
     </>
   )
 }
-

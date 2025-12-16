@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState, useMemo, useCallback, useRef } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import { Button } from '@/components/primitives/button'
@@ -146,7 +148,13 @@ export const TeamTrainingSection = () => {
     return () => window.removeEventListener('resize', checkScreenSize)
   }, [])
   useEffect(() => {
-    AOS.init()
+    AOS.init({
+      once: false,
+      duration: 700,
+      offset: 100,
+      easing: 'ease-in-out',
+      mirror: true
+    })
   }, [])
 
   const handleFeatureClick = (i: number) => {

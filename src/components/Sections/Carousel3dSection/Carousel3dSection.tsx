@@ -14,6 +14,7 @@ import { Torus } from './_components/Torus/Torus'
 import { Typography } from '@/components/ui/Typography/Typography'
 import { start } from 'repl'
 import { cn } from '@/lib/utils'
+import AOS from 'aos'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -39,6 +40,15 @@ const useMediaQuery = (query: string): boolean => {
 }
 
 export function Carousel3dSection() {
+  useEffect(() => {
+    AOS.init({
+      once: false,
+      duration: 700,
+      offset: 100,
+      easing: 'ease-in-out',
+      mirror: true
+    })
+  }, [])
   const isMobile = useMediaQuery('(max-width: 768px)')
   const locale = useLocale()
   const pinSectionRef = useRef<HTMLDivElement>(null)

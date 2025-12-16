@@ -39,7 +39,13 @@ export const GrowthStepSection = () => {
   const isArabic = locale == 'ar'
 
   useEffect(() => {
-    AOS.init()
+    AOS.init({
+      once: false,
+      duration: 700,
+      offset: 100,
+      easing: 'ease-in-out',
+      mirror: true
+    })
   }, [])
 
   const getStepperIndex = (index: number) => index + 1
