@@ -94,6 +94,14 @@ export const HeaderDropdown = ({ start }: { start: boolean }) => {
             href={`/${locale}/solutions`}>
             {t('solutions')}
           </a>
+          <a
+            className={cn(
+              'px-6 py-3 hover:bg-neutral-100 transition-colors rounded-2xl mx-[6px] ',
+              isArabic ? 'text-right' : 'text-left'
+            )}
+            href={`/${locale}/academy`}>
+            {t('academy')}
+          </a>
         </div>
       )}
       <a href={`/${locale}/blog`}>
