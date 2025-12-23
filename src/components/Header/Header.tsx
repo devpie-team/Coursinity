@@ -136,11 +136,11 @@ export const Header = () => {
                 </div>
               </div>
               {opened && (
-                <div className="flex flex-col gap-[6px]">
+                <div className="flex flex-col gap-[6px] flex-column items-center">
                   <a className="py-[7px] px-2" href={`/${locale}/solutions`}>
                     <Typography>{t('solutions')}</Typography>
                   </a>
-                  <a className="py-[7px] px-2" href={`/${locale}/solutions`}>
+                  <a className="py-[7px] px-2" href={`/${locale}/academy`}>
                     <Typography>{t('academy')}</Typography>
                   </a>
                 </div>
