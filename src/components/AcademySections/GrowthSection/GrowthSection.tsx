@@ -218,7 +218,14 @@ export const GrowthSection = () => {
 
         <div className="flex flex-col justify-center items-center text-center mt-4 gap-10 max-w-[760px] mx-auto">
           <Typography variant="body3" className="text-description">
-            {t('finalText')}
+            {isArabic
+              ? t.raw('finalTextMobile').map((line: string, i: number) => (
+                  <span key={i}>
+                    {line}
+                    <br />
+                  </span>
+                ))
+              : t('finalText')}
           </Typography>
           <Button variant="academy" className="shrink-0 max-md:w-full">
             {t('cta')}
