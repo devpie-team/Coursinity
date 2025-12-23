@@ -140,6 +140,9 @@ export const Header = () => {
                   <a className="py-[7px] px-2" href={`/${locale}/solutions`}>
                     <Typography>{t('solutions')}</Typography>
                   </a>
+                  <a className="py-[7px] px-2" href={`/${locale}/solutions`}>
+                    <Typography>{t('academy')}</Typography>
+                  </a>
                 </div>
               )}
               <a href={`/${locale}/blog`}>
