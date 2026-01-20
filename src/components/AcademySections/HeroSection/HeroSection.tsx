@@ -58,9 +58,11 @@ export const HeroSection = ({ canPlay = true }: HeroSectionProps) => {
             <Typography variant={isDesktop ? 'body2' : 'body3'} weight="medium">
               {t('subtitle')}
             </Typography>
-            <Button variant="academy_secondary" className="max-md:w-full">
-              {t('cta')}
-            </Button>
+            <a href={`/${locale}/contact-form`} className="max-md:w-full">
+              <Button variant="academy_secondary" className="max-md:w-full">
+                {t('cta')}
+              </Button>
+            </a>
           </div>
         </div>
         <div className="max-w-[1080px] z-10 overflow-hidden px-10 max-md:px-4 translate-y-1" ref={ref}>

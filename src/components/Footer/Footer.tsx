@@ -44,10 +44,26 @@ const Footer = ({ className, page }: FooterProps) => {
   const renderListItems = (baseKey: string, count: number) => {
     return Array.from({ length: count }).map((_, i) => {
       const blog = baseKey === 'columns.company.items' && i == 2
+      const company = baseKey === 'columns.company.items' && (i == 3 || i == 1)
+      const academy = baseKey === 'columns.academy.items'
+      const solutions = baseKey === 'columns.solutions.items'
 
       return (
         <li key={i}>
-          <Typography as="a" href={blog ? `/${locale}/blog` : '#'} variant={isDesktop ? 'body3' : 'caption'}>
+          <Typography
+            as="a"
+            href={
+              blog
+                ? `/${locale}/blog`
+                : company
+                ? `/${locale}/contact-form`
+                : academy
+                ? `/${locale}/academy`
+                : solutions
+                ? `/${locale}/solutions`
+                : '#'
+            }
+            variant={isDesktop ? 'body3' : 'caption'}>
             {t(`${baseKey}.${i}`)}
           </Typography>
         </li>
@@ -112,16 +128,21 @@ const Footer = ({ className, page }: FooterProps) => {
               <div className="grid grid-cols-3 gap-[50px] max-md:grid-cols-2 max-md:grid-rows-2 flex-grow">
                 {/* Solutions */}
                 <div>
-                  <Typography variant={isTablet ? 'body3' : 'body2'} weight="medium" className="mb-5">
-                    {t('columns.solutions.title')}
-                  </Typography>
+                  <a href={`/${locale}/solutions`}>
+                    <Typography variant={isTablet ? 'body3' : 'body2'} weight="medium" className="mb-5">
+                      {t('columns.solutions.title')}
+                    </Typography>
+                  </a>
+
                   <ul className="space-y-[6px] text-button">{renderListItems('columns.solutions.items', 5)}</ul>
                 </div>
                 {/* Academy */}
                 <div>
-                  <Typography variant={isTablet ? 'body3' : 'body2'} weight="medium" className="mb-5">
-                    {t('columns.academy.title')}
-                  </Typography>
+                  <a href={`/${locale}/academy`}>
+                    <Typography variant={isTablet ? 'body3' : 'body2'} weight="medium" className="mb-5">
+                      {t('columns.academy.title')}
+                    </Typography>
+                  </a>
                   <ul className="space-y-[6px] text-button">{renderListItems('columns.academy.items', 4)}</ul>
                 </div>
                 {/* Company */}
@@ -129,7 +150,7 @@ const Footer = ({ className, page }: FooterProps) => {
                   <Typography variant={isTablet ? 'body3' : 'body2'} weight="medium" className="mb-5">
                     {t('columns.company.title')}
                   </Typography>
-                  <ul className="space-y-[6px] text-button">{renderListItems('columns.company.items', 4)}</ul>
+                  <ul className="space-y-[6px] text-button">{renderListItems('columns.company.items', 2)}</ul>
                 </div>
               </div>
             </FadeInOnView>
