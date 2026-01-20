@@ -89,9 +89,11 @@ export const TrainingSection = () => {
         <Typography variant="body3" className="text-description">
           {t('bottom_text')}
         </Typography>
-        <Button variant="academy" className="max-md:w-full">
-          {t('button')}
-        </Button>
+        <a href={`/${locale}/contact-form`} className="max-md:w-full">
+          <Button variant="academy" className="max-md:w-full">
+            {t('button')}
+          </Button>
+        </a>
       </div>
     </section>
   )

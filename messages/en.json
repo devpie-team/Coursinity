@@ -38,8 +38,6 @@
         "company": {
           "title": "Company",
           "items": [
-            "About Us",
-            "Contact Us",
             "Blog",
             "Book a Demo"
           ]
