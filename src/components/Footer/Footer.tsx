@@ -43,7 +43,7 @@ const Footer = ({ className, page }: FooterProps) => {
 
   const renderListItems = (baseKey: string, count: number) => {
     return Array.from({ length: count }).map((_, i) => {
-      const blog = baseKey === 'columns.company.items' && i == 2
+      const blog = baseKey === 'columns.company.items' && i == 0
       const company = baseKey === 'columns.company.items' && (i == 3 || i == 1)
       const academy = baseKey === 'columns.academy.items'
       const solutions = baseKey === 'columns.solutions.items'
