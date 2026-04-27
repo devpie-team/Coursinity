@@ -21,6 +21,11 @@ export async function getArticlesInfo(locale?: string, mainArticle?: boolean): P
     next: { revalidate: 60 }
   })
 
+  if (!res.ok) {
+    console.error('Strapi getArticlesInfo error:', res.status, await res.text())
+    return { data: [] } as any
+  }
+
   const json = (await res.json()) as StrapiResponse<GetArticleInfo>
   return json
 }

@@ -16,6 +16,8 @@ export async function getArticleBySlug(slug: string, blocks: boolean, locale?: s
     url.searchParams.append('populate', '*')
   }
 
+  if (!slug) return null
+
   const headers: Record<string, string> = {}
   if (process.env.STRAPI_READONLY_TOKEN) {
     headers.Authorization = `Bearer ${process.env.STRAPI_READONLY_TOKEN}`
@@ -28,6 +30,7 @@ export async function getArticleBySlug(slug: string, blocks: boolean, locale?: s
 
   if (!res.ok) {
     console.error('Strapi error:', res.status, await res.text())
+    return null
   }
 
   const json = (await res.json()) as StrapiResponse<Article>

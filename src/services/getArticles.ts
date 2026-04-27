@@ -74,6 +74,11 @@ export async function getArticles(opts: GetArticlesOptions = {}): Promise<Strapi
     next: { revalidate: 60 }
   })
 
+  if (!res.ok) {
+    console.error('Strapi getArticles error:', res.status, await res.text())
+    return { data: [], meta: { pagination: { page: 1, pageSize, pageCount: 0, total: 0 } } } as any
+  }
+
   return res.json()
 }
 
