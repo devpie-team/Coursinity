@@ -16,8 +16,13 @@ export async function getArticlesInfo(locale?: string, mainArticle?: boolean): P
   }
   console.log(url.toString())
 
+  const headers: Record<string, string> = {}
+  if (process.env.STRAPI_READONLY_TOKEN) {
+    headers.Authorization = `Bearer ${process.env.STRAPI_READONLY_TOKEN}`
+  }
+
   const res = await fetch(url.toString(), {
-    headers: { Authorization: `Bearer ${process.env.STRAPI_READONLY_TOKEN}` },
+    headers,
     next: { revalidate: 60 }
   })
 
